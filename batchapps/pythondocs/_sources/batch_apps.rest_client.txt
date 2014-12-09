@@ -1,0 +1,8 @@
+batchapps.rest_client module
+==============================
+
+Fundamental REST call functions.
+
+.. automodule:: batchapps.rest_client
+    :members: get, head, post, put, download
+    :undoc-members:

@@ -1,0 +1,964 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>batchapps.files &mdash; azure-batch-apps 0.2.0 documentation</title>
+    
+    <link rel="stylesheet" href="../../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '0.2.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <link rel="top" title="azure-batch-apps 0.2.0 documentation" href="../../index.html" />
+    <link rel="up" title="Module code" href="../index.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../../index.html">azure-batch-apps 0.2.0 documentation</a> &raquo;</li>
+          <li><a href="../index.html" accesskey="U">Module code</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <h1>Source code for batchapps.files</h1><div class="highlight"><pre>
+<span class="c">#-------------------------------------------------------------------------</span>
+<span class="c"># The Azure Batch Apps Python Client</span>
+<span class="c">#</span>
+<span class="c"># Copyright (c) Microsoft Corporation. All rights reserved. </span>
+<span class="c">#</span>
+<span class="c"># The MIT License (MIT)</span>
+<span class="c">#</span>
+<span class="c"># Permission is hereby granted, free of charge, to any person obtaining a copy</span>
+<span class="c"># of this software and associated documentation files (the &quot;&quot;Software&quot;&quot;), to deal</span>
+<span class="c"># in the Software without restriction, including without limitation the rights</span>
+<span class="c"># to use, copy, modify, merge, publish, distribute, sublicense, and/or sell</span>
+<span class="c"># copies of the Software, and to permit persons to whom the Software is</span>
+<span class="c"># furnished to do so, subject to the following conditions:</span>
+<span class="c">#</span>
+<span class="c"># The above copyright notice and this permission notice shall be included in</span>
+<span class="c"># all copies or substantial portions of the Software.</span>
+<span class="c">#</span>
+<span class="c"># THE SOFTWARE IS PROVIDED *AS IS*, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR</span>
+<span class="c"># IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,</span>
+<span class="c"># FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE</span>
+<span class="c"># AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER</span>
+<span class="c"># LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,</span>
+<span class="c"># OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN</span>
+<span class="c"># THE SOFTWARE.</span>
+<span class="c">#</span>
+<span class="c">#--------------------------------------------------------------------------</span>
+
+<span class="kn">import</span> <span class="nn">logging</span>
+<span class="kn">import</span> <span class="nn">hashlib</span>
+<span class="kn">import</span> <span class="nn">multiprocessing</span>
+<span class="kn">import</span> <span class="nn">pickle</span>
+
+<span class="kn">from</span> <span class="nn">os</span> <span class="kn">import</span> <span class="n">path</span>
+<span class="kn">from</span> <span class="nn">datetime</span> <span class="kn">import</span> <span class="n">datetime</span>
+
+<span class="kn">from</span> <span class="nn">.</span> <span class="kn">import</span> <span class="n">utils</span>
+<span class="kn">from</span> <span class="nn">.exceptions</span> <span class="kn">import</span> <span class="p">(</span>
+    <span class="n">FileMissingException</span><span class="p">,</span>
+    <span class="n">FileInvalidException</span><span class="p">,</span>
+    <span class="n">RestCallException</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">upload_wrapper</span><span class="p">(</span><span class="n">arg</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">    Wrapper to pull upload method from self to avoid multiprocessing</span>
+<span class="sd">    errors in Python 2.6.</span>
+<span class="sd">    &#39;&#39;&#39;</span>
+    <span class="k">return</span> <span class="n">FileCollection</span><span class="o">.</span><span class="n">_upload_forced</span><span class="p">(</span><span class="o">*</span><span class="n">arg</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+
+
+<div class="viewcode-block" id="FileCollection"><a class="viewcode-back" href="../../batch_apps.files.html#batchapps.files.FileCollection">[docs]</a><span class="k">class</span> <span class="nc">FileCollection</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    A set of userfiles which can be applied to a job.</span>
+<span class="sd">    Behaves like a ``list``.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">client</span><span class="p">,</span> <span class="o">*</span><span class="n">files</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        :Args:</span>
+<span class="sd">            - client (:class:`.BatchAppsApi`): An authorized Batch Apps</span>
+<span class="sd">              Management API REST client.</span>
+<span class="sd">            - files (:class:`UserFile`, list): *Optional*. Any files to be</span>
+<span class="sd">              included in the collection. Can be individual</span>
+<span class="sd">              :class:`UserFile` objects or a list of them.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">client</span><span class="p">,</span> <span class="s">&#39;query_files&#39;</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span>
+                <span class="s">&quot;client must be an authenticated BatchAppsApi object.&quot;</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_api</span> <span class="o">=</span> <span class="n">client</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_collection</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_log</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="s">&#39;batch_apps&#39;</span><span class="p">)</span>
+
+        <span class="k">for</span> <span class="n">_file</span> <span class="ow">in</span> <span class="n">files</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">_file</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;String representation of FileCollection</span>
+
+<span class="sd">        :Returns:</span>
+<span class="sd">            - A string containing a list of filenames</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="nb">str</span><span class="p">([</span><span class="nb">str</span><span class="p">(</span><span class="n">a</span><span class="p">)</span> <span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_collection</span><span class="p">])</span>
+
+    <span class="k">def</span> <span class="nf">__len__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Length of FileCollection</span>
+
+<span class="sd">        :Returns:</span>
+<span class="sd">            - Number of files in the collection.</span>
+<span class="sd">              I.e. Length of internal list _collection</span>
+<span class="sd">              Example usage:</span>
+<span class="sd">                  &gt;&gt; if len(my_asset_collection) == 0: print(&quot;Empty&quot;)</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_collection</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">__iter__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Get FileCollection iterator</span>
+
+<span class="sd">        :Returns:</span>
+<span class="sd">            - Iterator for internal list _collection.</span>
+<span class="sd">              Example usage:</span>
+<span class="sd">                  &gt;&gt; for _file in FileCollection(my_list): print(_file.name)</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="nb">iter</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_collection</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">__getitem__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">filekey</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;FileCollection subscript - get userfile from collection via index</span>
+
+<span class="sd">        :Args:</span>
+<span class="sd">            - filekey (int, str, slice): Index of a specific userfile in the</span>
+<span class="sd">              collection. This can be an integer index, a slice index or the</span>
+<span class="sd">              name of a particular file.</span>
+
+<span class="sd">        :Returns:</span>
+<span class="sd">            - If a string name is passed in, the output will be a list of</span>
+<span class="sd">              :class:`.UserFile` objects, as multplie files may have the same</span>
+<span class="sd">              name. Likewise, passing in a slice will produce a list of</span>
+<span class="sd">              :class:`.UserFile`. Passing an int index will return a single</span>
+<span class="sd">              :class:`.UserFile`</span>
+<span class="sd">              Example usage:</span>
+<span class="sd">                  &gt;&gt; print(my_collection[5])</span>
+<span class="sd">                  &quot;texture.tif&quot;</span>
+<span class="sd">                  &gt;&gt; print(my_collection[&quot;star.png&quot;])</span>
+<span class="sd">                  &quot;[&#39;star.png&#39;]&quot;</span>
+<span class="sd">                  &gt;&gt; print(my_collection[5:-3])</span>
+<span class="sd">                  &quot;[&#39;texture.tif&#39;, &#39;star.png&#39;]&quot;</span>
+
+<span class="sd">        :Raises:</span>
+<span class="sd">            - FileMissingException: UserFile is not found or index is out</span>
+<span class="sd">              of range.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">filekey</span><span class="p">,</span> <span class="nb">int</span><span class="p">)</span> <span class="ow">and</span> <span class="n">filekey</span> <span class="o">&lt;</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_collection</span><span class="p">[</span><span class="n">filekey</span><span class="p">]</span>
+
+        <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">filekey</span><span class="p">,</span> <span class="nb">slice</span><span class="p">):</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_collection</span><span class="p">[</span><span class="n">filekey</span><span class="p">]</span>
+
+        <span class="k">elif</span> <span class="n">filekey</span> <span class="ow">in</span> <span class="p">[</span><span class="n">a</span><span class="o">.</span><span class="n">name</span> <span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_collection</span><span class="p">]:</span>
+            <span class="k">return</span> <span class="p">[</span><span class="n">a</span> <span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_collection</span> <span class="k">if</span> <span class="n">a</span><span class="o">.</span><span class="n">name</span> <span class="o">==</span> <span class="n">filekey</span><span class="p">]</span>
+
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">FileMissingException</span><span class="p">(</span>
+                <span class="s">&quot;Requested file is not in the collection&quot;</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">__setitem__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">filekey</span><span class="p">,</span> <span class="n">fileval</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Restrict setting userfiles in collection via index/subscript</span>
+
+<span class="sd">        :Args:</span>
+<span class="sd">            - filekey: Ignored</span>
+
+<span class="sd">        :Raises:</span>
+<span class="sd">            - TypeError - an FileCollection subscript cannot be assigned to</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s">&quot;Collection subscript cannot be assigned to&quot;</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">__delitem__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">filekey</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Delete userfile from collection, by name or index.</span>
+
+<span class="sd">        :Args:</span>
+<span class="sd">            - filekey (int, str): It an integer, will delete the userfile in</span>
+<span class="sd">              the collection at that index. Otherwise if it&#39;s a string, all</span>
+<span class="sd">              files in the collection with that name will be deleted.</span>
+
+<span class="sd">              If the name is not found, or the index out of range,</span>
+<span class="sd">              nothing will happen.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">filekey</span><span class="p">,</span> <span class="nb">int</span><span class="p">)</span> <span class="ow">and</span> <span class="n">filekey</span> <span class="o">&lt;</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+            <span class="k">del</span> <span class="bp">self</span><span class="o">.</span><span class="n">_collection</span><span class="p">[</span><span class="n">filekey</span><span class="p">]</span>
+
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">filekey</span><span class="p">,</span> <span class="nb">slice</span><span class="p">):</span>
+            <span class="k">del</span> <span class="bp">self</span><span class="o">.</span><span class="n">_collection</span><span class="p">[</span><span class="n">filekey</span><span class="p">]</span>
+
+        <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">filekey</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_collection</span> <span class="o">=</span> <span class="p">[</span><span class="n">a</span> <span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_collection</span>
+                                <span class="k">if</span> <span class="n">a</span><span class="o">.</span><span class="n">name</span> <span class="o">!=</span> <span class="n">filekey</span><span class="p">]</span>
+
+    <span class="k">def</span> <span class="nf">_upload_forced</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">userfile</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Upload a single file in the collection, ignoring overwrite.</span>
+<span class="sd">        Only used internally in :func:upload by the parallel subprocesses</span>
+
+<span class="sd">        :Args:</span>
+<span class="sd">            - userfile (:class:`.UserFile`): The file from the collection</span>
+<span class="sd">              to be uploaded</span>
+
+<span class="sd">        :Returns:</span>
+<span class="sd">            - A tuple containing the result of the :func:`UserFile.upload` call,</span>
+<span class="sd">              and the original userfile:</span>
+<span class="sd">              ``(bool success, userfile, string result)``</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_log</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s">&quot;About to upload file: {0}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">userfile</span><span class="p">))</span>
+        <span class="n">resp</span> <span class="o">=</span> <span class="n">userfile</span><span class="o">.</span><span class="n">upload</span><span class="p">(</span><span class="n">force</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+
+        <span class="c"># TODO: Need to fix hanging when we try to return the result</span>
+        <span class="c"># object rather than just a string.</span>
+        <span class="c"># self._log.critical(str(resp.result))</span>
+
+        <span class="k">return</span> <span class="p">(</span><span class="n">resp</span><span class="o">.</span><span class="n">success</span><span class="p">,</span> <span class="n">userfile</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="n">resp</span><span class="o">.</span><span class="n">result</span><span class="p">))</span>
+
+    <span class="k">def</span> <span class="nf">_get_message</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">operation</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Generate file specifier list for REST API</span>
+
+<span class="sd">        :Returns:</span>
+<span class="sd">            - A list of the file specifier messages for each :class:`.UserFile`</span>
+<span class="sd">              in the collection, formatted for use for the REST API client.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">filespecs</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">_file</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_collection</span><span class="p">:</span>
+
+            <span class="k">if</span> <span class="n">operation</span> <span class="ow">is</span> <span class="s">&quot;query&quot;</span><span class="p">:</span>
+                <span class="n">filespecs</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">_file</span><span class="o">.</span><span class="n">create_query_specifier</span><span class="p">())</span>
+
+            <span class="k">elif</span> <span class="n">operation</span> <span class="ow">is</span> <span class="s">&quot;submit&quot;</span><span class="p">:</span>
+                <span class="n">filespecs</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">_file</span><span class="o">.</span><span class="n">create_submit_specifier</span><span class="p">())</span>
+
+        <span class="k">return</span> <span class="n">filespecs</span>
+
+    <span class="k">def</span> <span class="nf">_remove_duplicates</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">rm_list</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Custom duplicate removal for UserFile objects, as</span>
+<span class="sd">        using set() does not work correctly.</span>
+
+<span class="sd">        :Args:</span>
+<span class="sd">            -rm_list (list): The list that will have duplicates removed.</span>
+
+<span class="sd">        :Returns:</span>
+<span class="sd">            - The cleaned up list.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">cleaned</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">rm_list</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">i</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">cleaned</span><span class="p">:</span>
+                <span class="n">cleaned</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">cleaned</span>
+
+<div class="viewcode-block" id="FileCollection.add"><a class="viewcode-back" href="../../batch_apps.files.html#batchapps.files.FileCollection.add">[docs]</a>    <span class="k">def</span> <span class="nf">add</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">userfile</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Add a userfile to the collection.</span>
+
+<span class="sd">        :Args:</span>
+<span class="sd">            - userfile (:class:`.UserFile`, list): File to be added to the</span>
+<span class="sd">              collection. Must be unique or FileInvalidException will be</span>
+<span class="sd">              raised. ``userfile`` can also be a list, all non-unique and</span>
+<span class="sd">              non-:class:`.UserFile` objects will be removed with a warning</span>
+<span class="sd">              before the list is added to the collection.</span>
+
+<span class="sd">        :Raises:</span>
+<span class="sd">            - :class:`.FileInvalidException` if called with a non:class:`.UserFile` object</span>
+<span class="sd">              or the file is already in the collection.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">userfile</span><span class="p">,</span> <span class="n">UserFile</span><span class="p">)</span> <span class="ow">and</span> <span class="n">userfile</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_collection</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_log</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s">&quot;Adding UserFile object to collection: &quot;</span>
+                            <span class="s">&quot;{0}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">userfile</span><span class="p">))</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_collection</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">userfile</span><span class="p">)</span>
+
+        <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">userfile</span><span class="p">,</span> <span class="nb">list</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_log</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s">&quot;Adding list object to collection&quot;</span><span class="p">)</span>
+
+            <span class="n">file_list</span> <span class="o">=</span> <span class="p">[</span><span class="n">a</span> <span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_remove_duplicates</span><span class="p">(</span><span class="n">userfile</span><span class="p">)</span>
+                         <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">UserFile</span><span class="p">)</span>
+                         <span class="ow">and</span> <span class="n">a</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_collection</span><span class="p">]</span>
+
+            <span class="k">if</span> <span class="nb">set</span><span class="p">(</span><span class="n">file_list</span><span class="p">)</span> <span class="o">!=</span> <span class="nb">set</span><span class="p">(</span><span class="n">userfile</span><span class="p">):</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_log</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span>
+                    <span class="s">&quot;Some invalid or duplicated userfiles removed from list&quot;</span><span class="p">)</span>
+
+            <span class="bp">self</span><span class="o">.</span><span class="n">_collection</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="n">file_list</span><span class="p">)</span>
+
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">FileInvalidException</span><span class="p">(</span>
+                <span class="s">&quot;Only unique UserFile objects can be added to collection, &quot;</span>
+                <span class="s">&quot;not {type}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="nb">type</span><span class="o">=</span><span class="nb">type</span><span class="p">(</span><span class="n">userfile</span><span class="p">)))</span>
+</div>
+<div class="viewcode-block" id="FileCollection.extend"><a class="viewcode-back" href="../../batch_apps.files.html#batchapps.files.FileCollection.extend">[docs]</a>    <span class="k">def</span> <span class="nf">extend</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">file_collection</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Extend a file collection by merging two together</span>
+
+<span class="sd">        :Args:</span>
+<span class="sd">            - file_collection (:class:`.FileCollection`): A file collection to</span>
+<span class="sd">              be merged into the current collection. Any duplicate userfiles</span>
+<span class="sd">              will be removed.</span>
+
+<span class="sd">        :Raises:</span>
+<span class="sd">            - AttributeError if ``file_collection`` is not a</span>
+<span class="sd">              :class:`.FileCollection`</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">file_collection</span><span class="p">,</span> <span class="n">FileCollection</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_log</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span>
+                <span class="s">&quot;Extending file collection with: {0}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">file_collection</span><span class="p">))</span>
+
+            <span class="bp">self</span><span class="o">.</span><span class="n">_collection</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="n">file_collection</span><span class="o">.</span><span class="n">_collection</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_collection</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_remove_duplicates</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_collection</span><span class="p">)</span>
+
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">msg</span> <span class="o">=</span> <span class="p">(</span><span class="s">&quot;FileCollection can only be &quot;</span>
+                   <span class="s">&quot;extended by another FileCollection&quot;</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_log</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span>
+            <span class="k">raise</span> <span class="ne">AttributeError</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span>
+</div>
+    <span class="k">def</span> <span class="nf">index</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">userfile</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Retrieve the index of a userfile</span>
+
+<span class="sd">        :Args:</span>
+<span class="sd">            - userfile (:class:`.UserFile`): The userfile object whose index will be</span>
+<span class="sd">              retrieved.</span>
+
+<span class="sd">        :Raises:</span>
+<span class="sd">            - TypeError if ``userfile`` is not a</span>
+<span class="sd">              :class:`.UserFile`</span>
+<span class="sd">            - ValueError if ``userfile`` is not in the :class:`.FileCollection` object</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">userfile</span><span class="p">,</span> <span class="s">&quot;create_query_specifier&quot;</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s">&quot;File to index must be userfile object&quot;</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_collection</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="n">userfile</span><span class="p">)</span>
+
+<div class="viewcode-block" id="FileCollection.remove"><a class="viewcode-back" href="../../batch_apps.files.html#batchapps.files.FileCollection.remove">[docs]</a>    <span class="k">def</span> <span class="nf">remove</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">userfile</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Remove a userfile from the collection, via index or name.</span>
+
+<span class="sd">        :Args:</span>
+<span class="sd">            - userfile (str, int, :class:`.UserFile`, list, slice): The name,</span>
+<span class="sd">              object or index of the file to be removed. If a name is passed</span>
+<span class="sd">              in, only the first occurance of that name will be removed. To</span>
+<span class="sd">              remove all occurances, use :meth:`.__delitem__()`.</span>
+<span class="sd">              A :class:`.UserFile` object can also be passed in or a list</span>
+<span class="sd">              of any of the above.</span>
+
+<span class="sd">        :Raises:</span>
+<span class="sd">            - TypeError if ``userfile`` is not a :class:`.UserFile`, int, str,</span>
+<span class="sd">              slice or list thereof.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">userfile</span><span class="p">,</span> <span class="nb">int</span><span class="p">)</span> <span class="ow">and</span> <span class="n">userfile</span> <span class="o">&lt;</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_log</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s">&quot;Removing userfile {0} from index: &quot;</span>
+                            <span class="s">&quot;{1}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_collection</span><span class="p">[</span><span class="n">userfile</span><span class="p">],</span> <span class="n">userfile</span><span class="p">))</span>
+
+            <span class="k">del</span> <span class="bp">self</span><span class="o">.</span><span class="n">_collection</span><span class="p">[</span><span class="n">userfile</span><span class="p">]</span>
+
+        <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">userfile</span><span class="p">,</span> <span class="n">UserFile</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_log</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s">&quot;Removing userfile object {0}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">userfile</span><span class="p">))</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_collection</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">userfile</span><span class="p">)</span>
+
+        <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">userfile</span><span class="p">,</span> <span class="nb">list</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_log</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s">&quot;Removing list of files: {0}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+                <span class="s">&#39;, &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="nb">str</span><span class="p">(</span><span class="n">a</span><span class="p">)</span> <span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="n">userfile</span><span class="p">])))</span>
+
+            <span class="k">for</span> <span class="n">rem</span> <span class="ow">in</span> <span class="n">userfile</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">rem</span><span class="p">)</span>
+
+        <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">userfile</span><span class="p">,</span> <span class="nb">slice</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_log</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s">&quot;Removing files from indices: &quot;</span>
+                            <span class="s">&quot;{0}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">userfile</span><span class="p">))</span>
+
+            <span class="k">del</span> <span class="bp">self</span><span class="o">.</span><span class="n">_collection</span><span class="p">[</span><span class="n">userfile</span><span class="p">]</span>
+
+        <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">userfile</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_log</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s">&quot;Removing first userfile with name: &quot;</span>
+                            <span class="s">&quot;{0}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">userfile</span><span class="p">))</span>
+
+            <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="p">[</span><span class="n">userfile</span><span class="p">])</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_collection</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="bp">self</span><span class="p">[</span><span class="n">userfile</span><span class="p">]</span><span class="o">.</span><span class="n">pop</span><span class="p">())</span>
+
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s">&quot;File to remove must be userfile object, &quot;</span>
+                            <span class="s">&quot;filename string, userfile index int or slice&quot;</span><span class="p">)</span>
+</div>
+<div class="viewcode-block" id="FileCollection.upload"><a class="viewcode-back" href="../../batch_apps.files.html#batchapps.files.FileCollection.upload">[docs]</a>    <span class="k">def</span> <span class="nf">upload</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">force</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span> <span class="n">threads</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Upload all files in a set, optionally in parallel</span>
+
+<span class="sd">        :Kwargs:</span>
+<span class="sd">            - force (bool): Whether the client will only upload if the file</span>
+<span class="sd">              has not be previously uploaded. Default is ``False``,</span>
+<span class="sd">              i.e. always check and if file has been uploaded, don&#39;t</span>
+<span class="sd">              re-uplod. Set to ``True`` to upload regardless.</span>
+<span class="sd">            - threads (int): number of parallel uploads, default is 1</span>
+<span class="sd">              (i.e. not parallel). Max threads is 10.</span>
+
+<span class="sd">        :Returns:</span>
+<span class="sd">            - A list of tuples containing any files that failed to upload and</span>
+<span class="sd">              the exception information. In the format:</span>
+<span class="sd">              ``[(UserFile(), ExceptionStr), (UserFile(), ExceptionStr)..]``</span>
+<span class="sd">              If all files successfully uploaded this list will be empty.</span>
+
+<span class="sd">        .. warning ::</span>
+<span class="sd">            During parallel uploads, messages will only be logged to the</span>
+<span class="sd">            console, not to file.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">force</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_log</span><span class="o">.</span><span class="n">info</span><span class="p">(</span>
+                <span class="s">&quot;Checking to see if files in collection exist in the cloud&quot;</span><span class="p">)</span>
+
+            <span class="n">file_set</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">is_uploaded</span><span class="p">()</span>
+
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_log</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s">&quot;Uploading files regardless of whether &quot;</span>
+                            <span class="s">&quot;they&#39;ve been uploaded before&quot;</span><span class="p">)</span>
+
+            <span class="n">file_set</span> <span class="o">=</span> <span class="bp">self</span>
+
+        <span class="k">if</span> <span class="n">threads</span><span class="p">:</span>
+            <span class="n">threads</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="n">threads</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span>
+        <span class="n">failed</span> <span class="o">=</span> <span class="p">[]</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">threads</span> <span class="ow">or</span> <span class="n">threads</span> <span class="o">&lt;</span> <span class="mi">1</span><span class="p">:</span> <span class="c"># No subprocessed uploads</span>
+            <span class="k">for</span> <span class="n">_file</span> <span class="ow">in</span> <span class="n">file_set</span><span class="p">:</span>
+                <span class="n">result</span><span class="p">,</span> <span class="n">userfile</span><span class="p">,</span> <span class="n">error</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_upload_forced</span><span class="p">(</span><span class="n">_file</span><span class="p">)</span>
+                <span class="k">if</span> <span class="ow">not</span> <span class="n">result</span><span class="p">:</span>
+                    <span class="n">failed</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">userfile</span><span class="p">,</span> <span class="n">error</span><span class="p">))</span>
+
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="n">parallel_uploads</span> <span class="o">=</span> <span class="n">multiprocessing</span><span class="o">.</span><span class="n">Pool</span><span class="p">(</span><span class="n">threads</span><span class="p">)</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_log</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s">&quot;Created a pool for {0} parallel file &quot;</span>
+                                <span class="s">&quot;uploads&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">threads</span><span class="p">))</span>
+
+                <span class="k">for</span> <span class="n">subset</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">file_set</span><span class="p">),</span> <span class="n">threads</span><span class="p">):</span>
+
+                    <span class="n">fstr</span> <span class="o">=</span> <span class="s">&#39;, &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="nb">str</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+                                      <span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="n">file_set</span><span class="p">[</span><span class="n">subset</span><span class="p">:</span><span class="n">subset</span><span class="o">+</span><span class="n">threads</span><span class="p">]])</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">_log</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span>
+                        <span class="s">&quot;Creating thread to upload: {0}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">fstr</span><span class="p">))</span>
+
+                    <span class="n">selected_files</span> <span class="o">=</span> <span class="n">file_set</span><span class="p">[</span><span class="n">subset</span><span class="p">:</span><span class="n">subset</span><span class="o">+</span><span class="n">threads</span><span class="p">]</span>
+                    <span class="n">zipped</span> <span class="o">=</span> <span class="nb">zip</span><span class="p">([</span><span class="bp">self</span><span class="p">]</span><span class="o">*</span><span class="nb">len</span><span class="p">(</span><span class="n">selected_files</span><span class="p">),</span> <span class="n">selected_files</span><span class="p">)</span>
+                    <span class="n">pickle</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">zipped</span><span class="p">)</span>
+
+                    <span class="n">processes</span> <span class="o">=</span> <span class="n">parallel_uploads</span><span class="o">.</span><span class="n">map_async</span><span class="p">(</span><span class="n">upload_wrapper</span><span class="p">,</span>
+                                                           <span class="n">zipped</span><span class="p">)</span>
+                    <span class="n">results</span> <span class="o">=</span> <span class="n">processes</span><span class="o">.</span><span class="n">get</span><span class="p">()</span>
+                    <span class="k">for</span> <span class="n">res</span> <span class="ow">in</span> <span class="n">results</span><span class="p">:</span>
+                        <span class="k">if</span> <span class="ow">not</span> <span class="n">res</span><span class="p">[</span><span class="mi">0</span><span class="p">]:</span>
+                            <span class="n">failed</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">res</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">res</span><span class="p">[</span><span class="mi">2</span><span class="p">]))</span>
+
+            <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">exp</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_log</span><span class="o">.</span><span class="n">exception</span><span class="p">(</span>
+                    <span class="s">&quot;Exception in parallel uploads: {0}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">exp</span><span class="p">))</span>
+
+                <span class="k">return</span> <span class="p">[(</span><span class="n">f</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="n">exp</span><span class="p">))</span> <span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="n">file_set</span><span class="o">.</span><span class="n">_collection</span><span class="p">]</span>
+
+        <span class="k">return</span> <span class="n">failed</span>
+</div>
+<div class="viewcode-block" id="FileCollection.is_uploaded"><a class="viewcode-back" href="../../batch_apps.files.html#batchapps.files.FileCollection.is_uploaded">[docs]</a>    <span class="k">def</span> <span class="nf">is_uploaded</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">per_call</span><span class="o">=</span><span class="mi">50</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Check if all files in set have already been uploaded</span>
+
+<span class="sd">        :Kwargs:</span>
+<span class="sd">            - per_call (int): Number of files to check against the server</span>
+<span class="sd">              at a time. The more per call, the slower the call and the</span>
+<span class="sd">              bigger the return object, but too few per call could mean a</span>
+<span class="sd">              large number of calls for a big file collection. Default is 50.</span>
+
+<span class="sd">        :Returns:</span>
+<span class="sd">            - An :class:`FileCollection` containing the files that have yet</span>
+<span class="sd">              to be uploaded.</span>
+
+<span class="sd">        :Raises:</span>
+<span class="sd">            - :class:`.RestCallException`. If an exception has been thrown be the REST</span>
+<span class="sd">              client, it will be raised here.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">file_set</span> <span class="o">=</span> <span class="n">FileCollection</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_api</span><span class="p">,</span> <span class="o">*</span><span class="nb">list</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_collection</span><span class="p">))</span>
+        <span class="n">collection_spec</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_message</span><span class="p">(</span><span class="s">&quot;query&quot;</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_log</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span>
+            <span class="s">&quot;File collection specification: {0}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">collection_spec</span><span class="p">))</span>
+
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="p">),</span> <span class="n">per_call</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_log</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s">&quot;Checking {0} files for prior uploads&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+                <span class="nb">len</span><span class="p">(</span><span class="n">collection_spec</span><span class="p">[</span><span class="n">i</span><span class="p">:</span><span class="n">i</span><span class="o">+</span><span class="n">per_call</span><span class="p">])))</span>
+
+            <span class="n">resp</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_api</span><span class="o">.</span><span class="n">query_files</span><span class="p">(</span><span class="n">collection_spec</span><span class="p">[</span><span class="n">i</span><span class="p">:</span><span class="n">i</span><span class="o">+</span><span class="n">per_call</span><span class="p">])</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">resp</span><span class="o">.</span><span class="n">success</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="n">resp</span><span class="o">.</span><span class="n">result</span>
+
+            <span class="n">resp_files</span> <span class="o">=</span> <span class="p">[</span><span class="n">UserFile</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_api</span><span class="p">,</span> <span class="n">r_file</span><span class="p">)</span>
+                          <span class="k">for</span> <span class="n">r_file</span> <span class="ow">in</span> <span class="n">resp</span><span class="o">.</span><span class="n">result</span><span class="p">]</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_log</span><span class="o">.</span><span class="n">info</span><span class="p">(</span>
+                <span class="s">&quot;{0} of {1} files have already been &quot;</span>
+                <span class="s">&quot;uploaded&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">resp_files</span><span class="p">),</span>
+                                  <span class="nb">len</span><span class="p">(</span><span class="n">collection_spec</span><span class="p">[</span><span class="n">i</span><span class="p">:</span><span class="n">i</span><span class="o">+</span><span class="n">per_call</span><span class="p">])))</span>
+
+            <span class="c"># Check for matching uploaded userfiles in server response.</span>
+            <span class="c"># TODO: Set up path or md5 comparison</span>
+            <span class="k">for</span> <span class="n">r_file</span> <span class="ow">in</span> <span class="n">resp_files</span><span class="p">:</span>
+                <span class="n">to_remove</span> <span class="o">=</span> <span class="p">[</span><span class="n">_file</span> <span class="k">for</span> <span class="n">_file</span> <span class="ow">in</span> <span class="n">file_set</span>
+                             <span class="k">if</span> <span class="p">(</span><span class="n">_file</span><span class="o">.</span><span class="n">name</span> <span class="o">==</span> <span class="n">r_file</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
+                             <span class="ow">and</span> <span class="p">(</span><span class="n">_file</span><span class="o">.</span><span class="n">compare_lastmodified</span><span class="p">(</span><span class="n">r_file</span><span class="p">))]</span>
+
+                <span class="c"># Remove any matches from the list of files to be uplaoded.</span>
+                <span class="n">file_set</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">to_remove</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_log</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span>
+            <span class="s">&quot;Files that still need to be uploaded: {0}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">file_set</span><span class="p">))</span>
+
+        <span class="k">return</span> <span class="n">file_set</span>
+
+</div></div>
+<div class="viewcode-block" id="UserFile"><a class="viewcode-back" href="../../batch_apps.files.html#batchapps.files.UserFile">[docs]</a><span class="k">class</span> <span class="nc">UserFile</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Definition of a single file to be used during the running of a</span>
+<span class="sd">    particular job.</span>
+
+<span class="sd">    :Attributes:</span>
+<span class="sd">        - name (str)</span>
+<span class="sd">        - path (str)</span>
+<span class="sd">        - url (str)</span>
+<span class="sd">        - tag (str)</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">client</span><span class="p">,</span> <span class="n">file_def</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        :Args:</span>
+<span class="sd">            - client (:class:`BatchAppsApi`): Authenticated and configured</span>
+<span class="sd">              REST API client.</span>
+<span class="sd">            - file_def (str, dict): Defining information on the file. To create</span>
+<span class="sd">              a userfile of a local file, this will be a string of the full</span>
+<span class="sd">              path to the file. To represent a userfile that exists in the</span>
+<span class="sd">              cloud, this will be a dictionary containing the path, name,</span>
+<span class="sd">              last modified date, and URL to the file.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">client</span><span class="p">,</span> <span class="s">&#39;send_file&#39;</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span>
+                <span class="s">&quot;client must be an authenticated BatchAppsApi object.&quot;</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_api</span> <span class="o">=</span> <span class="n">client</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_log</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="s">&#39;batch_apps&#39;</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">file_def</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">path</span><span class="o">.</span><span class="n">basename</span><span class="p">(</span><span class="n">file_def</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">path</span> <span class="o">=</span> <span class="n">path</span><span class="o">.</span><span class="n">normpath</span><span class="p">(</span><span class="n">file_def</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">url</span> <span class="o">=</span> <span class="s">&quot;&quot;</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">tag</span> <span class="o">=</span> <span class="s">&quot;&quot;</span>
+
+            <span class="bp">self</span><span class="o">.</span><span class="n">_exists</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_verify_path</span><span class="p">()</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_last_modified</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_last_modified</span><span class="p">()</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_checksum</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_checksum</span><span class="p">()</span>
+
+        <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">file_def</span><span class="p">,</span> <span class="nb">dict</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">file_def</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">&#39;name&#39;</span><span class="p">,</span> <span class="s">&quot;Unknown&quot;</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">path</span> <span class="o">=</span> <span class="n">file_def</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">&#39;originalFilePath&#39;</span><span class="p">,</span> <span class="s">&quot;&quot;</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">url</span> <span class="o">=</span> <span class="n">file_def</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">&#39;link&#39;</span><span class="p">,</span> <span class="p">{})</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">&#39;href&#39;</span><span class="p">,</span> <span class="s">&quot;&quot;</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">tag</span> <span class="o">=</span> <span class="s">&quot;&quot;</span>
+
+            <span class="bp">self</span><span class="o">.</span><span class="n">_exists</span> <span class="o">=</span> <span class="bp">False</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_last_modified</span> <span class="o">=</span> <span class="n">file_def</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">&#39;lastModifiedTime&#39;</span><span class="p">,</span> <span class="s">&quot;&quot;</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_checksum</span> <span class="o">=</span> <span class="s">&quot;&quot;</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s">&quot;file_def must be str or dict.&quot;</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">__bool__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Bool representation of an :class:`.UserFile`</span>
+
+<span class="sd">        Defined by whether the file exists at it&#39;s referenced path.</span>
+<span class="sd">        Example usage::</span>
+<span class="sd">            &gt;&gt; if not UserFile(&quot;texture.png&quot;): print(&quot;Can&#39;t find texture file&quot;)</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_exists</span>
+
+    <span class="k">def</span> <span class="nf">__len__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Determine userfile length as the size of the file in bytes.</span>
+
+<span class="sd">        :Returns:</span>
+<span class="sd">            - Size of the file in bytes (int)</span>
+<span class="sd">              If the file doesn&#39;t exist, return 0.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_exists</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">path</span><span class="o">.</span><span class="n">getsize</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">path</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="mi">0</span>
+
+    <span class="k">def</span> <span class="nf">__eq__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">compare_to</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        :class:`.UserFile` comparison.</span>
+<span class="sd">        If both files exist locally, the comparison will be with names and</span>
+<span class="sd">        md5 checksums. If one or both of the files only exist in the cloud,</span>
+<span class="sd">        the comparison will be of full paths.</span>
+
+<span class="sd">        :Args:</span>
+<span class="sd">            - compare_to (:class:`.UserFile`): The userfile to compare the</span>
+<span class="sd">              current userfile to.</span>
+
+<span class="sd">        :Returns:</span>
+<span class="sd">            - ``True`` if the two files are equal, else ``False``.</span>
+
+<span class="sd">        Example usage:</span>
+<span class="sd">            &gt;&gt; if assset_a == asset_b: print(&quot;Duplicate files!&quot;)</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c">#TODO: When server supports md5, have all checking done based on this.</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">compare_to</span><span class="p">,</span> <span class="n">UserFile</span><span class="p">):</span>
+
+            <span class="k">if</span> <span class="n">compare_to</span><span class="o">.</span><span class="n">_exists</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">_exists</span><span class="p">:</span>
+                <span class="k">return</span> <span class="p">((</span><span class="n">compare_to</span><span class="o">.</span><span class="n">_checksum</span> <span class="o">==</span> <span class="bp">self</span><span class="o">.</span><span class="n">_checksum</span><span class="p">)</span>
+                        <span class="ow">and</span> <span class="p">(</span><span class="n">compare_to</span><span class="o">.</span><span class="n">name</span> <span class="o">==</span> <span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">))</span>
+
+            <span class="k">return</span> <span class="n">compare_to</span><span class="o">.</span><span class="n">path</span> <span class="o">==</span> <span class="bp">self</span><span class="o">.</span><span class="n">path</span>
+
+        <span class="k">return</span> <span class="bp">False</span>
+
+    <span class="k">def</span> <span class="nf">__lt__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">compare_to</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        UserFile ordering (less-than).</span>
+<span class="sd">        Order of a sorted file list is done alphabetically based on the</span>
+<span class="sd">        filename.</span>
+
+<span class="sd">        :Args:</span>
+<span class="sd">            - compare_to (:class:`.UserFile`): The userfile to sort the current</span>
+<span class="sd">              userfile against.</span>
+
+<span class="sd">        :Returns:</span>
+<span class="sd">            - ``True`` if current userfile is &quot;less than&quot; passed in userfile,</span>
+<span class="sd">              else ``False``.</span>
+
+<span class="sd">        Example usage:</span>
+<span class="sd">            &gt;&gt; print(sorted(my_asset_collection))</span>
+<span class="sd">            &quot;[&#39;a.png&#39;, &#39;b.jpg&#39;, &#39;c.tif&#39;]&quot;</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">&lt;</span> <span class="n">compare_to</span><span class="o">.</span><span class="n">name</span>
+
+    <span class="k">def</span> <span class="nf">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;String representation of :class:`.UserFile`.</span>
+
+<span class="sd">        :Returns:</span>
+<span class="sd">            - The filename of the UserFile (string).</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">name</span>
+
+    <span class="k">def</span> <span class="nf">__hash__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;:class:`.UserFile` hashing behaviour</span>
+
+<span class="sd">        :Returns:</span>
+<span class="sd">            - If file exists locally, hash of the file checksum.</span>
+<span class="sd">            - If the file is in the cloud, hash of the full path.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c">#TODO: Once server supports md5, only hash this.</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_exists</span><span class="p">:</span>
+            <span class="k">return</span> <span class="nb">hash</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_checksum</span><span class="p">)</span>
+
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="nb">hash</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">path</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">_verify_path</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Verify existance of new userfile reference.</span>
+
+<span class="sd">        :Returns:</span>
+<span class="sd">            - ``True`` if file exists at the given path, else ``False``.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">path</span><span class="o">.</span><span class="n">isfile</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">path</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_log</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span>
+                <span class="s">&quot;Unable to verify existance of new file: </span><span class="si">%s</span><span class="s">&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">path</span><span class="p">)</span>
+
+            <span class="k">return</span> <span class="bp">False</span>
+
+        <span class="k">return</span> <span class="bp">True</span>
+
+    <span class="k">def</span> <span class="nf">_get_windows_path</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Format the file path for use on Windows OS (Azure).</span>
+
+<span class="sd">        :Returns:</span>
+<span class="sd">            - Modified path with forward slashes replaced. No changes are</span>
+<span class="sd">              made to the root or structure of the path.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s">&#39;/&#39;</span><span class="p">,</span> <span class="s">&#39;</span><span class="se">\\</span><span class="s">&#39;</span><span class="p">)</span>
+
+<div class="viewcode-block" id="UserFile.get_last_modified"><a class="viewcode-back" href="../../batch_apps.files.html#batchapps.files.UserFile.get_last_modified">[docs]</a>    <span class="k">def</span> <span class="nf">get_last_modified</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Get the last modified datetime stamp formatted for the REST API.</span>
+
+<span class="sd">        :Returns:</span>
+<span class="sd">            - If the file exists locally, the last modified</span>
+<span class="sd">              timestamp (string).</span>
+<span class="sd">            - If the file doesn&#39;t exist locally, an empty string.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">_exists</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_log</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s">&quot;Can&#39;t get last modified time for unverified file&quot;</span><span class="p">)</span>
+            <span class="k">return</span> <span class="s">&quot;&quot;</span>
+
+        <span class="n">mod_time</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">utcfromtimestamp</span><span class="p">(</span><span class="n">path</span><span class="o">.</span><span class="n">getmtime</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">path</span><span class="p">))</span>
+        <span class="k">return</span> <span class="n">mod_time</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s">&quot;%Y-%m-</span><span class="si">%d</span><span class="s">T%H:%M:%S&quot;</span><span class="p">)</span> <span class="o">+</span> <span class="s">&quot;Z&quot;</span>
+</div>
+<div class="viewcode-block" id="UserFile.compare_lastmodified"><a class="viewcode-back" href="../../batch_apps.files.html#batchapps.files.UserFile.compare_lastmodified">[docs]</a>    <span class="k">def</span> <span class="nf">compare_lastmodified</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">compare_to</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Compare files based on their last modified date.</span>
+
+<span class="sd">        :Args:</span>
+<span class="sd">            - compare_to (:class:`.UserFile`): UserFile to compare to</span>
+<span class="sd">              current userfile.</span>
+
+<span class="sd">        :Returns:</span>
+<span class="sd">            - ``True`` if the files were last modified at the same time,</span>
+<span class="sd">              else ``False``.</span>
+<span class="sd">            - Returns ``False`` if either of the UserFiles don&#39;t exist locally.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_last_modified</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_last_modified</span><span class="p">()</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">_last_modified</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">False</span>
+        <span class="c"># It looks like the way date time stamps are returned has changed...</span>
+        <span class="c">#file1 = utils.parse_date_string(self._last_modified)</span>
+        <span class="c">#file2 = utils.parse_date_string(compare_to._last_modified)</span>
+        <span class="c">#return file1 == file2</span>
+
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_last_modified</span> <span class="o">==</span> <span class="n">compare_to</span><span class="o">.</span><span class="n">_last_modified</span>
+
+</div>
+<div class="viewcode-block" id="UserFile.get_checksum"><a class="viewcode-back" href="../../batch_apps.files.html#batchapps.files.UserFile.get_checksum">[docs]</a>    <span class="k">def</span> <span class="nf">get_checksum</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Generate md5 checksum for file.</span>
+
+<span class="sd">        :Returns:</span>
+<span class="sd">            - If the file exists locally, the md5 checksum of the file (bytes).</span>
+<span class="sd">            - If the file doesn&#39;t exist locally, an empty string.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">_exists</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_log</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s">&quot;Can&#39;t get checksum for unverified file&quot;</span><span class="p">)</span>
+            <span class="k">return</span> <span class="s">&#39;&#39;</span>
+
+        <span class="n">block_size</span> <span class="o">=</span> <span class="mi">128</span>
+        <span class="n">hasher</span> <span class="o">=</span> <span class="n">hashlib</span><span class="o">.</span><span class="n">md5</span><span class="p">()</span>
+
+        <span class="k">try</span><span class="p">:</span>
+            <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">path</span><span class="p">,</span> <span class="s">&#39;rb&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">user_file</span><span class="p">:</span>
+                <span class="k">while</span> <span class="bp">True</span><span class="p">:</span>
+                    <span class="n">file_block</span> <span class="o">=</span> <span class="n">user_file</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="n">block_size</span><span class="p">)</span>
+                    <span class="k">if</span> <span class="ow">not</span> <span class="n">file_block</span><span class="p">:</span>
+                        <span class="k">break</span>
+                    <span class="n">hasher</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">file_block</span><span class="p">)</span>
+            <span class="k">return</span> <span class="n">hasher</span><span class="o">.</span><span class="n">digest</span><span class="p">()</span>
+
+        <span class="k">except</span> <span class="p">(</span><span class="ne">TypeError</span><span class="p">,</span> <span class="ne">EnvironmentError</span><span class="p">)</span> <span class="k">as</span> <span class="n">exp</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_log</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s">&quot;Can&#39;t get checksum: {0}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">exp</span><span class="p">))</span>
+            <span class="k">return</span> <span class="s">&#39;&#39;</span>
+</div>
+<div class="viewcode-block" id="UserFile.create_query_specifier"><a class="viewcode-back" href="../../batch_apps.files.html#batchapps.files.UserFile.create_query_specifier">[docs]</a>    <span class="k">def</span> <span class="nf">create_query_specifier</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Create the file specifier for REST API communications</span>
+
+<span class="sd">        :Returns:</span>
+<span class="sd">            - Dictionary of the file specification.</span>
+<span class="sd">              Format: ``{&#39;FileName&#39;:&#39;&#39;, &#39;Timestamp&#39;:&#39;&#39;, &#39;OriginalPath&#39;:&#39;&#39;}``</span>
+
+<span class="sd">        :Raises:</span>
+<span class="sd">            - :class:`.FileMissingException` if the file of which the specifier</span>
+<span class="sd">              is requested does not exist locally.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">_exists</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">FileMissingException</span><span class="p">(</span><span class="s">&quot;File is not found to exist at path: &quot;</span>
+                                       <span class="s">&quot;{p}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">p</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">path</span><span class="p">))</span>
+
+        <span class="n">file_spec</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s">&#39;FileName&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">,</span>
+            <span class="s">&#39;Timestamp&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">_last_modified</span><span class="p">,</span>
+            <span class="s">&#39;OriginalPath&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_windows_path</span><span class="p">()</span>
+        <span class="p">}</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_log</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s">&quot;File specification: {0}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">file_spec</span><span class="p">))</span>
+        <span class="k">return</span> <span class="n">file_spec</span>
+</div>
+<div class="viewcode-block" id="UserFile.create_submit_specifier"><a class="viewcode-back" href="../../batch_apps.files.html#batchapps.files.UserFile.create_submit_specifier">[docs]</a>    <span class="k">def</span> <span class="nf">create_submit_specifier</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Create the file specifier for REST API communications.</span>
+
+<span class="sd">        :Returns:</span>
+<span class="sd">            - Dictionary of the file specification.</span>
+<span class="sd">              Format: ``{&#39;Name&#39;:&#39;&#39;, &#39;Timestamp&#39;:&#39;&#39;}``</span>
+
+<span class="sd">        :Raises:</span>
+<span class="sd">            - :class:`.FileMissingException` if the file of which the specifier</span>
+<span class="sd">              is requested does not exist locally.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">_exists</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">FileMissingException</span><span class="p">(</span><span class="s">&quot;File is not found to exist at path: &quot;</span>
+                                       <span class="s">&quot;{p}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">p</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">path</span><span class="p">))</span>
+
+        <span class="n">file_spec</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s">&#39;Name&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">,</span>
+            <span class="s">&#39;Timestamp&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">_last_modified</span><span class="p">,</span>
+        <span class="p">}</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_log</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s">&quot;File specification: {0}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">file_spec</span><span class="p">))</span>
+        <span class="k">return</span> <span class="n">file_spec</span>
+</div>
+<div class="viewcode-block" id="UserFile.upload"><a class="viewcode-back" href="../../batch_apps.files.html#batchapps.files.UserFile.upload">[docs]</a>    <span class="k">def</span> <span class="nf">upload</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">force</span><span class="o">=</span><span class="bp">False</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Upload file.</span>
+
+<span class="sd">        :Kwargs:</span>
+<span class="sd">            - force (bool): If ``True``, uploads regardless of whether the</span>
+<span class="sd">              file has already been uploaded. Else, checks if file has been</span>
+<span class="sd">              uploaded, and if so, skips.</span>
+
+<span class="sd">        :Returns:</span>
+<span class="sd">            - Client :class:`.Response` object if upload was attempted.</span>
+<span class="sd">            - ``None`` if upload was skipped.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">uploaded</span> <span class="o">=</span> <span class="bp">False</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">force</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_log</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s">&quot;Checking if file {0} has been previously &quot;</span>
+                           <span class="s">&quot;uploaded&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">))</span>
+
+            <span class="n">uploaded</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">is_uploaded</span><span class="p">()</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_log</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s">&quot;Uploaded: {0}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">uploaded</span><span class="p">))</span>
+
+        <span class="k">if</span> <span class="n">force</span> <span class="ow">or</span> <span class="n">uploaded</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_log</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s">&quot;Uploading file {0}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">))</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_api</span><span class="o">.</span><span class="n">send_file</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="bp">None</span>
+</div>
+<div class="viewcode-block" id="UserFile.is_uploaded"><a class="viewcode-back" href="../../batch_apps.files.html#batchapps.files.UserFile.is_uploaded">[docs]</a>    <span class="k">def</span> <span class="nf">is_uploaded</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Check if a file has already been uploaded.</span>
+
+<span class="sd">        :Returns:</span>
+<span class="sd">            - :class:`.UserFile` if file has already been uploaded, else ``None``.</span>
+
+<span class="sd">        :Raises:</span>
+<span class="sd">            - :class:`.RestCallException` if any errors occured in the API</span>
+<span class="sd">              client.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">resp</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_api</span><span class="o">.</span><span class="n">query_files</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">create_query_specifier</span><span class="p">())</span>
+        <span class="k">if</span> <span class="n">resp</span><span class="o">.</span><span class="n">success</span><span class="p">:</span>
+
+            <span class="n">resp_files</span> <span class="o">=</span> <span class="p">[</span><span class="n">UserFile</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_api</span><span class="p">,</span> <span class="n">r_file</span><span class="p">)</span>
+                          <span class="k">for</span> <span class="n">r_file</span> <span class="ow">in</span> <span class="n">resp</span><span class="o">.</span><span class="n">result</span><span class="p">]</span>
+
+            <span class="k">for</span> <span class="n">r_file</span> <span class="ow">in</span> <span class="n">resp_files</span><span class="p">:</span> <span class="c">#TODO: Set up path or md5 comparison</span>
+
+                <span class="k">if</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">==</span> <span class="n">r_file</span><span class="o">.</span><span class="n">name</span>
+                    <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">compare_lastmodified</span><span class="p">(</span><span class="n">r_file</span><span class="p">)):</span>
+                    <span class="k">return</span> <span class="n">r_file</span>
+
+            <span class="k">return</span> <span class="bp">None</span>
+
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">resp</span><span class="o">.</span><span class="n">result</span>
+</div>
+<div class="viewcode-block" id="UserFile.download"><a class="viewcode-back" href="../../batch_apps.files.html#batchapps.files.UserFile.download">[docs]</a>    <span class="k">def</span> <span class="nf">download</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">download_dir</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Download file.</span>
+<span class="sd">        </span>
+<span class="sd">        :Args:</span>
+<span class="sd">            - download_dir (str): Path to the directory that to which the file </span>
+<span class="sd">              will be downloaded.</span>
+
+<span class="sd">        :Raises:</span>
+<span class="sd">            - :class:`.RestCallException` if any errors occured in the API</span>
+<span class="sd">              client.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">uploaded</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">is_uploaded</span><span class="p">()</span>
+
+        <span class="k">except</span> <span class="n">RestCallException</span><span class="p">:</span>
+            <span class="k">raise</span>
+        <span class="k">except</span> <span class="n">FileMissingException</span><span class="p">:</span>
+            <span class="k">return</span> <span class="c">#TODO: We should be able to download a file that doesn&#39;t</span>
+                   <span class="c"># exist locally.</span>
+        
+        <span class="k">if</span> <span class="n">uploaded</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_log</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s">&quot;File has not been previously uploaded. &quot;</span>
+                            <span class="s">&quot;Cannot download file.&quot;</span><span class="p">)</span>
+            <span class="k">return</span>
+
+        <span class="n">resp</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_api</span><span class="o">.</span><span class="n">props_file</span><span class="p">(</span><span class="n">uploaded</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">resp</span><span class="o">.</span><span class="n">success</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_log</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s">&quot;Unable to retrieve properties of uploaded &quot;</span>
+                            <span class="s">&quot;file: {0}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">resp</span><span class="o">.</span><span class="n">result</span><span class="p">))</span>
+            <span class="k">raise</span> <span class="n">resp</span><span class="o">.</span><span class="n">result</span>
+
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">size</span> <span class="o">=</span> <span class="n">resp</span><span class="o">.</span><span class="n">result</span>
+            <span class="n">dl_file</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_api</span><span class="o">.</span><span class="n">get_file</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">size</span><span class="p">,</span> <span class="n">download_dir</span><span class="p">)</span>
+
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">dl_file</span><span class="o">.</span><span class="n">success</span><span class="p">:</span>
+
+                <span class="bp">self</span><span class="o">.</span><span class="n">_log</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s">&quot;Failed to download file: &quot;</span>
+                                <span class="s">&quot;{0}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">dl_file</span><span class="o">.</span><span class="n">result</span><span class="p">))</span>
+                <span class="k">raise</span> <span class="n">dl_file</span><span class="o">.</span><span class="n">result</span>
+
+            <span class="k">else</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_log</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s">&quot;Successfully downloaded file to &quot;</span>
+                               <span class="s">&quot;{0}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">download_dir</span><span class="p">))</span></div></div>
+</pre></div>
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../../index.html">azure-batch-apps 0.2.0 documentation</a> &raquo;</li>
+          <li><a href="../index.html" >Module code</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2014, Microsoft Corporation.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2.2.
+    </div>
+  </body>
+</html>

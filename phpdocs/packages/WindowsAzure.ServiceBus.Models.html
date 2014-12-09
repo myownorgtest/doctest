@@ -1,0 +1,336 @@
+<!DOCTYPE html><html xmlns:date="http://exslt.org/dates-and-times" lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0; user-scalable=0;">
+<meta charset="utf-8">
+<title>Windows Azure SDK for PHP » WindowsAzure\ServiceBus\Models</title>
+<meta name="author" content="Mike van Riel">
+<meta name="description" content="">
+<link href="../css/template.css" rel="stylesheet" media="all">
+<script src="../js/jquery-1.7.1.min.js" type="text/javascript"></script><script src="../js/jquery-ui-1.8.2.custom.min.js" type="text/javascript"></script><script src="../js/jquery.mousewheel.min.js" type="text/javascript"></script><script src="../js/bootstrap.js" type="text/javascript"></script><script src="../js/template.js" type="text/javascript"></script><script src="../js/prettify/prettify.min.js" type="text/javascript"></script><link rel="shortcut icon" href="../img/favicon.ico">
+<link rel="apple-touch-icon" href="../img/apple-touch-icon.png">
+<link rel="apple-touch-icon" sizes="72x72" href="../img/apple-touch-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="114x114" href="../img/apple-touch-icon-114x114.png">
+</head>
+<body>
+<div class="navbar navbar-fixed-top">
+<div class="navbar-inner"><div class="container">
+<a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse"><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></a><a class="brand" href="../index.html">Windows Azure SDK for PHP</a><div class="nav-collapse"><ul class="nav">
+<li class="dropdown">
+<a href="#api" class="dropdown-toggle" data-toggle="dropdown">
+                                    API Documentation <b class="caret"></b></a><ul class="dropdown-menu">
+<li><a>Namespaces</a></li>
+<li><a href="../namespaces/WindowsAzure.html"><i class="icon-th"></i> WindowsAzure</a></li>
+<li><a>Packages</a></li>
+<li><a href="../packages/WindowsAzure.html"><i class="icon-folder-open"></i> WindowsAzure</a></li>
+</ul>
+</li>
+<li class="dropdown" id="charts-menu">
+<a href="#charts" class="dropdown-toggle" data-toggle="dropdown">
+                                    Charts <b class="caret"></b></a><ul class="dropdown-menu"><li><a href="../graph_class.html"><i class="icon-list-alt"></i> Class hierarchy diagram</a></li></ul>
+</li>
+<li class="dropdown" id="reports-menu">
+<a href="#reports" class="dropdown-toggle" data-toggle="dropdown">
+                                    Reports <b class="caret"></b></a><ul class="dropdown-menu">
+<li><a href="../errors.html"><i class="icon-remove-sign"></i> Errors 
+                <span class="label label-info">385</span></a></li>
+<li><a href="../markers.html"><i class="icon-map-marker"></i> Markers 
+                <ul></ul></a></li>
+<li><a href="../deprecated.html"><i class="icon-stop"></i> Deprecated elements 
+                <span class="label label-info">0</span></a></li>
+</ul>
+</li>
+</ul></div>
+</div></div>
+<div class="go_to_top"><a href="#___" style="color: inherit">Back to top  <i class="icon-upload icon-white"></i></a></div>
+</div>
+<div id="___" class="container">
+<noscript><div class="alert alert-warning">
+                            Javascript is disabled; several features are only available
+                            if Javascript is enabled.
+                        </div></noscript>
+<div class="row">
+<div class="span4">
+<div class="btn-group view pull-right" data-toggle="buttons-radio">
+<button class="btn details" title="Show descriptions and method names"><i class="icon-list"></i></button><button class="btn simple" title="Show only method names"><i class="icon-align-justify"></i></button>
+</div>
+<ul class="side-nav nav nav-list">
+<li class="nav-header">
+<i class="icon-map-marker"></i> Packages</li>
+<li>
+<a href="../packages/WindowsAzure.ServiceBus.Models.html" title="Models"><i class="icon-folder-open"></i>Models</a><ul class="nav nav-list nav-packages"></ul>
+</li>
+<li class="nav-header">
+<i class="icon-custom icon-class"></i> Classes</li>
+<li><a href="#Action" title="The base class for rule action.">Action</a></li>
+<li><a href="#ActiveToken" title="An active WRAP access Token.">ActiveToken</a></li>
+<li><a href="#BrokeredMessage" title="A class representing the brokered message of Windows Azure Service Bus.">BrokeredMessage</a></li>
+<li><a href="#BrokerProperties" title="The properties of the broker of a brokered message.">BrokerProperties</a></li>
+<li><a href="#CorrelationFilter" title="The base class for rule filter.">CorrelationFilter</a></li>
+<li><a href="#EmptyRuleAction" title="The empty rule action class.">EmptyRuleAction</a></li>
+<li><a href="#FalseFilter" title="The false filter.">FalseFilter</a></li>
+<li><a href="#Filter" title="The base class for rule filter.">Filter</a></li>
+<li><a href="#ListOptions" title="The base class for the options for list request.">ListOptions</a></li>
+<li><a href="#ListQueuesOptions" title="This options to list queues.">ListQueuesOptions</a></li>
+<li><a href="#ListQueuesResult" title="The results of list queues request.">ListQueuesResult</a></li>
+<li><a href="#ListRulesOptions" title="The options to specify a list rules request.">ListRulesOptions</a></li>
+<li><a href="#ListRulesResult" title="The result of the list rules request.">ListRulesResult</a></li>
+<li><a href="#ListSubscriptionsOptions" title="The options to list the subscriptions.">ListSubscriptionsOptions</a></li>
+<li><a href="#ListSubscriptionsResult" title="The result of the list subscription request.">ListSubscriptionsResult</a></li>
+<li><a href="#ListTopicsOptions" title="This class contains the options for list topics request.">ListTopicsOptions</a></li>
+<li><a href="#ListTopicsResult" title="The result of a list topics request.">ListTopicsResult</a></li>
+<li><a href="#QueueDescription" title="The description of a queue.">QueueDescription</a></li>
+<li><a href="#QueueInfo" title="The information of a queue.">QueueInfo</a></li>
+<li><a href="#ReceiveMessageOptions" title="The options for a receive message request.">ReceiveMessageOptions</a></li>
+<li><a href="#ReceiveMode" title="The mode of receiving message from Service Bus.">ReceiveMode</a></li>
+<li><a href="#RuleDescription" title="The description of the rule.">RuleDescription</a></li>
+<li><a href="#RuleInfo" title="The information of a rule.">RuleInfo</a></li>
+<li><a href="#SqlFilter" title="The SQL filter.">SqlFilter</a></li>
+<li><a href="#SqlRuleAction" title="The SQL rule action.">SqlRuleAction</a></li>
+<li><a href="#SubscriptionDescription" title="The subscription description.">SubscriptionDescription</a></li>
+<li><a href="#SubscriptionInfo" title="The information of a subscription.">SubscriptionInfo</a></li>
+<li><a href="#TopicDescription" title="The description of the topic.">TopicDescription</a></li>
+<li><a href="#TopicInfo" title="The description of a topic.">TopicInfo</a></li>
+<li><a href="#TrueFilter" title="The true filter.">TrueFilter</a></li>
+<li><a href="#WrapAccessTokenResult" title="Container to hold wrap accesss token response object.">WrapAccessTokenResult</a></li>
+</ul>
+</div>
+<div class="span8 package-contents">
+<ul class="breadcrumb">
+<li>
+<a href="../index.html"><i class="icon-folder-open"></i></a><span class="divider">\</span>
+</li>
+<li><a href="../packages/WindowsAzure.html">WindowsAzure</a></li>
+<span class="divider">\</span><li><a href="../packages/WindowsAzure.ServiceBus.html">ServiceBus</a></li>
+<span class="divider">\</span><li class="active"><a href="../packages/WindowsAzure.ServiceBus.Models.html">Models</a></li>
+</ul>
+<div class="package-indent">
+<h3>
+<i class="icon-custom icon-class"></i> Classes and interfaces</h3>
+<a name="Action" id="Action"></a><div class="element ajax clickable class" href="../classes/WindowsAzure.ServiceBus.Models.Action.html">
+<h1>Action<a href="../classes/WindowsAzure.ServiceBus.Models.Action.html">¶</a>
+</h1>
+<p class="short_description">The base class for rule action.</p>
+<div class="details collapse"></div>
+<a href="../classes/WindowsAzure.ServiceBus.Models.Action.html" class="more">« More »</a>
+</div>
+<a name="ActiveToken" id="ActiveToken"></a><div class="element ajax clickable class" href="../classes/WindowsAzure.ServiceBus.Models.ActiveToken.html">
+<h1>ActiveToken<a href="../classes/WindowsAzure.ServiceBus.Models.ActiveToken.html">¶</a>
+</h1>
+<p class="short_description">An active WRAP access Token.</p>
+<div class="details collapse"></div>
+<a href="../classes/WindowsAzure.ServiceBus.Models.ActiveToken.html" class="more">« More »</a>
+</div>
+<a name="BrokerProperties" id="BrokerProperties"></a><div class="element ajax clickable class" href="../classes/WindowsAzure.ServiceBus.Models.BrokerProperties.html">
+<h1>BrokerProperties<a href="../classes/WindowsAzure.ServiceBus.Models.BrokerProperties.html">¶</a>
+</h1>
+<p class="short_description">The properties of the broker of a brokered message.</p>
+<div class="details collapse"></div>
+<a href="../classes/WindowsAzure.ServiceBus.Models.BrokerProperties.html" class="more">« More »</a>
+</div>
+<a name="BrokeredMessage" id="BrokeredMessage"></a><div class="element ajax clickable class" href="../classes/WindowsAzure.ServiceBus.Models.BrokeredMessage.html">
+<h1>BrokeredMessage<a href="../classes/WindowsAzure.ServiceBus.Models.BrokeredMessage.html">¶</a>
+</h1>
+<p class="short_description">A class representing the brokered message of Windows Azure Service Bus.</p>
+<div class="details collapse"></div>
+<a href="../classes/WindowsAzure.ServiceBus.Models.BrokeredMessage.html" class="more">« More »</a>
+</div>
+<a name="CorrelationFilter" id="CorrelationFilter"></a><div class="element ajax clickable class" href="../classes/WindowsAzure.ServiceBus.Models.CorrelationFilter.html">
+<h1>CorrelationFilter<a href="../classes/WindowsAzure.ServiceBus.Models.CorrelationFilter.html">¶</a>
+</h1>
+<p class="short_description">The base class for rule filter.</p>
+<div class="details collapse"></div>
+<a href="../classes/WindowsAzure.ServiceBus.Models.CorrelationFilter.html" class="more">« More »</a>
+</div>
+<a name="EmptyRuleAction" id="EmptyRuleAction"></a><div class="element ajax clickable class" href="../classes/WindowsAzure.ServiceBus.Models.EmptyRuleAction.html">
+<h1>EmptyRuleAction<a href="../classes/WindowsAzure.ServiceBus.Models.EmptyRuleAction.html">¶</a>
+</h1>
+<p class="short_description">The empty rule action class.</p>
+<div class="details collapse"></div>
+<a href="../classes/WindowsAzure.ServiceBus.Models.EmptyRuleAction.html" class="more">« More »</a>
+</div>
+<a name="FalseFilter" id="FalseFilter"></a><div class="element ajax clickable class" href="../classes/WindowsAzure.ServiceBus.Models.FalseFilter.html">
+<h1>FalseFilter<a href="../classes/WindowsAzure.ServiceBus.Models.FalseFilter.html">¶</a>
+</h1>
+<p class="short_description">The false filter.</p>
+<div class="details collapse"></div>
+<a href="../classes/WindowsAzure.ServiceBus.Models.FalseFilter.html" class="more">« More »</a>
+</div>
+<a name="Filter" id="Filter"></a><div class="element ajax clickable class" href="../classes/WindowsAzure.ServiceBus.Models.Filter.html">
+<h1>Filter<a href="../classes/WindowsAzure.ServiceBus.Models.Filter.html">¶</a>
+</h1>
+<p class="short_description">The base class for rule filter.</p>
+<div class="details collapse"></div>
+<a href="../classes/WindowsAzure.ServiceBus.Models.Filter.html" class="more">« More »</a>
+</div>
+<a name="ListOptions" id="ListOptions"></a><div class="element ajax clickable class" href="../classes/WindowsAzure.ServiceBus.Models.ListOptions.html">
+<h1>ListOptions<a href="../classes/WindowsAzure.ServiceBus.Models.ListOptions.html">¶</a>
+</h1>
+<p class="short_description">The base class for the options for list request.</p>
+<div class="details collapse"></div>
+<a href="../classes/WindowsAzure.ServiceBus.Models.ListOptions.html" class="more">« More »</a>
+</div>
+<a name="ListQueuesOptions" id="ListQueuesOptions"></a><div class="element ajax clickable class" href="../classes/WindowsAzure.ServiceBus.Models.ListQueuesOptions.html">
+<h1>ListQueuesOptions<a href="../classes/WindowsAzure.ServiceBus.Models.ListQueuesOptions.html">¶</a>
+</h1>
+<p class="short_description">This options to list queues.</p>
+<div class="details collapse"></div>
+<a href="../classes/WindowsAzure.ServiceBus.Models.ListQueuesOptions.html" class="more">« More »</a>
+</div>
+<a name="ListQueuesResult" id="ListQueuesResult"></a><div class="element ajax clickable class" href="../classes/WindowsAzure.ServiceBus.Models.ListQueuesResult.html">
+<h1>ListQueuesResult<a href="../classes/WindowsAzure.ServiceBus.Models.ListQueuesResult.html">¶</a>
+</h1>
+<p class="short_description">The results of list queues request.</p>
+<div class="details collapse"></div>
+<a href="../classes/WindowsAzure.ServiceBus.Models.ListQueuesResult.html" class="more">« More »</a>
+</div>
+<a name="ListRulesOptions" id="ListRulesOptions"></a><div class="element ajax clickable class" href="../classes/WindowsAzure.ServiceBus.Models.ListRulesOptions.html">
+<h1>ListRulesOptions<a href="../classes/WindowsAzure.ServiceBus.Models.ListRulesOptions.html">¶</a>
+</h1>
+<p class="short_description">The options to specify a list rules request.</p>
+<div class="details collapse"></div>
+<a href="../classes/WindowsAzure.ServiceBus.Models.ListRulesOptions.html" class="more">« More »</a>
+</div>
+<a name="ListRulesResult" id="ListRulesResult"></a><div class="element ajax clickable class" href="../classes/WindowsAzure.ServiceBus.Models.ListRulesResult.html">
+<h1>ListRulesResult<a href="../classes/WindowsAzure.ServiceBus.Models.ListRulesResult.html">¶</a>
+</h1>
+<p class="short_description">The result of the list rules request.</p>
+<div class="details collapse"></div>
+<a href="../classes/WindowsAzure.ServiceBus.Models.ListRulesResult.html" class="more">« More »</a>
+</div>
+<a name="ListSubscriptionsOptions" id="ListSubscriptionsOptions"></a><div class="element ajax clickable class" href="../classes/WindowsAzure.ServiceBus.Models.ListSubscriptionsOptions.html">
+<h1>ListSubscriptionsOptions<a href="../classes/WindowsAzure.ServiceBus.Models.ListSubscriptionsOptions.html">¶</a>
+</h1>
+<p class="short_description">The options to list the subscriptions.</p>
+<div class="details collapse"></div>
+<a href="../classes/WindowsAzure.ServiceBus.Models.ListSubscriptionsOptions.html" class="more">« More »</a>
+</div>
+<a name="ListSubscriptionsResult" id="ListSubscriptionsResult"></a><div class="element ajax clickable class" href="../classes/WindowsAzure.ServiceBus.Models.ListSubscriptionsResult.html">
+<h1>ListSubscriptionsResult<a href="../classes/WindowsAzure.ServiceBus.Models.ListSubscriptionsResult.html">¶</a>
+</h1>
+<p class="short_description">The result of the list subscription request.</p>
+<div class="details collapse"></div>
+<a href="../classes/WindowsAzure.ServiceBus.Models.ListSubscriptionsResult.html" class="more">« More »</a>
+</div>
+<a name="ListTopicsOptions" id="ListTopicsOptions"></a><div class="element ajax clickable class" href="../classes/WindowsAzure.ServiceBus.Models.ListTopicsOptions.html">
+<h1>ListTopicsOptions<a href="../classes/WindowsAzure.ServiceBus.Models.ListTopicsOptions.html">¶</a>
+</h1>
+<p class="short_description">This class contains the options for list topics request.</p>
+<div class="details collapse"></div>
+<a href="../classes/WindowsAzure.ServiceBus.Models.ListTopicsOptions.html" class="more">« More »</a>
+</div>
+<a name="ListTopicsResult" id="ListTopicsResult"></a><div class="element ajax clickable class" href="../classes/WindowsAzure.ServiceBus.Models.ListTopicsResult.html">
+<h1>ListTopicsResult<a href="../classes/WindowsAzure.ServiceBus.Models.ListTopicsResult.html">¶</a>
+</h1>
+<p class="short_description">The result of a list topics request.</p>
+<div class="details collapse"></div>
+<a href="../classes/WindowsAzure.ServiceBus.Models.ListTopicsResult.html" class="more">« More »</a>
+</div>
+<a name="QueueDescription" id="QueueDescription"></a><div class="element ajax clickable class" href="../classes/WindowsAzure.ServiceBus.Models.QueueDescription.html">
+<h1>QueueDescription<a href="../classes/WindowsAzure.ServiceBus.Models.QueueDescription.html">¶</a>
+</h1>
+<p class="short_description">The description of a queue.</p>
+<div class="details collapse"></div>
+<a href="../classes/WindowsAzure.ServiceBus.Models.QueueDescription.html" class="more">« More »</a>
+</div>
+<a name="QueueInfo" id="QueueInfo"></a><div class="element ajax clickable class" href="../classes/WindowsAzure.ServiceBus.Models.QueueInfo.html">
+<h1>QueueInfo<a href="../classes/WindowsAzure.ServiceBus.Models.QueueInfo.html">¶</a>
+</h1>
+<p class="short_description">The information of a queue.</p>
+<div class="details collapse"></div>
+<a href="../classes/WindowsAzure.ServiceBus.Models.QueueInfo.html" class="more">« More »</a>
+</div>
+<a name="ReceiveMessageOptions" id="ReceiveMessageOptions"></a><div class="element ajax clickable class" href="../classes/WindowsAzure.ServiceBus.Models.ReceiveMessageOptions.html">
+<h1>ReceiveMessageOptions<a href="../classes/WindowsAzure.ServiceBus.Models.ReceiveMessageOptions.html">¶</a>
+</h1>
+<p class="short_description">The options for a receive message request.</p>
+<div class="details collapse"></div>
+<a href="../classes/WindowsAzure.ServiceBus.Models.ReceiveMessageOptions.html" class="more">« More »</a>
+</div>
+<a name="ReceiveMode" id="ReceiveMode"></a><div class="element ajax clickable class" href="../classes/WindowsAzure.ServiceBus.Models.ReceiveMode.html">
+<h1>ReceiveMode<a href="../classes/WindowsAzure.ServiceBus.Models.ReceiveMode.html">¶</a>
+</h1>
+<p class="short_description">The mode of receiving message from Service Bus.</p>
+<div class="details collapse"></div>
+<a href="../classes/WindowsAzure.ServiceBus.Models.ReceiveMode.html" class="more">« More »</a>
+</div>
+<a name="RuleDescription" id="RuleDescription"></a><div class="element ajax clickable class" href="../classes/WindowsAzure.ServiceBus.Models.RuleDescription.html">
+<h1>RuleDescription<a href="../classes/WindowsAzure.ServiceBus.Models.RuleDescription.html">¶</a>
+</h1>
+<p class="short_description">The description of the rule.</p>
+<div class="details collapse"></div>
+<a href="../classes/WindowsAzure.ServiceBus.Models.RuleDescription.html" class="more">« More »</a>
+</div>
+<a name="RuleInfo" id="RuleInfo"></a><div class="element ajax clickable class" href="../classes/WindowsAzure.ServiceBus.Models.RuleInfo.html">
+<h1>RuleInfo<a href="../classes/WindowsAzure.ServiceBus.Models.RuleInfo.html">¶</a>
+</h1>
+<p class="short_description">The information of a rule.</p>
+<div class="details collapse"></div>
+<a href="../classes/WindowsAzure.ServiceBus.Models.RuleInfo.html" class="more">« More »</a>
+</div>
+<a name="SqlFilter" id="SqlFilter"></a><div class="element ajax clickable class" href="../classes/WindowsAzure.ServiceBus.Models.SqlFilter.html">
+<h1>SqlFilter<a href="../classes/WindowsAzure.ServiceBus.Models.SqlFilter.html">¶</a>
+</h1>
+<p class="short_description">The SQL filter.</p>
+<div class="details collapse"></div>
+<a href="../classes/WindowsAzure.ServiceBus.Models.SqlFilter.html" class="more">« More »</a>
+</div>
+<a name="SqlRuleAction" id="SqlRuleAction"></a><div class="element ajax clickable class" href="../classes/WindowsAzure.ServiceBus.Models.SqlRuleAction.html">
+<h1>SqlRuleAction<a href="../classes/WindowsAzure.ServiceBus.Models.SqlRuleAction.html">¶</a>
+</h1>
+<p class="short_description">The SQL rule action.</p>
+<div class="details collapse"></div>
+<a href="../classes/WindowsAzure.ServiceBus.Models.SqlRuleAction.html" class="more">« More »</a>
+</div>
+<a name="SubscriptionDescription" id="SubscriptionDescription"></a><div class="element ajax clickable class" href="../classes/WindowsAzure.ServiceBus.Models.SubscriptionDescription.html">
+<h1>SubscriptionDescription<a href="../classes/WindowsAzure.ServiceBus.Models.SubscriptionDescription.html">¶</a>
+</h1>
+<p class="short_description">The subscription description.</p>
+<div class="details collapse"></div>
+<a href="../classes/WindowsAzure.ServiceBus.Models.SubscriptionDescription.html" class="more">« More »</a>
+</div>
+<a name="SubscriptionInfo" id="SubscriptionInfo"></a><div class="element ajax clickable class" href="../classes/WindowsAzure.ServiceBus.Models.SubscriptionInfo.html">
+<h1>SubscriptionInfo<a href="../classes/WindowsAzure.ServiceBus.Models.SubscriptionInfo.html">¶</a>
+</h1>
+<p class="short_description">The information of a subscription.</p>
+<div class="details collapse"></div>
+<a href="../classes/WindowsAzure.ServiceBus.Models.SubscriptionInfo.html" class="more">« More »</a>
+</div>
+<a name="TopicDescription" id="TopicDescription"></a><div class="element ajax clickable class" href="../classes/WindowsAzure.ServiceBus.Models.TopicDescription.html">
+<h1>TopicDescription<a href="../classes/WindowsAzure.ServiceBus.Models.TopicDescription.html">¶</a>
+</h1>
+<p class="short_description">The description of the topic.</p>
+<div class="details collapse"></div>
+<a href="../classes/WindowsAzure.ServiceBus.Models.TopicDescription.html" class="more">« More »</a>
+</div>
+<a name="TopicInfo" id="TopicInfo"></a><div class="element ajax clickable class" href="../classes/WindowsAzure.ServiceBus.Models.TopicInfo.html">
+<h1>TopicInfo<a href="../classes/WindowsAzure.ServiceBus.Models.TopicInfo.html">¶</a>
+</h1>
+<p class="short_description">The description of a topic.</p>
+<div class="details collapse"></div>
+<a href="../classes/WindowsAzure.ServiceBus.Models.TopicInfo.html" class="more">« More »</a>
+</div>
+<a name="TrueFilter" id="TrueFilter"></a><div class="element ajax clickable class" href="../classes/WindowsAzure.ServiceBus.Models.TrueFilter.html">
+<h1>TrueFilter<a href="../classes/WindowsAzure.ServiceBus.Models.TrueFilter.html">¶</a>
+</h1>
+<p class="short_description">The true filter.</p>
+<div class="details collapse"></div>
+<a href="../classes/WindowsAzure.ServiceBus.Models.TrueFilter.html" class="more">« More »</a>
+</div>
+<a name="WrapAccessTokenResult" id="WrapAccessTokenResult"></a><div class="element ajax clickable class" href="../classes/WindowsAzure.ServiceBus.Models.WrapAccessTokenResult.html">
+<h1>WrapAccessTokenResult<a href="../classes/WindowsAzure.ServiceBus.Models.WrapAccessTokenResult.html">¶</a>
+</h1>
+<p class="short_description">Container to hold wrap accesss token response object.</p>
+<div class="details collapse"></div>
+<a href="../classes/WindowsAzure.ServiceBus.Models.WrapAccessTokenResult.html" class="more">« More »</a>
+</div>
+</div>
+</div>
+</div>
+<div class="row"><footer class="span12">
+            Template is built using <a href="http://twitter.github.com/bootstrap/">Twitter Bootstrap 2</a> and icons provided by <a href="http://glyphicons.com/">Glyphicons</a>.<br>
+            Documentation is powered by <a href="http://www.phpdoc.org/">phpDocumentor 2.0.0a6</a> and<br>
+            generated on 2012-07-17T21:10:36-07:00.<br></footer></div>
+</div>
+</body>
+</html>

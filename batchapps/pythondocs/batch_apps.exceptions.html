@@ -1,0 +1,207 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>batchapps.exceptions &mdash; azure-batch-apps 0.2.0 documentation</title>
+    
+    <link rel="stylesheet" href="_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '0.2.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="top" title="azure-batch-apps 0.2.0 documentation" href="index.html" />
+    <link rel="up" title="batchapps package" href="batch_apps.html" />
+    <link rel="next" title="batchapps.log module" href="batch_apps.log.html" />
+    <link rel="prev" title="batchapps.rest_client module" href="batch_apps.rest_client.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="batch_apps.log.html" title="batchapps.log module"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="batch_apps.rest_client.html" title="batchapps.rest_client module"
+             accesskey="P">previous</a> |</li>
+        <li><a href="index.html">azure-batch-apps 0.2.0 documentation</a> &raquo;</li>
+          <li><a href="batch_apps.html" accesskey="U">batchapps package</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="module-batchapps.exceptions">
+<span id="batchapps-exceptions"></span><h1>batchapps.exceptions<a class="headerlink" href="#module-batchapps.exceptions" title="Permalink to this headline">¶</a></h1>
+<dl class="exception">
+<dt id="batchapps.exceptions.AuthenticationException">
+<em class="property">exception </em><tt class="descclassname">batchapps.exceptions.</tt><tt class="descname">AuthenticationException</tt><big>(</big><em>*args</em><big>)</big><a class="reference internal" href="_modules/batchapps/exceptions.html#AuthenticationException"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#batchapps.exceptions.AuthenticationException" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">builtins.Exception</span></tt></p>
+<p>Error relating to missing or invalid credentials.</p>
+<p>Log the exception args as ERROR</p>
+</dd></dl>
+
+<dl class="exception">
+<dt id="batchapps.exceptions.FileDownloadException">
+<em class="property">exception </em><tt class="descclassname">batchapps.exceptions.</tt><tt class="descname">FileDownloadException</tt><big>(</big><em>*args</em><big>)</big><a class="reference internal" href="_modules/batchapps/exceptions.html#FileDownloadException"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#batchapps.exceptions.FileDownloadException" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">builtins.Exception</span></tt></p>
+<p>Error thrown during downloading outputs or files.</p>
+<p>Log the exception args as ERROR</p>
+</dd></dl>
+
+<dl class="exception">
+<dt id="batchapps.exceptions.FileInvalidException">
+<em class="property">exception </em><tt class="descclassname">batchapps.exceptions.</tt><tt class="descname">FileInvalidException</tt><big>(</big><em>*args</em><big>)</big><a class="reference internal" href="_modules/batchapps/exceptions.html#FileInvalidException"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#batchapps.exceptions.FileInvalidException" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">builtins.Exception</span></tt></p>
+<p>Error occurred during the manipulation of a userfile.</p>
+<p>Log the exception args as ERROR</p>
+</dd></dl>
+
+<dl class="exception">
+<dt id="batchapps.exceptions.FileMissingException">
+<em class="property">exception </em><tt class="descclassname">batchapps.exceptions.</tt><tt class="descname">FileMissingException</tt><big>(</big><em>*args</em><big>)</big><a class="reference internal" href="_modules/batchapps/exceptions.html#FileMissingException"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#batchapps.exceptions.FileMissingException" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">builtins.Exception</span></tt></p>
+<p>Error occured during userfile creation and gathering where file does not
+exist locally.</p>
+<p>Log the exception args as ERROR</p>
+</dd></dl>
+
+<dl class="exception">
+<dt id="batchapps.exceptions.InvalidConfigException">
+<em class="property">exception </em><tt class="descclassname">batchapps.exceptions.</tt><tt class="descname">InvalidConfigException</tt><big>(</big><em>*args</em><big>)</big><a class="reference internal" href="_modules/batchapps/exceptions.html#InvalidConfigException"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#batchapps.exceptions.InvalidConfigException" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">builtins.Exception</span></tt></p>
+<p>Error thrown by an incorrect/incomplete config file.</p>
+<p>Log the exception args as ERROR</p>
+</dd></dl>
+
+<dl class="exception">
+<dt id="batchapps.exceptions.RestCallException">
+<em class="property">exception </em><tt class="descclassname">batchapps.exceptions.</tt><tt class="descname">RestCallException</tt><big>(</big><em>exp_type</em>, <em>message</em>, <em>excep</em>, <em>*args</em>, <em>**kwargs</em><big>)</big><a class="reference internal" href="_modules/batchapps/exceptions.html#RestCallException"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#batchapps.exceptions.RestCallException" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">builtins.Exception</span></tt></p>
+<p>Gather all exceptions thrown by the rest_client and during REST
+call preparation and interpretation in <a class="reference internal" href="batch_apps.api.html#batchapps.api.BatchAppsApi" title="batchapps.api.BatchAppsApi"><tt class="xref py py-class docutils literal"><span class="pre">BatchAppsApi</span></tt></a>.</p>
+<p>Will mostly be used to wrap an exception thrown during a REST call,
+then returned to the user as the <tt class="docutils literal"><span class="pre">result</span></tt> of a <a class="reference internal" href="batch_apps.api.html#batchapps.api.Response" title="batchapps.api.Response"><tt class="xref py py-class docutils literal"><span class="pre">Response</span></tt></a>
+object.</p>
+<p>Log the exception args as CRITICAL</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Args:</th><td class="field-body"><ul class="first simple">
+<li>exp_type (type): The type of the root exception thrown.</li>
+<li>message (str): The human readable text associated with the
+error to be reported to the user.</li>
+<li>excep (Exception, etc): The root exception object, for further
+inspection if required by the user. This may not always be
+set, or may contain a REST response object if a call failed
+but no exception was thrown
+(See: <tt class="xref py py-func docutils literal"><span class="pre">rest_client._call()</span></tt>).</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Kwargs:</th><td class="field-body"><ul class="first last simple">
+<li>silent (bool): If <tt class="docutils literal"><span class="pre">True</span></tt>, the error will not be logged.
+Default is <tt class="docutils literal"><span class="pre">False</span></tt>.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="exception">
+<dt id="batchapps.exceptions.SessionExpiredException">
+<em class="property">exception </em><tt class="descclassname">batchapps.exceptions.</tt><tt class="descname">SessionExpiredException</tt><big>(</big><em>*args</em><big>)</big><a class="reference internal" href="_modules/batchapps/exceptions.html#SessionExpiredException"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#batchapps.exceptions.SessionExpiredException" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">builtins.Exception</span></tt></p>
+<p>InvalidGrantError thrown during server call. This is generally interpreted
+to mean the current token has expired and cannot be refreshed. The client
+will need to be re-authenticated. This can be raised during any server call
+and would need to be handled by prompting the user to log in again.</p>
+<p>Log the exception args as ERROR</p>
+</dd></dl>
+
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="batch_apps.rest_client.html"
+                        title="previous chapter">batchapps.rest_client module</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="batch_apps.log.html"
+                        title="next chapter">batchapps.log module</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="_sources/batch_apps.exceptions.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="batch_apps.log.html" title="batchapps.log module"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="batch_apps.rest_client.html" title="batchapps.rest_client module"
+             >previous</a> |</li>
+        <li><a href="index.html">azure-batch-apps 0.2.0 documentation</a> &raquo;</li>
+          <li><a href="batch_apps.html" >batchapps package</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2014, Microsoft Corporation.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2.2.
+    </div>
+  </body>
+</html>

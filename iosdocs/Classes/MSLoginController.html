@@ -1,0 +1,172 @@
+<!DOCTYPE html><html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="UTF-8">
+<title>MSLoginController Class Reference</title>
+<meta id="Generator" name="Generator" content="Doxyclean">
+<meta id="GeneratorVersion" name="GeneratorVersion" content="2.2">
+<link rel="stylesheet" type="text/css" href="../css/common.css">
+<link rel="stylesheet" type="text/css" media="screen" href="../css/screen.css">
+<link rel="stylesheet" type="text/css" media="print" href="../css/print.css">
+<script type="text/javascript">
+				function toggleTOC() {
+					var toc = document.getElementById('tableOfContents');
+					var tocButton = document.getElementById('toc_button');
+					var contents = document.getElementById('contents');
+					if (toc.style.display == 'block') {
+						toc.style.display = 'none';
+						contents.className = '';
+						tocButton.className = '';
+					} else {
+						toc.style.display = 'block';
+						contents.className = 'tableOfContentsOpen';
+						tocButton.className = 'open';
+					}
+				}
+				
+				function toggleTOCItem() {
+					var listItem = event.srcElement;
+					var sublist = listItem.getElementsByTagName('ul')[0];
+					if (sublist.style.display == 'block') {
+						sublist.style.display = 'none';
+						listItem.className = 'expandable';
+					} else {
+						sublist.style.display = 'block';
+						listItem.className = 'expandable expanded';
+					}
+				}
+				
+				function jumpTo() {
+					selectedItem = event.srcElement.options[event.srcElement.selectedIndex].value;
+					window.location = "#" + selectedItem;
+				}
+			</script>
+</head>
+<body>
+<header id="projectHeader"><h1><a href="../index.html">Windows Azure Mobile Services Reference Library</a></h1></header><header id="fileHeader"><h1><a href="#classTitle">MSLoginController Class Reference</a></h1></header><nav id="buttons"><ul>
+<li id="toc_button"><button id="table_of_contents" onclick="toggleTOC()">Table of Contents</button></li>
+<li id="jumpto_button"><select id="jumpto" onchange="jumpTo()"><option value="classTitle">Jump To...</option>
+<option value="overview">Overview</option>
+<option value="tasks">Tasks</option>
+<option value="properties">Properties</option>
+<option value="client">    client</option>
+<option value="provider">    provider</option>
+<option value="activityIndicator">    activityIndicator</option>
+<option value="toolbar">    toolbar</option>
+<option value="showToolbar">    showToolbar</option>
+<option value="toolbarPosition">    toolbarPosition</option>
+<option value="instanceMethods">Instance Methods</option>
+<option value="initWithClient:provider:completion:">    - initWithClient:provider:completion:</option></select></li>
+</ul></nav><nav id="tableOfContents" style="display: none;"><ul>
+<li><a href="#overview">Overview</a></li>
+<li class="expandable" id="tocTasks" onclick="toggleTOCItem()">
+<a href="#tasks">Tasks</a><ul style="display: none;">
+<li><a href="#Initializing_the_MSLoginController_object">Initializing the <code>MSLoginController</code> object</a></li>
+<li><a href="#Properties">Properties</a></li>
+<li><a href="#Customizing_the_Toolbar">Customizing the Toolbar</a></li>
+</ul>
+</li>
+<li class="expandable" id="tocProperties" onclick="toggleTOCItem()">
+<a href="#properties">Properties</a><ul style="display: none;">
+<li><a href="#client">client</a></li>
+<li><a href="#provider">provider</a></li>
+<li><a href="#activityIndicator">activityIndicator</a></li>
+<li><a href="#toolbar">toolbar</a></li>
+<li><a href="#showToolbar">showToolbar</a></li>
+<li><a href="#toolbarPosition">toolbarPosition</a></li>
+</ul>
+</li>
+<li class="expandable" id="tocInstanceMethods" onclick="toggleTOCItem()">
+<a href="#instanceMethods">Instance Methods</a><ul style="display: none;"><li><a href="#initWithClient:provider:completion:">initWithClient:provider:completion:</a></li></ul>
+</li>
+</ul></nav><div id="contents">
+<h1 id="classTitle">MSLoginController Class Reference</h1>
+<table id="metadata">
+<tr class="alt">
+<th>Inherits from</th>
+<td><ul class="inheritance"><li><code><a href="http://developer.apple.com/iphone/library/documentation/UIKit/Reference/UIViewController_Class/index.html">UIViewController</a></code></li></ul></td>
+</tr>
+<tr>
+<th>Declared in</th>
+<td>MSLoginController.h</td>
+</tr>
+</table>
+<h2 id="overview">Overview</h2>
+<p>The MSLoginController class provides a <code><a href="http://developer.apple.com/iphone/library/documentation/UIKit/Reference/UIViewController_Class/index.html">UIViewController</a></code> that can be presented to allow an end user to authenticate with a Microsoft Azure Mobile Service. </p>
+<h2 id="tasks">Tasks</h2>
+<ul id="tasksList">
+<li id="Initializing_the_MSLoginController_object">
+<h3>Initializing the <code>MSLoginController</code> object</h3>
+<ul class="methods"><li>
+<span class="tooltipRegion"><code><a href="#initWithClient:provider:completion:">- initWithClient:provider:completion:</a></code></span><span class="tooltip">Initializes an MSLoginController instance with the given client, login provider and completion block. </span>
+</li></ul>
+</li>
+<li id="Properties">
+<h3>Properties</h3>
+<ul class="methods">
+<li>
+<span class="tooltipRegion"><code><a href="#client">client</a></code> <span class="specialType">property</span></span><span class="tooltip">The client associated with this MSLoginController. </span>
+</li>
+<li>
+<span class="tooltipRegion"><code><a href="#provider">provider</a></code> <span class="specialType">property</span></span><span class="tooltip">The login provider associated with this MSLoginController. </span>
+</li>
+<li>
+<span class="tooltipRegion"><code><a href="#activityIndicator">activityIndicator</a></code> <span class="specialType">property</span></span><span class="tooltip">The UIActivityIndicatorView on the UIToolbar associated with the MSLoginController. </span>
+</li>
+<li>
+<span class="tooltipRegion"><code><a href="#toolbar">toolbar</a></code> <span class="specialType">property</span></span><span class="tooltip">The UIToolbar associated with the MSLoginController. </span>
+</li>
+</ul>
+</li>
+<li id="Customizing_the_Toolbar">
+<h3>Customizing the Toolbar</h3>
+<ul class="methods">
+<li>
+<span class="tooltipRegion"><code><a href="#showToolbar">showToolbar</a></code> <span class="specialType">property</span></span><span class="tooltip">Indicates if the toolbar show be displayed. </span>
+</li>
+<li>
+<span class="tooltipRegion"><code><a href="#toolbarPosition">toolbarPosition</a></code> <span class="specialType">property</span></span><span class="tooltip">Indicates if the toolbar should be positioned at the top or bottom of the login view. </span>
+</li>
+</ul>
+</li>
+</ul>
+<section id="properties"><h2>Properties</h2>
+<section class="definition" id="client"><h3>client</h3>
+<p>The client associated with this <code>MSLoginController</code>. </p>
+<code class="methodDeclaration">@property <a href="../Classes/MSClient.html">MSClient</a> *client</code><h5>Declared In</h5>
+<code><code>MSLoginController</code>.h</code></section><section class="definition" id="provider"><h3>provider</h3>
+<p>The login provider associated with this <code>MSLoginController</code>. </p>
+<code class="methodDeclaration">@property <a href="http://developer.apple.com/iphone/library/documentation/Cocoa/Reference/Foundation/Classes/NSString_Class/index.html">NSString</a> *provider</code><h5>Declared In</h5>
+<code><code>MSLoginController</code>.h</code></section><section class="definition" id="activityIndicator"><h3>activityIndicator</h3>
+<p>The UIActivityIndicatorView on the UIToolbar associated with the <code>MSLoginController</code>. </p>
+<code class="methodDeclaration">@property <a href="http://developer.apple.com/iphone/library/documentation/UIKit/Reference/UIActivityIndicatorView_Class/index.html">UIActivityIndicatorView</a> *activityIndicator</code><h5>Discussion</h5>
+<p>If the toolbar is visible, the actvivity indicator will become active whenever the end user is navigating to a new URL during the login flow. </p>
+<h5>Declared In</h5>
+<code><code>MSLoginController</code>.h</code></section><section class="definition" id="toolbar"><h3>toolbar</h3>
+<p>The UIToolbar associated with the <code>MSLoginController</code>. </p>
+<code class="methodDeclaration">@property <a href="http://developer.apple.com/iphone/library/documentation/UIKit/Reference/UIToolbar_Class/index.html">UIToolbar</a> *toolbar</code><h5>Discussion</h5>
+<p>The toolbar includes a cancel button and an activity indicator. The visibility and placement of the toolbar can be configured using the showToolbar and toolbarPosition properties respectively. </p>
+<h5>Declared In</h5>
+<code><code>MSLoginController</code>.h</code></section><section class="definition" id="showToolbar"><h3>showToolbar</h3>
+<p>Indicates if the toolbar show be displayed. </p>
+<code class="methodDeclaration">@property BOOL showToolbar</code><h5>Discussion</h5>
+<p>By default, showToolbar is YES. </p>
+<h5>Declared In</h5>
+<code><code>MSLoginController</code>.h</code></section><section class="definition" id="toolbarPosition"><h3>toolbarPosition</h3>
+<p>Indicates if the toolbar should be positioned at the top or bottom of the login view. </p>
+<code class="methodDeclaration">@property <a href="http://developer.apple.com/iphone/library/documentation/UIKit/Reference/UIToolbar_Class/index.html">UIToolbar</a>Position toolbarPosition</code><h5>Discussion</h5>
+<p>By default, the toolbarPosition is <code><a href="http://developer.apple.com/iphone/library/documentation/UIKit/Reference/UIToolbar_Class/index.html">UIToolbar</a></code>PositionBottom. </p>
+<h5>Declared In</h5>
+<code><code>MSLoginController</code>.h</code></section></section><section id="instanceMethods"><h2>Instance Methods</h2>
+<section class="definition" id="initWithClient:provider:completion:"><h3>initWithClient:provider:completion:</h3>
+<p>Initializes an <code>MSLoginController</code> instance with the given client, login provider and completion block. </p>
+<code class="methodDeclaration">- (id)initWithClient:(<a href="../Classes/MSClient.html">MSClient</a> *)<span class="parameter">client</span> provider:(<a href="http://developer.apple.com/iphone/library/documentation/Cocoa/Reference/Foundation/Classes/NSString_Class/index.html">NSString</a> *)<span class="parameter">provider</span> completion:(<a href="../Classes/MSClient.html">MSClient</a>LoginBlock)<span class="parameter">completion</span> </code><h5>Declared In</h5>
+<code><code>MSLoginController</code>.h</code></section></section><hr>
+<p id="lastUpdated">Last updated: 2014-9-9</p>
+</div>
+<footer id="breadcrumbs"><ul>
+<li><a href="../index.html">Windows Azure Mobile Services</a></li>
+<li><a href="#classTitle">MSLoginController Class Reference</a></li>
+</ul></footer>
+</body>
+</html>

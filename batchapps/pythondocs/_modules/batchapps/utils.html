@@ -1,0 +1,302 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>batchapps.utils &mdash; azure-batch-apps 0.2.0 documentation</title>
+    
+    <link rel="stylesheet" href="../../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '0.2.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <link rel="top" title="azure-batch-apps 0.2.0 documentation" href="../../index.html" />
+    <link rel="up" title="Module code" href="../index.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../../index.html">azure-batch-apps 0.2.0 documentation</a> &raquo;</li>
+          <li><a href="../index.html" accesskey="U">Module code</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <h1>Source code for batchapps.utils</h1><div class="highlight"><pre>
+<span class="c">#-------------------------------------------------------------------------</span>
+<span class="c"># The Azure Batch Apps Python Client</span>
+<span class="c">#</span>
+<span class="c"># Copyright (c) Microsoft Corporation. All rights reserved. </span>
+<span class="c">#</span>
+<span class="c"># The MIT License (MIT)</span>
+<span class="c">#</span>
+<span class="c"># Permission is hereby granted, free of charge, to any person obtaining a copy</span>
+<span class="c"># of this software and associated documentation files (the &quot;&quot;Software&quot;&quot;), to deal</span>
+<span class="c"># in the Software without restriction, including without limitation the rights</span>
+<span class="c"># to use, copy, modify, merge, publish, distribute, sublicense, and/or sell</span>
+<span class="c"># copies of the Software, and to permit persons to whom the Software is</span>
+<span class="c"># furnished to do so, subject to the following conditions:</span>
+<span class="c">#</span>
+<span class="c"># The above copyright notice and this permission notice shall be included in</span>
+<span class="c"># all copies or substantial portions of the Software.</span>
+<span class="c">#</span>
+<span class="c"># THE SOFTWARE IS PROVIDED *AS IS*, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR</span>
+<span class="c"># IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,</span>
+<span class="c"># FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE</span>
+<span class="c"># AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER</span>
+<span class="c"># LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,</span>
+<span class="c"># OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN</span>
+<span class="c"># THE SOFTWARE.</span>
+<span class="c">#</span>
+<span class="c">#--------------------------------------------------------------------------</span>
+<span class="sd">&quot;&quot;&quot;Batch Apps Client Utility Module&quot;&quot;&quot;</span>
+
+<span class="kn">import</span> <span class="nn">re</span>
+<span class="kn">import</span> <span class="nn">urllib</span>
+<span class="kn">import</span> <span class="nn">sys</span>
+<span class="kn">import</span> <span class="nn">traceback</span>
+
+<span class="k">try</span><span class="p">:</span>
+    <span class="kn">from</span> <span class="nn">urllib.parse</span> <span class="kn">import</span> <span class="n">quote</span> <span class="k">as</span> <span class="n">urlquote</span><span class="p">,</span> <span class="n">unquote</span> <span class="k">as</span> <span class="n">urlunquote</span>
+    <span class="kn">from</span> <span class="nn">urllib.parse</span> <span class="kn">import</span> <span class="n">urlsplit</span>
+
+<span class="k">except</span> <span class="ne">ImportError</span><span class="p">:</span>
+    <span class="kn">from</span> <span class="nn">urllib</span> <span class="kn">import</span> <span class="n">quote</span> <span class="k">as</span> <span class="n">urlquote</span><span class="p">,</span> <span class="n">unquote</span> <span class="k">as</span> <span class="n">urlunquote</span>
+    <span class="kn">from</span> <span class="nn">urlparse</span> <span class="kn">import</span> <span class="n">urlsplit</span>
+
+
+<span class="kn">import</span> <span class="nn">logging</span>
+<span class="n">LOG</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="s">&#39;batch_apps&#39;</span><span class="p">)</span>
+
+<div class="viewcode-block" id="parse_date_string"><a class="viewcode-back" href="../../batch_apps.utils.html#batchapps.utils.parse_date_string">[docs]</a><span class="k">def</span> <span class="nf">parse_date_string</span><span class="p">(</span><span class="n">time_string</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Format datetime string into an easily comparable and REST happy form.</span>
+
+<span class="sd">    :Args:</span>
+<span class="sd">        - time_string (str): The datetime string to be formatted.</span>
+
+<span class="sd">    :Returns:</span>
+<span class="sd">        The string formatted for use with the REST API (str).</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">formatted</span> <span class="o">=</span> <span class="s">&#39;&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">re</span><span class="o">.</span><span class="n">findall</span><span class="p">(</span><span class="s">&#39;</span><span class="se">\\</span><span class="s">d+&#39;</span><span class="p">,</span> <span class="n">time_string</span><span class="p">))</span> <span class="o">+</span> <span class="s">&quot;000000&quot;</span>
+    <span class="n">LOG</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s">&quot;Parsed date string {in_t} to &quot;</span>
+              <span class="s">&quot;{out_t}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">in_t</span><span class="o">=</span><span class="n">time_string</span><span class="p">,</span> <span class="n">out_t</span><span class="o">=</span><span class="n">formatted</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">17</span><span class="p">]))</span>
+
+    <span class="k">return</span> <span class="n">formatted</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">17</span><span class="p">]</span>
+</div>
+<div class="viewcode-block" id="url_from_filename"><a class="viewcode-back" href="../../batch_apps.utils.html#batchapps.utils.url_from_filename">[docs]</a><span class="k">def</span> <span class="nf">url_from_filename</span><span class="p">(</span><span class="n">filename</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Format a given filename for use in a URL, version independant.</span>
+
+<span class="sd">    :Args:</span>
+<span class="sd">        - filename (str): The filename to be used in the URL.</span>
+
+<span class="sd">    :Returns:</span>
+<span class="sd">        - The correctly formatted filename (str).</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">urlquote</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span>
+</div>
+<div class="viewcode-block" id="filename_from_url"><a class="viewcode-back" href="../../batch_apps.utils.html#batchapps.utils.filename_from_url">[docs]</a><span class="k">def</span> <span class="nf">filename_from_url</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">ext</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Extract a valid filename from a URL</span>
+
+<span class="sd">    :Args:</span>
+<span class="sd">        - url (str): URL to extract the filename from.</span>
+<span class="sd">        - ext (str): An additional file extension if necessary.</span>
+<span class="sd">            May be ``None``.</span>
+
+<span class="sd">    :Returns:</span>
+<span class="sd">        - A valid filename.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">alt</span> <span class="o">=</span> <span class="n">urlsplit</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
+    <span class="n">url_file</span> <span class="o">=</span> <span class="n">alt</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">rpartition</span><span class="p">(</span><span class="s">&#39;/&#39;</span><span class="p">)[</span><span class="mi">2</span><span class="p">]</span>
+    <span class="n">filename</span> <span class="o">=</span> <span class="n">urlunquote</span><span class="p">(</span><span class="n">url_file</span><span class="p">)</span>
+
+    <span class="n">LOG</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s">&quot;Filename {fn} with extension {ex} from url &quot;</span>
+              <span class="s">&quot;{ur}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">fn</span><span class="o">=</span><span class="n">filename</span><span class="p">,</span> <span class="n">ex</span><span class="o">=</span><span class="n">ext</span><span class="p">,</span> <span class="n">ur</span><span class="o">=</span><span class="n">url</span><span class="p">))</span>
+
+    <span class="k">return</span> <span class="p">(</span><span class="n">filename</span> <span class="o">+</span> <span class="n">ext</span><span class="p">)</span> <span class="k">if</span> <span class="n">ext</span> <span class="k">else</span> <span class="n">filename</span>
+</div>
+<div class="viewcode-block" id="format_dictionary"><a class="viewcode-back" href="../../batch_apps.utils.html#batchapps.utils.format_dictionary">[docs]</a><span class="k">def</span> <span class="nf">format_dictionary</span><span class="p">(</span><span class="n">dictionary</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Format parameter dictionary into a list for REST consumption.</span>
+
+<span class="sd">    :Args:</span>
+<span class="sd">        - dictionary (dict): parameter dict in the format</span>
+<span class="sd">            {&#39;parameter&#39;: &#39;value}.</span>
+
+<span class="sd">    :Returns:</span>
+<span class="sd">        - REST list in the format</span>
+<span class="sd">            [ {&#39;Name&#39;:&#39;parameter}, {&#39;Value&#39;:&#39;value&#39;} ]</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="p">({</span><span class="s">&quot;Name&quot;</span><span class="p">:</span> <span class="nb">str</span><span class="p">(</span><span class="n">k</span><span class="p">),</span> <span class="s">&quot;Value&quot;</span><span class="p">:</span> <span class="nb">str</span><span class="p">(</span><span class="n">v</span><span class="p">)}</span> <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">dictionary</span><span class="o">.</span><span class="n">items</span><span class="p">())</span>
+</div>
+<div class="viewcode-block" id="valid_keys"><a class="viewcode-back" href="../../batch_apps.utils.html#batchapps.utils.valid_keys">[docs]</a><span class="k">def</span> <span class="nf">valid_keys</span><span class="p">(</span><span class="n">resp_dict</span><span class="p">,</span> <span class="n">search_keys</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">    Version independant checking if a list of keys are present in a</span>
+<span class="sd">    given dictionary.</span>
+
+<span class="sd">    :Args:</span>
+<span class="sd">        - resp_dict (dict): I dictionary from a server response.</span>
+<span class="sd">        - search_keys (list): A list of keys to verify they are</span>
+<span class="sd">            present in ``resp_dict``.</span>
+
+<span class="sd">    :Returns:</span>
+<span class="sd">        - ``True`` if all keys present in ``resp_dict`` else ``False``.</span>
+<span class="sd">    &#39;&#39;&#39;</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">resp_dict</span><span class="p">,</span> <span class="nb">dict</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">False</span>
+
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">overlap</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">resp_dict</span><span class="p">)</span> <span class="o">&amp;</span> <span class="nb">set</span><span class="p">(</span><span class="n">search_keys</span><span class="p">))</span>
+        <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="n">overlap</span><span class="p">)</span> <span class="o">==</span> <span class="nb">len</span><span class="p">(</span><span class="n">search_keys</span><span class="p">)</span>
+
+    <span class="k">except</span> <span class="ne">TypeError</span><span class="p">:</span>
+        <span class="n">matching_keys</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="n">search_keys</span><span class="p">)</span><span class="o">.</span><span class="n">intersection</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">resp_dict</span><span class="p">))</span>
+        <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">matching_keys</span><span class="p">))</span> <span class="o">==</span> <span class="nb">len</span><span class="p">(</span><span class="n">search_keys</span><span class="p">)</span>
+</div>
+<span class="k">def</span> <span class="nf">get_trace</span><span class="p">(</span><span class="n">excep</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Retrieve an exception traceback</span>
+
+<span class="sd">    :Args:</span>
+<span class="sd">        - excep (:class:`Exception`): The exception that was thrown.</span>
+
+<span class="sd">    :Returns:</span>
+<span class="sd">        The traceback information (str).</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">trace</span> <span class="o">=</span> <span class="n">traceback</span><span class="o">.</span><span class="n">format_exc</span><span class="p">()</span>
+        <span class="k">return</span> <span class="n">trace</span>
+    <span class="k">except</span> <span class="ne">AttributeError</span><span class="p">:</span>
+        <span class="k">return</span> <span class="bp">None</span>
+
+
+<div class="viewcode-block" id="Listener"><a class="viewcode-back" href="../../batch_apps.utils.html#batchapps.utils.Listener">[docs]</a><span class="k">class</span> <span class="nc">Listener</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Process wrapper object for starting, stopping and monitoring</span>
+<span class="sd">    background subprocesses.</span>
+
+<span class="sd">    :Attributes:</span>
+<span class="sd">        - pid (int): The process pid.</span>
+<span class="sd">        - name (str): The process name.</span>
+<span class="sd">        - children (list): A list of dependent :class:`.Listener` objects.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">process</span><span class="p">,</span> <span class="o">*</span><span class="n">child</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Create new listener.</span>
+
+<span class="sd">        :Args:</span>
+<span class="sd">            - process (:class:`multiprocessing.Process`): The process to be</span>
+<span class="sd">                wrapped for monitoring</span>
+<span class="sd">            - child (:class:`.Listener`): And child processes that should be</span>
+<span class="sd">                stoped before the parent process is stopped.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_proc</span> <span class="o">=</span> <span class="n">process</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">pid</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_proc</span><span class="o">.</span><span class="n">pid</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_proc</span><span class="o">.</span><span class="n">name</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">children</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">child</span><span class="p">)</span>
+
+<div class="viewcode-block" id="Listener.working"><a class="viewcode-back" href="../../batch_apps.utils.html#batchapps.utils.Listener.working">[docs]</a>    <span class="k">def</span> <span class="nf">working</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Check if the background process is still running.</span>
+
+<span class="sd">        :Returns:</span>
+<span class="sd">            ``True`` if the process is still running, else ``False``.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">pid</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_proc</span><span class="o">.</span><span class="n">pid</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_proc</span><span class="o">.</span><span class="n">is_alive</span><span class="p">()</span>
+</div>
+<div class="viewcode-block" id="Listener.stop"><a class="viewcode-back" href="../../batch_apps.utils.html#batchapps.utils.Listener.stop">[docs]</a>    <span class="k">def</span> <span class="nf">stop</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Terminate the background process&quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">pid</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_proc</span><span class="o">.</span><span class="n">pid</span>
+
+        <span class="k">try</span><span class="p">:</span>
+            <span class="k">for</span> <span class="n">child</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">children</span><span class="p">:</span>
+                <span class="n">child</span><span class="o">.</span><span class="n">stop</span><span class="p">()</span>
+
+            <span class="bp">self</span><span class="o">.</span><span class="n">_proc</span><span class="o">.</span><span class="n">terminate</span><span class="p">()</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_proc</span><span class="o">.</span><span class="n">join</span><span class="p">()</span>
+
+        <span class="k">except</span> <span class="ne">OSError</span> <span class="k">as</span> <span class="n">exc</span><span class="p">:</span>
+            <span class="n">LOG</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s">&quot;Interrupted download process: {0}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">exc</span><span class="p">))</span>
+
+</div>
+<div class="viewcode-block" id="Listener.listen"><a class="viewcode-back" href="../../batch_apps.utils.html#batchapps.utils.Listener.listen">[docs]</a>    <span class="k">def</span> <span class="nf">listen</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="mi">100</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Join the background process for a period of time.</span>
+
+<span class="sd">        :Kwargs:</span>
+<span class="sd">            - timeout (int): The number of seconds that the subprocess will</span>
+<span class="sd">                be monitored. Default is 100 seconds. Is set to ``None``,</span>
+<span class="sd">                the process will be listened to indefinitely.</span>
+
+<span class="sd">        :Raises:</span>
+<span class="sd">            :class:`ValueError` if an invalid timeout is passed in.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">timeout</span> <span class="ow">or</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">timeout</span><span class="p">,</span> <span class="nb">int</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_proc</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">timeout</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+                <span class="s">&quot;Invalid timeout, please set an number of seconds (int)&quot;</span><span class="p">)</span></div></div>
+</pre></div>
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../../index.html">azure-batch-apps 0.2.0 documentation</a> &raquo;</li>
+          <li><a href="../index.html" >Module code</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2014, Microsoft Corporation.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2.2.
+    </div>
+  </body>
+</html>

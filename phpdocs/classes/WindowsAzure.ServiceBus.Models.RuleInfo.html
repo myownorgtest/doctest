@@ -1,0 +1,422 @@
+<!DOCTYPE html><html xmlns:date="http://exslt.org/dates-and-times" lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0; user-scalable=0;">
+<meta charset="utf-8">
+<title>Windows Azure SDK for PHP » \WindowsAzure\ServiceBus\Models\RuleInfo</title>
+<meta name="author" content="Mike van Riel">
+<meta name="description" content="">
+<link href="../css/template.css" rel="stylesheet" media="all">
+<script src="../js/jquery-1.7.1.min.js" type="text/javascript"></script><script src="../js/jquery-ui-1.8.2.custom.min.js" type="text/javascript"></script><script src="../js/jquery.mousewheel.min.js" type="text/javascript"></script><script src="../js/bootstrap.js" type="text/javascript"></script><script src="../js/template.js" type="text/javascript"></script><script src="../js/prettify/prettify.min.js" type="text/javascript"></script><link rel="shortcut icon" href="../img/favicon.ico">
+<link rel="apple-touch-icon" href="../img/apple-touch-icon.png">
+<link rel="apple-touch-icon" sizes="72x72" href="../img/apple-touch-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="114x114" href="../img/apple-touch-icon-114x114.png">
+</head>
+<body>
+<div class="navbar navbar-fixed-top">
+<div class="navbar-inner"><div class="container">
+<a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse"><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></a><a class="brand" href="../index.html">Windows Azure SDK for PHP</a><div class="nav-collapse"><ul class="nav">
+<li class="dropdown">
+<a href="#api" class="dropdown-toggle" data-toggle="dropdown">
+                                    API Documentation <b class="caret"></b></a><ul class="dropdown-menu">
+<li><a>Namespaces</a></li>
+<li><a href="../namespaces/WindowsAzure.html"><i class="icon-th"></i> WindowsAzure</a></li>
+<li><a>Packages</a></li>
+<li><a href="../packages/WindowsAzure.html"><i class="icon-folder-open"></i> WindowsAzure</a></li>
+</ul>
+</li>
+<li class="dropdown" id="charts-menu">
+<a href="#charts" class="dropdown-toggle" data-toggle="dropdown">
+                                    Charts <b class="caret"></b></a><ul class="dropdown-menu"><li><a href="../graph_class.html"><i class="icon-list-alt"></i> Class hierarchy diagram</a></li></ul>
+</li>
+<li class="dropdown" id="reports-menu">
+<a href="#reports" class="dropdown-toggle" data-toggle="dropdown">
+                                    Reports <b class="caret"></b></a><ul class="dropdown-menu">
+<li><a href="../errors.html"><i class="icon-remove-sign"></i> Errors 
+                <span class="label label-info">385</span></a></li>
+<li><a href="../markers.html"><i class="icon-map-marker"></i> Markers 
+                <ul></ul></a></li>
+<li><a href="../deprecated.html"><i class="icon-stop"></i> Deprecated elements 
+                <span class="label label-info">0</span></a></li>
+</ul>
+</li>
+</ul></div>
+</div></div>
+<div class="go_to_top"><a href="#___" style="color: inherit">Back to top  <i class="icon-upload icon-white"></i></a></div>
+</div>
+<div id="___" class="container">
+<noscript><div class="alert alert-warning">
+                            Javascript is disabled; several features are only available
+                            if Javascript is enabled.
+                        </div></noscript>
+<div class="row">
+<div class="span4">
+<span class="btn-group visibility" data-toggle="buttons-checkbox"><button class="btn public active" title="Show public elements">Public</button><button class="btn protected" title="Show protected elements">Protected</button><button class="btn private" title="Show private elements">Private</button><button class="btn inherited active" title="Show inherited elements">Inherited</button></span><div class="btn-group view pull-right" data-toggle="buttons-radio">
+<button class="btn details" title="Show descriptions and method names"><i class="icon-list"></i></button><button class="btn simple" title="Show only method names"><i class="icon-align-justify"></i></button>
+</div>
+<ul class="side-nav nav nav-list">
+<li class="nav-header">
+<i class="icon-custom icon-method"></i> Methods</li>
+<li class="method public "><a href="#__construct" title="__construct :: Creates an RuleInfo with specified parameters."><span class="description">Creates an RuleInfo with specified parameters.</span><pre>__construct()</pre></a></li>
+<li class="method public "><a href="#getAction" title="getAction :: Gets the action."><span class="description">Gets the action.</span><pre>getAction()</pre></a></li>
+<li class="method public "><a href="#getEntry" title="getEntry :: Gets the entry."><span class="description">Gets the entry.</span><pre>getEntry()</pre></a></li>
+<li class="method public "><a href="#getFilter" title="getFilter :: Gets the filter."><span class="description">Gets the filter.</span><pre>getFilter()</pre></a></li>
+<li class="method public "><a href="#getName" title="getName :: Gets the name of the rule description."><span class="description">Gets the name of the rule description.</span><pre>getName()</pre></a></li>
+<li class="method public "><a href="#getRuleDescription" title="getRuleDescription :: Gets the description of the rule."><span class="description">Gets the description of the rule.</span><pre>getRuleDescription()</pre></a></li>
+<li class="method public "><a href="#getTitle" title="getTitle :: Gets the title."><span class="description">Gets the title.</span><pre>getTitle()</pre></a></li>
+<li class="method public "><a href="#parseXml" title="parseXml :: Populates the properties with a specified XML string based on ATOM
+ENTRY schema."><span class="description">Populates the properties with a specified XML string based on ATOM
+ENTRY schema.</span><pre>parseXml()</pre></a></li>
+<li class="method public "><a href="#setAction" title="setAction :: Sets the action."><span class="description">Sets the action.</span><pre>setAction()</pre></a></li>
+<li class="method public "><a href="#setEntry" title="setEntry :: Sets the entry."><span class="description">Sets the entry.</span><pre>setEntry()</pre></a></li>
+<li class="method public "><a href="#setFilter" title="setFilter :: Sets the filter."><span class="description">Sets the filter.</span><pre>setFilter()</pre></a></li>
+<li class="method public "><a href="#setName" title="setName :: Sets the name of the rule description."><span class="description">Sets the name of the rule description.</span><pre>setName()</pre></a></li>
+<li class="method public "><a href="#setRuleDescription" title="setRuleDescription :: Sets the rule description."><span class="description">Sets the rule description.</span><pre>setRuleDescription()</pre></a></li>
+<li class="method public "><a href="#setTitle" title="setTitle :: Sets the title."><span class="description">Sets the title.</span><pre>setTitle()</pre></a></li>
+<li class="method public "><a href="#withCorrelationFilter" title="withCorrelationFilter :: With correlation ID filter."><span class="description">With correlation ID filter.</span><pre>withCorrelationFilter()</pre></a></li>
+<li class="method public "><a href="#withEmptyRuleAction" title="withEmptyRuleAction :: With empty rule action."><span class="description">With empty rule action.</span><pre>withEmptyRuleAction()</pre></a></li>
+<li class="method public "><a href="#withFalseFilter" title="withFalseFilter :: With false filter."><span class="description">With false filter.</span><pre>withFalseFilter()</pre></a></li>
+<li class="method public "><a href="#withSqlFilter" title="withSqlFilter :: With sql expression filter."><span class="description">With sql expression filter.</span><pre>withSqlFilter()</pre></a></li>
+<li class="method public "><a href="#withSqlRuleAction" title="withSqlRuleAction :: With SQL rule action."><span class="description">With SQL rule action.</span><pre>withSqlRuleAction()</pre></a></li>
+<li class="method public "><a href="#withTrueFilter" title="withTrueFilter :: With true filter."><span class="description">With true filter.</span><pre>withTrueFilter()</pre></a></li>
+<li class="method public "><a href="#writeXml" title="writeXml :: Writes an XML string representing the rule info instance."><span class="description">Writes an XML string representing the rule info instance.</span><pre>writeXml()</pre></a></li>
+<li class="nav-header">
+<i class="icon-custom icon-property"></i> Properties</li>
+<li class="nav-header private">» Private</li>
+<li class="property private "><a href="#%24_entry" title="$_entry :: The entry of the rule info."><span class="description">The entry of the rule info.</span><pre>$_entry</pre></a></li>
+<li class="property private "><a href="#%24_ruleDescription" title="$_ruleDescription :: The description of the rule."><span class="description">The description of the rule.</span><pre>$_ruleDescription</pre></a></li>
+</ul>
+</div>
+<div class="span8">
+<a name="%5CWindowsAzure%5CServiceBus%5CModels%5CRuleInfo" id="\WindowsAzure\ServiceBus\Models\RuleInfo"></a><ul class="breadcrumb">
+<li>
+<a href="../index.html"><i class="icon-custom icon-class"></i></a><span class="divider">\</span>
+</li>
+<li><a href="../namespaces/WindowsAzure.html">WindowsAzure</a></li>
+<span class="divider">\</span><li><a href="../namespaces/WindowsAzure.ServiceBus.html">ServiceBus</a></li>
+<span class="divider">\</span><li><a href="../namespaces/WindowsAzure.ServiceBus.Models.html">Models</a></li>
+<li class="active">
+<span class="divider">\</span><a href="../classes/WindowsAzure.ServiceBus.Models.RuleInfo.html">RuleInfo</a>
+</li>
+</ul>
+<div href="../classes/WindowsAzure.ServiceBus.Models.RuleInfo.html" class="element class">
+<p class="short_description">The information of a rule.</p>
+<div class="details">
+<p class="long_description"></p>
+<table class="table table-bordered">
+<tr>
+<th>category</th>
+<td>Microsoft</td>
+</tr>
+<tr>
+<th>package</th>
+<td><a href="../packages/WindowsAzure.ServiceBus.Models.html">WindowsAzure\ServiceBus\Models</a></td>
+</tr>
+<tr>
+<th>author</th>
+<td><a href="mailto:azurephpsdk@microsoft.com">Azure PHP SDK</a></td>
+</tr>
+<tr>
+<th>copyright</th>
+<td>2012 Microsoft Corporation</td>
+</tr>
+<tr>
+<th>license</th>
+<td><a href="http://www.apache.org/licenses/LICENSE-2.0">Apache License 2.0</a></td>
+</tr>
+<tr>
+<th>version</th>
+<td>Release: @package_version@</td>
+</tr>
+<tr>
+<th>link</th>
+<td><a href="https://github.com/WindowsAzure/azure-sdk-for-php">https://github.com/WindowsAzure/azure-sdk-for-php</a></td>
+</tr>
+</table>
+<h3>
+<i class="icon-custom icon-method"></i> Methods</h3>
+<a name="__construct" id="__construct"></a><div class="element clickable method public __construct" data-toggle="collapse" data-target=".__construct .collapse">
+<h2>Creates an RuleInfo with specified parameters.</h2>
+<pre>__construct(string $title, \RuleDescription $ruleDescription) </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<p class="long_description"></p>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$title</h4>
+<code>string</code><p>The title of the rule.</p></div>
+<div class="subelement argument">
+<h4>$ruleDescription</h4>
+<code>\RuleDescription</code><p>The description of the rule.</p></div>
+</div></div>
+</div>
+<a name="getAction" id="getAction"></a><div class="element clickable method public getAction" data-toggle="collapse" data-target=".getAction .collapse">
+<h2>Gets the action.</h2>
+<pre>getAction() : \Action</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<p class="long_description"></p>
+<h3>Returns</h3>
+<div class="subelement response"><code>\Action</code></div>
+</div></div>
+</div>
+<a name="getEntry" id="getEntry"></a><div class="element clickable method public getEntry" data-toggle="collapse" data-target=".getEntry .collapse">
+<h2>Gets the entry.</h2>
+<pre>getEntry() : \Entry</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<p class="long_description"></p>
+<h3>Returns</h3>
+<div class="subelement response"><code>\Entry</code></div>
+</div></div>
+</div>
+<a name="getFilter" id="getFilter"></a><div class="element clickable method public getFilter" data-toggle="collapse" data-target=".getFilter .collapse">
+<h2>Gets the filter.</h2>
+<pre>getFilter() : \Filter</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<p class="long_description"></p>
+<h3>Returns</h3>
+<div class="subelement response"><code>\Filter</code></div>
+</div></div>
+</div>
+<a name="getName" id="getName"></a><div class="element clickable method public getName" data-toggle="collapse" data-target=".getName .collapse">
+<h2>Gets the name of the rule description.</h2>
+<pre>getName() : string</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<p class="long_description"></p>
+<h3>Returns</h3>
+<div class="subelement response"><code>string</code></div>
+</div></div>
+</div>
+<a name="getRuleDescription" id="getRuleDescription"></a><div class="element clickable method public getRuleDescription" data-toggle="collapse" data-target=".getRuleDescription .collapse">
+<h2>Gets the description of the rule.</h2>
+<pre>getRuleDescription() : \RuleDescription</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<p class="long_description"></p>
+<h3>Returns</h3>
+<div class="subelement response"><code>\RuleDescription</code></div>
+</div></div>
+</div>
+<a name="getTitle" id="getTitle"></a><div class="element clickable method public getTitle" data-toggle="collapse" data-target=".getTitle .collapse">
+<h2>Gets the title.</h2>
+<pre>getTitle() : string</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<p class="long_description"></p>
+<h3>Returns</h3>
+<div class="subelement response"><code>string</code></div>
+</div></div>
+</div>
+<a name="parseXml" id="parseXml"></a><div class="element clickable method public parseXml" data-toggle="collapse" data-target=".parseXml .collapse">
+<h2>Populates the properties with a specified XML string based on ATOM
+ENTRY schema.</h2>
+<pre>parseXml(string $xmlString) : \none</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<p class="long_description"></p>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$xmlString</h4>
+<code>string</code><p>An XML string representing a rule info instance.</p></div>
+<h3>Returns</h3>
+<div class="subelement response"><code>\none</code></div>
+</div></div>
+</div>
+<a name="setAction" id="setAction"></a><div class="element clickable method public setAction" data-toggle="collapse" data-target=".setAction .collapse">
+<h2>Sets the action.</h2>
+<pre>setAction(\Action $action) : \none</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<p class="long_description"></p>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$action</h4>
+<code>\Action</code><p>The action.</p></div>
+<h3>Returns</h3>
+<div class="subelement response"><code>\none</code></div>
+</div></div>
+</div>
+<a name="setEntry" id="setEntry"></a><div class="element clickable method public setEntry" data-toggle="collapse" data-target=".setEntry .collapse">
+<h2>Sets the entry.</h2>
+<pre>setEntry(\Entry $entry) : \none</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<p class="long_description"></p>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$entry</h4>
+<code>\Entry</code><p>The entry of the queue info.</p></div>
+<h3>Returns</h3>
+<div class="subelement response"><code>\none</code></div>
+</div></div>
+</div>
+<a name="setFilter" id="setFilter"></a><div class="element clickable method public setFilter" data-toggle="collapse" data-target=".setFilter .collapse">
+<h2>Sets the filter.</h2>
+<pre>setFilter(\Filter $filter) : \none</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<p class="long_description"></p>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$filter</h4>
+<code>\Filter</code><p>The filter.</p></div>
+<h3>Returns</h3>
+<div class="subelement response"><code>\none</code></div>
+</div></div>
+</div>
+<a name="setName" id="setName"></a><div class="element clickable method public setName" data-toggle="collapse" data-target=".setName .collapse">
+<h2>Sets the name of the rule description.</h2>
+<pre>setName(string $name) : \none</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<p class="long_description"></p>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$name</h4>
+<code>string</code><p>The name of the rule description.</p></div>
+<h3>Returns</h3>
+<div class="subelement response"><code>\none</code></div>
+</div></div>
+</div>
+<a name="setRuleDescription" id="setRuleDescription"></a><div class="element clickable method public setRuleDescription" data-toggle="collapse" data-target=".setRuleDescription .collapse">
+<h2>Sets the rule description.</h2>
+<pre>setRuleDescription(\RuleDescription $ruleDescription) : \none</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<p class="long_description"></p>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$ruleDescription</h4>
+<code>\RuleDescription</code><p>The description of the rule.</p></div>
+<h3>Returns</h3>
+<div class="subelement response"><code>\none</code></div>
+</div></div>
+</div>
+<a name="setTitle" id="setTitle"></a><div class="element clickable method public setTitle" data-toggle="collapse" data-target=".setTitle .collapse">
+<h2>Sets the title.</h2>
+<pre>setTitle(string $title) : \none</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<p class="long_description"></p>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$title</h4>
+<code>string</code><p>The title of the rule info.</p></div>
+<h3>Returns</h3>
+<div class="subelement response"><code>\none</code></div>
+</div></div>
+</div>
+<a name="withCorrelationFilter" id="withCorrelationFilter"></a><div class="element clickable method public withCorrelationFilter" data-toggle="collapse" data-target=".withCorrelationFilter .collapse">
+<h2>With correlation ID filter.</h2>
+<pre>withCorrelationFilter(string $correlationId) : \none</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<p class="long_description"></p>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$correlationId</h4>
+<code>string</code><p>The ID of the correlation.</p></div>
+<h3>Returns</h3>
+<div class="subelement response"><code>\none</code></div>
+</div></div>
+</div>
+<a name="withEmptyRuleAction" id="withEmptyRuleAction"></a><div class="element clickable method public withEmptyRuleAction" data-toggle="collapse" data-target=".withEmptyRuleAction .collapse">
+<h2>With empty rule action.</h2>
+<pre>withEmptyRuleAction() : \none</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<p class="long_description"></p>
+<h3>Returns</h3>
+<div class="subelement response"><code>\none</code></div>
+</div></div>
+</div>
+<a name="withFalseFilter" id="withFalseFilter"></a><div class="element clickable method public withFalseFilter" data-toggle="collapse" data-target=".withFalseFilter .collapse">
+<h2>With false filter.</h2>
+<pre>withFalseFilter() : \none</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<p class="long_description"></p>
+<h3>Returns</h3>
+<div class="subelement response"><code>\none</code></div>
+</div></div>
+</div>
+<a name="withSqlFilter" id="withSqlFilter"></a><div class="element clickable method public withSqlFilter" data-toggle="collapse" data-target=".withSqlFilter .collapse">
+<h2>With sql expression filter.</h2>
+<pre>withSqlFilter(string $sqlExpression) : \none</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<p class="long_description"></p>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$sqlExpression</h4>
+<code>string</code><p>The SQL expression of the filter.</p></div>
+<h3>Returns</h3>
+<div class="subelement response"><code>\none</code></div>
+</div></div>
+</div>
+<a name="withSqlRuleAction" id="withSqlRuleAction"></a><div class="element clickable method public withSqlRuleAction" data-toggle="collapse" data-target=".withSqlRuleAction .collapse">
+<h2>With SQL rule action.</h2>
+<pre>withSqlRuleAction(string $sqlExpression) : \none</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<p class="long_description"></p>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$sqlExpression</h4>
+<code>string</code><p>The SQL expression of the rule action.</p></div>
+<h3>Returns</h3>
+<div class="subelement response"><code>\none</code></div>
+</div></div>
+</div>
+<a name="withTrueFilter" id="withTrueFilter"></a><div class="element clickable method public withTrueFilter" data-toggle="collapse" data-target=".withTrueFilter .collapse">
+<h2>With true filter.</h2>
+<pre>withTrueFilter() : \none</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<p class="long_description"></p>
+<h3>Returns</h3>
+<div class="subelement response"><code>\none</code></div>
+</div></div>
+</div>
+<a name="writeXml" id="writeXml"></a><div class="element clickable method public writeXml" data-toggle="collapse" data-target=".writeXml .collapse">
+<h2>Writes an XML string representing the rule info instance.</h2>
+<pre>writeXml(<a href="http://php.net/manual/en/class.xmlwriter.php">\XMLWriter</a> $xmlWriter) : \none</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<p class="long_description"></p>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$xmlWriter</h4>
+<code><a href="http://php.net/manual/en/class.xmlwriter.php">\XMLWriter</a></code><p>The XML writer.</p></div>
+<h3>Returns</h3>
+<div class="subelement response"><code>\none</code></div>
+</div></div>
+</div>
+<h3>
+<i class="icon-custom icon-property"></i> Properties</h3>
+<a name="%24_entry" id="$_entry"> </a><div class="element clickable property private $_entry" data-toggle="collapse" data-target=".$_entry .collapse">
+<h2>The entry of the rule info.</h2>
+<pre>$_entry : \Entry</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><p class="long_description"></p></div></div>
+</div>
+<a name="%24_ruleDescription" id="$_ruleDescription"> </a><div class="element clickable property private $_ruleDescription" data-toggle="collapse" data-target=".$_ruleDescription .collapse">
+<h2>The description of the rule.</h2>
+<pre>$_ruleDescription : \RuleDescription</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><p class="long_description"></p></div></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="row"><footer class="span12">
+            Template is built using <a href="http://twitter.github.com/bootstrap/">Twitter Bootstrap 2</a> and icons provided by <a href="http://glyphicons.com/">Glyphicons</a>.<br>
+            Documentation is powered by <a href="http://www.phpdoc.org/">phpDocumentor 2.0.0a6</a> and<br>
+            generated on 2012-07-17T21:10:39-07:00.<br></footer></div>
+</div>
+</body>
+</html>

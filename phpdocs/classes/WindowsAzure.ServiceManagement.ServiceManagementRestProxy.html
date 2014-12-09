@@ -1,0 +1,552 @@
+<!DOCTYPE html><html xmlns:date="http://exslt.org/dates-and-times" lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0; user-scalable=0;">
+<meta charset="utf-8">
+<title>Windows Azure SDK for PHP » \WindowsAzure\ServiceManagement\ServiceManagementRestProxy</title>
+<meta name="author" content="Mike van Riel">
+<meta name="description" content="">
+<link href="../css/template.css" rel="stylesheet" media="all">
+<script src="../js/jquery-1.7.1.min.js" type="text/javascript"></script><script src="../js/jquery-ui-1.8.2.custom.min.js" type="text/javascript"></script><script src="../js/jquery.mousewheel.min.js" type="text/javascript"></script><script src="../js/bootstrap.js" type="text/javascript"></script><script src="../js/template.js" type="text/javascript"></script><script src="../js/prettify/prettify.min.js" type="text/javascript"></script><link rel="shortcut icon" href="../img/favicon.ico">
+<link rel="apple-touch-icon" href="../img/apple-touch-icon.png">
+<link rel="apple-touch-icon" sizes="72x72" href="../img/apple-touch-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="114x114" href="../img/apple-touch-icon-114x114.png">
+</head>
+<body>
+<div class="navbar navbar-fixed-top">
+<div class="navbar-inner"><div class="container">
+<a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse"><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></a><a class="brand" href="../index.html">Windows Azure SDK for PHP</a><div class="nav-collapse"><ul class="nav">
+<li class="dropdown">
+<a href="#api" class="dropdown-toggle" data-toggle="dropdown">
+                                    API Documentation <b class="caret"></b></a><ul class="dropdown-menu">
+<li><a>Namespaces</a></li>
+<li><a href="../namespaces/WindowsAzure.html"><i class="icon-th"></i> WindowsAzure</a></li>
+<li><a>Packages</a></li>
+<li><a href="../packages/WindowsAzure.html"><i class="icon-folder-open"></i> WindowsAzure</a></li>
+</ul>
+</li>
+<li class="dropdown" id="charts-menu">
+<a href="#charts" class="dropdown-toggle" data-toggle="dropdown">
+                                    Charts <b class="caret"></b></a><ul class="dropdown-menu"><li><a href="../graph_class.html"><i class="icon-list-alt"></i> Class hierarchy diagram</a></li></ul>
+</li>
+<li class="dropdown" id="reports-menu">
+<a href="#reports" class="dropdown-toggle" data-toggle="dropdown">
+                                    Reports <b class="caret"></b></a><ul class="dropdown-menu">
+<li><a href="../errors.html"><i class="icon-remove-sign"></i> Errors 
+                <span class="label label-info">385</span></a></li>
+<li><a href="../markers.html"><i class="icon-map-marker"></i> Markers 
+                <ul></ul></a></li>
+<li><a href="../deprecated.html"><i class="icon-stop"></i> Deprecated elements 
+                <span class="label label-info">0</span></a></li>
+</ul>
+</li>
+</ul></div>
+</div></div>
+<div class="go_to_top"><a href="#___" style="color: inherit">Back to top  <i class="icon-upload icon-white"></i></a></div>
+</div>
+<div id="___" class="container">
+<noscript><div class="alert alert-warning">
+                            Javascript is disabled; several features are only available
+                            if Javascript is enabled.
+                        </div></noscript>
+<div class="row">
+<div class="span4">
+<span class="btn-group visibility" data-toggle="buttons-checkbox"><button class="btn public active" title="Show public elements">Public</button><button class="btn protected" title="Show protected elements">Protected</button><button class="btn private" title="Show private elements">Private</button><button class="btn inherited active" title="Show inherited elements">Inherited</button></span><div class="btn-group view pull-right" data-toggle="buttons-radio">
+<button class="btn details" title="Show descriptions and method names"><i class="icon-list"></i></button><button class="btn simple" title="Show only method names"><i class="icon-align-justify"></i></button>
+</div>
+<ul class="side-nav nav nav-list">
+<li class="nav-header">
+<i class="icon-custom icon-method"></i> Methods</li>
+<li class="method public "><a href="#__construct" title="__construct :: Initializes new ServiceManagementRestProxy object."><span class="description">Initializes new ServiceManagementRestProxy object.</span><pre>__construct()</pre></a></li>
+<li class="method public "><a href="#createAffinityGroup" title="createAffinityGroup :: Creates a new affinity group for the specified subscription."><span class="description">Creates a new affinity group for the specified subscription.</span><pre>createAffinityGroup()</pre></a></li>
+<li class="method public "><a href="#createStorageService" title="createStorageService :: Creates a new storage account in Windows Azure."><span class="description">Creates a new storage account in Windows Azure.</span><pre>createStorageService()</pre></a></li>
+<li class="method public "><a href="#deleteAffinityGroup" title="deleteAffinityGroup :: Deletes an affinity group in the specified subscription."><span class="description">Deletes an affinity group in the specified subscription.</span><pre>deleteAffinityGroup()</pre></a></li>
+<li class="method public "><a href="#deleteStorageService" title="deleteStorageService :: Deletes the specified storage account from Windows Azure."><span class="description">Deletes the specified storage account from Windows Azure.</span><pre>deleteStorageService()</pre></a></li>
+<li class="method public "><a href="#getAffinityGroupProperties" title="getAffinityGroupProperties :: Returns the system properties associated with the specified affinity group."><span class="description">Returns the system properties associated with the specified affinity group.</span><pre>getAffinityGroupProperties()</pre></a></li>
+<li class="method public "><a href="#getOperationStatus" title="getOperationStatus :: Returns the status of the specified operation. After calling an asynchronous
+operation, you can call Get Operation Status to determine whether the
+operation has succeeded, failed, or is still in progress."><span class="description">Returns the status of the specified operation. After calling an asynchronous
+operation, you can call Get Operation Status to determine whether the
+operation has succeeded, failed, or is still in progress.</span><pre>getOperationStatus()</pre></a></li>
+<li class="method public "><a href="#getStorageServiceKeys" title="getStorageServiceKeys :: Returns the primary and secondary access keys for the specified storage
+account."><span class="description">Returns the primary and secondary access keys for the specified storage
+account.</span><pre>getStorageServiceKeys()</pre></a></li>
+<li class="method public "><a href="#getStorageServiceProperties" title="getStorageServiceProperties :: Returns the system properties for the specified storage account."><span class="description">Returns the system properties for the specified storage account.</span><pre>getStorageServiceProperties()</pre></a></li>
+<li class="method public "><a href="#listAffinityGroups" title="listAffinityGroups :: Lists the affinity groups associated with the specified subscription."><span class="description">Lists the affinity groups associated with the specified subscription.</span><pre>listAffinityGroups()</pre></a></li>
+<li class="method public "><a href="#listLocations" title="listLocations :: Lists all of the data center locations that are valid for your subscription."><span class="description">Lists all of the data center locations that are valid for your subscription.</span><pre>listLocations()</pre></a></li>
+<li class="method public "><a href="#listStorageServices" title="listStorageServices :: Lists the storage accounts available under the current subscription."><span class="description">Lists the storage accounts available under the current subscription.</span><pre>listStorageServices()</pre></a></li>
+<li class="method public "><a href="#regenerateStorageServiceKeys" title="regenerateStorageServiceKeys :: Regenerates the primary or secondary access key for the specified storage
+account."><span class="description">Regenerates the primary or secondary access key for the specified storage
+account.</span><pre>regenerateStorageServiceKeys()</pre></a></li>
+<li class="method public "><a href="#updateAffinityGroup" title="updateAffinityGroup :: Updates the label and/or the description for an affinity group for the
+specified subscription."><span class="description">Updates the label and/or the description for an affinity group for the
+specified subscription.</span><pre>updateAffinityGroup()</pre></a></li>
+<li class="method public "><a href="#updateStorageService" title="updateStorageService :: Updates the label and/or the description for a storage account in Windows
+Azure."><span class="description">Updates the label and/or the description for a storage account in Windows
+Azure.</span><pre>updateStorageService()</pre></a></li>
+<li class="nav-header private">» Private</li>
+<li class="method private "><a href="#_getAffinityGroupPath" title="_getAffinityGroupPath :: Constructs URI path for affinity group."><span class="description">Constructs URI path for affinity group.</span><pre>_getAffinityGroupPath()</pre></a></li>
+<li class="method private "><a href="#_getLocationPath" title="_getLocationPath :: Constructs URI path for locations."><span class="description">Constructs URI path for locations.</span><pre>_getLocationPath()</pre></a></li>
+<li class="method private "><a href="#_getOperationPath" title="_getOperationPath :: Constructs URI path for operations."><span class="description">Constructs URI path for operations.</span><pre>_getOperationPath()</pre></a></li>
+<li class="method private "><a href="#_getPath" title="_getPath :: Constructs URI path for given service management resource."><span class="description">Constructs URI path for given service management resource.</span><pre>_getPath()</pre></a></li>
+<li class="method private "><a href="#_getStorageServiceKeysPath" title="_getStorageServiceKeysPath :: Constructs URI path for storage service key."><span class="description">Constructs URI path for storage service key.</span><pre>_getStorageServiceKeysPath()</pre></a></li>
+<li class="method private "><a href="#_getStorageServicePath" title="_getStorageServicePath :: Constructs URI path for storage services."><span class="description">Constructs URI path for storage services.</span><pre>_getStorageServicePath()</pre></a></li>
+<li class="nav-header">
+<i class="icon-custom icon-property"></i> Properties</li>
+<li class="nav-header private">» Private</li>
+<li class="property private "><a href="#%24_subscriptionId" title="$_subscriptionId :: "><span class="description">$_subscriptionId</span><pre>$_subscriptionId</pre></a></li>
+</ul>
+</div>
+<div class="span8">
+<a name="%5CWindowsAzure%5CServiceManagement%5CServiceManagementRestProxy" id="\WindowsAzure\ServiceManagement\ServiceManagementRestProxy"></a><ul class="breadcrumb">
+<li>
+<a href="../index.html"><i class="icon-custom icon-class"></i></a><span class="divider">\</span>
+</li>
+<li><a href="../namespaces/WindowsAzure.html">WindowsAzure</a></li>
+<span class="divider">\</span><li><a href="../namespaces/WindowsAzure.ServiceManagement.html">ServiceManagement</a></li>
+<li class="active">
+<span class="divider">\</span><a href="../classes/WindowsAzure.ServiceManagement.ServiceManagementRestProxy.html">ServiceManagementRestProxy</a>
+</li>
+</ul>
+<div href="../classes/WindowsAzure.ServiceManagement.ServiceManagementRestProxy.html" class="element class">
+<p class="short_description">This class constructs HTTP requests and receive HTTP responses for service
+management service layer.</p>
+<div class="details">
+<p class="long_description"></p>
+<table class="table table-bordered">
+<tr>
+<th>category</th>
+<td>Microsoft</td>
+</tr>
+<tr>
+<th>package</th>
+<td><a href="../packages/WindowsAzure.ServiceManagement.html">WindowsAzure\ServiceManagement</a></td>
+</tr>
+<tr>
+<th>author</th>
+<td><a href="mailto:azurephpsdk@microsoft.com">Azure PHP SDK</a></td>
+</tr>
+<tr>
+<th>copyright</th>
+<td>2012 Microsoft Corporation</td>
+</tr>
+<tr>
+<th>license</th>
+<td><a href="http://www.apache.org/licenses/LICENSE-2.0">Apache License 2.0</a></td>
+</tr>
+<tr>
+<th>version</th>
+<td>Release: @package_version@</td>
+</tr>
+<tr>
+<th>link</th>
+<td><a href="https://github.com/windowsazure/azure-sdk-for-php">https://github.com/windowsazure/azure-sdk-for-php</a></td>
+</tr>
+</table>
+<h3>
+<i class="icon-custom icon-method"></i> Methods</h3>
+<a name="__construct" id="__construct"></a><div class="element clickable method public __construct" data-toggle="collapse" data-target=".__construct .collapse">
+<h2>Initializes new ServiceManagementRestProxy object.</h2>
+<pre>__construct(\IHttpClient $channel, string $subscriptionId, string $uri, \ISerializer $dataSerializer) </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<p class="long_description"></p>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$channel</h4>
+<code>\IHttpClient</code><p>The HTTP channel.</p></div>
+<div class="subelement argument">
+<h4>$subscriptionId</h4>
+<code>string</code><p>The user subscription id.</p></div>
+<div class="subelement argument">
+<h4>$uri</h4>
+<code>string</code><p>The service URI.</p></div>
+<div class="subelement argument">
+<h4>$dataSerializer</h4>
+<code>\ISerializer</code><p>The data serializer.</p></div>
+</div></div>
+</div>
+<a name="createAffinityGroup" id="createAffinityGroup"></a><div class="element clickable method public createAffinityGroup" data-toggle="collapse" data-target=".createAffinityGroup .collapse">
+<h2>Creates a new affinity group for the specified subscription.</h2>
+<pre>createAffinityGroup(string $name, string $label, string $location, \Models\CreateAffinityGroupOptions $options) : \none</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<p class="long_description"></p>
+<table class="table table-bordered"><tr>
+<th>see</th>
+<td>\http://msdn.microsoft.com/en-us/library/windowsazure/gg715317.aspx</td>
+</tr></table>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$name</h4>
+<code>string</code><p>The affinity group name.</p></div>
+<div class="subelement argument">
+<h4>$label</h4>
+<code>string</code><p>A base-64 encoded name for the affinity group. The name can be up to 100 characters in length.</p>
+</div>
+<div class="subelement argument">
+<h4>$location</h4>
+<code>string</code><p>The data center location where the affinity group will be created. To list available locations, use the listLocations API.</p></div>
+<div class="subelement argument">
+<h4>$options</h4>
+<code>\Models\CreateAffinityGroupOptions</code><p>The optional parameters.</p></div>
+<h3>Returns</h3>
+<div class="subelement response"><code>\none</code></div>
+</div></div>
+</div>
+<a name="createStorageService" id="createStorageService"></a><div class="element clickable method public createStorageService" data-toggle="collapse" data-target=".createStorageService .collapse">
+<h2>Creates a new storage account in Windows Azure.</h2>
+<pre>createStorageService(string $name, string $label, \Models\CreateStorageServiceOptions $options) : \Models\AsynchronousOperationResult</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<p class="long_description"><p>In the optional parameters either location or affinity group must be provided.
+Because Create Storage Account is an asynchronous operation, it always returns
+status code 202 (Accepted). To determine the status code for the operation
+once it is complete, call getOperationStatus API. The status code is embedded
+in the response for this operation; if successful, it will be
+status code 200 (OK).</p></p>
+<table class="table table-bordered"><tr>
+<th>see</th>
+<td>\http://msdn.microsoft.com/en-us/library/windowsazure/hh264518.aspx</td>
+</tr></table>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$name</h4>
+<code>string</code><p>The storage account name.</p></div>
+<div class="subelement argument">
+<h4>$label</h4>
+<code>string</code><p>Name for the storage account specified as a base64-encoded string. The name may be up to 100 characters in length. The name can be used identify the storage account for your tracking purposes.</p>
+</div>
+<div class="subelement argument">
+<h4>$options</h4>
+<code>\Models\CreateStorageServiceOptions</code><p>The optional parameters.</p></div>
+<h3>Returns</h3>
+<div class="subelement response"><code>\Models\AsynchronousOperationResult</code></div>
+</div></div>
+</div>
+<a name="deleteAffinityGroup" id="deleteAffinityGroup"></a><div class="element clickable method public deleteAffinityGroup" data-toggle="collapse" data-target=".deleteAffinityGroup .collapse">
+<h2>Deletes an affinity group in the specified subscription.</h2>
+<pre>deleteAffinityGroup(string $name) : \none</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<p class="long_description"></p>
+<table class="table table-bordered"><tr>
+<th>see</th>
+<td>\http://msdn.microsoft.com/en-us/library/windowsazure/gg715314.aspx</td>
+</tr></table>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$name</h4>
+<code>string</code><p>The affinity group name.</p></div>
+<h3>Returns</h3>
+<div class="subelement response"><code>\none</code></div>
+</div></div>
+</div>
+<a name="deleteStorageService" id="deleteStorageService"></a><div class="element clickable method public deleteStorageService" data-toggle="collapse" data-target=".deleteStorageService .collapse">
+<h2>Deletes the specified storage account from Windows Azure.</h2>
+<pre>deleteStorageService(string $name) : \none</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<p class="long_description"></p>
+<table class="table table-bordered"><tr>
+<th>see</th>
+<td>\http://msdn.microsoft.com/en-us/library/windowsazure/hh264517.aspx</td>
+</tr></table>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$name</h4>
+<code>string</code><p>The storage account name.</p></div>
+<h3>Returns</h3>
+<div class="subelement response"><code>\none</code></div>
+</div></div>
+</div>
+<a name="getAffinityGroupProperties" id="getAffinityGroupProperties"></a><div class="element clickable method public getAffinityGroupProperties" data-toggle="collapse" data-target=".getAffinityGroupProperties .collapse">
+<h2>Returns the system properties associated with the specified affinity group.</h2>
+<pre>getAffinityGroupProperties(string $name) : \Models\GetAffinityGroupPropertiesResult</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<p class="long_description"></p>
+<table class="table table-bordered"><tr>
+<th>see</th>
+<td>\http://msdn.microsoft.com/en-us/library/windowsazure/ee460789.aspx</td>
+</tr></table>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$name</h4>
+<code>string</code><p>The affinity group name.</p></div>
+<h3>Returns</h3>
+<div class="subelement response"><code>\Models\GetAffinityGroupPropertiesResult</code></div>
+</div></div>
+</div>
+<a name="getOperationStatus" id="getOperationStatus"></a><div class="element clickable method public getOperationStatus" data-toggle="collapse" data-target=".getOperationStatus .collapse">
+<h2>Returns the status of the specified operation. After calling an asynchronous
+operation, you can call Get Operation Status to determine whether the
+operation has succeeded, failed, or is still in progress.</h2>
+<pre>getOperationStatus(string $requestId) : \Models\GetOperationStatusResult</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<p class="long_description"></p>
+<table class="table table-bordered"><tr>
+<th>see</th>
+<td>\http://msdn.microsoft.com/en-us/library/windowsazure/ee460783.aspx</td>
+</tr></table>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$requestId</h4>
+<code>string</code><p>The request ID for the request you wish to track.</p></div>
+<h3>Returns</h3>
+<div class="subelement response"><code>\Models\GetOperationStatusResult</code></div>
+</div></div>
+</div>
+<a name="getStorageServiceKeys" id="getStorageServiceKeys"></a><div class="element clickable method public getStorageServiceKeys" data-toggle="collapse" data-target=".getStorageServiceKeys .collapse">
+<h2>Returns the primary and secondary access keys for the specified storage
+account.</h2>
+<pre>getStorageServiceKeys(string $name) : \Models\GetStorageServiceKeysResult</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<p class="long_description"></p>
+<table class="table table-bordered"><tr>
+<th>see</th>
+<td>\http://msdn.microsoft.com/en-us/library/windowsazure/ee460785.aspx</td>
+</tr></table>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$name</h4>
+<code>string</code><p>The storage account name.</p></div>
+<h3>Returns</h3>
+<div class="subelement response"><code>\Models\GetStorageServiceKeysResult</code></div>
+</div></div>
+</div>
+<a name="getStorageServiceProperties" id="getStorageServiceProperties"></a><div class="element clickable method public getStorageServiceProperties" data-toggle="collapse" data-target=".getStorageServiceProperties .collapse">
+<h2>Returns the system properties for the specified storage account.</h2>
+<pre>getStorageServiceProperties(string $name) : \Models\GetStorageServicePropertiesResult</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<p class="long_description"><p>These properties include: the address, description, and label of the storage
+account; and the name of the affinity group to which the service belongs,
+or its geo-location if it is not part of an affinity group.</p></p>
+<table class="table table-bordered"><tr>
+<th>see</th>
+<td>\http://msdn.microsoft.com/en-us/library/windowsazure/ee460802.aspx</td>
+</tr></table>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$name</h4>
+<code>string</code><p>The storage account name.</p></div>
+<h3>Returns</h3>
+<div class="subelement response"><code>\Models\GetStorageServicePropertiesResult</code></div>
+</div></div>
+</div>
+<a name="listAffinityGroups" id="listAffinityGroups"></a><div class="element clickable method public listAffinityGroups" data-toggle="collapse" data-target=".listAffinityGroups .collapse">
+<h2>Lists the affinity groups associated with the specified subscription.</h2>
+<pre>listAffinityGroups() : \Models\ListAffinityGroupsResult</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<p class="long_description"></p>
+<table class="table table-bordered"><tr>
+<th>see</th>
+<td>\http://msdn.microsoft.com/en-us/library/windowsazure/ee460797.aspx</td>
+</tr></table>
+<h3>Returns</h3>
+<div class="subelement response"><code>\Models\ListAffinityGroupsResult</code></div>
+</div></div>
+</div>
+<a name="listLocations" id="listLocations"></a><div class="element clickable method public listLocations" data-toggle="collapse" data-target=".listLocations .collapse">
+<h2>Lists all of the data center locations that are valid for your subscription.</h2>
+<pre>listLocations() : \Models\ListLocationsResult</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<p class="long_description"></p>
+<table class="table table-bordered"><tr>
+<th>see</th>
+<td>\http://msdn.microsoft.com/en-us/library/windowsazure/gg441293.aspx</td>
+</tr></table>
+<h3>Returns</h3>
+<div class="subelement response"><code>\Models\ListLocationsResult</code></div>
+</div></div>
+</div>
+<a name="listStorageServices" id="listStorageServices"></a><div class="element clickable method public listStorageServices" data-toggle="collapse" data-target=".listStorageServices .collapse">
+<h2>Lists the storage accounts available under the current subscription.</h2>
+<pre>listStorageServices() : \Models\ListStorageServicesResult</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<p class="long_description"></p>
+<table class="table table-bordered"><tr>
+<th>see</th>
+<td>\http://msdn.microsoft.com/en-us/library/windowsazure/ee460787.aspx</td>
+</tr></table>
+<h3>Returns</h3>
+<div class="subelement response"><code>\Models\ListStorageServicesResult</code></div>
+</div></div>
+</div>
+<a name="regenerateStorageServiceKeys" id="regenerateStorageServiceKeys"></a><div class="element clickable method public regenerateStorageServiceKeys" data-toggle="collapse" data-target=".regenerateStorageServiceKeys .collapse">
+<h2>Regenerates the primary or secondary access key for the specified storage
+account.</h2>
+<pre>regenerateStorageServiceKeys(string $name, string $keyType) : \Models\GetStorageServiceKeysResult</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<p class="long_description"></p>
+<table class="table table-bordered"><tr>
+<th>see</th>
+<td>\http://msdn.microsoft.com/en-us/library/windowsazure/ee460795.aspx</td>
+</tr></table>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$name</h4>
+<code>string</code><p>The storage account name.</p></div>
+<div class="subelement argument">
+<h4>$keyType</h4>
+<code>string</code><p>Specifies which key to regenerate.</p></div>
+<h3>Returns</h3>
+<div class="subelement response"><code>\Models\GetStorageServiceKeysResult</code></div>
+</div></div>
+</div>
+<a name="updateAffinityGroup" id="updateAffinityGroup"></a><div class="element clickable method public updateAffinityGroup" data-toggle="collapse" data-target=".updateAffinityGroup .collapse">
+<h2>Updates the label and/or the description for an affinity group for the
+specified subscription.</h2>
+<pre>updateAffinityGroup(string $name, string $label, \Models\CreateAffinityGroupOptions $options) : \none</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<p class="long_description"></p>
+<table class="table table-bordered"><tr>
+<th>see</th>
+<td>\http://msdn.microsoft.com/en-us/library/windowsazure/gg715316.aspx</td>
+</tr></table>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$name</h4>
+<code>string</code><p>The affinity group name.</p></div>
+<div class="subelement argument">
+<h4>$label</h4>
+<code>string</code><p>The affinity group label.</p></div>
+<div class="subelement argument">
+<h4>$options</h4>
+<code>\Models\CreateAffinityGroupOptions</code><p>The optional parameters.</p></div>
+<h3>Returns</h3>
+<div class="subelement response"><code>\none</code></div>
+</div></div>
+</div>
+<a name="updateStorageService" id="updateStorageService"></a><div class="element clickable method public updateStorageService" data-toggle="collapse" data-target=".updateStorageService .collapse">
+<h2>Updates the label and/or the description for a storage account in Windows
+Azure.</h2>
+<pre>updateStorageService(string $name, \Models\UpdateStorageServiceOptions $options) : \none</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<p class="long_description"></p>
+<table class="table table-bordered"><tr>
+<th>see</th>
+<td>\http://msdn.microsoft.com/en-us/library/windowsazure/hh264516.aspx</td>
+</tr></table>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$name</h4>
+<code>string</code><p>The storage account name.</p></div>
+<div class="subelement argument">
+<h4>$options</h4>
+<code>\Models\UpdateStorageServiceOptions</code><p>The optional parameters.</p></div>
+<h3>Returns</h3>
+<div class="subelement response"><code>\none</code></div>
+</div></div>
+</div>
+<a name="_getAffinityGroupPath" id="_getAffinityGroupPath"></a><div class="element clickable method private _getAffinityGroupPath" data-toggle="collapse" data-target="._getAffinityGroupPath .collapse">
+<h2>Constructs URI path for affinity group.</h2>
+<pre>_getAffinityGroupPath(string $name) : string</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<p class="long_description"></p>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$name</h4>
+<code>string</code><p>The affinity group name.</p></div>
+<h3>Returns</h3>
+<div class="subelement response"><code>string</code></div>
+</div></div>
+</div>
+<a name="_getLocationPath" id="_getLocationPath"></a><div class="element clickable method private _getLocationPath" data-toggle="collapse" data-target="._getLocationPath .collapse">
+<h2>Constructs URI path for locations.</h2>
+<pre>_getLocationPath() : string</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<p class="long_description"></p>
+<h3>Returns</h3>
+<div class="subelement response"><code>string</code></div>
+</div></div>
+</div>
+<a name="_getOperationPath" id="_getOperationPath"></a><div class="element clickable method private _getOperationPath" data-toggle="collapse" data-target="._getOperationPath .collapse">
+<h2>Constructs URI path for operations.</h2>
+<pre>_getOperationPath(string $name) : string</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<p class="long_description"></p>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$name</h4>
+<code>string</code><p>The operation resource name.</p></div>
+<h3>Returns</h3>
+<div class="subelement response"><code>string</code></div>
+</div></div>
+</div>
+<a name="_getPath" id="_getPath"></a><div class="element clickable method private _getPath" data-toggle="collapse" data-target="._getPath .collapse">
+<h2>Constructs URI path for given service management resource.</h2>
+<pre>_getPath(string $serviceManagementResource, string $name) : string</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<p class="long_description"></p>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$serviceManagementResource</h4>
+<code>string</code><p>The resource name.</p></div>
+<div class="subelement argument">
+<h4>$name</h4>
+<code>string</code><p>The service name.</p></div>
+<h3>Returns</h3>
+<div class="subelement response"><code>string</code></div>
+</div></div>
+</div>
+<a name="_getStorageServiceKeysPath" id="_getStorageServiceKeysPath"></a><div class="element clickable method private _getStorageServiceKeysPath" data-toggle="collapse" data-target="._getStorageServiceKeysPath .collapse">
+<h2>Constructs URI path for storage service key.</h2>
+<pre>_getStorageServiceKeysPath(string $name) : string</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<p class="long_description"></p>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$name</h4>
+<code>string</code><p>The storage service name.</p></div>
+<h3>Returns</h3>
+<div class="subelement response"><code>string</code></div>
+</div></div>
+</div>
+<a name="_getStorageServicePath" id="_getStorageServicePath"></a><div class="element clickable method private _getStorageServicePath" data-toggle="collapse" data-target="._getStorageServicePath .collapse">
+<h2>Constructs URI path for storage services.</h2>
+<pre>_getStorageServicePath(string $name) : string</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<p class="long_description"></p>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$name</h4>
+<code>string</code><p>The storage service name.</p></div>
+<h3>Returns</h3>
+<div class="subelement response"><code>string</code></div>
+</div></div>
+</div>
+<h3>
+<i class="icon-custom icon-property"></i> Properties</h3>
+<a name="%24_subscriptionId" id="$_subscriptionId"> </a><div class="element clickable property private $_subscriptionId" data-toggle="collapse" data-target=".$_subscriptionId .collapse">
+<h2>$_subscriptionId</h2>
+<pre>$_subscriptionId : string</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><p class="long_description"></p></div></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="row"><footer class="span12">
+            Template is built using <a href="http://twitter.github.com/bootstrap/">Twitter Bootstrap 2</a> and icons provided by <a href="http://glyphicons.com/">Glyphicons</a>.<br>
+            Documentation is powered by <a href="http://www.phpdoc.org/">phpDocumentor 2.0.0a6</a> and<br>
+            generated on 2012-07-17T21:10:40-07:00.<br></footer></div>
+</div>
+</body>
+</html>

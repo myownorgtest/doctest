@@ -1,0 +1,289 @@
+<!DOCTYPE html><html xmlns:date="http://exslt.org/dates-and-times" lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0; user-scalable=0;">
+<meta charset="utf-8">
+<title>Windows Azure SDK for PHP » \WindowsAzure\ServiceRuntime\Internal\Protocol1RuntimeGoalStateClient</title>
+<meta name="author" content="Mike van Riel">
+<meta name="description" content="">
+<link href="../css/template.css" rel="stylesheet" media="all">
+<script src="../js/jquery-1.7.1.min.js" type="text/javascript"></script><script src="../js/jquery-ui-1.8.2.custom.min.js" type="text/javascript"></script><script src="../js/jquery.mousewheel.min.js" type="text/javascript"></script><script src="../js/bootstrap.js" type="text/javascript"></script><script src="../js/template.js" type="text/javascript"></script><script src="../js/prettify/prettify.min.js" type="text/javascript"></script><link rel="shortcut icon" href="../img/favicon.ico">
+<link rel="apple-touch-icon" href="../img/apple-touch-icon.png">
+<link rel="apple-touch-icon" sizes="72x72" href="../img/apple-touch-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="114x114" href="../img/apple-touch-icon-114x114.png">
+</head>
+<body>
+<div class="navbar navbar-fixed-top">
+<div class="navbar-inner"><div class="container">
+<a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse"><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></a><a class="brand" href="../index.html">Windows Azure SDK for PHP</a><div class="nav-collapse"><ul class="nav">
+<li class="dropdown">
+<a href="#api" class="dropdown-toggle" data-toggle="dropdown">
+                                    API Documentation <b class="caret"></b></a><ul class="dropdown-menu">
+<li><a>Namespaces</a></li>
+<li><a href="../namespaces/WindowsAzure.html"><i class="icon-th"></i> WindowsAzure</a></li>
+<li><a>Packages</a></li>
+<li><a href="../packages/WindowsAzure.html"><i class="icon-folder-open"></i> WindowsAzure</a></li>
+</ul>
+</li>
+<li class="dropdown" id="charts-menu">
+<a href="#charts" class="dropdown-toggle" data-toggle="dropdown">
+                                    Charts <b class="caret"></b></a><ul class="dropdown-menu"><li><a href="../graph_class.html"><i class="icon-list-alt"></i> Class hierarchy diagram</a></li></ul>
+</li>
+<li class="dropdown" id="reports-menu">
+<a href="#reports" class="dropdown-toggle" data-toggle="dropdown">
+                                    Reports <b class="caret"></b></a><ul class="dropdown-menu">
+<li><a href="../errors.html"><i class="icon-remove-sign"></i> Errors 
+                <span class="label label-info">385</span></a></li>
+<li><a href="../markers.html"><i class="icon-map-marker"></i> Markers 
+                <ul></ul></a></li>
+<li><a href="../deprecated.html"><i class="icon-stop"></i> Deprecated elements 
+                <span class="label label-info">0</span></a></li>
+</ul>
+</li>
+</ul></div>
+</div></div>
+<div class="go_to_top"><a href="#___" style="color: inherit">Back to top  <i class="icon-upload icon-white"></i></a></div>
+</div>
+<div id="___" class="container">
+<noscript><div class="alert alert-warning">
+                            Javascript is disabled; several features are only available
+                            if Javascript is enabled.
+                        </div></noscript>
+<div class="row">
+<div class="span4">
+<span class="btn-group visibility" data-toggle="buttons-checkbox"><button class="btn public active" title="Show public elements">Public</button><button class="btn protected" title="Show protected elements">Protected</button><button class="btn private" title="Show private elements">Private</button><button class="btn inherited active" title="Show inherited elements">Inherited</button></span><div class="btn-group view pull-right" data-toggle="buttons-radio">
+<button class="btn details" title="Show descriptions and method names"><i class="icon-list"></i></button><button class="btn simple" title="Show only method names"><i class="icon-align-justify"></i></button>
+</div>
+<ul class="side-nav nav nav-list">
+<li class="nav-header">
+<i class="icon-custom icon-method"></i> Methods</li>
+<li class="method public "><a href="#__construct" title="__construct :: Constructor"><span class="description">Constructor</span><pre>__construct()</pre></a></li>
+<li class="method public "><a href="#getCurrentGoalState" title="getCurrentGoalState :: Gets the current goal state."><span class="description">Gets the current goal state.</span><pre>getCurrentGoalState()</pre></a></li>
+<li class="method public "><a href="#getEndpoint" title="getEndpoint :: Gets the endpoint."><span class="description">Gets the endpoint.</span><pre>getEndpoint()</pre></a></li>
+<li class="method public "><a href="#getKeepOpen" title="getKeepOpen :: Gets the keep open state."><span class="description">Gets the keep open state.</span><pre>getKeepOpen()</pre></a></li>
+<li class="method public "><a href="#getRoleEnvironmentData" title="getRoleEnvironmentData :: Gets the role environment data."><span class="description">Gets the role environment data.</span><pre>getRoleEnvironmentData()</pre></a></li>
+<li class="method public "><a href="#setEndpoint" title="setEndpoint :: Sets the endpoint."><span class="description">Sets the endpoint.</span><pre>setEndpoint()</pre></a></li>
+<li class="method public "><a href="#setKeepOpen" title="setKeepOpen :: Sets the keep open state."><span class="description">Sets the keep open state.</span><pre>setKeepOpen()</pre></a></li>
+<li class="nav-header private">» Private</li>
+<li class="method private "><a href="#_ensureGoalStateRetrieved" title="_ensureGoalStateRetrieved :: Ensures that the goal state is retrieved."><span class="description">Ensures that the goal state is retrieved.</span><pre>_ensureGoalStateRetrieved()</pre></a></li>
+<li class="nav-header">
+<i class="icon-custom icon-property"></i> Properties</li>
+<li class="nav-header private">» Private</li>
+<li class="property private "><a href="#%24_currentEnvironmentData" title="$_currentEnvironmentData :: "><span class="description">$_currentEnvironmentData</span><pre>$_currentEnvironmentData</pre></a></li>
+<li class="property private "><a href="#%24_currentGoalState" title="$_currentGoalState :: "><span class="description">$_currentGoalState</span><pre>$_currentGoalState</pre></a></li>
+<li class="property private "><a href="#%24_currentStateClient" title="$_currentStateClient :: "><span class="description">$_currentStateClient</span><pre>$_currentStateClient</pre></a></li>
+<li class="property private "><a href="#%24_endpoint" title="$_endpoint :: "><span class="description">$_endpoint</span><pre>$_endpoint</pre></a></li>
+<li class="property private "><a href="#%24_goalStateDeserializer" title="$_goalStateDeserializer :: "><span class="description">$_goalStateDeserializer</span><pre>$_goalStateDeserializer</pre></a></li>
+<li class="property private "><a href="#%24_inputChannel" title="$_inputChannel :: "><span class="description">$_inputChannel</span><pre>$_inputChannel</pre></a></li>
+<li class="property private "><a href="#%24_keepOpen" title="$_keepOpen :: "><span class="description">$_keepOpen</span><pre>$_keepOpen</pre></a></li>
+<li class="property private "><a href="#%24_roleEnvironmentDeserializer" title="$_roleEnvironmentDeserializer :: "><span class="description">$_roleEnvironmentDeserializer</span><pre>$_roleEnvironmentDeserializer</pre></a></li>
+</ul>
+</div>
+<div class="span8">
+<a name="%5CWindowsAzure%5CServiceRuntime%5CInternal%5CProtocol1RuntimeGoalStateClient" id="\WindowsAzure\ServiceRuntime\Internal\Protocol1RuntimeGoalStateClient"></a><ul class="breadcrumb">
+<li>
+<a href="../index.html"><i class="icon-custom icon-class"></i></a><span class="divider">\</span>
+</li>
+<li><a href="../namespaces/WindowsAzure.html">WindowsAzure</a></li>
+<span class="divider">\</span><li><a href="../namespaces/WindowsAzure.ServiceRuntime.html">ServiceRuntime</a></li>
+<span class="divider">\</span><li><a href="../namespaces/WindowsAzure.ServiceRuntime.Internal.html">Internal</a></li>
+<li class="active">
+<span class="divider">\</span><a href="../classes/WindowsAzure.ServiceRuntime.Internal.Protocol1RuntimeGoalStateClient.html">Protocol1RuntimeGoalStateClient</a>
+</li>
+</ul>
+<div href="../classes/WindowsAzure.ServiceRuntime.Internal.Protocol1RuntimeGoalStateClient.html" class="element class">
+<p class="short_description">An implementation for the protocol runtime goal state client.</p>
+<div class="details">
+<p class="long_description"></p>
+<table class="table table-bordered">
+<tr>
+<th>category</th>
+<td>Microsoft</td>
+</tr>
+<tr>
+<th>package</th>
+<td><a href="../packages/WindowsAzure.ServiceRuntime.Internal.html">WindowsAzure\ServiceRuntime\Internal</a></td>
+</tr>
+<tr>
+<th>author</th>
+<td><a href="mailto:azurephpsdk@microsoft.com">Azure PHP SDK</a></td>
+</tr>
+<tr>
+<th>copyright</th>
+<td>2012 Microsoft Corporation</td>
+</tr>
+<tr>
+<th>license</th>
+<td><a href="http://www.apache.org/licenses/LICENSE-2.0">Apache License 2.0</a></td>
+</tr>
+<tr>
+<th>version</th>
+<td>Release: @package_version@</td>
+</tr>
+<tr>
+<th>link</th>
+<td><a href="https://github.com/windowsazure/azure-sdk-for-php">https://github.com/windowsazure/azure-sdk-for-php</a></td>
+</tr>
+</table>
+<h3>
+<i class="icon-custom icon-method"></i> Methods</h3>
+<a name="__construct" id="__construct"></a><div class="element clickable method public __construct" data-toggle="collapse" data-target=".__construct .collapse">
+<h2>Constructor</h2>
+<pre>__construct(\Protocol1RuntimeCurrentStateClient $currentStateClient, \IGoalStateDeserializer $goalStateDeserializer, \IRoleEnvironmentDeserializer $roleEnvironmentDeserializer, \IInputChannel $inputChannel) </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<p class="long_description"></p>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$currentStateClient</h4>
+<code>\Protocol1RuntimeCurrentStateClient</code><p>The current state client.</p></div>
+<div class="subelement argument">
+<h4>$goalStateDeserializer</h4>
+<code>\IGoalStateDeserializer</code><p>The goal state deserializer.</p></div>
+<div class="subelement argument">
+<h4>$roleEnvironmentDeserializer</h4>
+<code>\IRoleEnvironmentDeserializer</code><p>The role environment deserializer.</p></div>
+<div class="subelement argument">
+<h4>$inputChannel</h4>
+<code>\IInputChannel</code><p>The input channel.</p></div>
+</div></div>
+</div>
+<a name="getCurrentGoalState" id="getCurrentGoalState"></a><div class="element clickable method public getCurrentGoalState" data-toggle="collapse" data-target=".getCurrentGoalState .collapse">
+<h2>Gets the current goal state.</h2>
+<pre>getCurrentGoalState() : \GoalState</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<p class="long_description"></p>
+<h3>Returns</h3>
+<div class="subelement response"><code>\GoalState</code></div>
+</div></div>
+</div>
+<a name="getEndpoint" id="getEndpoint"></a><div class="element clickable method public getEndpoint" data-toggle="collapse" data-target=".getEndpoint .collapse">
+<h2>Gets the endpoint.</h2>
+<pre>getEndpoint() : string</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<p class="long_description"></p>
+<h3>Returns</h3>
+<div class="subelement response"><code>string</code></div>
+</div></div>
+</div>
+<a name="getKeepOpen" id="getKeepOpen"></a><div class="element clickable method public getKeepOpen" data-toggle="collapse" data-target=".getKeepOpen .collapse">
+<h2>Gets the keep open state.</h2>
+<pre>getKeepOpen() : bool</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<p class="long_description"></p>
+<h3>Returns</h3>
+<div class="subelement response"><code>bool</code></div>
+</div></div>
+</div>
+<a name="getRoleEnvironmentData" id="getRoleEnvironmentData"></a><div class="element clickable method public getRoleEnvironmentData" data-toggle="collapse" data-target=".getRoleEnvironmentData .collapse">
+<h2>Gets the role environment data.</h2>
+<pre>getRoleEnvironmentData() : \RoleEnvironmentData</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<p class="long_description"></p>
+<h3>Returns</h3>
+<div class="subelement response"><code>\RoleEnvironmentData</code></div>
+</div></div>
+</div>
+<a name="setEndpoint" id="setEndpoint"></a><div class="element clickable method public setEndpoint" data-toggle="collapse" data-target=".setEndpoint .collapse">
+<h2>Sets the endpoint.</h2>
+<pre>setEndpoint(string $endpoint) : \none</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<p class="long_description"></p>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$endpoint</h4>
+<code>string</code><p>Sets the endpoint.</p></div>
+<h3>Returns</h3>
+<div class="subelement response"><code>\none</code></div>
+</div></div>
+</div>
+<a name="setKeepOpen" id="setKeepOpen"></a><div class="element clickable method public setKeepOpen" data-toggle="collapse" data-target=".setKeepOpen .collapse">
+<h2>Sets the keep open state.</h2>
+<pre>setKeepOpen(string $keepOpen) : \none</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<p class="long_description"></p>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$keepOpen</h4>
+<code>string</code><p>Sets the keep open state.</p></div>
+<h3>Returns</h3>
+<div class="subelement response"><code>\none</code></div>
+</div></div>
+</div>
+<a name="_ensureGoalStateRetrieved" id="_ensureGoalStateRetrieved"></a><div class="element clickable method private _ensureGoalStateRetrieved" data-toggle="collapse" data-target="._ensureGoalStateRetrieved .collapse">
+<h2>Ensures that the goal state is retrieved.</h2>
+<pre>_ensureGoalStateRetrieved() : \none</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<p class="long_description"></p>
+<h3>Returns</h3>
+<div class="subelement response"><code>\none</code></div>
+</div></div>
+</div>
+<h3>
+<i class="icon-custom icon-property"></i> Properties</h3>
+<a name="%24_currentEnvironmentData" id="$_currentEnvironmentData"> </a><div class="element clickable property private $_currentEnvironmentData" data-toggle="collapse" data-target=".$_currentEnvironmentData .collapse">
+<h2>$_currentEnvironmentData</h2>
+<pre>$_currentEnvironmentData : \RoleEnvironmentData</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><p class="long_description"></p></div></div>
+</div>
+<a name="%24_currentGoalState" id="$_currentGoalState"> </a><div class="element clickable property private $_currentGoalState" data-toggle="collapse" data-target=".$_currentGoalState .collapse">
+<h2>$_currentGoalState</h2>
+<pre>$_currentGoalState : \CurrentGoalState</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><p class="long_description"></p></div></div>
+</div>
+<a name="%24_currentStateClient" id="$_currentStateClient"> </a><div class="element clickable property private $_currentStateClient" data-toggle="collapse" data-target=".$_currentStateClient .collapse">
+<h2>$_currentStateClient</h2>
+<pre>$_currentStateClient : \Protocol1RuntimeCurrentStateClient</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><p class="long_description"></p></div></div>
+</div>
+<a name="%24_endpoint" id="$_endpoint"> </a><div class="element clickable property private $_endpoint" data-toggle="collapse" data-target=".$_endpoint .collapse">
+<h2>$_endpoint</h2>
+<pre>$_endpoint : string</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><p class="long_description"></p></div></div>
+</div>
+<a name="%24_goalStateDeserializer" id="$_goalStateDeserializer"> </a><div class="element clickable property private $_goalStateDeserializer" data-toggle="collapse" data-target=".$_goalStateDeserializer .collapse">
+<h2>$_goalStateDeserializer</h2>
+<pre>$_goalStateDeserializer : \IGoalStateDeserializer</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><p class="long_description"></p></div></div>
+</div>
+<a name="%24_inputChannel" id="$_inputChannel"> </a><div class="element clickable property private $_inputChannel" data-toggle="collapse" data-target=".$_inputChannel .collapse">
+<h2>$_inputChannel</h2>
+<pre>$_inputChannel : \IInputChannel</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><p class="long_description"></p></div></div>
+</div>
+<a name="%24_keepOpen" id="$_keepOpen"> </a><div class="element clickable property private $_keepOpen" data-toggle="collapse" data-target=".$_keepOpen .collapse">
+<h2>$_keepOpen</h2>
+<pre>$_keepOpen : bool</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><p class="long_description"></p></div></div>
+</div>
+<a name="%24_roleEnvironmentDeserializer" id="$_roleEnvironmentDeserializer"> </a><div class="element clickable property private $_roleEnvironmentDeserializer" data-toggle="collapse" data-target=".$_roleEnvironmentDeserializer .collapse">
+<h2>$_roleEnvironmentDeserializer</h2>
+<pre>$_roleEnvironmentDeserializer : \IGoalStateDeserializer</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><p class="long_description"></p></div></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="row"><footer class="span12">
+            Template is built using <a href="http://twitter.github.com/bootstrap/">Twitter Bootstrap 2</a> and icons provided by <a href="http://glyphicons.com/">Glyphicons</a>.<br>
+            Documentation is powered by <a href="http://www.phpdoc.org/">phpDocumentor 2.0.0a6</a> and<br>
+            generated on 2012-07-17T21:10:40-07:00.<br></footer></div>
+</div>
+</body>
+</html>

@@ -1,0 +1,288 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>JobManager &mdash; azure-batch-apps 0.2.0 documentation</title>
+    
+    <link rel="stylesheet" href="_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '0.2.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="top" title="azure-batch-apps 0.2.0 documentation" href="index.html" />
+    <link rel="up" title="batchapps package" href="batch_apps.html" />
+    <link rel="next" title="batchapps.job module" href="batch_apps.job.html" />
+    <link rel="prev" title="batchapps.credentials module" href="batch_apps.credentials.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="batch_apps.job.html" title="batchapps.job module"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="batch_apps.credentials.html" title="batchapps.credentials module"
+             accesskey="P">previous</a> |</li>
+        <li><a href="index.html">azure-batch-apps 0.2.0 documentation</a> &raquo;</li>
+          <li><a href="batch_apps.html" accesskey="U">batchapps package</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="module-batchapps.job_manager">
+<span id="jobmanager"></span><h1>JobManager<a class="headerlink" href="#module-batchapps.job_manager" title="Permalink to this headline">¶</a></h1>
+<dl class="class">
+<dt id="batchapps.job_manager.JobManager">
+<em class="property">class </em><tt class="descclassname">batchapps.job_manager.</tt><tt class="descname">JobManager</tt><big>(</big><em>credentials</em>, <em>cfg=None</em><big>)</big><a class="reference internal" href="_modules/batchapps/job_manager.html#JobManager"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#batchapps.job_manager.JobManager" title="Permalink to this definition">¶</a></dt>
+<dd><p>This is the only class that a user should need to import to access all
+job manipulation. Contains general functionality for the creation
+of new job submissions and retrieveing data on submitted jobs.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Args:</th><td class="field-body"><ul class="first simple">
+<li>credentials (<a class="reference internal" href="batch_apps.credentials.html#batchapps.credentials.Credentials" title="batchapps.credentials.Credentials"><tt class="xref py py-class docutils literal"><span class="pre">Credentials</span></tt></a>): User credentials for REST
+API authentication.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Kwargs:</th><td class="field-body"><ul class="first last simple">
+<li>cfg (<a class="reference internal" href="batch_apps.config.html#batchapps.config.Configuration" title="batchapps.config.Configuration"><tt class="xref py py-class docutils literal"><span class="pre">Configuration</span></tt></a>): Configuration of the Batch Apps
+client session. If not set, a default config will be used.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<dl class="method">
+<dt id="batchapps.job_manager.JobManager.create_job">
+<tt class="descname">create_job</tt><big>(</big><em>name</em>, <em>**jobdetails</em><big>)</big><a class="reference internal" href="_modules/batchapps/job_manager.html#JobManager.create_job"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#batchapps.job_manager.JobManager.create_job" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create a new job submission.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Args:</th><td class="field-body"><ul class="first simple">
+<li>name (str): The name for the new job.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Kwargs:</th><td class="field-body"><ul class="first">
+<li><p class="first">jobdetails (dict): Additional job settings or parameters can be
+added as keyword arguments. These include:</p>
+<blockquote>
+<div><ul class="simple">
+<li>&#8216;params&#8217;: A string dict of job parameters to add to the
+submission.</li>
+<li>&#8216;files&#8217;: A <a class="reference internal" href="batch_apps.files.html#batchapps.files.FileCollection" title="batchapps.files.FileCollection"><tt class="xref py py-class docutils literal"><span class="pre">FileCollection</span></tt></a> of required files to
+include with the job.</li>
+<li>&#8216;job_file&#8217;: The name (str) of the source file that should
+be used to start the job. This filename should be
+included in the above <tt class="docutils literal"><span class="pre">files</span></tt> collection.</li>
+<li>&#8216;instances&#8217;: The number (int) of instances to allocate
+to the job on submission.</li>
+</ul>
+</div></blockquote>
+</li>
+</ul>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><ul class="first last simple">
+<li>A new <a class="reference internal" href="batch_apps.job.html#batchapps.job.JobSubmission" title="batchapps.job.JobSubmission"><tt class="xref py py-class docutils literal"><span class="pre">JobSubmission</span></tt></a> object.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="batchapps.job_manager.JobManager.get_job">
+<tt class="descname">get_job</tt><big>(</big><em>job=None</em>, <em>url=None</em>, <em>jobid=None</em><big>)</big><a class="reference internal" href="_modules/batchapps/job_manager.html#JobManager.get_job"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#batchapps.job_manager.JobManager.get_job" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get details of single job. Input can be either a
+<a class="reference internal" href="batch_apps.job.html#batchapps.job.SubmittedJob" title="batchapps.job.SubmittedJob"><tt class="xref py py-class docutils literal"><span class="pre">SubmittedJob</span></tt></a> object, a URL, or a job ID.
+If more than one option is set, they will be prioritized in that order.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Kwargs:</th><td class="field-body"><ul class="first simple">
+<li>job (<a class="reference internal" href="batch_apps.job.html#batchapps.job.SubmittedJob" title="batchapps.job.SubmittedJob"><tt class="xref py py-class docutils literal"><span class="pre">SubmittedJob</span></tt></a>): A job object to be updated.</li>
+<li>url (str): The URL to a the details of a job, as returned by
+<a class="reference internal" href="batch_apps.job.html#batchapps.job.JobSubmission.submit" title="batchapps.job.JobSubmission.submit"><tt class="xref py py-meth docutils literal"><span class="pre">JobSubmission.submit()</span></tt></a>.</li>
+<li>jobid (str): The ID of a submitted job, as retrieved from
+Mission Control or returned by <a class="reference internal" href="batch_apps.job.html#batchapps.job.JobSubmission.submit" title="batchapps.job.JobSubmission.submit"><tt class="xref py py-meth docutils literal"><span class="pre">JobSubmission.submit()</span></tt></a>.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><ul class="first simple">
+<li>An updated or new <a class="reference internal" href="batch_apps.job.html#batchapps.job.SubmittedJob" title="batchapps.job.SubmittedJob"><tt class="xref py py-class docutils literal"><span class="pre">SubmittedJob</span></tt></a> object.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Raises:</th><td class="field-body"><ul class="first last simple">
+<li><tt class="xref py py-exc docutils literal"><span class="pre">AttributeError</span></tt> if invalid parameters have been set.</li>
+<li><a class="reference internal" href="batch_apps.exceptions.html#batchapps.exceptions.RestCallException" title="batchapps.exceptions.RestCallException"><tt class="xref py py-exc docutils literal"><span class="pre">RestCallException</span></tt></a> if an error occured during the request.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="batchapps.job_manager.JobManager.get_jobs">
+<tt class="descname">get_jobs</tt><big>(</big><em>index=0</em>, <em>per_call=10</em>, <em>name=None</em><big>)</big><a class="reference internal" href="_modules/batchapps/job_manager.html#JobManager.get_jobs"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#batchapps.job_manager.JobManager.get_jobs" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get a list of the user&#8217;s jobs.
+This call also sets the <tt class="xref py py-attr docutils literal"><span class="pre">JobManager.count</span></tt> attribute to reflect
+the total jobs submitted by the user.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Kwargs:</th><td class="field-body"><ul class="first simple">
+<li>index (int): The start index of the list of jobs to be returned.
+Default is 0, i.e. return all jobs from the beginning.</li>
+<li>per_call (int): Number of jobs to be returned. Default is 10.</li>
+<li>name (str): Only return jobs whose names contain this string.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><ul class="first simple">
+<li>A list of <a class="reference internal" href="batch_apps.job.html#batchapps.job.SubmittedJob" title="batchapps.job.SubmittedJob"><tt class="xref py py-class docutils literal"><span class="pre">SubmittedJob</span></tt></a> objects.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Raises:</th><td class="field-body"><ul class="first last simple">
+<li><a class="reference internal" href="batch_apps.exceptions.html#batchapps.exceptions.RestCallException" title="batchapps.exceptions.RestCallException"><tt class="xref py py-exc docutils literal"><span class="pre">RestCallException</span></tt></a> if an error occured during the request.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="batchapps.job_manager.JobManager.submit">
+<tt class="descname">submit</tt><big>(</big><em>submitjob</em>, <em>upload_threads=None</em><big>)</big><a class="reference internal" href="_modules/batchapps/job_manager.html#JobManager.submit"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#batchapps.job_manager.JobManager.submit" title="Permalink to this definition">¶</a></dt>
+<dd><p>Submit a job, and upload all its assets</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Args:</th><td class="field-body"><ul class="first simple">
+<li>submitjob (<a class="reference internal" href="batch_apps.job.html#batchapps.job.JobSubmission" title="batchapps.job.JobSubmission"><tt class="xref py py-class docutils literal"><span class="pre">JobSubmission</span></tt></a>): The job to be submitted.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Kwargs:</th><td class="field-body"><ul class="first simple">
+<li>upload_threads (int): Number of concurrent asset uplaods.
+Default is 1.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><ul class="first simple">
+<li>A job susbmission response dictionary in the format:
+<tt class="docutils literal"><span class="pre">{'jobId':</span> <span class="pre">'',</span> <span class="pre">'link':</span> <span class="pre">''}</span></tt></li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Raises:</th><td class="field-body"><ul class="first last simple">
+<li><tt class="xref py py-exc docutils literal"><span class="pre">TypeError</span></tt> if <tt class="docutils literal"><span class="pre">submitjob</span></tt> is not a JobSubmission.</li>
+<li><a class="reference internal" href="batch_apps.exceptions.html#batchapps.exceptions.RestCallException" title="batchapps.exceptions.RestCallException"><tt class="xref py py-exc docutils literal"><span class="pre">RestCallException</span></tt></a> if job submission failed.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="batch_apps.credentials.html"
+                        title="previous chapter">batchapps.credentials module</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="batch_apps.job.html"
+                        title="next chapter">batchapps.job module</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="_sources/batch_apps.job_manager.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="batch_apps.job.html" title="batchapps.job module"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="batch_apps.credentials.html" title="batchapps.credentials module"
+             >previous</a> |</li>
+        <li><a href="index.html">azure-batch-apps 0.2.0 documentation</a> &raquo;</li>
+          <li><a href="batch_apps.html" >batchapps package</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2014, Microsoft Corporation.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2.2.
+    </div>
+  </body>
+</html>

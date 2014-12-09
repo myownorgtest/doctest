@@ -1,0 +1,26 @@
+batchapps.job module
+======================
+
+Representations of a job submission and a submitted job.
+
+.. automodule:: batchapps.job
+
+JobSubmission
+---------------
+.. autoclass:: batchapps.job.JobSubmission
+    :members: add_file_collection, get_default_params, add_file, set_job_file, submit
+    :undoc-members:
+
+SubmittedJob
+---------------
+.. autoclass:: batchapps.job.SubmittedJob
+    :members: cancel, reprocess, get_output, get_tasks, get_thumbnail, list_all_outputs, update, get_logs
+    :undoc-members:
+
+
+Task
+---------------
+.. autoclass:: batchapps.job.Task
+    :members: get_thumbnail, list_outputs, get_output, cancel
+    :undoc-members:
+	

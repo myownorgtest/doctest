@@ -1,0 +1,16 @@
+batchapps.api module
+======================
+
+.. automodule:: batchapps.api
+
+BatchAppsApi
+---------------
+.. autoclass:: batchapps.api.BatchAppsApi
+    :members:
+    :undoc-members:
+
+Response
+---------------
+.. autoclass:: batchapps.api.Response
+    :members:
+    :undoc-members:

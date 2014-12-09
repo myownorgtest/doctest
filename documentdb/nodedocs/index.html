@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Index</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Index</h1>
+
+    
+
+
+    
+
+
+    <h3> </h3>
+
+
+
+
+
+
+
+
+
+    
+
+
+
+
+    <section>
+        <article><html>
+    <head>
+        <title>Azure DocumentDB SDK: node.js</title>
+    </head>
+    <body>
+        <h2>Azure DocumentDB nodejs SDK</h2>
+        <p>
+            DocumentDB is a purpose built NoSQL JSON document database designed for modern mobile and web applications. DocumentDB supports rich queries over JSON data as well as, <br>
+            transactional execution of JavaScript based application logic. DocumentDB is built with a deep commitment to the JSON data model enabling it to offer differentiated query and data <br>
+            processing capabilities that scale to meet the needs of the most demanding modern applications.
+        </p>
+
+        <p>
+            The Nodejs sdk has two API models: <br>
+            Callback model: where all calls use callbacks for responses and this is exposed in DocumentClient.
+            Promises model: where all calls use Q promises for responses ( this one is built on top of the callback model and this is exposed in DocumentClientWrapper.
+        </p>
+
+        <h4>Installing the library from nodejsclient folder</h4>
+        <p><pre>&gt; npm install nodejsclient</pre></p>
+
+        <h4>Installing the library using npm</h4>
+        <p><pre>&gt; npm install documentdb</pre></p>
+
+        <h4>Hello world example code using callbacks</h4>
+        <p><pre style="background-color:#eee">
+
+var DocumentClient = require('documentdb').DocumentClient;
+
+var host = [hostendpoint];                     // Add your endpoint
+var masterKey = [database account masterkey];  // Add the massterkey of the endpoint
+
+var client = new DocumentClient(host, {masterKey: masterKey});
+var databaseDefinition = { id: &quot;sample database&quot; };
+var collectionDefinition = { id: &quot;sample collection&quot; };
+var documentDefinition = { id: &quot;hello world doc&quot;, content: &quot;Hello World!&quot; };
+
+client.createDatabase(databaseDefinition, function(err, database) {
+    if(err) return console.log(err);
+    console.log('created db');
+
+    client.createCollection(database._self, collectionDefinition, function(err, collection) {
+        if(err) return console.log(err);
+
+        console.log('created collection');
+
+        client.createDocument(collection._self, documentDefinition, function(err, document) {
+            if(err) return console.log(err);
+
+            console.log('Created Document with content: ', document.content);
+        });
+    });
+});
+
+function cleanup(client, database) {
+    client.deleteDatabase(database._self, function(err) {
+        if(err) console.log(err);
+    })
+}
+</pre></p>
+
+<h4>Hello world example code using Q promises</h4>
+<p><pre  style="background-color:#eee">
+var DocumentClient = require('documentdb').DocumentClientWrapper;
+
+var host = [hostendpoint];                    // Add your endpoint
+var masterKey = [database account masterkey]; // Add the massterkey of the endpoint
+
+var client = new DocumentClient(host, {masterKey: masterKey});
+var databaseDefinition = { id: &quot;sample database&quot; }
+var collectionDefinition = { id: &quot;sample collection&quot; };
+var documentDefinition = { id: &quot;hello world doc&quot;, content: &quot;Hello World !&quot; };
+
+var database, collection, document;
+client.createDatabaseAsync(databaseDefinition)
+    .then(function(databaseResponse) {
+        database = databaseResponse.resource;
+        return client.createCollectionAsync(database._self, collectionDefinition);
+    })
+    .then(function(collectionResponse) {
+        collection = collectionResponse.resource;
+
+        return client.createDocumentAsync(collection._self, documentDefinition);
+    })
+    .then(function(documentResponse) {
+        var document = documentResponse.resource;
+        console.log('Created Document with content: ', document.content);
+        cleanup(client, database);
+    })
+    .fail(function(error) {
+        console.log(&quot;An error occured&quot;, error);
+    });
+
+function cleanup(client, database) {
+    client.deleteDatabaseAsync(database._self)
+        .then(function(response) {
+            console.log('clean up completed');
+        })
+        .fail(function(error){
+            console.log(error);
+        });
+}
+        </pre></p>
+
+<h4>Running the tests</h4>
+<p><pre><br>First You need to install mocha and q
+&gt; npm install mocha
+&gt; npm install q
+
+From the nodejsclient folder run 
+&gt; mocha -t 0 -R spec
+</p></pre>
+    </body>
+</html></article>
+    </section>
+
+
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Index</a></h2><h3>Classes</h3><ul><li><a href="DocumentClient.html">DocumentClient</a></li><li><a href="DocumentClientWrapper.html">DocumentClientWrapper</a></li><li><a href="QueryIterator.html">QueryIterator</a></li><li><a href="QueryIteratorWrapper.html">QueryIteratorWrapper</a></li></ul><h3>Global</h3><ul><li><a href="global.html#ConnectionPolicy">ConnectionPolicy</a></li><li><a href="global.html#ConsistencyLevel">ConsistencyLevel</a></li><li><a href="global.html#DatabaseAccount">DatabaseAccount</a></li><li><a href="global.html#IndexingMode">IndexingMode</a></li><li><a href="global.html#IndexType">IndexType</a></li><li><a href="global.html#MediaReadMode">MediaReadMode</a></li><li><a href="global.html#PermissionMode">PermissionMode</a></li><li><a href="global.html#TriggerOperation">TriggerOperation</a></li><li><a href="global.html#TriggerType">TriggerType</a></li><li><a href="global.html#UserDefinedFunctionType">UserDefinedFunctionType</a></li></ul>
+</nav>
+
+<br clear="both">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.3.0-alpha8</a> on Wed Aug 13 2014 16:16:21 GMT-0700 (Pacific Daylight Time)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

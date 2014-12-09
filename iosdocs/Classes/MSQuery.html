@@ -1,0 +1,237 @@
+<!DOCTYPE html><html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="UTF-8">
+<title>MSQuery Class Reference</title>
+<meta id="Generator" name="Generator" content="Doxyclean">
+<meta id="GeneratorVersion" name="GeneratorVersion" content="2.2">
+<link rel="stylesheet" type="text/css" href="../css/common.css">
+<link rel="stylesheet" type="text/css" media="screen" href="../css/screen.css">
+<link rel="stylesheet" type="text/css" media="print" href="../css/print.css">
+<script type="text/javascript">
+				function toggleTOC() {
+					var toc = document.getElementById('tableOfContents');
+					var tocButton = document.getElementById('toc_button');
+					var contents = document.getElementById('contents');
+					if (toc.style.display == 'block') {
+						toc.style.display = 'none';
+						contents.className = '';
+						tocButton.className = '';
+					} else {
+						toc.style.display = 'block';
+						contents.className = 'tableOfContentsOpen';
+						tocButton.className = 'open';
+					}
+				}
+				
+				function toggleTOCItem() {
+					var listItem = event.srcElement;
+					var sublist = listItem.getElementsByTagName('ul')[0];
+					if (sublist.style.display == 'block') {
+						sublist.style.display = 'none';
+						listItem.className = 'expandable';
+					} else {
+						sublist.style.display = 'block';
+						listItem.className = 'expandable expanded';
+					}
+				}
+				
+				function jumpTo() {
+					selectedItem = event.srcElement.options[event.srcElement.selectedIndex].value;
+					window.location = "#" + selectedItem;
+				}
+			</script>
+</head>
+<body>
+<header id="projectHeader"><h1><a href="../index.html">Windows Azure Mobile Services Reference Library</a></h1></header><header id="fileHeader"><h1><a href="#classTitle">MSQuery Class Reference</a></h1></header><nav id="buttons"><ul>
+<li id="toc_button"><button id="table_of_contents" onclick="toggleTOC()">Table of Contents</button></li>
+<li id="jumpto_button"><select id="jumpto" onchange="jumpTo()"><option value="classTitle">Jump To...</option>
+<option value="overview">Overview</option>
+<option value="tasks">Tasks</option>
+<option value="properties">Properties</option>
+<option value="predicate">    predicate</option>
+<option value="fetchLimit">    fetchLimit</option>
+<option value="fetchOffset">    fetchOffset</option>
+<option value="orderBy">    orderBy</option>
+<option value="includeTotalCount">    includeTotalCount</option>
+<option value="parameters">    parameters</option>
+<option value="selectFields">    selectFields</option>
+<option value="table">    table</option>
+<option value="instanceMethods">Instance Methods</option>
+<option value="initWithTable:">    - initWithTable:</option>
+<option value="initWithTable:predicate:">    - initWithTable:predicate:</option>
+<option value="orderByAscending:">    - orderByAscending:</option>
+<option value="orderByDescending:">    - orderByDescending:</option>
+<option value="readWithCompletion:">    - readWithCompletion:</option>
+<option value="queryStringOrError:">    - queryStringOrError:</option></select></li>
+</ul></nav><nav id="tableOfContents" style="display: none;"><ul>
+<li><a href="#overview">Overview</a></li>
+<li class="expandable" id="tocTasks" onclick="toggleTOCItem()">
+<a href="#tasks">Tasks</a><ul style="display: none;">
+<li><a href="#Initializing_the_MSQuery_object">Initializing the <code>MSQuery</code> object</a></li>
+<li><a href="#Modifying_the_Query">Modifying the Query</a></li>
+<li><a href="#Executing_the_query">Executing the query</a></li>
+<li><a href="#Properties">Properties</a></li>
+</ul>
+</li>
+<li class="expandable" id="tocProperties" onclick="toggleTOCItem()">
+<a href="#properties">Properties</a><ul style="display: none;">
+<li><a href="#predicate">predicate</a></li>
+<li><a href="#fetchLimit">fetchLimit</a></li>
+<li><a href="#fetchOffset">fetchOffset</a></li>
+<li><a href="#orderBy">orderBy</a></li>
+<li><a href="#includeTotalCount">includeTotalCount</a></li>
+<li><a href="#parameters">parameters</a></li>
+<li><a href="#selectFields">selectFields</a></li>
+<li><a href="#table">table</a></li>
+</ul>
+</li>
+<li class="expandable" id="tocInstanceMethods" onclick="toggleTOCItem()">
+<a href="#instanceMethods">Instance Methods</a><ul style="display: none;">
+<li><a href="#initWithTable:">initWithTable:</a></li>
+<li><a href="#initWithTable:predicate:">initWithTable:predicate:</a></li>
+<li><a href="#orderByAscending:">orderByAscending:</a></li>
+<li><a href="#orderByDescending:">orderByDescending:</a></li>
+<li><a href="#readWithCompletion:">readWithCompletion:</a></li>
+<li><a href="#queryStringOrError:">queryStringOrError:</a></li>
+</ul>
+</li>
+</ul></nav><div id="contents">
+<h1 id="classTitle">MSQuery Class Reference</h1>
+<table id="metadata">
+<tr class="alt">
+<th>Inherits from</th>
+<td><ul class="inheritance"><li><code><a href="http://developer.apple.com/iphone/library/documentation/Cocoa/Reference/Foundation/Protocols/NSObject_Protocol/index.html">NSObject</a></code></li></ul></td>
+</tr>
+<tr>
+<th>Declared in</th>
+<td>MSQuery.h</td>
+</tr>
+</table>
+<h2 id="overview">Overview</h2>
+<p>The <code>MSQuery</code> class represents a query that can be configured and then executed against a table of a Microsoft Azure Mobile Service. </p>
+<p>The query is serialized as a query string in the URL of the request. A query can be configured and then sent to the Microsoft Azure Mobile Service using the readOnSuccess:onError: method. <code>MSQuery</code> instances can be modfied and reused, but are not threadsafe. </p>
+<h2 id="tasks">Tasks</h2>
+<ul id="tasksList">
+<li id="Initializing_the_MSQuery_object">
+<h3>Initializing the <code>MSQuery</code> object</h3>
+<ul class="methods">
+<li>
+<span class="tooltipRegion"><code><a href="#initWithTable:">- initWithTable:</a></code></span><span class="tooltip">Initializes a MSQuery instance with the given table. </span>
+</li>
+<li>
+<span class="tooltipRegion"><code><a href="#initWithTable:predicate:">- initWithTable:predicate:</a></code></span><span class="tooltip">Returns a new MSQuery instance with the given table and the given predicate is used as the filter clause of the query. </span>
+</li>
+</ul>
+</li>
+<li id="Modifying_the_Query">
+<h3>Modifying the Query</h3>
+<ul class="methods">
+<li>
+<span class="tooltipRegion"><code><a href="#predicate">predicate</a></code> <span class="specialType">property</span></span><span class="tooltip">The predicate used as the filter clause of the query. </span>
+</li>
+<li>
+<span class="tooltipRegion"><code><a href="#fetchLimit">fetchLimit</a></code> <span class="specialType">property</span></span><span class="tooltip">The maximum number of items to return from the query. </span>
+</li>
+<li>
+<span class="tooltipRegion"><code><a href="#fetchOffset">fetchOffset</a></code> <span class="specialType">property</span></span><span class="tooltip">The offset from the initial item to use when returning items from a query. </span>
+</li>
+<li>
+<span class="tooltipRegion"><code><a href="#orderBy">orderBy</a></code> <span class="specialType">property</span></span><span class="tooltip">The array of NSSortDescriptors used to order the query results. </span>
+</li>
+<li>
+<span class="tooltipRegion"><code><a href="#includeTotalCount">includeTotalCount</a></code> <span class="specialType">property</span></span><span class="tooltip">Indicates if the Microsoft Azure Mobile Service should also include the total count of items on the server (not just the count of items returned) with the query results. </span>
+</li>
+<li>
+<span class="tooltipRegion"><code><a href="#parameters">parameters</a></code> <span class="specialType">property</span></span><span class="tooltip">A dictionary of string key-value pairs that can include user-defined parameters to use with the query. </span>
+</li>
+<li>
+<span class="tooltipRegion"><code><a href="#selectFields">selectFields</a></code> <span class="specialType">property</span></span><span class="tooltip">The fields or keys of an item that should be included in the results. </span>
+</li>
+<li>
+<span class="tooltipRegion"><code><a href="#orderByAscending:">- orderByAscending:</a></code></span><span class="tooltip">Indicates that the query results should be returned in ascending order based on the given field. </span>
+</li>
+<li>
+<span class="tooltipRegion"><code><a href="#orderByDescending:">- orderByDescending:</a></code></span><span class="tooltip">Indicates that the query results should be returned in descending order based on the given field. </span>
+</li>
+</ul>
+</li>
+<li id="Executing_the_query">
+<h3>Executing the query</h3>
+<ul class="methods"><li>
+<span class="tooltipRegion"><code><a href="#readWithCompletion:">- readWithCompletion:</a></code></span><span class="tooltip">Executes the query by sending a request to the Microsoft Azure Mobile Service. </span>
+</li></ul>
+</li>
+<li id="Properties">
+<h3>Properties</h3>
+<ul class="methods">
+<li>
+<span class="tooltipRegion"><code><a href="#table">table</a></code> <span class="specialType">property</span></span><span class="tooltip">The table associated with this query. </span>
+</li>
+<li>
+<span class="tooltipRegion"><code><a href="#queryStringOrError:">- queryStringOrError:</a></code></span><span class="tooltip">Generates a query string for current state of the MSQuery instance or an error if the query string could not be generated. </span>
+</li>
+</ul>
+</li>
+</ul>
+<section id="properties"><h2>Properties</h2>
+<section class="definition" id="predicate"><h3>predicate</h3>
+<p>The predicate used as the filter clause of the query. </p>
+<code class="methodDeclaration">@property <a href="http://developer.apple.com/iphone/library/documentation/Cocoa/Reference/Foundation/Classes/NSPredicate_Class/index.html">NSPredicate</a> *predicate</code><h5>Declared In</h5>
+<code><code>MSQuery</code>.h</code></section><section class="definition" id="fetchLimit"><h3>fetchLimit</h3>
+<p>The maximum number of items to return from the query. </p>
+<code class="methodDeclaration">@property NSInteger fetchLimit</code><h5>Declared In</h5>
+<code><code>MSQuery</code>.h</code></section><section class="definition" id="fetchOffset"><h3>fetchOffset</h3>
+<p>The offset from the initial item to use when returning items from a query. </p>
+<code class="methodDeclaration">@property NSInteger fetchOffset</code><h5>Discussion</h5>
+<p>Can be used with fetchLimit to implement paging. </p>
+<h5>Declared In</h5>
+<code><code>MSQuery</code>.h</code></section><section class="definition" id="orderBy"><h3>orderBy</h3>
+<p>The array of <code><a href="http://developer.apple.com/iphone/library/documentation/Cocoa/Reference/Foundation/Classes/NSSortDescriptor_Class/index.html">NSSortDescriptor</a></code>s used to order the query results. </p>
+<code class="methodDeclaration">@property <a href="http://developer.apple.com/iphone/library/documentation/Cocoa/Reference/Foundation/Classes/NSArray_Class/index.html">NSArray</a> *orderBy</code><h5>Declared In</h5>
+<code><code>MSQuery</code>.h</code></section><section class="definition" id="includeTotalCount"><h3>includeTotalCount</h3>
+<p>Indicates if the Microsoft Azure Mobile Service should also include the total count of items on the server (not just the count of items returned) with the query results. </p>
+<code class="methodDeclaration">@property BOOL includeTotalCount</code><h5>Declared In</h5>
+<code><code>MSQuery</code>.h</code></section><section class="definition" id="parameters"><h3>parameters</h3>
+<p>A dictionary of string key-value pairs that can include user-defined parameters to use with the query. </p>
+<code class="methodDeclaration">@property <a href="http://developer.apple.com/iphone/library/documentation/Cocoa/Reference/Foundation/Classes/NSDictionary_Class/index.html">NSDictionary</a> *parameters</code><h5>Declared In</h5>
+<code><code>MSQuery</code>.h</code></section><section class="definition" id="selectFields"><h3>selectFields</h3>
+<p>The fields or keys of an item that should be included in the results. </p>
+<code class="methodDeclaration">@property <a href="http://developer.apple.com/iphone/library/documentation/Cocoa/Reference/Foundation/Classes/NSArray_Class/index.html">NSArray</a> *selectFields</code><h5>Discussion</h5>
+<p>A value of "*" means all fields should be included. "*" is the default value if no select keys are specified. </p>
+<h5>Declared In</h5>
+<code><code>MSQuery</code>.h</code></section><section class="definition" id="table"><h3>table</h3>
+<p>The table associated with this query. </p>
+<code class="methodDeclaration">@property <a href="../Classes/MSTable.html">MSTable</a> *table</code><h5>Declared In</h5>
+<code><code>MSQuery</code>.h</code></section></section><section id="instanceMethods"><h2>Instance Methods</h2>
+<section class="definition" id="initWithTable:"><h3>initWithTable:</h3>
+<p>Initializes a <code>MSQuery</code> instance with the given table. </p>
+<code class="methodDeclaration">- (id)initWithTable:(<a href="../Classes/MSTable.html">MSTable</a> *)<span class="parameter">table</span> </code><h5>Declared In</h5>
+<code><code>MSQuery</code>.h</code></section><section class="definition" id="initWithTable:predicate:"><h3>initWithTable:predicate:</h3>
+<p>Returns a new <code>MSQuery</code> instance with the given table and the given predicate is used as the filter clause of the query. </p>
+<code class="methodDeclaration">- (id)initWithTable:(<a href="../Classes/MSTable.html">MSTable</a> *)<span class="parameter">table</span> predicate:(<a href="http://developer.apple.com/iphone/library/documentation/Cocoa/Reference/Foundation/Classes/NSPredicate_Class/index.html">NSPredicate</a> *)<span class="parameter">predicate</span> </code><h5>Declared In</h5>
+<code><code>MSQuery</code>.h</code></section><section class="definition" id="orderByAscending:"><h3>orderByAscending:</h3>
+<p>Indicates that the query results should be returned in ascending order based on the given field. </p>
+<code class="methodDeclaration">- (void)orderByAscending:(<a href="http://developer.apple.com/iphone/library/documentation/Cocoa/Reference/Foundation/Classes/NSString_Class/index.html">NSString</a> *)<span class="parameter">field</span> </code><h5>Discussion</h5>
+<p>orderByAscending: and orderByDescending: can each be called multiple times to further specify how the query results should be ordered. </p>
+<h5>Declared In</h5>
+<code><code>MSQuery</code>.h</code></section><section class="definition" id="orderByDescending:"><h3>orderByDescending:</h3>
+<p>Indicates that the query results should be returned in descending order based on the given field. </p>
+<code class="methodDeclaration">- (void)orderByDescending:(<a href="http://developer.apple.com/iphone/library/documentation/Cocoa/Reference/Foundation/Classes/NSString_Class/index.html">NSString</a> *)<span class="parameter">field</span> </code><h5>Discussion</h5>
+<p>orderByAscending: and orderByDescending: can each be called multiple times to further specify how the query results should be ordered. </p>
+<h5>Declared In</h5>
+<code><code>MSQuery</code>.h</code></section><section class="definition" id="readWithCompletion:"><h3>readWithCompletion:</h3>
+<p>Executes the query by sending a request to the Microsoft Azure Mobile Service. </p>
+<code class="methodDeclaration">- (void)readWithCompletion:(MSReadQueryBlock)<span class="parameter">completion</span> </code><h5>Declared In</h5>
+<code><code>MSQuery</code>.h</code></section><section class="definition" id="queryStringOrError:"><h3>queryStringOrError:</h3>
+<p>Generates a query string for current state of the <code>MSQuery</code> instance or an error if the query string could not be generated. </p>
+<code class="methodDeclaration">- (NSString *)queryStringOrError:(<a href="http://developer.apple.com/iphone/library/documentation/Cocoa/Reference/Foundation/Classes/NSError_Class/index.html">NSError</a> **)<span class="parameter">error</span> </code><h5>Declared In</h5>
+<code><code>MSQuery</code>.h</code></section></section><hr>
+<p id="lastUpdated">Last updated: 2014-9-9</p>
+</div>
+<footer id="breadcrumbs"><ul>
+<li><a href="../index.html">Windows Azure Mobile Services</a></li>
+<li><a href="#classTitle">MSQuery Class Reference</a></li>
+</ul></footer>
+</body>
+</html>

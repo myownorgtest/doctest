@@ -1,0 +1,48 @@
+batchapps package
+===================
+
+
+.. automodule:: batchapps
+    :members:
+    :undoc-members:
+
+
+Session Setup
+---------------
+.. toctree::
+
+   batch_apps.config
+   batch_apps.credentials
+
+   
+Job Management
+---------------
+.. toctree::
+
+   batch_apps.job_manager
+   batch_apps.job
+  
+  
+File Management
+-----------------
+.. toctree::
+
+   batch_apps.file_manager
+   batch_apps.files
+  
+  
+BatchApps Client
+-------------------
+.. toctree::
+
+   batch_apps.api
+   batch_apps.rest_client
+   
+   
+Additional Resources
+---------------------
+.. toctree::
+
+   batch_apps.exceptions
+   batch_apps.log
+   batch_apps.utils

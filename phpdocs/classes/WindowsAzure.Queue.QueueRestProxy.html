@@ -1,0 +1,387 @@
+<!DOCTYPE html><html xmlns:date="http://exslt.org/dates-and-times" lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0; user-scalable=0;">
+<meta charset="utf-8">
+<title>Windows Azure SDK for PHP » \WindowsAzure\Queue\QueueRestProxy</title>
+<meta name="author" content="Mike van Riel">
+<meta name="description" content="">
+<link href="../css/template.css" rel="stylesheet" media="all">
+<script src="../js/jquery-1.7.1.min.js" type="text/javascript"></script><script src="../js/jquery-ui-1.8.2.custom.min.js" type="text/javascript"></script><script src="../js/jquery.mousewheel.min.js" type="text/javascript"></script><script src="../js/bootstrap.js" type="text/javascript"></script><script src="../js/template.js" type="text/javascript"></script><script src="../js/prettify/prettify.min.js" type="text/javascript"></script><link rel="shortcut icon" href="../img/favicon.ico">
+<link rel="apple-touch-icon" href="../img/apple-touch-icon.png">
+<link rel="apple-touch-icon" sizes="72x72" href="../img/apple-touch-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="114x114" href="../img/apple-touch-icon-114x114.png">
+</head>
+<body>
+<div class="navbar navbar-fixed-top">
+<div class="navbar-inner"><div class="container">
+<a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse"><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></a><a class="brand" href="../index.html">Windows Azure SDK for PHP</a><div class="nav-collapse"><ul class="nav">
+<li class="dropdown">
+<a href="#api" class="dropdown-toggle" data-toggle="dropdown">
+                                    API Documentation <b class="caret"></b></a><ul class="dropdown-menu">
+<li><a>Namespaces</a></li>
+<li><a href="../namespaces/WindowsAzure.html"><i class="icon-th"></i> WindowsAzure</a></li>
+<li><a>Packages</a></li>
+<li><a href="../packages/WindowsAzure.html"><i class="icon-folder-open"></i> WindowsAzure</a></li>
+</ul>
+</li>
+<li class="dropdown" id="charts-menu">
+<a href="#charts" class="dropdown-toggle" data-toggle="dropdown">
+                                    Charts <b class="caret"></b></a><ul class="dropdown-menu"><li><a href="../graph_class.html"><i class="icon-list-alt"></i> Class hierarchy diagram</a></li></ul>
+</li>
+<li class="dropdown" id="reports-menu">
+<a href="#reports" class="dropdown-toggle" data-toggle="dropdown">
+                                    Reports <b class="caret"></b></a><ul class="dropdown-menu">
+<li><a href="../errors.html"><i class="icon-remove-sign"></i> Errors 
+                <span class="label label-info">385</span></a></li>
+<li><a href="../markers.html"><i class="icon-map-marker"></i> Markers 
+                <ul></ul></a></li>
+<li><a href="../deprecated.html"><i class="icon-stop"></i> Deprecated elements 
+                <span class="label label-info">0</span></a></li>
+</ul>
+</li>
+</ul></div>
+</div></div>
+<div class="go_to_top"><a href="#___" style="color: inherit">Back to top  <i class="icon-upload icon-white"></i></a></div>
+</div>
+<div id="___" class="container">
+<noscript><div class="alert alert-warning">
+                            Javascript is disabled; several features are only available
+                            if Javascript is enabled.
+                        </div></noscript>
+<div class="row">
+<div class="span4">
+<span class="btn-group visibility" data-toggle="buttons-checkbox"><button class="btn public active" title="Show public elements">Public</button><button class="btn protected" title="Show protected elements">Protected</button><button class="btn private" title="Show private elements">Private</button><button class="btn inherited active" title="Show inherited elements">Inherited</button></span><div class="btn-group view pull-right" data-toggle="buttons-radio">
+<button class="btn details" title="Show descriptions and method names"><i class="icon-list"></i></button><button class="btn simple" title="Show only method names"><i class="icon-align-justify"></i></button>
+</div>
+<ul class="side-nav nav nav-list">
+<li class="nav-header">
+<i class="icon-custom icon-method"></i> Methods</li>
+<li class="method public "><a href="#clearMessages" title="clearMessages :: Clears all messages from the queue."><span class="description">Clears all messages from the queue.</span><pre>clearMessages()</pre></a></li>
+<li class="method public "><a href="#createMessage" title="createMessage :: Adds a message to the queue and optionally sets a visibility timeout
+for the message."><span class="description">Adds a message to the queue and optionally sets a visibility timeout
+for the message.</span><pre>createMessage()</pre></a></li>
+<li class="method public "><a href="#createQueue" title="createQueue :: Creates a new queue under the storage account."><span class="description">Creates a new queue under the storage account.</span><pre>createQueue()</pre></a></li>
+<li class="method public "><a href="#deleteMessage" title="deleteMessage :: Deletes a specified message from the queue."><span class="description">Deletes a specified message from the queue.</span><pre>deleteMessage()</pre></a></li>
+<li class="method public "><a href="#deleteQueue" title="deleteQueue :: Deletes a queue."><span class="description">Deletes a queue.</span><pre>deleteQueue()</pre></a></li>
+<li class="method public "><a href="#getQueueMetadata" title="getQueueMetadata :: Returns queue properties, including user-defined metadata."><span class="description">Returns queue properties, including user-defined metadata.</span><pre>getQueueMetadata()</pre></a></li>
+<li class="method public "><a href="#getServiceProperties" title="getServiceProperties :: Gets the properties of the Queue service."><span class="description">Gets the properties of the Queue service.</span><pre>getServiceProperties()</pre></a></li>
+<li class="method public "><a href="#listMessages" title="listMessages :: Lists all messages in the queue."><span class="description">Lists all messages in the queue.</span><pre>listMessages()</pre></a></li>
+<li class="method public "><a href="#listQueues" title="listQueues :: Lists all queues in the storage account."><span class="description">Lists all queues in the storage account.</span><pre>listQueues()</pre></a></li>
+<li class="method public "><a href="#peekMessages" title="peekMessages :: Retrieves a message from the front of the queue, without changing
+the message visibility."><span class="description">Retrieves a message from the front of the queue, without changing
+the message visibility.</span><pre>peekMessages()</pre></a></li>
+<li class="method public "><a href="#setQueueMetadata" title="setQueueMetadata :: Sets user-defined metadata on the queue. To delete queue metadata, call
+this API without specifying any metadata in $metadata."><span class="description">Sets user-defined metadata on the queue. To delete queue metadata, call
+this API without specifying any metadata in $metadata.</span><pre>setQueueMetadata()</pre></a></li>
+<li class="method public "><a href="#setServiceProperties" title="setServiceProperties :: Sets the properties of the Queue service."><span class="description">Sets the properties of the Queue service.</span><pre>setServiceProperties()</pre></a></li>
+<li class="method public "><a href="#updateMessage" title="updateMessage :: Updates the visibility timeout of a message and/or the message contents."><span class="description">Updates the visibility timeout of a message and/or the message contents.</span><pre>updateMessage()</pre></a></li>
+</ul>
+</div>
+<div class="span8">
+<a name="%5CWindowsAzure%5CQueue%5CQueueRestProxy" id="\WindowsAzure\Queue\QueueRestProxy"></a><ul class="breadcrumb">
+<li>
+<a href="../index.html"><i class="icon-custom icon-class"></i></a><span class="divider">\</span>
+</li>
+<li><a href="../namespaces/WindowsAzure.html">WindowsAzure</a></li>
+<span class="divider">\</span><li><a href="../namespaces/WindowsAzure.Queue.html">Queue</a></li>
+<li class="active">
+<span class="divider">\</span><a href="../classes/WindowsAzure.Queue.QueueRestProxy.html">QueueRestProxy</a>
+</li>
+</ul>
+<div href="../classes/WindowsAzure.Queue.QueueRestProxy.html" class="element class">
+<p class="short_description">This class constructs HTTP requests and receive HTTP responses for queue
+service layer.</p>
+<div class="details">
+<p class="long_description"></p>
+<table class="table table-bordered">
+<tr>
+<th>category</th>
+<td>Microsoft</td>
+</tr>
+<tr>
+<th>package</th>
+<td><a href="../packages/WindowsAzure.Queue.html">WindowsAzure\Queue</a></td>
+</tr>
+<tr>
+<th>author</th>
+<td><a href="mailto:azurephpsdk@microsoft.com">Azure PHP SDK</a></td>
+</tr>
+<tr>
+<th>copyright</th>
+<td>2012 Microsoft Corporation</td>
+</tr>
+<tr>
+<th>license</th>
+<td><a href="http://www.apache.org/licenses/LICENSE-2.0">Apache License 2.0</a></td>
+</tr>
+<tr>
+<th>version</th>
+<td>Release: @package_version@</td>
+</tr>
+<tr>
+<th>link</th>
+<td><a href="https://github.com/windowsazure/azure-sdk-for-php">https://github.com/windowsazure/azure-sdk-for-php</a></td>
+</tr>
+</table>
+<h3>
+<i class="icon-custom icon-method"></i> Methods</h3>
+<a name="clearMessages" id="clearMessages"></a><div class="element clickable method public clearMessages" data-toggle="collapse" data-target=".clearMessages .collapse">
+<h2>Clears all messages from the queue.</h2>
+<pre>clearMessages(string $queueName, \QueueServiceOptions $options) : \none</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<p class="long_description"><p>If a queue contains a large number of messages, Clear Messages may time out
+before all messages have been deleted. In this case the Queue service will
+return status code 500 (Internal Server Error), with the additional error
+code OperationTimedOut. If the operation times out, the client should
+continue to retry Clear Messages until it succeeds, to ensure that all
+messages have been deleted.</p></p>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$queueName</h4>
+<code>string</code><p>The name of the queue.</p></div>
+<div class="subelement argument">
+<h4>$options</h4>
+<code>\QueueServiceOptions</code><p>The optional parameters.</p></div>
+<h3>Returns</h3>
+<div class="subelement response"><code>\none</code></div>
+</div></div>
+</div>
+<a name="createMessage" id="createMessage"></a><div class="element clickable method public createMessage" data-toggle="collapse" data-target=".createMessage .collapse">
+<h2>Adds a message to the queue and optionally sets a visibility timeout
+for the message.</h2>
+<pre>createMessage(string $queueName, string $messageText, \CreateMessageOptions $options) : \none</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<p class="long_description"></p>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$queueName</h4>
+<code>string</code><p>The name of the queue.</p></div>
+<div class="subelement argument">
+<h4>$messageText</h4>
+<code>string</code><p>The message contents.</p></div>
+<div class="subelement argument">
+<h4>$options</h4>
+<code>\CreateMessageOptions</code><p>The optional parameters.</p></div>
+<h3>Returns</h3>
+<div class="subelement response"><code>\none</code></div>
+</div></div>
+</div>
+<a name="createQueue" id="createQueue"></a><div class="element clickable method public createQueue" data-toggle="collapse" data-target=".createQueue .collapse">
+<h2>Creates a new queue under the storage account.</h2>
+<pre>createQueue(string $queueName, \QueueCreateOptions $options) : \none</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<p class="long_description"></p>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$queueName</h4>
+<code>string</code><p>The queue name.</p></div>
+<div class="subelement argument">
+<h4>$options</h4>
+<code>\QueueCreateOptions</code><p>The Optional parameters.</p></div>
+<h3>Returns</h3>
+<div class="subelement response"><code>\none</code></div>
+</div></div>
+</div>
+<a name="deleteMessage" id="deleteMessage"></a><div class="element clickable method public deleteMessage" data-toggle="collapse" data-target=".deleteMessage .collapse">
+<h2>Deletes a specified message from the queue.</h2>
+<pre>deleteMessage(string $queueName, string $messageId, string $popReceipt, \QueueServiceOptions $options) : \none</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<p class="long_description"></p>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$queueName</h4>
+<code>string</code><p>The name of the queue.</p></div>
+<div class="subelement argument">
+<h4>$messageId</h4>
+<code>string</code><p>The id of the message.</p></div>
+<div class="subelement argument">
+<h4>$popReceipt</h4>
+<code>string</code><p>The valid pop receipt value returned from an earlier call to the Get Messages or Update Message operation.</p></div>
+<div class="subelement argument">
+<h4>$options</h4>
+<code>\QueueServiceOptions</code><p>The optional parameters.</p></div>
+<h3>Returns</h3>
+<div class="subelement response"><code>\none</code></div>
+</div></div>
+</div>
+<a name="deleteQueue" id="deleteQueue"></a><div class="element clickable method public deleteQueue" data-toggle="collapse" data-target=".deleteQueue .collapse">
+<h2>Deletes a queue.</h2>
+<pre>deleteQueue(string $queueName, \QueueServiceOptions $options) : \none</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<p class="long_description"></p>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$queueName</h4>
+<code>string</code><p>The queue name.</p></div>
+<div class="subelement argument">
+<h4>$options</h4>
+<code>\QueueServiceOptions</code><p>The optional parameters.</p></div>
+<h3>Returns</h3>
+<div class="subelement response"><code>\none</code></div>
+</div></div>
+</div>
+<a name="getQueueMetadata" id="getQueueMetadata"></a><div class="element clickable method public getQueueMetadata" data-toggle="collapse" data-target=".getQueueMetadata .collapse">
+<h2>Returns queue properties, including user-defined metadata.</h2>
+<pre>getQueueMetadata(string $queueName, \QueueServiceOptions $options) : \WindowsAzure\Common\Models\GetQueueMetadataResult</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<p class="long_description"></p>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$queueName</h4>
+<code>string</code><p>The queue name.</p></div>
+<div class="subelement argument">
+<h4>$options</h4>
+<code>\QueueServiceOptions</code><p>The optional parameters.</p></div>
+<h3>Returns</h3>
+<div class="subelement response"><code>\WindowsAzure\Common\Models\GetQueueMetadataResult</code></div>
+</div></div>
+</div>
+<a name="getServiceProperties" id="getServiceProperties"></a><div class="element clickable method public getServiceProperties" data-toggle="collapse" data-target=".getServiceProperties .collapse">
+<h2>Gets the properties of the Queue service.</h2>
+<pre>getServiceProperties(\QueueServiceOptions $options) : <a href="../classes/WindowsAzure.Common.Models.GetServicePropertiesResult.html">\WindowsAzure\Common\Models\GetServicePropertiesResult</a></pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<p class="long_description"></p>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$options</h4>
+<code>\QueueServiceOptions</code><p>The optional parameters.</p></div>
+<h3>Returns</h3>
+<div class="subelement response"><code><a href="../classes/WindowsAzure.Common.Models.GetServicePropertiesResult.html">\WindowsAzure\Common\Models\GetServicePropertiesResult</a></code></div>
+</div></div>
+</div>
+<a name="listMessages" id="listMessages"></a><div class="element clickable method public listMessages" data-toggle="collapse" data-target=".listMessages .collapse">
+<h2>Lists all messages in the queue.</h2>
+<pre>listMessages(string $queueName, \ListMessagesOptions $options) : \WindowsAzure\Common\Models\ListMessagesResult</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<p class="long_description"></p>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$queueName</h4>
+<code>string</code><p>The queue name.</p></div>
+<div class="subelement argument">
+<h4>$options</h4>
+<code>\ListMessagesOptions</code><p>The optional parameters.</p></div>
+<h3>Returns</h3>
+<div class="subelement response"><code>\WindowsAzure\Common\Models\ListMessagesResult</code></div>
+</div></div>
+</div>
+<a name="listQueues" id="listQueues"></a><div class="element clickable method public listQueues" data-toggle="collapse" data-target=".listQueues .collapse">
+<h2>Lists all queues in the storage account.</h2>
+<pre>listQueues(\ListQueuesOptions $options) : <a href="../classes/WindowsAzure.Queue.Models.ListQueuesResult.html">\WindowsAzure\Queue\Models\ListQueuesResult</a></pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<p class="long_description"></p>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$options</h4>
+<code>\ListQueuesOptions</code><p>The optional list queue options.</p></div>
+<h3>Returns</h3>
+<div class="subelement response"><code><a href="../classes/WindowsAzure.Queue.Models.ListQueuesResult.html">\WindowsAzure\Queue\Models\ListQueuesResult</a></code></div>
+</div></div>
+</div>
+<a name="peekMessages" id="peekMessages"></a><div class="element clickable method public peekMessages" data-toggle="collapse" data-target=".peekMessages .collapse">
+<h2>Retrieves a message from the front of the queue, without changing
+the message visibility.</h2>
+<pre>peekMessages(string $queueName, \PeekMessagesOptions $options) : \WindowsAzure\Common\Models\PeekMessagesResult</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<p class="long_description"></p>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$queueName</h4>
+<code>string</code><p>The queue name.</p></div>
+<div class="subelement argument">
+<h4>$options</h4>
+<code>\PeekMessagesOptions</code><p>The optional parameters.</p></div>
+<h3>Returns</h3>
+<div class="subelement response"><code>\WindowsAzure\Common\Models\PeekMessagesResult</code></div>
+</div></div>
+</div>
+<a name="setQueueMetadata" id="setQueueMetadata"></a><div class="element clickable method public setQueueMetadata" data-toggle="collapse" data-target=".setQueueMetadata .collapse">
+<h2>Sets user-defined metadata on the queue. To delete queue metadata, call
+this API without specifying any metadata in $metadata.</h2>
+<pre>setQueueMetadata(string $queueName, array $metadata, \QueueServiceOptions $options) : \none</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<p class="long_description"></p>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$queueName</h4>
+<code>string</code><p>The queue name.</p></div>
+<div class="subelement argument">
+<h4>$metadata</h4>
+<code>array</code><p>The metadata array.</p></div>
+<div class="subelement argument">
+<h4>$options</h4>
+<code>\QueueServiceOptions</code><p>The optional parameters.</p></div>
+<h3>Returns</h3>
+<div class="subelement response"><code>\none</code></div>
+</div></div>
+</div>
+<a name="setServiceProperties" id="setServiceProperties"></a><div class="element clickable method public setServiceProperties" data-toggle="collapse" data-target=".setServiceProperties .collapse">
+<h2>Sets the properties of the Queue service.</h2>
+<pre>setServiceProperties(array $serviceProperties, \QueueServiceOptions $options) : \none</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<p class="long_description"><p>It's recommended to use getServiceProperties, alter the returned object and
+then use setServiceProperties with this altered object.</p></p>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$serviceProperties</h4>
+<code>array</code><p>The new service properties.</p></div>
+<div class="subelement argument">
+<h4>$options</h4>
+<code>\QueueServiceOptions</code><p>The optional parameters.</p></div>
+<h3>Returns</h3>
+<div class="subelement response"><code>\none</code></div>
+</div></div>
+</div>
+<a name="updateMessage" id="updateMessage"></a><div class="element clickable method public updateMessage" data-toggle="collapse" data-target=".updateMessage .collapse">
+<h2>Updates the visibility timeout of a message and/or the message contents.</h2>
+<pre>updateMessage(string $queueName, string $messageId, string $popReceipt, string $messageText, int $visibilityTimeoutInSeconds, \QueueServiceOptions $options) : \WindowsAzure\Common\Models\UpdateMessageResult</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<p class="long_description"></p>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$queueName</h4>
+<code>string</code><p>The queue name.</p></div>
+<div class="subelement argument">
+<h4>$messageId</h4>
+<code>string</code><p>The id of the message.</p></div>
+<div class="subelement argument">
+<h4>$popReceipt</h4>
+<code>string</code><p>The valid pop receipt value returned from an earlier call to the Get Messages or Update Message operation.</p></div>
+<div class="subelement argument">
+<h4>$messageText</h4>
+<code>string</code><p>The message contents.</p></div>
+<div class="subelement argument">
+<h4>$visibilityTimeoutInSeconds</h4>
+<code>int</code><p>Specifies the new visibility timeout value, in seconds, relative to server time. The new value must be larger than or equal to 0, and cannot be larger than 7 days. The visibility timeout of a message cannot be set to a value later than the expiry time. A message can be updated until it has been deleted or has expired.</p></div>
+<div class="subelement argument">
+<h4>$options</h4>
+<code>\QueueServiceOptions</code><p>The optional parameters.</p></div>
+<h3>Returns</h3>
+<div class="subelement response"><code>\WindowsAzure\Common\Models\UpdateMessageResult</code></div>
+</div></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="row"><footer class="span12">
+            Template is built using <a href="http://twitter.github.com/bootstrap/">Twitter Bootstrap 2</a> and icons provided by <a href="http://glyphicons.com/">Glyphicons</a>.<br>
+            Documentation is powered by <a href="http://www.phpdoc.org/">phpDocumentor 2.0.0a6</a> and<br>
+            generated on 2012-07-17T21:10:39-07:00.<br></footer></div>
+</div>
+</body>
+</html>

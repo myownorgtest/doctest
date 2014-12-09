@@ -1,0 +1,428 @@
+<!DOCTYPE html><html xmlns:date="http://exslt.org/dates-and-times" lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0; user-scalable=0;">
+<meta charset="utf-8">
+<title>Windows Azure SDK for PHP » \WindowsAzure\Common\Internal\StorageServiceSettings</title>
+<meta name="author" content="Mike van Riel">
+<meta name="description" content="">
+<link href="../css/template.css" rel="stylesheet" media="all">
+<script src="../js/jquery-1.7.1.min.js" type="text/javascript"></script><script src="../js/jquery-ui-1.8.2.custom.min.js" type="text/javascript"></script><script src="../js/jquery.mousewheel.min.js" type="text/javascript"></script><script src="../js/bootstrap.js" type="text/javascript"></script><script src="../js/template.js" type="text/javascript"></script><script src="../js/prettify/prettify.min.js" type="text/javascript"></script><link rel="shortcut icon" href="../img/favicon.ico">
+<link rel="apple-touch-icon" href="../img/apple-touch-icon.png">
+<link rel="apple-touch-icon" sizes="72x72" href="../img/apple-touch-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="114x114" href="../img/apple-touch-icon-114x114.png">
+</head>
+<body>
+<div class="navbar navbar-fixed-top">
+<div class="navbar-inner"><div class="container">
+<a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse"><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></a><a class="brand" href="../index.html">Windows Azure SDK for PHP</a><div class="nav-collapse"><ul class="nav">
+<li class="dropdown">
+<a href="#api" class="dropdown-toggle" data-toggle="dropdown">
+                                    API Documentation <b class="caret"></b></a><ul class="dropdown-menu">
+<li><a>Namespaces</a></li>
+<li><a href="../namespaces/WindowsAzure.html"><i class="icon-th"></i> WindowsAzure</a></li>
+<li><a>Packages</a></li>
+<li><a href="../packages/WindowsAzure.html"><i class="icon-folder-open"></i> WindowsAzure</a></li>
+</ul>
+</li>
+<li class="dropdown" id="charts-menu">
+<a href="#charts" class="dropdown-toggle" data-toggle="dropdown">
+                                    Charts <b class="caret"></b></a><ul class="dropdown-menu"><li><a href="../graph_class.html"><i class="icon-list-alt"></i> Class hierarchy diagram</a></li></ul>
+</li>
+<li class="dropdown" id="reports-menu">
+<a href="#reports" class="dropdown-toggle" data-toggle="dropdown">
+                                    Reports <b class="caret"></b></a><ul class="dropdown-menu">
+<li><a href="../errors.html"><i class="icon-remove-sign"></i> Errors 
+                <span class="label label-info">385</span></a></li>
+<li><a href="../markers.html"><i class="icon-map-marker"></i> Markers 
+                <ul></ul></a></li>
+<li><a href="../deprecated.html"><i class="icon-stop"></i> Deprecated elements 
+                <span class="label label-info">0</span></a></li>
+</ul>
+</li>
+</ul></div>
+</div></div>
+<div class="go_to_top"><a href="#___" style="color: inherit">Back to top  <i class="icon-upload icon-white"></i></a></div>
+</div>
+<div id="___" class="container">
+<noscript><div class="alert alert-warning">
+                            Javascript is disabled; several features are only available
+                            if Javascript is enabled.
+                        </div></noscript>
+<div class="row">
+<div class="span4">
+<span class="btn-group visibility" data-toggle="buttons-checkbox"><button class="btn public active" title="Show public elements">Public</button><button class="btn protected" title="Show protected elements">Protected</button><button class="btn private" title="Show private elements">Private</button><button class="btn inherited active" title="Show inherited elements">Inherited</button></span><div class="btn-group view pull-right" data-toggle="buttons-radio">
+<button class="btn details" title="Show descriptions and method names"><i class="icon-list"></i></button><button class="btn simple" title="Show only method names"><i class="icon-align-justify"></i></button>
+</div>
+<ul class="side-nav nav nav-list">
+<li class="nav-header">
+<i class="icon-custom icon-method"></i> Methods</li>
+<li class="method public "><a href="#__construct" title="__construct :: Creates new storage service settings instance."><span class="description">Creates new storage service settings instance.</span><pre>__construct()</pre></a></li>
+<li class="method public "><a href="#createFromConnectionString" title="createFromConnectionString :: Creates a StorageServiceSettings object from the given connection string."><span class="description">Creates a StorageServiceSettings object from the given connection string.</span><pre>createFromConnectionString()</pre></a></li>
+<li class="method public "><a href="#developmentStorageAccount" title="developmentStorageAccount :: Gets a StorageServiceSettings object that references the development storage
+account."><span class="description">Gets a StorageServiceSettings object that references the development storage
+account.</span><pre>developmentStorageAccount()</pre></a></li>
+<li class="method public "><a href="#getBlobEndpointUri" title="getBlobEndpointUri :: Gets storage service blob endpoint uri."><span class="description">Gets storage service blob endpoint uri.</span><pre>getBlobEndpointUri()</pre></a></li>
+<li class="method public "><a href="#getKey" title="getKey :: Gets storage service key."><span class="description">Gets storage service key.</span><pre>getKey()</pre></a></li>
+<li class="method public "><a href="#getName" title="getName :: Gets storage service name."><span class="description">Gets storage service name.</span><pre>getName()</pre></a></li>
+<li class="method public "><a href="#getQueueEndpointUri" title="getQueueEndpointUri :: Gets storage service queue endpoint uri."><span class="description">Gets storage service queue endpoint uri.</span><pre>getQueueEndpointUri()</pre></a></li>
+<li class="method public "><a href="#getTableEndpointUri" title="getTableEndpointUri :: Gets storage service table endpoint uri."><span class="description">Gets storage service table endpoint uri.</span><pre>getTableEndpointUri()</pre></a></li>
+<li class="nav-header protected">» Protected</li>
+<li class="method protected "><a href="#init" title="init :: Initializes static members of the class."><span class="description">Initializes static members of the class.</span><pre>init()</pre></a></li>
+<li class="nav-header private">» Private</li>
+<li class="method private "><a href="#_createStorageServiceSettings" title="_createStorageServiceSettings :: Creates StorageServiceSettings object given endpoints uri."><span class="description">Creates StorageServiceSettings object given endpoints uri.</span><pre>_createStorageServiceSettings()</pre></a></li>
+<li class="method private "><a href="#_getDefaultServiceEndpoint" title="_getDefaultServiceEndpoint :: Gets the default service endpoint using the specified protocol and account
+name."><span class="description">Gets the default service endpoint using the specified protocol and account
+name.</span><pre>_getDefaultServiceEndpoint()</pre></a></li>
+<li class="method private "><a href="#_getDevelopmentStorageAccount" title="_getDevelopmentStorageAccount :: Returns a StorageServiceSettings with development storage credentials using
+the specified proxy Uri."><span class="description">Returns a StorageServiceSettings with development storage credentials using
+the specified proxy Uri.</span><pre>_getDevelopmentStorageAccount()</pre></a></li>
+<li class="nav-header">
+<i class="icon-custom icon-property"></i> Properties</li>
+<li class="nav-header protected">» Protected</li>
+<li class="property protected "><a href="#%24isInitialized" title="$isInitialized :: "><span class="description">$isInitialized</span><pre>$isInitialized</pre></a></li>
+<li class="property protected "><a href="#%24validSettingKeys" title="$validSettingKeys :: Holds the expected setting keys."><span class="description">Holds the expected setting keys.</span><pre>$validSettingKeys</pre></a></li>
+<li class="nav-header private">» Private</li>
+<li class="property private "><a href="#%24_accountKeySetting" title="$_accountKeySetting :: Validator for the AccountKey setting. Must be a valid base64 string."><span class="description">Validator for the AccountKey setting. Must be a valid base64 string.</span><pre>$_accountKeySetting</pre></a></li>
+<li class="property private "><a href="#%24_accountNameSetting" title="$_accountNameSetting :: Validator for the AccountName setting. No restrictions."><span class="description">Validator for the AccountName setting. No restrictions.</span><pre>$_accountNameSetting</pre></a></li>
+<li class="property private "><a href="#%24_blobEndpointSetting" title="$_blobEndpointSetting :: Validator for the BlobEndpoint setting. Must be a valid Uri."><span class="description">Validator for the BlobEndpoint setting. Must be a valid Uri.</span><pre>$_blobEndpointSetting</pre></a></li>
+<li class="property private "><a href="#%24_blobEndpointUri" title="$_blobEndpointUri :: The endpoint for the blob service."><span class="description">The endpoint for the blob service.</span><pre>$_blobEndpointUri</pre></a></li>
+<li class="property private "><a href="#%24_defaultEndpointsProtocolSetting" title='$_defaultEndpointsProtocolSetting :: Validator for the DefaultEndpointsProtocol setting. Must be either "http"
+or "https".'><span class="description">Validator for the DefaultEndpointsProtocol setting. Must be either "http"
+or "https".</span><pre>$_defaultEndpointsProtocolSetting</pre></a></li>
+<li class="property private "><a href="#%24_devStoreAccount" title="$_devStoreAccount :: "><span class="description">$_devStoreAccount</span><pre>$_devStoreAccount</pre></a></li>
+<li class="property private "><a href="#%24_developmentStorageProxyUriSetting" title="$_developmentStorageProxyUriSetting :: Validator for the DevelopmentStorageProxyUri setting. Must be a valid Uri."><span class="description">Validator for the DevelopmentStorageProxyUri setting. Must be a valid Uri.</span><pre>$_developmentStorageProxyUriSetting</pre></a></li>
+<li class="property private "><a href="#%24_key" title="$_key :: A base64 representation."><span class="description">A base64 representation.</span><pre>$_key</pre></a></li>
+<li class="property private "><a href="#%24_name" title="$_name :: The storage service name."><span class="description">The storage service name.</span><pre>$_name</pre></a></li>
+<li class="property private "><a href="#%24_queueEndpointSetting" title="$_queueEndpointSetting :: Validator for the QueueEndpoint setting. Must be a valid Uri."><span class="description">Validator for the QueueEndpoint setting. Must be a valid Uri.</span><pre>$_queueEndpointSetting</pre></a></li>
+<li class="property private "><a href="#%24_queueEndpointUri" title="$_queueEndpointUri :: The endpoint for the queue service."><span class="description">The endpoint for the queue service.</span><pre>$_queueEndpointUri</pre></a></li>
+<li class="property private "><a href="#%24_tableEndpointSetting" title="$_tableEndpointSetting :: Validator for the TableEndpoint setting. Must be a valid Uri."><span class="description">Validator for the TableEndpoint setting. Must be a valid Uri.</span><pre>$_tableEndpointSetting</pre></a></li>
+<li class="property private "><a href="#%24_tableEndpointUri" title="$_tableEndpointUri :: The endpoint for the table service."><span class="description">The endpoint for the table service.</span><pre>$_tableEndpointUri</pre></a></li>
+<li class="property private "><a href="#%24_useDevelopmentStorageSetting" title='$_useDevelopmentStorageSetting :: Validator for the UseDevelopmentStorage setting. Must be "true".'><span class="description">Validator for the UseDevelopmentStorage setting. Must be "true".</span><pre>$_useDevelopmentStorageSetting</pre></a></li>
+</ul>
+</div>
+<div class="span8">
+<a name="%5CWindowsAzure%5CCommon%5CInternal%5CStorageServiceSettings" id="\WindowsAzure\Common\Internal\StorageServiceSettings"></a><ul class="breadcrumb">
+<li>
+<a href="../index.html"><i class="icon-custom icon-class"></i></a><span class="divider">\</span>
+</li>
+<li><a href="../namespaces/WindowsAzure.html">WindowsAzure</a></li>
+<span class="divider">\</span><li><a href="../namespaces/WindowsAzure.Common.html">Common</a></li>
+<span class="divider">\</span><li><a href="../namespaces/WindowsAzure.Common.Internal.html">Internal</a></li>
+<li class="active">
+<span class="divider">\</span><a href="../classes/WindowsAzure.Common.Internal.StorageServiceSettings.html">StorageServiceSettings</a>
+</li>
+</ul>
+<div href="../classes/WindowsAzure.Common.Internal.StorageServiceSettings.html" class="element class">
+<p class="short_description">Represents the settings used to sign and access a request against the storage
+service. For more information about storage service connection strings check this
+page: http://msdn.microsoft.com/en-us/library/ee758697</p>
+<div class="details">
+<p class="long_description"></p>
+<table class="table table-bordered">
+<tr>
+<th>category</th>
+<td>Microsoft</td>
+</tr>
+<tr>
+<th>package</th>
+<td><a href="../packages/WindowsAzure.Common.Internal.html">WindowsAzure\Common\Internal</a></td>
+</tr>
+<tr>
+<th>author</th>
+<td><a href="mailto:azurephpsdk@microsoft.com">Azure PHP SDK</a></td>
+</tr>
+<tr>
+<th>copyright</th>
+<td>2012 Microsoft Corporation</td>
+</tr>
+<tr>
+<th>license</th>
+<td><a href="http://www.apache.org/licenses/LICENSE-2.0">Apache License 2.0</a></td>
+</tr>
+<tr>
+<th>version</th>
+<td>Release: @package_version@</td>
+</tr>
+<tr>
+<th>link</th>
+<td><a href="https://github.com/windowsazure/azure-sdk-for-php">https://github.com/windowsazure/azure-sdk-for-php</a></td>
+</tr>
+</table>
+<h3>
+<i class="icon-custom icon-method"></i> Methods</h3>
+<a name="__construct" id="__construct"></a><div class="element clickable method public __construct" data-toggle="collapse" data-target=".__construct .collapse">
+<h2>Creates new storage service settings instance.</h2>
+<pre>__construct(string $name, string $key, string $blobEndpointUri, string $queueEndpointUri, string $tableEndpointUri) </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<p class="long_description"></p>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$name</h4>
+<code>string</code><p>The storage service name.</p></div>
+<div class="subelement argument">
+<h4>$key</h4>
+<code>string</code><p>The storage service key.</p></div>
+<div class="subelement argument">
+<h4>$blobEndpointUri</h4>
+<code>string</code><p>The sotrage service blob endpoint.</p></div>
+<div class="subelement argument">
+<h4>$queueEndpointUri</h4>
+<code>string</code><p>The sotrage service queue endpoint.</p></div>
+<div class="subelement argument">
+<h4>$tableEndpointUri</h4>
+<code>string</code><p>The sotrage service table endpoint.</p></div>
+</div></div>
+</div>
+<a name="createFromConnectionString" id="createFromConnectionString"></a><div class="element clickable method public createFromConnectionString" data-toggle="collapse" data-target=".createFromConnectionString .collapse">
+<h2>Creates a StorageServiceSettings object from the given connection string.</h2>
+<pre>createFromConnectionString(string $connectionString) : \StorageServiceSettings</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<p class="long_description"></p>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$connectionString</h4>
+<code>string</code><p>The storage settings connection string.</p></div>
+<h3>Returns</h3>
+<div class="subelement response"><code>\StorageServiceSettings</code></div>
+</div></div>
+</div>
+<a name="developmentStorageAccount" id="developmentStorageAccount"></a><div class="element clickable method public developmentStorageAccount" data-toggle="collapse" data-target=".developmentStorageAccount .collapse">
+<h2>Gets a StorageServiceSettings object that references the development storage
+account.</h2>
+<pre>developmentStorageAccount() : \StorageServiceSettings</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<p class="long_description"></p>
+<h3>Returns</h3>
+<div class="subelement response"><code>\StorageServiceSettings</code></div>
+</div></div>
+</div>
+<a name="getBlobEndpointUri" id="getBlobEndpointUri"></a><div class="element clickable method public getBlobEndpointUri" data-toggle="collapse" data-target=".getBlobEndpointUri .collapse">
+<h2>Gets storage service blob endpoint uri.</h2>
+<pre>getBlobEndpointUri() : string</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<p class="long_description"></p>
+<h3>Returns</h3>
+<div class="subelement response"><code>string</code></div>
+</div></div>
+</div>
+<a name="getKey" id="getKey"></a><div class="element clickable method public getKey" data-toggle="collapse" data-target=".getKey .collapse">
+<h2>Gets storage service key.</h2>
+<pre>getKey() : string</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<p class="long_description"></p>
+<h3>Returns</h3>
+<div class="subelement response"><code>string</code></div>
+</div></div>
+</div>
+<a name="getName" id="getName"></a><div class="element clickable method public getName" data-toggle="collapse" data-target=".getName .collapse">
+<h2>Gets storage service name.</h2>
+<pre>getName() : string</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<p class="long_description"></p>
+<h3>Returns</h3>
+<div class="subelement response"><code>string</code></div>
+</div></div>
+</div>
+<a name="getQueueEndpointUri" id="getQueueEndpointUri"></a><div class="element clickable method public getQueueEndpointUri" data-toggle="collapse" data-target=".getQueueEndpointUri .collapse">
+<h2>Gets storage service queue endpoint uri.</h2>
+<pre>getQueueEndpointUri() : string</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<p class="long_description"></p>
+<h3>Returns</h3>
+<div class="subelement response"><code>string</code></div>
+</div></div>
+</div>
+<a name="getTableEndpointUri" id="getTableEndpointUri"></a><div class="element clickable method public getTableEndpointUri" data-toggle="collapse" data-target=".getTableEndpointUri .collapse">
+<h2>Gets storage service table endpoint uri.</h2>
+<pre>getTableEndpointUri() : string</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<p class="long_description"></p>
+<h3>Returns</h3>
+<div class="subelement response"><code>string</code></div>
+</div></div>
+</div>
+<a name="init" id="init"></a><div class="element clickable method protected init" data-toggle="collapse" data-target=".init .collapse">
+<h2>Initializes static members of the class.</h2>
+<pre>init() : \none</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<p class="long_description"></p>
+<h3>Returns</h3>
+<div class="subelement response"><code>\none</code></div>
+</div></div>
+</div>
+<a name="_createStorageServiceSettings" id="_createStorageServiceSettings"></a><div class="element clickable method private _createStorageServiceSettings" data-toggle="collapse" data-target="._createStorageServiceSettings .collapse">
+<h2>Creates StorageServiceSettings object given endpoints uri.</h2>
+<pre>_createStorageServiceSettings(array $settings, string $blobEndpointUri, string $queueEndpointUri, string $tableEndpointUri) : <a href="../classes/WindowsAzure.Common.Internal.StorageServiceSettings.html">\WindowsAzure\Common\Internal\StorageServiceSettings</a></pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<p class="long_description"></p>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$settings</h4>
+<code>array</code><p>The service settings.</p></div>
+<div class="subelement argument">
+<h4>$blobEndpointUri</h4>
+<code>string</code><p>The blob endpoint uri.</p></div>
+<div class="subelement argument">
+<h4>$queueEndpointUri</h4>
+<code>string</code><p>The queue endpoint uri.</p></div>
+<div class="subelement argument">
+<h4>$tableEndpointUri</h4>
+<code>string</code><p>The table endpoint uri.</p></div>
+<h3>Returns</h3>
+<div class="subelement response"><code><a href="../classes/WindowsAzure.Common.Internal.StorageServiceSettings.html">\WindowsAzure\Common\Internal\StorageServiceSettings</a></code></div>
+</div></div>
+</div>
+<a name="_getDefaultServiceEndpoint" id="_getDefaultServiceEndpoint"></a><div class="element clickable method private _getDefaultServiceEndpoint" data-toggle="collapse" data-target="._getDefaultServiceEndpoint .collapse">
+<h2>Gets the default service endpoint using the specified protocol and account
+name.</h2>
+<pre>_getDefaultServiceEndpoint(array $settings, string $dns) : string</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<p class="long_description"></p>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$settings</h4>
+<code>array</code><p>The service settings.</p></div>
+<div class="subelement argument">
+<h4>$dns</h4>
+<code>string</code><p>The service DNS.</p></div>
+<h3>Returns</h3>
+<div class="subelement response"><code>string</code></div>
+</div></div>
+</div>
+<a name="_getDevelopmentStorageAccount" id="_getDevelopmentStorageAccount"></a><div class="element clickable method private _getDevelopmentStorageAccount" data-toggle="collapse" data-target="._getDevelopmentStorageAccount .collapse">
+<h2>Returns a StorageServiceSettings with development storage credentials using
+the specified proxy Uri.</h2>
+<pre>_getDevelopmentStorageAccount(string $proxyUri) : \StorageServiceSettings</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<p class="long_description"></p>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$proxyUri</h4>
+<code>string</code><p>The proxy endpoint to use.</p></div>
+<h3>Returns</h3>
+<div class="subelement response"><code>\StorageServiceSettings</code></div>
+</div></div>
+</div>
+<h3>
+<i class="icon-custom icon-property"></i> Properties</h3>
+<a name="%24isInitialized" id="$isInitialized"> </a><div class="element clickable property protected $isInitialized" data-toggle="collapse" data-target=".$isInitialized .collapse">
+<h2>$isInitialized</h2>
+<pre>$isInitialized : boolean</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><p class="long_description"></p></div></div>
+</div>
+<a name="%24validSettingKeys" id="$validSettingKeys"> </a><div class="element clickable property protected $validSettingKeys" data-toggle="collapse" data-target=".$validSettingKeys .collapse">
+<h2>Holds the expected setting keys.</h2>
+<pre>$validSettingKeys : array</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><p class="long_description"></p></div></div>
+</div>
+<a name="%24_accountKeySetting" id="$_accountKeySetting"> </a><div class="element clickable property private $_accountKeySetting" data-toggle="collapse" data-target=".$_accountKeySetting .collapse">
+<h2>Validator for the AccountKey setting. Must be a valid base64 string.</h2>
+<pre>$_accountKeySetting : array</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><p class="long_description"></p></div></div>
+</div>
+<a name="%24_accountNameSetting" id="$_accountNameSetting"> </a><div class="element clickable property private $_accountNameSetting" data-toggle="collapse" data-target=".$_accountNameSetting .collapse">
+<h2>Validator for the AccountName setting. No restrictions.</h2>
+<pre>$_accountNameSetting : array</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><p class="long_description"></p></div></div>
+</div>
+<a name="%24_blobEndpointSetting" id="$_blobEndpointSetting"> </a><div class="element clickable property private $_blobEndpointSetting" data-toggle="collapse" data-target=".$_blobEndpointSetting .collapse">
+<h2>Validator for the BlobEndpoint setting. Must be a valid Uri.</h2>
+<pre>$_blobEndpointSetting : array</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><p class="long_description"></p></div></div>
+</div>
+<a name="%24_blobEndpointUri" id="$_blobEndpointUri"> </a><div class="element clickable property private $_blobEndpointUri" data-toggle="collapse" data-target=".$_blobEndpointUri .collapse">
+<h2>The endpoint for the blob service.</h2>
+<pre>$_blobEndpointUri : string</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><p class="long_description"></p></div></div>
+</div>
+<a name="%24_defaultEndpointsProtocolSetting" id="$_defaultEndpointsProtocolSetting"> </a><div class="element clickable property private $_defaultEndpointsProtocolSetting" data-toggle="collapse" data-target=".$_defaultEndpointsProtocolSetting .collapse">
+<h2>Validator for the DefaultEndpointsProtocol setting. Must be either "http"
+or "https".</h2>
+<pre>$_defaultEndpointsProtocolSetting : array</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><p class="long_description"></p></div></div>
+</div>
+<a name="%24_devStoreAccount" id="$_devStoreAccount"> </a><div class="element clickable property private $_devStoreAccount" data-toggle="collapse" data-target=".$_devStoreAccount .collapse">
+<h2>$_devStoreAccount</h2>
+<pre>$_devStoreAccount : \StorageServiceSettings</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><p class="long_description"></p></div></div>
+</div>
+<a name="%24_developmentStorageProxyUriSetting" id="$_developmentStorageProxyUriSetting"> </a><div class="element clickable property private $_developmentStorageProxyUriSetting" data-toggle="collapse" data-target=".$_developmentStorageProxyUriSetting .collapse">
+<h2>Validator for the DevelopmentStorageProxyUri setting. Must be a valid Uri.</h2>
+<pre>$_developmentStorageProxyUriSetting : array</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><p class="long_description"></p></div></div>
+</div>
+<a name="%24_key" id="$_key"> </a><div class="element clickable property private $_key" data-toggle="collapse" data-target=".$_key .collapse">
+<h2>A base64 representation.</h2>
+<pre>$_key : string</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><p class="long_description"></p></div></div>
+</div>
+<a name="%24_name" id="$_name"> </a><div class="element clickable property private $_name" data-toggle="collapse" data-target=".$_name .collapse">
+<h2>The storage service name.</h2>
+<pre>$_name : string</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><p class="long_description"></p></div></div>
+</div>
+<a name="%24_queueEndpointSetting" id="$_queueEndpointSetting"> </a><div class="element clickable property private $_queueEndpointSetting" data-toggle="collapse" data-target=".$_queueEndpointSetting .collapse">
+<h2>Validator for the QueueEndpoint setting. Must be a valid Uri.</h2>
+<pre>$_queueEndpointSetting : array</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><p class="long_description"></p></div></div>
+</div>
+<a name="%24_queueEndpointUri" id="$_queueEndpointUri"> </a><div class="element clickable property private $_queueEndpointUri" data-toggle="collapse" data-target=".$_queueEndpointUri .collapse">
+<h2>The endpoint for the queue service.</h2>
+<pre>$_queueEndpointUri : string</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><p class="long_description"></p></div></div>
+</div>
+<a name="%24_tableEndpointSetting" id="$_tableEndpointSetting"> </a><div class="element clickable property private $_tableEndpointSetting" data-toggle="collapse" data-target=".$_tableEndpointSetting .collapse">
+<h2>Validator for the TableEndpoint setting. Must be a valid Uri.</h2>
+<pre>$_tableEndpointSetting : array</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><p class="long_description"></p></div></div>
+</div>
+<a name="%24_tableEndpointUri" id="$_tableEndpointUri"> </a><div class="element clickable property private $_tableEndpointUri" data-toggle="collapse" data-target=".$_tableEndpointUri .collapse">
+<h2>The endpoint for the table service.</h2>
+<pre>$_tableEndpointUri : string</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><p class="long_description"></p></div></div>
+</div>
+<a name="%24_useDevelopmentStorageSetting" id="$_useDevelopmentStorageSetting"> </a><div class="element clickable property private $_useDevelopmentStorageSetting" data-toggle="collapse" data-target=".$_useDevelopmentStorageSetting .collapse">
+<h2>Validator for the UseDevelopmentStorage setting. Must be "true".</h2>
+<pre>$_useDevelopmentStorageSetting : array</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><p class="long_description"></p></div></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="row"><footer class="span12">
+            Template is built using <a href="http://twitter.github.com/bootstrap/">Twitter Bootstrap 2</a> and icons provided by <a href="http://glyphicons.com/">Glyphicons</a>.<br>
+            Documentation is powered by <a href="http://www.phpdoc.org/">phpDocumentor 2.0.0a6</a> and<br>
+            generated on 2012-07-17T21:10:38-07:00.<br></footer></div>
+</div>
+</body>
+</html>

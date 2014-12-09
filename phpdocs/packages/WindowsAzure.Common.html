@@ -1,0 +1,562 @@
+<!DOCTYPE html><html xmlns:date="http://exslt.org/dates-and-times" lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0; user-scalable=0;">
+<meta charset="utf-8">
+<title>Windows Azure SDK for PHP » WindowsAzure\Common</title>
+<meta name="author" content="Mike van Riel">
+<meta name="description" content="">
+<link href="../css/template.css" rel="stylesheet" media="all">
+<script src="../js/jquery-1.7.1.min.js" type="text/javascript"></script><script src="../js/jquery-ui-1.8.2.custom.min.js" type="text/javascript"></script><script src="../js/jquery.mousewheel.min.js" type="text/javascript"></script><script src="../js/bootstrap.js" type="text/javascript"></script><script src="../js/template.js" type="text/javascript"></script><script src="../js/prettify/prettify.min.js" type="text/javascript"></script><link rel="shortcut icon" href="../img/favicon.ico">
+<link rel="apple-touch-icon" href="../img/apple-touch-icon.png">
+<link rel="apple-touch-icon" sizes="72x72" href="../img/apple-touch-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="114x114" href="../img/apple-touch-icon-114x114.png">
+</head>
+<body>
+<div class="navbar navbar-fixed-top">
+<div class="navbar-inner"><div class="container">
+<a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse"><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></a><a class="brand" href="../index.html">Windows Azure SDK for PHP</a><div class="nav-collapse"><ul class="nav">
+<li class="dropdown">
+<a href="#api" class="dropdown-toggle" data-toggle="dropdown">
+                                    API Documentation <b class="caret"></b></a><ul class="dropdown-menu">
+<li><a>Namespaces</a></li>
+<li><a href="../namespaces/WindowsAzure.html"><i class="icon-th"></i> WindowsAzure</a></li>
+<li><a>Packages</a></li>
+<li><a href="../packages/WindowsAzure.html"><i class="icon-folder-open"></i> WindowsAzure</a></li>
+</ul>
+</li>
+<li class="dropdown" id="charts-menu">
+<a href="#charts" class="dropdown-toggle" data-toggle="dropdown">
+                                    Charts <b class="caret"></b></a><ul class="dropdown-menu"><li><a href="../graph_class.html"><i class="icon-list-alt"></i> Class hierarchy diagram</a></li></ul>
+</li>
+<li class="dropdown" id="reports-menu">
+<a href="#reports" class="dropdown-toggle" data-toggle="dropdown">
+                                    Reports <b class="caret"></b></a><ul class="dropdown-menu">
+<li><a href="../errors.html"><i class="icon-remove-sign"></i> Errors 
+                <span class="label label-info">385</span></a></li>
+<li><a href="../markers.html"><i class="icon-map-marker"></i> Markers 
+                <ul></ul></a></li>
+<li><a href="../deprecated.html"><i class="icon-stop"></i> Deprecated elements 
+                <span class="label label-info">0</span></a></li>
+</ul>
+</li>
+</ul></div>
+</div></div>
+<div class="go_to_top"><a href="#___" style="color: inherit">Back to top  <i class="icon-upload icon-white"></i></a></div>
+</div>
+<div id="___" class="container">
+<noscript><div class="alert alert-warning">
+                            Javascript is disabled; several features are only available
+                            if Javascript is enabled.
+                        </div></noscript>
+<div class="row">
+<div class="span4">
+<div class="btn-group view pull-right" data-toggle="buttons-radio">
+<button class="btn details" title="Show descriptions and method names"><i class="icon-list"></i></button><button class="btn simple" title="Show only method names"><i class="icon-align-justify"></i></button>
+</div>
+<ul class="side-nav nav nav-list">
+<li class="nav-header">
+<i class="icon-map-marker"></i> Packages</li>
+<li>
+<a href="../packages/WindowsAzure.Common.html" title="Common"><i class="icon-folder-open"></i>Common</a><ul class="nav nav-list nav-packages">
+<li>
+<a href="../packages/WindowsAzure.Common.Internal.html" title="Internal"><i class="icon-folder-open"></i>Internal</a><ul class="nav nav-list nav-packages">
+<li>
+<a href="../packages/WindowsAzure.Common.Internal.Atom.html" title="Atom"><i class="icon-folder-open"></i>Atom</a><ul class="nav nav-list nav-packages"></ul>
+</li>
+<li>
+<a href="../packages/WindowsAzure.Common.Internal.Authentication.html" title="Authentication"><i class="icon-folder-open"></i>Authentication</a><ul class="nav nav-list nav-packages"></ul>
+</li>
+<li>
+<a href="../packages/WindowsAzure.Common.Internal.Filters.html" title="Filters"><i class="icon-folder-open"></i>Filters</a><ul class="nav nav-list nav-packages"></ul>
+</li>
+<li>
+<a href="../packages/WindowsAzure.Common.Internal.Http.html" title="Http"><i class="icon-folder-open"></i>Http</a><ul class="nav nav-list nav-packages"></ul>
+</li>
+<li>
+<a href="../packages/WindowsAzure.Common.Internal.Serialization.html" title="Serialization"><i class="icon-folder-open"></i>Serialization</a><ul class="nav nav-list nav-packages"></ul>
+</li>
+</ul>
+</li>
+<li>
+<a href="../packages/WindowsAzure.Common.Models.html" title="Models"><i class="icon-folder-open"></i>Models</a><ul class="nav nav-list nav-packages"></ul>
+</li>
+</ul>
+</li>
+<li class="nav-header">
+<i class="icon-custom icon-class"></i> Classes</li>
+<li><a href="#CloudConfigurationManager" title="Configuration manager for accessing Windows Azure settings.">CloudConfigurationManager</a></li>
+<li><a href="#ServiceException" title="Fires when the response code is incorrect.">ServiceException</a></li>
+<li><a href="#ServicesBuilder" title="Builds azure service objects.">ServicesBuilder</a></li>
+</ul>
+</div>
+<div class="span8 package-contents">
+<ul class="breadcrumb">
+<li>
+<a href="../index.html"><i class="icon-folder-open"></i></a><span class="divider">\</span>
+</li>
+<li><a href="../packages/WindowsAzure.html">WindowsAzure</a></li>
+<span class="divider">\</span><li class="active"><a href="../packages/WindowsAzure.Common.html">Common</a></li>
+</ul>
+<div class="package-indent">
+<h3>
+<i class="icon-custom icon-class"></i> Classes and interfaces</h3>
+<a name="CloudConfigurationManager" id="CloudConfigurationManager"></a><div class="element ajax clickable class" href="../classes/WindowsAzure.Common.CloudConfigurationManager.html">
+<h1>CloudConfigurationManager<a href="../classes/WindowsAzure.Common.CloudConfigurationManager.html">¶</a>
+</h1>
+<p class="short_description">Configuration manager for accessing Windows Azure settings.</p>
+<div class="details collapse"></div>
+<a href="../classes/WindowsAzure.Common.CloudConfigurationManager.html" class="more">« More »</a>
+</div>
+<a name="ServiceException" id="ServiceException"></a><div class="element ajax clickable class" href="../classes/WindowsAzure.Common.ServiceException.html">
+<h1>ServiceException<a href="../classes/WindowsAzure.Common.ServiceException.html">¶</a>
+</h1>
+<p class="short_description">Fires when the response code is incorrect.</p>
+<div class="details collapse"></div>
+<a href="../classes/WindowsAzure.Common.ServiceException.html" class="more">« More »</a>
+</div>
+<a name="ServicesBuilder" id="ServicesBuilder"></a><div class="element ajax clickable class" href="../classes/WindowsAzure.Common.ServicesBuilder.html">
+<h1>ServicesBuilder<a href="../classes/WindowsAzure.Common.ServicesBuilder.html">¶</a>
+</h1>
+<p class="short_description">Builds azure service objects.</p>
+<div class="details collapse"></div>
+<a href="../classes/WindowsAzure.Common.ServicesBuilder.html" class="more">« More »</a>
+</div>
+<ul class="breadcrumb">
+<li>
+<a href="../index.html"><i class="icon-folder-open"></i></a><span class="divider">\</span>
+</li>
+<li><a href="../packages/WindowsAzure.html">WindowsAzure</a></li>
+<span class="divider">\</span><li><a href="../packages/WindowsAzure.Common.html">Common</a></li>
+<span class="divider">\</span><li class="active"><a href="../packages/WindowsAzure.Common.Internal.html">Internal</a></li>
+</ul>
+<div class="package-indent">
+<h3>
+<i class="icon-custom icon-class"></i> Classes and interfaces</h3>
+<a name="FilterableService" id="FilterableService"></a><div class="element ajax clickable interface" href="../classes/WindowsAzure.Common.Internal.FilterableService.html">
+<h1>FilterableService<a href="../classes/WindowsAzure.Common.Internal.FilterableService.html">¶</a>
+</h1>
+<p class="short_description">Interface for service with filers.</p>
+<div class="details collapse"></div>
+<a href="../classes/WindowsAzure.Common.Internal.FilterableService.html" class="more">« More »</a>
+</div>
+<a name="IServiceFilter" id="IServiceFilter"></a><div class="element ajax clickable interface" href="../classes/WindowsAzure.Common.Internal.IServiceFilter.html">
+<h1>IServiceFilter<a href="../classes/WindowsAzure.Common.Internal.IServiceFilter.html">¶</a>
+</h1>
+<p class="short_description">ServceFilter is called when the sending the request and after receiving the
+response.</p>
+<div class="details collapse"></div>
+<a href="../classes/WindowsAzure.Common.Internal.IServiceFilter.html" class="more">« More »</a>
+</div>
+<a name="ConnectionStringParser" id="ConnectionStringParser"></a><div class="element ajax clickable class" href="../classes/WindowsAzure.Common.Internal.ConnectionStringParser.html">
+<h1>ConnectionStringParser<a href="../classes/WindowsAzure.Common.Internal.ConnectionStringParser.html">¶</a>
+</h1>
+<p class="short_description">Helper methods for parsing connection strings. The rules for formatting connection
+strings are defined here:
+www.connectionstrings.com/articles/show/important-rules-for-connection-strings</p>
+<div class="details collapse"></div>
+<a href="../classes/WindowsAzure.Common.Internal.ConnectionStringParser.html" class="more">« More »</a>
+</div>
+<a name="ConnectionStringSource" id="ConnectionStringSource"></a><div class="element ajax clickable class" href="../classes/WindowsAzure.Common.Internal.ConnectionStringSource.html">
+<h1>ConnectionStringSource<a href="../classes/WindowsAzure.Common.Internal.ConnectionStringSource.html">¶</a>
+</h1>
+<p class="short_description">Holder for default connection string sources used in CloudConfigurationManager.</p>
+<div class="details collapse"></div>
+<a href="../classes/WindowsAzure.Common.Internal.ConnectionStringSource.html" class="more">« More »</a>
+</div>
+<a name="InvalidArgumentTypeException" id="InvalidArgumentTypeException"></a><div class="element ajax clickable class" href="../classes/WindowsAzure.Common.Internal.InvalidArgumentTypeException.html">
+<h1>InvalidArgumentTypeException<a href="../classes/WindowsAzure.Common.Internal.InvalidArgumentTypeException.html">¶</a>
+</h1>
+<p class="short_description">Exception thrown if an argument type does not match with the expected type.</p>
+<div class="details collapse"></div>
+<a href="../classes/WindowsAzure.Common.Internal.InvalidArgumentTypeException.html" class="more">« More »</a>
+</div>
+<a name="Logger" id="Logger"></a><div class="element ajax clickable class" href="../classes/WindowsAzure.Common.Internal.Logger.html">
+<h1>Logger<a href="../classes/WindowsAzure.Common.Internal.Logger.html">¶</a>
+</h1>
+<p class="short_description">Logger class for debugging purpose.</p>
+<div class="details collapse"></div>
+<a href="../classes/WindowsAzure.Common.Internal.Logger.html" class="more">« More »</a>
+</div>
+<a name="ParserState" id="ParserState"></a><div class="element ajax clickable class" href="../classes/WindowsAzure.Common.Internal.ParserState.html">
+<h1>ParserState<a href="../classes/WindowsAzure.Common.Internal.ParserState.html">¶</a>
+</h1>
+<p class="short_description">State of the connection string parser.</p>
+<div class="details collapse"></div>
+<a href="../classes/WindowsAzure.Common.Internal.ParserState.html" class="more">« More »</a>
+</div>
+<a name="Resources" id="Resources"></a><div class="element ajax clickable class" href="../classes/WindowsAzure.Common.Internal.Resources.html">
+<h1>Resources<a href="../classes/WindowsAzure.Common.Internal.Resources.html">¶</a>
+</h1>
+<p class="short_description">Project resources.</p>
+<div class="details collapse"></div>
+<a href="../classes/WindowsAzure.Common.Internal.Resources.html" class="more">« More »</a>
+</div>
+<a name="RestProxy" id="RestProxy"></a><div class="element ajax clickable class" href="../classes/WindowsAzure.Common.Internal.RestProxy.html">
+<h1>RestProxy<a href="../classes/WindowsAzure.Common.Internal.RestProxy.html">¶</a>
+</h1>
+<p class="short_description">Base class for all REST proxies.</p>
+<div class="details collapse"></div>
+<a href="../classes/WindowsAzure.Common.Internal.RestProxy.html" class="more">« More »</a>
+</div>
+<a name="ServiceBusSettings" id="ServiceBusSettings"></a><div class="element ajax clickable class" href="../classes/WindowsAzure.Common.Internal.ServiceBusSettings.html">
+<h1>ServiceBusSettings<a href="../classes/WindowsAzure.Common.Internal.ServiceBusSettings.html">¶</a>
+</h1>
+<p class="short_description">Represents the settings used to sign and access a request against the service
+bus.</p>
+<div class="details collapse"></div>
+<a href="../classes/WindowsAzure.Common.Internal.ServiceBusSettings.html" class="more">« More »</a>
+</div>
+<a name="ServiceManagementSettings" id="ServiceManagementSettings"></a><div class="element ajax clickable class" href="../classes/WindowsAzure.Common.Internal.ServiceManagementSettings.html">
+<h1>ServiceManagementSettings<a href="../classes/WindowsAzure.Common.Internal.ServiceManagementSettings.html">¶</a>
+</h1>
+<p class="short_description">Represents the settings used to sign and access a request against the service
+management. For more information about service management connection strings check
+this page: http://msdn.microsoft.com/en-us/library/windowsazure/gg466228.aspx</p>
+<div class="details collapse"></div>
+<a href="../classes/WindowsAzure.Common.Internal.ServiceManagementSettings.html" class="more">« More »</a>
+</div>
+<a name="ServiceRestProxy" id="ServiceRestProxy"></a><div class="element ajax clickable class" href="../classes/WindowsAzure.Common.Internal.ServiceRestProxy.html">
+<h1>ServiceRestProxy<a href="../classes/WindowsAzure.Common.Internal.ServiceRestProxy.html">¶</a>
+</h1>
+<p class="short_description">Base class for all services rest proxies.</p>
+<div class="details collapse"></div>
+<a href="../classes/WindowsAzure.Common.Internal.ServiceRestProxy.html" class="more">« More »</a>
+</div>
+<a name="ServiceSettings" id="ServiceSettings"></a><div class="element ajax clickable class" href="../classes/WindowsAzure.Common.Internal.ServiceSettings.html">
+<h1>ServiceSettings<a href="../classes/WindowsAzure.Common.Internal.ServiceSettings.html">¶</a>
+</h1>
+<p class="short_description">Base class for all REST services settings.</p>
+<div class="details collapse"></div>
+<a href="../classes/WindowsAzure.Common.Internal.ServiceSettings.html" class="more">« More »</a>
+</div>
+<a name="StorageServiceSettings" id="StorageServiceSettings"></a><div class="element ajax clickable class" href="../classes/WindowsAzure.Common.Internal.StorageServiceSettings.html">
+<h1>StorageServiceSettings<a href="../classes/WindowsAzure.Common.Internal.StorageServiceSettings.html">¶</a>
+</h1>
+<p class="short_description">Represents the settings used to sign and access a request against the storage
+service. For more information about storage service connection strings check this
+page: http://msdn.microsoft.com/en-us/library/ee758697</p>
+<div class="details collapse"></div>
+<a href="../classes/WindowsAzure.Common.Internal.StorageServiceSettings.html" class="more">« More »</a>
+</div>
+<a name="Utilities" id="Utilities"></a><div class="element ajax clickable class" href="../classes/WindowsAzure.Common.Internal.Utilities.html">
+<h1>Utilities<a href="../classes/WindowsAzure.Common.Internal.Utilities.html">¶</a>
+</h1>
+<p class="short_description">Utilities for the project</p>
+<div class="details collapse"></div>
+<a href="../classes/WindowsAzure.Common.Internal.Utilities.html" class="more">« More »</a>
+</div>
+<a name="Validate" id="Validate"></a><div class="element ajax clickable class" href="../classes/WindowsAzure.Common.Internal.Validate.html">
+<h1>Validate<a href="../classes/WindowsAzure.Common.Internal.Validate.html">¶</a>
+</h1>
+<p class="short_description">Validates aganist a condition and throws an exception in case of failure.</p>
+<div class="details collapse"></div>
+<a href="../classes/WindowsAzure.Common.Internal.Validate.html" class="more">« More »</a>
+</div>
+<ul class="breadcrumb">
+<li>
+<a href="../index.html"><i class="icon-folder-open"></i></a><span class="divider">\</span>
+</li>
+<li><a href="../packages/WindowsAzure.html">WindowsAzure</a></li>
+<span class="divider">\</span><li><a href="../packages/WindowsAzure.Common.html">Common</a></li>
+<span class="divider">\</span><li><a href="../packages/WindowsAzure.Common.Internal.html">Internal</a></li>
+<span class="divider">\</span><li class="active"><a href="../packages/WindowsAzure.Common.Internal.Atom.html">Atom</a></li>
+</ul>
+<div class="package-indent">
+<h3>
+<i class="icon-custom icon-class"></i> Classes and interfaces</h3>
+<a name="AtomBase" id="AtomBase"></a><div class="element ajax clickable class" href="../classes/WindowsAzure.Common.Internal.Atom.AtomBase.html">
+<h1>AtomBase<a href="../classes/WindowsAzure.Common.Internal.Atom.AtomBase.html">¶</a>
+</h1>
+<p class="short_description">The base class of ATOM library.</p>
+<div class="details collapse"></div>
+<a href="../classes/WindowsAzure.Common.Internal.Atom.AtomBase.html" class="more">« More »</a>
+</div>
+<a name="AtomLink" id="AtomLink"></a><div class="element ajax clickable class" href="../classes/WindowsAzure.Common.Internal.Atom.AtomLink.html">
+<h1>AtomLink<a href="../classes/WindowsAzure.Common.Internal.Atom.AtomLink.html">¶</a>
+</h1>
+<p class="short_description">This link defines a reference from an entry or feed to a Web resource.</p>
+<div class="details collapse"></div>
+<a href="../classes/WindowsAzure.Common.Internal.Atom.AtomLink.html" class="more">« More »</a>
+</div>
+<a name="Category" id="Category"></a><div class="element ajax clickable class" href="../classes/WindowsAzure.Common.Internal.Atom.Category.html">
+<h1>Category<a href="../classes/WindowsAzure.Common.Internal.Atom.Category.html">¶</a>
+</h1>
+<p class="short_description">The category class of the ATOM standard.</p>
+<div class="details collapse"></div>
+<a href="../classes/WindowsAzure.Common.Internal.Atom.Category.html" class="more">« More »</a>
+</div>
+<a name="Content" id="Content"></a><div class="element ajax clickable class" href="../classes/WindowsAzure.Common.Internal.Atom.Content.html">
+<h1>Content<a href="../classes/WindowsAzure.Common.Internal.Atom.Content.html">¶</a>
+</h1>
+<p class="short_description">The content class of ATOM standard.</p>
+<div class="details collapse"></div>
+<a href="../classes/WindowsAzure.Common.Internal.Atom.Content.html" class="more">« More »</a>
+</div>
+<a name="Entry" id="Entry"></a><div class="element ajax clickable class" href="../classes/WindowsAzure.Common.Internal.Atom.Entry.html">
+<h1>Entry<a href="../classes/WindowsAzure.Common.Internal.Atom.Entry.html">¶</a>
+</h1>
+<p class="short_description">The Entry class of ATOM standard.</p>
+<div class="details collapse"></div>
+<a href="../classes/WindowsAzure.Common.Internal.Atom.Entry.html" class="more">« More »</a>
+</div>
+<a name="Feed" id="Feed"></a><div class="element ajax clickable class" href="../classes/WindowsAzure.Common.Internal.Atom.Feed.html">
+<h1>Feed<a href="../classes/WindowsAzure.Common.Internal.Atom.Feed.html">¶</a>
+</h1>
+<p class="short_description">The feed class of ATOM library.</p>
+<div class="details collapse"></div>
+<a href="../classes/WindowsAzure.Common.Internal.Atom.Feed.html" class="more">« More »</a>
+</div>
+<a name="Generator" id="Generator"></a><div class="element ajax clickable class" href="../classes/WindowsAzure.Common.Internal.Atom.Generator.html">
+<h1>Generator<a href="../classes/WindowsAzure.Common.Internal.Atom.Generator.html">¶</a>
+</h1>
+<p class="short_description">The generator class of ATOM library.</p>
+<div class="details collapse"></div>
+<a href="../classes/WindowsAzure.Common.Internal.Atom.Generator.html" class="more">« More »</a>
+</div>
+<a name="Person" id="Person"></a><div class="element ajax clickable class" href="../classes/WindowsAzure.Common.Internal.Atom.Person.html">
+<h1>Person<a href="../classes/WindowsAzure.Common.Internal.Atom.Person.html">¶</a>
+</h1>
+<p class="short_description">The person class of ATOM library.</p>
+<div class="details collapse"></div>
+<a href="../classes/WindowsAzure.Common.Internal.Atom.Person.html" class="more">« More »</a>
+</div>
+<a name="Source" id="Source"></a><div class="element ajax clickable class" href="../classes/WindowsAzure.Common.Internal.Atom.Source.html">
+<h1>Source<a href="../classes/WindowsAzure.Common.Internal.Atom.Source.html">¶</a>
+</h1>
+<p class="short_description">The source class of ATOM library.</p>
+<div class="details collapse"></div>
+<a href="../classes/WindowsAzure.Common.Internal.Atom.Source.html" class="more">« More »</a>
+</div>
+</div>
+<ul class="breadcrumb">
+<li>
+<a href="../index.html"><i class="icon-folder-open"></i></a><span class="divider">\</span>
+</li>
+<li><a href="../packages/WindowsAzure.html">WindowsAzure</a></li>
+<span class="divider">\</span><li><a href="../packages/WindowsAzure.Common.html">Common</a></li>
+<span class="divider">\</span><li><a href="../packages/WindowsAzure.Common.Internal.html">Internal</a></li>
+<span class="divider">\</span><li class="active"><a href="../packages/WindowsAzure.Common.Internal.Authentication.html">Authentication</a></li>
+</ul>
+<div class="package-indent">
+<h3>
+<i class="icon-custom icon-class"></i> Classes and interfaces</h3>
+<a name="SharedKeyAuthScheme" id="SharedKeyAuthScheme"></a><div class="element ajax clickable class" href="../classes/WindowsAzure.Common.Internal.Authentication.SharedKeyAuthScheme.html">
+<h1>SharedKeyAuthScheme<a href="../classes/WindowsAzure.Common.Internal.Authentication.SharedKeyAuthScheme.html">¶</a>
+</h1>
+<p class="short_description">Provides shared key authentication scheme for blob and queue. For more info
+check: http://msdn.microsoft.com/en-us/library/windowsazure/dd179428.aspx</p>
+<div class="details collapse"></div>
+<a href="../classes/WindowsAzure.Common.Internal.Authentication.SharedKeyAuthScheme.html" class="more">« More »</a>
+</div>
+<a name="StorageAuthScheme" id="StorageAuthScheme"></a><div class="element ajax clickable class" href="../classes/WindowsAzure.Common.Internal.Authentication.StorageAuthScheme.html">
+<h1>StorageAuthScheme<a href="../classes/WindowsAzure.Common.Internal.Authentication.StorageAuthScheme.html">¶</a>
+</h1>
+<p class="short_description">Base class for azure authentication schemes.</p>
+<div class="details collapse"></div>
+<a href="../classes/WindowsAzure.Common.Internal.Authentication.StorageAuthScheme.html" class="more">« More »</a>
+</div>
+<a name="TableSharedKeyLiteAuthScheme" id="TableSharedKeyLiteAuthScheme"></a><div class="element ajax clickable class" href="../classes/WindowsAzure.Common.Internal.Authentication.TableSharedKeyLiteAuthScheme.html">
+<h1>TableSharedKeyLiteAuthScheme<a href="../classes/WindowsAzure.Common.Internal.Authentication.TableSharedKeyLiteAuthScheme.html">¶</a>
+</h1>
+<p class="short_description">Provides shared key authentication scheme for blob and queue. For more info
+check: http://msdn.microsoft.com/en-us/library/windowsazure/dd179428.aspx</p>
+<div class="details collapse"></div>
+<a href="../classes/WindowsAzure.Common.Internal.Authentication.TableSharedKeyLiteAuthScheme.html" class="more">« More »</a>
+</div>
+</div>
+<ul class="breadcrumb">
+<li>
+<a href="../index.html"><i class="icon-folder-open"></i></a><span class="divider">\</span>
+</li>
+<li><a href="../packages/WindowsAzure.html">WindowsAzure</a></li>
+<span class="divider">\</span><li><a href="../packages/WindowsAzure.Common.html">Common</a></li>
+<span class="divider">\</span><li><a href="../packages/WindowsAzure.Common.Internal.html">Internal</a></li>
+<span class="divider">\</span><li class="active"><a href="../packages/WindowsAzure.Common.Internal.Filters.html">Filters</a></li>
+</ul>
+<div class="package-indent">
+<h3>
+<i class="icon-custom icon-class"></i> Classes and interfaces</h3>
+<a name="AuthenticationFilter" id="AuthenticationFilter"></a><div class="element ajax clickable class" href="../classes/WindowsAzure.Common.Internal.Filters.AuthenticationFilter.html">
+<h1>AuthenticationFilter<a href="../classes/WindowsAzure.Common.Internal.Filters.AuthenticationFilter.html">¶</a>
+</h1>
+<p class="short_description">Adds authentication header to the http request object.</p>
+<div class="details collapse"></div>
+<a href="../classes/WindowsAzure.Common.Internal.Filters.AuthenticationFilter.html" class="more">« More »</a>
+</div>
+<a name="DateFilter" id="DateFilter"></a><div class="element ajax clickable class" href="../classes/WindowsAzure.Common.Internal.Filters.DateFilter.html">
+<h1>DateFilter<a href="../classes/WindowsAzure.Common.Internal.Filters.DateFilter.html">¶</a>
+</h1>
+<p class="short_description">Adds date header to the http request.</p>
+<div class="details collapse"></div>
+<a href="../classes/WindowsAzure.Common.Internal.Filters.DateFilter.html" class="more">« More »</a>
+</div>
+<a name="ExponentialRetryPolicy" id="ExponentialRetryPolicy"></a><div class="element ajax clickable class" href="../classes/WindowsAzure.Common.Internal.Filters.ExponentialRetryPolicy.html">
+<h1>ExponentialRetryPolicy<a href="../classes/WindowsAzure.Common.Internal.Filters.ExponentialRetryPolicy.html">¶</a>
+</h1>
+<p class="short_description">The exponential retry policy.</p>
+<div class="details collapse"></div>
+<a href="../classes/WindowsAzure.Common.Internal.Filters.ExponentialRetryPolicy.html" class="more">« More »</a>
+</div>
+<a name="HeadersFilter" id="HeadersFilter"></a><div class="element ajax clickable class" href="../classes/WindowsAzure.Common.Internal.Filters.HeadersFilter.html">
+<h1>HeadersFilter<a href="../classes/WindowsAzure.Common.Internal.Filters.HeadersFilter.html">¶</a>
+</h1>
+<p class="short_description">Adds all passed headers to the HTTP request headers.</p>
+<div class="details collapse"></div>
+<a href="../classes/WindowsAzure.Common.Internal.Filters.HeadersFilter.html" class="more">« More »</a>
+</div>
+<a name="RetryPolicy" id="RetryPolicy"></a><div class="element ajax clickable class" href="../classes/WindowsAzure.Common.Internal.Filters.RetryPolicy.html">
+<h1>RetryPolicy<a href="../classes/WindowsAzure.Common.Internal.Filters.RetryPolicy.html">¶</a>
+</h1>
+<p class="short_description">The retry policy abstract class.</p>
+<div class="details collapse"></div>
+<a href="../classes/WindowsAzure.Common.Internal.Filters.RetryPolicy.html" class="more">« More »</a>
+</div>
+<a name="RetryPolicyFilter" id="RetryPolicyFilter"></a><div class="element ajax clickable class" href="../classes/WindowsAzure.Common.Internal.Filters.RetryPolicyFilter.html">
+<h1>RetryPolicyFilter<a href="../classes/WindowsAzure.Common.Internal.Filters.RetryPolicyFilter.html">¶</a>
+</h1>
+<p class="short_description">Short description</p>
+<div class="details collapse"></div>
+<a href="../classes/WindowsAzure.Common.Internal.Filters.RetryPolicyFilter.html" class="more">« More »</a>
+</div>
+<a name="WrapFilter" id="WrapFilter"></a><div class="element ajax clickable class" href="../classes/WindowsAzure.Common.Internal.Filters.WrapFilter.html">
+<h1>WrapFilter<a href="../classes/WindowsAzure.Common.Internal.Filters.WrapFilter.html">¶</a>
+</h1>
+<p class="short_description">Adds WRAP authentication header to the http request object.</p>
+<div class="details collapse"></div>
+<a href="../classes/WindowsAzure.Common.Internal.Filters.WrapFilter.html" class="more">« More »</a>
+</div>
+</div>
+<ul class="breadcrumb">
+<li>
+<a href="../index.html"><i class="icon-folder-open"></i></a><span class="divider">\</span>
+</li>
+<li><a href="../packages/WindowsAzure.html">WindowsAzure</a></li>
+<span class="divider">\</span><li><a href="../packages/WindowsAzure.Common.html">Common</a></li>
+<span class="divider">\</span><li><a href="../packages/WindowsAzure.Common.Internal.html">Internal</a></li>
+<span class="divider">\</span><li class="active"><a href="../packages/WindowsAzure.Common.Internal.Http.html">Http</a></li>
+</ul>
+<div class="package-indent">
+<h3>
+<i class="icon-custom icon-class"></i> Classes and interfaces</h3>
+<a name="IHttpClient" id="IHttpClient"></a><div class="element ajax clickable interface" href="../classes/WindowsAzure.Common.Internal.Http.IHttpClient.html">
+<h1>IHttpClient<a href="../classes/WindowsAzure.Common.Internal.Http.IHttpClient.html">¶</a>
+</h1>
+<p class="short_description">Defines required methods for a HTTP client proxy.</p>
+<div class="details collapse"></div>
+<a href="../classes/WindowsAzure.Common.Internal.Http.IHttpClient.html" class="more">« More »</a>
+</div>
+<a name="IUrl" id="IUrl"></a><div class="element ajax clickable interface" href="../classes/WindowsAzure.Common.Internal.Http.IUrl.html">
+<h1>IUrl<a href="../classes/WindowsAzure.Common.Internal.Http.IUrl.html">¶</a>
+</h1>
+<p class="short_description">Defines what are main url functionalities that should be supported</p>
+<div class="details collapse"></div>
+<a href="../classes/WindowsAzure.Common.Internal.Http.IUrl.html" class="more">« More »</a>
+</div>
+<a name="HttpCallContext" id="HttpCallContext"></a><div class="element ajax clickable class" href="../classes/WindowsAzure.Common.Internal.Http.HttpCallContext.html">
+<h1>HttpCallContext<a href="../classes/WindowsAzure.Common.Internal.Http.HttpCallContext.html">¶</a>
+</h1>
+<p class="short_description">Holds basic elements for making HTTP call.</p>
+<div class="details collapse"></div>
+<a href="../classes/WindowsAzure.Common.Internal.Http.HttpCallContext.html" class="more">« More »</a>
+</div>
+<a name="HttpClient" id="HttpClient"></a><div class="element ajax clickable class" href="../classes/WindowsAzure.Common.Internal.Http.HttpClient.html">
+<h1>HttpClient<a href="../classes/WindowsAzure.Common.Internal.Http.HttpClient.html">¶</a>
+</h1>
+<p class="short_description">HTTP client which sends and receives HTTP requests and responses.</p>
+<div class="details collapse"></div>
+<a href="../classes/WindowsAzure.Common.Internal.Http.HttpClient.html" class="more">« More »</a>
+</div>
+<a name="Url" id="Url"></a><div class="element ajax clickable class" href="../classes/WindowsAzure.Common.Internal.Http.Url.html">
+<h1>Url<a href="../classes/WindowsAzure.Common.Internal.Http.Url.html">¶</a>
+</h1>
+<p class="short_description">Default IUrl implementation.</p>
+<div class="details collapse"></div>
+<a href="../classes/WindowsAzure.Common.Internal.Http.Url.html" class="more">« More »</a>
+</div>
+</div>
+<ul class="breadcrumb">
+<li>
+<a href="../index.html"><i class="icon-folder-open"></i></a><span class="divider">\</span>
+</li>
+<li><a href="../packages/WindowsAzure.html">WindowsAzure</a></li>
+<span class="divider">\</span><li><a href="../packages/WindowsAzure.Common.html">Common</a></li>
+<span class="divider">\</span><li><a href="../packages/WindowsAzure.Common.Internal.html">Internal</a></li>
+<span class="divider">\</span><li class="active"><a href="../packages/WindowsAzure.Common.Internal.Serialization.html">Serialization</a></li>
+</ul>
+<div class="package-indent">
+<h3>
+<i class="icon-custom icon-class"></i> Classes and interfaces</h3>
+<a name="ISerializer" id="ISerializer"></a><div class="element ajax clickable interface" href="../classes/WindowsAzure.Common.Internal.Serialization.ISerializer.html">
+<h1>ISerializer<a href="../classes/WindowsAzure.Common.Internal.Serialization.ISerializer.html">¶</a>
+</h1>
+<p class="short_description">The serialization interface.</p>
+<div class="details collapse"></div>
+<a href="../classes/WindowsAzure.Common.Internal.Serialization.ISerializer.html" class="more">« More »</a>
+</div>
+<a name="XmlSerializer" id="XmlSerializer"></a><div class="element ajax clickable class" href="../classes/WindowsAzure.Common.Internal.Serialization.XmlSerializer.html">
+<h1>XmlSerializer<a href="../classes/WindowsAzure.Common.Internal.Serialization.XmlSerializer.html">¶</a>
+</h1>
+<p class="short_description">Short description</p>
+<div class="details collapse"></div>
+<a href="../classes/WindowsAzure.Common.Internal.Serialization.XmlSerializer.html" class="more">« More »</a>
+</div>
+</div>
+</div>
+<ul class="breadcrumb">
+<li>
+<a href="../index.html"><i class="icon-folder-open"></i></a><span class="divider">\</span>
+</li>
+<li><a href="../packages/WindowsAzure.html">WindowsAzure</a></li>
+<span class="divider">\</span><li><a href="../packages/WindowsAzure.Common.html">Common</a></li>
+<span class="divider">\</span><li class="active"><a href="../packages/WindowsAzure.Common.Models.html">Models</a></li>
+</ul>
+<div class="package-indent">
+<h3>
+<i class="icon-custom icon-class"></i> Classes and interfaces</h3>
+<a name="GetServicePropertiesResult" id="GetServicePropertiesResult"></a><div class="element ajax clickable class" href="../classes/WindowsAzure.Common.Models.GetServicePropertiesResult.html">
+<h1>GetServicePropertiesResult<a href="../classes/WindowsAzure.Common.Models.GetServicePropertiesResult.html">¶</a>
+</h1>
+<p class="short_description">Result from calling GetQueueProperties REST wrapper.</p>
+<div class="details collapse"></div>
+<a href="../classes/WindowsAzure.Common.Models.GetServicePropertiesResult.html" class="more">« More »</a>
+</div>
+<a name="Logging" id="Logging"></a><div class="element ajax clickable class" href="../classes/WindowsAzure.Common.Models.Logging.html">
+<h1>Logging<a href="../classes/WindowsAzure.Common.Models.Logging.html">¶</a>
+</h1>
+<p class="short_description">Holds elements of queue properties logging field.</p>
+<div class="details collapse"></div>
+<a href="../classes/WindowsAzure.Common.Models.Logging.html" class="more">« More »</a>
+</div>
+<a name="Metrics" id="Metrics"></a><div class="element ajax clickable class" href="../classes/WindowsAzure.Common.Models.Metrics.html">
+<h1>Metrics<a href="../classes/WindowsAzure.Common.Models.Metrics.html">¶</a>
+</h1>
+<p class="short_description">Holds elements of queue properties metrics field.</p>
+<div class="details collapse"></div>
+<a href="../classes/WindowsAzure.Common.Models.Metrics.html" class="more">« More »</a>
+</div>
+<a name="RetentionPolicy" id="RetentionPolicy"></a><div class="element ajax clickable class" href="../classes/WindowsAzure.Common.Models.RetentionPolicy.html">
+<h1>RetentionPolicy<a href="../classes/WindowsAzure.Common.Models.RetentionPolicy.html">¶</a>
+</h1>
+<p class="short_description">Holds elements of queue properties retention policy field.</p>
+<div class="details collapse"></div>
+<a href="../classes/WindowsAzure.Common.Models.RetentionPolicy.html" class="more">« More »</a>
+</div>
+<a name="ServiceProperties" id="ServiceProperties"></a><div class="element ajax clickable class" href="../classes/WindowsAzure.Common.Models.ServiceProperties.html">
+<h1>ServiceProperties<a href="../classes/WindowsAzure.Common.Models.ServiceProperties.html">¶</a>
+</h1>
+<p class="short_description">Encapsulates service properties</p>
+<div class="details collapse"></div>
+<a href="../classes/WindowsAzure.Common.Models.ServiceProperties.html" class="more">« More »</a>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="row"><footer class="span12">
+            Template is built using <a href="http://twitter.github.com/bootstrap/">Twitter Bootstrap 2</a> and icons provided by <a href="http://glyphicons.com/">Glyphicons</a>.<br>
+            Documentation is powered by <a href="http://www.phpdoc.org/">phpDocumentor 2.0.0a6</a> and<br>
+            generated on 2012-07-17T21:10:36-07:00.<br></footer></div>
+</div>
+</body>
+</html>

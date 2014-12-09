@@ -1,0 +1,353 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>batchapps.utils &mdash; azure-batch-apps 0.2.0 documentation</title>
+    
+    <link rel="stylesheet" href="_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '0.2.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="top" title="azure-batch-apps 0.2.0 documentation" href="index.html" />
+    <link rel="up" title="batchapps package" href="batch_apps.html" />
+    <link rel="next" title="Sample Script - Cancel Job" href="batch_apps.sample.cancel_job.html" />
+    <link rel="prev" title="batchapps.log module" href="batch_apps.log.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="batch_apps.sample.cancel_job.html" title="Sample Script - Cancel Job"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="batch_apps.log.html" title="batchapps.log module"
+             accesskey="P">previous</a> |</li>
+        <li><a href="index.html">azure-batch-apps 0.2.0 documentation</a> &raquo;</li>
+          <li><a href="batch_apps.html" accesskey="U">batchapps package</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="module-batchapps.utils">
+<span id="batchapps-utils"></span><h1>batchapps.utils<a class="headerlink" href="#module-batchapps.utils" title="Permalink to this headline">¶</a></h1>
+<p>Batch Apps Client Utility Module</p>
+<dl class="function">
+<dt id="batchapps.utils.parse_date_string">
+<tt class="descclassname">batchapps.utils.</tt><tt class="descname">parse_date_string</tt><big>(</big><em>time_string</em><big>)</big><a class="reference internal" href="_modules/batchapps/utils.html#parse_date_string"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#batchapps.utils.parse_date_string" title="Permalink to this definition">¶</a></dt>
+<dd><p>Format datetime string into an easily comparable and REST happy form.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Args:</th><td class="field-body"><ul class="first simple">
+<li>time_string (str): The datetime string to be formatted.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">The string formatted for use with the REST API (str).</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="batchapps.utils.filename_from_url">
+<tt class="descclassname">batchapps.utils.</tt><tt class="descname">filename_from_url</tt><big>(</big><em>url</em>, <em>ext</em><big>)</big><a class="reference internal" href="_modules/batchapps/utils.html#filename_from_url"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#batchapps.utils.filename_from_url" title="Permalink to this definition">¶</a></dt>
+<dd><p>Extract a valid filename from a URL</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Args:</th><td class="field-body"><ul class="first">
+<li><p class="first">url (str): URL to extract the filename from.</p>
+</li>
+<li><dl class="first docutils">
+<dt>ext (str): An additional file extension if necessary.</dt>
+<dd><p class="first last">May be <tt class="docutils literal"><span class="pre">None</span></tt>.</p>
+</dd>
+</dl>
+</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><ul class="first last simple">
+<li>A valid filename.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="batchapps.utils.url_from_filename">
+<tt class="descclassname">batchapps.utils.</tt><tt class="descname">url_from_filename</tt><big>(</big><em>filename</em><big>)</big><a class="reference internal" href="_modules/batchapps/utils.html#url_from_filename"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#batchapps.utils.url_from_filename" title="Permalink to this definition">¶</a></dt>
+<dd><p>Format a given filename for use in a URL, version independant.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Args:</th><td class="field-body"><ul class="first simple">
+<li>filename (str): The filename to be used in the URL.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><ul class="first last simple">
+<li>The correctly formatted filename (str).</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="batchapps.utils.format_dictionary">
+<tt class="descclassname">batchapps.utils.</tt><tt class="descname">format_dictionary</tt><big>(</big><em>dictionary</em><big>)</big><a class="reference internal" href="_modules/batchapps/utils.html#format_dictionary"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#batchapps.utils.format_dictionary" title="Permalink to this definition">¶</a></dt>
+<dd><p>Format parameter dictionary into a list for REST consumption.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Args:</th><td class="field-body"><ul class="first">
+<li><dl class="first docutils">
+<dt>dictionary (dict): parameter dict in the format</dt>
+<dd><p class="first last">{&#8216;parameter&#8217;: &#8216;value}.</p>
+</dd>
+</dl>
+</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><ul class="first last">
+<li><dl class="first docutils">
+<dt>REST list in the format</dt>
+<dd><p class="first last">[ {&#8216;Name&#8217;:&#8217;parameter}, {&#8216;Value&#8217;:&#8217;value&#8217;} ]</p>
+</dd>
+</dl>
+</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="batchapps.utils.valid_keys">
+<tt class="descclassname">batchapps.utils.</tt><tt class="descname">valid_keys</tt><big>(</big><em>resp_dict</em>, <em>search_keys</em><big>)</big><a class="reference internal" href="_modules/batchapps/utils.html#valid_keys"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#batchapps.utils.valid_keys" title="Permalink to this definition">¶</a></dt>
+<dd><p>Version independant checking if a list of keys are present in a
+given dictionary.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Args:</th><td class="field-body"><ul class="first">
+<li><p class="first">resp_dict (dict): I dictionary from a server response.</p>
+</li>
+<li><dl class="first docutils">
+<dt>search_keys (list): A list of keys to verify they are</dt>
+<dd><p class="first last">present in <tt class="docutils literal"><span class="pre">resp_dict</span></tt>.</p>
+</dd>
+</dl>
+</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><ul class="first last simple">
+<li><tt class="docutils literal"><span class="pre">True</span></tt> if all keys present in <tt class="docutils literal"><span class="pre">resp_dict</span></tt> else <tt class="docutils literal"><span class="pre">False</span></tt>.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<div class="section" id="listener">
+<h2>Listener<a class="headerlink" href="#listener" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="batchapps.utils.Listener">
+<em class="property">class </em><tt class="descclassname">batchapps.utils.</tt><tt class="descname">Listener</tt><big>(</big><em>process</em>, <em>*child</em><big>)</big><a class="reference internal" href="_modules/batchapps/utils.html#Listener"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#batchapps.utils.Listener" title="Permalink to this definition">¶</a></dt>
+<dd><p>Process wrapper object for starting, stopping and monitoring
+background subprocesses.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Attributes:</th><td class="field-body"><ul class="first last simple">
+<li>pid (int): The process pid.</li>
+<li>name (str): The process name.</li>
+<li>children (list): A list of dependent <a class="reference internal" href="#batchapps.utils.Listener" title="batchapps.utils.Listener"><tt class="xref py py-class docutils literal"><span class="pre">Listener</span></tt></a> objects.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<p>Create new listener.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Args:</th><td class="field-body"><ul class="first last">
+<li><dl class="first docutils">
+<dt>process (<a class="reference external" href="http://docs.python.org/library/multiprocessing.html#multiprocessing.Process" title="(in Python v2.7)"><tt class="xref py py-class docutils literal"><span class="pre">multiprocessing.Process</span></tt></a>): The process to be</dt>
+<dd><p class="first last">wrapped for monitoring</p>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>child (<a class="reference internal" href="#batchapps.utils.Listener" title="batchapps.utils.Listener"><tt class="xref py py-class docutils literal"><span class="pre">Listener</span></tt></a>): And child processes that should be</dt>
+<dd><p class="first last">stoped before the parent process is stopped.</p>
+</dd>
+</dl>
+</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<dl class="method">
+<dt id="batchapps.utils.Listener.listen">
+<tt class="descname">listen</tt><big>(</big><em>timeout=100</em><big>)</big><a class="reference internal" href="_modules/batchapps/utils.html#Listener.listen"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#batchapps.utils.Listener.listen" title="Permalink to this definition">¶</a></dt>
+<dd><p>Join the background process for a period of time.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Kwargs:</th><td class="field-body"><ul class="first">
+<li><dl class="first docutils">
+<dt>timeout (int): The number of seconds that the subprocess will</dt>
+<dd><p class="first last">be monitored. Default is 100 seconds. Is set to <tt class="docutils literal"><span class="pre">None</span></tt>,
+the process will be listened to indefinitely.</p>
+</dd>
+</dl>
+</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Raises:</th><td class="field-body"><p class="first last"><tt class="xref py py-class docutils literal"><span class="pre">ValueError</span></tt> if an invalid timeout is passed in.</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="batchapps.utils.Listener.stop">
+<tt class="descname">stop</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/batchapps/utils.html#Listener.stop"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#batchapps.utils.Listener.stop" title="Permalink to this definition">¶</a></dt>
+<dd><p>Terminate the background process</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="batchapps.utils.Listener.working">
+<tt class="descname">working</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/batchapps/utils.html#Listener.working"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#batchapps.utils.Listener.working" title="Permalink to this definition">¶</a></dt>
+<dd><p>Check if the background process is still running.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><tt class="docutils literal"><span class="pre">True</span></tt> if the process is still running, else <tt class="docutils literal"><span class="pre">False</span></tt>.</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">batchapps.utils</a><ul>
+<li><a class="reference internal" href="#listener">Listener</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="batch_apps.log.html"
+                        title="previous chapter">batchapps.log module</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="batch_apps.sample.cancel_job.html"
+                        title="next chapter">Sample Script - Cancel Job</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="_sources/batch_apps.utils.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="batch_apps.sample.cancel_job.html" title="Sample Script - Cancel Job"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="batch_apps.log.html" title="batchapps.log module"
+             >previous</a> |</li>
+        <li><a href="index.html">azure-batch-apps 0.2.0 documentation</a> &raquo;</li>
+          <li><a href="batch_apps.html" >batchapps package</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2014, Microsoft Corporation.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2.2.
+    </div>
+  </body>
+</html>

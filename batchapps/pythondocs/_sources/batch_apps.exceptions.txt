@@ -1,0 +1,7 @@
+batchapps.exceptions
+=============================
+
+.. automodule:: batchapps.exceptions
+    :members:
+    :undoc-members:
+    :show-inheritance:

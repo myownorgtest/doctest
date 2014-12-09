@@ -1,0 +1,954 @@
+<!DOCTYPE html><html xmlns:date="http://exslt.org/dates-and-times" lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0; user-scalable=0;">
+<meta charset="utf-8">
+<title>Windows Azure SDK for PHP » \WindowsAzure\Blob\Internal\IBlob</title>
+<meta name="author" content="Mike van Riel">
+<meta name="description" content="">
+<link href="../css/template.css" rel="stylesheet" media="all">
+<script src="../js/jquery-1.7.1.min.js" type="text/javascript"></script><script src="../js/jquery-ui-1.8.2.custom.min.js" type="text/javascript"></script><script src="../js/jquery.mousewheel.min.js" type="text/javascript"></script><script src="../js/bootstrap.js" type="text/javascript"></script><script src="../js/template.js" type="text/javascript"></script><script src="../js/prettify/prettify.min.js" type="text/javascript"></script><link rel="shortcut icon" href="../img/favicon.ico">
+<link rel="apple-touch-icon" href="../img/apple-touch-icon.png">
+<link rel="apple-touch-icon" sizes="72x72" href="../img/apple-touch-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="114x114" href="../img/apple-touch-icon-114x114.png">
+</head>
+<body>
+<div class="navbar navbar-fixed-top">
+<div class="navbar-inner"><div class="container">
+<a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse"><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></a><a class="brand" href="../index.html">Windows Azure SDK for PHP</a><div class="nav-collapse"><ul class="nav">
+<li class="dropdown">
+<a href="#api" class="dropdown-toggle" data-toggle="dropdown">
+                                    API Documentation <b class="caret"></b></a><ul class="dropdown-menu">
+<li><a>Namespaces</a></li>
+<li><a href="../namespaces/WindowsAzure.html"><i class="icon-th"></i> WindowsAzure</a></li>
+<li><a>Packages</a></li>
+<li><a href="../packages/WindowsAzure.html"><i class="icon-folder-open"></i> WindowsAzure</a></li>
+</ul>
+</li>
+<li class="dropdown" id="charts-menu">
+<a href="#charts" class="dropdown-toggle" data-toggle="dropdown">
+                                    Charts <b class="caret"></b></a><ul class="dropdown-menu"><li><a href="../graph_class.html"><i class="icon-list-alt"></i> Class hierarchy diagram</a></li></ul>
+</li>
+<li class="dropdown" id="reports-menu">
+<a href="#reports" class="dropdown-toggle" data-toggle="dropdown">
+                                    Reports <b class="caret"></b></a><ul class="dropdown-menu">
+<li><a href="../errors.html"><i class="icon-remove-sign"></i> Errors 
+                <span class="label label-info">385</span></a></li>
+<li><a href="../markers.html"><i class="icon-map-marker"></i> Markers 
+                <ul></ul></a></li>
+<li><a href="../deprecated.html"><i class="icon-stop"></i> Deprecated elements 
+                <span class="label label-info">0</span></a></li>
+</ul>
+</li>
+</ul></div>
+</div></div>
+<div class="go_to_top"><a href="#___" style="color: inherit">Back to top  <i class="icon-upload icon-white"></i></a></div>
+</div>
+<div id="___" class="container">
+<noscript><div class="alert alert-warning">
+                            Javascript is disabled; several features are only available
+                            if Javascript is enabled.
+                        </div></noscript>
+<div class="row">
+<div class="span4">
+<span class="btn-group visibility" data-toggle="buttons-checkbox"><button class="btn public active" title="Show public elements">Public</button><button class="btn protected" title="Show protected elements">Protected</button><button class="btn private" title="Show private elements">Private</button><button class="btn inherited active" title="Show inherited elements">Inherited</button></span><div class="btn-group view pull-right" data-toggle="buttons-radio">
+<button class="btn details" title="Show descriptions and method names"><i class="icon-list"></i></button><button class="btn simple" title="Show only method names"><i class="icon-align-justify"></i></button>
+</div>
+<ul class="side-nav nav nav-list">
+<li class="nav-header">
+<i class="icon-custom icon-method"></i> Methods</li>
+<li class="method public "><a href="#acquireLease" title="acquireLease :: Establishes an exclusive one-minute write lock on a blob. To write to a locked
+blob, a client must provide a lease ID."><span class="description">Establishes an exclusive one-minute write lock on a blob. To write to a locked
+blob, a client must provide a lease ID.</span><pre>acquireLease()</pre></a></li>
+<li class="method public "><a href="#breakLease" title="breakLease :: Ends the lease but ensure that another client cannot acquire a new lease until
+the current lease period has expired."><span class="description">Ends the lease but ensure that another client cannot acquire a new lease until
+the current lease period has expired.</span><pre>breakLease()</pre></a></li>
+<li class="method public "><a href="#clearBlobPages" title="clearBlobPages :: Clears a range of pages from the blob."><span class="description">Clears a range of pages from the blob.</span><pre>clearBlobPages()</pre></a></li>
+<li class="method public "><a href="#commitBlobBlocks" title="commitBlobBlocks :: This method writes a blob by specifying the list of block IDs that make up the
+blob. In order to be written as part of a blob, a block must have been
+successfully written to the server in a prior createBlobBlock method."><span class="description">This method writes a blob by specifying the list of block IDs that make up the
+blob. In order to be written as part of a blob, a block must have been
+successfully written to the server in a prior createBlobBlock method.</span><pre>commitBlobBlocks()</pre></a></li>
+<li class="method public "><a href="#copyBlob" title="copyBlob :: Copies a source blob to a destination blob within the same storage account."><span class="description">Copies a source blob to a destination blob within the same storage account.</span><pre>copyBlob()</pre></a></li>
+<li class="method public "><a href="#createBlobBlock" title="createBlobBlock :: Creates a new block to be committed as part of a block blob."><span class="description">Creates a new block to be committed as part of a block blob.</span><pre>createBlobBlock()</pre></a></li>
+<li class="method public "><a href="#createBlobPages" title="createBlobPages :: Creates a range of pages to a page blob."><span class="description">Creates a range of pages to a page blob.</span><pre>createBlobPages()</pre></a></li>
+<li class="method public "><a href="#createBlobSnapshot" title="createBlobSnapshot :: Creates a snapshot of a blob."><span class="description">Creates a snapshot of a blob.</span><pre>createBlobSnapshot()</pre></a></li>
+<li class="method public "><a href="#createBlockBlob" title="createBlockBlob :: Creates a new block blob or updates the content of an existing block blob."><span class="description">Creates a new block blob or updates the content of an existing block blob.</span><pre>createBlockBlob()</pre></a></li>
+<li class="method public "><a href="#createContainer" title="createContainer :: Creates a new container in the given storage account."><span class="description">Creates a new container in the given storage account.</span><pre>createContainer()</pre></a></li>
+<li class="method public "><a href="#createPageBlob" title="createPageBlob :: Creates a new page blob. Note that calling createPageBlob to create a page
+blob only initializes the blob."><span class="description">Creates a new page blob. Note that calling createPageBlob to create a page
+blob only initializes the blob.</span><pre>createPageBlob()</pre></a></li>
+<li class="method public "><a href="#deleteBlob" title="deleteBlob :: Deletes a blob or blob snapshot."><span class="description">Deletes a blob or blob snapshot.</span><pre>deleteBlob()</pre></a></li>
+<li class="method public "><a href="#deleteContainer" title="deleteContainer :: Creates a new container in the given storage account."><span class="description">Creates a new container in the given storage account.</span><pre>deleteContainer()</pre></a></li>
+<li class="method public "><a href="#getBlob" title="getBlob :: Reads or downloads a blob from the system, including its metadata and
+properties."><span class="description">Reads or downloads a blob from the system, including its metadata and
+properties.</span><pre>getBlob()</pre></a></li>
+<li class="method public "><a href="#getBlobMetadata" title="getBlobMetadata :: Returns all properties and metadata on the blob."><span class="description">Returns all properties and metadata on the blob.</span><pre>getBlobMetadata()</pre></a></li>
+<li class="method public "><a href="#getBlobProperties" title="getBlobProperties :: Returns all properties and metadata on the blob."><span class="description">Returns all properties and metadata on the blob.</span><pre>getBlobProperties()</pre></a></li>
+<li class="method public "><a href="#getContainerAcl" title="getContainerAcl :: Gets the access control list (ACL) and any container-level access policies
+for the container."><span class="description">Gets the access control list (ACL) and any container-level access policies
+for the container.</span><pre>getContainerAcl()</pre></a></li>
+<li class="method public "><a href="#getContainerMetadata" title="getContainerMetadata :: Returns only user-defined metadata for the specified container."><span class="description">Returns only user-defined metadata for the specified container.</span><pre>getContainerMetadata()</pre></a></li>
+<li class="method public "><a href="#getContainerProperties" title="getContainerProperties :: Returns all properties and metadata on the container."><span class="description">Returns all properties and metadata on the container.</span><pre>getContainerProperties()</pre></a></li>
+<li class="method public "><a href="#getServiceProperties" title="getServiceProperties :: Gets the properties of the Blob service."><span class="description">Gets the properties of the Blob service.</span><pre>getServiceProperties()</pre></a></li>
+<li class="method public "><a href="#listBlobBlocks" title="listBlobBlocks :: Retrieves the list of blocks that have been uploaded as part of a block blob."><span class="description">Retrieves the list of blocks that have been uploaded as part of a block blob.</span><pre>listBlobBlocks()</pre></a></li>
+<li class="method public "><a href="#listBlobs" title="listBlobs :: Lists all of the blobs in the given container."><span class="description">Lists all of the blobs in the given container.</span><pre>listBlobs()</pre></a></li>
+<li class="method public "><a href="#listContainers" title="listContainers :: Lists all of the containers in the given storage account."><span class="description">Lists all of the containers in the given storage account.</span><pre>listContainers()</pre></a></li>
+<li class="method public "><a href="#listPageBlobRanges" title="listPageBlobRanges :: Returns a list of active page ranges for a page blob. Active page ranges are
+those that have been populated with data."><span class="description">Returns a list of active page ranges for a page blob. Active page ranges are
+those that have been populated with data.</span><pre>listPageBlobRanges()</pre></a></li>
+<li class="method public "><a href="#releaseLease" title="releaseLease :: Frees the lease if it is no longer needed so that another client may
+immediately acquire a lease against the blob."><span class="description">Frees the lease if it is no longer needed so that another client may
+immediately acquire a lease against the blob.</span><pre>releaseLease()</pre></a></li>
+<li class="method public "><a href="#renewLease" title="renewLease :: Renews an existing lease"><span class="description">Renews an existing lease</span><pre>renewLease()</pre></a></li>
+<li class="method public "><a href="#setBlobMetadata" title="setBlobMetadata :: Sets metadata headers on the blob."><span class="description">Sets metadata headers on the blob.</span><pre>setBlobMetadata()</pre></a></li>
+<li class="method public "><a href="#setBlobProperties" title="setBlobProperties :: Sets system properties defined for a blob."><span class="description">Sets system properties defined for a blob.</span><pre>setBlobProperties()</pre></a></li>
+<li class="method public "><a href="#setContainerAcl" title="setContainerAcl :: Sets the ACL and any container-level access policies for the container."><span class="description">Sets the ACL and any container-level access policies for the container.</span><pre>setContainerAcl()</pre></a></li>
+<li class="method public "><a href="#setContainerMetadata" title="setContainerMetadata :: Sets metadata headers on the container."><span class="description">Sets metadata headers on the container.</span><pre>setContainerMetadata()</pre></a></li>
+<li class="method public "><a href="#setServiceProperties" title="setServiceProperties :: Sets the properties of the Blob service."><span class="description">Sets the properties of the Blob service.</span><pre>setServiceProperties()</pre></a></li>
+</ul>
+</div>
+<div class="span8">
+<a name="%5CWindowsAzure%5CBlob%5CInternal%5CIBlob" id="\WindowsAzure\Blob\Internal\IBlob"></a><ul class="breadcrumb">
+<li>
+<a href="../index.html"><i class="icon-custom icon-class"></i></a><span class="divider">\</span>
+</li>
+<li><a href="../namespaces/WindowsAzure.html">WindowsAzure</a></li>
+<span class="divider">\</span><li><a href="../namespaces/WindowsAzure.Blob.html">Blob</a></li>
+<span class="divider">\</span><li><a href="../namespaces/WindowsAzure.Blob.Internal.html">Internal</a></li>
+<li class="active">
+<span class="divider">\</span><a href="../classes/WindowsAzure.Blob.Internal.IBlob.html">IBlob</a>
+</li>
+</ul>
+<div href="../classes/WindowsAzure.Blob.Internal.IBlob.html" class="element interface">
+<p class="short_description">This interface has all REST APIs provided by Windows Azure for Blob service.</p>
+<div class="details">
+<p class="long_description"></p>
+<table class="table table-bordered">
+<tr>
+<th>category</th>
+<td>Microsoft</td>
+</tr>
+<tr>
+<th>package</th>
+<td><a href="../packages/WindowsAzure.Blob.Internal.html">WindowsAzure\Blob\Internal</a></td>
+</tr>
+<tr>
+<th>author</th>
+<td><a href="mailto:azurephpsdk@microsoft.com">Azure PHP SDK</a></td>
+</tr>
+<tr>
+<th>copyright</th>
+<td>2012 Microsoft Corporation</td>
+</tr>
+<tr>
+<th>license</th>
+<td><a href="http://www.apache.org/licenses/LICENSE-2.0">Apache License 2.0</a></td>
+</tr>
+<tr>
+<th>version</th>
+<td>Release: @package_version@</td>
+</tr>
+<tr>
+<th>link</th>
+<td><a href="https://github.com/windowsazure/azure-sdk-for-php">https://github.com/windowsazure/azure-sdk-for-php</a></td>
+</tr>
+<tr>
+<th>see</th>
+<td>\WindowsAzure\Blob\Internal\http://msdn.microsoft.com/en-us/library/windowsazure/dd135733.aspx</td>
+</tr>
+</table>
+<h3>
+<i class="icon-custom icon-method"></i> Methods</h3>
+<a name="acquireLease" id="acquireLease"></a><div class="element clickable method public acquireLease" data-toggle="collapse" data-target=".acquireLease .collapse">
+<h2>Establishes an exclusive one-minute write lock on a blob. To write to a locked
+blob, a client must provide a lease ID.</h2>
+<pre>acquireLease(string $container, string $blob, \Models\AcquireLeaseOptions $options) : \Models\AcquireLeaseResult</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<p class="long_description"></p>
+<table class="table table-bordered"><tr>
+<th>see</th>
+<td>\http://msdn.microsoft.com/en-us/library/windowsazure/ee691972.aspx</td>
+</tr></table>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$container</h4>
+<code>string</code><p>name of the container</p></div>
+<div class="subelement argument">
+<h4>$blob</h4>
+<code>string</code><p>name of the blob</p></div>
+<div class="subelement argument">
+<h4>$options</h4>
+<code>\Models\AcquireLeaseOptions</code><p>optional parameters</p></div>
+<h3>Returns</h3>
+<div class="subelement response"><code>\Models\AcquireLeaseResult</code></div>
+</div></div>
+</div>
+<a name="breakLease" id="breakLease"></a><div class="element clickable method public breakLease" data-toggle="collapse" data-target=".breakLease .collapse">
+<h2>Ends the lease but ensure that another client cannot acquire a new lease until
+the current lease period has expired.</h2>
+<pre>breakLease(string $container, string $blob, string $leaseId, \Models\BlobServiceOptions $options) : \none</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<p class="long_description"></p>
+<table class="table table-bordered"><tr>
+<th>see</th>
+<td>\http://msdn.microsoft.com/en-us/library/windowsazure/ee691972.aspx</td>
+</tr></table>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$container</h4>
+<code>string</code><p>name of the container</p></div>
+<div class="subelement argument">
+<h4>$blob</h4>
+<code>string</code><p>name of the blob</p></div>
+<div class="subelement argument">
+<h4>$leaseId</h4>
+<code>string</code><p>lease id when acquiring</p></div>
+<div class="subelement argument">
+<h4>$options</h4>
+<code>\Models\BlobServiceOptions</code><p>optional parameters</p></div>
+<h3>Returns</h3>
+<div class="subelement response"><code>\none</code></div>
+</div></div>
+</div>
+<a name="clearBlobPages" id="clearBlobPages"></a><div class="element clickable method public clearBlobPages" data-toggle="collapse" data-target=".clearBlobPages .collapse">
+<h2>Clears a range of pages from the blob.</h2>
+<pre>clearBlobPages(string $container, string $blob, \Models\PageRange $range, \Models\CreateBlobPagesOptions $options) : \Models\CreateBlobPagesResult.</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<p class="long_description"></p>
+<table class="table table-bordered"><tr>
+<th>see</th>
+<td>\http://msdn.microsoft.com/en-us/library/windowsazure/ee691975.aspx</td>
+</tr></table>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$container</h4>
+<code>string</code><p>name of the container</p></div>
+<div class="subelement argument">
+<h4>$blob</h4>
+<code>string</code><p>name of the blob</p></div>
+<div class="subelement argument">
+<h4>$range</h4>
+<code>\Models\PageRange</code><p>Can be up to the value of the blob's full size.</p>
+</div>
+<div class="subelement argument">
+<h4>$options</h4>
+<code>\Models\CreateBlobPagesOptions</code><p>optional parameters</p></div>
+<h3>Returns</h3>
+<div class="subelement response"><code>\Models\CreateBlobPagesResult.</code></div>
+</div></div>
+</div>
+<a name="commitBlobBlocks" id="commitBlobBlocks"></a><div class="element clickable method public commitBlobBlocks" data-toggle="collapse" data-target=".commitBlobBlocks .collapse">
+<h2>This method writes a blob by specifying the list of block IDs that make up the
+blob. In order to be written as part of a blob, a block must have been
+successfully written to the server in a prior createBlobBlock method.</h2>
+<pre>commitBlobBlocks(string $container, string $blob, \Models\BlockList $blockList, \Models\CommitBlobBlocksOptions $options) : \none.</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<p class="long_description"><p>You can call Put Block List to update a blob by uploading only those blocks
+that have changed, then committing the new and existing blocks together.
+You can do this by specifying whether to commit a block from the committed
+block list or from the uncommitted block list, or to commit the most recently
+uploaded version of the block, whichever list it may belong to.</p></p>
+<table class="table table-bordered"><tr>
+<th>see</th>
+<td>\http://msdn.microsoft.com/en-us/library/windowsazure/dd179467.aspx</td>
+</tr></table>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$container</h4>
+<code>string</code><p>name of the container</p></div>
+<div class="subelement argument">
+<h4>$blob</h4>
+<code>string</code><p>name of the blob</p></div>
+<div class="subelement argument">
+<h4>$blockList</h4>
+<code>\Models\BlockList</code><p>the block list entries</p></div>
+<div class="subelement argument">
+<h4>$options</h4>
+<code>\Models\CommitBlobBlocksOptions</code><p>optional parameters</p></div>
+<h3>Returns</h3>
+<div class="subelement response"><code>\none.</code></div>
+</div></div>
+</div>
+<a name="copyBlob" id="copyBlob"></a><div class="element clickable method public copyBlob" data-toggle="collapse" data-target=".copyBlob .collapse">
+<h2>Copies a source blob to a destination blob within the same storage account.</h2>
+<pre>copyBlob(string $destinationContainer, string $destinationBlob, string $sourceContainer, string $sourceBlob, \Models\CopyBlobOptions $options) : \CopyBlobResult</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<p class="long_description"></p>
+<table class="table table-bordered"><tr>
+<th>see</th>
+<td>\http://msdn.microsoft.com/en-us/library/windowsazure/dd894037.aspx</td>
+</tr></table>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$destinationContainer</h4>
+<code>string</code><p>name of container</p></div>
+<div class="subelement argument">
+<h4>$destinationBlob</h4>
+<code>string</code><p>name of blob</p></div>
+<div class="subelement argument">
+<h4>$sourceContainer</h4>
+<code>string</code><p>name of container</p></div>
+<div class="subelement argument">
+<h4>$sourceBlob</h4>
+<code>string</code><p>name of blob</p></div>
+<div class="subelement argument">
+<h4>$options</h4>
+<code>\Models\CopyBlobOptions</code><p>optional parameters</p></div>
+<h3>Returns</h3>
+<div class="subelement response"><code>\CopyBlobResult</code></div>
+</div></div>
+</div>
+<a name="createBlobBlock" id="createBlobBlock"></a><div class="element clickable method public createBlobBlock" data-toggle="collapse" data-target=".createBlobBlock .collapse">
+<h2>Creates a new block to be committed as part of a block blob.</h2>
+<pre>createBlobBlock(string $container, string $blob, string $blockId, string $content, \Models\CreateBlobBlockOptions $options) : \none.</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<p class="long_description"></p>
+<table class="table table-bordered"><tr>
+<th>see</th>
+<td>\http://msdn.microsoft.com/en-us/library/windowsazure/dd135726.aspx</td>
+</tr></table>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$container</h4>
+<code>string</code><p>name of the container</p></div>
+<div class="subelement argument">
+<h4>$blob</h4>
+<code>string</code><p>name of the blob</p></div>
+<div class="subelement argument">
+<h4>$blockId</h4>
+<code>string</code><p>must be less than or equal to 64 bytes in size. For a given blob, the length of the value specified for the blockid parameter must be the same size for each block.</p></div>
+<div class="subelement argument">
+<h4>$content</h4>
+<code>string</code><p>the blob block contents</p></div>
+<div class="subelement argument">
+<h4>$options</h4>
+<code>\Models\CreateBlobBlockOptions</code><p>optional parameters</p></div>
+<h3>Returns</h3>
+<div class="subelement response"><code>\none.</code></div>
+</div></div>
+</div>
+<a name="createBlobPages" id="createBlobPages"></a><div class="element clickable method public createBlobPages" data-toggle="collapse" data-target=".createBlobPages .collapse">
+<h2>Creates a range of pages to a page blob.</h2>
+<pre>createBlobPages(string $container, string $blob, \Models\PageRange $range, string $content, \Models\CreateBlobPagesOptions $options) : \Models\CreateBlobPagesResult.</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<p class="long_description"></p>
+<table class="table table-bordered"><tr>
+<th>see</th>
+<td>\http://msdn.microsoft.com/en-us/library/windowsazure/ee691975.aspx</td>
+</tr></table>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$container</h4>
+<code>string</code><p>name of the container</p></div>
+<div class="subelement argument">
+<h4>$blob</h4>
+<code>string</code><p>name of the blob</p></div>
+<div class="subelement argument">
+<h4>$range</h4>
+<code>\Models\PageRange</code><p>Can be up to 4 MB in size</p></div>
+<div class="subelement argument">
+<h4>$content</h4>
+<code>string</code><p>the blob contents</p></div>
+<div class="subelement argument">
+<h4>$options</h4>
+<code>\Models\CreateBlobPagesOptions</code><p>optional parameters</p></div>
+<h3>Returns</h3>
+<div class="subelement response"><code>\Models\CreateBlobPagesResult.</code></div>
+</div></div>
+</div>
+<a name="createBlobSnapshot" id="createBlobSnapshot"></a><div class="element clickable method public createBlobSnapshot" data-toggle="collapse" data-target=".createBlobSnapshot .collapse">
+<h2>Creates a snapshot of a blob.</h2>
+<pre>createBlobSnapshot(string $container, string $blob, \Models\CreateBlobSnapshotOptions $options) : \Models\CreateBlobSnapshotResult</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<p class="long_description"></p>
+<table class="table table-bordered"><tr>
+<th>see</th>
+<td>\http://msdn.microsoft.com/en-us/library/windowsazure/ee691971.aspx</td>
+</tr></table>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$container</h4>
+<code>string</code><p>name of the container</p></div>
+<div class="subelement argument">
+<h4>$blob</h4>
+<code>string</code><p>name of the blob</p></div>
+<div class="subelement argument">
+<h4>$options</h4>
+<code>\Models\CreateBlobSnapshotOptions</code><p>optional parameters</p></div>
+<h3>Returns</h3>
+<div class="subelement response"><code>\Models\CreateBlobSnapshotResult</code></div>
+</div></div>
+</div>
+<a name="createBlockBlob" id="createBlockBlob"></a><div class="element clickable method public createBlockBlob" data-toggle="collapse" data-target=".createBlockBlob .collapse">
+<h2>Creates a new block blob or updates the content of an existing block blob.</h2>
+<pre>createBlockBlob(string $container, string $blob, string $content, \Models\CreateBlobOptions $options) : \CopyBlobResult</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<p class="long_description"><p>Updating an existing block blob overwrites any existing metadata on the blob.
+Partial updates are not supported with createBlockBlob; the content of the
+existing blob is overwritten with the content of the new blob. To perform a
+partial update of the content of a block blob, use the createBlockList method.</p></p>
+<table class="table table-bordered"><tr>
+<th>see</th>
+<td>\http://msdn.microsoft.com/en-us/library/windowsazure/dd179451.aspx</td>
+</tr></table>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$container</h4>
+<code>string</code><p>name of the container</p></div>
+<div class="subelement argument">
+<h4>$blob</h4>
+<code>string</code><p>name of the blob</p></div>
+<div class="subelement argument">
+<h4>$content</h4>
+<code>string</code><p>content of the blob</p></div>
+<div class="subelement argument">
+<h4>$options</h4>
+<code>\Models\CreateBlobOptions</code><p>optional parameters</p></div>
+<h3>Returns</h3>
+<div class="subelement response"><code>\CopyBlobResult</code></div>
+</div></div>
+</div>
+<a name="createContainer" id="createContainer"></a><div class="element clickable method public createContainer" data-toggle="collapse" data-target=".createContainer .collapse">
+<h2>Creates a new container in the given storage account.</h2>
+<pre>createContainer(string $container, \Models\CreateContainerOptions $options) : \none.</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<p class="long_description"></p>
+<table class="table table-bordered"><tr>
+<th>see</th>
+<td>\http://msdn.microsoft.com/en-us/library/windowsazure/dd179468.aspx</td>
+</tr></table>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$container</h4>
+<code>string</code><p>name</p></div>
+<div class="subelement argument">
+<h4>$options</h4>
+<code>\Models\CreateContainerOptions</code><p>optional parameters</p></div>
+<h3>Returns</h3>
+<div class="subelement response"><code>\none.</code></div>
+</div></div>
+</div>
+<a name="createPageBlob" id="createPageBlob"></a><div class="element clickable method public createPageBlob" data-toggle="collapse" data-target=".createPageBlob .collapse">
+<h2>Creates a new page blob. Note that calling createPageBlob to create a page
+blob only initializes the blob.</h2>
+<pre>createPageBlob(string $container, string $blob, int $length, \Models\CreateBlobOptions $options) : \CopyBlobResult</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<p class="long_description"><p>To add content to a page blob, call createBlobPages method.</p></p>
+<table class="table table-bordered"><tr>
+<th>see</th>
+<td>\http://msdn.microsoft.com/en-us/library/windowsazure/dd179451.aspx</td>
+</tr></table>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$container</h4>
+<code>string</code><p>name of the container</p></div>
+<div class="subelement argument">
+<h4>$blob</h4>
+<code>string</code><p>name of the blob</p></div>
+<div class="subelement argument">
+<h4>$length</h4>
+<code>int</code><p>specifies the maximum size for the page blob, up to 1 TB. The page blob size must be aligned to a 512-byte boundary.</p>
+</div>
+<div class="subelement argument">
+<h4>$options</h4>
+<code>\Models\CreateBlobOptions</code><p>optional parameters</p></div>
+<h3>Returns</h3>
+<div class="subelement response"><code>\CopyBlobResult</code></div>
+</div></div>
+</div>
+<a name="deleteBlob" id="deleteBlob"></a><div class="element clickable method public deleteBlob" data-toggle="collapse" data-target=".deleteBlob .collapse">
+<h2>Deletes a blob or blob snapshot.</h2>
+<pre>deleteBlob(string $container, string $blob, \Models\DeleteBlobOptions $options) : \none</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<p class="long_description"><p>Note that if the snapshot entry is specified in the $options then only this
+blob snapshot is deleted. To delete all blob snapshots, do not set Snapshot
+and just set getDeleteSnaphotsOnly to true.</p></p>
+<table class="table table-bordered"><tr>
+<th>see</th>
+<td>\http://msdn.microsoft.com/en-us/library/windowsazure/dd179413.aspx</td>
+</tr></table>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$container</h4>
+<code>string</code><p>name of the container</p></div>
+<div class="subelement argument">
+<h4>$blob</h4>
+<code>string</code><p>name of the blob</p></div>
+<div class="subelement argument">
+<h4>$options</h4>
+<code>\Models\DeleteBlobOptions</code><p>optional parameters</p></div>
+<h3>Returns</h3>
+<div class="subelement response"><code>\none</code></div>
+</div></div>
+</div>
+<a name="deleteContainer" id="deleteContainer"></a><div class="element clickable method public deleteContainer" data-toggle="collapse" data-target=".deleteContainer .collapse">
+<h2>Creates a new container in the given storage account.</h2>
+<pre>deleteContainer(string $container, \Models\DeleteContainerOptions $options) : \none.</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<p class="long_description"></p>
+<table class="table table-bordered"><tr>
+<th>see</th>
+<td>\http://msdn.microsoft.com/en-us/library/windowsazure/dd179408.aspx</td>
+</tr></table>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$container</h4>
+<code>string</code><p>name</p></div>
+<div class="subelement argument">
+<h4>$options</h4>
+<code>\Models\DeleteContainerOptions</code><p>optional parameters</p></div>
+<h3>Returns</h3>
+<div class="subelement response"><code>\none.</code></div>
+</div></div>
+</div>
+<a name="getBlob" id="getBlob"></a><div class="element clickable method public getBlob" data-toggle="collapse" data-target=".getBlob .collapse">
+<h2>Reads or downloads a blob from the system, including its metadata and
+properties.</h2>
+<pre>getBlob(string $container, string $blob, \Models\GetBlobOptions $options) : \Models\GetBlobResult</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<p class="long_description"></p>
+<table class="table table-bordered"><tr>
+<th>see</th>
+<td>\http://msdn.microsoft.com/en-us/library/windowsazure/dd179440.aspx</td>
+</tr></table>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$container</h4>
+<code>string</code><p>name of the container</p></div>
+<div class="subelement argument">
+<h4>$blob</h4>
+<code>string</code><p>name of the blob</p></div>
+<div class="subelement argument">
+<h4>$options</h4>
+<code>\Models\GetBlobOptions</code><p>optional parameters</p></div>
+<h3>Returns</h3>
+<div class="subelement response"><code>\Models\GetBlobResult</code></div>
+</div></div>
+</div>
+<a name="getBlobMetadata" id="getBlobMetadata"></a><div class="element clickable method public getBlobMetadata" data-toggle="collapse" data-target=".getBlobMetadata .collapse">
+<h2>Returns all properties and metadata on the blob.</h2>
+<pre>getBlobMetadata(string $container, string $blob, \Models\GetBlobMetadataOptions $options) : \Models\GetBlobMetadataResult</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<p class="long_description"></p>
+<table class="table table-bordered"><tr>
+<th>see</th>
+<td>\http://msdn.microsoft.com/en-us/library/windowsazure/dd179350.aspx</td>
+</tr></table>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$container</h4>
+<code>string</code><p>name of the container</p></div>
+<div class="subelement argument">
+<h4>$blob</h4>
+<code>string</code><p>name of the blob</p></div>
+<div class="subelement argument">
+<h4>$options</h4>
+<code>\Models\GetBlobMetadataOptions</code><p>optional parameters</p></div>
+<h3>Returns</h3>
+<div class="subelement response"><code>\Models\GetBlobMetadataResult</code></div>
+</div></div>
+</div>
+<a name="getBlobProperties" id="getBlobProperties"></a><div class="element clickable method public getBlobProperties" data-toggle="collapse" data-target=".getBlobProperties .collapse">
+<h2>Returns all properties and metadata on the blob.</h2>
+<pre>getBlobProperties(string $container, string $blob, \Models\GetBlobPropertiesOptions $options) : \Models\GetBlobPropertiesResult</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<p class="long_description"></p>
+<table class="table table-bordered"><tr>
+<th>see</th>
+<td>\http://msdn.microsoft.com/en-us/library/windowsazure/dd179394.aspx</td>
+</tr></table>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$container</h4>
+<code>string</code><p>name of the container</p></div>
+<div class="subelement argument">
+<h4>$blob</h4>
+<code>string</code><p>name of the blob</p></div>
+<div class="subelement argument">
+<h4>$options</h4>
+<code>\Models\GetBlobPropertiesOptions</code><p>optional parameters</p></div>
+<h3>Returns</h3>
+<div class="subelement response"><code>\Models\GetBlobPropertiesResult</code></div>
+</div></div>
+</div>
+<a name="getContainerAcl" id="getContainerAcl"></a><div class="element clickable method public getContainerAcl" data-toggle="collapse" data-target=".getContainerAcl .collapse">
+<h2>Gets the access control list (ACL) and any container-level access policies
+for the container.</h2>
+<pre>getContainerAcl(string $container, \Models\BlobServiceOptions $options) : \Models\GetContainerAclResult</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<p class="long_description"></p>
+<table class="table table-bordered"><tr>
+<th>see</th>
+<td>\http://msdn.microsoft.com/en-us/library/windowsazure/dd179469.aspx</td>
+</tr></table>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$container</h4>
+<code>string</code><p>name</p></div>
+<div class="subelement argument">
+<h4>$options</h4>
+<code>\Models\BlobServiceOptions</code><p>optional parameters</p></div>
+<h3>Returns</h3>
+<div class="subelement response"><code>\Models\GetContainerAclResult</code></div>
+</div></div>
+</div>
+<a name="getContainerMetadata" id="getContainerMetadata"></a><div class="element clickable method public getContainerMetadata" data-toggle="collapse" data-target=".getContainerMetadata .collapse">
+<h2>Returns only user-defined metadata for the specified container.</h2>
+<pre>getContainerMetadata(string $container, \Models\BlobServiceOptions $options) : \Models\GetContainerPropertiesResult</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<p class="long_description"></p>
+<table class="table table-bordered"><tr>
+<th>see</th>
+<td>\http://msdn.microsoft.com/en-us/library/windowsazure/ee691976.aspx</td>
+</tr></table>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$container</h4>
+<code>string</code><p>name</p></div>
+<div class="subelement argument">
+<h4>$options</h4>
+<code>\Models\BlobServiceOptions</code><p>optional parameters</p></div>
+<h3>Returns</h3>
+<div class="subelement response"><code>\Models\GetContainerPropertiesResult</code></div>
+</div></div>
+</div>
+<a name="getContainerProperties" id="getContainerProperties"></a><div class="element clickable method public getContainerProperties" data-toggle="collapse" data-target=".getContainerProperties .collapse">
+<h2>Returns all properties and metadata on the container.</h2>
+<pre>getContainerProperties(string $container, \Models\BlobServiceOptions $options) : \Models\GetContainerPropertiesResult</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<p class="long_description"></p>
+<table class="table table-bordered"><tr>
+<th>see</th>
+<td>\http://msdn.microsoft.com/en-us/library/windowsazure/dd179370.aspx</td>
+</tr></table>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$container</h4>
+<code>string</code><p>name</p></div>
+<div class="subelement argument">
+<h4>$options</h4>
+<code>\Models\BlobServiceOptions</code><p>optional parameters</p></div>
+<h3>Returns</h3>
+<div class="subelement response"><code>\Models\GetContainerPropertiesResult</code></div>
+</div></div>
+</div>
+<a name="getServiceProperties" id="getServiceProperties"></a><div class="element clickable method public getServiceProperties" data-toggle="collapse" data-target=".getServiceProperties .collapse">
+<h2>Gets the properties of the Blob service.</h2>
+<pre>getServiceProperties(\Models\BlobServiceOptions $options) : <a href="../classes/WindowsAzure.Common.Models.GetServicePropertiesResult.html">\WindowsAzure\Common\Models\GetServicePropertiesResult</a></pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<p class="long_description"></p>
+<table class="table table-bordered"><tr>
+<th>see</th>
+<td>\http://msdn.microsoft.com/en-us/library/windowsazure/hh452239.aspx</td>
+</tr></table>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$options</h4>
+<code>\Models\BlobServiceOptions</code><p>optional blob service options.</p></div>
+<h3>Returns</h3>
+<div class="subelement response"><code><a href="../classes/WindowsAzure.Common.Models.GetServicePropertiesResult.html">\WindowsAzure\Common\Models\GetServicePropertiesResult</a></code></div>
+</div></div>
+</div>
+<a name="listBlobBlocks" id="listBlobBlocks"></a><div class="element clickable method public listBlobBlocks" data-toggle="collapse" data-target=".listBlobBlocks .collapse">
+<h2>Retrieves the list of blocks that have been uploaded as part of a block blob.</h2>
+<pre>listBlobBlocks(string $container, string $blob, \Models\ListBlobBlocksOptions $options) : \Models\ListBlobBlocksResult</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<p class="long_description"><p>There are two block lists maintained for a blob:
+1) Committed Block List: The list of blocks that have been successfully
+   committed to a given blob with commitBlobBlocks.
+2) Uncommitted Block List: The list of blocks that have been uploaded for a
+   blob using Put Block (REST API), but that have not yet been committed.
+   These blocks are stored in Windows Azure in association with a blob, but do
+   not yet form part of the blob.</p></p>
+<table class="table table-bordered"><tr>
+<th>see</th>
+<td>\http://msdn.microsoft.com/en-us/library/windowsazure/dd179400.aspx</td>
+</tr></table>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$container</h4>
+<code>string</code><p>name of the container</p></div>
+<div class="subelement argument">
+<h4>$blob</h4>
+<code>string</code><p>name of the blob</p></div>
+<div class="subelement argument">
+<h4>$options</h4>
+<code>\Models\ListBlobBlocksOptions</code><p>optional parameters</p></div>
+<h3>Returns</h3>
+<div class="subelement response"><code>\Models\ListBlobBlocksResult</code></div>
+</div></div>
+</div>
+<a name="listBlobs" id="listBlobs"></a><div class="element clickable method public listBlobs" data-toggle="collapse" data-target=".listBlobs .collapse">
+<h2>Lists all of the blobs in the given container.</h2>
+<pre>listBlobs(string $container, \Models\ListBlobsOptions $options) : \Models\ListBlobsResult</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<p class="long_description"></p>
+<table class="table table-bordered"><tr>
+<th>see</th>
+<td>\http://msdn.microsoft.com/en-us/library/windowsazure/dd135734.aspx</td>
+</tr></table>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$container</h4>
+<code>string</code><p>name</p></div>
+<div class="subelement argument">
+<h4>$options</h4>
+<code>\Models\ListBlobsOptions</code><p>optional parameters</p></div>
+<h3>Returns</h3>
+<div class="subelement response"><code>\Models\ListBlobsResult</code></div>
+</div></div>
+</div>
+<a name="listContainers" id="listContainers"></a><div class="element clickable method public listContainers" data-toggle="collapse" data-target=".listContainers .collapse">
+<h2>Lists all of the containers in the given storage account.</h2>
+<pre>listContainers(\Models\ListContainersOptions $options) : <a href="../classes/WindowsAzure.Blob.Models.ListContainersResult.html">\WindowsAzure\Blob\Models\ListContainersResult</a></pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<p class="long_description"></p>
+<table class="table table-bordered"><tr>
+<th>see</th>
+<td>\http://msdn.microsoft.com/en-us/library/windowsazure/dd179352.aspx</td>
+</tr></table>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$options</h4>
+<code>\Models\ListContainersOptions</code><p>optional parameters</p></div>
+<h3>Returns</h3>
+<div class="subelement response"><code><a href="../classes/WindowsAzure.Blob.Models.ListContainersResult.html">\WindowsAzure\Blob\Models\ListContainersResult</a></code></div>
+</div></div>
+</div>
+<a name="listPageBlobRanges" id="listPageBlobRanges"></a><div class="element clickable method public listPageBlobRanges" data-toggle="collapse" data-target=".listPageBlobRanges .collapse">
+<h2>Returns a list of active page ranges for a page blob. Active page ranges are
+those that have been populated with data.</h2>
+<pre>listPageBlobRanges(string $container, string $blob, \Models\ListPageBlobRangesOptions $options) : \Models\ListPageBlobRangesResult</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<p class="long_description"></p>
+<table class="table table-bordered"><tr>
+<th>see</th>
+<td>\http://msdn.microsoft.com/en-us/library/windowsazure/ee691973.aspx</td>
+</tr></table>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$container</h4>
+<code>string</code><p>name of the container</p></div>
+<div class="subelement argument">
+<h4>$blob</h4>
+<code>string</code><p>name of the blob</p></div>
+<div class="subelement argument">
+<h4>$options</h4>
+<code>\Models\ListPageBlobRangesOptions</code><p>optional parameters</p></div>
+<h3>Returns</h3>
+<div class="subelement response"><code>\Models\ListPageBlobRangesResult</code></div>
+</div></div>
+</div>
+<a name="releaseLease" id="releaseLease"></a><div class="element clickable method public releaseLease" data-toggle="collapse" data-target=".releaseLease .collapse">
+<h2>Frees the lease if it is no longer needed so that another client may
+immediately acquire a lease against the blob.</h2>
+<pre>releaseLease(string $container, string $blob, string $leaseId, \Models\BlobServiceOptions $options) : \none</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<p class="long_description"></p>
+<table class="table table-bordered"><tr>
+<th>see</th>
+<td>\http://msdn.microsoft.com/en-us/library/windowsazure/ee691972.aspx</td>
+</tr></table>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$container</h4>
+<code>string</code><p>name of the container</p></div>
+<div class="subelement argument">
+<h4>$blob</h4>
+<code>string</code><p>name of the blob</p></div>
+<div class="subelement argument">
+<h4>$leaseId</h4>
+<code>string</code><p>lease id when acquiring</p></div>
+<div class="subelement argument">
+<h4>$options</h4>
+<code>\Models\BlobServiceOptions</code><p>optional parameters</p></div>
+<h3>Returns</h3>
+<div class="subelement response"><code>\none</code></div>
+</div></div>
+</div>
+<a name="renewLease" id="renewLease"></a><div class="element clickable method public renewLease" data-toggle="collapse" data-target=".renewLease .collapse">
+<h2>Renews an existing lease</h2>
+<pre>renewLease(string $container, string $blob, string $leaseId, \Models\BlobServiceOptions $options) : \Models\AcquireLeaseResult</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<p class="long_description"></p>
+<table class="table table-bordered"><tr>
+<th>see</th>
+<td>\http://msdn.microsoft.com/en-us/library/windowsazure/ee691972.aspx</td>
+</tr></table>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$container</h4>
+<code>string</code><p>name of the container</p></div>
+<div class="subelement argument">
+<h4>$blob</h4>
+<code>string</code><p>name of the blob</p></div>
+<div class="subelement argument">
+<h4>$leaseId</h4>
+<code>string</code><p>lease id when acquiring</p></div>
+<div class="subelement argument">
+<h4>$options</h4>
+<code>\Models\BlobServiceOptions</code><p>optional parameters</p></div>
+<h3>Returns</h3>
+<div class="subelement response"><code>\Models\AcquireLeaseResult</code></div>
+</div></div>
+</div>
+<a name="setBlobMetadata" id="setBlobMetadata"></a><div class="element clickable method public setBlobMetadata" data-toggle="collapse" data-target=".setBlobMetadata .collapse">
+<h2>Sets metadata headers on the blob.</h2>
+<pre>setBlobMetadata(string $container, string $blob, array $metadata, \Models\SetBlobMetadataOptions $options) : \Models\SetBlobMetadataResult</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<p class="long_description"></p>
+<table class="table table-bordered"><tr>
+<th>see</th>
+<td>\http://msdn.microsoft.com/en-us/library/windowsazure/dd179414.aspx</td>
+</tr></table>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$container</h4>
+<code>string</code><p>name of the container</p></div>
+<div class="subelement argument">
+<h4>$blob</h4>
+<code>string</code><p>name of the blob</p></div>
+<div class="subelement argument">
+<h4>$metadata</h4>
+<code>array</code><p>key/value pair representation</p>
+</div>
+<div class="subelement argument">
+<h4>$options</h4>
+<code>\Models\SetBlobMetadataOptions</code><p>optional parameters</p></div>
+<h3>Returns</h3>
+<div class="subelement response"><code>\Models\SetBlobMetadataResult</code></div>
+</div></div>
+</div>
+<a name="setBlobProperties" id="setBlobProperties"></a><div class="element clickable method public setBlobProperties" data-toggle="collapse" data-target=".setBlobProperties .collapse">
+<h2>Sets system properties defined for a blob.</h2>
+<pre>setBlobProperties(string $container, string $blob, \Models\SetBlobPropertiesOptions $options) : \Models\SetBlobPropertiesResult</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<p class="long_description"></p>
+<table class="table table-bordered"><tr>
+<th>see</th>
+<td>\http://msdn.microsoft.com/en-us/library/windowsazure/ee691966.aspx</td>
+</tr></table>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$container</h4>
+<code>string</code><p>name of the container</p></div>
+<div class="subelement argument">
+<h4>$blob</h4>
+<code>string</code><p>name of the blob</p></div>
+<div class="subelement argument">
+<h4>$options</h4>
+<code>\Models\SetBlobPropertiesOptions</code><p>optional parameters</p></div>
+<h3>Returns</h3>
+<div class="subelement response"><code>\Models\SetBlobPropertiesResult</code></div>
+</div></div>
+</div>
+<a name="setContainerAcl" id="setContainerAcl"></a><div class="element clickable method public setContainerAcl" data-toggle="collapse" data-target=".setContainerAcl .collapse">
+<h2>Sets the ACL and any container-level access policies for the container.</h2>
+<pre>setContainerAcl(string $container, \Models\ContainerAcl $acl, \Models\BlobServiceOptions $options) : \none.</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<p class="long_description"></p>
+<table class="table table-bordered"><tr>
+<th>see</th>
+<td>\http://msdn.microsoft.com/en-us/library/windowsazure/dd179391.aspx</td>
+</tr></table>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$container</h4>
+<code>string</code><p>name</p></div>
+<div class="subelement argument">
+<h4>$acl</h4>
+<code>\Models\ContainerAcl</code><p>access control list for container</p></div>
+<div class="subelement argument">
+<h4>$options</h4>
+<code>\Models\BlobServiceOptions</code><p>optional parameters</p></div>
+<h3>Returns</h3>
+<div class="subelement response"><code>\none.</code></div>
+</div></div>
+</div>
+<a name="setContainerMetadata" id="setContainerMetadata"></a><div class="element clickable method public setContainerMetadata" data-toggle="collapse" data-target=".setContainerMetadata .collapse">
+<h2>Sets metadata headers on the container.</h2>
+<pre>setContainerMetadata(string $container, array $metadata, \Models\SetContainerMetadataOptions $options) : \none.</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<p class="long_description"></p>
+<table class="table table-bordered"><tr>
+<th>see</th>
+<td>\http://msdn.microsoft.com/en-us/library/windowsazure/dd179362.aspx</td>
+</tr></table>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$container</h4>
+<code>string</code><p>name</p></div>
+<div class="subelement argument">
+<h4>$metadata</h4>
+<code>array</code><p>metadata key/value pair.</p>
+</div>
+<div class="subelement argument">
+<h4>$options</h4>
+<code>\Models\SetContainerMetadataOptions</code><p>optional parameters</p></div>
+<h3>Returns</h3>
+<div class="subelement response"><code>\none.</code></div>
+</div></div>
+</div>
+<a name="setServiceProperties" id="setServiceProperties"></a><div class="element clickable method public setServiceProperties" data-toggle="collapse" data-target=".setServiceProperties .collapse">
+<h2>Sets the properties of the Blob service.</h2>
+<pre>setServiceProperties(\ServiceProperties $serviceProperties, \Models\BlobServiceOptions $options) : \none.</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<p class="long_description"></p>
+<table class="table table-bordered"><tr>
+<th>see</th>
+<td>\http://msdn.microsoft.com/en-us/library/windowsazure/hh452235.aspx</td>
+</tr></table>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$serviceProperties</h4>
+<code>\ServiceProperties</code><p>new service properties</p></div>
+<div class="subelement argument">
+<h4>$options</h4>
+<code>\Models\BlobServiceOptions</code><p>optional parameters</p></div>
+<h3>Returns</h3>
+<div class="subelement response"><code>\none.</code></div>
+</div></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="row"><footer class="span12">
+            Template is built using <a href="http://twitter.github.com/bootstrap/">Twitter Bootstrap 2</a> and icons provided by <a href="http://glyphicons.com/">Glyphicons</a>.<br>
+            Documentation is powered by <a href="http://www.phpdoc.org/">phpDocumentor 2.0.0a6</a> and<br>
+            generated on 2012-07-17T21:10:36-07:00.<br></footer></div>
+</div>
+</body>
+</html>

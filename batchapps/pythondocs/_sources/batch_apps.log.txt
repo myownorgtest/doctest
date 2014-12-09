@@ -1,0 +1,7 @@
+batchapps.log module
+======================
+
+.. automodule:: batchapps.log
+    :members:
+    :undoc-members:
+    :show-inheritance:

@@ -1,0 +1,312 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>batchapps.job_manager &mdash; azure-batch-apps 0.2.0 documentation</title>
+    
+    <link rel="stylesheet" href="../../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '0.2.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <link rel="top" title="azure-batch-apps 0.2.0 documentation" href="../../index.html" />
+    <link rel="up" title="Module code" href="../index.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../../index.html">azure-batch-apps 0.2.0 documentation</a> &raquo;</li>
+          <li><a href="../index.html" accesskey="U">Module code</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <h1>Source code for batchapps.job_manager</h1><div class="highlight"><pre>
+<span class="c">#-------------------------------------------------------------------------</span>
+<span class="c"># The Azure Batch Apps Python Client</span>
+<span class="c">#</span>
+<span class="c"># Copyright (c) Microsoft Corporation. All rights reserved. </span>
+<span class="c">#</span>
+<span class="c"># The MIT License (MIT)</span>
+<span class="c">#</span>
+<span class="c"># Permission is hereby granted, free of charge, to any person obtaining a copy</span>
+<span class="c"># of this software and associated documentation files (the &quot;&quot;Software&quot;&quot;), to deal</span>
+<span class="c"># in the Software without restriction, including without limitation the rights</span>
+<span class="c"># to use, copy, modify, merge, publish, distribute, sublicense, and/or sell</span>
+<span class="c"># copies of the Software, and to permit persons to whom the Software is</span>
+<span class="c"># furnished to do so, subject to the following conditions:</span>
+<span class="c">#</span>
+<span class="c"># The above copyright notice and this permission notice shall be included in</span>
+<span class="c"># all copies or substantial portions of the Software.</span>
+<span class="c">#</span>
+<span class="c"># THE SOFTWARE IS PROVIDED *AS IS*, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR</span>
+<span class="c"># IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,</span>
+<span class="c"># FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE</span>
+<span class="c"># AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER</span>
+<span class="c"># LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,</span>
+<span class="c"># OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN</span>
+<span class="c"># THE SOFTWARE.</span>
+<span class="c">#</span>
+<span class="c">#--------------------------------------------------------------------------</span>
+
+<span class="kn">import</span> <span class="nn">logging</span>
+<span class="kn">import</span> <span class="nn">multiprocessing</span>
+
+<span class="kn">from</span> <span class="nn">.config</span> <span class="kn">import</span> <span class="n">Configuration</span>
+<span class="kn">from</span> <span class="nn">.job</span> <span class="kn">import</span> <span class="n">JobSubmission</span><span class="p">,</span> <span class="n">SubmittedJob</span>
+<span class="kn">from</span> <span class="nn">.api</span> <span class="kn">import</span> <span class="n">BatchAppsApi</span>
+<span class="kn">from</span> <span class="nn">.utils</span> <span class="kn">import</span> <span class="n">Listener</span>
+<span class="kn">from</span> <span class="nn">.exceptions</span> <span class="kn">import</span> <span class="n">RestCallException</span>
+
+<div class="viewcode-block" id="JobManager"><a class="viewcode-back" href="../../batch_apps.job_manager.html#batchapps.job_manager.JobManager">[docs]</a><span class="k">class</span> <span class="nc">JobManager</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    This is the only class that a user should need to import to access all</span>
+<span class="sd">    job manipulation. Contains general functionality for the creation</span>
+<span class="sd">    of new job submissions and retrieveing data on submitted jobs.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">credentials</span><span class="p">,</span> <span class="n">cfg</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        :Args:</span>
+<span class="sd">            - credentials (:class:`.Credentials`): User credentials for REST</span>
+<span class="sd">              API authentication.</span>
+
+<span class="sd">        :Kwargs:</span>
+<span class="sd">            - cfg (:class:`.Configuration`): Configuration of the Batch Apps</span>
+<span class="sd">              client session. If not set, a default config will be used.</span>
+<span class="sd">       &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_log</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="s">&#39;batch_apps&#39;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_client</span> <span class="o">=</span> <span class="n">BatchAppsApi</span><span class="p">(</span>
+            <span class="n">credentials</span><span class="p">,</span> <span class="n">cfg</span> <span class="k">if</span> <span class="n">cfg</span> <span class="k">else</span> <span class="n">Configuration</span><span class="p">())</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">count</span> <span class="o">=</span> <span class="bp">None</span>
+
+    <span class="k">def</span> <span class="nf">__len__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Return the number of cloud jobs available to the manager</span>
+
+<span class="sd">        :Returns:</span>
+<span class="sd">            - The number of jobs submitted to the cloud by the user. This value</span>
+<span class="sd">              will only be populated once :meth:`.get_jobs()` has been called.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">count</span>
+
+<div class="viewcode-block" id="JobManager.get_job"><a class="viewcode-back" href="../../batch_apps.job_manager.html#batchapps.job_manager.JobManager.get_job">[docs]</a>    <span class="k">def</span> <span class="nf">get_job</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">job</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">url</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">jobid</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Get details of single job. Input can be either a</span>
+<span class="sd">        :class:`.SubmittedJob` object, a URL, or a job ID.</span>
+<span class="sd">        If more than one option is set, they will be prioritized in that order.</span>
+
+<span class="sd">        :Kwargs:</span>
+<span class="sd">            - job (:class:`.SubmittedJob`): A job object to be updated.</span>
+<span class="sd">            - url (str): The URL to a the details of a job, as returned by</span>
+<span class="sd">              :meth:`.JobSubmission.submit()`.</span>
+<span class="sd">            - jobid (str): The ID of a submitted job, as retrieved from</span>
+<span class="sd">              Mission Control or returned by :meth:`.JobSubmission.submit()`.</span>
+
+<span class="sd">        :Returns:</span>
+<span class="sd">            - An updated or new :class:`.SubmittedJob` object.</span>
+
+<span class="sd">        :Raises:</span>
+<span class="sd">            - :exc:`AttributeError` if invalid parameters have been set.</span>
+<span class="sd">            - :exc:`.RestCallException` if an error occured during the request.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">resp</span> <span class="o">=</span> <span class="bp">None</span>
+        <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">job</span><span class="p">,</span> <span class="s">&#39;update&#39;</span><span class="p">):</span>
+            <span class="n">resp</span> <span class="o">=</span> <span class="n">job</span><span class="o">.</span><span class="n">update</span><span class="p">()</span>
+            <span class="k">if</span> <span class="n">resp</span><span class="p">:</span>
+                <span class="k">return</span> <span class="n">job</span>
+
+        <span class="k">elif</span> <span class="n">url</span><span class="p">:</span>
+            <span class="n">resp</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_client</span><span class="o">.</span><span class="n">get_job</span><span class="p">(</span><span class="n">url</span><span class="o">=</span><span class="nb">str</span><span class="p">(</span><span class="n">url</span><span class="p">))</span>
+
+        <span class="k">elif</span> <span class="n">jobid</span><span class="p">:</span>
+            <span class="n">resp</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_client</span><span class="o">.</span><span class="n">get_job</span><span class="p">(</span><span class="n">job_id</span><span class="o">=</span><span class="nb">str</span><span class="p">(</span><span class="n">jobid</span><span class="p">))</span>
+
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s">&quot;Call must be passed either a jobid, &quot;</span>
+                             <span class="s">&quot;url or a SubmittedJob object&quot;</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">resp</span><span class="o">.</span><span class="n">success</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">SubmittedJob</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_client</span><span class="p">,</span>
+                                <span class="n">resp</span><span class="o">.</span><span class="n">result</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s">&#39;id&#39;</span><span class="p">),</span>
+                                <span class="n">resp</span><span class="o">.</span><span class="n">result</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s">&#39;name&#39;</span><span class="p">),</span>
+                                <span class="n">resp</span><span class="o">.</span><span class="n">result</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s">&#39;type&#39;</span><span class="p">),</span>
+                                <span class="o">**</span><span class="n">resp</span><span class="o">.</span><span class="n">result</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">resp</span><span class="o">.</span><span class="n">result</span>
+</div>
+<div class="viewcode-block" id="JobManager.get_jobs"><a class="viewcode-back" href="../../batch_apps.job_manager.html#batchapps.job_manager.JobManager.get_jobs">[docs]</a>    <span class="k">def</span> <span class="nf">get_jobs</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">per_call</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Get a list of the user&#39;s jobs.</span>
+<span class="sd">        This call also sets the :attr:`.JobManager.count` attribute to reflect</span>
+<span class="sd">        the total jobs submitted by the user.</span>
+
+<span class="sd">        :Kwargs:</span>
+<span class="sd">            - index (int): The start index of the list of jobs to be returned.</span>
+<span class="sd">              Default is 0, i.e. return all jobs from the beginning.</span>
+<span class="sd">            - per_call (int): Number of jobs to be returned. Default is 10.</span>
+<span class="sd">            - name (str): Only return jobs whose names contain this string.</span>
+
+<span class="sd">        :Returns:</span>
+<span class="sd">            - A list of :class:`.SubmittedJob` objects.</span>
+
+<span class="sd">        :Raises:</span>
+<span class="sd">            - :exc:`.RestCallException` if an error occured during the request.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">name</span><span class="p">:</span>
+            <span class="n">resp</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_client</span><span class="o">.</span><span class="n">list_jobs</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">index</span><span class="p">),</span>
+                                          <span class="nb">int</span><span class="p">(</span><span class="n">per_call</span><span class="p">),</span>
+                                          <span class="n">name</span><span class="o">=</span><span class="nb">str</span><span class="p">(</span><span class="n">name</span><span class="p">))</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">resp</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_client</span><span class="o">.</span><span class="n">list_jobs</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">index</span><span class="p">),</span> <span class="nb">int</span><span class="p">(</span><span class="n">per_call</span><span class="p">))</span>
+
+        <span class="k">if</span> <span class="n">resp</span><span class="o">.</span><span class="n">success</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">count</span> <span class="o">=</span> <span class="n">resp</span><span class="o">.</span><span class="n">result</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">&#39;totalCount&#39;</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+
+            <span class="k">try</span><span class="p">:</span>
+                <span class="n">resp_jobs</span> <span class="o">=</span> <span class="p">[</span><span class="n">SubmittedJob</span><span class="p">(</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">_client</span><span class="p">,</span>
+                    <span class="n">_job</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s">&#39;id&#39;</span><span class="p">),</span>
+                    <span class="n">_job</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s">&#39;name&#39;</span><span class="p">),</span>
+                    <span class="n">_job</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s">&#39;type&#39;</span><span class="p">),</span>
+                    <span class="o">**</span><span class="n">_job</span><span class="p">)</span> <span class="k">for</span> <span class="n">_job</span> <span class="ow">in</span> <span class="n">resp</span><span class="o">.</span><span class="n">result</span><span class="p">[</span><span class="s">&#39;jobs&#39;</span><span class="p">]]</span>
+
+                <span class="k">return</span> <span class="n">resp_jobs</span>
+
+            <span class="k">except</span> <span class="p">(</span><span class="ne">KeyError</span><span class="p">,</span> <span class="ne">TypeError</span><span class="p">)</span> <span class="k">as</span> <span class="n">excp</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="n">RestCallException</span><span class="p">(</span>
+                    <span class="nb">type</span><span class="p">(</span><span class="n">excp</span><span class="p">),</span>
+                    <span class="s">&quot;Malformed job response object: {0}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">excp</span><span class="p">),</span>
+                    <span class="n">excp</span><span class="p">)</span>
+
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">resp</span><span class="o">.</span><span class="n">result</span>
+</div>
+<div class="viewcode-block" id="JobManager.create_job"><a class="viewcode-back" href="../../batch_apps.job_manager.html#batchapps.job_manager.JobManager.create_job">[docs]</a>    <span class="k">def</span> <span class="nf">create_job</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="o">**</span><span class="n">jobdetails</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Create a new job submission.</span>
+
+<span class="sd">        :Args:</span>
+<span class="sd">            - name (str): The name for the new job.</span>
+
+<span class="sd">        :Kwargs:</span>
+<span class="sd">            - jobdetails (dict): Additional job settings or parameters can be</span>
+<span class="sd">              added as keyword arguments. These include:</span>
+<span class="sd">                - &#39;params&#39;: A string dict of job parameters to add to the</span>
+<span class="sd">                  submission.</span>
+<span class="sd">                - &#39;files&#39;: A :class:`.FileCollection` of required files to</span>
+<span class="sd">                  include with the job.</span>
+<span class="sd">                - &#39;job_file&#39;: The name (str) of the source file that should</span>
+<span class="sd">                  be used to start the job. This filename should be</span>
+<span class="sd">                  included in the above ``files`` collection.</span>
+<span class="sd">                - &#39;instances&#39;: The number (int) of instances to allocate</span>
+<span class="sd">                  to the job on submission.</span>
+
+<span class="sd">        :Returns:</span>
+<span class="sd">            - A new :class:`.JobSubmission` object.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">JobSubmission</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_client</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="n">name</span><span class="p">),</span> <span class="o">**</span><span class="n">jobdetails</span><span class="p">)</span>
+</div>
+<div class="viewcode-block" id="JobManager.submit"><a class="viewcode-back" href="../../batch_apps.job_manager.html#batchapps.job_manager.JobManager.submit">[docs]</a>    <span class="k">def</span> <span class="nf">submit</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">submitjob</span><span class="p">,</span> <span class="n">upload_threads</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Submit a job, and upload all its assets</span>
+
+<span class="sd">        :Args:</span>
+<span class="sd">            - submitjob (:class:`.JobSubmission`): The job to be submitted.</span>
+
+<span class="sd">        :Kwargs:</span>
+<span class="sd">            - upload_threads (int): Number of concurrent asset uplaods.</span>
+<span class="sd">              Default is 1.</span>
+
+<span class="sd">        :Returns:</span>
+<span class="sd">            - A job susbmission response dictionary in the format:</span>
+<span class="sd">              ``{&#39;jobId&#39;: &#39;&#39;, &#39;link&#39;: &#39;&#39;}``</span>
+
+<span class="sd">        :Raises:</span>
+<span class="sd">            - :exc:`TypeError` if ``submitjob`` is not a JobSubmission.</span>
+<span class="sd">            - :exc:`.RestCallException` if job submission failed.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">submitjob</span><span class="p">,</span> <span class="s">&#39;submit&#39;</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s">&quot;Must submit a JobSubmission object.&quot;</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_log</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s">&quot;Processing job: {0}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">submitjob</span><span class="o">.</span><span class="n">name</span><span class="p">))</span>
+
+        <span class="k">if</span> <span class="n">submitjob</span><span class="o">.</span><span class="n">source</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">submitjob</span><span class="o">.</span><span class="n">required_files</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_log</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="s">&quot;The job file for job {0} has not been included &quot;</span>
+                              <span class="s">&quot;in the required files list. &quot;</span>
+                              <span class="s">&quot;Consider revising.&quot;</span><span class="p">)</span>
+
+        <span class="n">failed_uploads</span> <span class="o">=</span> <span class="n">submitjob</span><span class="o">.</span><span class="n">required_files</span><span class="o">.</span><span class="n">upload</span><span class="p">(</span>
+            <span class="n">threads</span><span class="o">=</span><span class="n">upload_threads</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">failed_uploads</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span>
+                <span class="s">&quot;Some required files failed to upload. &quot;</span>
+                <span class="s">&quot;Discontinuing submission of job {0}.&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">submitjob</span><span class="o">.</span><span class="n">name</span><span class="p">))</span>
+
+        <span class="k">return</span> <span class="n">submitjob</span><span class="o">.</span><span class="n">submit</span><span class="p">()</span></div></div>
+</pre></div>
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../../index.html">azure-batch-apps 0.2.0 documentation</a> &raquo;</li>
+          <li><a href="../index.html" >Module code</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2014, Microsoft Corporation.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2.2.
+    </div>
+  </body>
+</html>

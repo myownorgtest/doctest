@@ -1,0 +1,200 @@
+<!DOCTYPE html><html xmlns:date="http://exslt.org/dates-and-times" lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0; user-scalable=0;">
+<meta charset="utf-8">
+<title>Windows Azure SDK for PHP » WindowsAzure\Queue\Models</title>
+<meta name="author" content="Mike van Riel">
+<meta name="description" content="">
+<link href="../css/template.css" rel="stylesheet" media="all">
+<script src="../js/jquery-1.7.1.min.js" type="text/javascript"></script><script src="../js/jquery-ui-1.8.2.custom.min.js" type="text/javascript"></script><script src="../js/jquery.mousewheel.min.js" type="text/javascript"></script><script src="../js/bootstrap.js" type="text/javascript"></script><script src="../js/template.js" type="text/javascript"></script><script src="../js/prettify/prettify.min.js" type="text/javascript"></script><link rel="shortcut icon" href="../img/favicon.ico">
+<link rel="apple-touch-icon" href="../img/apple-touch-icon.png">
+<link rel="apple-touch-icon" sizes="72x72" href="../img/apple-touch-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="114x114" href="../img/apple-touch-icon-114x114.png">
+</head>
+<body>
+<div class="navbar navbar-fixed-top">
+<div class="navbar-inner"><div class="container">
+<a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse"><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></a><a class="brand" href="../index.html">Windows Azure SDK for PHP</a><div class="nav-collapse"><ul class="nav">
+<li class="dropdown">
+<a href="#api" class="dropdown-toggle" data-toggle="dropdown">
+                                    API Documentation <b class="caret"></b></a><ul class="dropdown-menu">
+<li><a>Namespaces</a></li>
+<li><a href="../namespaces/WindowsAzure.html"><i class="icon-th"></i> WindowsAzure</a></li>
+<li><a>Packages</a></li>
+<li><a href="../packages/WindowsAzure.html"><i class="icon-folder-open"></i> WindowsAzure</a></li>
+</ul>
+</li>
+<li class="dropdown" id="charts-menu">
+<a href="#charts" class="dropdown-toggle" data-toggle="dropdown">
+                                    Charts <b class="caret"></b></a><ul class="dropdown-menu"><li><a href="../graph_class.html"><i class="icon-list-alt"></i> Class hierarchy diagram</a></li></ul>
+</li>
+<li class="dropdown" id="reports-menu">
+<a href="#reports" class="dropdown-toggle" data-toggle="dropdown">
+                                    Reports <b class="caret"></b></a><ul class="dropdown-menu">
+<li><a href="../errors.html"><i class="icon-remove-sign"></i> Errors 
+                <span class="label label-info">385</span></a></li>
+<li><a href="../markers.html"><i class="icon-map-marker"></i> Markers 
+                <ul></ul></a></li>
+<li><a href="../deprecated.html"><i class="icon-stop"></i> Deprecated elements 
+                <span class="label label-info">0</span></a></li>
+</ul>
+</li>
+</ul></div>
+</div></div>
+<div class="go_to_top"><a href="#___" style="color: inherit">Back to top  <i class="icon-upload icon-white"></i></a></div>
+</div>
+<div id="___" class="container">
+<noscript><div class="alert alert-warning">
+                            Javascript is disabled; several features are only available
+                            if Javascript is enabled.
+                        </div></noscript>
+<div class="row">
+<div class="span4">
+<div class="btn-group view pull-right" data-toggle="buttons-radio">
+<button class="btn details" title="Show descriptions and method names"><i class="icon-list"></i></button><button class="btn simple" title="Show only method names"><i class="icon-align-justify"></i></button>
+</div>
+<ul class="side-nav nav nav-list">
+<li class="nav-header">
+<i class="icon-map-marker"></i> Packages</li>
+<li>
+<a href="../packages/WindowsAzure.Queue.Models.html" title="Models"><i class="icon-folder-open"></i>Models</a><ul class="nav nav-list nav-packages"></ul>
+</li>
+<li class="nav-header">
+<i class="icon-custom icon-class"></i> Classes</li>
+<li><a href="#CreateMessageOptions" title="Holds optional parameters for createMessage wrapper.">CreateMessageOptions</a></li>
+<li><a href="#CreateQueueOptions" title="Optional parameters for Create Queue REST API.">CreateQueueOptions</a></li>
+<li><a href="#GetQueueMetadataResult" title="Holds result from calling GetQueueMetadata wrapper">GetQueueMetadataResult</a></li>
+<li><a href="#ListMessagesOptions" title="Optional parameters for list messages wrapper.">ListMessagesOptions</a></li>
+<li><a href="#ListMessagesResult" title="Holds results of listMessages wrapper.">ListMessagesResult</a></li>
+<li><a href="#ListQueuesOptions" title="Options for listQueues API.">ListQueuesOptions</a></li>
+<li><a href="#ListQueuesResult" title="Container to hold list queue response object.">ListQueuesResult</a></li>
+<li><a href="#PeekMessagesOptions" title="Short description">PeekMessagesOptions</a></li>
+<li><a href="#PeekMessagesResult" title="Holds results of listMessages wrapper.">PeekMessagesResult</a></li>
+<li><a href="#Queue" title="WindowsAzure queue object.">Queue</a></li>
+<li><a href="#QueueMessage" title="Wrappers queue message text.">QueueMessage</a></li>
+<li><a href="#QueueServiceOptions" title="Queue service options.">QueueServiceOptions</a></li>
+<li><a href="#UpdateMessageResult" title="Holds results of updateMessage wrapper.">UpdateMessageResult</a></li>
+<li><a href="#WindowsAzureQueueMessage" title="Holds data for single WindowsAzure queue message.">WindowsAzureQueueMessage</a></li>
+</ul>
+</div>
+<div class="span8 package-contents">
+<ul class="breadcrumb">
+<li>
+<a href="../index.html"><i class="icon-folder-open"></i></a><span class="divider">\</span>
+</li>
+<li><a href="../packages/WindowsAzure.html">WindowsAzure</a></li>
+<span class="divider">\</span><li><a href="../packages/WindowsAzure.Queue.html">Queue</a></li>
+<span class="divider">\</span><li class="active"><a href="../packages/WindowsAzure.Queue.Models.html">Models</a></li>
+</ul>
+<div class="package-indent">
+<h3>
+<i class="icon-custom icon-class"></i> Classes and interfaces</h3>
+<a name="CreateMessageOptions" id="CreateMessageOptions"></a><div class="element ajax clickable class" href="../classes/WindowsAzure.Queue.Models.CreateMessageOptions.html">
+<h1>CreateMessageOptions<a href="../classes/WindowsAzure.Queue.Models.CreateMessageOptions.html">¶</a>
+</h1>
+<p class="short_description">Holds optional parameters for createMessage wrapper.</p>
+<div class="details collapse"></div>
+<a href="../classes/WindowsAzure.Queue.Models.CreateMessageOptions.html" class="more">« More »</a>
+</div>
+<a name="CreateQueueOptions" id="CreateQueueOptions"></a><div class="element ajax clickable class" href="../classes/WindowsAzure.Queue.Models.CreateQueueOptions.html">
+<h1>CreateQueueOptions<a href="../classes/WindowsAzure.Queue.Models.CreateQueueOptions.html">¶</a>
+</h1>
+<p class="short_description">Optional parameters for Create Queue REST API.</p>
+<div class="details collapse"></div>
+<a href="../classes/WindowsAzure.Queue.Models.CreateQueueOptions.html" class="more">« More »</a>
+</div>
+<a name="GetQueueMetadataResult" id="GetQueueMetadataResult"></a><div class="element ajax clickable class" href="../classes/WindowsAzure.Queue.Models.GetQueueMetadataResult.html">
+<h1>GetQueueMetadataResult<a href="../classes/WindowsAzure.Queue.Models.GetQueueMetadataResult.html">¶</a>
+</h1>
+<p class="short_description">Holds result from calling GetQueueMetadata wrapper</p>
+<div class="details collapse"></div>
+<a href="../classes/WindowsAzure.Queue.Models.GetQueueMetadataResult.html" class="more">« More »</a>
+</div>
+<a name="ListMessagesOptions" id="ListMessagesOptions"></a><div class="element ajax clickable class" href="../classes/WindowsAzure.Queue.Models.ListMessagesOptions.html">
+<h1>ListMessagesOptions<a href="../classes/WindowsAzure.Queue.Models.ListMessagesOptions.html">¶</a>
+</h1>
+<p class="short_description">Optional parameters for list messages wrapper.</p>
+<div class="details collapse"></div>
+<a href="../classes/WindowsAzure.Queue.Models.ListMessagesOptions.html" class="more">« More »</a>
+</div>
+<a name="ListMessagesResult" id="ListMessagesResult"></a><div class="element ajax clickable class" href="../classes/WindowsAzure.Queue.Models.ListMessagesResult.html">
+<h1>ListMessagesResult<a href="../classes/WindowsAzure.Queue.Models.ListMessagesResult.html">¶</a>
+</h1>
+<p class="short_description">Holds results of listMessages wrapper.</p>
+<div class="details collapse"></div>
+<a href="../classes/WindowsAzure.Queue.Models.ListMessagesResult.html" class="more">« More »</a>
+</div>
+<a name="ListQueuesOptions" id="ListQueuesOptions"></a><div class="element ajax clickable class" href="../classes/WindowsAzure.Queue.Models.ListQueuesOptions.html">
+<h1>ListQueuesOptions<a href="../classes/WindowsAzure.Queue.Models.ListQueuesOptions.html">¶</a>
+</h1>
+<p class="short_description">Options for listQueues API.</p>
+<div class="details collapse"></div>
+<a href="../classes/WindowsAzure.Queue.Models.ListQueuesOptions.html" class="more">« More »</a>
+</div>
+<a name="ListQueuesResult" id="ListQueuesResult"></a><div class="element ajax clickable class" href="../classes/WindowsAzure.Queue.Models.ListQueuesResult.html">
+<h1>ListQueuesResult<a href="../classes/WindowsAzure.Queue.Models.ListQueuesResult.html">¶</a>
+</h1>
+<p class="short_description">Container to hold list queue response object.</p>
+<div class="details collapse"></div>
+<a href="../classes/WindowsAzure.Queue.Models.ListQueuesResult.html" class="more">« More »</a>
+</div>
+<a name="PeekMessagesOptions" id="PeekMessagesOptions"></a><div class="element ajax clickable class" href="../classes/WindowsAzure.Queue.Models.PeekMessagesOptions.html">
+<h1>PeekMessagesOptions<a href="../classes/WindowsAzure.Queue.Models.PeekMessagesOptions.html">¶</a>
+</h1>
+<p class="short_description">Short description</p>
+<div class="details collapse"></div>
+<a href="../classes/WindowsAzure.Queue.Models.PeekMessagesOptions.html" class="more">« More »</a>
+</div>
+<a name="PeekMessagesResult" id="PeekMessagesResult"></a><div class="element ajax clickable class" href="../classes/WindowsAzure.Queue.Models.PeekMessagesResult.html">
+<h1>PeekMessagesResult<a href="../classes/WindowsAzure.Queue.Models.PeekMessagesResult.html">¶</a>
+</h1>
+<p class="short_description">Holds results of listMessages wrapper.</p>
+<div class="details collapse"></div>
+<a href="../classes/WindowsAzure.Queue.Models.PeekMessagesResult.html" class="more">« More »</a>
+</div>
+<a name="Queue" id="Queue"></a><div class="element ajax clickable class" href="../classes/WindowsAzure.Queue.Models.Queue.html">
+<h1>Queue<a href="../classes/WindowsAzure.Queue.Models.Queue.html">¶</a>
+</h1>
+<p class="short_description">WindowsAzure queue object.</p>
+<div class="details collapse"></div>
+<a href="../classes/WindowsAzure.Queue.Models.Queue.html" class="more">« More »</a>
+</div>
+<a name="QueueMessage" id="QueueMessage"></a><div class="element ajax clickable class" href="../classes/WindowsAzure.Queue.Models.QueueMessage.html">
+<h1>QueueMessage<a href="../classes/WindowsAzure.Queue.Models.QueueMessage.html">¶</a>
+</h1>
+<p class="short_description">Wrappers queue message text.</p>
+<div class="details collapse"></div>
+<a href="../classes/WindowsAzure.Queue.Models.QueueMessage.html" class="more">« More »</a>
+</div>
+<a name="QueueServiceOptions" id="QueueServiceOptions"></a><div class="element ajax clickable class" href="../classes/WindowsAzure.Queue.Models.QueueServiceOptions.html">
+<h1>QueueServiceOptions<a href="../classes/WindowsAzure.Queue.Models.QueueServiceOptions.html">¶</a>
+</h1>
+<p class="short_description">Queue service options.</p>
+<div class="details collapse"></div>
+<a href="../classes/WindowsAzure.Queue.Models.QueueServiceOptions.html" class="more">« More »</a>
+</div>
+<a name="UpdateMessageResult" id="UpdateMessageResult"></a><div class="element ajax clickable class" href="../classes/WindowsAzure.Queue.Models.UpdateMessageResult.html">
+<h1>UpdateMessageResult<a href="../classes/WindowsAzure.Queue.Models.UpdateMessageResult.html">¶</a>
+</h1>
+<p class="short_description">Holds results of updateMessage wrapper.</p>
+<div class="details collapse"></div>
+<a href="../classes/WindowsAzure.Queue.Models.UpdateMessageResult.html" class="more">« More »</a>
+</div>
+<a name="WindowsAzureQueueMessage" id="WindowsAzureQueueMessage"></a><div class="element ajax clickable class" href="../classes/WindowsAzure.Queue.Models.WindowsAzureQueueMessage.html">
+<h1>WindowsAzureQueueMessage<a href="../classes/WindowsAzure.Queue.Models.WindowsAzureQueueMessage.html">¶</a>
+</h1>
+<p class="short_description">Holds data for single WindowsAzure queue message.</p>
+<div class="details collapse"></div>
+<a href="../classes/WindowsAzure.Queue.Models.WindowsAzureQueueMessage.html" class="more">« More »</a>
+</div>
+</div>
+</div>
+</div>
+<div class="row"><footer class="span12">
+            Template is built using <a href="http://twitter.github.com/bootstrap/">Twitter Bootstrap 2</a> and icons provided by <a href="http://glyphicons.com/">Glyphicons</a>.<br>
+            Documentation is powered by <a href="http://www.phpdoc.org/">phpDocumentor 2.0.0a6</a> and<br>
+            generated on 2012-07-17T21:10:36-07:00.<br></footer></div>
+</div>
+</body>
+</html>

@@ -1,0 +1,347 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>batchapps.file_manager &mdash; azure-batch-apps 0.2.0 documentation</title>
+    
+    <link rel="stylesheet" href="../../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '0.2.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <link rel="top" title="azure-batch-apps 0.2.0 documentation" href="../../index.html" />
+    <link rel="up" title="Module code" href="../index.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../../index.html">azure-batch-apps 0.2.0 documentation</a> &raquo;</li>
+          <li><a href="../index.html" accesskey="U">Module code</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <h1>Source code for batchapps.file_manager</h1><div class="highlight"><pre>
+<span class="c">#-------------------------------------------------------------------------</span>
+<span class="c"># The Azure Batch Apps Python Client</span>
+<span class="c">#</span>
+<span class="c"># Copyright (c) Microsoft Corporation. All rights reserved. </span>
+<span class="c">#</span>
+<span class="c"># The MIT License (MIT)</span>
+<span class="c">#</span>
+<span class="c"># Permission is hereby granted, free of charge, to any person obtaining a copy</span>
+<span class="c"># of this software and associated documentation files (the &quot;&quot;Software&quot;&quot;), to deal</span>
+<span class="c"># in the Software without restriction, including without limitation the rights</span>
+<span class="c"># to use, copy, modify, merge, publish, distribute, sublicense, and/or sell</span>
+<span class="c"># copies of the Software, and to permit persons to whom the Software is</span>
+<span class="c"># furnished to do so, subject to the following conditions:</span>
+<span class="c">#</span>
+<span class="c"># The above copyright notice and this permission notice shall be included in</span>
+<span class="c"># all copies or substantial portions of the Software.</span>
+<span class="c">#</span>
+<span class="c"># THE SOFTWARE IS PROVIDED *AS IS*, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR</span>
+<span class="c"># IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,</span>
+<span class="c"># FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE</span>
+<span class="c"># AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER</span>
+<span class="c"># LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,</span>
+<span class="c"># OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN</span>
+<span class="c"># THE SOFTWARE.</span>
+<span class="c">#</span>
+<span class="c">#--------------------------------------------------------------------------</span>
+
+<span class="kn">from</span> <span class="nn">.files</span> <span class="kn">import</span> <span class="n">UserFile</span><span class="p">,</span> <span class="n">FileCollection</span>
+<span class="kn">from</span> <span class="nn">.config</span> <span class="kn">import</span> <span class="n">Configuration</span>
+<span class="kn">from</span> <span class="nn">.api</span> <span class="kn">import</span> <span class="n">BatchAppsApi</span>
+
+<span class="kn">import</span> <span class="nn">logging</span>
+<span class="kn">import</span> <span class="nn">glob</span>
+<span class="kn">import</span> <span class="nn">os</span>
+
+<div class="viewcode-block" id="FileManager"><a class="viewcode-back" href="../../batch_apps.file_manager.html#batchapps.file_manager.FileManager">[docs]</a><span class="k">class</span> <span class="nc">FileManager</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    This is the only class that a user should need to import to access all</span>
+<span class="sd">    user data and asset files manipulation.</span>
+<span class="sd">    Contains only general functionality for the creation of :class:`.UserFile`</span>
+<span class="sd">    and :class:`.FileCollection` objects.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">credentials</span><span class="p">,</span> <span class="n">cfg</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        :Args:</span>
+<span class="sd">            - credentials (:class:`.Credentials`): The Users authentication.</span>
+
+<span class="sd">        :Kwargs:</span>
+<span class="sd">            - cfg (:class:`.Configuration`): Logging and application</span>
+<span class="sd">              configuration. Unless set this is None, in which case a default</span>
+<span class="sd">              configuration will be used.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">cfg</span><span class="p">:</span>
+            <span class="n">cfg</span> <span class="o">=</span> <span class="n">Configuration</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_log</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="s">&#39;batch_apps&#39;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_client</span> <span class="o">=</span> <span class="n">BatchAppsApi</span><span class="p">(</span><span class="n">credentials</span><span class="p">,</span> <span class="n">cfg</span><span class="p">)</span>
+
+<div class="viewcode-block" id="FileManager.create_file_set"><a class="viewcode-back" href="../../batch_apps.file_manager.html#batchapps.file_manager.FileManager.create_file_set">[docs]</a>    <span class="k">def</span> <span class="nf">create_file_set</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">files</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Create a file collection to assign to job.</span>
+
+<span class="sd">        :Args:</span>
+<span class="sd">            - files (:class:`.UserFile`, list): *Optional*. Any files to be</span>
+<span class="sd">              included in the newly created set. This can be passed in a</span>
+<span class="sd">              individual :class:`.UserFile` objects or as a list of</span>
+<span class="sd">              :class:`.UserFile` objects.</span>
+
+<span class="sd">        :Returns:</span>
+<span class="sd">            - :class:`.FileCollection` The new FileCollection, containing any</span>
+<span class="sd">              specified userfiles.</span>
+
+<span class="sd">        :Raises:</span>
+<span class="sd">            - :exc:`.FileInvalidException` Raised by the FileCollection class</span>
+<span class="sd">              if ``files`` contains non-:class:`.UserFile` objects.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_log</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s">&quot;Creating new FileCollection with included &quot;</span>
+                       <span class="s">&quot;userfiles: {0}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">files</span><span class="p">)))</span>
+
+        <span class="n">file_list</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">_file</span> <span class="ow">in</span> <span class="n">files</span><span class="p">:</span>
+
+            <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">_file</span><span class="p">,</span> <span class="nb">list</span><span class="p">):</span>
+                <span class="n">file_list</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="n">_file</span><span class="p">)</span>
+
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">file_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">_file</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">FileCollection</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_client</span><span class="p">,</span> <span class="o">*</span><span class="nb">list</span><span class="p">(</span><span class="nb">set</span><span class="p">(</span><span class="n">file_list</span><span class="p">)))</span>
+</div>
+<div class="viewcode-block" id="FileManager.create_file"><a class="viewcode-back" href="../../batch_apps.file_manager.html#batchapps.file_manager.FileManager.create_file">[docs]</a>    <span class="k">def</span> <span class="nf">create_file</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">fullpath</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        .. warning:: Deprecated. Use :meth:`.file_from_path()`.</span>
+<span class="sd">        Create a userfile object.</span>
+
+<span class="sd">        :Args:</span>
+<span class="sd">            - fullpath (str): Full path to the file</span>
+
+<span class="sd">        :Returns:</span>
+<span class="sd">            - :class:`.UserFile`: The file object reference for the</span>
+<span class="sd">              supplied file path. This will be returned regardless of</span>
+<span class="sd">              whether the file actually exists.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_log</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="s">&quot;create_file() has been deprecated. &quot;</span>
+                          <span class="s">&quot;Please use file_from_path()&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">file_from_path</span><span class="p">(</span><span class="n">fullpath</span><span class="p">)</span>
+</div>
+<div class="viewcode-block" id="FileManager.file_from_path"><a class="viewcode-back" href="../../batch_apps.file_manager.html#batchapps.file_manager.FileManager.file_from_path">[docs]</a>    <span class="k">def</span> <span class="nf">file_from_path</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">fullpath</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Create a new userfile object.</span>
+
+<span class="sd">        :Args:</span>
+<span class="sd">            - fullpath (str): Full path to the file</span>
+
+<span class="sd">        :Returns:</span>
+<span class="sd">            - :class:`.UserFile`: The file object reference for the</span>
+<span class="sd">              supplied file path. This will be returned regardless of</span>
+<span class="sd">              whether the file actually exists.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_log</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s">&quot;Creating new userfile at path: {0}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">fullpath</span><span class="p">))</span>
+        <span class="k">return</span> <span class="n">UserFile</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_client</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="n">fullpath</span><span class="p">))</span>
+</div>
+<div class="viewcode-block" id="FileManager.files_from_dir"><a class="viewcode-back" href="../../batch_apps.file_manager.html#batchapps.file_manager.FileManager.files_from_dir">[docs]</a>    <span class="k">def</span> <span class="nf">files_from_dir</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">top_dir</span><span class="p">,</span> <span class="n">recursive</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span> <span class="n">pattern</span><span class="o">=</span><span class="s">&#39;*&#39;</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Create a file set from contents of a directory.</span>
+
+<span class="sd">        :Args:</span>
+<span class="sd">            - top_dir (str): The full path to the directory, the contents</span>
+<span class="sd">              of which will be added to the set.</span>
+
+<span class="sd">        :Kwargs:</span>
+<span class="sd">            - recursive (bool): Whether the set will include the contents of</span>
+<span class="sd">              subdirectories. Default is ``False``</span>
+<span class="sd">            - pattern (str): The pattern to apply to filter director contents.</span>
+<span class="sd">              Default: ``&quot;*&quot;``, i.e. all files included.</span>
+
+<span class="sd">        :Returns:</span>
+<span class="sd">            - :class:`.FileCollection` The new FileCollection containing an</span>
+<span class="sd">              :class:`.UserFile` object for each non-filtered file in the</span>
+<span class="sd">              specified directory.</span>
+
+<span class="sd">        :Raises:</span>
+<span class="sd">            - :class:`NotADirectoryError` if the supplied directory does not</span>
+<span class="sd">              exist.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">top_dir</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">top_dir</span><span class="p">)</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isdir</span><span class="p">(</span><span class="n">top_dir</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">OSError</span><span class="p">(</span><span class="s">&quot;Supplied directory invalid&quot;</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_log</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s">&quot;Creating FileCollection from contents of &quot;</span>
+                       <span class="s">&quot;directory: {0}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">top_dir</span><span class="p">))</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">recursive</span><span class="p">:</span>
+            <span class="n">top</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">top_dir</span><span class="p">,</span> <span class="n">pattern</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_log</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span>
+                <span class="s">&quot;Non-recursive search in with pattern: {0}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">top</span><span class="p">))</span>
+
+            <span class="n">file_list</span> <span class="o">=</span> <span class="p">[</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">normpath</span><span class="p">(</span><span class="n">a</span><span class="p">)</span> <span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="n">glob</span><span class="o">.</span><span class="n">glob</span><span class="p">(</span><span class="n">top</span><span class="p">)</span>
+                         <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isfile</span><span class="p">(</span><span class="n">a</span><span class="p">)]</span>
+
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_log</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s">&quot;Recursive search in the following directories...&quot;</span><span class="p">)</span>
+            <span class="n">file_list</span> <span class="o">=</span> <span class="p">[]</span>
+            <span class="n">file_list</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span>
+                <span class="p">[</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">normpath</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+                 <span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="n">glob</span><span class="o">.</span><span class="n">glob</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">top_dir</span><span class="p">,</span> <span class="n">pattern</span><span class="p">))</span>
+                 <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isfile</span><span class="p">(</span><span class="n">a</span><span class="p">)])</span>
+
+            <span class="k">for</span> <span class="n">dirs</span> <span class="ow">in</span> <span class="n">os</span><span class="o">.</span><span class="n">walk</span><span class="p">(</span><span class="n">top_dir</span><span class="p">):</span>
+
+                <span class="k">for</span> <span class="n">folder</span> <span class="ow">in</span> <span class="n">dirs</span><span class="p">[</span><span class="mi">1</span><span class="p">]:</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">_log</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span>
+                        <span class="s">&quot;Searching in {0}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+                            <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">dirs</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">folder</span><span class="p">)))</span>
+
+                    <span class="n">top</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">dirs</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">folder</span><span class="p">,</span> <span class="n">pattern</span><span class="p">)</span>
+                    <span class="n">file_list</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span>
+                        <span class="p">[</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">normpath</span><span class="p">(</span><span class="n">a</span><span class="p">)</span> <span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="n">glob</span><span class="o">.</span><span class="n">glob</span><span class="p">(</span><span class="n">top</span><span class="p">)</span>
+                         <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isfile</span><span class="p">(</span><span class="n">a</span><span class="p">)])</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_log</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span>
+            <span class="s">&quot;Collected files: {0}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+                <span class="p">[</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">basename</span><span class="p">(</span><span class="n">a</span><span class="p">)</span> <span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="n">file_list</span><span class="p">]))</span>
+
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">create_file_set</span><span class="p">(</span>
+            <span class="p">[</span><span class="n">UserFile</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_client</span><span class="p">,</span> <span class="n">a</span><span class="p">)</span> <span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="n">file_list</span><span class="p">])</span>
+</div>
+<div class="viewcode-block" id="FileManager.list_files"><a class="viewcode-back" href="../../batch_apps.file_manager.html#batchapps.file_manager.FileManager.list_files">[docs]</a>    <span class="k">def</span> <span class="nf">list_files</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;List all the files previously uploaded by the user.</span>
+
+<span class="sd">        :Returns:</span>
+<span class="sd">            - If successful, A list of :class:`.UserFile` objects,</span>
+<span class="sd">              else ``None``.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">all_files</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_client</span><span class="o">.</span><span class="n">list_files</span><span class="p">()</span>
+
+        <span class="k">if</span> <span class="n">all_files</span><span class="o">.</span><span class="n">success</span><span class="p">:</span>
+            <span class="n">cloud_files</span> <span class="o">=</span> <span class="p">[</span><span class="n">UserFile</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_client</span><span class="p">,</span> <span class="n">_file</span><span class="p">)</span>
+                           <span class="k">for</span> <span class="n">_file</span> <span class="ow">in</span> <span class="n">all_files</span><span class="o">.</span><span class="n">result</span><span class="p">]</span>
+
+            <span class="k">return</span> <span class="n">cloud_files</span>
+
+        <span class="k">else</span><span class="p">:</span>
+            <span class="c">#self._log.error(all_files.result.msg)</span>
+            <span class="k">raise</span> <span class="n">all_files</span><span class="o">.</span><span class="n">result</span>
+</div>
+<div class="viewcode-block" id="FileManager.find_file"><a class="viewcode-back" href="../../batch_apps.file_manager.html#batchapps.file_manager.FileManager.find_file">[docs]</a>    <span class="k">def</span> <span class="nf">find_file</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">last_mod</span><span class="p">,</span> <span class="n">full_path</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Find the reference to a specific file on the cloud.</span>
+
+<span class="sd">        :Args:</span>
+<span class="sd">            - name (str): The name of the file to be located in the cloud.</span>
+<span class="sd">            - last_mod (str): The last modified timestamp of the</span>
+<span class="sd">              file.</span>
+
+<span class="sd">        :Kwargs:</span>
+<span class="sd">            - full_path (str): The full path of the file to be found.</span>
+<span class="sd">              If omitted, and file path is a match.</span>
+
+<span class="sd">        :Returns:</span>
+<span class="sd">            - A list of :class:`.UserFile` objects that are uploaded and</span>
+<span class="sd">              match the specified names.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">spec</span> <span class="o">=</span> <span class="p">{</span><span class="s">&#39;FileName&#39;</span><span class="p">:</span><span class="n">name</span><span class="p">,</span> <span class="s">&#39;Timestamp&#39;</span><span class="p">:</span><span class="n">last_mod</span><span class="p">}</span>
+        <span class="k">if</span> <span class="n">full_path</span><span class="p">:</span>
+            <span class="n">spec</span><span class="p">[</span><span class="s">&#39;OriginalPath&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">full_path</span>
+
+        <span class="n">matches</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_client</span><span class="o">.</span><span class="n">query_files</span><span class="p">(</span><span class="n">spec</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">matches</span><span class="o">.</span><span class="n">success</span><span class="p">:</span>
+            <span class="n">cloud_files</span> <span class="o">=</span> <span class="p">[</span><span class="n">UserFile</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_client</span><span class="p">,</span> <span class="n">_file</span><span class="p">)</span>
+                           <span class="k">for</span> <span class="n">_file</span> <span class="ow">in</span> <span class="n">matches</span><span class="o">.</span><span class="n">result</span><span class="p">]</span>
+
+            <span class="k">return</span> <span class="n">cloud_files</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="c">#self._log.error(matches.result.msg)</span>
+            <span class="k">raise</span> <span class="n">matches</span><span class="o">.</span><span class="n">result</span>
+</div>
+<div class="viewcode-block" id="FileManager.find_files"><a class="viewcode-back" href="../../batch_apps.file_manager.html#batchapps.file_manager.FileManager.find_files">[docs]</a>    <span class="k">def</span> <span class="nf">find_files</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Returns a list of existing files in the users account meeting</span>
+<span class="sd">        certain criteria.</span>
+
+<span class="sd">        :Args:</span>
+<span class="sd">            - name (str, list): The filename of file to find, including</span>
+<span class="sd">              extension. Can also be a list of filenames.</span>
+
+<span class="sd">        :Returns:</span>
+<span class="sd">            - A list of :class:`.UserFile` objects that are uploaded and</span>
+<span class="sd">              match the specified names.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">matches</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_client</span><span class="o">.</span><span class="n">query_files</span><span class="p">(</span><span class="n">name</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">matches</span><span class="o">.</span><span class="n">success</span><span class="p">:</span>
+            <span class="n">cloud_files</span> <span class="o">=</span> <span class="p">[</span><span class="n">UserFile</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_client</span><span class="p">,</span> <span class="n">_file</span><span class="p">)</span>
+                           <span class="k">for</span> <span class="n">_file</span> <span class="ow">in</span> <span class="n">matches</span><span class="o">.</span><span class="n">result</span><span class="p">]</span>
+
+            <span class="k">return</span> <span class="n">cloud_files</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="c">#self._log.error(matches.result.msg)</span>
+            <span class="k">raise</span> <span class="n">matches</span><span class="o">.</span><span class="n">result</span></div></div>
+</pre></div>
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../../index.html">azure-batch-apps 0.2.0 documentation</a> &raquo;</li>
+          <li><a href="../index.html" >Module code</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2014, Microsoft Corporation.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2.2.
+    </div>
+  </body>
+</html>

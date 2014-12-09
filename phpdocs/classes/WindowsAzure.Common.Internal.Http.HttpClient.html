@@ -1,0 +1,469 @@
+<!DOCTYPE html><html xmlns:date="http://exslt.org/dates-and-times" lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0; user-scalable=0;">
+<meta charset="utf-8">
+<title>Windows Azure SDK for PHP » \WindowsAzure\Common\Internal\Http\HttpClient</title>
+<meta name="author" content="Mike van Riel">
+<meta name="description" content="">
+<link href="../css/template.css" rel="stylesheet" media="all">
+<script src="../js/jquery-1.7.1.min.js" type="text/javascript"></script><script src="../js/jquery-ui-1.8.2.custom.min.js" type="text/javascript"></script><script src="../js/jquery.mousewheel.min.js" type="text/javascript"></script><script src="../js/bootstrap.js" type="text/javascript"></script><script src="../js/template.js" type="text/javascript"></script><script src="../js/prettify/prettify.min.js" type="text/javascript"></script><link rel="shortcut icon" href="../img/favicon.ico">
+<link rel="apple-touch-icon" href="../img/apple-touch-icon.png">
+<link rel="apple-touch-icon" sizes="72x72" href="../img/apple-touch-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="114x114" href="../img/apple-touch-icon-114x114.png">
+</head>
+<body>
+<div class="navbar navbar-fixed-top">
+<div class="navbar-inner"><div class="container">
+<a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse"><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></a><a class="brand" href="../index.html">Windows Azure SDK for PHP</a><div class="nav-collapse"><ul class="nav">
+<li class="dropdown">
+<a href="#api" class="dropdown-toggle" data-toggle="dropdown">
+                                    API Documentation <b class="caret"></b></a><ul class="dropdown-menu">
+<li><a>Namespaces</a></li>
+<li><a href="../namespaces/WindowsAzure.html"><i class="icon-th"></i> WindowsAzure</a></li>
+<li><a>Packages</a></li>
+<li><a href="../packages/WindowsAzure.html"><i class="icon-folder-open"></i> WindowsAzure</a></li>
+</ul>
+</li>
+<li class="dropdown" id="charts-menu">
+<a href="#charts" class="dropdown-toggle" data-toggle="dropdown">
+                                    Charts <b class="caret"></b></a><ul class="dropdown-menu"><li><a href="../graph_class.html"><i class="icon-list-alt"></i> Class hierarchy diagram</a></li></ul>
+</li>
+<li class="dropdown" id="reports-menu">
+<a href="#reports" class="dropdown-toggle" data-toggle="dropdown">
+                                    Reports <b class="caret"></b></a><ul class="dropdown-menu">
+<li><a href="../errors.html"><i class="icon-remove-sign"></i> Errors 
+                <span class="label label-info">385</span></a></li>
+<li><a href="../markers.html"><i class="icon-map-marker"></i> Markers 
+                <ul></ul></a></li>
+<li><a href="../deprecated.html"><i class="icon-stop"></i> Deprecated elements 
+                <span class="label label-info">0</span></a></li>
+</ul>
+</li>
+</ul></div>
+</div></div>
+<div class="go_to_top"><a href="#___" style="color: inherit">Back to top  <i class="icon-upload icon-white"></i></a></div>
+</div>
+<div id="___" class="container">
+<noscript><div class="alert alert-warning">
+                            Javascript is disabled; several features are only available
+                            if Javascript is enabled.
+                        </div></noscript>
+<div class="row">
+<div class="span4">
+<span class="btn-group visibility" data-toggle="buttons-checkbox"><button class="btn public active" title="Show public elements">Public</button><button class="btn protected" title="Show protected elements">Protected</button><button class="btn private" title="Show private elements">Private</button><button class="btn inherited active" title="Show inherited elements">Inherited</button></span><div class="btn-group view pull-right" data-toggle="buttons-radio">
+<button class="btn details" title="Show descriptions and method names"><i class="icon-list"></i></button><button class="btn simple" title="Show only method names"><i class="icon-align-justify"></i></button>
+</div>
+<ul class="side-nav nav nav-list">
+<li class="nav-header">
+<i class="icon-custom icon-method"></i> Methods</li>
+<li class="method public "><a href="#__clone" title="__clone :: Makes deep copy from the current object."><span class="description">Makes deep copy from the current object.</span><pre>__clone()</pre></a></li>
+<li class="method public "><a href="#__construct" title="__construct :: Initializes new HttpClient object."><span class="description">Initializes new HttpClient object.</span><pre>__construct()</pre></a></li>
+<li class="method public "><a href="#getBody" title="getBody :: Gets the request body."><span class="description">Gets the request body.</span><pre>getBody()</pre></a></li>
+<li class="method public "><a href="#getConfig" title="getConfig :: Gets value for configuration parameter."><span class="description">Gets value for configuration parameter.</span><pre>getConfig()</pre></a></li>
+<li class="method public "><a href="#getHeaders" title="getHeaders :: Gets request's headers. The returned array key (header names) are all in
+lower case even if they were set having some upper letters."><span class="description">Gets request's headers. The returned array key (header names) are all in
+lower case even if they were set having some upper letters.</span><pre>getHeaders()</pre></a></li>
+<li class="method public "><a href="#getMethod" title="getMethod :: Gets request's HTTP method."><span class="description">Gets request's HTTP method.</span><pre>getMethod()</pre></a></li>
+<li class="method public "><a href="#getResponse" title="getResponse :: Gets the response object."><span class="description">Gets the response object.</span><pre>getResponse()</pre></a></li>
+<li class="method public "><a href="#getSuccessfulStatusCode" title="getSuccessfulStatusCode :: Gets successful status code"><span class="description">Gets successful status code</span><pre>getSuccessfulStatusCode()</pre></a></li>
+<li class="method public "><a href="#getUrl" title="getUrl :: Gets request url. Note that you must check if the returned object is null or
+not."><span class="description">Gets request url. Note that you must check if the returned object is null or
+not.</span><pre>getUrl()</pre></a></li>
+<li class="method public "><a href="#send" title="send :: Processes the reuqest through HTTP pipeline with passed $filters,
+sends HTTP request to the wire and process the response in the HTTP pipeline."><span class="description">Processes the reuqest through HTTP pipeline with passed $filters,
+sends HTTP request to the wire and process the response in the HTTP pipeline.</span><pre>send()</pre></a></li>
+<li class="method public "><a href="#setBody" title="setBody :: Sets the request body."><span class="description">Sets the request body.</span><pre>setBody()</pre></a></li>
+<li class="method public "><a href="#setConfig" title="setConfig :: Sets configuration parameter."><span class="description">Sets configuration parameter.</span><pre>setConfig()</pre></a></li>
+<li class="method public "><a href="#setExpectedStatusCode" title="setExpectedStatusCode :: Sets successful status code"><span class="description">Sets successful status code</span><pre>setExpectedStatusCode()</pre></a></li>
+<li class="method public "><a href="#setHeader" title="setHeader :: Sets a an existing request header to value or creates a new one if the $header
+doesn't exist."><span class="description">Sets a an existing request header to value or creates a new one if the $header
+doesn't exist.</span><pre>setHeader()</pre></a></li>
+<li class="method public "><a href="#setHeaders" title="setHeaders :: Sets request headers using array"><span class="description">Sets request headers using array</span><pre>setHeaders()</pre></a></li>
+<li class="method public "><a href="#setMethod" title="setMethod :: Sets request's HTTP method. You can use \HTTP_Request2 constants like
+Resources::HTTP_GET or strings like 'GET'."><span class="description">Sets request's HTTP method. You can use \HTTP_Request2 constants like
+Resources::HTTP_GET or strings like 'GET'.</span><pre>setMethod()</pre></a></li>
+<li class="method public "><a href="#setPostParameters" title="setPostParameters :: Sets HTTP POST parameters."><span class="description">Sets HTTP POST parameters.</span><pre>setPostParameters()</pre></a></li>
+<li class="method public "><a href="#setUrl" title="setUrl :: Sets the request url."><span class="description">Sets the request url.</span><pre>setUrl()</pre></a></li>
+<li class="method public "><a href="#throwIfError" title="throwIfError :: Throws ServiceException if the recieved status code is not expected."><span class="description">Throws ServiceException if the recieved status code is not expected.</span><pre>throwIfError()</pre></a></li>
+<li class="nav-header">
+<i class="icon-custom icon-property"></i> Properties</li>
+<li class="nav-header private">» Private</li>
+<li class="property private "><a href="#%24_expectedStatusCodes" title="$_expectedStatusCodes :: Holds expected status code after sending the request."><span class="description">Holds expected status code after sending the request.</span><pre>$_expectedStatusCodes</pre></a></li>
+<li class="property private "><a href="#%24_request" title="$_request :: "><span class="description">$_request</span><pre>$_request</pre></a></li>
+<li class="property private "><a href="#%24_requestUrl" title="$_requestUrl :: "><span class="description">$_requestUrl</span><pre>$_requestUrl</pre></a></li>
+<li class="property private "><a href="#%24_response" title="$_response :: Holds the latest response object"><span class="description">Holds the latest response object</span><pre>$_response</pre></a></li>
+</ul>
+</div>
+<div class="span8">
+<a name="%5CWindowsAzure%5CCommon%5CInternal%5CHttp%5CHttpClient" id="\WindowsAzure\Common\Internal\Http\HttpClient"></a><ul class="breadcrumb">
+<li>
+<a href="../index.html"><i class="icon-custom icon-class"></i></a><span class="divider">\</span>
+</li>
+<li><a href="../namespaces/WindowsAzure.html">WindowsAzure</a></li>
+<span class="divider">\</span><li><a href="../namespaces/WindowsAzure.Common.html">Common</a></li>
+<span class="divider">\</span><li><a href="../namespaces/WindowsAzure.Common.Internal.html">Internal</a></li>
+<span class="divider">\</span><li><a href="../namespaces/WindowsAzure.Common.Internal.Http.html">Http</a></li>
+<li class="active">
+<span class="divider">\</span><a href="../classes/WindowsAzure.Common.Internal.Http.HttpClient.html">HttpClient</a>
+</li>
+</ul>
+<div href="../classes/WindowsAzure.Common.Internal.Http.HttpClient.html" class="element class">
+<p class="short_description">HTTP client which sends and receives HTTP requests and responses.</p>
+<div class="details">
+<p class="long_description"></p>
+<table class="table table-bordered">
+<tr>
+<th>category</th>
+<td>Microsoft</td>
+</tr>
+<tr>
+<th>package</th>
+<td><a href="../packages/WindowsAzure.Common.Internal.Http.html">WindowsAzure\Common\Internal\Http</a></td>
+</tr>
+<tr>
+<th>author</th>
+<td><a href="mailto:azurephpsdk@microsoft.com">Azure PHP SDK</a></td>
+</tr>
+<tr>
+<th>copyright</th>
+<td>2012 Microsoft Corporation</td>
+</tr>
+<tr>
+<th>license</th>
+<td><a href="http://www.apache.org/licenses/LICENSE-2.0">Apache License 2.0</a></td>
+</tr>
+<tr>
+<th>version</th>
+<td>Release: @package_version@</td>
+</tr>
+<tr>
+<th>link</th>
+<td><a href="https://github.com/windowsazure/azure-sdk-for-php">https://github.com/windowsazure/azure-sdk-for-php</a></td>
+</tr>
+</table>
+<h3>
+<i class="icon-custom icon-method"></i> Methods</h3>
+<a name="__clone" id="__clone"></a><div class="element clickable method public __clone" data-toggle="collapse" data-target=".__clone .collapse">
+<h2>Makes deep copy from the current object.</h2>
+<pre>__clone() : <a href="../classes/WindowsAzure.Common.Internal.Http.HttpClient.html">\WindowsAzure\Common\Internal\Http\HttpClient</a></pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<p class="long_description"></p>
+<h3>Returns</h3>
+<div class="subelement response"><code><a href="../classes/WindowsAzure.Common.Internal.Http.HttpClient.html">\WindowsAzure\Common\Internal\Http\HttpClient</a></code></div>
+</div></div>
+</div>
+<a name="__construct" id="__construct"></a><div class="element clickable method public __construct" data-toggle="collapse" data-target=".__construct .collapse">
+<h2>Initializes new HttpClient object.</h2>
+<pre>__construct(string $certificatePath, string $certificateAuthorityPath) : <a href="../classes/WindowsAzure.Common.Internal.Http.HttpClient.html">\WindowsAzure\Common\Internal\Http\HttpClient</a></pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<p class="long_description"></p>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$certificatePath</h4>
+<code>string</code><p>The certificate path.</p></div>
+<div class="subelement argument">
+<h4>$certificateAuthorityPath</h4>
+<code>string</code><p>The path of the certificate authority.</p></div>
+<h3>Returns</h3>
+<div class="subelement response"><code><a href="../classes/WindowsAzure.Common.Internal.Http.HttpClient.html">\WindowsAzure\Common\Internal\Http\HttpClient</a></code></div>
+</div></div>
+</div>
+<a name="getBody" id="getBody"></a><div class="element clickable method public getBody" data-toggle="collapse" data-target=".getBody .collapse">
+<h2>Gets the request body.</h2>
+<pre>getBody() : string</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<p class="long_description"></p>
+<h3>Returns</h3>
+<div class="subelement response"><code>string</code></div>
+</div></div>
+</div>
+<a name="getConfig" id="getConfig"></a><div class="element clickable method public getConfig" data-toggle="collapse" data-target=".getConfig .collapse">
+<h2>Gets value for configuration parameter.</h2>
+<pre>getConfig(string $name) : string</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<p class="long_description"></p>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$name</h4>
+<code>string</code><p>configuration parameter name.</p></div>
+<h3>Returns</h3>
+<div class="subelement response"><code>string</code></div>
+</div></div>
+</div>
+<a name="getHeaders" id="getHeaders"></a><div class="element clickable method public getHeaders" data-toggle="collapse" data-target=".getHeaders .collapse">
+<h2>Gets request's headers. The returned array key (header names) are all in
+lower case even if they were set having some upper letters.</h2>
+<pre>getHeaders() : array</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<p class="long_description"></p>
+<h3>Returns</h3>
+<div class="subelement response"><code>array</code></div>
+</div></div>
+</div>
+<a name="getMethod" id="getMethod"></a><div class="element clickable method public getMethod" data-toggle="collapse" data-target=".getMethod .collapse">
+<h2>Gets request's HTTP method.</h2>
+<pre>getMethod() : string</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<p class="long_description"></p>
+<h3>Returns</h3>
+<div class="subelement response"><code>string</code></div>
+</div></div>
+</div>
+<a name="getResponse" id="getResponse"></a><div class="element clickable method public getResponse" data-toggle="collapse" data-target=".getResponse .collapse">
+<h2>Gets the response object.</h2>
+<pre>getResponse() : \HTTP_Request2_Response</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<p class="long_description"></p>
+<h3>Returns</h3>
+<div class="subelement response"><code>\HTTP_Request2_Response</code></div>
+</div></div>
+</div>
+<a name="getSuccessfulStatusCode" id="getSuccessfulStatusCode"></a><div class="element clickable method public getSuccessfulStatusCode" data-toggle="collapse" data-target=".getSuccessfulStatusCode .collapse">
+<h2>Gets successful status code</h2>
+<pre>getSuccessfulStatusCode() : array</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<p class="long_description"></p>
+<h3>Returns</h3>
+<div class="subelement response"><code>array</code></div>
+</div></div>
+</div>
+<a name="getUrl" id="getUrl"></a><div class="element clickable method public getUrl" data-toggle="collapse" data-target=".getUrl .collapse">
+<h2>Gets request url. Note that you must check if the returned object is null or
+not.</h2>
+<pre>getUrl() : <a href="../classes/WindowsAzure.Common.Internal.Http.IUrl.html">\WindowsAzure\Common\Internal\Http\IUrl</a></pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<p class="long_description"></p>
+<h3>Returns</h3>
+<div class="subelement response"><code><a href="../classes/WindowsAzure.Common.Internal.Http.IUrl.html">\WindowsAzure\Common\Internal\Http\IUrl</a></code></div>
+</div></div>
+</div>
+<a name="send" id="send"></a><div class="element clickable method public send" data-toggle="collapse" data-target=".send .collapse">
+<h2>Processes the reuqest through HTTP pipeline with passed $filters,
+sends HTTP request to the wire and process the response in the HTTP pipeline.</h2>
+<pre>send(array $filters, \IUrl $url) : string</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<p class="long_description"></p>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$filters</h4>
+<code>array</code><p>HTTP filters which will be applied to the request before send and then applied to the response.</p></div>
+<div class="subelement argument">
+<h4>$url</h4>
+<code>\IUrl</code><p>Request url.</p></div>
+<h3>Exceptions</h3>
+<table class="table table-bordered"><tr>
+<th><code><a href="../classes/WindowsAzure.Common.ServiceException.html">\WindowsAzure\Common\ServiceException</a></code></th>
+<td></td>
+</tr></table>
+<h3>Returns</h3>
+<div class="subelement response">
+<code>string</code>The response body</div>
+</div></div>
+</div>
+<a name="setBody" id="setBody"></a><div class="element clickable method public setBody" data-toggle="collapse" data-target=".setBody .collapse">
+<h2>Sets the request body.</h2>
+<pre>setBody(string $body) : \none</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<p class="long_description"></p>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$body</h4>
+<code>string</code><p>body to use.</p></div>
+<h3>Returns</h3>
+<div class="subelement response"><code>\none</code></div>
+</div></div>
+</div>
+<a name="setConfig" id="setConfig"></a><div class="element clickable method public setConfig" data-toggle="collapse" data-target=".setConfig .collapse">
+<h2>Sets configuration parameter.</h2>
+<pre>setConfig(string $name, \mix $value) : \none</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<p class="long_description"></p>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$name</h4>
+<code>string</code><p>The configuration parameter name.</p></div>
+<div class="subelement argument">
+<h4>$value</h4>
+<code>\mix</code><p>The configuration parameter value.</p></div>
+<h3>Returns</h3>
+<div class="subelement response"><code>\none</code></div>
+</div></div>
+</div>
+<a name="setExpectedStatusCode" id="setExpectedStatusCode"></a><div class="element clickable method public setExpectedStatusCode" data-toggle="collapse" data-target=".setExpectedStatusCode .collapse">
+<h2>Sets successful status code</h2>
+<pre>setExpectedStatusCode(array | string $statusCodes) : \none</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<p class="long_description"></p>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$statusCodes</h4>
+<code>arraystring</code><p>successful status code.</p></div>
+<h3>Returns</h3>
+<div class="subelement response"><code>\none</code></div>
+</div></div>
+</div>
+<a name="setHeader" id="setHeader"></a><div class="element clickable method public setHeader" data-toggle="collapse" data-target=".setHeader .collapse">
+<h2>Sets a an existing request header to value or creates a new one if the $header
+doesn't exist.</h2>
+<pre>setHeader(string $header, string $value, bool $replace) : \none</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<p class="long_description"></p>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$header</h4>
+<code>string</code><p>header name.</p></div>
+<div class="subelement argument">
+<h4>$value</h4>
+<code>string</code><p>header value.</p></div>
+<div class="subelement argument">
+<h4>$replace</h4>
+<code>bool</code><p>whether to replace previous header with the same name or append to its value (comma separated)</p>
+</div>
+<h3>Returns</h3>
+<div class="subelement response"><code>\none</code></div>
+</div></div>
+</div>
+<a name="setHeaders" id="setHeaders"></a><div class="element clickable method public setHeaders" data-toggle="collapse" data-target=".setHeaders .collapse">
+<h2>Sets request headers using array</h2>
+<pre>setHeaders(array $headers) : \none</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<p class="long_description"></p>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$headers</h4>
+<code>array</code><p>headers key-value array</p>
+</div>
+<h3>Returns</h3>
+<div class="subelement response"><code>\none</code></div>
+</div></div>
+</div>
+<a name="setMethod" id="setMethod"></a><div class="element clickable method public setMethod" data-toggle="collapse" data-target=".setMethod .collapse">
+<h2>Sets request's HTTP method. You can use \HTTP_Request2 constants like
+Resources::HTTP_GET or strings like 'GET'.</h2>
+<pre>setMethod(string $method) : \none</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<p class="long_description"></p>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$method</h4>
+<code>string</code><p>request's HTTP method.</p>
+</div>
+<h3>Returns</h3>
+<div class="subelement response"><code>\none</code></div>
+</div></div>
+</div>
+<a name="setPostParameters" id="setPostParameters"></a><div class="element clickable method public setPostParameters" data-toggle="collapse" data-target=".setPostParameters .collapse">
+<h2>Sets HTTP POST parameters.</h2>
+<pre>setPostParameters(array $postParameters) : \none</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<p class="long_description"></p>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$postParameters</h4>
+<code>array</code><p>The HTTP POST parameters.</p></div>
+<h3>Returns</h3>
+<div class="subelement response"><code>\none</code></div>
+</div></div>
+</div>
+<a name="setUrl" id="setUrl"></a><div class="element clickable method public setUrl" data-toggle="collapse" data-target=".setUrl .collapse">
+<h2>Sets the request url.</h2>
+<pre>setUrl(<a href="../classes/WindowsAzure.Common.Internal.Http.IUrl.html">\WindowsAzure\Common\Internal\Http\IUrl</a> $url) : \none.</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<p class="long_description"></p>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$url</h4>
+<code><a href="../classes/WindowsAzure.Common.Internal.Http.IUrl.html">\WindowsAzure\Common\Internal\Http\IUrl</a></code><p>request url.</p></div>
+<h3>Returns</h3>
+<div class="subelement response"><code>\none.</code></div>
+</div></div>
+</div>
+<a name="throwIfError" id="throwIfError"></a><div class="element clickable method public throwIfError" data-toggle="collapse" data-target=".throwIfError .collapse">
+<h2>Throws ServiceException if the recieved status code is not expected.</h2>
+<pre>throwIfError(string $actual, string $reason, string $message, array $expected) : \none</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<p class="long_description"></p>
+<table class="table table-bordered"><tr>
+<th>static</th>
+<td></td>
+</tr></table>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$actual</h4>
+<code>string</code><p>The received status code.</p></div>
+<div class="subelement argument">
+<h4>$reason</h4>
+<code>string</code><p>The reason phrase.</p></div>
+<div class="subelement argument">
+<h4>$message</h4>
+<code>string</code><p>The detailed message (if any).</p>
+</div>
+<div class="subelement argument">
+<h4>$expected</h4>
+<code>array</code><p>The expected status codes.</p></div>
+<h3>Exceptions</h3>
+<table class="table table-bordered"><tr>
+<th><code>\ServiceException</code></th>
+<td></td>
+</tr></table>
+<h3>Returns</h3>
+<div class="subelement response"><code>\none</code></div>
+</div></div>
+</div>
+<h3>
+<i class="icon-custom icon-property"></i> Properties</h3>
+<a name="%24_expectedStatusCodes" id="$_expectedStatusCodes"> </a><div class="element clickable property private $_expectedStatusCodes" data-toggle="collapse" data-target=".$_expectedStatusCodes .collapse">
+<h2>Holds expected status code after sending the request.</h2>
+<pre>$_expectedStatusCodes : array</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><p class="long_description"></p></div></div>
+</div>
+<a name="%24_request" id="$_request"> </a><div class="element clickable property private $_request" data-toggle="collapse" data-target=".$_request .collapse">
+<h2>$_request</h2>
+<pre>$_request : \HTTP_Request2</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><p class="long_description"></p></div></div>
+</div>
+<a name="%24_requestUrl" id="$_requestUrl"> </a><div class="element clickable property private $_requestUrl" data-toggle="collapse" data-target=".$_requestUrl .collapse">
+<h2>$_requestUrl</h2>
+<pre>$_requestUrl : <a href="../classes/WindowsAzure.Common.Internal.Http.IUrl.html">\WindowsAzure\Common\Internal\Http\IUrl</a></pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><p class="long_description"></p></div></div>
+</div>
+<a name="%24_response" id="$_response"> </a><div class="element clickable property private $_response" data-toggle="collapse" data-target=".$_response .collapse">
+<h2>Holds the latest response object</h2>
+<pre>$_response : \HTTP_Request2_Response</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><p class="long_description"></p></div></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="row"><footer class="span12">
+            Template is built using <a href="http://twitter.github.com/bootstrap/">Twitter Bootstrap 2</a> and icons provided by <a href="http://glyphicons.com/">Glyphicons</a>.<br>
+            Documentation is powered by <a href="http://www.phpdoc.org/">phpDocumentor 2.0.0a6</a> and<br>
+            generated on 2012-07-17T21:10:38-07:00.<br></footer></div>
+</div>
+</body>
+</html>

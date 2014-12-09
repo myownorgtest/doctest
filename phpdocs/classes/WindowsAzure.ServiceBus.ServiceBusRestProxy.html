@@ -1,0 +1,580 @@
+<!DOCTYPE html><html xmlns:date="http://exslt.org/dates-and-times" lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0; user-scalable=0;">
+<meta charset="utf-8">
+<title>Windows Azure SDK for PHP » \WindowsAzure\ServiceBus\ServiceBusRestProxy</title>
+<meta name="author" content="Mike van Riel">
+<meta name="description" content="">
+<link href="../css/template.css" rel="stylesheet" media="all">
+<script src="../js/jquery-1.7.1.min.js" type="text/javascript"></script><script src="../js/jquery-ui-1.8.2.custom.min.js" type="text/javascript"></script><script src="../js/jquery.mousewheel.min.js" type="text/javascript"></script><script src="../js/bootstrap.js" type="text/javascript"></script><script src="../js/template.js" type="text/javascript"></script><script src="../js/prettify/prettify.min.js" type="text/javascript"></script><link rel="shortcut icon" href="../img/favicon.ico">
+<link rel="apple-touch-icon" href="../img/apple-touch-icon.png">
+<link rel="apple-touch-icon" sizes="72x72" href="../img/apple-touch-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="114x114" href="../img/apple-touch-icon-114x114.png">
+</head>
+<body>
+<div class="navbar navbar-fixed-top">
+<div class="navbar-inner"><div class="container">
+<a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse"><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></a><a class="brand" href="../index.html">Windows Azure SDK for PHP</a><div class="nav-collapse"><ul class="nav">
+<li class="dropdown">
+<a href="#api" class="dropdown-toggle" data-toggle="dropdown">
+                                    API Documentation <b class="caret"></b></a><ul class="dropdown-menu">
+<li><a>Namespaces</a></li>
+<li><a href="../namespaces/WindowsAzure.html"><i class="icon-th"></i> WindowsAzure</a></li>
+<li><a>Packages</a></li>
+<li><a href="../packages/WindowsAzure.html"><i class="icon-folder-open"></i> WindowsAzure</a></li>
+</ul>
+</li>
+<li class="dropdown" id="charts-menu">
+<a href="#charts" class="dropdown-toggle" data-toggle="dropdown">
+                                    Charts <b class="caret"></b></a><ul class="dropdown-menu"><li><a href="../graph_class.html"><i class="icon-list-alt"></i> Class hierarchy diagram</a></li></ul>
+</li>
+<li class="dropdown" id="reports-menu">
+<a href="#reports" class="dropdown-toggle" data-toggle="dropdown">
+                                    Reports <b class="caret"></b></a><ul class="dropdown-menu">
+<li><a href="../errors.html"><i class="icon-remove-sign"></i> Errors 
+                <span class="label label-info">385</span></a></li>
+<li><a href="../markers.html"><i class="icon-map-marker"></i> Markers 
+                <ul></ul></a></li>
+<li><a href="../deprecated.html"><i class="icon-stop"></i> Deprecated elements 
+                <span class="label label-info">0</span></a></li>
+</ul>
+</li>
+</ul></div>
+</div></div>
+<div class="go_to_top"><a href="#___" style="color: inherit">Back to top  <i class="icon-upload icon-white"></i></a></div>
+</div>
+<div id="___" class="container">
+<noscript><div class="alert alert-warning">
+                            Javascript is disabled; several features are only available
+                            if Javascript is enabled.
+                        </div></noscript>
+<div class="row">
+<div class="span4">
+<span class="btn-group visibility" data-toggle="buttons-checkbox"><button class="btn public active" title="Show public elements">Public</button><button class="btn protected" title="Show protected elements">Protected</button><button class="btn private" title="Show private elements">Private</button><button class="btn inherited active" title="Show inherited elements">Inherited</button></span><div class="btn-group view pull-right" data-toggle="buttons-radio">
+<button class="btn details" title="Show descriptions and method names"><i class="icon-list"></i></button><button class="btn simple" title="Show only method names"><i class="icon-align-justify"></i></button>
+</div>
+<ul class="side-nav nav nav-list">
+<li class="nav-header">
+<i class="icon-custom icon-method"></i> Methods</li>
+<li class="method public "><a href="#__construct" title="__construct :: Creates a ServiceBusRestProxy with specified parameter."><span class="description">Creates a ServiceBusRestProxy with specified parameter.</span><pre>__construct()</pre></a></li>
+<li class="method public "><a href="#createQueue" title="createQueue :: Creates a queue with a specified queue information."><span class="description">Creates a queue with a specified queue information.</span><pre>createQueue()</pre></a></li>
+<li class="method public "><a href="#createRule" title="createRule :: Creates a rule."><span class="description">Creates a rule.</span><pre>createRule()</pre></a></li>
+<li class="method public "><a href="#createSubscription" title="createSubscription :: Creates a subscription with specified topic path and
+subscription info."><span class="description">Creates a subscription with specified topic path and
+subscription info.</span><pre>createSubscription()</pre></a></li>
+<li class="method public "><a href="#createTopic" title="createTopic :: Creates a topic with specified topic info."><span class="description">Creates a topic with specified topic info.</span><pre>createTopic()</pre></a></li>
+<li class="method public "><a href="#deleteMessage" title="deleteMessage :: Deletes a brokered message."><span class="description">Deletes a brokered message.</span><pre>deleteMessage()</pre></a></li>
+<li class="method public "><a href="#deleteQueue" title="deleteQueue :: Deletes a queue."><span class="description">Deletes a queue.</span><pre>deleteQueue()</pre></a></li>
+<li class="method public "><a href="#deleteRule" title="deleteRule :: Deletes a rule."><span class="description">Deletes a rule.</span><pre>deleteRule()</pre></a></li>
+<li class="method public "><a href="#deleteSubscription" title="deleteSubscription :: Deletes a subscription."><span class="description">Deletes a subscription.</span><pre>deleteSubscription()</pre></a></li>
+<li class="method public "><a href="#deleteTopic" title="deleteTopic :: Deletes a topic with specified topic path."><span class="description">Deletes a topic with specified topic path.</span><pre>deleteTopic()</pre></a></li>
+<li class="method public "><a href="#getQueue" title="getQueue :: Gets a queue with specified path."><span class="description">Gets a queue with specified path.</span><pre>getQueue()</pre></a></li>
+<li class="method public "><a href="#getRule" title="getRule :: Gets a rule."><span class="description">Gets a rule.</span><pre>getRule()</pre></a></li>
+<li class="method public "><a href="#getSubscription" title="getSubscription :: Gets a subscription."><span class="description">Gets a subscription.</span><pre>getSubscription()</pre></a></li>
+<li class="method public "><a href="#getTopic" title="getTopic :: Gets a topic."><span class="description">Gets a topic.</span><pre>getTopic()</pre></a></li>
+<li class="method public "><a href="#listQueues" title="listQueues :: Lists a queue."><span class="description">Lists a queue.</span><pre>listQueues()</pre></a></li>
+<li class="method public "><a href="#listRules" title="listRules :: Lists rules."><span class="description">Lists rules.</span><pre>listRules()</pre></a></li>
+<li class="method public "><a href="#listSubscriptions" title="listSubscriptions :: Lists subscription."><span class="description">Lists subscription.</span><pre>listSubscriptions()</pre></a></li>
+<li class="method public "><a href="#listTopics" title="listTopics :: Lists topics."><span class="description">Lists topics.</span><pre>listTopics()</pre></a></li>
+<li class="method public "><a href="#receiveMessage" title="receiveMessage :: Receives a message."><span class="description">Receives a message.</span><pre>receiveMessage()</pre></a></li>
+<li class="method public "><a href="#receiveQueueMessage" title="receiveQueueMessage :: Receives a queue message."><span class="description">Receives a queue message.</span><pre>receiveQueueMessage()</pre></a></li>
+<li class="method public "><a href="#receiveSubscriptionMessage" title="receiveSubscriptionMessage :: Receives a subscription message."><span class="description">Receives a subscription message.</span><pre>receiveSubscriptionMessage()</pre></a></li>
+<li class="method public "><a href="#sendMessage" title="sendMessage :: Sends a brokered message."><span class="description">Sends a brokered message.</span><pre>sendMessage()</pre></a></li>
+<li class="method public "><a href="#sendQueueMessage" title="sendQueueMessage :: Sends a queue message."><span class="description">Sends a queue message.</span><pre>sendQueueMessage()</pre></a></li>
+<li class="method public "><a href="#sendTopicMessage" title="sendTopicMessage :: Sends a brokered message to a specified topic."><span class="description">Sends a brokered message to a specified topic.</span><pre>sendTopicMessage()</pre></a></li>
+<li class="method public "><a href="#unlockMessage" title="unlockMessage :: Unlocks a brokered message."><span class="description">Unlocks a brokered message.</span><pre>unlockMessage()</pre></a></li>
+<li class="nav-header private">» Private</li>
+<li class="method private "><a href="#_listOptions" title="_listOptions :: The base method of all the list operations."><span class="description">The base method of all the list operations.</span><pre>_listOptions()</pre></a></li>
+</ul>
+</div>
+<div class="span8">
+<a name="%5CWindowsAzure%5CServiceBus%5CServiceBusRestProxy" id="\WindowsAzure\ServiceBus\ServiceBusRestProxy"></a><ul class="breadcrumb">
+<li>
+<a href="../index.html"><i class="icon-custom icon-class"></i></a><span class="divider">\</span>
+</li>
+<li><a href="../namespaces/WindowsAzure.html">WindowsAzure</a></li>
+<span class="divider">\</span><li><a href="../namespaces/WindowsAzure.ServiceBus.html">ServiceBus</a></li>
+<li class="active">
+<span class="divider">\</span><a href="../classes/WindowsAzure.ServiceBus.ServiceBusRestProxy.html">ServiceBusRestProxy</a>
+</li>
+</ul>
+<div href="../classes/WindowsAzure.ServiceBus.ServiceBusRestProxy.html" class="element class">
+<p class="short_description">This class constructs HTTP requests and receive HTTP responses
+for Service Bus.</p>
+<div class="details">
+<p class="long_description"></p>
+<table class="table table-bordered">
+<tr>
+<th>category</th>
+<td>Microsoft</td>
+</tr>
+<tr>
+<th>package</th>
+<td><a href="../packages/WindowsAzure.ServiceBus.html">WindowsAzure\ServiceBus</a></td>
+</tr>
+<tr>
+<th>author</th>
+<td><a href="mailto:azurephpsdk@microsoft.com">Azure PHP SDK</a></td>
+</tr>
+<tr>
+<th>copyright</th>
+<td>2012 Microsoft Corporation</td>
+</tr>
+<tr>
+<th>license</th>
+<td><a href="http://www.apache.org/licenses/LICENSE-2.0">Apache License 2.0</a></td>
+</tr>
+<tr>
+<th>version</th>
+<td>Release: @package_version@</td>
+</tr>
+<tr>
+<th>link</th>
+<td><a href="https://github.com/WindowsAzure/azure-sdk-for-php">https://github.com/WindowsAzure/azure-sdk-for-php</a></td>
+</tr>
+</table>
+<h3>
+<i class="icon-custom icon-method"></i> Methods</h3>
+<a name="__construct" id="__construct"></a><div class="element clickable method public __construct" data-toggle="collapse" data-target=".__construct .collapse">
+<h2>Creates a ServiceBusRestProxy with specified parameter.</h2>
+<pre>__construct(\IHttpClient $channel, string $uri, \ISerializer $dataSerializer) : \none</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<p class="long_description"></p>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$channel</h4>
+<code>\IHttpClient</code><p>The channel to communicate.</p></div>
+<div class="subelement argument">
+<h4>$uri</h4>
+<code>string</code><p>The URI of Service Bus service.</p></div>
+<div class="subelement argument">
+<h4>$dataSerializer</h4>
+<code>\ISerializer</code><p>The serializer of the Service Bus.</p></div>
+<h3>Returns</h3>
+<div class="subelement response"><code>\none</code></div>
+</div></div>
+</div>
+<a name="createQueue" id="createQueue"></a><div class="element clickable method public createQueue" data-toggle="collapse" data-target=".createQueue .collapse">
+<h2>Creates a queue with a specified queue information.</h2>
+<pre>createQueue(\QueueInfo $queueInfo) : \QueueInfo</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<p class="long_description"></p>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$queueInfo</h4>
+<code>\QueueInfo</code><p>The information of the queue.</p></div>
+<h3>Returns</h3>
+<div class="subelement response"><code>\QueueInfo</code></div>
+</div></div>
+</div>
+<a name="createRule" id="createRule"></a><div class="element clickable method public createRule" data-toggle="collapse" data-target=".createRule .collapse">
+<h2>Creates a rule.</h2>
+<pre>createRule(string $topicPath, string $subscriptionName, \RuleInfo $ruleInfo) : \RuleInfo</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<p class="long_description"></p>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$topicPath</h4>
+<code>string</code><p>The path of the topic.</p></div>
+<div class="subelement argument">
+<h4>$subscriptionName</h4>
+<code>string</code><p>The name of the subscription.</p></div>
+<div class="subelement argument">
+<h4>$ruleInfo</h4>
+<code>\RuleInfo</code><p>The information of the rule.</p></div>
+<h3>Returns</h3>
+<div class="subelement response"><code>\RuleInfo</code></div>
+</div></div>
+</div>
+<a name="createSubscription" id="createSubscription"></a><div class="element clickable method public createSubscription" data-toggle="collapse" data-target=".createSubscription .collapse">
+<h2>Creates a subscription with specified topic path and
+subscription info.</h2>
+<pre>createSubscription(string $topicPath, \SubscriptionInfo $subscriptionInfo) : \SubscriptionInfo</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<p class="long_description"></p>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$topicPath</h4>
+<code>string</code><p>The path of the topic.</p></div>
+<div class="subelement argument">
+<h4>$subscriptionInfo</h4>
+<code>\SubscriptionInfo</code><p>The information of the subscription.</p></div>
+<h3>Returns</h3>
+<div class="subelement response"><code>\SubscriptionInfo</code></div>
+</div></div>
+</div>
+<a name="createTopic" id="createTopic"></a><div class="element clickable method public createTopic" data-toggle="collapse" data-target=".createTopic .collapse">
+<h2>Creates a topic with specified topic info.</h2>
+<pre>createTopic(\TopicInfo $topicInfo) : \TopicInfo</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<p class="long_description"></p>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$topicInfo</h4>
+<code>\TopicInfo</code><p>The information of the topic.</p></div>
+<h3>Returns</h3>
+<div class="subelement response"><code>\TopicInfo</code></div>
+</div></div>
+</div>
+<a name="deleteMessage" id="deleteMessage"></a><div class="element clickable method public deleteMessage" data-toggle="collapse" data-target=".deleteMessage .collapse">
+<h2>Deletes a brokered message.</h2>
+<pre>deleteMessage(\BrokeredMessage $brokeredMessage) : \none</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<p class="long_description"></p>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$brokeredMessage</h4>
+<code>\BrokeredMessage</code><p>The brokered message.</p></div>
+<h3>Returns</h3>
+<div class="subelement response"><code>\none</code></div>
+</div></div>
+</div>
+<a name="deleteQueue" id="deleteQueue"></a><div class="element clickable method public deleteQueue" data-toggle="collapse" data-target=".deleteQueue .collapse">
+<h2>Deletes a queue.</h2>
+<pre>deleteQueue(string $queuePath) : \none</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<p class="long_description"></p>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$queuePath</h4>
+<code>string</code><p>The path of the queue.</p></div>
+<h3>Returns</h3>
+<div class="subelement response"><code>\none</code></div>
+</div></div>
+</div>
+<a name="deleteRule" id="deleteRule"></a><div class="element clickable method public deleteRule" data-toggle="collapse" data-target=".deleteRule .collapse">
+<h2>Deletes a rule.</h2>
+<pre>deleteRule(string $topicPath, string $subscriptionName, string $ruleName) : \none</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<p class="long_description"></p>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$topicPath</h4>
+<code>string</code><p>The path of the topic.</p></div>
+<div class="subelement argument">
+<h4>$subscriptionName</h4>
+<code>string</code><p>The name of the subscription.</p></div>
+<div class="subelement argument">
+<h4>$ruleName</h4>
+<code>string</code><p>The name of the rule.</p></div>
+<h3>Returns</h3>
+<div class="subelement response"><code>\none</code></div>
+</div></div>
+</div>
+<a name="deleteSubscription" id="deleteSubscription"></a><div class="element clickable method public deleteSubscription" data-toggle="collapse" data-target=".deleteSubscription .collapse">
+<h2>Deletes a subscription.</h2>
+<pre>deleteSubscription(string $topicPath, string $subscriptionName) : \none</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<p class="long_description"></p>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$topicPath</h4>
+<code>string</code><p>The path of the topic.</p></div>
+<div class="subelement argument">
+<h4>$subscriptionName</h4>
+<code>string</code><p>The name of the subscription.</p></div>
+<h3>Returns</h3>
+<div class="subelement response"><code>\none</code></div>
+</div></div>
+</div>
+<a name="deleteTopic" id="deleteTopic"></a><div class="element clickable method public deleteTopic" data-toggle="collapse" data-target=".deleteTopic .collapse">
+<h2>Deletes a topic with specified topic path.</h2>
+<pre>deleteTopic(string $topicPath) : \none</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<p class="long_description"></p>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$topicPath</h4>
+<code>string</code><p>The path of the topic.</p></div>
+<h3>Returns</h3>
+<div class="subelement response"><code>\none</code></div>
+</div></div>
+</div>
+<a name="getQueue" id="getQueue"></a><div class="element clickable method public getQueue" data-toggle="collapse" data-target=".getQueue .collapse">
+<h2>Gets a queue with specified path.</h2>
+<pre>getQueue(string $queuePath) : \QueueInfo</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<p class="long_description"></p>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$queuePath</h4>
+<code>string</code><p>The path of the queue.</p></div>
+<h3>Returns</h3>
+<div class="subelement response"><code>\QueueInfo</code></div>
+</div></div>
+</div>
+<a name="getRule" id="getRule"></a><div class="element clickable method public getRule" data-toggle="collapse" data-target=".getRule .collapse">
+<h2>Gets a rule.</h2>
+<pre>getRule(string $topicPath, string $subscriptionName, string $ruleName) : \RuleInfo</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<p class="long_description"></p>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$topicPath</h4>
+<code>string</code><p>The path of the topic.</p></div>
+<div class="subelement argument">
+<h4>$subscriptionName</h4>
+<code>string</code><p>The name of the subscription.</p></div>
+<div class="subelement argument">
+<h4>$ruleName</h4>
+<code>string</code><p>The name of the rule.</p></div>
+<h3>Returns</h3>
+<div class="subelement response"><code>\RuleInfo</code></div>
+</div></div>
+</div>
+<a name="getSubscription" id="getSubscription"></a><div class="element clickable method public getSubscription" data-toggle="collapse" data-target=".getSubscription .collapse">
+<h2>Gets a subscription.</h2>
+<pre>getSubscription(string $topicPath, string $subscriptionName) : \SubscriptionInfo</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<p class="long_description"></p>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$topicPath</h4>
+<code>string</code><p>The path of the topic.</p></div>
+<div class="subelement argument">
+<h4>$subscriptionName</h4>
+<code>string</code><p>The name of the subscription.</p></div>
+<h3>Returns</h3>
+<div class="subelement response"><code>\SubscriptionInfo</code></div>
+</div></div>
+</div>
+<a name="getTopic" id="getTopic"></a><div class="element clickable method public getTopic" data-toggle="collapse" data-target=".getTopic .collapse">
+<h2>Gets a topic.</h2>
+<pre>getTopic(string $topicPath) : \TopicInfo</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<p class="long_description"></p>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$topicPath</h4>
+<code>string</code><p>The path of the topic.</p></div>
+<h3>Returns</h3>
+<div class="subelement response"><code>\TopicInfo</code></div>
+</div></div>
+</div>
+<a name="listQueues" id="listQueues"></a><div class="element clickable method public listQueues" data-toggle="collapse" data-target=".listQueues .collapse">
+<h2>Lists a queue.</h2>
+<pre>listQueues(\ListQueuesOptions $listQueuesOptions) : \ListQueuesResult;</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<p class="long_description"></p>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$listQueuesOptions</h4>
+<code>\ListQueuesOptions</code><p>The options to list the queues.</p></div>
+<h3>Returns</h3>
+<div class="subelement response"><code>\ListQueuesResult;</code></div>
+</div></div>
+</div>
+<a name="listRules" id="listRules"></a><div class="element clickable method public listRules" data-toggle="collapse" data-target=".listRules .collapse">
+<h2>Lists rules.</h2>
+<pre>listRules(string $topicPath, string $subscriptionName, \ListRulesOptions $listRulesOptions) : \ListRuleResult</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<p class="long_description"></p>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$topicPath</h4>
+<code>string</code><p>The path of the topic.</p></div>
+<div class="subelement argument">
+<h4>$subscriptionName</h4>
+<code>string</code><p>The name of the subscription.</p></div>
+<div class="subelement argument">
+<h4>$listRulesOptions</h4>
+<code>\ListRulesOptions</code><p>The options to list the rules.</p></div>
+<h3>Returns</h3>
+<div class="subelement response"><code>\ListRuleResult</code></div>
+</div></div>
+</div>
+<a name="listSubscriptions" id="listSubscriptions"></a><div class="element clickable method public listSubscriptions" data-toggle="collapse" data-target=".listSubscriptions .collapse">
+<h2>Lists subscription.</h2>
+<pre>listSubscriptions(string $topicPath, \ListSubscriptionsOptions $listSubscriptionsOptions) : \ListSubscriptionsResult</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<p class="long_description"></p>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$topicPath</h4>
+<code>string</code><p>The path of the topic.</p></div>
+<div class="subelement argument">
+<h4>$listSubscriptionsOptions</h4>
+<code>\ListSubscriptionsOptions</code><p>The options to list the subscription.</p></div>
+<h3>Returns</h3>
+<div class="subelement response"><code>\ListSubscriptionsResult</code></div>
+</div></div>
+</div>
+<a name="listTopics" id="listTopics"></a><div class="element clickable method public listTopics" data-toggle="collapse" data-target=".listTopics .collapse">
+<h2>Lists topics.</h2>
+<pre>listTopics(\ListTopicsOptions $listTopicsOptions) : \ListTopicsResults</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<p class="long_description"></p>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$listTopicsOptions</h4>
+<code>\ListTopicsOptions</code><p>The options to list the topics.</p></div>
+<h3>Returns</h3>
+<div class="subelement response"><code>\ListTopicsResults</code></div>
+</div></div>
+</div>
+<a name="receiveMessage" id="receiveMessage"></a><div class="element clickable method public receiveMessage" data-toggle="collapse" data-target=".receiveMessage .collapse">
+<h2>Receives a message.</h2>
+<pre>receiveMessage(string $path, \ReceivedMessageOptions $receiveMessageOptions) : \BrokeredMessage</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<p class="long_description"></p>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$path</h4>
+<code>string</code><p>The path of the message.</p></div>
+<div class="subelement argument">
+<h4>$receiveMessageOptions</h4>
+<code>\ReceivedMessageOptions</code><p>The options to receive the message.</p></div>
+<h3>Returns</h3>
+<div class="subelement response"><code>\BrokeredMessage</code></div>
+</div></div>
+</div>
+<a name="receiveQueueMessage" id="receiveQueueMessage"></a><div class="element clickable method public receiveQueueMessage" data-toggle="collapse" data-target=".receiveQueueMessage .collapse">
+<h2>Receives a queue message.</h2>
+<pre>receiveQueueMessage(string $queueName, \ReceiveMessageOptions $receiveMessageOptions) : \BrokeredMessage</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<p class="long_description"></p>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$queueName</h4>
+<code>string</code><p>The name of the queue.</p></div>
+<div class="subelement argument">
+<h4>$receiveMessageOptions</h4>
+<code>\ReceiveMessageOptions</code><p>The options to receive the message.</p></div>
+<h3>Returns</h3>
+<div class="subelement response"><code>\BrokeredMessage</code></div>
+</div></div>
+</div>
+<a name="receiveSubscriptionMessage" id="receiveSubscriptionMessage"></a><div class="element clickable method public receiveSubscriptionMessage" data-toggle="collapse" data-target=".receiveSubscriptionMessage .collapse">
+<h2>Receives a subscription message.</h2>
+<pre>receiveSubscriptionMessage(string $topicName, string $subscriptionName, \ReceiveMessageOptions $receiveMessageOptions) : \BrokeredMessage</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<p class="long_description"></p>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$topicName</h4>
+<code>string</code><p>The name of the topic.</p></div>
+<div class="subelement argument">
+<h4>$subscriptionName</h4>
+<code>string</code><p>The name of the subscription.</p></div>
+<div class="subelement argument">
+<h4>$receiveMessageOptions</h4>
+<code>\ReceiveMessageOptions</code><p>The options to receive the subscription message.</p></div>
+<h3>Returns</h3>
+<div class="subelement response"><code>\BrokeredMessage</code></div>
+</div></div>
+</div>
+<a name="sendMessage" id="sendMessage"></a><div class="element clickable method public sendMessage" data-toggle="collapse" data-target=".sendMessage .collapse">
+<h2>Sends a brokered message.</h2>
+<pre>sendMessage(\type $path, \type $brokeredMessage) : \none</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<p class="long_description"></p>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$path</h4>
+<code>\type</code><p>The path to send message.</p></div>
+<div class="subelement argument">
+<h4>$brokeredMessage</h4>
+<code>\type</code><p>The brokered message.</p></div>
+<h3>Returns</h3>
+<div class="subelement response"><code>\none</code></div>
+</div></div>
+</div>
+<a name="sendQueueMessage" id="sendQueueMessage"></a><div class="element clickable method public sendQueueMessage" data-toggle="collapse" data-target=".sendQueueMessage .collapse">
+<h2>Sends a queue message.</h2>
+<pre>sendQueueMessage(string $queueName, \BrokeredMessage $brokeredMessage) : \none</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<p class="long_description"></p>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$queueName</h4>
+<code>string</code><p>The name of the queue.</p></div>
+<div class="subelement argument">
+<h4>$brokeredMessage</h4>
+<code>\BrokeredMessage</code><p>The brokered message.</p></div>
+<h3>Returns</h3>
+<div class="subelement response"><code>\none</code></div>
+</div></div>
+</div>
+<a name="sendTopicMessage" id="sendTopicMessage"></a><div class="element clickable method public sendTopicMessage" data-toggle="collapse" data-target=".sendTopicMessage .collapse">
+<h2>Sends a brokered message to a specified topic.</h2>
+<pre>sendTopicMessage(string $topicName, \BrokeredMessage $brokeredMessage) : \none</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<p class="long_description"></p>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$topicName</h4>
+<code>string</code><p>The name of the topic.</p></div>
+<div class="subelement argument">
+<h4>$brokeredMessage</h4>
+<code>\BrokeredMessage</code><p>The brokered message.</p></div>
+<h3>Returns</h3>
+<div class="subelement response"><code>\none</code></div>
+</div></div>
+</div>
+<a name="unlockMessage" id="unlockMessage"></a><div class="element clickable method public unlockMessage" data-toggle="collapse" data-target=".unlockMessage .collapse">
+<h2>Unlocks a brokered message.</h2>
+<pre>unlockMessage(\BrokeredMessage $brokeredMessage) : \none</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<p class="long_description"></p>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$brokeredMessage</h4>
+<code>\BrokeredMessage</code><p>The brokered message.</p></div>
+<h3>Returns</h3>
+<div class="subelement response"><code>\none</code></div>
+</div></div>
+</div>
+<a name="_listOptions" id="_listOptions"></a><div class="element clickable method private _listOptions" data-toggle="collapse" data-target="._listOptions .collapse">
+<h2>The base method of all the list operations.</h2>
+<pre>_listOptions(\ListOptions $listOptions, string $path) : \none</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<p class="long_description"></p>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$listOptions</h4>
+<code>\ListOptions</code><p>The options for list operation.</p></div>
+<div class="subelement argument">
+<h4>$path</h4>
+<code>string</code><p>The path of the list operation.</p></div>
+<h3>Returns</h3>
+<div class="subelement response"><code>\none</code></div>
+</div></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="row"><footer class="span12">
+            Template is built using <a href="http://twitter.github.com/bootstrap/">Twitter Bootstrap 2</a> and icons provided by <a href="http://glyphicons.com/">Glyphicons</a>.<br>
+            Documentation is powered by <a href="http://www.phpdoc.org/">phpDocumentor 2.0.0a6</a> and<br>
+            generated on 2012-07-17T21:10:39-07:00.<br></footer></div>
+</div>
+</body>
+</html>

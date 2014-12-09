@@ -1,0 +1,285 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>pydocumentdb.base &mdash; pydocumentdb 0.9.0-preview documentation</title>
+    
+    <link rel="stylesheet" href="../../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '0.9.0-preview',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <script type="text/javascript" src="../../_static/sidebar.js"></script>
+    <link rel="top" title="pydocumentdb 0.9.0-preview documentation" href="../../index.html" />
+    <link rel="up" title="Module code" href="../index.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../../index.html">pydocumentdb 0.9.0-preview documentation</a> &raquo;</li>
+          <li><a href="../index.html" accesskey="U">Module code</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <h1>Source code for pydocumentdb.base</h1><div class="highlight"><pre>
+<span class="c"># Copyright (c) Microsoft Corporation.  All rights reserved.</span>
+
+<span class="sd">&quot;&quot;&quot;Base functions.</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="kn">import</span> <span class="nn">base64</span>
+<span class="kn">import</span> <span class="nn">datetime</span>
+<span class="kn">import</span> <span class="nn">urllib</span>
+<span class="kn">import</span> <span class="nn">uuid</span>
+
+<span class="kn">import</span> <span class="nn">pydocumentdb.auth</span> <span class="kn">as</span> <span class="nn">auth</span>
+<span class="kn">import</span> <span class="nn">pydocumentdb.http_constants</span> <span class="kn">as</span> <span class="nn">http_constants</span>
+<span class="kn">import</span> <span class="nn">pydocumentdb.runtime_constants</span> <span class="kn">as</span> <span class="nn">runtime_constants</span>
+
+
+<div class="viewcode-block" id="Extend"><a class="viewcode-back" href="../../api/pydocumentdb.base.html#pydocumentdb.base.Extend">[docs]</a><span class="k">def</span> <span class="nf">Extend</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span> <span class="n">extent</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Extends `obj` with contents in `extent`.</span>
+
+<span class="sd">    :Parameters:</span>
+<span class="sd">        - `obj`: dict, the content to be extended</span>
+<span class="sd">        - `extent`: dict, the content used to extend `obj`</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">for</span> <span class="nb">property</span> <span class="ow">in</span> <span class="n">extent</span><span class="p">:</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">extent</span><span class="p">[</span><span class="nb">property</span><span class="p">],</span> <span class="s">&#39;__call__&#39;</span><span class="p">):</span>
+            <span class="c"># type is not &#39;function&#39;.</span>
+            <span class="n">obj</span><span class="p">[</span><span class="nb">property</span><span class="p">]</span> <span class="o">=</span> <span class="n">extent</span><span class="p">[</span><span class="nb">property</span><span class="p">]</span>
+    <span class="k">return</span> <span class="n">obj</span>
+
+</div>
+<div class="viewcode-block" id="GetHeaders"><a class="viewcode-back" href="../../api/pydocumentdb.base.html#pydocumentdb.base.GetHeaders">[docs]</a><span class="k">def</span> <span class="nf">GetHeaders</span><span class="p">(</span><span class="n">document_client</span><span class="p">,</span>
+               <span class="n">default_headers</span><span class="p">,</span>
+               <span class="n">verb</span><span class="p">,</span>
+               <span class="n">path</span><span class="p">,</span>
+               <span class="n">resource_id</span><span class="p">,</span>
+               <span class="n">resource_type</span><span class="p">,</span>
+               <span class="n">options</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Gets HTTP request headers.</span>
+
+<span class="sd">    :Parameters:</span>
+<span class="sd">        - `document_client`: document_client.DocumentClient</span>
+<span class="sd">        - `default_headers`: dict</span>
+<span class="sd">        - `verb`: str</span>
+<span class="sd">        - `path`: str</span>
+<span class="sd">        - `resource_id`: str</span>
+<span class="sd">        - `resource_type`: str</span>
+<span class="sd">        - `options`: dict</span>
+
+<span class="sd">    :Returns:</span>
+<span class="sd">        dict, the HTTP request headers.</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">headers</span> <span class="o">=</span> <span class="n">Extend</span><span class="p">({},</span> <span class="n">default_headers</span><span class="p">)</span>
+    <span class="n">options</span> <span class="o">=</span> <span class="n">options</span> <span class="ow">or</span> <span class="p">{}</span>
+
+    <span class="k">if</span> <span class="s">&#39;continuation&#39;</span> <span class="ow">in</span> <span class="n">options</span> <span class="ow">and</span> <span class="n">options</span><span class="p">[</span><span class="s">&#39;continuation&#39;</span><span class="p">]:</span>
+        <span class="n">headers</span><span class="p">[</span><span class="n">http_constants</span><span class="o">.</span><span class="n">HttpHeaders</span><span class="o">.</span><span class="n">Continuation</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span>
+            <span class="n">options</span><span class="p">[</span><span class="s">&#39;continuation&#39;</span><span class="p">])</span>
+
+    <span class="k">if</span> <span class="s">&#39;preTriggerInclude&#39;</span> <span class="ow">in</span> <span class="n">options</span> <span class="ow">and</span> <span class="n">options</span><span class="p">[</span><span class="s">&#39;preTriggerInclude&#39;</span><span class="p">]:</span>
+        <span class="n">headers</span><span class="p">[</span><span class="n">http_constants</span><span class="o">.</span><span class="n">HttpHeaders</span><span class="o">.</span><span class="n">PreTriggerInclude</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span>
+            <span class="p">(</span><span class="s">&#39;,&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">options</span><span class="p">[</span><span class="s">&#39;preTriggerInclude&#39;</span><span class="p">])</span>
+            <span class="k">if</span> <span class="nb">type</span><span class="p">(</span><span class="n">options</span><span class="p">[</span><span class="s">&#39;preTriggerInclude&#39;</span><span class="p">])</span> <span class="ow">is</span> <span class="nb">list</span>
+            <span class="k">else</span> <span class="n">options</span><span class="p">[</span><span class="s">&#39;preTriggerInclude&#39;</span><span class="p">])</span>
+
+    <span class="k">if</span> <span class="s">&#39;postTriggerInclude&#39;</span> <span class="ow">in</span> <span class="n">options</span> <span class="ow">and</span> <span class="n">options</span><span class="p">[</span><span class="s">&#39;postTriggerInclude&#39;</span><span class="p">]:</span>
+        <span class="n">headers</span><span class="p">[</span><span class="n">http_constants</span><span class="o">.</span><span class="n">HttpHeaders</span><span class="o">.</span><span class="n">PostTriggerInclude</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span>
+            <span class="p">(</span><span class="s">&#39;,&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">options</span><span class="p">[</span><span class="s">&#39;postTriggerInclude&#39;</span><span class="p">])</span>
+            <span class="k">if</span> <span class="nb">type</span><span class="p">(</span><span class="n">options</span><span class="p">[</span><span class="s">&#39;postTriggerInclude&#39;</span><span class="p">])</span> <span class="ow">is</span> <span class="nb">list</span>
+            <span class="k">else</span> <span class="n">options</span><span class="p">[</span><span class="s">&#39;postTriggerInclude&#39;</span><span class="p">])</span>
+
+    <span class="k">if</span> <span class="s">&#39;maxItemCount&#39;</span> <span class="ow">in</span> <span class="n">options</span> <span class="ow">and</span> <span class="n">options</span><span class="p">[</span><span class="s">&#39;maxItemCount&#39;</span><span class="p">]:</span>
+        <span class="n">headers</span><span class="p">[</span><span class="n">http_constants</span><span class="o">.</span><span class="n">HttpHeaders</span><span class="o">.</span><span class="n">PageSize</span><span class="p">]</span> <span class="o">=</span> <span class="n">options</span><span class="p">[</span><span class="s">&#39;maxItemCount&#39;</span><span class="p">]</span>
+
+    <span class="k">if</span> <span class="s">&#39;accessCondition&#39;</span><span class="ow">in</span> <span class="n">options</span> <span class="ow">and</span> <span class="n">options</span><span class="p">[</span><span class="s">&#39;accessCondition&#39;</span><span class="p">]:</span>
+        <span class="k">if</span> <span class="n">options</span><span class="p">[</span><span class="s">&#39;accessCondition&#39;</span><span class="p">][</span><span class="s">&#39;type&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s">&#39;IfMatch&#39;</span><span class="p">:</span>
+            <span class="n">headers</span><span class="p">[</span><span class="n">http_constants</span><span class="o">.</span><span class="n">HttpHeaders</span><span class="o">.</span><span class="n">IfMatch</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span>
+                <span class="n">options</span><span class="p">[</span><span class="s">&#39;accessCondition&#39;</span><span class="p">][</span><span class="s">&#39;condition&#39;</span><span class="p">])</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">headers</span><span class="p">[</span><span class="n">http_constants</span><span class="o">.</span><span class="n">HttpHeaders</span><span class="o">.</span><span class="n">IfNoneMatch</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span>
+                <span class="n">options</span><span class="p">[</span><span class="s">&#39;accessCondition&#39;</span><span class="p">][</span><span class="s">&#39;condition&#39;</span><span class="p">])</span>
+
+    <span class="k">if</span> <span class="s">&#39;indexingDirective&#39;</span> <span class="ow">in</span> <span class="n">options</span> <span class="ow">and</span> <span class="n">options</span><span class="p">[</span><span class="s">&#39;indexingDirective&#39;</span><span class="p">]:</span>
+        <span class="n">headers</span><span class="p">[</span><span class="n">http_constants</span><span class="o">.</span><span class="n">HttpHeaders</span><span class="o">.</span><span class="n">IndexingDirective</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span>
+            <span class="n">options</span><span class="p">[</span><span class="s">&#39;indexingDirective&#39;</span><span class="p">])</span>
+
+    <span class="c"># TODO: add consistency level validation.</span>
+    <span class="k">if</span> <span class="s">&#39;consistencyLevel&#39;</span> <span class="ow">in</span> <span class="n">options</span> <span class="ow">and</span> <span class="n">options</span><span class="o">.</span><span class="n">consistency_level</span><span class="p">:</span>
+        <span class="n">headers</span><span class="p">[</span><span class="n">http_constants</span><span class="o">.</span><span class="n">HttpHeaders</span><span class="o">.</span><span class="n">ConsistencyLevel</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span>
+            <span class="n">options</span><span class="p">[</span><span class="s">&#39;consistencyLevel&#39;</span><span class="p">])</span>
+
+    <span class="c"># TODO: add session token automatic handling in case of session consistency.</span>
+    <span class="k">if</span> <span class="s">&#39;sessionToken&#39;</span> <span class="ow">in</span> <span class="n">options</span> <span class="ow">and</span> <span class="n">options</span><span class="p">[</span><span class="s">&#39;sessionToken&#39;</span><span class="p">]:</span>
+        <span class="n">headers</span><span class="p">[</span><span class="n">http_constants</span><span class="o">.</span><span class="n">HttpHeaders</span><span class="o">.</span><span class="n">SessionToken</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span>
+            <span class="n">options</span><span class="p">[</span><span class="s">&#39;sessionToken&#39;</span><span class="p">])</span>
+
+    <span class="k">if</span> <span class="s">&#39;resourceTokenExpirySeconds&#39;</span> <span class="ow">in</span> <span class="n">options</span> <span class="ow">and</span> <span class="n">options</span><span class="p">[</span><span class="s">&#39;resourceTokenExpirySeconds&#39;</span><span class="p">]:</span>
+        <span class="n">headers</span><span class="p">[</span><span class="n">http_constants</span><span class="o">.</span><span class="n">HttpHeaders</span><span class="o">.</span><span class="n">ResourceTokenExpiry</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span>
+            <span class="n">options</span><span class="p">[</span><span class="s">&#39;resourceTokenExpirySeconds&#39;</span><span class="p">])</span>
+
+    <span class="k">if</span> <span class="n">document_client</span><span class="o">.</span><span class="n">master_key</span><span class="p">:</span>
+        <span class="n">headers</span><span class="p">[</span><span class="n">http_constants</span><span class="o">.</span><span class="n">HttpHeaders</span><span class="o">.</span><span class="n">XDate</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span>
+            <span class="n">datetime</span><span class="o">.</span><span class="n">datetime</span><span class="o">.</span><span class="n">utcnow</span><span class="p">()</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s">&#39;%a, </span><span class="si">%d</span><span class="s"> %b %Y %H:%M:%S GMT&#39;</span><span class="p">))</span>
+
+    <span class="k">if</span> <span class="n">document_client</span><span class="o">.</span><span class="n">master_key</span> <span class="ow">or</span> <span class="n">document_client</span><span class="o">.</span><span class="n">resource_tokens</span><span class="p">:</span>
+        <span class="c"># -_.!~*&#39;() are valid characters in url, and shouldn&#39;t be quoted.</span>
+        <span class="n">headers</span><span class="p">[</span><span class="n">http_constants</span><span class="o">.</span><span class="n">HttpHeaders</span><span class="o">.</span><span class="n">Authorization</span><span class="p">]</span> <span class="o">=</span> <span class="n">urllib</span><span class="o">.</span><span class="n">quote</span><span class="p">(</span>
+            <span class="n">auth</span><span class="o">.</span><span class="n">GetAuthorizationHeader</span><span class="p">(</span><span class="n">document_client</span><span class="p">,</span>
+                                        <span class="n">verb</span><span class="p">,</span>
+                                        <span class="n">path</span><span class="p">,</span>
+                                        <span class="n">resource_id</span><span class="p">,</span>
+                                        <span class="n">resource_type</span><span class="p">,</span>
+                                        <span class="n">headers</span><span class="p">),</span>
+            <span class="s">&#39;-_.!~*</span><span class="se">\&#39;</span><span class="s">()&#39;</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">verb</span> <span class="o">==</span> <span class="s">&#39;post&#39;</span> <span class="ow">or</span> <span class="n">verb</span> <span class="o">==</span> <span class="s">&#39;put&#39;</span><span class="p">:</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">http_constants</span><span class="o">.</span><span class="n">HttpHeaders</span><span class="o">.</span><span class="n">ContentType</span> <span class="ow">in</span> <span class="n">headers</span><span class="p">:</span>
+            <span class="n">headers</span><span class="p">[</span><span class="n">http_constants</span><span class="o">.</span><span class="n">HttpHeaders</span><span class="o">.</span><span class="n">ContentType</span><span class="p">]</span> <span class="o">=</span> <span class="n">runtime_constants</span><span class="o">.</span><span class="n">MediaTypes</span><span class="o">.</span><span class="n">Json</span>
+
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">http_constants</span><span class="o">.</span><span class="n">HttpHeaders</span><span class="o">.</span><span class="n">Accept</span> <span class="ow">in</span> <span class="n">headers</span><span class="p">:</span>
+        <span class="n">headers</span><span class="p">[</span><span class="n">http_constants</span><span class="o">.</span><span class="n">HttpHeaders</span><span class="o">.</span><span class="n">Accept</span><span class="p">]</span> <span class="o">=</span> <span class="n">runtime_constants</span><span class="o">.</span><span class="n">MediaTypes</span><span class="o">.</span><span class="n">Json</span>
+
+    <span class="k">return</span> <span class="n">headers</span>
+
+</div>
+<div class="viewcode-block" id="GetIdFromLink"><a class="viewcode-back" href="../../api/pydocumentdb.base.html#pydocumentdb.base.GetIdFromLink">[docs]</a><span class="k">def</span> <span class="nf">GetIdFromLink</span><span class="p">(</span><span class="n">resource_link</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Gets resource id from resource link.</span>
+
+<span class="sd">    :Parameters:</span>
+<span class="sd">        - `resource_link`: str</span>
+
+<span class="sd">    :Returns:</span>
+<span class="sd">        str, the resource ID from the resource link.</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">resource_link</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">!=</span> <span class="s">&#39;/&#39;</span><span class="p">:</span>
+        <span class="n">resource_link</span> <span class="o">=</span> <span class="n">resource_link</span> <span class="o">+</span> <span class="s">&#39;/&#39;</span>
+
+    <span class="k">if</span> <span class="n">resource_link</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">!=</span> <span class="s">&#39;/&#39;</span><span class="p">:</span>
+        <span class="n">resource_link</span> <span class="o">=</span> <span class="s">&#39;/&#39;</span> <span class="o">+</span> <span class="n">resource_link</span>
+
+    <span class="c"># The path will be in the form of </span>
+    <span class="c"># /[resourceType]/[resourceId]/ .... /[resourceType]/[resourceId]/ or</span>
+    <span class="c"># /[resourceType]/[resourceId]/ .... /[resourceType]/</span>
+    <span class="c"># The result of split will be in the form of</span>
+    <span class="c"># [[[resourceType], [resourceId] ... ,[resourceType], [resourceId], &quot;&quot;]</span>
+    <span class="c"># In the first case, to extract the resourceId it will the element</span>
+    <span class="c"># before last ( at length -2 ) and the the type will before it</span>
+    <span class="c"># ( at length -3 )</span>
+    <span class="c"># In the second case, to extract the resource type it will the element</span>
+    <span class="c"># before last ( at length -2 )</span>
+    <span class="n">path_parts</span> <span class="o">=</span> <span class="n">resource_link</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s">&quot;/&quot;</span><span class="p">)</span>
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">path_parts</span><span class="p">)</span> <span class="o">%</span> <span class="mi">2</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="c"># request in form</span>
+        <span class="c"># /[resourceType]/[resourceId]/ .... /[resourceType]/[resourceId]/.</span>
+        <span class="k">return</span> <span class="n">path_parts</span><span class="p">[</span><span class="o">-</span><span class="mi">2</span><span class="p">]</span>
+    <span class="k">return</span> <span class="bp">None</span>
+
+</div>
+<div class="viewcode-block" id="GetAttachmentIdFromMediaId"><a class="viewcode-back" href="../../api/pydocumentdb.base.html#pydocumentdb.base.GetAttachmentIdFromMediaId">[docs]</a><span class="k">def</span> <span class="nf">GetAttachmentIdFromMediaId</span><span class="p">(</span><span class="n">media_id</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Gets attachment id from media id.</span>
+
+<span class="sd">    :Parameters:</span>
+<span class="sd">        - `media_id`: str</span>
+
+<span class="sd">    :Returns:</span>
+<span class="sd">        str, the attachment id from the media id.</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="nb">buffer</span> <span class="o">=</span> <span class="n">base64</span><span class="o">.</span><span class="n">b64decode</span><span class="p">(</span><span class="n">media_id</span><span class="p">)</span>
+    <span class="n">resoure_id_length</span> <span class="o">=</span> <span class="mi">20</span>
+    <span class="n">attachment_id</span> <span class="o">=</span> <span class="s">&#39;&#39;</span>
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="nb">buffer</span><span class="p">)</span> <span class="o">&gt;</span> <span class="n">resoure_id_length</span><span class="p">:</span>
+        <span class="c"># We are cuting off the storage index.</span>
+        <span class="n">attachment_id</span> <span class="o">=</span> <span class="n">base64</span><span class="o">.</span><span class="n">b64encode</span><span class="p">(</span><span class="nb">buffer</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="n">resoure_id_length</span><span class="p">])</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">attachment_id</span> <span class="o">=</span> <span class="n">media_id</span>
+        
+    <span class="k">return</span> <span class="n">attachment_id</span>
+
+</div>
+<div class="viewcode-block" id="GenerateGuidId"><a class="viewcode-back" href="../../api/pydocumentdb.base.html#pydocumentdb.base.GenerateGuidId">[docs]</a><span class="k">def</span> <span class="nf">GenerateGuidId</span><span class="p">():</span>
+    <span class="sd">&quot;&quot;&quot;Gets a random GUID.</span>
+
+<span class="sd">    Note that here we use python&#39;s UUID generation library. Basically UUID</span>
+<span class="sd">    is the same as GUID when represented as a string.</span>
+
+<span class="sd">    :Returns:</span>
+<span class="sd">        str, the generated random GUID.</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="nb">str</span><span class="p">(</span><span class="n">uuid</span><span class="o">.</span><span class="n">uuid4</span><span class="p">())</span></div>
+</pre></div>
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../../index.html">pydocumentdb 0.9.0-preview documentation</a> &raquo;</li>
+          <li><a href="../index.html" >Module code</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2014, Microsoft.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2.2.
+    </div>
+  </body>
+</html>

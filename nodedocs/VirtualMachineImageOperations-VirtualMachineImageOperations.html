@@ -1,0 +1,2000 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Class: VirtualMachineImageOperations</title>
+    
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+    
+    <h1 class="page-title">Class: VirtualMachineImageOperations</h1>
+    
+    
+
+
+
+<section>
+    
+<header>
+    <h2>
+    VirtualMachineImageOperations
+    </h2>
+    
+        <div class="class-description"><p>The Service Management API includes operations for managing the OS images
+in your subscription.  (see
+<a href="http://msdn.microsoft.com/en-us/library/windowsazure/jj157175.aspx">http://msdn.microsoft.com/en-us/library/windowsazure/jj157175.aspx</a> for
+more information)
+<strong>NOTE</strong>: An instance of this class is automatically created for an
+instance of the [ComputeManagementClient] <a href="ComputeManagementClient-ComputeManagementClient.html">ComputeManagementClient~ComputeManagementClient</a>.
+See [virtualMachineImages] <a href="ComputeManagementClient-ComputeManagementClient.html#virtualMachineImages">ComputeManagementClient~ComputeManagementClient#virtualMachineImages</a>.
+Initializes a new instance of the VirtualMachineImageOperations class.</p></div>
+    
+</header>  
+
+<article>
+    <div class="container-overview">
+    
+    
+    
+        
+<dt>
+    <h4 class="name" id="VirtualMachineImageOperations"><span class="type-signature"></span>new VirtualMachineImageOperations<span class="signature">(client)</span><span class="type-signature"></span></h4>
+    
+    
+</dt>
+<dd>
+    
+    
+
+    
+    
+    
+    
+    
+        <h5>Parameters:</h5>
+        
+
+<table class="params">
+    <thead>
+	<tr>
+		
+		<th>Name</th>
+		
+		
+		<th>Type</th>
+		
+		
+		
+		
+		
+		<th class="last">Description</th>
+	</tr>
+	</thead>
+	
+	<tbody>
+	
+	
+        <tr>
+            
+                <td class="name"><code>client</code></td>
+            
+            
+            <td class="type">
+            
+                
+<span class="param-type">ComputeManagementClient</span>
+
+
+            
+            </td>
+            
+            
+            
+            
+            
+            <td class="description last"><p>Reference to the service client.</p></td>
+        </tr>
+	
+	
+	</tbody>
+</table>
+    
+    
+    
+<dl class="details">
+    
+        
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="computeManagementClient.js.html">services/computeManagement/lib/computeManagementClient.js</a>, <a href="computeManagementClient.js.html#line10889">line 10889</a>
+    </li></ul></dd>
+    
+    
+    
+    
+    
+    
+    
+</dl>
+
+    
+    
+
+    
+
+    
+    
+    
+    
+    
+    
+    
+</dd>
+
+    
+    </div>
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+        <h3 class="subsection-title">Methods</h3>
+        
+        <dl>
+            
+<dt>
+    <h4 class="name" id="create"><span class="type-signature"></span>create<span class="signature">(parameters, callback)</span><span class="type-signature"> &rarr; {Stream}</span></h4>
+    
+    
+</dt>
+<dd>
+    
+    
+    <div class="description">
+        <p>The Add OS Image operation adds an operating system image that is stored
+in a storage account and is available from the image repository.  (see
+<a href="http://msdn.microsoft.com/en-us/library/windowsazure/jj157192.aspx">http://msdn.microsoft.com/en-us/library/windowsazure/jj157192.aspx</a> for
+more information)</p>
+    </div>
+    
+
+    
+    
+    
+    
+    
+        <h5>Parameters:</h5>
+        
+
+<table class="params">
+    <thead>
+	<tr>
+		
+		<th>Name</th>
+		
+		
+		<th>Type</th>
+		
+		
+		
+		
+		
+		<th class="last">Description</th>
+	</tr>
+	</thead>
+	
+	<tbody>
+	
+	
+        <tr>
+            
+                <td class="name"><code>parameters</code></td>
+            
+            
+            <td class="type">
+            
+                
+<span class="param-type">VirtualMachineImageCreateParameters</span>
+
+
+            
+            </td>
+            
+            
+            
+            
+            
+            <td class="description last"><p>Parameters
+supplied to the Create Virtual Machine Image operation.</p>
+                <h6>Properties</h6>
+                
+
+<table class="params">
+    <thead>
+	<tr>
+		
+		<th>Name</th>
+		
+		
+		<th>Type</th>
+		
+		
+		<th>Argument</th>
+		
+		
+		
+		
+		<th class="last">Description</th>
+	</tr>
+	</thead>
+	
+	<tbody>
+	
+	
+        <tr>
+            
+                <td class="name"><code>label</code></td>
+            
+            
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+            
+            
+                <td class="attributes">
+                
+                    
+                
+                    
+                
+                </td>
+            
+            
+            
+            
+            <td class="description last"><p>Required. Specifies the friendly name of
+the image.</p></td>
+        </tr>
+	
+	
+	
+        <tr>
+            
+                <td class="name"><code>mediaLinkUri</code></td>
+            
+            
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+            
+            
+                <td class="attributes">
+                
+                    
+                
+                    
+                
+                </td>
+            
+            
+            
+            
+            <td class="description last"><p>Required. Specifies the location
+of the blob in Windows Azure storage. The blob location must belong to a
+storage account in the subscription specified by the SubscriptionId value
+in the operation call.  Example:
+<a href="http://example.blob.core.windows.net/disks/mydisk.vhd">http://example.blob.core.windows.net/disks/mydisk.vhd</a></p></td>
+        </tr>
+	
+	
+	
+        <tr>
+            
+                <td class="name"><code>name</code></td>
+            
+            
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+            
+            
+                <td class="attributes">
+                
+                    
+                
+                    
+                
+                </td>
+            
+            
+            
+            
+            <td class="description last"><p>Required. Specifies a name that Windows
+Azure uses to identify the image when creating one or more virtual
+machines.</p></td>
+        </tr>
+	
+	
+	
+        <tr>
+            
+                <td class="name"><code>operatingSystemType</code></td>
+            
+            
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+            
+            
+                <td class="attributes">
+                
+                    
+                
+                    
+                
+                </td>
+            
+            
+            
+            
+            <td class="description last"><p>Required. The operating
+system type of the OS image. Possible values are: Linux, Windows.</p></td>
+        </tr>
+	
+	
+	
+        <tr>
+            
+                <td class="name"><code>eula</code></td>
+            
+            
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+            
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+                    
+                
+                    
+                
+                </td>
+            
+            
+            
+            
+            <td class="description last"><p>Optional. Specifies the End User License
+Agreement that is associated with the image. The value for this element
+is a string, but it is recommended that the value be a URL that points to
+a EULA.</p></td>
+        </tr>
+	
+	
+	
+        <tr>
+            
+                <td class="name"><code>description</code></td>
+            
+            
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+            
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+                    
+                
+                    
+                
+                </td>
+            
+            
+            
+            
+            <td class="description last"><p>Optional. Specifies the
+description of the OS image.</p></td>
+        </tr>
+	
+	
+	
+        <tr>
+            
+                <td class="name"><code>imageFamily</code></td>
+            
+            
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+            
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+                    
+                
+                    
+                
+                </td>
+            
+            
+            
+            
+            <td class="description last"><p>Optional. Specifies a value that
+can be used to group OS images.</p></td>
+        </tr>
+	
+	
+	
+        <tr>
+            
+                <td class="name"><code>publishedDate</code></td>
+            
+            
+            <td class="type">
+            
+                
+<span class="param-type">date</span>
+
+
+            
+            </td>
+            
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+                    
+                
+                    
+                
+                </td>
+            
+            
+            
+            
+            <td class="description last"><p>Optional. Specifies the date when
+the OS image was added to the image repository.</p></td>
+        </tr>
+	
+	
+	
+        <tr>
+            
+                <td class="name"><code>isPremium</code></td>
+            
+            
+            <td class="type">
+            
+                
+<span class="param-type">boolean</span>
+
+
+            
+            </td>
+            
+            
+                <td class="attributes">
+                
+                    
+                
+                    
+                
+                </td>
+            
+            
+            
+            
+            <td class="description last"><p>Indicates if the image contains
+software or associated services that will incur charges above the core
+price for the virtual machine.</p></td>
+        </tr>
+	
+	
+	
+        <tr>
+            
+                <td class="name"><code>showInGui</code></td>
+            
+            
+            <td class="type">
+            
+                
+<span class="param-type">boolean</span>
+
+
+            
+            </td>
+            
+            
+                <td class="attributes">
+                
+                    
+                
+                    
+                
+                </td>
+            
+            
+            
+            
+            <td class="description last"><p>Specifies whether the image should
+appear in the image gallery.</p></td>
+        </tr>
+	
+	
+	
+        <tr>
+            
+                <td class="name"><code>privacyUri</code></td>
+            
+            
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+            
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+                    
+                
+                    
+                
+                </td>
+            
+            
+            
+            
+            <td class="description last"><p>Optional. Specifies the URI that
+points to a document that contains the privacy policy related to the OS
+image.</p></td>
+        </tr>
+	
+	
+	
+        <tr>
+            
+                <td class="name"><code>iconUri</code></td>
+            
+            
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+            
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+                    
+                
+                    
+                
+                </td>
+            
+            
+            
+            
+            <td class="description last"><p>Optional. Specifies the Uri to the
+icon that is displayed for the image in the Management Portal.</p></td>
+        </tr>
+	
+	
+	
+        <tr>
+            
+                <td class="name"><code>recommendedVMSize</code></td>
+            
+            
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+            
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+                    
+                
+                    
+                
+                </td>
+            
+            
+            
+            
+            <td class="description last"><p>Optional. Specifies the
+size to use for the virtual machine that is created from the OS image.</p></td>
+        </tr>
+	
+	
+	
+        <tr>
+            
+                <td class="name"><code>smallIconUri</code></td>
+            
+            
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+            
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+                    
+                
+                    
+                
+                </td>
+            
+            
+            
+            
+            <td class="description last"><p>Specifies the URI to the small
+icon that is displayed when the image is presented in the Windows Azure
+Management Portal.  The SmallIconUri element is only available using
+version 2013-03-01 or higher.</p></td>
+        </tr>
+	
+	
+	
+        <tr>
+            
+                <td class="name"><code>language</code></td>
+            
+            
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+            
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+                    
+                
+                    
+                
+                </td>
+            
+            
+            
+            
+            <td class="description last"><p>Specifies the language of the image.
+The Language element is only available using version 2013-03-01 or
+higher.</p></td>
+        </tr>
+	
+	
+	</tbody>
+</table>
+            </td>
+        </tr>
+	
+	
+	
+        <tr>
+            
+                <td class="name"><code>callback</code></td>
+            
+            
+            <td class="type">
+            
+                
+<span class="param-type">function</span>
+
+
+            
+            </td>
+            
+            
+            
+            
+            
+            <td class="description last"></td>
+        </tr>
+	
+	
+	</tbody>
+</table>
+    
+    
+    
+<dl class="details">
+    
+        
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="computeManagementClient.js.html">services/computeManagement/lib/computeManagementClient.js</a>, <a href="computeManagementClient.js.html#line10962">line 10962</a>
+    </li></ul></dd>
+    
+    
+    
+    
+    
+    
+    
+</dl>
+
+    
+    
+
+    
+
+    
+    
+    
+    
+    
+    <h5>Returns:</h5>
+    
+            
+<div class="param-desc">
+    <p>The response stream.</p>
+</div>
+
+
+
+<dl>
+	<dt>
+		Type
+	</dt>
+	<dd>
+		
+<span class="param-type">Stream</span>
+
+
+	</dd>
+</dl>
+
+        
+    
+    
+</dd>
+
+        
+            
+<dt>
+    <h4 class="name" id="delete"><span class="type-signature"></span>delete<span class="signature">(imageName, deleteFromStorage, callback)</span><span class="type-signature"> &rarr; {Stream}</span></h4>
+    
+    
+</dt>
+<dd>
+    
+    
+    <div class="description">
+        <p>The Delete OS Image operation deletes the specified OS image from your
+image repository.  (see
+<a href="http://msdn.microsoft.com/en-us/library/windowsazure/jj157203.aspx">http://msdn.microsoft.com/en-us/library/windowsazure/jj157203.aspx</a> for
+more information)</p>
+    </div>
+    
+
+    
+    
+    
+    
+    
+        <h5>Parameters:</h5>
+        
+
+<table class="params">
+    <thead>
+	<tr>
+		
+		<th>Name</th>
+		
+		
+		<th>Type</th>
+		
+		
+		
+		
+		
+		<th class="last">Description</th>
+	</tr>
+	</thead>
+	
+	<tbody>
+	
+	
+        <tr>
+            
+                <td class="name"><code>imageName</code></td>
+            
+            
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+            
+            
+            
+            
+            
+            <td class="description last"><p>The name of the image to delete.</p></td>
+        </tr>
+	
+	
+	
+        <tr>
+            
+                <td class="name"><code>deleteFromStorage</code></td>
+            
+            
+            <td class="type">
+            
+                
+<span class="param-type">boolean</span>
+
+
+            
+            </td>
+            
+            
+            
+            
+            
+            <td class="description last"><p>Optional. Specifies that the source
+blob for the image should also be deleted from storage.</p></td>
+        </tr>
+	
+	
+	
+        <tr>
+            
+                <td class="name"><code>callback</code></td>
+            
+            
+            <td class="type">
+            
+                
+<span class="param-type">function</span>
+
+
+            
+            </td>
+            
+            
+            
+            
+            
+            <td class="description last"></td>
+        </tr>
+	
+	
+	</tbody>
+</table>
+    
+    
+    
+<dl class="details">
+    
+        
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="computeManagementClient.js.html">services/computeManagement/lib/computeManagementClient.js</a>, <a href="computeManagementClient.js.html#line11256">line 11256</a>
+    </li></ul></dd>
+    
+    
+    
+    
+    
+    
+    
+</dl>
+
+    
+    
+
+    
+
+    
+    
+    
+    
+    
+    <h5>Returns:</h5>
+    
+            
+<div class="param-desc">
+    <p>The response stream.</p>
+</div>
+
+
+
+<dl>
+	<dt>
+		Type
+	</dt>
+	<dd>
+		
+<span class="param-type">Stream</span>
+
+
+	</dd>
+</dl>
+
+        
+    
+    
+</dd>
+
+        
+            
+<dt>
+    <h4 class="name" id="get"><span class="type-signature"></span>get<span class="signature">(imageName, callback)</span><span class="type-signature"> &rarr; {Stream}</span></h4>
+    
+    
+</dt>
+<dd>
+    
+    
+    <div class="description">
+        <p>The Get OS Image operation retrieves the details for an operating system
+image from the image repository.  (see
+<a href="http://msdn.microsoft.com/en-us/library/windowsazure/jj157191.aspx">http://msdn.microsoft.com/en-us/library/windowsazure/jj157191.aspx</a> for
+more information)</p>
+    </div>
+    
+
+    
+    
+    
+    
+    
+        <h5>Parameters:</h5>
+        
+
+<table class="params">
+    <thead>
+	<tr>
+		
+		<th>Name</th>
+		
+		
+		<th>Type</th>
+		
+		
+		
+		
+		
+		<th class="last">Description</th>
+	</tr>
+	</thead>
+	
+	<tbody>
+	
+	
+        <tr>
+            
+                <td class="name"><code>imageName</code></td>
+            
+            
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+            
+            
+            
+            
+            
+            <td class="description last"><p>The name of the OS image to retrieve.</p></td>
+        </tr>
+	
+	
+	
+        <tr>
+            
+                <td class="name"><code>callback</code></td>
+            
+            
+            <td class="type">
+            
+                
+<span class="param-type">function</span>
+
+
+            
+            </td>
+            
+            
+            
+            
+            
+            <td class="description last"></td>
+        </tr>
+	
+	
+	</tbody>
+</table>
+    
+    
+    
+<dl class="details">
+    
+        
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="computeManagementClient.js.html">services/computeManagement/lib/computeManagementClient.js</a>, <a href="computeManagementClient.js.html#line11317">line 11317</a>
+    </li></ul></dd>
+    
+    
+    
+    
+    
+    
+    
+</dl>
+
+    
+    
+
+    
+
+    
+    
+    
+    
+    
+    <h5>Returns:</h5>
+    
+            
+<div class="param-desc">
+    <p>The response stream.</p>
+</div>
+
+
+
+<dl>
+	<dt>
+		Type
+	</dt>
+	<dd>
+		
+<span class="param-type">Stream</span>
+
+
+	</dd>
+</dl>
+
+        
+    
+    
+</dd>
+
+        
+            
+<dt>
+    <h4 class="name" id="list"><span class="type-signature"></span>list<span class="signature">(callback)</span><span class="type-signature"> &rarr; {Stream}</span></h4>
+    
+    
+</dt>
+<dd>
+    
+    
+    <div class="description">
+        <p>The List OS Images operation retrieves a list of the operating system
+images from the image repository.  (see
+<a href="http://msdn.microsoft.com/en-us/library/windowsazure/jj157191.aspx">http://msdn.microsoft.com/en-us/library/windowsazure/jj157191.aspx</a> for
+more information)</p>
+    </div>
+    
+
+    
+    
+    
+    
+    
+        <h5>Parameters:</h5>
+        
+
+<table class="params">
+    <thead>
+	<tr>
+		
+		<th>Name</th>
+		
+		
+		<th>Type</th>
+		
+		
+		
+		
+		
+		<th class="last">Description</th>
+	</tr>
+	</thead>
+	
+	<tbody>
+	
+	
+        <tr>
+            
+                <td class="name"><code>callback</code></td>
+            
+            
+            <td class="type">
+            
+                
+<span class="param-type">function</span>
+
+
+            
+            </td>
+            
+            
+            
+            
+            
+            <td class="description last"></td>
+        </tr>
+	
+	
+	</tbody>
+</table>
+    
+    
+    
+<dl class="details">
+    
+        
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="computeManagementClient.js.html">services/computeManagement/lib/computeManagementClient.js</a>, <a href="computeManagementClient.js.html#line11504">line 11504</a>
+    </li></ul></dd>
+    
+    
+    
+    
+    
+    
+    
+</dl>
+
+    
+    
+
+    
+
+    
+    
+    
+    
+    
+    <h5>Returns:</h5>
+    
+            
+<div class="param-desc">
+    <p>The response stream.</p>
+</div>
+
+
+
+<dl>
+	<dt>
+		Type
+	</dt>
+	<dd>
+		
+<span class="param-type">Stream</span>
+
+
+	</dd>
+</dl>
+
+        
+    
+    
+</dd>
+
+        
+            
+<dt>
+    <h4 class="name" id="update"><span class="type-signature"></span>update<span class="signature">(imageName, parameters, callback)</span><span class="type-signature"> &rarr; {Stream}</span></h4>
+    
+    
+</dt>
+<dd>
+    
+    
+    <div class="description">
+        <p>The Update OS Image operation updates an OS image that in your image
+repository.  (see
+<a href="http://msdn.microsoft.com/en-us/library/windowsazure/jj157198.aspx">http://msdn.microsoft.com/en-us/library/windowsazure/jj157198.aspx</a> for
+more information)</p>
+    </div>
+    
+
+    
+    
+    
+    
+    
+        <h5>Parameters:</h5>
+        
+
+<table class="params">
+    <thead>
+	<tr>
+		
+		<th>Name</th>
+		
+		
+		<th>Type</th>
+		
+		
+		
+		
+		
+		<th class="last">Description</th>
+	</tr>
+	</thead>
+	
+	<tbody>
+	
+	
+        <tr>
+            
+                <td class="name"><code>imageName</code></td>
+            
+            
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+            
+            
+            
+            
+            
+            <td class="description last"><p>The name of the virtual machine image to be
+updated.</p></td>
+        </tr>
+	
+	
+	
+        <tr>
+            
+                <td class="name"><code>parameters</code></td>
+            
+            
+            <td class="type">
+            
+                
+<span class="param-type">VirtualMachineImageUpdateParameters</span>
+
+
+            
+            </td>
+            
+            
+            
+            
+            
+            <td class="description last"><p>Parameters
+supplied to the Update Virtual Machine Image operation.</p>
+                <h6>Properties</h6>
+                
+
+<table class="params">
+    <thead>
+	<tr>
+		
+		<th>Name</th>
+		
+		
+		<th>Type</th>
+		
+		
+		<th>Argument</th>
+		
+		
+		
+		
+		<th class="last">Description</th>
+	</tr>
+	</thead>
+	
+	<tbody>
+	
+	
+        <tr>
+            
+                <td class="name"><code>label</code></td>
+            
+            
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+            
+            
+                <td class="attributes">
+                
+                    
+                
+                    
+                
+                </td>
+            
+            
+            
+            
+            <td class="description last"><p>Required. Specifies the friendly name of
+the image to be updated. You cannot use this operation to update images
+provided by the Windows Azure platform.</p></td>
+        </tr>
+	
+	
+	
+        <tr>
+            
+                <td class="name"><code>eula</code></td>
+            
+            
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+            
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+                    
+                
+                    
+                
+                </td>
+            
+            
+            
+            
+            <td class="description last"><p>Optional. Specifies the End User License
+Agreement that is associated with the image. The value for this element
+is a string, but it is recommended that the value be a URL that points to
+a EULA.</p></td>
+        </tr>
+	
+	
+	
+        <tr>
+            
+                <td class="name"><code>description</code></td>
+            
+            
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+            
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+                    
+                
+                    
+                
+                </td>
+            
+            
+            
+            
+            <td class="description last"><p>Optional. Specifies the
+description of the OS image.</p></td>
+        </tr>
+	
+	
+	
+        <tr>
+            
+                <td class="name"><code>imageFamily</code></td>
+            
+            
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+            
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+                    
+                
+                    
+                
+                </td>
+            
+            
+            
+            
+            <td class="description last"><p>Optional. Specifies a value that
+can be used to group OS images.</p></td>
+        </tr>
+	
+	
+	
+        <tr>
+            
+                <td class="name"><code>publishedDate</code></td>
+            
+            
+            <td class="type">
+            
+                
+<span class="param-type">date</span>
+
+
+            
+            </td>
+            
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+                    
+                
+                    
+                
+                </td>
+            
+            
+            
+            
+            <td class="description last"><p>Optional. Specifies the date when
+the OS image was added to the image repository.</p></td>
+        </tr>
+	
+	
+	
+        <tr>
+            
+                <td class="name"><code>isPremium</code></td>
+            
+            
+            <td class="type">
+            
+                
+<span class="param-type">boolean</span>
+
+
+            
+            </td>
+            
+            
+                <td class="attributes">
+                
+                    
+                
+                    
+                
+                </td>
+            
+            
+            
+            
+            <td class="description last"><p>Indicates if the image contains
+software or associated services that will incur charges above the core
+price for the virtual machine.</p></td>
+        </tr>
+	
+	
+	
+        <tr>
+            
+                <td class="name"><code>privacyUri</code></td>
+            
+            
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+            
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+                    
+                
+                    
+                
+                </td>
+            
+            
+            
+            
+            <td class="description last"><p>Optional. Specifies the URI that
+points to a document that contains the privacy policy related to the OS
+image.</p></td>
+        </tr>
+	
+	
+	
+        <tr>
+            
+                <td class="name"><code>iconUri</code></td>
+            
+            
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+            
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+                    
+                
+                    
+                
+                </td>
+            
+            
+            
+            
+            <td class="description last"><p>Optional. Specifies the Uri to the
+icon that is displayed for the image in the Management Portal.</p></td>
+        </tr>
+	
+	
+	
+        <tr>
+            
+                <td class="name"><code>recommendedVMSize</code></td>
+            
+            
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+            
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+                    
+                
+                    
+                
+                </td>
+            
+            
+            
+            
+            <td class="description last"><p>Optional. Specifies the
+size to use for the virtual machine that is created from the OS image.</p></td>
+        </tr>
+	
+	
+	
+        <tr>
+            
+                <td class="name"><code>smallIconUri</code></td>
+            
+            
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+            
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+                    
+                
+                    
+                
+                </td>
+            
+            
+            
+            
+            <td class="description last"><p>Specifies the URI to the small
+icon that is displayed when the image is presented in the Windows Azure
+Management Portal.  The SmallIconUri element is only available using
+version 2013-03-01 or higher.</p></td>
+        </tr>
+	
+	
+	
+        <tr>
+            
+                <td class="name"><code>language</code></td>
+            
+            
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+            
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+                    
+                
+                    
+                
+                </td>
+            
+            
+            
+            
+            <td class="description last"><p>Specifies the language of the image.
+The Language element is only available using version 2013-03-01 or
+higher.</p></td>
+        </tr>
+	
+	
+	</tbody>
+</table>
+            </td>
+        </tr>
+	
+	
+	
+        <tr>
+            
+                <td class="name"><code>callback</code></td>
+            
+            
+            <td class="type">
+            
+                
+<span class="param-type">function</span>
+
+
+            
+            </td>
+            
+            
+            
+            
+            
+            <td class="description last"></td>
+        </tr>
+	
+	
+	</tbody>
+</table>
+    
+    
+    
+<dl class="details">
+    
+        
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="computeManagementClient.js.html">services/computeManagement/lib/computeManagementClient.js</a>, <a href="computeManagementClient.js.html#line11735">line 11735</a>
+    </li></ul></dd>
+    
+    
+    
+    
+    
+    
+    
+</dl>
+
+    
+    
+
+    
+
+    
+    
+    
+    
+    
+    <h5>Returns:</h5>
+    
+            
+<div class="param-desc">
+    <p>The response stream.</p>
+</div>
+
+
+
+<dl>
+	<dt>
+		Type
+	</dt>
+	<dd>
+		
+<span class="param-type">Stream</span>
+
+
+	</dd>
+</dl>
+
+        
+    
+    
+</dd>
+
+        </dl>
+    
+    
+    
+    
+    
+</article>
+
+</section>  
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Index</a></h2><h3>Modules</h3><ul><li><a href="module-RoleEnvironment.html">RoleEnvironment</a></li></ul><h3>Classes</h3><ul><li><a href="AddOnOperations-AddOnOperations.html">AddOnOperations</a></li><li><a href="AffinityGroupOperations-AffinityGroupOperations.html">AffinityGroupOperations</a></li><li><a href="ApnsService.html">ApnsService</a></li><li><a href="BlobService.html">BlobService</a></li><li><a href="ClientRootCertificateOperations-ClientRootCertificateOperations.html">ClientRootCertificateOperations</a></li><li><a href="CloudServiceOperations-CloudServiceOperations.html">CloudServiceOperations</a></li><li><a href="ComputeManagementClient-ComputeManagementClient.html">ComputeManagementClient</a></li><li><a href="DacOperations-DacOperations.html">DacOperations</a></li><li><a href="DatabaseCopyOperations-DatabaseCopyOperations.html">DatabaseCopyOperations</a></li><li><a href="DatabaseOperationOperations-DatabaseOperationOperations.html">DatabaseOperationOperations</a></li><li><a href="DatabaseOperations-DatabaseOperations.html">DatabaseOperations</a></li><li><a href="DeploymentOperations-DeploymentOperations.html">DeploymentOperations</a></li><li><a href="FirewallRuleOperations-FirewallRuleOperations.html">FirewallRuleOperations</a></li><li><a href="GatewayOperations-GatewayOperations.html">GatewayOperations</a></li><li><a href="GcmService.html">GcmService</a></li><li><a href="HDInsightService.html">HDInsightService</a></li><li><a href="HostedServiceOperations-HostedServiceOperations.html">HostedServiceOperations</a></li><li><a href="LocationOperations-LocationOperations.html">LocationOperations</a></li><li><a href="ManagementCertificateOperations-ManagementCertificateOperations.html">ManagementCertificateOperations</a></li><li><a href="ManagementClient-ManagementClient.html">ManagementClient</a></li><li><a href="MpnsService.html">MpnsService</a></li><li><a href="NamespaceOperations-NamespaceOperations.html">NamespaceOperations</a></li><li><a href="NetworkOperations-NetworkOperations.html">NetworkOperations</a></li><li><a href="NotificationHubOperations-NotificationHubOperations.html">NotificationHubOperations</a></li><li><a href="NotificationHubService.html">NotificationHubService</a></li><li><a href="OperatingSystemOperations-OperatingSystemOperations.html">OperatingSystemOperations</a></li><li><a href="QueueOperations-QueueOperations.html">QueueOperations</a></li><li><a href="QueueService.html">QueueService</a></li><li><a href="RelayOperations-RelayOperations.html">RelayOperations</a></li><li><a href="ReservedIPOperations-ReservedIPOperations.html">ReservedIPOperations</a></li><li><a href="RoleSizeOperations-RoleSizeOperations.html">RoleSizeOperations</a></li><li><a href="ScmService.html">ScmService</a></li><li><a href="ServerFarmOperations-ServerFarmOperations.html">ServerFarmOperations</a></li><li><a href="ServerOperations-ServerOperations.html">ServerOperations</a></li><li><a href="ServiceBusManagementClient-ServiceBusManagementClient.html">ServiceBusManagementClient</a></li><li><a href="ServiceBusService.html">ServiceBusService</a></li><li><a href="ServiceCertificateOperations-ServiceCertificateOperations.html">ServiceCertificateOperations</a></li><li><a href="ServiceObjectiveOperations-ServiceObjectiveOperations.html">ServiceObjectiveOperations</a></li><li><a href="SqlManagementClient-SqlManagementClient.html">SqlManagementClient</a></li><li><a href="SqlService.html">SqlService</a></li><li><a href="StaticIPOperations-StaticIPOperations.html">StaticIPOperations</a></li><li><a href="StorageAccountOperations-StorageAccountOperations.html">StorageAccountOperations</a></li><li><a href="StorageManagementClient-StorageManagementClient.html">StorageManagementClient</a></li><li><a href="StoreManagementClient-StoreManagementClient.html">StoreManagementClient</a></li><li><a href="SubscriptionClient.html">SubscriptionClient</a></li><li><a href="SubscriptionOperations.html">SubscriptionOperations</a></li><li><a href="SubscriptionOperations-SubscriptionOperations.html">SubscriptionOperations</a></li><li><a href="TableService.html">TableService</a></li><li><a href="TopicOperations-TopicOperations.html">TopicOperations</a></li><li><a href="VirtualMachineDiskOperations-VirtualMachineDiskOperations.html">VirtualMachineDiskOperations</a></li><li><a href="VirtualMachineImageOperations-VirtualMachineImageOperations.html">VirtualMachineImageOperations</a></li><li><a href="VirtualMachineOperations-VirtualMachineOperations.html">VirtualMachineOperations</a></li><li><a href="VirtualNetworkManagementClient-VirtualNetworkManagementClient.html">VirtualNetworkManagementClient</a></li><li><a href="WebSiteManagementClient-WebSiteManagementClient.html">WebSiteManagementClient</a></li><li><a href="WebSiteOperations-WebSiteOperations.html">WebSiteOperations</a></li><li><a href="WebSpaceOperations-WebSpaceOperations.html">WebSpaceOperations</a></li><li><a href="WnsService.html">WnsService</a></li></ul><h3>Global</h3><ul><li><a href="global.html#createBlobService">createBlobService</a></li><li><a href="global.html#createComputeManagementClient">createComputeManagementClient</a></li><li><a href="global.html#createHDInsightService">createHDInsightService</a></li><li><a href="global.html#createManagementClient">createManagementClient</a></li><li><a href="global.html#createNotificationHubService">createNotificationHubService</a></li><li><a href="global.html#createQueueService">createQueueService</a></li><li><a href="global.html#createScmService">createScmService</a></li><li><a href="global.html#createServiceBusManagementClient">createServiceBusManagementClient</a></li><li><a href="global.html#createServiceBusManagementService">createServiceBusManagementService</a></li><li><a href="global.html#createServiceBusService">createServiceBusService</a></li><li><a href="global.html#createServiceManagementService">createServiceManagementService</a></li><li><a href="global.html#createSqlManagementClient">createSqlManagementClient</a></li><li><a href="global.html#createSqlManagementService">createSqlManagementService</a></li><li><a href="global.html#createSqlService">createSqlService</a></li><li><a href="global.html#createStorageManagementClient">createStorageManagementClient</a></li><li><a href="global.html#createTableService">createTableService</a></li><li><a href="global.html#createVirtualNetworkManagementClient">createVirtualNetworkManagementClient</a></li><li><a href="global.html#createWebSiteManagementClient">createWebSiteManagementClient</a></li><li><a href="global.html#createWebsiteManagementService">createWebsiteManagementService</a></li><li><a href="global.html#isEmulated">isEmulated</a></li></ul>
+</nav>
+
+<br clear="both">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.2.2</a> on Wed Jan 15 2014 12:59:03 GMT-0500 (EST)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

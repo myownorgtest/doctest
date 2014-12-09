@@ -1,0 +1,497 @@
+<!DOCTYPE html><html xmlns:date="http://exslt.org/dates-and-times" lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0; user-scalable=0;">
+<meta charset="utf-8">
+<title>Windows Azure SDK for PHP » \WindowsAzure\ServiceBus\Models\SubscriptionInfo</title>
+<meta name="author" content="Mike van Riel">
+<meta name="description" content="">
+<link href="../css/template.css" rel="stylesheet" media="all">
+<script src="../js/jquery-1.7.1.min.js" type="text/javascript"></script><script src="../js/jquery-ui-1.8.2.custom.min.js" type="text/javascript"></script><script src="../js/jquery.mousewheel.min.js" type="text/javascript"></script><script src="../js/bootstrap.js" type="text/javascript"></script><script src="../js/template.js" type="text/javascript"></script><script src="../js/prettify/prettify.min.js" type="text/javascript"></script><link rel="shortcut icon" href="../img/favicon.ico">
+<link rel="apple-touch-icon" href="../img/apple-touch-icon.png">
+<link rel="apple-touch-icon" sizes="72x72" href="../img/apple-touch-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="114x114" href="../img/apple-touch-icon-114x114.png">
+</head>
+<body>
+<div class="navbar navbar-fixed-top">
+<div class="navbar-inner"><div class="container">
+<a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse"><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></a><a class="brand" href="../index.html">Windows Azure SDK for PHP</a><div class="nav-collapse"><ul class="nav">
+<li class="dropdown">
+<a href="#api" class="dropdown-toggle" data-toggle="dropdown">
+                                    API Documentation <b class="caret"></b></a><ul class="dropdown-menu">
+<li><a>Namespaces</a></li>
+<li><a href="../namespaces/WindowsAzure.html"><i class="icon-th"></i> WindowsAzure</a></li>
+<li><a>Packages</a></li>
+<li><a href="../packages/WindowsAzure.html"><i class="icon-folder-open"></i> WindowsAzure</a></li>
+</ul>
+</li>
+<li class="dropdown" id="charts-menu">
+<a href="#charts" class="dropdown-toggle" data-toggle="dropdown">
+                                    Charts <b class="caret"></b></a><ul class="dropdown-menu"><li><a href="../graph_class.html"><i class="icon-list-alt"></i> Class hierarchy diagram</a></li></ul>
+</li>
+<li class="dropdown" id="reports-menu">
+<a href="#reports" class="dropdown-toggle" data-toggle="dropdown">
+                                    Reports <b class="caret"></b></a><ul class="dropdown-menu">
+<li><a href="../errors.html"><i class="icon-remove-sign"></i> Errors 
+                <span class="label label-info">385</span></a></li>
+<li><a href="../markers.html"><i class="icon-map-marker"></i> Markers 
+                <ul></ul></a></li>
+<li><a href="../deprecated.html"><i class="icon-stop"></i> Deprecated elements 
+                <span class="label label-info">0</span></a></li>
+</ul>
+</li>
+</ul></div>
+</div></div>
+<div class="go_to_top"><a href="#___" style="color: inherit">Back to top  <i class="icon-upload icon-white"></i></a></div>
+</div>
+<div id="___" class="container">
+<noscript><div class="alert alert-warning">
+                            Javascript is disabled; several features are only available
+                            if Javascript is enabled.
+                        </div></noscript>
+<div class="row">
+<div class="span4">
+<span class="btn-group visibility" data-toggle="buttons-checkbox"><button class="btn public active" title="Show public elements">Public</button><button class="btn protected" title="Show protected elements">Protected</button><button class="btn private" title="Show private elements">Private</button><button class="btn inherited active" title="Show inherited elements">Inherited</button></span><div class="btn-group view pull-right" data-toggle="buttons-radio">
+<button class="btn details" title="Show descriptions and method names"><i class="icon-list"></i></button><button class="btn simple" title="Show only method names"><i class="icon-align-justify"></i></button>
+</div>
+<ul class="side-nav nav nav-list">
+<li class="nav-header">
+<i class="icon-custom icon-method"></i> Methods</li>
+<li class="method public "><a href="#__construct" title="__construct :: Creates a SubscriptionInfo instance with specified parameters."><span class="description">Creates a SubscriptionInfo instance with specified parameters.</span><pre>__construct()</pre></a></li>
+<li class="method public "><a href="#getDeadLetteringOnFilterEvaluationExceptions" title="getDeadLetteringOnFilterEvaluationExceptions :: Gets dead lettering on filter evaluation exceptions."><span class="description">Gets dead lettering on filter evaluation exceptions.</span><pre>getDeadLetteringOnFilterEvaluationExceptions()</pre></a></li>
+<li class="method public "><a href="#getDeadLetteringOnMessageExpiration" title="getDeadLetteringOnMessageExpiration :: Gets dead lettering on message expiration."><span class="description">Gets dead lettering on message expiration.</span><pre>getDeadLetteringOnMessageExpiration()</pre></a></li>
+<li class="method public "><a href="#getDefaultMessageTimeToLive" title="getDefaultMessageTimeToLive :: Gets default message time to live."><span class="description">Gets default message time to live.</span><pre>getDefaultMessageTimeToLive()</pre></a></li>
+<li class="method public "><a href="#getDefaultRuleDescription" title="getDefaultRuleDescription :: Gets the default rule description."><span class="description">Gets the default rule description.</span><pre>getDefaultRuleDescription()</pre></a></li>
+<li class="method public "><a href="#getEnableBatchedOperations" title="getEnableBatchedOperations :: Gets enable batched operations."><span class="description">Gets enable batched operations.</span><pre>getEnableBatchedOperations()</pre></a></li>
+<li class="method public "><a href="#getEntry" title="getEntry :: Gets the entry of the subscription info."><span class="description">Gets the entry of the subscription info.</span><pre>getEntry()</pre></a></li>
+<li class="method public "><a href="#getLockDuration" title="getLockDuration :: Gets the lock duration."><span class="description">Gets the lock duration.</span><pre>getLockDuration()</pre></a></li>
+<li class="method public "><a href="#getMaxDeliveryCount" title="getMaxDeliveryCount :: Gets maximum delivery count."><span class="description">Gets maximum delivery count.</span><pre>getMaxDeliveryCount()</pre></a></li>
+<li class="method public "><a href="#getMessageCount" title="getMessageCount :: Gets the count of the message."><span class="description">Gets the count of the message.</span><pre>getMessageCount()</pre></a></li>
+<li class="method public "><a href="#getRequiresSession" title="getRequiresSession :: Gets requires session."><span class="description">Gets requires session.</span><pre>getRequiresSession()</pre></a></li>
+<li class="method public "><a href="#getSubscriptionDescription" title="getSubscriptionDescription :: Gets the subscription description."><span class="description">Gets the subscription description.</span><pre>getSubscriptionDescription()</pre></a></li>
+<li class="method public "><a href="#getTitle" title="getTitle :: Gets the title."><span class="description">Gets the title.</span><pre>getTitle()</pre></a></li>
+<li class="method public "><a href="#parseXml" title="parseXml :: Populates the properties of the subscription info instance with a XML string."><span class="description">Populates the properties of the subscription info instance with a XML string.</span><pre>parseXml()</pre></a></li>
+<li class="method public "><a href="#setDeadLetteringOnFilterEvaluationExceptions" title="setDeadLetteringOnFilterEvaluationExceptions :: Sets dead lettering on filter evaluation exceptions."><span class="description">Sets dead lettering on filter evaluation exceptions.</span><pre>setDeadLetteringOnFilterEvaluationExceptions()</pre></a></li>
+<li class="method public "><a href="#setDeadLetteringOnMessageExpiration" title="setDeadLetteringOnMessageExpiration :: Sets dead lettering on message expiration."><span class="description">Sets dead lettering on message expiration.</span><pre>setDeadLetteringOnMessageExpiration()</pre></a></li>
+<li class="method public "><a href="#setDefaultMessageTimeToLive" title="setDefaultMessageTimeToLive :: Sets default message time to live."><span class="description">Sets default message time to live.</span><pre>setDefaultMessageTimeToLive()</pre></a></li>
+<li class="method public "><a href="#setDefaultRuleDescription" title="setDefaultRuleDescription :: Sets the default rule description."><span class="description">Sets the default rule description.</span><pre>setDefaultRuleDescription()</pre></a></li>
+<li class="method public "><a href="#setEnableBatchedOperations" title="setEnableBatchedOperations :: Sets enable batched operations."><span class="description">Sets enable batched operations.</span><pre>setEnableBatchedOperations()</pre></a></li>
+<li class="method public "><a href="#setEntry" title="setEntry :: Sets the entry of the subscription info."><span class="description">Sets the entry of the subscription info.</span><pre>setEntry()</pre></a></li>
+<li class="method public "><a href="#setLockDuration" title="setLockDuration :: Sets the lock duration."><span class="description">Sets the lock duration.</span><pre>setLockDuration()</pre></a></li>
+<li class="method public "><a href="#setMaxDeliveryCount" title="setMaxDeliveryCount :: Sets maximum delivery count."><span class="description">Sets maximum delivery count.</span><pre>setMaxDeliveryCount()</pre></a></li>
+<li class="method public "><a href="#setMessageCount" title="setMessageCount :: Sets the count of the message."><span class="description">Sets the count of the message.</span><pre>setMessageCount()</pre></a></li>
+<li class="method public "><a href="#setRequiresSession" title="setRequiresSession :: Sets the requires session."><span class="description">Sets the requires session.</span><pre>setRequiresSession()</pre></a></li>
+<li class="method public "><a href="#setSubscriptionDescription" title="setSubscriptionDescription :: Sets the subscription description."><span class="description">Sets the subscription description.</span><pre>setSubscriptionDescription()</pre></a></li>
+<li class="method public "><a href="#setTitle" title="setTitle :: Sets the title."><span class="description">Sets the title.</span><pre>setTitle()</pre></a></li>
+<li class="method public "><a href="#writeXml" title="writeXml :: Writes XML based on the subscription information."><span class="description">Writes XML based on the subscription information.</span><pre>writeXml()</pre></a></li>
+<li class="nav-header">
+<i class="icon-custom icon-property"></i> Properties</li>
+<li class="nav-header private">» Private</li>
+<li class="property private "><a href="#%24_entry" title="$_entry :: The entry of the subscription info."><span class="description">The entry of the subscription info.</span><pre>$_entry</pre></a></li>
+<li class="property private "><a href="#%24_subscriptionDescription" title="$_subscriptionDescription :: The description of the subscription."><span class="description">The description of the subscription.</span><pre>$_subscriptionDescription</pre></a></li>
+</ul>
+</div>
+<div class="span8">
+<a name="%5CWindowsAzure%5CServiceBus%5CModels%5CSubscriptionInfo" id="\WindowsAzure\ServiceBus\Models\SubscriptionInfo"></a><ul class="breadcrumb">
+<li>
+<a href="../index.html"><i class="icon-custom icon-class"></i></a><span class="divider">\</span>
+</li>
+<li><a href="../namespaces/WindowsAzure.html">WindowsAzure</a></li>
+<span class="divider">\</span><li><a href="../namespaces/WindowsAzure.ServiceBus.html">ServiceBus</a></li>
+<span class="divider">\</span><li><a href="../namespaces/WindowsAzure.ServiceBus.Models.html">Models</a></li>
+<li class="active">
+<span class="divider">\</span><a href="../classes/WindowsAzure.ServiceBus.Models.SubscriptionInfo.html">SubscriptionInfo</a>
+</li>
+</ul>
+<div href="../classes/WindowsAzure.ServiceBus.Models.SubscriptionInfo.html" class="element class">
+<p class="short_description">The information of a subscription.</p>
+<div class="details">
+<p class="long_description"></p>
+<table class="table table-bordered">
+<tr>
+<th>category</th>
+<td>Microsoft</td>
+</tr>
+<tr>
+<th>package</th>
+<td><a href="../packages/WindowsAzure.ServiceBus.Models.html">WindowsAzure\ServiceBus\Models</a></td>
+</tr>
+<tr>
+<th>author</th>
+<td><a href="mailto:azurephpsdk@microsoft.com">Azure PHP SDK</a></td>
+</tr>
+<tr>
+<th>copyright</th>
+<td>2012 Microsoft Corporation</td>
+</tr>
+<tr>
+<th>license</th>
+<td><a href="http://www.apache.org/licenses/LICENSE-2.0">Apache License 2.0</a></td>
+</tr>
+<tr>
+<th>version</th>
+<td>Release: @package_version@</td>
+</tr>
+<tr>
+<th>link</th>
+<td><a href="https://github.com/WindowsAzure/azure-sdk-for-php">https://github.com/WindowsAzure/azure-sdk-for-php</a></td>
+</tr>
+</table>
+<h3>
+<i class="icon-custom icon-method"></i> Methods</h3>
+<a name="__construct" id="__construct"></a><div class="element clickable method public __construct" data-toggle="collapse" data-target=".__construct .collapse">
+<h2>Creates a SubscriptionInfo instance with specified parameters.</h2>
+<pre>__construct(string $title, \SubscriptionDescription $subscriptionDescription) </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<p class="long_description"></p>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$title</h4>
+<code>string</code><p>The title of the subscription.</p></div>
+<div class="subelement argument">
+<h4>$subscriptionDescription</h4>
+<code>\SubscriptionDescription</code><p>The description of the subscription.</p></div>
+</div></div>
+</div>
+<a name="getDeadLetteringOnFilterEvaluationExceptions" id="getDeadLetteringOnFilterEvaluationExceptions"></a><div class="element clickable method public getDeadLetteringOnFilterEvaluationExceptions" data-toggle="collapse" data-target=".getDeadLetteringOnFilterEvaluationExceptions .collapse">
+<h2>Gets dead lettering on filter evaluation exceptions.</h2>
+<pre>getDeadLetteringOnFilterEvaluationExceptions() : string</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<p class="long_description"></p>
+<h3>Returns</h3>
+<div class="subelement response"><code>string</code></div>
+</div></div>
+</div>
+<a name="getDeadLetteringOnMessageExpiration" id="getDeadLetteringOnMessageExpiration"></a><div class="element clickable method public getDeadLetteringOnMessageExpiration" data-toggle="collapse" data-target=".getDeadLetteringOnMessageExpiration .collapse">
+<h2>Gets dead lettering on message expiration.</h2>
+<pre>getDeadLetteringOnMessageExpiration() : string</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<p class="long_description"></p>
+<h3>Returns</h3>
+<div class="subelement response"><code>string</code></div>
+</div></div>
+</div>
+<a name="getDefaultMessageTimeToLive" id="getDefaultMessageTimeToLive"></a><div class="element clickable method public getDefaultMessageTimeToLive" data-toggle="collapse" data-target=".getDefaultMessageTimeToLive .collapse">
+<h2>Gets default message time to live.</h2>
+<pre>getDefaultMessageTimeToLive() : string</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<p class="long_description"></p>
+<h3>Returns</h3>
+<div class="subelement response"><code>string</code></div>
+</div></div>
+</div>
+<a name="getDefaultRuleDescription" id="getDefaultRuleDescription"></a><div class="element clickable method public getDefaultRuleDescription" data-toggle="collapse" data-target=".getDefaultRuleDescription .collapse">
+<h2>Gets the default rule description.</h2>
+<pre>getDefaultRuleDescription() : \RuleDescription</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<p class="long_description"></p>
+<h3>Returns</h3>
+<div class="subelement response"><code>\RuleDescription</code></div>
+</div></div>
+</div>
+<a name="getEnableBatchedOperations" id="getEnableBatchedOperations"></a><div class="element clickable method public getEnableBatchedOperations" data-toggle="collapse" data-target=".getEnableBatchedOperations .collapse">
+<h2>Gets enable batched operations.</h2>
+<pre>getEnableBatchedOperations() : boolean</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<p class="long_description"></p>
+<h3>Returns</h3>
+<div class="subelement response"><code>boolean</code></div>
+</div></div>
+</div>
+<a name="getEntry" id="getEntry"></a><div class="element clickable method public getEntry" data-toggle="collapse" data-target=".getEntry .collapse">
+<h2>Gets the entry of the subscription info.</h2>
+<pre>getEntry() : \Entry</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<p class="long_description"></p>
+<h3>Returns</h3>
+<div class="subelement response"><code>\Entry</code></div>
+</div></div>
+</div>
+<a name="getLockDuration" id="getLockDuration"></a><div class="element clickable method public getLockDuration" data-toggle="collapse" data-target=".getLockDuration .collapse">
+<h2>Gets the lock duration.</h2>
+<pre>getLockDuration() : integer</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<p class="long_description"></p>
+<h3>Returns</h3>
+<div class="subelement response"><code>integer</code></div>
+</div></div>
+</div>
+<a name="getMaxDeliveryCount" id="getMaxDeliveryCount"></a><div class="element clickable method public getMaxDeliveryCount" data-toggle="collapse" data-target=".getMaxDeliveryCount .collapse">
+<h2>Gets maximum delivery count.</h2>
+<pre>getMaxDeliveryCount() : integer</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<p class="long_description"></p>
+<h3>Returns</h3>
+<div class="subelement response"><code>integer</code></div>
+</div></div>
+</div>
+<a name="getMessageCount" id="getMessageCount"></a><div class="element clickable method public getMessageCount" data-toggle="collapse" data-target=".getMessageCount .collapse">
+<h2>Gets the count of the message.</h2>
+<pre>getMessageCount() : integer</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<p class="long_description"></p>
+<h3>Returns</h3>
+<div class="subelement response"><code>integer</code></div>
+</div></div>
+</div>
+<a name="getRequiresSession" id="getRequiresSession"></a><div class="element clickable method public getRequiresSession" data-toggle="collapse" data-target=".getRequiresSession .collapse">
+<h2>Gets requires session.</h2>
+<pre>getRequiresSession() : boolean</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<p class="long_description"></p>
+<h3>Returns</h3>
+<div class="subelement response"><code>boolean</code></div>
+</div></div>
+</div>
+<a name="getSubscriptionDescription" id="getSubscriptionDescription"></a><div class="element clickable method public getSubscriptionDescription" data-toggle="collapse" data-target=".getSubscriptionDescription .collapse">
+<h2>Gets the subscription description.</h2>
+<pre>getSubscriptionDescription() : \none</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<p class="long_description"></p>
+<h3>Returns</h3>
+<div class="subelement response"><code>\none</code></div>
+</div></div>
+</div>
+<a name="getTitle" id="getTitle"></a><div class="element clickable method public getTitle" data-toggle="collapse" data-target=".getTitle .collapse">
+<h2>Gets the title.</h2>
+<pre>getTitle() : string</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<p class="long_description"></p>
+<h3>Returns</h3>
+<div class="subelement response"><code>string</code></div>
+</div></div>
+</div>
+<a name="parseXml" id="parseXml"></a><div class="element clickable method public parseXml" data-toggle="collapse" data-target=".parseXml .collapse">
+<h2>Populates the properties of the subscription info instance with a XML string.</h2>
+<pre>parseXml(string $entryXml) : \none</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<p class="long_description"></p>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$entryXml</h4>
+<code>string</code><p>A XML string representing a subscription information instance.</p></div>
+<h3>Returns</h3>
+<div class="subelement response"><code>\none</code></div>
+</div></div>
+</div>
+<a name="setDeadLetteringOnFilterEvaluationExceptions" id="setDeadLetteringOnFilterEvaluationExceptions"></a><div class="element clickable method public setDeadLetteringOnFilterEvaluationExceptions" data-toggle="collapse" data-target=".setDeadLetteringOnFilterEvaluationExceptions .collapse">
+<h2>Sets dead lettering on filter evaluation exceptions.</h2>
+<pre>setDeadLetteringOnFilterEvaluationExceptions(string $deadLetteringOnFilterEvaluationExceptions) : \none</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<p class="long_description"></p>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$deadLetteringOnFilterEvaluationExceptions</h4>
+<code>string</code><p>Sets dead lettering on filter evaluation exceptions.</p></div>
+<h3>Returns</h3>
+<div class="subelement response"><code>\none</code></div>
+</div></div>
+</div>
+<a name="setDeadLetteringOnMessageExpiration" id="setDeadLetteringOnMessageExpiration"></a><div class="element clickable method public setDeadLetteringOnMessageExpiration" data-toggle="collapse" data-target=".setDeadLetteringOnMessageExpiration .collapse">
+<h2>Sets dead lettering on message expiration.</h2>
+<pre>setDeadLetteringOnMessageExpiration(string $deadLetteringOnMessageExpiration) : \none</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<p class="long_description"></p>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$deadLetteringOnMessageExpiration</h4>
+<code>string</code><p>The dead lettering on message expiration.</p></div>
+<h3>Returns</h3>
+<div class="subelement response"><code>\none</code></div>
+</div></div>
+</div>
+<a name="setDefaultMessageTimeToLive" id="setDefaultMessageTimeToLive"></a><div class="element clickable method public setDefaultMessageTimeToLive" data-toggle="collapse" data-target=".setDefaultMessageTimeToLive .collapse">
+<h2>Sets default message time to live.</h2>
+<pre>setDefaultMessageTimeToLive(string $defaultMessageTimeToLive) : \none</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<p class="long_description"></p>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$defaultMessageTimeToLive</h4>
+<code>string</code><p>The default message time to live.</p></div>
+<h3>Returns</h3>
+<div class="subelement response"><code>\none</code></div>
+</div></div>
+</div>
+<a name="setDefaultRuleDescription" id="setDefaultRuleDescription"></a><div class="element clickable method public setDefaultRuleDescription" data-toggle="collapse" data-target=".setDefaultRuleDescription .collapse">
+<h2>Sets the default rule description.</h2>
+<pre>setDefaultRuleDescription(string $defaultRuleDescription) : \none</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<p class="long_description"></p>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$defaultRuleDescription</h4>
+<code>string</code><p>The default rule description.</p></div>
+<h3>Returns</h3>
+<div class="subelement response"><code>\none</code></div>
+</div></div>
+</div>
+<a name="setEnableBatchedOperations" id="setEnableBatchedOperations"></a><div class="element clickable method public setEnableBatchedOperations" data-toggle="collapse" data-target=".setEnableBatchedOperations .collapse">
+<h2>Sets enable batched operations.</h2>
+<pre>setEnableBatchedOperations(boolean $enableBatchedOperations) : \none</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<p class="long_description"></p>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$enableBatchedOperations</h4>
+<code>boolean</code><p>Enable batched operations.</p></div>
+<h3>Returns</h3>
+<div class="subelement response"><code>\none</code></div>
+</div></div>
+</div>
+<a name="setEntry" id="setEntry"></a><div class="element clickable method public setEntry" data-toggle="collapse" data-target=".setEntry .collapse">
+<h2>Sets the entry of the subscription info.</h2>
+<pre>setEntry(\Entry $entry) : \none</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<p class="long_description"></p>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$entry</h4>
+<code>\Entry</code><p>The entry of the subscription info.</p></div>
+<h3>Returns</h3>
+<div class="subelement response"><code>\none</code></div>
+</div></div>
+</div>
+<a name="setLockDuration" id="setLockDuration"></a><div class="element clickable method public setLockDuration" data-toggle="collapse" data-target=".setLockDuration .collapse">
+<h2>Sets the lock duration.</h2>
+<pre>setLockDuration(string $lockDuration) : \none</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<p class="long_description"></p>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$lockDuration</h4>
+<code>string</code><p>The duration of the lock.</p></div>
+<h3>Returns</h3>
+<div class="subelement response"><code>\none</code></div>
+</div></div>
+</div>
+<a name="setMaxDeliveryCount" id="setMaxDeliveryCount"></a><div class="element clickable method public setMaxDeliveryCount" data-toggle="collapse" data-target=".setMaxDeliveryCount .collapse">
+<h2>Sets maximum delivery count.</h2>
+<pre>setMaxDeliveryCount(integer $maxDeliveryCount) : \none</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<p class="long_description"></p>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$maxDeliveryCount</h4>
+<code>integer</code><p>The maximum delivery count.</p></div>
+<h3>Returns</h3>
+<div class="subelement response"><code>\none</code></div>
+</div></div>
+</div>
+<a name="setMessageCount" id="setMessageCount"></a><div class="element clickable method public setMessageCount" data-toggle="collapse" data-target=".setMessageCount .collapse">
+<h2>Sets the count of the message.</h2>
+<pre>setMessageCount(string $messageCount) : \none</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<p class="long_description"></p>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$messageCount</h4>
+<code>string</code><p>The count of the message.</p></div>
+<h3>Returns</h3>
+<div class="subelement response"><code>\none</code></div>
+</div></div>
+</div>
+<a name="setRequiresSession" id="setRequiresSession"></a><div class="element clickable method public setRequiresSession" data-toggle="collapse" data-target=".setRequiresSession .collapse">
+<h2>Sets the requires session.</h2>
+<pre>setRequiresSession(boolean $requiresSession) : \none</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<p class="long_description"></p>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$requiresSession</h4>
+<code>boolean</code><p>The requires session.</p></div>
+<h3>Returns</h3>
+<div class="subelement response"><code>\none</code></div>
+</div></div>
+</div>
+<a name="setSubscriptionDescription" id="setSubscriptionDescription"></a><div class="element clickable method public setSubscriptionDescription" data-toggle="collapse" data-target=".setSubscriptionDescription .collapse">
+<h2>Sets the subscription description.</h2>
+<pre>setSubscriptionDescription(string $subscriptionDescription) : \none</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<p class="long_description"></p>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$subscriptionDescription</h4>
+<code>string</code><p>The description of the subscription.</p></div>
+<h3>Returns</h3>
+<div class="subelement response"><code>\none</code></div>
+</div></div>
+</div>
+<a name="setTitle" id="setTitle"></a><div class="element clickable method public setTitle" data-toggle="collapse" data-target=".setTitle .collapse">
+<h2>Sets the title.</h2>
+<pre>setTitle(string $title) : \none</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<p class="long_description"></p>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$title</h4>
+<code>string</code><p>The title of the queue info.</p></div>
+<h3>Returns</h3>
+<div class="subelement response"><code>\none</code></div>
+</div></div>
+</div>
+<a name="writeXml" id="writeXml"></a><div class="element clickable method public writeXml" data-toggle="collapse" data-target=".writeXml .collapse">
+<h2>Writes XML based on the subscription information.</h2>
+<pre>writeXml(<a href="http://php.net/manual/en/class.xmlwriter.php">\XMLWriter</a> $xmlWriter) : \none</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<p class="long_description"></p>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$xmlWriter</h4>
+<code><a href="http://php.net/manual/en/class.xmlwriter.php">\XMLWriter</a></code><p>The XML writer.</p></div>
+<h3>Returns</h3>
+<div class="subelement response"><code>\none</code></div>
+</div></div>
+</div>
+<h3>
+<i class="icon-custom icon-property"></i> Properties</h3>
+<a name="%24_entry" id="$_entry"> </a><div class="element clickable property private $_entry" data-toggle="collapse" data-target=".$_entry .collapse">
+<h2>The entry of the subscription info.</h2>
+<pre>$_entry : \Entry</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><p class="long_description"></p></div></div>
+</div>
+<a name="%24_subscriptionDescription" id="$_subscriptionDescription"> </a><div class="element clickable property private $_subscriptionDescription" data-toggle="collapse" data-target=".$_subscriptionDescription .collapse">
+<h2>The description of the subscription.</h2>
+<pre>$_subscriptionDescription : \SubscriptionDescription</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><p class="long_description"></p></div></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="row"><footer class="span12">
+            Template is built using <a href="http://twitter.github.com/bootstrap/">Twitter Bootstrap 2</a> and icons provided by <a href="http://glyphicons.com/">Glyphicons</a>.<br>
+            Documentation is powered by <a href="http://www.phpdoc.org/">phpDocumentor 2.0.0a6</a> and<br>
+            generated on 2012-07-17T21:10:39-07:00.<br></footer></div>
+</div>
+</body>
+</html>

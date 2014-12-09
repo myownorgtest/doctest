@@ -1,0 +1,371 @@
+<!DOCTYPE html><html xmlns:date="http://exslt.org/dates-and-times" lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0; user-scalable=0;">
+<meta charset="utf-8">
+<title>Windows Azure SDK for PHP » \WindowsAzure\Blob\Models\ListBlobsResult</title>
+<meta name="author" content="Mike van Riel">
+<meta name="description" content="">
+<link href="../css/template.css" rel="stylesheet" media="all">
+<script src="../js/jquery-1.7.1.min.js" type="text/javascript"></script><script src="../js/jquery-ui-1.8.2.custom.min.js" type="text/javascript"></script><script src="../js/jquery.mousewheel.min.js" type="text/javascript"></script><script src="../js/bootstrap.js" type="text/javascript"></script><script src="../js/template.js" type="text/javascript"></script><script src="../js/prettify/prettify.min.js" type="text/javascript"></script><link rel="shortcut icon" href="../img/favicon.ico">
+<link rel="apple-touch-icon" href="../img/apple-touch-icon.png">
+<link rel="apple-touch-icon" sizes="72x72" href="../img/apple-touch-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="114x114" href="../img/apple-touch-icon-114x114.png">
+</head>
+<body>
+<div class="navbar navbar-fixed-top">
+<div class="navbar-inner"><div class="container">
+<a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse"><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></a><a class="brand" href="../index.html">Windows Azure SDK for PHP</a><div class="nav-collapse"><ul class="nav">
+<li class="dropdown">
+<a href="#api" class="dropdown-toggle" data-toggle="dropdown">
+                                    API Documentation <b class="caret"></b></a><ul class="dropdown-menu">
+<li><a>Namespaces</a></li>
+<li><a href="../namespaces/WindowsAzure.html"><i class="icon-th"></i> WindowsAzure</a></li>
+<li><a>Packages</a></li>
+<li><a href="../packages/WindowsAzure.html"><i class="icon-folder-open"></i> WindowsAzure</a></li>
+</ul>
+</li>
+<li class="dropdown" id="charts-menu">
+<a href="#charts" class="dropdown-toggle" data-toggle="dropdown">
+                                    Charts <b class="caret"></b></a><ul class="dropdown-menu"><li><a href="../graph_class.html"><i class="icon-list-alt"></i> Class hierarchy diagram</a></li></ul>
+</li>
+<li class="dropdown" id="reports-menu">
+<a href="#reports" class="dropdown-toggle" data-toggle="dropdown">
+                                    Reports <b class="caret"></b></a><ul class="dropdown-menu">
+<li><a href="../errors.html"><i class="icon-remove-sign"></i> Errors 
+                <span class="label label-info">385</span></a></li>
+<li><a href="../markers.html"><i class="icon-map-marker"></i> Markers 
+                <ul></ul></a></li>
+<li><a href="../deprecated.html"><i class="icon-stop"></i> Deprecated elements 
+                <span class="label label-info">0</span></a></li>
+</ul>
+</li>
+</ul></div>
+</div></div>
+<div class="go_to_top"><a href="#___" style="color: inherit">Back to top  <i class="icon-upload icon-white"></i></a></div>
+</div>
+<div id="___" class="container">
+<noscript><div class="alert alert-warning">
+                            Javascript is disabled; several features are only available
+                            if Javascript is enabled.
+                        </div></noscript>
+<div class="row">
+<div class="span4">
+<span class="btn-group visibility" data-toggle="buttons-checkbox"><button class="btn public active" title="Show public elements">Public</button><button class="btn protected" title="Show protected elements">Protected</button><button class="btn private" title="Show private elements">Private</button><button class="btn inherited active" title="Show inherited elements">Inherited</button></span><div class="btn-group view pull-right" data-toggle="buttons-radio">
+<button class="btn details" title="Show descriptions and method names"><i class="icon-list"></i></button><button class="btn simple" title="Show only method names"><i class="icon-align-justify"></i></button>
+</div>
+<ul class="side-nav nav nav-list">
+<li class="nav-header">
+<i class="icon-custom icon-method"></i> Methods</li>
+<li class="method public "><a href="#create" title="create :: Creates ListBlobsResult object from parsed XML response."><span class="description">Creates ListBlobsResult object from parsed XML response.</span><pre>create()</pre></a></li>
+<li class="method public "><a href="#getBlobPrefixes" title="getBlobPrefixes :: Gets blobPrefixes."><span class="description">Gets blobPrefixes.</span><pre>getBlobPrefixes()</pre></a></li>
+<li class="method public "><a href="#getBlobs" title="getBlobs :: Gets blobs."><span class="description">Gets blobs.</span><pre>getBlobs()</pre></a></li>
+<li class="method public "><a href="#getDelimiter" title="getDelimiter :: Gets prefix."><span class="description">Gets prefix.</span><pre>getDelimiter()</pre></a></li>
+<li class="method public "><a href="#getMarker" title="getMarker :: Gets marker."><span class="description">Gets marker.</span><pre>getMarker()</pre></a></li>
+<li class="method public "><a href="#getMaxResults" title="getMaxResults :: Gets max results."><span class="description">Gets max results.</span><pre>getMaxResults()</pre></a></li>
+<li class="method public "><a href="#getNextMarker" title="getNextMarker :: Gets next marker."><span class="description">Gets next marker.</span><pre>getNextMarker()</pre></a></li>
+<li class="method public "><a href="#getPrefix" title="getPrefix :: Gets prefix."><span class="description">Gets prefix.</span><pre>getPrefix()</pre></a></li>
+<li class="method public "><a href="#setBlobPrefixes" title="setBlobPrefixes :: Sets blobPrefixes."><span class="description">Sets blobPrefixes.</span><pre>setBlobPrefixes()</pre></a></li>
+<li class="method public "><a href="#setBlobs" title="setBlobs :: Sets blobs."><span class="description">Sets blobs.</span><pre>setBlobs()</pre></a></li>
+<li class="method public "><a href="#setDelimiter" title="setDelimiter :: Sets prefix."><span class="description">Sets prefix.</span><pre>setDelimiter()</pre></a></li>
+<li class="method public "><a href="#setMarker" title="setMarker :: Sets marker."><span class="description">Sets marker.</span><pre>setMarker()</pre></a></li>
+<li class="method public "><a href="#setMaxResults" title="setMaxResults :: Sets max results."><span class="description">Sets max results.</span><pre>setMaxResults()</pre></a></li>
+<li class="method public "><a href="#setNextMarker" title="setNextMarker :: Sets next marker."><span class="description">Sets next marker.</span><pre>setNextMarker()</pre></a></li>
+<li class="method public "><a href="#setPrefix" title="setPrefix :: Sets prefix."><span class="description">Sets prefix.</span><pre>setPrefix()</pre></a></li>
+<li class="nav-header">
+<i class="icon-custom icon-property"></i> Properties</li>
+<li class="nav-header private">» Private</li>
+<li class="property private "><a href="#%24_blobPrefixes" title="$_blobPrefixes :: "><span class="description">$_blobPrefixes</span><pre>$_blobPrefixes</pre></a></li>
+<li class="property private "><a href="#%24_blobs" title="$_blobs :: "><span class="description">$_blobs</span><pre>$_blobs</pre></a></li>
+<li class="property private "><a href="#%24_delimiter" title="$_delimiter :: "><span class="description">$_delimiter</span><pre>$_delimiter</pre></a></li>
+<li class="property private "><a href="#%24_marker" title="$_marker :: "><span class="description">$_marker</span><pre>$_marker</pre></a></li>
+<li class="property private "><a href="#%24_maxResults" title="$_maxResults :: "><span class="description">$_maxResults</span><pre>$_maxResults</pre></a></li>
+<li class="property private "><a href="#%24_nextMarker" title="$_nextMarker :: "><span class="description">$_nextMarker</span><pre>$_nextMarker</pre></a></li>
+<li class="property private "><a href="#%24_prefix" title="$_prefix :: "><span class="description">$_prefix</span><pre>$_prefix</pre></a></li>
+</ul>
+</div>
+<div class="span8">
+<a name="%5CWindowsAzure%5CBlob%5CModels%5CListBlobsResult" id="\WindowsAzure\Blob\Models\ListBlobsResult"></a><ul class="breadcrumb">
+<li>
+<a href="../index.html"><i class="icon-custom icon-class"></i></a><span class="divider">\</span>
+</li>
+<li><a href="../namespaces/WindowsAzure.html">WindowsAzure</a></li>
+<span class="divider">\</span><li><a href="../namespaces/WindowsAzure.Blob.html">Blob</a></li>
+<span class="divider">\</span><li><a href="../namespaces/WindowsAzure.Blob.Models.html">Models</a></li>
+<li class="active">
+<span class="divider">\</span><a href="../classes/WindowsAzure.Blob.Models.ListBlobsResult.html">ListBlobsResult</a>
+</li>
+</ul>
+<div href="../classes/WindowsAzure.Blob.Models.ListBlobsResult.html" class="element class">
+<p class="short_description">Hold result of calliing listBlobs wrapper.</p>
+<div class="details">
+<p class="long_description"></p>
+<table class="table table-bordered">
+<tr>
+<th>category</th>
+<td>Microsoft</td>
+</tr>
+<tr>
+<th>package</th>
+<td><a href="../packages/WindowsAzure.Blob.Models.html">WindowsAzure\Blob\Models</a></td>
+</tr>
+<tr>
+<th>author</th>
+<td><a href="mailto:azurephpsdk@microsoft.com">Azure PHP SDK</a></td>
+</tr>
+<tr>
+<th>copyright</th>
+<td>2012 Microsoft Corporation</td>
+</tr>
+<tr>
+<th>license</th>
+<td><a href="http://www.apache.org/licenses/LICENSE-2.0">Apache License 2.0</a></td>
+</tr>
+<tr>
+<th>version</th>
+<td>Release: @package_version@</td>
+</tr>
+<tr>
+<th>link</th>
+<td><a href="https://github.com/windowsazure/azure-sdk-for-php">https://github.com/windowsazure/azure-sdk-for-php</a></td>
+</tr>
+</table>
+<h3>
+<i class="icon-custom icon-method"></i> Methods</h3>
+<a name="create" id="create"></a><div class="element clickable method public create" data-toggle="collapse" data-target=".create .collapse">
+<h2>Creates ListBlobsResult object from parsed XML response.</h2>
+<pre>create(array $parsed) : \WindowsAzure\Blob\Models\ListBlobsResult.</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<p class="long_description"></p>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$parsed</h4>
+<code>array</code><p>XML response parsed into array.</p></div>
+<h3>Returns</h3>
+<div class="subelement response"><code>\WindowsAzure\Blob\Models\ListBlobsResult.</code></div>
+</div></div>
+</div>
+<a name="getBlobPrefixes" id="getBlobPrefixes"></a><div class="element clickable method public getBlobPrefixes" data-toggle="collapse" data-target=".getBlobPrefixes .collapse">
+<h2>Gets blobPrefixes.</h2>
+<pre>getBlobPrefixes() : \array.</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<p class="long_description"></p>
+<h3>Returns</h3>
+<div class="subelement response"><code>\array.</code></div>
+</div></div>
+</div>
+<a name="getBlobs" id="getBlobs"></a><div class="element clickable method public getBlobs" data-toggle="collapse" data-target=".getBlobs .collapse">
+<h2>Gets blobs.</h2>
+<pre>getBlobs() : \array.</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<p class="long_description"></p>
+<h3>Returns</h3>
+<div class="subelement response"><code>\array.</code></div>
+</div></div>
+</div>
+<a name="getDelimiter" id="getDelimiter"></a><div class="element clickable method public getDelimiter" data-toggle="collapse" data-target=".getDelimiter .collapse">
+<h2>Gets prefix.</h2>
+<pre>getDelimiter() : \string.</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<p class="long_description"></p>
+<h3>Returns</h3>
+<div class="subelement response"><code>\string.</code></div>
+</div></div>
+</div>
+<a name="getMarker" id="getMarker"></a><div class="element clickable method public getMarker" data-toggle="collapse" data-target=".getMarker .collapse">
+<h2>Gets marker.</h2>
+<pre>getMarker() : \string.</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<p class="long_description"></p>
+<h3>Returns</h3>
+<div class="subelement response"><code>\string.</code></div>
+</div></div>
+</div>
+<a name="getMaxResults" id="getMaxResults"></a><div class="element clickable method public getMaxResults" data-toggle="collapse" data-target=".getMaxResults .collapse">
+<h2>Gets max results.</h2>
+<pre>getMaxResults() : \integer.</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<p class="long_description"></p>
+<h3>Returns</h3>
+<div class="subelement response"><code>\integer.</code></div>
+</div></div>
+</div>
+<a name="getNextMarker" id="getNextMarker"></a><div class="element clickable method public getNextMarker" data-toggle="collapse" data-target=".getNextMarker .collapse">
+<h2>Gets next marker.</h2>
+<pre>getNextMarker() : \string.</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<p class="long_description"></p>
+<h3>Returns</h3>
+<div class="subelement response"><code>\string.</code></div>
+</div></div>
+</div>
+<a name="getPrefix" id="getPrefix"></a><div class="element clickable method public getPrefix" data-toggle="collapse" data-target=".getPrefix .collapse">
+<h2>Gets prefix.</h2>
+<pre>getPrefix() : \string.</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<p class="long_description"></p>
+<h3>Returns</h3>
+<div class="subelement response"><code>\string.</code></div>
+</div></div>
+</div>
+<a name="setBlobPrefixes" id="setBlobPrefixes"></a><div class="element clickable method public setBlobPrefixes" data-toggle="collapse" data-target=".setBlobPrefixes .collapse">
+<h2>Sets blobPrefixes.</h2>
+<pre>setBlobPrefixes(array $blobPrefixes) : \none.</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<p class="long_description"></p>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$blobPrefixes</h4>
+<code>array</code><p>list of blobPrefixes</p></div>
+<h3>Returns</h3>
+<div class="subelement response"><code>\none.</code></div>
+</div></div>
+</div>
+<a name="setBlobs" id="setBlobs"></a><div class="element clickable method public setBlobs" data-toggle="collapse" data-target=".setBlobs .collapse">
+<h2>Sets blobs.</h2>
+<pre>setBlobs(array $blobs) : \none.</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<p class="long_description"></p>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$blobs</h4>
+<code>array</code><p>list of blobs</p></div>
+<h3>Returns</h3>
+<div class="subelement response"><code>\none.</code></div>
+</div></div>
+</div>
+<a name="setDelimiter" id="setDelimiter"></a><div class="element clickable method public setDelimiter" data-toggle="collapse" data-target=".setDelimiter .collapse">
+<h2>Sets prefix.</h2>
+<pre>setDelimiter(string $delimiter) : \none.</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<p class="long_description"></p>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$delimiter</h4>
+<code>string</code><p>value.</p></div>
+<h3>Returns</h3>
+<div class="subelement response"><code>\none.</code></div>
+</div></div>
+</div>
+<a name="setMarker" id="setMarker"></a><div class="element clickable method public setMarker" data-toggle="collapse" data-target=".setMarker .collapse">
+<h2>Sets marker.</h2>
+<pre>setMarker(string $marker) : \none.</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<p class="long_description"></p>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$marker</h4>
+<code>string</code><p>value.</p></div>
+<h3>Returns</h3>
+<div class="subelement response"><code>\none.</code></div>
+</div></div>
+</div>
+<a name="setMaxResults" id="setMaxResults"></a><div class="element clickable method public setMaxResults" data-toggle="collapse" data-target=".setMaxResults .collapse">
+<h2>Sets max results.</h2>
+<pre>setMaxResults(integer $maxResults) : \none.</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<p class="long_description"></p>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$maxResults</h4>
+<code>integer</code><p>value.</p></div>
+<h3>Returns</h3>
+<div class="subelement response"><code>\none.</code></div>
+</div></div>
+</div>
+<a name="setNextMarker" id="setNextMarker"></a><div class="element clickable method public setNextMarker" data-toggle="collapse" data-target=".setNextMarker .collapse">
+<h2>Sets next marker.</h2>
+<pre>setNextMarker(string $nextMarker) : \none.</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<p class="long_description"></p>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$nextMarker</h4>
+<code>string</code><p>value.</p></div>
+<h3>Returns</h3>
+<div class="subelement response"><code>\none.</code></div>
+</div></div>
+</div>
+<a name="setPrefix" id="setPrefix"></a><div class="element clickable method public setPrefix" data-toggle="collapse" data-target=".setPrefix .collapse">
+<h2>Sets prefix.</h2>
+<pre>setPrefix(string $prefix) : \none.</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<p class="long_description"></p>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$prefix</h4>
+<code>string</code><p>value.</p></div>
+<h3>Returns</h3>
+<div class="subelement response"><code>\none.</code></div>
+</div></div>
+</div>
+<h3>
+<i class="icon-custom icon-property"></i> Properties</h3>
+<a name="%24_blobPrefixes" id="$_blobPrefixes"> </a><div class="element clickable property private $_blobPrefixes" data-toggle="collapse" data-target=".$_blobPrefixes .collapse">
+<h2>$_blobPrefixes</h2>
+<pre>$_blobPrefixes : array</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><p class="long_description"></p></div></div>
+</div>
+<a name="%24_blobs" id="$_blobs"> </a><div class="element clickable property private $_blobs" data-toggle="collapse" data-target=".$_blobs .collapse">
+<h2>$_blobs</h2>
+<pre>$_blobs : array</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><p class="long_description"></p></div></div>
+</div>
+<a name="%24_delimiter" id="$_delimiter"> </a><div class="element clickable property private $_delimiter" data-toggle="collapse" data-target=".$_delimiter .collapse">
+<h2>$_delimiter</h2>
+<pre>$_delimiter : string</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><p class="long_description"></p></div></div>
+</div>
+<a name="%24_marker" id="$_marker"> </a><div class="element clickable property private $_marker" data-toggle="collapse" data-target=".$_marker .collapse">
+<h2>$_marker</h2>
+<pre>$_marker : string</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><p class="long_description"></p></div></div>
+</div>
+<a name="%24_maxResults" id="$_maxResults"> </a><div class="element clickable property private $_maxResults" data-toggle="collapse" data-target=".$_maxResults .collapse">
+<h2>$_maxResults</h2>
+<pre>$_maxResults : integer</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><p class="long_description"></p></div></div>
+</div>
+<a name="%24_nextMarker" id="$_nextMarker"> </a><div class="element clickable property private $_nextMarker" data-toggle="collapse" data-target=".$_nextMarker .collapse">
+<h2>$_nextMarker</h2>
+<pre>$_nextMarker : string</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><p class="long_description"></p></div></div>
+</div>
+<a name="%24_prefix" id="$_prefix"> </a><div class="element clickable property private $_prefix" data-toggle="collapse" data-target=".$_prefix .collapse">
+<h2>$_prefix</h2>
+<pre>$_prefix : string</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><p class="long_description"></p></div></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="row"><footer class="span12">
+            Template is built using <a href="http://twitter.github.com/bootstrap/">Twitter Bootstrap 2</a> and icons provided by <a href="http://glyphicons.com/">Glyphicons</a>.<br>
+            Documentation is powered by <a href="http://www.phpdoc.org/">phpDocumentor 2.0.0a6</a> and<br>
+            generated on 2012-07-17T21:10:37-07:00.<br></footer></div>
+</div>
+</body>
+</html>

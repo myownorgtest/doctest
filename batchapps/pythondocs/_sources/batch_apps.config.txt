@@ -1,0 +1,9 @@
+Configuration
+=========================
+
+.. automodule:: batchapps.config
+
+.. autoclass:: batchapps.config.Configuration
+    :members: set_default_application, save_config, remove, get, set, add_application, default_params, applications, application, logging_level, endpoint, clear_config, aad_config,
+	add_jobtype, current_jobtype, list_jobtypes, set_default_jobtype,
+    :undoc-members:

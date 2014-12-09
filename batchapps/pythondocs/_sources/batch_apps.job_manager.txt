@@ -1,0 +1,10 @@
+JobManager
+==============================
+
+.. automodule:: batchapps.job_manager
+
+.. autoclass:: batchapps.job_manager.JobManager
+    :members: get_job, get_jobs, create_job, submit
+    :undoc-members:
+
+

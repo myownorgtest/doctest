@@ -1,0 +1,305 @@
+<!DOCTYPE html><html xmlns:date="http://exslt.org/dates-and-times" lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0; user-scalable=0;">
+<meta charset="utf-8">
+<title>Windows Azure SDK for PHP » WindowsAzure\Table\Models</title>
+<meta name="author" content="Mike van Riel">
+<meta name="description" content="">
+<link href="../css/template.css" rel="stylesheet" media="all">
+<script src="../js/jquery-1.7.1.min.js" type="text/javascript"></script><script src="../js/jquery-ui-1.8.2.custom.min.js" type="text/javascript"></script><script src="../js/jquery.mousewheel.min.js" type="text/javascript"></script><script src="../js/bootstrap.js" type="text/javascript"></script><script src="../js/template.js" type="text/javascript"></script><script src="../js/prettify/prettify.min.js" type="text/javascript"></script><link rel="shortcut icon" href="../img/favicon.ico">
+<link rel="apple-touch-icon" href="../img/apple-touch-icon.png">
+<link rel="apple-touch-icon" sizes="72x72" href="../img/apple-touch-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="114x114" href="../img/apple-touch-icon-114x114.png">
+</head>
+<body>
+<div class="navbar navbar-fixed-top">
+<div class="navbar-inner"><div class="container">
+<a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse"><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></a><a class="brand" href="../index.html">Windows Azure SDK for PHP</a><div class="nav-collapse"><ul class="nav">
+<li class="dropdown">
+<a href="#api" class="dropdown-toggle" data-toggle="dropdown">
+                                    API Documentation <b class="caret"></b></a><ul class="dropdown-menu">
+<li><a>Namespaces</a></li>
+<li><a href="../namespaces/WindowsAzure.html"><i class="icon-th"></i> WindowsAzure</a></li>
+<li><a>Packages</a></li>
+<li><a href="../packages/WindowsAzure.html"><i class="icon-folder-open"></i> WindowsAzure</a></li>
+</ul>
+</li>
+<li class="dropdown" id="charts-menu">
+<a href="#charts" class="dropdown-toggle" data-toggle="dropdown">
+                                    Charts <b class="caret"></b></a><ul class="dropdown-menu"><li><a href="../graph_class.html"><i class="icon-list-alt"></i> Class hierarchy diagram</a></li></ul>
+</li>
+<li class="dropdown" id="reports-menu">
+<a href="#reports" class="dropdown-toggle" data-toggle="dropdown">
+                                    Reports <b class="caret"></b></a><ul class="dropdown-menu">
+<li><a href="../errors.html"><i class="icon-remove-sign"></i> Errors 
+                <span class="label label-info">385</span></a></li>
+<li><a href="../markers.html"><i class="icon-map-marker"></i> Markers 
+                <ul></ul></a></li>
+<li><a href="../deprecated.html"><i class="icon-stop"></i> Deprecated elements 
+                <span class="label label-info">0</span></a></li>
+</ul>
+</li>
+</ul></div>
+</div></div>
+<div class="go_to_top"><a href="#___" style="color: inherit">Back to top  <i class="icon-upload icon-white"></i></a></div>
+</div>
+<div id="___" class="container">
+<noscript><div class="alert alert-warning">
+                            Javascript is disabled; several features are only available
+                            if Javascript is enabled.
+                        </div></noscript>
+<div class="row">
+<div class="span4">
+<div class="btn-group view pull-right" data-toggle="buttons-radio">
+<button class="btn details" title="Show descriptions and method names"><i class="icon-list"></i></button><button class="btn simple" title="Show only method names"><i class="icon-align-justify"></i></button>
+</div>
+<ul class="side-nav nav nav-list">
+<li class="nav-header">
+<i class="icon-map-marker"></i> Packages</li>
+<li>
+<a href="../packages/WindowsAzure.Table.Models.html" title="Models"><i class="icon-folder-open"></i>Models</a><ul class="nav nav-list nav-packages"><li>
+<a href="../packages/WindowsAzure.Table.Models.Filters.html" title="Filters"><i class="icon-folder-open"></i>Filters</a><ul class="nav nav-list nav-packages"></ul>
+</li></ul>
+</li>
+<li class="nav-header">
+<i class="icon-custom icon-class"></i> Classes</li>
+<li><a href="#BatchError" title="Represents an error returned from call to batch API.">BatchError</a></li>
+<li><a href="#BatchOperation" title="Represents one batch operation">BatchOperation</a></li>
+<li><a href="#BatchOperationParameterName" title="Batch parameter names.">BatchOperationParameterName</a></li>
+<li><a href="#BatchOperations" title="Holds batch operation change set.">BatchOperations</a></li>
+<li><a href="#BatchOperationType" title="Supported batch operations.">BatchOperationType</a></li>
+<li><a href="#BatchResult" title="Holds results from batch API.">BatchResult</a></li>
+<li><a href="#DeleteEntityOptions" title="Holds optional parameters for deleteEntity API.">DeleteEntityOptions</a></li>
+<li><a href="#EdmType" title="Basic Windows Azure EDM Types used for table entity properties.">EdmType</a></li>
+<li><a href="#Entity" title="Represents entity object used in tables">Entity</a></li>
+<li><a href="#GetEntityResult" title="Holds result of calling getEntity wrapper.">GetEntityResult</a></li>
+<li><a href="#GetTableResult" title="Holds result of getTable API.">GetTableResult</a></li>
+<li><a href="#InsertEntityResult" title="Holds result of calling insertEntity wrapper">InsertEntityResult</a></li>
+<li><a href="#Property" title="Represents entity property.">Property</a></li>
+<li><a href="#Query" title="Query to be performed on a table">Query</a></li>
+<li><a href="#QueryEntitiesOptions" title="Holds optional parameters for queryEntities API">QueryEntitiesOptions</a></li>
+<li><a href="#QueryEntitiesResult" title="Holds results of calling queryEntities API">QueryEntitiesResult</a></li>
+<li><a href="#QueryTablesOptions" title="Optional parameters for queryTables wrapper.">QueryTablesOptions</a></li>
+<li><a href="#QueryTablesResult" title="QueryTablesResult">QueryTablesResult</a></li>
+<li><a href="#TableServiceOptions" title="Table service options.">TableServiceOptions</a></li>
+<li><a href="#UpdateEntityResult" title="Holds result of updateEntity and mergeEntity APIs">UpdateEntityResult</a></li>
+</ul>
+</div>
+<div class="span8 package-contents">
+<ul class="breadcrumb">
+<li>
+<a href="../index.html"><i class="icon-folder-open"></i></a><span class="divider">\</span>
+</li>
+<li><a href="../packages/WindowsAzure.html">WindowsAzure</a></li>
+<span class="divider">\</span><li><a href="../packages/WindowsAzure.Table.html">Table</a></li>
+<span class="divider">\</span><li class="active"><a href="../packages/WindowsAzure.Table.Models.html">Models</a></li>
+</ul>
+<div class="package-indent">
+<h3>
+<i class="icon-custom icon-class"></i> Classes and interfaces</h3>
+<a name="BatchError" id="BatchError"></a><div class="element ajax clickable class" href="../classes/WindowsAzure.Table.Models.BatchError.html">
+<h1>BatchError<a href="../classes/WindowsAzure.Table.Models.BatchError.html">¶</a>
+</h1>
+<p class="short_description">Represents an error returned from call to batch API.</p>
+<div class="details collapse"></div>
+<a href="../classes/WindowsAzure.Table.Models.BatchError.html" class="more">« More »</a>
+</div>
+<a name="BatchOperation" id="BatchOperation"></a><div class="element ajax clickable class" href="../classes/WindowsAzure.Table.Models.BatchOperation.html">
+<h1>BatchOperation<a href="../classes/WindowsAzure.Table.Models.BatchOperation.html">¶</a>
+</h1>
+<p class="short_description">Represents one batch operation</p>
+<div class="details collapse"></div>
+<a href="../classes/WindowsAzure.Table.Models.BatchOperation.html" class="more">« More »</a>
+</div>
+<a name="BatchOperationParameterName" id="BatchOperationParameterName"></a><div class="element ajax clickable class" href="../classes/WindowsAzure.Table.Models.BatchOperationParameterName.html">
+<h1>BatchOperationParameterName<a href="../classes/WindowsAzure.Table.Models.BatchOperationParameterName.html">¶</a>
+</h1>
+<p class="short_description">Batch parameter names.</p>
+<div class="details collapse"></div>
+<a href="../classes/WindowsAzure.Table.Models.BatchOperationParameterName.html" class="more">« More »</a>
+</div>
+<a name="BatchOperationType" id="BatchOperationType"></a><div class="element ajax clickable class" href="../classes/WindowsAzure.Table.Models.BatchOperationType.html">
+<h1>BatchOperationType<a href="../classes/WindowsAzure.Table.Models.BatchOperationType.html">¶</a>
+</h1>
+<p class="short_description">Supported batch operations.</p>
+<div class="details collapse"></div>
+<a href="../classes/WindowsAzure.Table.Models.BatchOperationType.html" class="more">« More »</a>
+</div>
+<a name="BatchOperations" id="BatchOperations"></a><div class="element ajax clickable class" href="../classes/WindowsAzure.Table.Models.BatchOperations.html">
+<h1>BatchOperations<a href="../classes/WindowsAzure.Table.Models.BatchOperations.html">¶</a>
+</h1>
+<p class="short_description">Holds batch operation change set.</p>
+<div class="details collapse"></div>
+<a href="../classes/WindowsAzure.Table.Models.BatchOperations.html" class="more">« More »</a>
+</div>
+<a name="BatchResult" id="BatchResult"></a><div class="element ajax clickable class" href="../classes/WindowsAzure.Table.Models.BatchResult.html">
+<h1>BatchResult<a href="../classes/WindowsAzure.Table.Models.BatchResult.html">¶</a>
+</h1>
+<p class="short_description">Holds results from batch API.</p>
+<div class="details collapse"></div>
+<a href="../classes/WindowsAzure.Table.Models.BatchResult.html" class="more">« More »</a>
+</div>
+<a name="DeleteEntityOptions" id="DeleteEntityOptions"></a><div class="element ajax clickable class" href="../classes/WindowsAzure.Table.Models.DeleteEntityOptions.html">
+<h1>DeleteEntityOptions<a href="../classes/WindowsAzure.Table.Models.DeleteEntityOptions.html">¶</a>
+</h1>
+<p class="short_description">Holds optional parameters for deleteEntity API.</p>
+<div class="details collapse"></div>
+<a href="../classes/WindowsAzure.Table.Models.DeleteEntityOptions.html" class="more">« More »</a>
+</div>
+<a name="EdmType" id="EdmType"></a><div class="element ajax clickable class" href="../classes/WindowsAzure.Table.Models.EdmType.html">
+<h1>EdmType<a href="../classes/WindowsAzure.Table.Models.EdmType.html">¶</a>
+</h1>
+<p class="short_description">Basic Windows Azure EDM Types used for table entity properties.</p>
+<div class="details collapse"></div>
+<a href="../classes/WindowsAzure.Table.Models.EdmType.html" class="more">« More »</a>
+</div>
+<a name="Entity" id="Entity"></a><div class="element ajax clickable class" href="../classes/WindowsAzure.Table.Models.Entity.html">
+<h1>Entity<a href="../classes/WindowsAzure.Table.Models.Entity.html">¶</a>
+</h1>
+<p class="short_description">Represents entity object used in tables</p>
+<div class="details collapse"></div>
+<a href="../classes/WindowsAzure.Table.Models.Entity.html" class="more">« More »</a>
+</div>
+<a name="GetEntityResult" id="GetEntityResult"></a><div class="element ajax clickable class" href="../classes/WindowsAzure.Table.Models.GetEntityResult.html">
+<h1>GetEntityResult<a href="../classes/WindowsAzure.Table.Models.GetEntityResult.html">¶</a>
+</h1>
+<p class="short_description">Holds result of calling getEntity wrapper.</p>
+<div class="details collapse"></div>
+<a href="../classes/WindowsAzure.Table.Models.GetEntityResult.html" class="more">« More »</a>
+</div>
+<a name="GetTableResult" id="GetTableResult"></a><div class="element ajax clickable class" href="../classes/WindowsAzure.Table.Models.GetTableResult.html">
+<h1>GetTableResult<a href="../classes/WindowsAzure.Table.Models.GetTableResult.html">¶</a>
+</h1>
+<p class="short_description">Holds result of getTable API.</p>
+<div class="details collapse"></div>
+<a href="../classes/WindowsAzure.Table.Models.GetTableResult.html" class="more">« More »</a>
+</div>
+<a name="InsertEntityResult" id="InsertEntityResult"></a><div class="element ajax clickable class" href="../classes/WindowsAzure.Table.Models.InsertEntityResult.html">
+<h1>InsertEntityResult<a href="../classes/WindowsAzure.Table.Models.InsertEntityResult.html">¶</a>
+</h1>
+<p class="short_description">Holds result of calling insertEntity wrapper</p>
+<div class="details collapse"></div>
+<a href="../classes/WindowsAzure.Table.Models.InsertEntityResult.html" class="more">« More »</a>
+</div>
+<a name="Property" id="Property"></a><div class="element ajax clickable class" href="../classes/WindowsAzure.Table.Models.Property.html">
+<h1>Property<a href="../classes/WindowsAzure.Table.Models.Property.html">¶</a>
+</h1>
+<p class="short_description">Represents entity property.</p>
+<div class="details collapse"></div>
+<a href="../classes/WindowsAzure.Table.Models.Property.html" class="more">« More »</a>
+</div>
+<a name="Query" id="Query"></a><div class="element ajax clickable class" href="../classes/WindowsAzure.Table.Models.Query.html">
+<h1>Query<a href="../classes/WindowsAzure.Table.Models.Query.html">¶</a>
+</h1>
+<p class="short_description">Query to be performed on a table</p>
+<div class="details collapse"></div>
+<a href="../classes/WindowsAzure.Table.Models.Query.html" class="more">« More »</a>
+</div>
+<a name="QueryEntitiesOptions" id="QueryEntitiesOptions"></a><div class="element ajax clickable class" href="../classes/WindowsAzure.Table.Models.QueryEntitiesOptions.html">
+<h1>QueryEntitiesOptions<a href="../classes/WindowsAzure.Table.Models.QueryEntitiesOptions.html">¶</a>
+</h1>
+<p class="short_description">Holds optional parameters for queryEntities API</p>
+<div class="details collapse"></div>
+<a href="../classes/WindowsAzure.Table.Models.QueryEntitiesOptions.html" class="more">« More »</a>
+</div>
+<a name="QueryEntitiesResult" id="QueryEntitiesResult"></a><div class="element ajax clickable class" href="../classes/WindowsAzure.Table.Models.QueryEntitiesResult.html">
+<h1>QueryEntitiesResult<a href="../classes/WindowsAzure.Table.Models.QueryEntitiesResult.html">¶</a>
+</h1>
+<p class="short_description">Holds results of calling queryEntities API</p>
+<div class="details collapse"></div>
+<a href="../classes/WindowsAzure.Table.Models.QueryEntitiesResult.html" class="more">« More »</a>
+</div>
+<a name="QueryTablesOptions" id="QueryTablesOptions"></a><div class="element ajax clickable class" href="../classes/WindowsAzure.Table.Models.QueryTablesOptions.html">
+<h1>QueryTablesOptions<a href="../classes/WindowsAzure.Table.Models.QueryTablesOptions.html">¶</a>
+</h1>
+<p class="short_description">Optional parameters for queryTables wrapper.</p>
+<div class="details collapse"></div>
+<a href="../classes/WindowsAzure.Table.Models.QueryTablesOptions.html" class="more">« More »</a>
+</div>
+<a name="QueryTablesResult" id="QueryTablesResult"></a><div class="element ajax clickable class" href="../classes/WindowsAzure.Table.Models.QueryTablesResult.html">
+<h1>QueryTablesResult<a href="../classes/WindowsAzure.Table.Models.QueryTablesResult.html">¶</a>
+</h1>
+<p class="short_description">QueryTablesResult</p>
+<div class="details collapse"></div>
+<a href="../classes/WindowsAzure.Table.Models.QueryTablesResult.html" class="more">« More »</a>
+</div>
+<a name="TableServiceOptions" id="TableServiceOptions"></a><div class="element ajax clickable class" href="../classes/WindowsAzure.Table.Models.TableServiceOptions.html">
+<h1>TableServiceOptions<a href="../classes/WindowsAzure.Table.Models.TableServiceOptions.html">¶</a>
+</h1>
+<p class="short_description">Table service options.</p>
+<div class="details collapse"></div>
+<a href="../classes/WindowsAzure.Table.Models.TableServiceOptions.html" class="more">« More »</a>
+</div>
+<a name="UpdateEntityResult" id="UpdateEntityResult"></a><div class="element ajax clickable class" href="../classes/WindowsAzure.Table.Models.UpdateEntityResult.html">
+<h1>UpdateEntityResult<a href="../classes/WindowsAzure.Table.Models.UpdateEntityResult.html">¶</a>
+</h1>
+<p class="short_description">Holds result of updateEntity and mergeEntity APIs</p>
+<div class="details collapse"></div>
+<a href="../classes/WindowsAzure.Table.Models.UpdateEntityResult.html" class="more">« More »</a>
+</div>
+<ul class="breadcrumb">
+<li>
+<a href="../index.html"><i class="icon-folder-open"></i></a><span class="divider">\</span>
+</li>
+<li><a href="../packages/WindowsAzure.html">WindowsAzure</a></li>
+<span class="divider">\</span><li><a href="../packages/WindowsAzure.Table.html">Table</a></li>
+<span class="divider">\</span><li><a href="../packages/WindowsAzure.Table.Models.html">Models</a></li>
+<span class="divider">\</span><li class="active"><a href="../packages/WindowsAzure.Table.Models.Filters.html">Filters</a></li>
+</ul>
+<div class="package-indent">
+<h3>
+<i class="icon-custom icon-class"></i> Classes and interfaces</h3>
+<a name="BinaryFilter" id="BinaryFilter"></a><div class="element ajax clickable class" href="../classes/WindowsAzure.Table.Models.Filters.BinaryFilter.html">
+<h1>BinaryFilter<a href="../classes/WindowsAzure.Table.Models.Filters.BinaryFilter.html">¶</a>
+</h1>
+<p class="short_description">Binary filter</p>
+<div class="details collapse"></div>
+<a href="../classes/WindowsAzure.Table.Models.Filters.BinaryFilter.html" class="more">« More »</a>
+</div>
+<a name="ConstantFilter" id="ConstantFilter"></a><div class="element ajax clickable class" href="../classes/WindowsAzure.Table.Models.Filters.ConstantFilter.html">
+<h1>ConstantFilter<a href="../classes/WindowsAzure.Table.Models.Filters.ConstantFilter.html">¶</a>
+</h1>
+<p class="short_description">Constant filter</p>
+<div class="details collapse"></div>
+<a href="../classes/WindowsAzure.Table.Models.Filters.ConstantFilter.html" class="more">« More »</a>
+</div>
+<a name="Filter" id="Filter"></a><div class="element ajax clickable class" href="../classes/WindowsAzure.Table.Models.Filters.Filter.html">
+<h1>Filter<a href="../classes/WindowsAzure.Table.Models.Filters.Filter.html">¶</a>
+</h1>
+<p class="short_description">Filter operations</p>
+<div class="details collapse"></div>
+<a href="../classes/WindowsAzure.Table.Models.Filters.Filter.html" class="more">« More »</a>
+</div>
+<a name="PropertyNameFilter" id="PropertyNameFilter"></a><div class="element ajax clickable class" href="../classes/WindowsAzure.Table.Models.Filters.PropertyNameFilter.html">
+<h1>PropertyNameFilter<a href="../classes/WindowsAzure.Table.Models.Filters.PropertyNameFilter.html">¶</a>
+</h1>
+<p class="short_description">Constant filter</p>
+<div class="details collapse"></div>
+<a href="../classes/WindowsAzure.Table.Models.Filters.PropertyNameFilter.html" class="more">« More »</a>
+</div>
+<a name="QueryStringFilter" id="QueryStringFilter"></a><div class="element ajax clickable class" href="../classes/WindowsAzure.Table.Models.Filters.QueryStringFilter.html">
+<h1>QueryStringFilter<a href="../classes/WindowsAzure.Table.Models.Filters.QueryStringFilter.html">¶</a>
+</h1>
+<p class="short_description">Constant filter</p>
+<div class="details collapse"></div>
+<a href="../classes/WindowsAzure.Table.Models.Filters.QueryStringFilter.html" class="more">« More »</a>
+</div>
+<a name="UnaryFilter" id="UnaryFilter"></a><div class="element ajax clickable class" href="../classes/WindowsAzure.Table.Models.Filters.UnaryFilter.html">
+<h1>UnaryFilter<a href="../classes/WindowsAzure.Table.Models.Filters.UnaryFilter.html">¶</a>
+</h1>
+<p class="short_description">Unary filter</p>
+<div class="details collapse"></div>
+<a href="../classes/WindowsAzure.Table.Models.Filters.UnaryFilter.html" class="more">« More »</a>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="row"><footer class="span12">
+            Template is built using <a href="http://twitter.github.com/bootstrap/">Twitter Bootstrap 2</a> and icons provided by <a href="http://glyphicons.com/">Glyphicons</a>.<br>
+            Documentation is powered by <a href="http://www.phpdoc.org/">phpDocumentor 2.0.0a6</a> and<br>
+            generated on 2012-07-17T21:10:36-07:00.<br></footer></div>
+</div>
+</body>
+</html>

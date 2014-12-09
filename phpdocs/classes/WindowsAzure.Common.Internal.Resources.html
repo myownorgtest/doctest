@@ -1,0 +1,1982 @@
+<!DOCTYPE html><html xmlns:date="http://exslt.org/dates-and-times" lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0; user-scalable=0;">
+<meta charset="utf-8">
+<title>Windows Azure SDK for PHP » \WindowsAzure\Common\Internal\Resources</title>
+<meta name="author" content="Mike van Riel">
+<meta name="description" content="">
+<link href="../css/template.css" rel="stylesheet" media="all">
+<script src="../js/jquery-1.7.1.min.js" type="text/javascript"></script><script src="../js/jquery-ui-1.8.2.custom.min.js" type="text/javascript"></script><script src="../js/jquery.mousewheel.min.js" type="text/javascript"></script><script src="../js/bootstrap.js" type="text/javascript"></script><script src="../js/template.js" type="text/javascript"></script><script src="../js/prettify/prettify.min.js" type="text/javascript"></script><link rel="shortcut icon" href="../img/favicon.ico">
+<link rel="apple-touch-icon" href="../img/apple-touch-icon.png">
+<link rel="apple-touch-icon" sizes="72x72" href="../img/apple-touch-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="114x114" href="../img/apple-touch-icon-114x114.png">
+</head>
+<body>
+<div class="navbar navbar-fixed-top">
+<div class="navbar-inner"><div class="container">
+<a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse"><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></a><a class="brand" href="../index.html">Windows Azure SDK for PHP</a><div class="nav-collapse"><ul class="nav">
+<li class="dropdown">
+<a href="#api" class="dropdown-toggle" data-toggle="dropdown">
+                                    API Documentation <b class="caret"></b></a><ul class="dropdown-menu">
+<li><a>Namespaces</a></li>
+<li><a href="../namespaces/WindowsAzure.html"><i class="icon-th"></i> WindowsAzure</a></li>
+<li><a>Packages</a></li>
+<li><a href="../packages/WindowsAzure.html"><i class="icon-folder-open"></i> WindowsAzure</a></li>
+</ul>
+</li>
+<li class="dropdown" id="charts-menu">
+<a href="#charts" class="dropdown-toggle" data-toggle="dropdown">
+                                    Charts <b class="caret"></b></a><ul class="dropdown-menu"><li><a href="../graph_class.html"><i class="icon-list-alt"></i> Class hierarchy diagram</a></li></ul>
+</li>
+<li class="dropdown" id="reports-menu">
+<a href="#reports" class="dropdown-toggle" data-toggle="dropdown">
+                                    Reports <b class="caret"></b></a><ul class="dropdown-menu">
+<li><a href="../errors.html"><i class="icon-remove-sign"></i> Errors 
+                <span class="label label-info">385</span></a></li>
+<li><a href="../markers.html"><i class="icon-map-marker"></i> Markers 
+                <ul></ul></a></li>
+<li><a href="../deprecated.html"><i class="icon-stop"></i> Deprecated elements 
+                <span class="label label-info">0</span></a></li>
+</ul>
+</li>
+</ul></div>
+</div></div>
+<div class="go_to_top"><a href="#___" style="color: inherit">Back to top  <i class="icon-upload icon-white"></i></a></div>
+</div>
+<div id="___" class="container">
+<noscript><div class="alert alert-warning">
+                            Javascript is disabled; several features are only available
+                            if Javascript is enabled.
+                        </div></noscript>
+<div class="row">
+<div class="span4">
+<span class="btn-group visibility" data-toggle="buttons-checkbox"><button class="btn public active" title="Show public elements">Public</button><button class="btn protected" title="Show protected elements">Protected</button><button class="btn private" title="Show private elements">Private</button><button class="btn inherited active" title="Show inherited elements">Inherited</button></span><div class="btn-group view pull-right" data-toggle="buttons-radio">
+<button class="btn details" title="Show descriptions and method names"><i class="icon-list"></i></button><button class="btn simple" title="Show only method names"><i class="icon-align-justify"></i></button>
+</div>
+<ul class="side-nav nav nav-list">
+<li class="nav-header">
+<i class="icon-custom icon-constant"></i> Constants</li>
+<li class="constant  "><a href="#ACCEPT_CHARSET" title="ACCEPT_CHARSET :: "><span class="description">ACCEPT_CHARSET</span><pre>ACCEPT_CHARSET</pre></a></li>
+<li class="constant  "><a href="#ACCEPT_CHARSET_VALUE" title="ACCEPT_CHARSET_VALUE :: "><span class="description">ACCEPT_CHARSET_VALUE</span><pre>ACCEPT_CHARSET_VALUE</pre></a></li>
+<li class="constant  "><a href="#ACCEPT_HEADER" title="ACCEPT_HEADER :: "><span class="description">ACCEPT_HEADER</span><pre>ACCEPT_HEADER</pre></a></li>
+<li class="constant  "><a href="#ACCEPT_HEADER_VALUE" title="ACCEPT_HEADER_VALUE :: "><span class="description">ACCEPT_HEADER_VALUE</span><pre>ACCEPT_HEADER_VALUE</pre></a></li>
+<li class="constant  "><a href="#ACCOUNT_KEY_NAME" title="ACCOUNT_KEY_NAME :: "><span class="description">ACCOUNT_KEY_NAME</span><pre>ACCOUNT_KEY_NAME</pre></a></li>
+<li class="constant  "><a href="#ACCOUNT_NAME_NAME" title="ACCOUNT_NAME_NAME :: "><span class="description">ACCOUNT_NAME_NAME</span><pre>ACCOUNT_NAME_NAME</pre></a></li>
+<li class="constant  "><a href="#ASTERISK" title="ASTERISK :: "><span class="description">ASTERISK</span><pre>ASTERISK</pre></a></li>
+<li class="constant  "><a href="#ATOM_ENTRY_CONTENT_TYPE" title="ATOM_ENTRY_CONTENT_TYPE :: "><span class="description">ATOM_ENTRY_CONTENT_TYPE</span><pre>ATOM_ENTRY_CONTENT_TYPE</pre></a></li>
+<li class="constant  "><a href="#ATOM_NAMESPACE" title="ATOM_NAMESPACE :: "><span class="description">ATOM_NAMESPACE</span><pre>ATOM_NAMESPACE</pre></a></li>
+<li class="constant  "><a href="#ATOM_XML_NAMESPACE" title="ATOM_XML_NAMESPACE :: "><span class="description">ATOM_XML_NAMESPACE</span><pre>ATOM_XML_NAMESPACE</pre></a></li>
+<li class="constant  "><a href="#AUTHENTICATION" title="AUTHENTICATION :: "><span class="description">AUTHENTICATION</span><pre>AUTHENTICATION</pre></a></li>
+<li class="constant  "><a href="#AUTHOR" title="AUTHOR :: "><span class="description">AUTHOR</span><pre>AUTHOR</pre></a></li>
+<li class="constant  "><a href="#AZURE_DATE_FORMAT" title="AZURE_DATE_FORMAT :: "><span class="description">AZURE_DATE_FORMAT</span><pre>AZURE_DATE_FORMAT</pre></a></li>
+<li class="constant  "><a href="#AZURE_ERROR_MSG" title="AZURE_ERROR_MSG :: "><span class="description">AZURE_ERROR_MSG</span><pre>AZURE_ERROR_MSG</pre></a></li>
+<li class="constant  "><a href="#BATCH_ENTITY_DEL_MSG" title="BATCH_ENTITY_DEL_MSG :: "><span class="description">BATCH_ENTITY_DEL_MSG</span><pre>BATCH_ENTITY_DEL_MSG</pre></a></li>
+<li class="constant  "><a href="#BINARY_FILE_TYPE" title="BINARY_FILE_TYPE :: "><span class="description">BINARY_FILE_TYPE</span><pre>BINARY_FILE_TYPE</pre></a></li>
+<li class="constant  "><a href="#BLOB_BASE_DNS_NAME" title="BLOB_BASE_DNS_NAME :: "><span class="description">BLOB_BASE_DNS_NAME</span><pre>BLOB_BASE_DNS_NAME</pre></a></li>
+<li class="constant  "><a href="#BLOB_ENDPOINT_NAME" title="BLOB_ENDPOINT_NAME :: "><span class="description">BLOB_ENDPOINT_NAME</span><pre>BLOB_ENDPOINT_NAME</pre></a></li>
+<li class="constant  "><a href="#BLOB_TYPE_NAME" title="BLOB_TYPE_NAME :: "><span class="description">BLOB_TYPE_NAME</span><pre>BLOB_TYPE_NAME</pre></a></li>
+<li class="constant  "><a href="#BROKER_PROPERTIES" title="BROKER_PROPERTIES :: "><span class="description">BROKER_PROPERTIES</span><pre>BROKER_PROPERTIES</pre></a></li>
+<li class="constant  "><a href="#CACHE_CONTROL" title="CACHE_CONTROL :: "><span class="description">CACHE_CONTROL</span><pre>CACHE_CONTROL</pre></a></li>
+<li class="constant  "><a href="#CATEGORY" title="CATEGORY :: "><span class="description">CATEGORY</span><pre>CATEGORY</pre></a></li>
+<li class="constant  "><a href="#CERTIFICATE_PATH_NAME" title="CERTIFICATE_PATH_NAME :: "><span class="description">CERTIFICATE_PATH_NAME</span><pre>CERTIFICATE_PATH_NAME</pre></a></li>
+<li class="constant  "><a href="#CONNECT_TIMEOUT" title="CONNECT_TIMEOUT :: "><span class="description">CONNECT_TIMEOUT</span><pre>CONNECT_TIMEOUT</pre></a></li>
+<li class="constant  "><a href="#CONTENT_ENCODING" title="CONTENT_ENCODING :: "><span class="description">CONTENT_ENCODING</span><pre>CONTENT_ENCODING</pre></a></li>
+<li class="constant  "><a href="#CONTENT_ID" title="CONTENT_ID :: "><span class="description">CONTENT_ID</span><pre>CONTENT_ID</pre></a></li>
+<li class="constant  "><a href="#CONTENT_LANGUAGE" title="CONTENT_LANGUAGE :: "><span class="description">CONTENT_LANGUAGE</span><pre>CONTENT_LANGUAGE</pre></a></li>
+<li class="constant  "><a href="#CONTENT_LENGTH" title="CONTENT_LENGTH :: "><span class="description">CONTENT_LENGTH</span><pre>CONTENT_LENGTH</pre></a></li>
+<li class="constant  "><a href="#CONTENT_MD5" title="CONTENT_MD5 :: "><span class="description">CONTENT_MD5</span><pre>CONTENT_MD5</pre></a></li>
+<li class="constant  "><a href="#CONTENT_RANGE" title="CONTENT_RANGE :: "><span class="description">CONTENT_RANGE</span><pre>CONTENT_RANGE</pre></a></li>
+<li class="constant  "><a href="#CONTENT_TYPE" title="CONTENT_TYPE :: "><span class="description">CONTENT_TYPE</span><pre>CONTENT_TYPE</pre></a></li>
+<li class="constant  "><a href="#CONTRIBUTOR" title="CONTRIBUTOR :: "><span class="description">CONTRIBUTOR</span><pre>CONTRIBUTOR</pre></a></li>
+<li class="constant  "><a href="#DATA_SERVICE_VERSION" title="DATA_SERVICE_VERSION :: "><span class="description">DATA_SERVICE_VERSION</span><pre>DATA_SERVICE_VERSION</pre></a></li>
+<li class="constant  "><a href="#DATA_SERVICE_VERSION_VALUE" title="DATA_SERVICE_VERSION_VALUE :: "><span class="description">DATA_SERVICE_VERSION_VALUE</span><pre>DATA_SERVICE_VERSION_VALUE</pre></a></li>
+<li class="constant  "><a href="#DATE" title="DATE :: "><span class="description">DATE</span><pre>DATE</pre></a></li>
+<li class="constant  "><a href="#DEFAULT_ENDPOINTS_PROTOCOL_NAME" title="DEFAULT_ENDPOINTS_PROTOCOL_NAME :: "><span class="description">DEFAULT_ENDPOINTS_PROTOCOL_NAME</span><pre>DEFAULT_ENDPOINTS_PROTOCOL_NAME</pre></a></li>
+<li class="constant  "><a href="#DEFAULT_RULE_NAME" title="DEFAULT_RULE_NAME :: "><span class="description">DEFAULT_RULE_NAME</span><pre>DEFAULT_RULE_NAME</pre></a></li>
+<li class="constant  "><a href="#DEVELOPMENT_STORAGE_PROXY_URI_NAME" title="DEVELOPMENT_STORAGE_PROXY_URI_NAME :: "><span class="description">DEVELOPMENT_STORAGE_PROXY_URI_NAME</span><pre>DEVELOPMENT_STORAGE_PROXY_URI_NAME</pre></a></li>
+<li class="constant  "><a href="#DEV_STORE_CONNECTION_STRING" title="DEV_STORE_CONNECTION_STRING :: "><span class="description">DEV_STORE_CONNECTION_STRING</span><pre>DEV_STORE_CONNECTION_STRING</pre></a></li>
+<li class="constant  "><a href="#DEV_STORE_KEY" title="DEV_STORE_KEY :: "><span class="description">DEV_STORE_KEY</span><pre>DEV_STORE_KEY</pre></a></li>
+<li class="constant  "><a href="#DEV_STORE_NAME" title="DEV_STORE_NAME :: "><span class="description">DEV_STORE_NAME</span><pre>DEV_STORE_NAME</pre></a></li>
+<li class="constant  "><a href="#DEV_STORE_URI" title="DEV_STORE_URI :: "><span class="description">DEV_STORE_URI</span><pre>DEV_STORE_URI</pre></a></li>
+<li class="constant  "><a href="#DSM_XML_NAMESPACE" title="DSM_XML_NAMESPACE :: "><span class="description">DSM_XML_NAMESPACE</span><pre>DSM_XML_NAMESPACE</pre></a></li>
+<li class="constant  "><a href="#DS_XML_NAMESPACE" title="DS_XML_NAMESPACE :: "><span class="description">DS_XML_NAMESPACE</span><pre>DS_XML_NAMESPACE</pre></a></li>
+<li class="constant  "><a href="#EMPTY_STRING" title="EMPTY_STRING :: "><span class="description">EMPTY_STRING</span><pre>EMPTY_STRING</pre></a></li>
+<li class="constant  "><a href="#EMULATED" title="EMULATED :: "><span class="description">EMULATED</span><pre>EMULATED</pre></a></li>
+<li class="constant  "><a href="#EMULATOR_BLOB_URI" title="EMULATOR_BLOB_URI :: "><span class="description">EMULATOR_BLOB_URI</span><pre>EMULATOR_BLOB_URI</pre></a></li>
+<li class="constant  "><a href="#EMULATOR_QUEUE_URI" title="EMULATOR_QUEUE_URI :: "><span class="description">EMULATOR_QUEUE_URI</span><pre>EMULATOR_QUEUE_URI</pre></a></li>
+<li class="constant  "><a href="#EMULATOR_TABLE_URI" title="EMULATOR_TABLE_URI :: "><span class="description">EMULATOR_TABLE_URI</span><pre>EMULATOR_TABLE_URI</pre></a></li>
+<li class="constant  "><a href="#ENTRY" title="ENTRY :: "><span class="description">ENTRY</span><pre>ENTRY</pre></a></li>
+<li class="constant  "><a href="#ERROR_CONNECTION_STRING_EMPTY_KEY" title="ERROR_CONNECTION_STRING_EMPTY_KEY :: "><span class="description">ERROR_CONNECTION_STRING_EMPTY_KEY</span><pre>ERROR_CONNECTION_STRING_EMPTY_KEY</pre></a></li>
+<li class="constant  "><a href="#ERROR_CONNECTION_STRING_MISSING_CHARACTER" title="ERROR_CONNECTION_STRING_MISSING_CHARACTER :: "><span class="description">ERROR_CONNECTION_STRING_MISSING_CHARACTER</span><pre>ERROR_CONNECTION_STRING_MISSING_CHARACTER</pre></a></li>
+<li class="constant  "><a href="#ERROR_CONNECTION_STRING_MISSING_KEY" title="ERROR_CONNECTION_STRING_MISSING_KEY :: "><span class="description">ERROR_CONNECTION_STRING_MISSING_KEY</span><pre>ERROR_CONNECTION_STRING_MISSING_KEY</pre></a></li>
+<li class="constant  "><a href="#ERROR_EMPTY_SETTINGS" title="ERROR_EMPTY_SETTINGS :: "><span class="description">ERROR_EMPTY_SETTINGS</span><pre>ERROR_EMPTY_SETTINGS</pre></a></li>
+<li class="constant  "><a href="#ERROR_PARSING_STRING" title="ERROR_PARSING_STRING :: "><span class="description">ERROR_PARSING_STRING</span><pre>ERROR_PARSING_STRING</pre></a></li>
+<li class="constant  "><a href="#ETAG" title="ETAG :: "><span class="description">ETAG</span><pre>ETAG</pre></a></li>
+<li class="constant  "><a href="#HTTPS_SCHEME" title="HTTPS_SCHEME :: "><span class="description">HTTPS_SCHEME</span><pre>HTTPS_SCHEME</pre></a></li>
+<li class="constant  "><a href="#HTTP_DELETE" title="HTTP_DELETE :: "><span class="description">HTTP_DELETE</span><pre>HTTP_DELETE</pre></a></li>
+<li class="constant  "><a href="#HTTP_GET" title="HTTP_GET :: "><span class="description">HTTP_GET</span><pre>HTTP_GET</pre></a></li>
+<li class="constant  "><a href="#HTTP_HEAD" title="HTTP_HEAD :: "><span class="description">HTTP_HEAD</span><pre>HTTP_HEAD</pre></a></li>
+<li class="constant  "><a href="#HTTP_MERGE" title="HTTP_MERGE :: "><span class="description">HTTP_MERGE</span><pre>HTTP_MERGE</pre></a></li>
+<li class="constant  "><a href="#HTTP_POST" title="HTTP_POST :: "><span class="description">HTTP_POST</span><pre>HTTP_POST</pre></a></li>
+<li class="constant  "><a href="#HTTP_PUT" title="HTTP_PUT :: "><span class="description">HTTP_PUT</span><pre>HTTP_PUT</pre></a></li>
+<li class="constant  "><a href="#HTTP_SCHEME" title="HTTP_SCHEME :: "><span class="description">HTTP_SCHEME</span><pre>HTTP_SCHEME</pre></a></li>
+<li class="constant  "><a href="#HTTP_TYPE" title="HTTP_TYPE :: "><span class="description">HTTP_TYPE</span><pre>HTTP_TYPE</pre></a></li>
+<li class="constant  "><a href="#IF_MATCH" title="IF_MATCH :: "><span class="description">IF_MATCH</span><pre>IF_MATCH</pre></a></li>
+<li class="constant  "><a href="#IF_MODIFIED_SINCE" title="IF_MODIFIED_SINCE :: "><span class="description">IF_MODIFIED_SINCE</span><pre>IF_MODIFIED_SINCE</pre></a></li>
+<li class="constant  "><a href="#IF_NONE_MATCH" title="IF_NONE_MATCH :: "><span class="description">IF_NONE_MATCH</span><pre>IF_NONE_MATCH</pre></a></li>
+<li class="constant  "><a href="#IF_UNMODIFIED_SINCE" title="IF_UNMODIFIED_SINCE :: "><span class="description">IF_UNMODIFIED_SINCE</span><pre>IF_UNMODIFIED_SINCE</pre></a></li>
+<li class="constant  "><a href="#INSTANCE_TYPE_VALIDATION_MSG" title="INSTANCE_TYPE_VALIDATION_MSG :: "><span class="description">INSTANCE_TYPE_VALIDATION_MSG</span><pre>INSTANCE_TYPE_VALIDATION_MSG</pre></a></li>
+<li class="constant  "><a href="#INVALID_ACCOUNT_KEY_FORMAT" title="INVALID_ACCOUNT_KEY_FORMAT :: "><span class="description">INVALID_ACCOUNT_KEY_FORMAT</span><pre>INVALID_ACCOUNT_KEY_FORMAT</pre></a></li>
+<li class="constant  "><a href="#INVALID_ACH_MSG" title="INVALID_ACH_MSG :: "><span class="description">INVALID_ACH_MSG</span><pre>INVALID_ACH_MSG</pre></a></li>
+<li class="constant  "><a href="#INVALID_BLOB_PAT_MSG" title="INVALID_BLOB_PAT_MSG :: "><span class="description">INVALID_BLOB_PAT_MSG</span><pre>INVALID_BLOB_PAT_MSG</pre></a></li>
+<li class="constant  "><a href="#INVALID_BO_PN_MSG" title="INVALID_BO_PN_MSG :: "><span class="description">INVALID_BO_PN_MSG</span><pre>INVALID_BO_PN_MSG</pre></a></li>
+<li class="constant  "><a href="#INVALID_BO_TYPE_MSG" title="INVALID_BO_TYPE_MSG :: "><span class="description">INVALID_BO_TYPE_MSG</span><pre>INVALID_BO_TYPE_MSG</pre></a></li>
+<li class="constant  "><a href="#INVALID_BTE_MSG" title="INVALID_BTE_MSG :: "><span class="description">INVALID_BTE_MSG</span><pre>INVALID_BTE_MSG</pre></a></li>
+<li class="constant  "><a href="#INVALID_CERTIFICATE_PATH" title="INVALID_CERTIFICATE_PATH :: "><span class="description">INVALID_CERTIFICATE_PATH</span><pre>INVALID_CERTIFICATE_PATH</pre></a></li>
+<li class="constant  "><a href="#INVALID_CONFIG_MSG" title="INVALID_CONFIG_MSG :: "><span class="description">INVALID_CONFIG_MSG</span><pre>INVALID_CONFIG_MSG</pre></a></li>
+<li class="constant  "><a href="#INVALID_CONFIG_URI" title="INVALID_CONFIG_URI :: "><span class="description">INVALID_CONFIG_URI</span><pre>INVALID_CONFIG_URI</pre></a></li>
+<li class="constant  "><a href="#INVALID_CONFIG_VALUE" title="INVALID_CONFIG_VALUE :: "><span class="description">INVALID_CONFIG_VALUE</span><pre>INVALID_CONFIG_VALUE</pre></a></li>
+<li class="constant  "><a href="#INVALID_CONNECTION_STRING" title="INVALID_CONNECTION_STRING :: "><span class="description">INVALID_CONNECTION_STRING</span><pre>INVALID_CONNECTION_STRING</pre></a></li>
+<li class="constant  "><a href="#INVALID_CONNECTION_STRING_SETTING_KEY" title="INVALID_CONNECTION_STRING_SETTING_KEY :: "><span class="description">INVALID_CONNECTION_STRING_SETTING_KEY</span><pre>INVALID_CONNECTION_STRING_SETTING_KEY</pre></a></li>
+<li class="constant  "><a href="#INVALID_CSA_OPT_MSG" title="INVALID_CSA_OPT_MSG :: "><span class="description">INVALID_CSA_OPT_MSG</span><pre>INVALID_CSA_OPT_MSG</pre></a></li>
+<li class="constant  "><a href="#INVALID_EDM_MSG" title="INVALID_EDM_MSG :: "><span class="description">INVALID_EDM_MSG</span><pre>INVALID_EDM_MSG</pre></a></li>
+<li class="constant  "><a href="#INVALID_ENTITY_MSG" title="INVALID_ENTITY_MSG :: "><span class="description">INVALID_ENTITY_MSG</span><pre>INVALID_ENTITY_MSG</pre></a></li>
+<li class="constant  "><a href="#INVALID_EXC_OBJ_MSG" title="INVALID_EXC_OBJ_MSG :: "><span class="description">INVALID_EXC_OBJ_MSG</span><pre>INVALID_EXC_OBJ_MSG</pre></a></li>
+<li class="constant  "><a href="#INVALID_HT_MSG" title="INVALID_HT_MSG :: "><span class="description">INVALID_HT_MSG</span><pre>INVALID_HT_MSG</pre></a></li>
+<li class="constant  "><a href="#INVALID_META_MSG" title="INVALID_META_MSG :: "><span class="description">INVALID_META_MSG</span><pre>INVALID_META_MSG</pre></a></li>
+<li class="constant  "><a href="#INVALID_OC_COUNT_MSG" title="INVALID_OC_COUNT_MSG :: "><span class="description">INVALID_OC_COUNT_MSG</span><pre>INVALID_OC_COUNT_MSG</pre></a></li>
+<li class="constant  "><a href="#INVALID_PARAM_MSG" title="INVALID_PARAM_MSG :: "><span class="description">INVALID_PARAM_MSG</span><pre>INVALID_PARAM_MSG</pre></a></li>
+<li class="constant  "><a href="#INVALID_PROP_MSG" title="INVALID_PROP_MSG :: "><span class="description">INVALID_PROP_MSG</span><pre>INVALID_PROP_MSG</pre></a></li>
+<li class="constant  "><a href="#INVALID_PROP_VAL_MSG" title="INVALID_PROP_VAL_MSG :: "><span class="description">INVALID_PROP_VAL_MSG</span><pre>INVALID_PROP_VAL_MSG</pre></a></li>
+<li class="constant  "><a href="#INVALID_RECEIVE_MODE_MSG" title="INVALID_RECEIVE_MODE_MSG :: "><span class="description">INVALID_RECEIVE_MODE_MSG</span><pre>INVALID_RECEIVE_MODE_MSG</pre></a></li>
+<li class="constant  "><a href="#INVALID_SVC_PROP_MSG" title="INVALID_SVC_PROP_MSG :: "><span class="description">INVALID_SVC_PROP_MSG</span><pre>INVALID_SVC_PROP_MSG</pre></a></li>
+<li class="constant  "><a href="#INVALID_TYPE_MSG" title="INVALID_TYPE_MSG :: "><span class="description">INVALID_TYPE_MSG</span><pre>INVALID_TYPE_MSG</pre></a></li>
+<li class="constant  "><a href="#INVALID_URL_MSG" title="INVALID_URL_MSG :: "><span class="description">INVALID_URL_MSG</span><pre>INVALID_URL_MSG</pre></a></li>
+<li class="constant  "><a href="#INVALID_USA_OPT_MSG" title="INVALID_USA_OPT_MSG :: "><span class="description">INVALID_USA_OPT_MSG</span><pre>INVALID_USA_OPT_MSG</pre></a></li>
+<li class="constant  "><a href="#INVALID_VERSION_MSG" title="INVALID_VERSION_MSG :: "><span class="description">INVALID_VERSION_MSG</span><pre>INVALID_VERSION_MSG</pre></a></li>
+<li class="constant  "><a href="#LAST_MODIFIED" title="LAST_MODIFIED :: "><span class="description">LAST_MODIFIED</span><pre>LAST_MODIFIED</pre></a></li>
+<li class="constant  "><a href="#LINK" title="LINK :: "><span class="description">LINK</span><pre>LINK</pre></a></li>
+<li class="constant  "><a href="#LIST_QUEUES_PATH" title="LIST_QUEUES_PATH :: "><span class="description">LIST_QUEUES_PATH</span><pre>LIST_QUEUES_PATH</pre></a></li>
+<li class="constant  "><a href="#LIST_RULES_PATH" title="LIST_RULES_PATH :: "><span class="description">LIST_RULES_PATH</span><pre>LIST_RULES_PATH</pre></a></li>
+<li class="constant  "><a href="#LIST_SUBSCRIPTIONS_PATH" title="LIST_SUBSCRIPTIONS_PATH :: "><span class="description">LIST_SUBSCRIPTIONS_PATH</span><pre>LIST_SUBSCRIPTIONS_PATH</pre></a></li>
+<li class="constant  "><a href="#LIST_TOPICS_PATH" title="LIST_TOPICS_PATH :: "><span class="description">LIST_TOPICS_PATH</span><pre>LIST_TOPICS_PATH</pre></a></li>
+<li class="constant  "><a href="#MAX_DATA_SERVICE_VERSION" title="MAX_DATA_SERVICE_VERSION :: "><span class="description">MAX_DATA_SERVICE_VERSION</span><pre>MAX_DATA_SERVICE_VERSION</pre></a></li>
+<li class="constant  "><a href="#MAX_DATA_SERVICE_VERSION_VALUE" title="MAX_DATA_SERVICE_VERSION_VALUE :: "><span class="description">MAX_DATA_SERVICE_VERSION_VALUE</span><pre>MAX_DATA_SERVICE_VERSION_VALUE</pre></a></li>
+<li class="constant  "><a href="#MISSING_CONNECTION_STRING_CHAR" title="MISSING_CONNECTION_STRING_CHAR :: "><span class="description">MISSING_CONNECTION_STRING_CHAR</span><pre>MISSING_CONNECTION_STRING_CHAR</pre></a></li>
+<li class="constant  "><a href="#MISSING_CONNECTION_STRING_SETTINGS" title="MISSING_CONNECTION_STRING_SETTINGS :: "><span class="description">MISSING_CONNECTION_STRING_SETTINGS</span><pre>MISSING_CONNECTION_STRING_SETTINGS</pre></a></li>
+<li class="constant  "><a href="#MISSING_LOCK_LOCATION_MSG" title="MISSING_LOCK_LOCATION_MSG :: "><span class="description">MISSING_LOCK_LOCATION_MSG</span><pre>MISSING_LOCK_LOCATION_MSG</pre></a></li>
+<li class="constant  "><a href="#MULTIPART_MIXED_TYPE" title="MULTIPART_MIXED_TYPE :: "><span class="description">MULTIPART_MIXED_TYPE</span><pre>MULTIPART_MIXED_TYPE</pre></a></li>
+<li class="constant  "><a href="#NOT_IMPLEMENTED_MSG" title="NOT_IMPLEMENTED_MSG :: "><span class="description">NOT_IMPLEMENTED_MSG</span><pre>NOT_IMPLEMENTED_MSG</pre></a></li>
+<li class="constant  "><a href="#NULL_MSG" title="NULL_MSG :: "><span class="description">NULL_MSG</span><pre>NULL_MSG</pre></a></li>
+<li class="constant  "><a href="#NULL_OR_EMPTY_MSG" title="NULL_OR_EMPTY_MSG :: "><span class="description">NULL_OR_EMPTY_MSG</span><pre>NULL_OR_EMPTY_MSG</pre></a></li>
+<li class="constant  "><a href="#NULL_TABLE_KEY_MSG" title="NULL_TABLE_KEY_MSG :: "><span class="description">NULL_TABLE_KEY_MSG</span><pre>NULL_TABLE_KEY_MSG</pre></a></li>
+<li class="constant  "><a href="#PHP_URL_FRAGMENT" title="PHP_URL_FRAGMENT :: "><span class="description">PHP_URL_FRAGMENT</span><pre>PHP_URL_FRAGMENT</pre></a></li>
+<li class="constant  "><a href="#PHP_URL_HOST" title="PHP_URL_HOST :: "><span class="description">PHP_URL_HOST</span><pre>PHP_URL_HOST</pre></a></li>
+<li class="constant  "><a href="#PHP_URL_PASS" title="PHP_URL_PASS :: "><span class="description">PHP_URL_PASS</span><pre>PHP_URL_PASS</pre></a></li>
+<li class="constant  "><a href="#PHP_URL_PATH" title="PHP_URL_PATH :: "><span class="description">PHP_URL_PATH</span><pre>PHP_URL_PATH</pre></a></li>
+<li class="constant  "><a href="#PHP_URL_PORT" title="PHP_URL_PORT :: "><span class="description">PHP_URL_PORT</span><pre>PHP_URL_PORT</pre></a></li>
+<li class="constant  "><a href="#PHP_URL_QUERY" title="PHP_URL_QUERY :: "><span class="description">PHP_URL_QUERY</span><pre>PHP_URL_QUERY</pre></a></li>
+<li class="constant  "><a href="#PHP_URL_SCHEME" title="PHP_URL_SCHEME :: "><span class="description">PHP_URL_SCHEME</span><pre>PHP_URL_SCHEME</pre></a></li>
+<li class="constant  "><a href="#PHP_URL_USER" title="PHP_URL_USER :: "><span class="description">PHP_URL_USER</span><pre>PHP_URL_USER</pre></a></li>
+<li class="constant  "><a href="#QP_ACTION" title="QP_ACTION :: "><span class="description">QP_ACTION</span><pre>QP_ACTION</pre></a></li>
+<li class="constant  "><a href="#QP_BLOCKID" title="QP_BLOCKID :: "><span class="description">QP_BLOCKID</span><pre>QP_BLOCKID</pre></a></li>
+<li class="constant  "><a href="#QP_BLOCK_LIST_TYPE" title="QP_BLOCK_LIST_TYPE :: "><span class="description">QP_BLOCK_LIST_TYPE</span><pre>QP_BLOCK_LIST_TYPE</pre></a></li>
+<li class="constant  "><a href="#QP_COMP" title="QP_COMP :: "><span class="description">QP_COMP</span><pre>QP_COMP</pre></a></li>
+<li class="constant  "><a href="#QP_DELIMITER" title="QP_DELIMITER :: "><span class="description">QP_DELIMITER</span><pre>QP_DELIMITER</pre></a></li>
+<li class="constant  "><a href="#QP_FILTER" title="QP_FILTER :: "><span class="description">QP_FILTER</span><pre>QP_FILTER</pre></a></li>
+<li class="constant  "><a href="#QP_INCLUDE" title="QP_INCLUDE :: "><span class="description">QP_INCLUDE</span><pre>QP_INCLUDE</pre></a></li>
+<li class="constant  "><a href="#QP_MARKER" title="QP_MARKER :: "><span class="description">QP_MARKER</span><pre>QP_MARKER</pre></a></li>
+<li class="constant  "><a href="#QP_MAX_RESULTS" title="QP_MAX_RESULTS :: "><span class="description">QP_MAX_RESULTS</span><pre>QP_MAX_RESULTS</pre></a></li>
+<li class="constant  "><a href="#QP_MESSAGE_TTL" title="QP_MESSAGE_TTL :: "><span class="description">QP_MESSAGE_TTL</span><pre>QP_MESSAGE_TTL</pre></a></li>
+<li class="constant  "><a href="#QP_METADATA" title="QP_METADATA :: "><span class="description">QP_METADATA</span><pre>QP_METADATA</pre></a></li>
+<li class="constant  "><a href="#QP_NEXT_MARKER" title="QP_NEXT_MARKER :: "><span class="description">QP_NEXT_MARKER</span><pre>QP_NEXT_MARKER</pre></a></li>
+<li class="constant  "><a href="#QP_NEXT_PK" title="QP_NEXT_PK :: "><span class="description">QP_NEXT_PK</span><pre>QP_NEXT_PK</pre></a></li>
+<li class="constant  "><a href="#QP_NEXT_RK" title="QP_NEXT_RK :: "><span class="description">QP_NEXT_RK</span><pre>QP_NEXT_RK</pre></a></li>
+<li class="constant  "><a href="#QP_NEXT_TABLE_NAME" title="QP_NEXT_TABLE_NAME :: "><span class="description">QP_NEXT_TABLE_NAME</span><pre>QP_NEXT_TABLE_NAME</pre></a></li>
+<li class="constant  "><a href="#QP_NUM_OF_MESSAGES" title="QP_NUM_OF_MESSAGES :: "><span class="description">QP_NUM_OF_MESSAGES</span><pre>QP_NUM_OF_MESSAGES</pre></a></li>
+<li class="constant  "><a href="#QP_PEEK_ONLY" title="QP_PEEK_ONLY :: "><span class="description">QP_PEEK_ONLY</span><pre>QP_PEEK_ONLY</pre></a></li>
+<li class="constant  "><a href="#QP_POPRECEIPT" title="QP_POPRECEIPT :: "><span class="description">QP_POPRECEIPT</span><pre>QP_POPRECEIPT</pre></a></li>
+<li class="constant  "><a href="#QP_PREFIX" title="QP_PREFIX :: "><span class="description">QP_PREFIX</span><pre>QP_PREFIX</pre></a></li>
+<li class="constant  "><a href="#QP_REST_TYPE" title="QP_REST_TYPE :: "><span class="description">QP_REST_TYPE</span><pre>QP_REST_TYPE</pre></a></li>
+<li class="constant  "><a href="#QP_SELECT" title="QP_SELECT :: "><span class="description">QP_SELECT</span><pre>QP_SELECT</pre></a></li>
+<li class="constant  "><a href="#QP_SKIP" title="QP_SKIP :: "><span class="description">QP_SKIP</span><pre>QP_SKIP</pre></a></li>
+<li class="constant  "><a href="#QP_SNAPSHOT" title="QP_SNAPSHOT :: "><span class="description">QP_SNAPSHOT</span><pre>QP_SNAPSHOT</pre></a></li>
+<li class="constant  "><a href="#QP_TIMEOUT" title="QP_TIMEOUT :: "><span class="description">QP_TIMEOUT</span><pre>QP_TIMEOUT</pre></a></li>
+<li class="constant  "><a href="#QP_TOP" title="QP_TOP :: "><span class="description">QP_TOP</span><pre>QP_TOP</pre></a></li>
+<li class="constant  "><a href="#QP_VISIBILITY_TIMEOUT" title="QP_VISIBILITY_TIMEOUT :: "><span class="description">QP_VISIBILITY_TIMEOUT</span><pre>QP_VISIBILITY_TIMEOUT</pre></a></li>
+<li class="constant  "><a href="#QUEUE_BASE_DNS_NAME" title="QUEUE_BASE_DNS_NAME :: "><span class="description">QUEUE_BASE_DNS_NAME</span><pre>QUEUE_BASE_DNS_NAME</pre></a></li>
+<li class="constant  "><a href="#QUEUE_ENDPOINT_NAME" title="QUEUE_ENDPOINT_NAME :: "><span class="description">QUEUE_ENDPOINT_NAME</span><pre>QUEUE_ENDPOINT_NAME</pre></a></li>
+<li class="constant  "><a href="#QUEUE_TYPE_NAME" title="QUEUE_TYPE_NAME :: "><span class="description">QUEUE_TYPE_NAME</span><pre>QUEUE_TYPE_NAME</pre></a></li>
+<li class="constant  "><a href="#RANGE" title="RANGE :: "><span class="description">RANGE</span><pre>RANGE</pre></a></li>
+<li class="constant  "><a href="#RECEIVE_MESSAGE_PATH" title="RECEIVE_MESSAGE_PATH :: "><span class="description">RECEIVE_MESSAGE_PATH</span><pre>RECEIVE_MESSAGE_PATH</pre></a></li>
+<li class="constant  "><a href="#RECEIVE_SUBSCRIPTION_MESSAGE_PATH" title="RECEIVE_SUBSCRIPTION_MESSAGE_PATH :: "><span class="description">RECEIVE_SUBSCRIPTION_MESSAGE_PATH</span><pre>RECEIVE_SUBSCRIPTION_MESSAGE_PATH</pre></a></li>
+<li class="constant  "><a href="#RULE_PATH" title="RULE_PATH :: "><span class="description">RULE_PATH</span><pre>RULE_PATH</pre></a></li>
+<li class="constant  "><a href="#SEND_MESSAGE_PATH" title="SEND_MESSAGE_PATH :: "><span class="description">SEND_MESSAGE_PATH</span><pre>SEND_MESSAGE_PATH</pre></a></li>
+<li class="constant  "><a href="#SEPARATOR" title="SEPARATOR :: "><span class="description">SEPARATOR</span><pre>SEPARATOR</pre></a></li>
+<li class="constant  "><a href="#SERVICE_BUS_ENDPOINT_NAME" title="SERVICE_BUS_ENDPOINT_NAME :: "><span class="description">SERVICE_BUS_ENDPOINT_NAME</span><pre>SERVICE_BUS_ENDPOINT_NAME</pre></a></li>
+<li class="constant  "><a href="#SERVICE_BUS_NAMESPACE" title="SERVICE_BUS_NAMESPACE :: "><span class="description">SERVICE_BUS_NAMESPACE</span><pre>SERVICE_BUS_NAMESPACE</pre></a></li>
+<li class="constant  "><a href="#SERVICE_BUS_TYPE_NAME" title="SERVICE_BUS_TYPE_NAME :: "><span class="description">SERVICE_BUS_TYPE_NAME</span><pre>SERVICE_BUS_TYPE_NAME</pre></a></li>
+<li class="constant  "><a href="#SERVICE_MANAGEMENT_ENDPOINT_NAME" title="SERVICE_MANAGEMENT_ENDPOINT_NAME :: "><span class="description">SERVICE_MANAGEMENT_ENDPOINT_NAME</span><pre>SERVICE_MANAGEMENT_ENDPOINT_NAME</pre></a></li>
+<li class="constant  "><a href="#SERVICE_MANAGEMENT_TYPE_NAME" title="SERVICE_MANAGEMENT_TYPE_NAME :: "><span class="description">SERVICE_MANAGEMENT_TYPE_NAME</span><pre>SERVICE_MANAGEMENT_TYPE_NAME</pre></a></li>
+<li class="constant  "><a href="#SERVICE_MANAGEMENT_URL" title="SERVICE_MANAGEMENT_URL :: "><span class="description">SERVICE_MANAGEMENT_URL</span><pre>SERVICE_MANAGEMENT_URL</pre></a></li>
+<li class="constant  "><a href="#SERVICE_URI_FORMAT" title="SERVICE_URI_FORMAT :: "><span class="description">SERVICE_URI_FORMAT</span><pre>SERVICE_URI_FORMAT</pre></a></li>
+<li class="constant  "><a href="#SETTING_CONSTRAINT" title="SETTING_CONSTRAINT :: "><span class="description">SETTING_CONSTRAINT</span><pre>SETTING_CONSTRAINT</pre></a></li>
+<li class="constant  "><a href="#SETTING_NAME" title="SETTING_NAME :: "><span class="description">SETTING_NAME</span><pre>SETTING_NAME</pre></a></li>
+<li class="constant  "><a href="#SHARED_ACCESS_SIGNATURE_NAME" title="SHARED_ACCESS_SIGNATURE_NAME :: "><span class="description">SHARED_ACCESS_SIGNATURE_NAME</span><pre>SHARED_ACCESS_SIGNATURE_NAME</pre></a></li>
+<li class="constant  "><a href="#SHARED_SECRET_ISSUER_NAME" title="SHARED_SECRET_ISSUER_NAME :: "><span class="description">SHARED_SECRET_ISSUER_NAME</span><pre>SHARED_SECRET_ISSUER_NAME</pre></a></li>
+<li class="constant  "><a href="#SHARED_SECRET_VALUE_NAME" title="SHARED_SECRET_VALUE_NAME :: "><span class="description">SHARED_SECRET_VALUE_NAME</span><pre>SHARED_SECRET_VALUE_NAME</pre></a></li>
+<li class="constant  "><a href="#SM_API_LATEST_VERSION" title="SM_API_LATEST_VERSION :: "><span class="description">SM_API_LATEST_VERSION</span><pre>SM_API_LATEST_VERSION</pre></a></li>
+<li class="constant  "><a href="#SSL_CAFILE" title="SSL_CAFILE :: "><span class="description">SSL_CAFILE</span><pre>SSL_CAFILE</pre></a></li>
+<li class="constant  "><a href="#SSL_LOCAL_CERT" title="SSL_LOCAL_CERT :: "><span class="description">SSL_LOCAL_CERT</span><pre>SSL_LOCAL_CERT</pre></a></li>
+<li class="constant  "><a href="#SSL_VERIFY_HOST" title="SSL_VERIFY_HOST :: "><span class="description">SSL_VERIFY_HOST</span><pre>SSL_VERIFY_HOST</pre></a></li>
+<li class="constant  "><a href="#SSL_VERIFY_PEER" title="SSL_VERIFY_PEER :: "><span class="description">SSL_VERIFY_PEER</span><pre>SSL_VERIFY_PEER</pre></a></li>
+<li class="constant  "><a href="#STATUS_ACCEPTED" title="STATUS_ACCEPTED :: "><span class="description">STATUS_ACCEPTED</span><pre>STATUS_ACCEPTED</pre></a></li>
+<li class="constant  "><a href="#STATUS_CREATED" title="STATUS_CREATED :: "><span class="description">STATUS_CREATED</span><pre>STATUS_CREATED</pre></a></li>
+<li class="constant  "><a href="#STATUS_NO_CONTENT" title="STATUS_NO_CONTENT :: "><span class="description">STATUS_NO_CONTENT</span><pre>STATUS_NO_CONTENT</pre></a></li>
+<li class="constant  "><a href="#STATUS_OK" title="STATUS_OK :: "><span class="description">STATUS_OK</span><pre>STATUS_OK</pre></a></li>
+<li class="constant  "><a href="#STATUS_PARTIAL_CONTENT" title="STATUS_PARTIAL_CONTENT :: "><span class="description">STATUS_PARTIAL_CONTENT</span><pre>STATUS_PARTIAL_CONTENT</pre></a></li>
+<li class="constant  "><a href="#STORAGE_API_LATEST_VERSION" title="STORAGE_API_LATEST_VERSION :: "><span class="description">STORAGE_API_LATEST_VERSION</span><pre>STORAGE_API_LATEST_VERSION</pre></a></li>
+<li class="constant  "><a href="#SUBSCRIPTION_ID_NAME" title="SUBSCRIPTION_ID_NAME :: "><span class="description">SUBSCRIPTION_ID_NAME</span><pre>SUBSCRIPTION_ID_NAME</pre></a></li>
+<li class="constant  "><a href="#SUBSCRIPTION_PATH" title="SUBSCRIPTION_PATH :: "><span class="description">SUBSCRIPTION_PATH</span><pre>SUBSCRIPTION_PATH</pre></a></li>
+<li class="constant  "><a href="#TABLE_BASE_DNS_NAME" title="TABLE_BASE_DNS_NAME :: "><span class="description">TABLE_BASE_DNS_NAME</span><pre>TABLE_BASE_DNS_NAME</pre></a></li>
+<li class="constant  "><a href="#TABLE_ENDPOINT_NAME" title="TABLE_ENDPOINT_NAME :: "><span class="description">TABLE_ENDPOINT_NAME</span><pre>TABLE_ENDPOINT_NAME</pre></a></li>
+<li class="constant  "><a href="#TABLE_TYPE_NAME" title="TABLE_TYPE_NAME :: "><span class="description">TABLE_TYPE_NAME</span><pre>TABLE_TYPE_NAME</pre></a></li>
+<li class="constant  "><a href="#TIMESTAMP_FORMAT" title="TIMESTAMP_FORMAT :: "><span class="description">TIMESTAMP_FORMAT</span><pre>TIMESTAMP_FORMAT</pre></a></li>
+<li class="constant  "><a href="#UNIQUE_ID_PREFIX" title="UNIQUE_ID_PREFIX :: "><span class="description">UNIQUE_ID_PREFIX</span><pre>UNIQUE_ID_PREFIX</pre></a></li>
+<li class="constant  "><a href="#UNKNOWN_SRILZER_MSG" title="UNKNOWN_SRILZER_MSG :: "><span class="description">UNKNOWN_SRILZER_MSG</span><pre>UNKNOWN_SRILZER_MSG</pre></a></li>
+<li class="constant  "><a href="#URL_ENCODED_CONTENT_TYPE" title="URL_ENCODED_CONTENT_TYPE :: "><span class="description">URL_ENCODED_CONTENT_TYPE</span><pre>URL_ENCODED_CONTENT_TYPE</pre></a></li>
+<li class="constant  "><a href="#USE_BRACKETS" title="USE_BRACKETS :: "><span class="description">USE_BRACKETS</span><pre>USE_BRACKETS</pre></a></li>
+<li class="constant  "><a href="#USE_DEVELOPMENT_STORAGE_NAME" title="USE_DEVELOPMENT_STORAGE_NAME :: "><span class="description">USE_DEVELOPMENT_STORAGE_NAME</span><pre>USE_DEVELOPMENT_STORAGE_NAME</pre></a></li>
+<li class="constant  "><a href="#WA_XML_NAMESPACE" title="WA_XML_NAMESPACE :: "><span class="description">WA_XML_NAMESPACE</span><pre>WA_XML_NAMESPACE</pre></a></li>
+<li class="constant  "><a href="#WRAP_ACCESS_TOKEN" title="WRAP_ACCESS_TOKEN :: "><span class="description">WRAP_ACCESS_TOKEN</span><pre>WRAP_ACCESS_TOKEN</pre></a></li>
+<li class="constant  "><a href="#WRAP_ACCESS_TOKEN_EXPIRES_IN" title="WRAP_ACCESS_TOKEN_EXPIRES_IN :: "><span class="description">WRAP_ACCESS_TOKEN_EXPIRES_IN</span><pre>WRAP_ACCESS_TOKEN_EXPIRES_IN</pre></a></li>
+<li class="constant  "><a href="#WRAP_AUTHORIZATION" title="WRAP_AUTHORIZATION :: "><span class="description">WRAP_AUTHORIZATION</span><pre>WRAP_AUTHORIZATION</pre></a></li>
+<li class="constant  "><a href="#WRAP_ENDPOINT_URI_FORMAT" title="WRAP_ENDPOINT_URI_FORMAT :: "><span class="description">WRAP_ENDPOINT_URI_FORMAT</span><pre>WRAP_ENDPOINT_URI_FORMAT</pre></a></li>
+<li class="constant  "><a href="#WRAP_NAME" title="WRAP_NAME :: "><span class="description">WRAP_NAME</span><pre>WRAP_NAME</pre></a></li>
+<li class="constant  "><a href="#WRAP_PASSWORD" title="WRAP_PASSWORD :: "><span class="description">WRAP_PASSWORD</span><pre>WRAP_PASSWORD</pre></a></li>
+<li class="constant  "><a href="#WRAP_SCOPE" title="WRAP_SCOPE :: "><span class="description">WRAP_SCOPE</span><pre>WRAP_SCOPE</pre></a></li>
+<li class="constant  "><a href="#WRAP_TYPE_NAME" title="WRAP_TYPE_NAME :: "><span class="description">WRAP_TYPE_NAME</span><pre>WRAP_TYPE_NAME</pre></a></li>
+<li class="constant  "><a href="#XMLNS" title="XMLNS :: "><span class="description">XMLNS</span><pre>XMLNS</pre></a></li>
+<li class="constant  "><a href="#XMLNS_ATOM" title="XMLNS_ATOM :: "><span class="description">XMLNS_ATOM</span><pre>XMLNS_ATOM</pre></a></li>
+<li class="constant  "><a href="#XML_ATOM_CONTENT_TYPE" title="XML_ATOM_CONTENT_TYPE :: "><span class="description">XML_ATOM_CONTENT_TYPE</span><pre>XML_ATOM_CONTENT_TYPE</pre></a></li>
+<li class="constant  "><a href="#XML_CONTENT_TYPE" title="XML_CONTENT_TYPE :: "><span class="description">XML_CONTENT_TYPE</span><pre>XML_CONTENT_TYPE</pre></a></li>
+<li class="constant  "><a href="#XSI_XML_NAMESPACE" title="XSI_XML_NAMESPACE :: "><span class="description">XSI_XML_NAMESPACE</span><pre>XSI_XML_NAMESPACE</pre></a></li>
+<li class="constant  "><a href="#XTAG_AFFINITY_GROUP" title="XTAG_AFFINITY_GROUP :: "><span class="description">XTAG_AFFINITY_GROUP</span><pre>XTAG_AFFINITY_GROUP</pre></a></li>
+<li class="constant  "><a href="#XTAG_ATTRIBUTES" title="XTAG_ATTRIBUTES :: "><span class="description">XTAG_ATTRIBUTES</span><pre>XTAG_ATTRIBUTES</pre></a></li>
+<li class="constant  "><a href="#XTAG_CODE" title="XTAG_CODE :: "><span class="description">XTAG_CODE</span><pre>XTAG_CODE</pre></a></li>
+<li class="constant  "><a href="#XTAG_DESCRIPTION" title="XTAG_DESCRIPTION :: "><span class="description">XTAG_DESCRIPTION</span><pre>XTAG_DESCRIPTION</pre></a></li>
+<li class="constant  "><a href="#XTAG_DISPLAY_NAME" title="XTAG_DISPLAY_NAME :: "><span class="description">XTAG_DISPLAY_NAME</span><pre>XTAG_DISPLAY_NAME</pre></a></li>
+<li class="constant  "><a href="#XTAG_ENDPOINT" title="XTAG_ENDPOINT :: "><span class="description">XTAG_ENDPOINT</span><pre>XTAG_ENDPOINT</pre></a></li>
+<li class="constant  "><a href="#XTAG_ENDPOINTS" title="XTAG_ENDPOINTS :: "><span class="description">XTAG_ENDPOINTS</span><pre>XTAG_ENDPOINTS</pre></a></li>
+<li class="constant  "><a href="#XTAG_ERROR" title="XTAG_ERROR :: "><span class="description">XTAG_ERROR</span><pre>XTAG_ERROR</pre></a></li>
+<li class="constant  "><a href="#XTAG_HOSTED_SERVICES" title="XTAG_HOSTED_SERVICES :: "><span class="description">XTAG_HOSTED_SERVICES</span><pre>XTAG_HOSTED_SERVICES</pre></a></li>
+<li class="constant  "><a href="#XTAG_HTTP_STATUS_CODE" title="XTAG_HTTP_STATUS_CODE :: "><span class="description">XTAG_HTTP_STATUS_CODE</span><pre>XTAG_HTTP_STATUS_CODE</pre></a></li>
+<li class="constant  "><a href="#XTAG_ID" title="XTAG_ID :: "><span class="description">XTAG_ID</span><pre>XTAG_ID</pre></a></li>
+<li class="constant  "><a href="#XTAG_KEY_TYPE" title="XTAG_KEY_TYPE :: "><span class="description">XTAG_KEY_TYPE</span><pre>XTAG_KEY_TYPE</pre></a></li>
+<li class="constant  "><a href="#XTAG_LABEL" title="XTAG_LABEL :: "><span class="description">XTAG_LABEL</span><pre>XTAG_LABEL</pre></a></li>
+<li class="constant  "><a href="#XTAG_LOCATION" title="XTAG_LOCATION :: "><span class="description">XTAG_LOCATION</span><pre>XTAG_LOCATION</pre></a></li>
+<li class="constant  "><a href="#XTAG_MESSAGE" title="XTAG_MESSAGE :: "><span class="description">XTAG_MESSAGE</span><pre>XTAG_MESSAGE</pre></a></li>
+<li class="constant  "><a href="#XTAG_NAME" title="XTAG_NAME :: "><span class="description">XTAG_NAME</span><pre>XTAG_NAME</pre></a></li>
+<li class="constant  "><a href="#XTAG_NAMESPACE" title="XTAG_NAMESPACE :: "><span class="description">XTAG_NAMESPACE</span><pre>XTAG_NAMESPACE</pre></a></li>
+<li class="constant  "><a href="#XTAG_PRIMARY" title="XTAG_PRIMARY :: "><span class="description">XTAG_PRIMARY</span><pre>XTAG_PRIMARY</pre></a></li>
+<li class="constant  "><a href="#XTAG_SECONDARY" title="XTAG_SECONDARY :: "><span class="description">XTAG_SECONDARY</span><pre>XTAG_SECONDARY</pre></a></li>
+<li class="constant  "><a href="#XTAG_SERVICE_NAME" title="XTAG_SERVICE_NAME :: "><span class="description">XTAG_SERVICE_NAME</span><pre>XTAG_SERVICE_NAME</pre></a></li>
+<li class="constant  "><a href="#XTAG_STATUS" title="XTAG_STATUS :: "><span class="description">XTAG_STATUS</span><pre>XTAG_STATUS</pre></a></li>
+<li class="constant  "><a href="#XTAG_STORAGE_SERVICE" title="XTAG_STORAGE_SERVICE :: "><span class="description">XTAG_STORAGE_SERVICE</span><pre>XTAG_STORAGE_SERVICE</pre></a></li>
+<li class="constant  "><a href="#XTAG_STORAGE_SERVICES" title="XTAG_STORAGE_SERVICES :: "><span class="description">XTAG_STORAGE_SERVICES</span><pre>XTAG_STORAGE_SERVICES</pre></a></li>
+<li class="constant  "><a href="#XTAG_STORAGE_SERVICE_KEYS" title="XTAG_STORAGE_SERVICE_KEYS :: "><span class="description">XTAG_STORAGE_SERVICE_KEYS</span><pre>XTAG_STORAGE_SERVICE_KEYS</pre></a></li>
+<li class="constant  "><a href="#XTAG_STORAGE_SERVICE_PROPERTIES" title="XTAG_STORAGE_SERVICE_PROPERTIES :: "><span class="description">XTAG_STORAGE_SERVICE_PROPERTIES</span><pre>XTAG_STORAGE_SERVICE_PROPERTIES</pre></a></li>
+<li class="constant  "><a href="#XTAG_URL" title="XTAG_URL :: "><span class="description">XTAG_URL</span><pre>XTAG_URL</pre></a></li>
+<li class="constant  "><a href="#X_MS_APPROXIMATE_MESSAGES_COUNT" title="X_MS_APPROXIMATE_MESSAGES_COUNT :: "><span class="description">X_MS_APPROXIMATE_MESSAGES_COUNT</span><pre>X_MS_APPROXIMATE_MESSAGES_COUNT</pre></a></li>
+<li class="constant  "><a href="#X_MS_BLOB_CACHE_CONTROL" title="X_MS_BLOB_CACHE_CONTROL :: "><span class="description">X_MS_BLOB_CACHE_CONTROL</span><pre>X_MS_BLOB_CACHE_CONTROL</pre></a></li>
+<li class="constant  "><a href="#X_MS_BLOB_CONTENT_ENCODING" title="X_MS_BLOB_CONTENT_ENCODING :: "><span class="description">X_MS_BLOB_CONTENT_ENCODING</span><pre>X_MS_BLOB_CONTENT_ENCODING</pre></a></li>
+<li class="constant  "><a href="#X_MS_BLOB_CONTENT_LANGUAGE" title="X_MS_BLOB_CONTENT_LANGUAGE :: "><span class="description">X_MS_BLOB_CONTENT_LANGUAGE</span><pre>X_MS_BLOB_CONTENT_LANGUAGE</pre></a></li>
+<li class="constant  "><a href="#X_MS_BLOB_CONTENT_LENGTH" title="X_MS_BLOB_CONTENT_LENGTH :: "><span class="description">X_MS_BLOB_CONTENT_LENGTH</span><pre>X_MS_BLOB_CONTENT_LENGTH</pre></a></li>
+<li class="constant  "><a href="#X_MS_BLOB_CONTENT_MD5" title="X_MS_BLOB_CONTENT_MD5 :: "><span class="description">X_MS_BLOB_CONTENT_MD5</span><pre>X_MS_BLOB_CONTENT_MD5</pre></a></li>
+<li class="constant  "><a href="#X_MS_BLOB_CONTENT_TYPE" title="X_MS_BLOB_CONTENT_TYPE :: "><span class="description">X_MS_BLOB_CONTENT_TYPE</span><pre>X_MS_BLOB_CONTENT_TYPE</pre></a></li>
+<li class="constant  "><a href="#X_MS_BLOB_PUBLIC_ACCESS" title="X_MS_BLOB_PUBLIC_ACCESS :: "><span class="description">X_MS_BLOB_PUBLIC_ACCESS</span><pre>X_MS_BLOB_PUBLIC_ACCESS</pre></a></li>
+<li class="constant  "><a href="#X_MS_BLOB_SEQUENCE_NUMBER" title="X_MS_BLOB_SEQUENCE_NUMBER :: "><span class="description">X_MS_BLOB_SEQUENCE_NUMBER</span><pre>X_MS_BLOB_SEQUENCE_NUMBER</pre></a></li>
+<li class="constant  "><a href="#X_MS_BLOB_SEQUENCE_NUMBER_ACTION" title="X_MS_BLOB_SEQUENCE_NUMBER_ACTION :: "><span class="description">X_MS_BLOB_SEQUENCE_NUMBER_ACTION</span><pre>X_MS_BLOB_SEQUENCE_NUMBER_ACTION</pre></a></li>
+<li class="constant  "><a href="#X_MS_BLOB_TYPE" title="X_MS_BLOB_TYPE :: "><span class="description">X_MS_BLOB_TYPE</span><pre>X_MS_BLOB_TYPE</pre></a></li>
+<li class="constant  "><a href="#X_MS_CONTINUATION_NEXTPARTITIONKEY" title="X_MS_CONTINUATION_NEXTPARTITIONKEY :: "><span class="description">X_MS_CONTINUATION_NEXTPARTITIONKEY</span><pre>X_MS_CONTINUATION_NEXTPARTITIONKEY</pre></a></li>
+<li class="constant  "><a href="#X_MS_CONTINUATION_NEXTROWKEY" title="X_MS_CONTINUATION_NEXTROWKEY :: "><span class="description">X_MS_CONTINUATION_NEXTROWKEY</span><pre>X_MS_CONTINUATION_NEXTROWKEY</pre></a></li>
+<li class="constant  "><a href="#X_MS_CONTINUATION_NEXTTABLENAME" title="X_MS_CONTINUATION_NEXTTABLENAME :: "><span class="description">X_MS_CONTINUATION_NEXTTABLENAME</span><pre>X_MS_CONTINUATION_NEXTTABLENAME</pre></a></li>
+<li class="constant  "><a href="#X_MS_COPY_SOURCE" title="X_MS_COPY_SOURCE :: "><span class="description">X_MS_COPY_SOURCE</span><pre>X_MS_COPY_SOURCE</pre></a></li>
+<li class="constant  "><a href="#X_MS_DATE" title="X_MS_DATE :: "><span class="description">X_MS_DATE</span><pre>X_MS_DATE</pre></a></li>
+<li class="constant  "><a href="#X_MS_DELETE_SNAPSHOTS" title="X_MS_DELETE_SNAPSHOTS :: "><span class="description">X_MS_DELETE_SNAPSHOTS</span><pre>X_MS_DELETE_SNAPSHOTS</pre></a></li>
+<li class="constant  "><a href="#X_MS_HEADER_PREFIX" title="X_MS_HEADER_PREFIX :: "><span class="description">X_MS_HEADER_PREFIX</span><pre>X_MS_HEADER_PREFIX</pre></a></li>
+<li class="constant  "><a href="#X_MS_LEASE_ACTION" title="X_MS_LEASE_ACTION :: "><span class="description">X_MS_LEASE_ACTION</span><pre>X_MS_LEASE_ACTION</pre></a></li>
+<li class="constant  "><a href="#X_MS_LEASE_ID" title="X_MS_LEASE_ID :: "><span class="description">X_MS_LEASE_ID</span><pre>X_MS_LEASE_ID</pre></a></li>
+<li class="constant  "><a href="#X_MS_LEASE_STATUS" title="X_MS_LEASE_STATUS :: "><span class="description">X_MS_LEASE_STATUS</span><pre>X_MS_LEASE_STATUS</pre></a></li>
+<li class="constant  "><a href="#X_MS_META_HEADER_PREFIX" title="X_MS_META_HEADER_PREFIX :: "><span class="description">X_MS_META_HEADER_PREFIX</span><pre>X_MS_META_HEADER_PREFIX</pre></a></li>
+<li class="constant  "><a href="#X_MS_PAGE_WRITE" title="X_MS_PAGE_WRITE :: "><span class="description">X_MS_PAGE_WRITE</span><pre>X_MS_PAGE_WRITE</pre></a></li>
+<li class="constant  "><a href="#X_MS_POPRECEIPT" title="X_MS_POPRECEIPT :: "><span class="description">X_MS_POPRECEIPT</span><pre>X_MS_POPRECEIPT</pre></a></li>
+<li class="constant  "><a href="#X_MS_RANGE" title="X_MS_RANGE :: "><span class="description">X_MS_RANGE</span><pre>X_MS_RANGE</pre></a></li>
+<li class="constant  "><a href="#X_MS_RANGE_GET_CONTENT_MD5" title="X_MS_RANGE_GET_CONTENT_MD5 :: "><span class="description">X_MS_RANGE_GET_CONTENT_MD5</span><pre>X_MS_RANGE_GET_CONTENT_MD5</pre></a></li>
+<li class="constant  "><a href="#X_MS_REQUEST_ID" title="X_MS_REQUEST_ID :: "><span class="description">X_MS_REQUEST_ID</span><pre>X_MS_REQUEST_ID</pre></a></li>
+<li class="constant  "><a href="#X_MS_SNAPSHOT" title="X_MS_SNAPSHOT :: "><span class="description">X_MS_SNAPSHOT</span><pre>X_MS_SNAPSHOT</pre></a></li>
+<li class="constant  "><a href="#X_MS_SOURCE_IF_MATCH" title="X_MS_SOURCE_IF_MATCH :: "><span class="description">X_MS_SOURCE_IF_MATCH</span><pre>X_MS_SOURCE_IF_MATCH</pre></a></li>
+<li class="constant  "><a href="#X_MS_SOURCE_IF_MODIFIED_SINCE" title="X_MS_SOURCE_IF_MODIFIED_SINCE :: "><span class="description">X_MS_SOURCE_IF_MODIFIED_SINCE</span><pre>X_MS_SOURCE_IF_MODIFIED_SINCE</pre></a></li>
+<li class="constant  "><a href="#X_MS_SOURCE_IF_NONE_MATCH" title="X_MS_SOURCE_IF_NONE_MATCH :: "><span class="description">X_MS_SOURCE_IF_NONE_MATCH</span><pre>X_MS_SOURCE_IF_NONE_MATCH</pre></a></li>
+<li class="constant  "><a href="#X_MS_SOURCE_IF_UNMODIFIED_SINCE" title="X_MS_SOURCE_IF_UNMODIFIED_SINCE :: "><span class="description">X_MS_SOURCE_IF_UNMODIFIED_SINCE</span><pre>X_MS_SOURCE_IF_UNMODIFIED_SINCE</pre></a></li>
+<li class="constant  "><a href="#X_MS_SOURCE_LEASE_ID" title="X_MS_SOURCE_LEASE_ID :: "><span class="description">X_MS_SOURCE_LEASE_ID</span><pre>X_MS_SOURCE_LEASE_ID</pre></a></li>
+<li class="constant  "><a href="#X_MS_TIME_NEXT_VISIBLE" title="X_MS_TIME_NEXT_VISIBLE :: "><span class="description">X_MS_TIME_NEXT_VISIBLE</span><pre>X_MS_TIME_NEXT_VISIBLE</pre></a></li>
+<li class="constant  "><a href="#X_MS_VERSION" title="X_MS_VERSION :: "><span class="description">X_MS_VERSION</span><pre>X_MS_VERSION</pre></a></li>
+</ul>
+</div>
+<div class="span8">
+<a name="%5CWindowsAzure%5CCommon%5CInternal%5CResources" id="\WindowsAzure\Common\Internal\Resources"></a><ul class="breadcrumb">
+<li>
+<a href="../index.html"><i class="icon-custom icon-class"></i></a><span class="divider">\</span>
+</li>
+<li><a href="../namespaces/WindowsAzure.html">WindowsAzure</a></li>
+<span class="divider">\</span><li><a href="../namespaces/WindowsAzure.Common.html">Common</a></li>
+<span class="divider">\</span><li><a href="../namespaces/WindowsAzure.Common.Internal.html">Internal</a></li>
+<li class="active">
+<span class="divider">\</span><a href="../classes/WindowsAzure.Common.Internal.Resources.html">Resources</a>
+</li>
+</ul>
+<div href="../classes/WindowsAzure.Common.Internal.Resources.html" class="element class">
+<p class="short_description">Project resources.</p>
+<div class="details">
+<p class="long_description"></p>
+<table class="table table-bordered">
+<tr>
+<th>category</th>
+<td>Microsoft</td>
+</tr>
+<tr>
+<th>package</th>
+<td><a href="../packages/WindowsAzure.Common.Internal.html">WindowsAzure\Common\Internal</a></td>
+</tr>
+<tr>
+<th>author</th>
+<td><a href="mailto:azurephpsdk@microsoft.com">Azure PHP SDK</a></td>
+</tr>
+<tr>
+<th>copyright</th>
+<td>2012 Microsoft Corporation</td>
+</tr>
+<tr>
+<th>license</th>
+<td><a href="http://www.apache.org/licenses/LICENSE-2.0">Apache License 2.0</a></td>
+</tr>
+<tr>
+<th>version</th>
+<td>Release: @package_version@</td>
+</tr>
+<tr>
+<th>link</th>
+<td><a href="https://github.com/windowsazure/azure-sdk-for-php">https://github.com/windowsazure/azure-sdk-for-php</a></td>
+</tr>
+</table>
+<h3>
+<i class="icon-custom icon-constant"></i> Constants</h3>
+<a name="ACCEPT_CHARSET" id="ACCEPT_CHARSET"> </a><div class="element clickable constant  ACCEPT_CHARSET" data-toggle="collapse" data-target=".ACCEPT_CHARSET .collapse">
+<h2>ACCEPT_CHARSET</h2>
+<pre>ACCEPT_CHARSET </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><p class="long_description"></p></div></div>
+</div>
+<a name="ACCEPT_CHARSET_VALUE" id="ACCEPT_CHARSET_VALUE"> </a><div class="element clickable constant  ACCEPT_CHARSET_VALUE" data-toggle="collapse" data-target=".ACCEPT_CHARSET_VALUE .collapse">
+<h2>ACCEPT_CHARSET_VALUE</h2>
+<pre>ACCEPT_CHARSET_VALUE </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><p class="long_description"></p></div></div>
+</div>
+<a name="ACCEPT_HEADER" id="ACCEPT_HEADER"> </a><div class="element clickable constant  ACCEPT_HEADER" data-toggle="collapse" data-target=".ACCEPT_HEADER .collapse">
+<h2>ACCEPT_HEADER</h2>
+<pre>ACCEPT_HEADER </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><p class="long_description"></p></div></div>
+</div>
+<a name="ACCEPT_HEADER_VALUE" id="ACCEPT_HEADER_VALUE"> </a><div class="element clickable constant  ACCEPT_HEADER_VALUE" data-toggle="collapse" data-target=".ACCEPT_HEADER_VALUE .collapse">
+<h2>ACCEPT_HEADER_VALUE</h2>
+<pre>ACCEPT_HEADER_VALUE </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><p class="long_description"></p></div></div>
+</div>
+<a name="ACCOUNT_KEY_NAME" id="ACCOUNT_KEY_NAME"> </a><div class="element clickable constant  ACCOUNT_KEY_NAME" data-toggle="collapse" data-target=".ACCOUNT_KEY_NAME .collapse">
+<h2>ACCOUNT_KEY_NAME</h2>
+<pre>ACCOUNT_KEY_NAME </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><p class="long_description"></p></div></div>
+</div>
+<a name="ACCOUNT_NAME_NAME" id="ACCOUNT_NAME_NAME"> </a><div class="element clickable constant  ACCOUNT_NAME_NAME" data-toggle="collapse" data-target=".ACCOUNT_NAME_NAME .collapse">
+<h2>ACCOUNT_NAME_NAME</h2>
+<pre>ACCOUNT_NAME_NAME </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><p class="long_description"></p></div></div>
+</div>
+<a name="ASTERISK" id="ASTERISK"> </a><div class="element clickable constant  ASTERISK" data-toggle="collapse" data-target=".ASTERISK .collapse">
+<h2>ASTERISK</h2>
+<pre>ASTERISK </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><p class="long_description"></p></div></div>
+</div>
+<a name="ATOM_ENTRY_CONTENT_TYPE" id="ATOM_ENTRY_CONTENT_TYPE"> </a><div class="element clickable constant  ATOM_ENTRY_CONTENT_TYPE" data-toggle="collapse" data-target=".ATOM_ENTRY_CONTENT_TYPE .collapse">
+<h2>ATOM_ENTRY_CONTENT_TYPE</h2>
+<pre>ATOM_ENTRY_CONTENT_TYPE </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><p class="long_description"></p></div></div>
+</div>
+<a name="ATOM_NAMESPACE" id="ATOM_NAMESPACE"> </a><div class="element clickable constant  ATOM_NAMESPACE" data-toggle="collapse" data-target=".ATOM_NAMESPACE .collapse">
+<h2>ATOM_NAMESPACE</h2>
+<pre>ATOM_NAMESPACE </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><p class="long_description"></p></div></div>
+</div>
+<a name="ATOM_XML_NAMESPACE" id="ATOM_XML_NAMESPACE"> </a><div class="element clickable constant  ATOM_XML_NAMESPACE" data-toggle="collapse" data-target=".ATOM_XML_NAMESPACE .collapse">
+<h2>ATOM_XML_NAMESPACE</h2>
+<pre>ATOM_XML_NAMESPACE </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><p class="long_description"></p></div></div>
+</div>
+<a name="AUTHENTICATION" id="AUTHENTICATION"> </a><div class="element clickable constant  AUTHENTICATION" data-toggle="collapse" data-target=".AUTHENTICATION .collapse">
+<h2>AUTHENTICATION</h2>
+<pre>AUTHENTICATION </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><p class="long_description"></p></div></div>
+</div>
+<a name="AUTHOR" id="AUTHOR"> </a><div class="element clickable constant  AUTHOR" data-toggle="collapse" data-target=".AUTHOR .collapse">
+<h2>AUTHOR</h2>
+<pre>AUTHOR </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><p class="long_description"></p></div></div>
+</div>
+<a name="AZURE_DATE_FORMAT" id="AZURE_DATE_FORMAT"> </a><div class="element clickable constant  AZURE_DATE_FORMAT" data-toggle="collapse" data-target=".AZURE_DATE_FORMAT .collapse">
+<h2>AZURE_DATE_FORMAT</h2>
+<pre>AZURE_DATE_FORMAT </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><p class="long_description"></p></div></div>
+</div>
+<a name="AZURE_ERROR_MSG" id="AZURE_ERROR_MSG"> </a><div class="element clickable constant  AZURE_ERROR_MSG" data-toggle="collapse" data-target=".AZURE_ERROR_MSG .collapse">
+<h2>AZURE_ERROR_MSG</h2>
+<pre>AZURE_ERROR_MSG </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><p class="long_description"></p></div></div>
+</div>
+<a name="BATCH_ENTITY_DEL_MSG" id="BATCH_ENTITY_DEL_MSG"> </a><div class="element clickable constant  BATCH_ENTITY_DEL_MSG" data-toggle="collapse" data-target=".BATCH_ENTITY_DEL_MSG .collapse">
+<h2>BATCH_ENTITY_DEL_MSG</h2>
+<pre>BATCH_ENTITY_DEL_MSG </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><p class="long_description"></p></div></div>
+</div>
+<a name="BINARY_FILE_TYPE" id="BINARY_FILE_TYPE"> </a><div class="element clickable constant  BINARY_FILE_TYPE" data-toggle="collapse" data-target=".BINARY_FILE_TYPE .collapse">
+<h2>BINARY_FILE_TYPE</h2>
+<pre>BINARY_FILE_TYPE </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><p class="long_description"></p></div></div>
+</div>
+<a name="BLOB_BASE_DNS_NAME" id="BLOB_BASE_DNS_NAME"> </a><div class="element clickable constant  BLOB_BASE_DNS_NAME" data-toggle="collapse" data-target=".BLOB_BASE_DNS_NAME .collapse">
+<h2>BLOB_BASE_DNS_NAME</h2>
+<pre>BLOB_BASE_DNS_NAME </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><p class="long_description"></p></div></div>
+</div>
+<a name="BLOB_ENDPOINT_NAME" id="BLOB_ENDPOINT_NAME"> </a><div class="element clickable constant  BLOB_ENDPOINT_NAME" data-toggle="collapse" data-target=".BLOB_ENDPOINT_NAME .collapse">
+<h2>BLOB_ENDPOINT_NAME</h2>
+<pre>BLOB_ENDPOINT_NAME </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><p class="long_description"></p></div></div>
+</div>
+<a name="BLOB_TYPE_NAME" id="BLOB_TYPE_NAME"> </a><div class="element clickable constant  BLOB_TYPE_NAME" data-toggle="collapse" data-target=".BLOB_TYPE_NAME .collapse">
+<h2>BLOB_TYPE_NAME</h2>
+<pre>BLOB_TYPE_NAME </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><p class="long_description"></p></div></div>
+</div>
+<a name="BROKER_PROPERTIES" id="BROKER_PROPERTIES"> </a><div class="element clickable constant  BROKER_PROPERTIES" data-toggle="collapse" data-target=".BROKER_PROPERTIES .collapse">
+<h2>BROKER_PROPERTIES</h2>
+<pre>BROKER_PROPERTIES </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><p class="long_description"></p></div></div>
+</div>
+<a name="CACHE_CONTROL" id="CACHE_CONTROL"> </a><div class="element clickable constant  CACHE_CONTROL" data-toggle="collapse" data-target=".CACHE_CONTROL .collapse">
+<h2>CACHE_CONTROL</h2>
+<pre>CACHE_CONTROL </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><p class="long_description"></p></div></div>
+</div>
+<a name="CATEGORY" id="CATEGORY"> </a><div class="element clickable constant  CATEGORY" data-toggle="collapse" data-target=".CATEGORY .collapse">
+<h2>CATEGORY</h2>
+<pre>CATEGORY </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><p class="long_description"></p></div></div>
+</div>
+<a name="CERTIFICATE_PATH_NAME" id="CERTIFICATE_PATH_NAME"> </a><div class="element clickable constant  CERTIFICATE_PATH_NAME" data-toggle="collapse" data-target=".CERTIFICATE_PATH_NAME .collapse">
+<h2>CERTIFICATE_PATH_NAME</h2>
+<pre>CERTIFICATE_PATH_NAME </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><p class="long_description"></p></div></div>
+</div>
+<a name="CONNECT_TIMEOUT" id="CONNECT_TIMEOUT"> </a><div class="element clickable constant  CONNECT_TIMEOUT" data-toggle="collapse" data-target=".CONNECT_TIMEOUT .collapse">
+<h2>CONNECT_TIMEOUT</h2>
+<pre>CONNECT_TIMEOUT </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><p class="long_description"></p></div></div>
+</div>
+<a name="CONTENT_ENCODING" id="CONTENT_ENCODING"> </a><div class="element clickable constant  CONTENT_ENCODING" data-toggle="collapse" data-target=".CONTENT_ENCODING .collapse">
+<h2>CONTENT_ENCODING</h2>
+<pre>CONTENT_ENCODING </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><p class="long_description"></p></div></div>
+</div>
+<a name="CONTENT_ID" id="CONTENT_ID"> </a><div class="element clickable constant  CONTENT_ID" data-toggle="collapse" data-target=".CONTENT_ID .collapse">
+<h2>CONTENT_ID</h2>
+<pre>CONTENT_ID </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><p class="long_description"></p></div></div>
+</div>
+<a name="CONTENT_LANGUAGE" id="CONTENT_LANGUAGE"> </a><div class="element clickable constant  CONTENT_LANGUAGE" data-toggle="collapse" data-target=".CONTENT_LANGUAGE .collapse">
+<h2>CONTENT_LANGUAGE</h2>
+<pre>CONTENT_LANGUAGE </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><p class="long_description"></p></div></div>
+</div>
+<a name="CONTENT_LENGTH" id="CONTENT_LENGTH"> </a><div class="element clickable constant  CONTENT_LENGTH" data-toggle="collapse" data-target=".CONTENT_LENGTH .collapse">
+<h2>CONTENT_LENGTH</h2>
+<pre>CONTENT_LENGTH </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><p class="long_description"></p></div></div>
+</div>
+<a name="CONTENT_MD5" id="CONTENT_MD5"> </a><div class="element clickable constant  CONTENT_MD5" data-toggle="collapse" data-target=".CONTENT_MD5 .collapse">
+<h2>CONTENT_MD5</h2>
+<pre>CONTENT_MD5 </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><p class="long_description"></p></div></div>
+</div>
+<a name="CONTENT_RANGE" id="CONTENT_RANGE"> </a><div class="element clickable constant  CONTENT_RANGE" data-toggle="collapse" data-target=".CONTENT_RANGE .collapse">
+<h2>CONTENT_RANGE</h2>
+<pre>CONTENT_RANGE </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><p class="long_description"></p></div></div>
+</div>
+<a name="CONTENT_TYPE" id="CONTENT_TYPE"> </a><div class="element clickable constant  CONTENT_TYPE" data-toggle="collapse" data-target=".CONTENT_TYPE .collapse">
+<h2>CONTENT_TYPE</h2>
+<pre>CONTENT_TYPE </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><p class="long_description"></p></div></div>
+</div>
+<a name="CONTRIBUTOR" id="CONTRIBUTOR"> </a><div class="element clickable constant  CONTRIBUTOR" data-toggle="collapse" data-target=".CONTRIBUTOR .collapse">
+<h2>CONTRIBUTOR</h2>
+<pre>CONTRIBUTOR </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><p class="long_description"></p></div></div>
+</div>
+<a name="DATA_SERVICE_VERSION" id="DATA_SERVICE_VERSION"> </a><div class="element clickable constant  DATA_SERVICE_VERSION" data-toggle="collapse" data-target=".DATA_SERVICE_VERSION .collapse">
+<h2>DATA_SERVICE_VERSION</h2>
+<pre>DATA_SERVICE_VERSION </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><p class="long_description"></p></div></div>
+</div>
+<a name="DATA_SERVICE_VERSION_VALUE" id="DATA_SERVICE_VERSION_VALUE"> </a><div class="element clickable constant  DATA_SERVICE_VERSION_VALUE" data-toggle="collapse" data-target=".DATA_SERVICE_VERSION_VALUE .collapse">
+<h2>DATA_SERVICE_VERSION_VALUE</h2>
+<pre>DATA_SERVICE_VERSION_VALUE </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><p class="long_description"></p></div></div>
+</div>
+<a name="DATE" id="DATE"> </a><div class="element clickable constant  DATE" data-toggle="collapse" data-target=".DATE .collapse">
+<h2>DATE</h2>
+<pre>DATE </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><p class="long_description"></p></div></div>
+</div>
+<a name="DEFAULT_ENDPOINTS_PROTOCOL_NAME" id="DEFAULT_ENDPOINTS_PROTOCOL_NAME"> </a><div class="element clickable constant  DEFAULT_ENDPOINTS_PROTOCOL_NAME" data-toggle="collapse" data-target=".DEFAULT_ENDPOINTS_PROTOCOL_NAME .collapse">
+<h2>DEFAULT_ENDPOINTS_PROTOCOL_NAME</h2>
+<pre>DEFAULT_ENDPOINTS_PROTOCOL_NAME </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><p class="long_description"></p></div></div>
+</div>
+<a name="DEFAULT_RULE_NAME" id="DEFAULT_RULE_NAME"> </a><div class="element clickable constant  DEFAULT_RULE_NAME" data-toggle="collapse" data-target=".DEFAULT_RULE_NAME .collapse">
+<h2>DEFAULT_RULE_NAME</h2>
+<pre>DEFAULT_RULE_NAME </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><p class="long_description"></p></div></div>
+</div>
+<a name="DEVELOPMENT_STORAGE_PROXY_URI_NAME" id="DEVELOPMENT_STORAGE_PROXY_URI_NAME"> </a><div class="element clickable constant  DEVELOPMENT_STORAGE_PROXY_URI_NAME" data-toggle="collapse" data-target=".DEVELOPMENT_STORAGE_PROXY_URI_NAME .collapse">
+<h2>DEVELOPMENT_STORAGE_PROXY_URI_NAME</h2>
+<pre>DEVELOPMENT_STORAGE_PROXY_URI_NAME </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><p class="long_description"></p></div></div>
+</div>
+<a name="DEV_STORE_CONNECTION_STRING" id="DEV_STORE_CONNECTION_STRING"> </a><div class="element clickable constant  DEV_STORE_CONNECTION_STRING" data-toggle="collapse" data-target=".DEV_STORE_CONNECTION_STRING .collapse">
+<h2>DEV_STORE_CONNECTION_STRING</h2>
+<pre>DEV_STORE_CONNECTION_STRING </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><p class="long_description"></p></div></div>
+</div>
+<a name="DEV_STORE_KEY" id="DEV_STORE_KEY"> </a><div class="element clickable constant  DEV_STORE_KEY" data-toggle="collapse" data-target=".DEV_STORE_KEY .collapse">
+<h2>DEV_STORE_KEY</h2>
+<pre>DEV_STORE_KEY </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><p class="long_description"></p></div></div>
+</div>
+<a name="DEV_STORE_NAME" id="DEV_STORE_NAME"> </a><div class="element clickable constant  DEV_STORE_NAME" data-toggle="collapse" data-target=".DEV_STORE_NAME .collapse">
+<h2>DEV_STORE_NAME</h2>
+<pre>DEV_STORE_NAME </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><p class="long_description"></p></div></div>
+</div>
+<a name="DEV_STORE_URI" id="DEV_STORE_URI"> </a><div class="element clickable constant  DEV_STORE_URI" data-toggle="collapse" data-target=".DEV_STORE_URI .collapse">
+<h2>DEV_STORE_URI</h2>
+<pre>DEV_STORE_URI </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><p class="long_description"></p></div></div>
+</div>
+<a name="DSM_XML_NAMESPACE" id="DSM_XML_NAMESPACE"> </a><div class="element clickable constant  DSM_XML_NAMESPACE" data-toggle="collapse" data-target=".DSM_XML_NAMESPACE .collapse">
+<h2>DSM_XML_NAMESPACE</h2>
+<pre>DSM_XML_NAMESPACE </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><p class="long_description"></p></div></div>
+</div>
+<a name="DS_XML_NAMESPACE" id="DS_XML_NAMESPACE"> </a><div class="element clickable constant  DS_XML_NAMESPACE" data-toggle="collapse" data-target=".DS_XML_NAMESPACE .collapse">
+<h2>DS_XML_NAMESPACE</h2>
+<pre>DS_XML_NAMESPACE </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><p class="long_description"></p></div></div>
+</div>
+<a name="EMPTY_STRING" id="EMPTY_STRING"> </a><div class="element clickable constant  EMPTY_STRING" data-toggle="collapse" data-target=".EMPTY_STRING .collapse">
+<h2>EMPTY_STRING</h2>
+<pre>EMPTY_STRING </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><p class="long_description"></p></div></div>
+</div>
+<a name="EMULATED" id="EMULATED"> </a><div class="element clickable constant  EMULATED" data-toggle="collapse" data-target=".EMULATED .collapse">
+<h2>EMULATED</h2>
+<pre>EMULATED </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><p class="long_description"></p></div></div>
+</div>
+<a name="EMULATOR_BLOB_URI" id="EMULATOR_BLOB_URI"> </a><div class="element clickable constant  EMULATOR_BLOB_URI" data-toggle="collapse" data-target=".EMULATOR_BLOB_URI .collapse">
+<h2>EMULATOR_BLOB_URI</h2>
+<pre>EMULATOR_BLOB_URI </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><p class="long_description"></p></div></div>
+</div>
+<a name="EMULATOR_QUEUE_URI" id="EMULATOR_QUEUE_URI"> </a><div class="element clickable constant  EMULATOR_QUEUE_URI" data-toggle="collapse" data-target=".EMULATOR_QUEUE_URI .collapse">
+<h2>EMULATOR_QUEUE_URI</h2>
+<pre>EMULATOR_QUEUE_URI </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><p class="long_description"></p></div></div>
+</div>
+<a name="EMULATOR_TABLE_URI" id="EMULATOR_TABLE_URI"> </a><div class="element clickable constant  EMULATOR_TABLE_URI" data-toggle="collapse" data-target=".EMULATOR_TABLE_URI .collapse">
+<h2>EMULATOR_TABLE_URI</h2>
+<pre>EMULATOR_TABLE_URI </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><p class="long_description"></p></div></div>
+</div>
+<a name="ENTRY" id="ENTRY"> </a><div class="element clickable constant  ENTRY" data-toggle="collapse" data-target=".ENTRY .collapse">
+<h2>ENTRY</h2>
+<pre>ENTRY </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><p class="long_description"></p></div></div>
+</div>
+<a name="ERROR_CONNECTION_STRING_EMPTY_KEY" id="ERROR_CONNECTION_STRING_EMPTY_KEY"> </a><div class="element clickable constant  ERROR_CONNECTION_STRING_EMPTY_KEY" data-toggle="collapse" data-target=".ERROR_CONNECTION_STRING_EMPTY_KEY .collapse">
+<h2>ERROR_CONNECTION_STRING_EMPTY_KEY</h2>
+<pre>ERROR_CONNECTION_STRING_EMPTY_KEY </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><p class="long_description"></p></div></div>
+</div>
+<a name="ERROR_CONNECTION_STRING_MISSING_CHARACTER" id="ERROR_CONNECTION_STRING_MISSING_CHARACTER"> </a><div class="element clickable constant  ERROR_CONNECTION_STRING_MISSING_CHARACTER" data-toggle="collapse" data-target=".ERROR_CONNECTION_STRING_MISSING_CHARACTER .collapse">
+<h2>ERROR_CONNECTION_STRING_MISSING_CHARACTER</h2>
+<pre>ERROR_CONNECTION_STRING_MISSING_CHARACTER </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><p class="long_description"></p></div></div>
+</div>
+<a name="ERROR_CONNECTION_STRING_MISSING_KEY" id="ERROR_CONNECTION_STRING_MISSING_KEY"> </a><div class="element clickable constant  ERROR_CONNECTION_STRING_MISSING_KEY" data-toggle="collapse" data-target=".ERROR_CONNECTION_STRING_MISSING_KEY .collapse">
+<h2>ERROR_CONNECTION_STRING_MISSING_KEY</h2>
+<pre>ERROR_CONNECTION_STRING_MISSING_KEY </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><p class="long_description"></p></div></div>
+</div>
+<a name="ERROR_EMPTY_SETTINGS" id="ERROR_EMPTY_SETTINGS"> </a><div class="element clickable constant  ERROR_EMPTY_SETTINGS" data-toggle="collapse" data-target=".ERROR_EMPTY_SETTINGS .collapse">
+<h2>ERROR_EMPTY_SETTINGS</h2>
+<pre>ERROR_EMPTY_SETTINGS </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><p class="long_description"></p></div></div>
+</div>
+<a name="ERROR_PARSING_STRING" id="ERROR_PARSING_STRING"> </a><div class="element clickable constant  ERROR_PARSING_STRING" data-toggle="collapse" data-target=".ERROR_PARSING_STRING .collapse">
+<h2>ERROR_PARSING_STRING</h2>
+<pre>ERROR_PARSING_STRING </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><p class="long_description"></p></div></div>
+</div>
+<a name="ETAG" id="ETAG"> </a><div class="element clickable constant  ETAG" data-toggle="collapse" data-target=".ETAG .collapse">
+<h2>ETAG</h2>
+<pre>ETAG </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><p class="long_description"></p></div></div>
+</div>
+<a name="HTTPS_SCHEME" id="HTTPS_SCHEME"> </a><div class="element clickable constant  HTTPS_SCHEME" data-toggle="collapse" data-target=".HTTPS_SCHEME .collapse">
+<h2>HTTPS_SCHEME</h2>
+<pre>HTTPS_SCHEME </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><p class="long_description"></p></div></div>
+</div>
+<a name="HTTP_DELETE" id="HTTP_DELETE"> </a><div class="element clickable constant  HTTP_DELETE" data-toggle="collapse" data-target=".HTTP_DELETE .collapse">
+<h2>HTTP_DELETE</h2>
+<pre>HTTP_DELETE </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><p class="long_description"></p></div></div>
+</div>
+<a name="HTTP_GET" id="HTTP_GET"> </a><div class="element clickable constant  HTTP_GET" data-toggle="collapse" data-target=".HTTP_GET .collapse">
+<h2>HTTP_GET</h2>
+<pre>HTTP_GET </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><p class="long_description"></p></div></div>
+</div>
+<a name="HTTP_HEAD" id="HTTP_HEAD"> </a><div class="element clickable constant  HTTP_HEAD" data-toggle="collapse" data-target=".HTTP_HEAD .collapse">
+<h2>HTTP_HEAD</h2>
+<pre>HTTP_HEAD </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><p class="long_description"></p></div></div>
+</div>
+<a name="HTTP_MERGE" id="HTTP_MERGE"> </a><div class="element clickable constant  HTTP_MERGE" data-toggle="collapse" data-target=".HTTP_MERGE .collapse">
+<h2>HTTP_MERGE</h2>
+<pre>HTTP_MERGE </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><p class="long_description"></p></div></div>
+</div>
+<a name="HTTP_POST" id="HTTP_POST"> </a><div class="element clickable constant  HTTP_POST" data-toggle="collapse" data-target=".HTTP_POST .collapse">
+<h2>HTTP_POST</h2>
+<pre>HTTP_POST </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><p class="long_description"></p></div></div>
+</div>
+<a name="HTTP_PUT" id="HTTP_PUT"> </a><div class="element clickable constant  HTTP_PUT" data-toggle="collapse" data-target=".HTTP_PUT .collapse">
+<h2>HTTP_PUT</h2>
+<pre>HTTP_PUT </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><p class="long_description"></p></div></div>
+</div>
+<a name="HTTP_SCHEME" id="HTTP_SCHEME"> </a><div class="element clickable constant  HTTP_SCHEME" data-toggle="collapse" data-target=".HTTP_SCHEME .collapse">
+<h2>HTTP_SCHEME</h2>
+<pre>HTTP_SCHEME </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><p class="long_description"></p></div></div>
+</div>
+<a name="HTTP_TYPE" id="HTTP_TYPE"> </a><div class="element clickable constant  HTTP_TYPE" data-toggle="collapse" data-target=".HTTP_TYPE .collapse">
+<h2>HTTP_TYPE</h2>
+<pre>HTTP_TYPE </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><p class="long_description"></p></div></div>
+</div>
+<a name="IF_MATCH" id="IF_MATCH"> </a><div class="element clickable constant  IF_MATCH" data-toggle="collapse" data-target=".IF_MATCH .collapse">
+<h2>IF_MATCH</h2>
+<pre>IF_MATCH </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><p class="long_description"></p></div></div>
+</div>
+<a name="IF_MODIFIED_SINCE" id="IF_MODIFIED_SINCE"> </a><div class="element clickable constant  IF_MODIFIED_SINCE" data-toggle="collapse" data-target=".IF_MODIFIED_SINCE .collapse">
+<h2>IF_MODIFIED_SINCE</h2>
+<pre>IF_MODIFIED_SINCE </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><p class="long_description"></p></div></div>
+</div>
+<a name="IF_NONE_MATCH" id="IF_NONE_MATCH"> </a><div class="element clickable constant  IF_NONE_MATCH" data-toggle="collapse" data-target=".IF_NONE_MATCH .collapse">
+<h2>IF_NONE_MATCH</h2>
+<pre>IF_NONE_MATCH </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><p class="long_description"></p></div></div>
+</div>
+<a name="IF_UNMODIFIED_SINCE" id="IF_UNMODIFIED_SINCE"> </a><div class="element clickable constant  IF_UNMODIFIED_SINCE" data-toggle="collapse" data-target=".IF_UNMODIFIED_SINCE .collapse">
+<h2>IF_UNMODIFIED_SINCE</h2>
+<pre>IF_UNMODIFIED_SINCE </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><p class="long_description"></p></div></div>
+</div>
+<a name="INSTANCE_TYPE_VALIDATION_MSG" id="INSTANCE_TYPE_VALIDATION_MSG"> </a><div class="element clickable constant  INSTANCE_TYPE_VALIDATION_MSG" data-toggle="collapse" data-target=".INSTANCE_TYPE_VALIDATION_MSG .collapse">
+<h2>INSTANCE_TYPE_VALIDATION_MSG</h2>
+<pre>INSTANCE_TYPE_VALIDATION_MSG </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><p class="long_description"></p></div></div>
+</div>
+<a name="INVALID_ACCOUNT_KEY_FORMAT" id="INVALID_ACCOUNT_KEY_FORMAT"> </a><div class="element clickable constant  INVALID_ACCOUNT_KEY_FORMAT" data-toggle="collapse" data-target=".INVALID_ACCOUNT_KEY_FORMAT .collapse">
+<h2>INVALID_ACCOUNT_KEY_FORMAT</h2>
+<pre>INVALID_ACCOUNT_KEY_FORMAT </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><p class="long_description"></p></div></div>
+</div>
+<a name="INVALID_ACH_MSG" id="INVALID_ACH_MSG"> </a><div class="element clickable constant  INVALID_ACH_MSG" data-toggle="collapse" data-target=".INVALID_ACH_MSG .collapse">
+<h2>INVALID_ACH_MSG</h2>
+<pre>INVALID_ACH_MSG </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><p class="long_description"></p></div></div>
+</div>
+<a name="INVALID_BLOB_PAT_MSG" id="INVALID_BLOB_PAT_MSG"> </a><div class="element clickable constant  INVALID_BLOB_PAT_MSG" data-toggle="collapse" data-target=".INVALID_BLOB_PAT_MSG .collapse">
+<h2>INVALID_BLOB_PAT_MSG</h2>
+<pre>INVALID_BLOB_PAT_MSG </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><p class="long_description"></p></div></div>
+</div>
+<a name="INVALID_BO_PN_MSG" id="INVALID_BO_PN_MSG"> </a><div class="element clickable constant  INVALID_BO_PN_MSG" data-toggle="collapse" data-target=".INVALID_BO_PN_MSG .collapse">
+<h2>INVALID_BO_PN_MSG</h2>
+<pre>INVALID_BO_PN_MSG </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><p class="long_description"></p></div></div>
+</div>
+<a name="INVALID_BO_TYPE_MSG" id="INVALID_BO_TYPE_MSG"> </a><div class="element clickable constant  INVALID_BO_TYPE_MSG" data-toggle="collapse" data-target=".INVALID_BO_TYPE_MSG .collapse">
+<h2>INVALID_BO_TYPE_MSG</h2>
+<pre>INVALID_BO_TYPE_MSG </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><p class="long_description"></p></div></div>
+</div>
+<a name="INVALID_BTE_MSG" id="INVALID_BTE_MSG"> </a><div class="element clickable constant  INVALID_BTE_MSG" data-toggle="collapse" data-target=".INVALID_BTE_MSG .collapse">
+<h2>INVALID_BTE_MSG</h2>
+<pre>INVALID_BTE_MSG </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><p class="long_description"></p></div></div>
+</div>
+<a name="INVALID_CERTIFICATE_PATH" id="INVALID_CERTIFICATE_PATH"> </a><div class="element clickable constant  INVALID_CERTIFICATE_PATH" data-toggle="collapse" data-target=".INVALID_CERTIFICATE_PATH .collapse">
+<h2>INVALID_CERTIFICATE_PATH</h2>
+<pre>INVALID_CERTIFICATE_PATH </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><p class="long_description"></p></div></div>
+</div>
+<a name="INVALID_CONFIG_MSG" id="INVALID_CONFIG_MSG"> </a><div class="element clickable constant  INVALID_CONFIG_MSG" data-toggle="collapse" data-target=".INVALID_CONFIG_MSG .collapse">
+<h2>INVALID_CONFIG_MSG</h2>
+<pre>INVALID_CONFIG_MSG </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><p class="long_description"></p></div></div>
+</div>
+<a name="INVALID_CONFIG_URI" id="INVALID_CONFIG_URI"> </a><div class="element clickable constant  INVALID_CONFIG_URI" data-toggle="collapse" data-target=".INVALID_CONFIG_URI .collapse">
+<h2>INVALID_CONFIG_URI</h2>
+<pre>INVALID_CONFIG_URI </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><p class="long_description"></p></div></div>
+</div>
+<a name="INVALID_CONFIG_VALUE" id="INVALID_CONFIG_VALUE"> </a><div class="element clickable constant  INVALID_CONFIG_VALUE" data-toggle="collapse" data-target=".INVALID_CONFIG_VALUE .collapse">
+<h2>INVALID_CONFIG_VALUE</h2>
+<pre>INVALID_CONFIG_VALUE </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><p class="long_description"></p></div></div>
+</div>
+<a name="INVALID_CONNECTION_STRING" id="INVALID_CONNECTION_STRING"> </a><div class="element clickable constant  INVALID_CONNECTION_STRING" data-toggle="collapse" data-target=".INVALID_CONNECTION_STRING .collapse">
+<h2>INVALID_CONNECTION_STRING</h2>
+<pre>INVALID_CONNECTION_STRING </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><p class="long_description"></p></div></div>
+</div>
+<a name="INVALID_CONNECTION_STRING_SETTING_KEY" id="INVALID_CONNECTION_STRING_SETTING_KEY"> </a><div class="element clickable constant  INVALID_CONNECTION_STRING_SETTING_KEY" data-toggle="collapse" data-target=".INVALID_CONNECTION_STRING_SETTING_KEY .collapse">
+<h2>INVALID_CONNECTION_STRING_SETTING_KEY</h2>
+<pre>INVALID_CONNECTION_STRING_SETTING_KEY </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><p class="long_description"></p></div></div>
+</div>
+<a name="INVALID_CSA_OPT_MSG" id="INVALID_CSA_OPT_MSG"> </a><div class="element clickable constant  INVALID_CSA_OPT_MSG" data-toggle="collapse" data-target=".INVALID_CSA_OPT_MSG .collapse">
+<h2>INVALID_CSA_OPT_MSG</h2>
+<pre>INVALID_CSA_OPT_MSG </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><p class="long_description"></p></div></div>
+</div>
+<a name="INVALID_EDM_MSG" id="INVALID_EDM_MSG"> </a><div class="element clickable constant  INVALID_EDM_MSG" data-toggle="collapse" data-target=".INVALID_EDM_MSG .collapse">
+<h2>INVALID_EDM_MSG</h2>
+<pre>INVALID_EDM_MSG </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><p class="long_description"></p></div></div>
+</div>
+<a name="INVALID_ENTITY_MSG" id="INVALID_ENTITY_MSG"> </a><div class="element clickable constant  INVALID_ENTITY_MSG" data-toggle="collapse" data-target=".INVALID_ENTITY_MSG .collapse">
+<h2>INVALID_ENTITY_MSG</h2>
+<pre>INVALID_ENTITY_MSG </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><p class="long_description"></p></div></div>
+</div>
+<a name="INVALID_EXC_OBJ_MSG" id="INVALID_EXC_OBJ_MSG"> </a><div class="element clickable constant  INVALID_EXC_OBJ_MSG" data-toggle="collapse" data-target=".INVALID_EXC_OBJ_MSG .collapse">
+<h2>INVALID_EXC_OBJ_MSG</h2>
+<pre>INVALID_EXC_OBJ_MSG </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><p class="long_description"></p></div></div>
+</div>
+<a name="INVALID_HT_MSG" id="INVALID_HT_MSG"> </a><div class="element clickable constant  INVALID_HT_MSG" data-toggle="collapse" data-target=".INVALID_HT_MSG .collapse">
+<h2>INVALID_HT_MSG</h2>
+<pre>INVALID_HT_MSG </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><p class="long_description"></p></div></div>
+</div>
+<a name="INVALID_META_MSG" id="INVALID_META_MSG"> </a><div class="element clickable constant  INVALID_META_MSG" data-toggle="collapse" data-target=".INVALID_META_MSG .collapse">
+<h2>INVALID_META_MSG</h2>
+<pre>INVALID_META_MSG </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><p class="long_description"></p></div></div>
+</div>
+<a name="INVALID_OC_COUNT_MSG" id="INVALID_OC_COUNT_MSG"> </a><div class="element clickable constant  INVALID_OC_COUNT_MSG" data-toggle="collapse" data-target=".INVALID_OC_COUNT_MSG .collapse">
+<h2>INVALID_OC_COUNT_MSG</h2>
+<pre>INVALID_OC_COUNT_MSG </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><p class="long_description"></p></div></div>
+</div>
+<a name="INVALID_PARAM_MSG" id="INVALID_PARAM_MSG"> </a><div class="element clickable constant  INVALID_PARAM_MSG" data-toggle="collapse" data-target=".INVALID_PARAM_MSG .collapse">
+<h2>INVALID_PARAM_MSG</h2>
+<pre>INVALID_PARAM_MSG </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><p class="long_description"></p></div></div>
+</div>
+<a name="INVALID_PROP_MSG" id="INVALID_PROP_MSG"> </a><div class="element clickable constant  INVALID_PROP_MSG" data-toggle="collapse" data-target=".INVALID_PROP_MSG .collapse">
+<h2>INVALID_PROP_MSG</h2>
+<pre>INVALID_PROP_MSG </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><p class="long_description"></p></div></div>
+</div>
+<a name="INVALID_PROP_VAL_MSG" id="INVALID_PROP_VAL_MSG"> </a><div class="element clickable constant  INVALID_PROP_VAL_MSG" data-toggle="collapse" data-target=".INVALID_PROP_VAL_MSG .collapse">
+<h2>INVALID_PROP_VAL_MSG</h2>
+<pre>INVALID_PROP_VAL_MSG </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><p class="long_description"></p></div></div>
+</div>
+<a name="INVALID_RECEIVE_MODE_MSG" id="INVALID_RECEIVE_MODE_MSG"> </a><div class="element clickable constant  INVALID_RECEIVE_MODE_MSG" data-toggle="collapse" data-target=".INVALID_RECEIVE_MODE_MSG .collapse">
+<h2>INVALID_RECEIVE_MODE_MSG</h2>
+<pre>INVALID_RECEIVE_MODE_MSG </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><p class="long_description"></p></div></div>
+</div>
+<a name="INVALID_SVC_PROP_MSG" id="INVALID_SVC_PROP_MSG"> </a><div class="element clickable constant  INVALID_SVC_PROP_MSG" data-toggle="collapse" data-target=".INVALID_SVC_PROP_MSG .collapse">
+<h2>INVALID_SVC_PROP_MSG</h2>
+<pre>INVALID_SVC_PROP_MSG </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><p class="long_description"></p></div></div>
+</div>
+<a name="INVALID_TYPE_MSG" id="INVALID_TYPE_MSG"> </a><div class="element clickable constant  INVALID_TYPE_MSG" data-toggle="collapse" data-target=".INVALID_TYPE_MSG .collapse">
+<h2>INVALID_TYPE_MSG</h2>
+<pre>INVALID_TYPE_MSG </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><p class="long_description"></p></div></div>
+</div>
+<a name="INVALID_URL_MSG" id="INVALID_URL_MSG"> </a><div class="element clickable constant  INVALID_URL_MSG" data-toggle="collapse" data-target=".INVALID_URL_MSG .collapse">
+<h2>INVALID_URL_MSG</h2>
+<pre>INVALID_URL_MSG </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><p class="long_description"></p></div></div>
+</div>
+<a name="INVALID_USA_OPT_MSG" id="INVALID_USA_OPT_MSG"> </a><div class="element clickable constant  INVALID_USA_OPT_MSG" data-toggle="collapse" data-target=".INVALID_USA_OPT_MSG .collapse">
+<h2>INVALID_USA_OPT_MSG</h2>
+<pre>INVALID_USA_OPT_MSG </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><p class="long_description"></p></div></div>
+</div>
+<a name="INVALID_VERSION_MSG" id="INVALID_VERSION_MSG"> </a><div class="element clickable constant  INVALID_VERSION_MSG" data-toggle="collapse" data-target=".INVALID_VERSION_MSG .collapse">
+<h2>INVALID_VERSION_MSG</h2>
+<pre>INVALID_VERSION_MSG </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><p class="long_description"></p></div></div>
+</div>
+<a name="LAST_MODIFIED" id="LAST_MODIFIED"> </a><div class="element clickable constant  LAST_MODIFIED" data-toggle="collapse" data-target=".LAST_MODIFIED .collapse">
+<h2>LAST_MODIFIED</h2>
+<pre>LAST_MODIFIED </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><p class="long_description"></p></div></div>
+</div>
+<a name="LINK" id="LINK"> </a><div class="element clickable constant  LINK" data-toggle="collapse" data-target=".LINK .collapse">
+<h2>LINK</h2>
+<pre>LINK </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><p class="long_description"></p></div></div>
+</div>
+<a name="LIST_QUEUES_PATH" id="LIST_QUEUES_PATH"> </a><div class="element clickable constant  LIST_QUEUES_PATH" data-toggle="collapse" data-target=".LIST_QUEUES_PATH .collapse">
+<h2>LIST_QUEUES_PATH</h2>
+<pre>LIST_QUEUES_PATH </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><p class="long_description"></p></div></div>
+</div>
+<a name="LIST_RULES_PATH" id="LIST_RULES_PATH"> </a><div class="element clickable constant  LIST_RULES_PATH" data-toggle="collapse" data-target=".LIST_RULES_PATH .collapse">
+<h2>LIST_RULES_PATH</h2>
+<pre>LIST_RULES_PATH </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><p class="long_description"></p></div></div>
+</div>
+<a name="LIST_SUBSCRIPTIONS_PATH" id="LIST_SUBSCRIPTIONS_PATH"> </a><div class="element clickable constant  LIST_SUBSCRIPTIONS_PATH" data-toggle="collapse" data-target=".LIST_SUBSCRIPTIONS_PATH .collapse">
+<h2>LIST_SUBSCRIPTIONS_PATH</h2>
+<pre>LIST_SUBSCRIPTIONS_PATH </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><p class="long_description"></p></div></div>
+</div>
+<a name="LIST_TOPICS_PATH" id="LIST_TOPICS_PATH"> </a><div class="element clickable constant  LIST_TOPICS_PATH" data-toggle="collapse" data-target=".LIST_TOPICS_PATH .collapse">
+<h2>LIST_TOPICS_PATH</h2>
+<pre>LIST_TOPICS_PATH </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><p class="long_description"></p></div></div>
+</div>
+<a name="MAX_DATA_SERVICE_VERSION" id="MAX_DATA_SERVICE_VERSION"> </a><div class="element clickable constant  MAX_DATA_SERVICE_VERSION" data-toggle="collapse" data-target=".MAX_DATA_SERVICE_VERSION .collapse">
+<h2>MAX_DATA_SERVICE_VERSION</h2>
+<pre>MAX_DATA_SERVICE_VERSION </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><p class="long_description"></p></div></div>
+</div>
+<a name="MAX_DATA_SERVICE_VERSION_VALUE" id="MAX_DATA_SERVICE_VERSION_VALUE"> </a><div class="element clickable constant  MAX_DATA_SERVICE_VERSION_VALUE" data-toggle="collapse" data-target=".MAX_DATA_SERVICE_VERSION_VALUE .collapse">
+<h2>MAX_DATA_SERVICE_VERSION_VALUE</h2>
+<pre>MAX_DATA_SERVICE_VERSION_VALUE </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><p class="long_description"></p></div></div>
+</div>
+<a name="MISSING_CONNECTION_STRING_CHAR" id="MISSING_CONNECTION_STRING_CHAR"> </a><div class="element clickable constant  MISSING_CONNECTION_STRING_CHAR" data-toggle="collapse" data-target=".MISSING_CONNECTION_STRING_CHAR .collapse">
+<h2>MISSING_CONNECTION_STRING_CHAR</h2>
+<pre>MISSING_CONNECTION_STRING_CHAR </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><p class="long_description"></p></div></div>
+</div>
+<a name="MISSING_CONNECTION_STRING_SETTINGS" id="MISSING_CONNECTION_STRING_SETTINGS"> </a><div class="element clickable constant  MISSING_CONNECTION_STRING_SETTINGS" data-toggle="collapse" data-target=".MISSING_CONNECTION_STRING_SETTINGS .collapse">
+<h2>MISSING_CONNECTION_STRING_SETTINGS</h2>
+<pre>MISSING_CONNECTION_STRING_SETTINGS </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><p class="long_description"></p></div></div>
+</div>
+<a name="MISSING_LOCK_LOCATION_MSG" id="MISSING_LOCK_LOCATION_MSG"> </a><div class="element clickable constant  MISSING_LOCK_LOCATION_MSG" data-toggle="collapse" data-target=".MISSING_LOCK_LOCATION_MSG .collapse">
+<h2>MISSING_LOCK_LOCATION_MSG</h2>
+<pre>MISSING_LOCK_LOCATION_MSG </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><p class="long_description"></p></div></div>
+</div>
+<a name="MULTIPART_MIXED_TYPE" id="MULTIPART_MIXED_TYPE"> </a><div class="element clickable constant  MULTIPART_MIXED_TYPE" data-toggle="collapse" data-target=".MULTIPART_MIXED_TYPE .collapse">
+<h2>MULTIPART_MIXED_TYPE</h2>
+<pre>MULTIPART_MIXED_TYPE </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><p class="long_description"></p></div></div>
+</div>
+<a name="NOT_IMPLEMENTED_MSG" id="NOT_IMPLEMENTED_MSG"> </a><div class="element clickable constant  NOT_IMPLEMENTED_MSG" data-toggle="collapse" data-target=".NOT_IMPLEMENTED_MSG .collapse">
+<h2>NOT_IMPLEMENTED_MSG</h2>
+<pre>NOT_IMPLEMENTED_MSG </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><p class="long_description"></p></div></div>
+</div>
+<a name="NULL_MSG" id="NULL_MSG"> </a><div class="element clickable constant  NULL_MSG" data-toggle="collapse" data-target=".NULL_MSG .collapse">
+<h2>NULL_MSG</h2>
+<pre>NULL_MSG </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><p class="long_description"></p></div></div>
+</div>
+<a name="NULL_OR_EMPTY_MSG" id="NULL_OR_EMPTY_MSG"> </a><div class="element clickable constant  NULL_OR_EMPTY_MSG" data-toggle="collapse" data-target=".NULL_OR_EMPTY_MSG .collapse">
+<h2>NULL_OR_EMPTY_MSG</h2>
+<pre>NULL_OR_EMPTY_MSG </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><p class="long_description"></p></div></div>
+</div>
+<a name="NULL_TABLE_KEY_MSG" id="NULL_TABLE_KEY_MSG"> </a><div class="element clickable constant  NULL_TABLE_KEY_MSG" data-toggle="collapse" data-target=".NULL_TABLE_KEY_MSG .collapse">
+<h2>NULL_TABLE_KEY_MSG</h2>
+<pre>NULL_TABLE_KEY_MSG </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><p class="long_description"></p></div></div>
+</div>
+<a name="PHP_URL_FRAGMENT" id="PHP_URL_FRAGMENT"> </a><div class="element clickable constant  PHP_URL_FRAGMENT" data-toggle="collapse" data-target=".PHP_URL_FRAGMENT .collapse">
+<h2>PHP_URL_FRAGMENT</h2>
+<pre>PHP_URL_FRAGMENT </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><p class="long_description"></p></div></div>
+</div>
+<a name="PHP_URL_HOST" id="PHP_URL_HOST"> </a><div class="element clickable constant  PHP_URL_HOST" data-toggle="collapse" data-target=".PHP_URL_HOST .collapse">
+<h2>PHP_URL_HOST</h2>
+<pre>PHP_URL_HOST </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><p class="long_description"></p></div></div>
+</div>
+<a name="PHP_URL_PASS" id="PHP_URL_PASS"> </a><div class="element clickable constant  PHP_URL_PASS" data-toggle="collapse" data-target=".PHP_URL_PASS .collapse">
+<h2>PHP_URL_PASS</h2>
+<pre>PHP_URL_PASS </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><p class="long_description"></p></div></div>
+</div>
+<a name="PHP_URL_PATH" id="PHP_URL_PATH"> </a><div class="element clickable constant  PHP_URL_PATH" data-toggle="collapse" data-target=".PHP_URL_PATH .collapse">
+<h2>PHP_URL_PATH</h2>
+<pre>PHP_URL_PATH </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><p class="long_description"></p></div></div>
+</div>
+<a name="PHP_URL_PORT" id="PHP_URL_PORT"> </a><div class="element clickable constant  PHP_URL_PORT" data-toggle="collapse" data-target=".PHP_URL_PORT .collapse">
+<h2>PHP_URL_PORT</h2>
+<pre>PHP_URL_PORT </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><p class="long_description"></p></div></div>
+</div>
+<a name="PHP_URL_QUERY" id="PHP_URL_QUERY"> </a><div class="element clickable constant  PHP_URL_QUERY" data-toggle="collapse" data-target=".PHP_URL_QUERY .collapse">
+<h2>PHP_URL_QUERY</h2>
+<pre>PHP_URL_QUERY </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><p class="long_description"></p></div></div>
+</div>
+<a name="PHP_URL_SCHEME" id="PHP_URL_SCHEME"> </a><div class="element clickable constant  PHP_URL_SCHEME" data-toggle="collapse" data-target=".PHP_URL_SCHEME .collapse">
+<h2>PHP_URL_SCHEME</h2>
+<pre>PHP_URL_SCHEME </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><p class="long_description"></p></div></div>
+</div>
+<a name="PHP_URL_USER" id="PHP_URL_USER"> </a><div class="element clickable constant  PHP_URL_USER" data-toggle="collapse" data-target=".PHP_URL_USER .collapse">
+<h2>PHP_URL_USER</h2>
+<pre>PHP_URL_USER </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><p class="long_description"></p></div></div>
+</div>
+<a name="QP_ACTION" id="QP_ACTION"> </a><div class="element clickable constant  QP_ACTION" data-toggle="collapse" data-target=".QP_ACTION .collapse">
+<h2>QP_ACTION</h2>
+<pre>QP_ACTION </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><p class="long_description"></p></div></div>
+</div>
+<a name="QP_BLOCKID" id="QP_BLOCKID"> </a><div class="element clickable constant  QP_BLOCKID" data-toggle="collapse" data-target=".QP_BLOCKID .collapse">
+<h2>QP_BLOCKID</h2>
+<pre>QP_BLOCKID </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><p class="long_description"></p></div></div>
+</div>
+<a name="QP_BLOCK_LIST_TYPE" id="QP_BLOCK_LIST_TYPE"> </a><div class="element clickable constant  QP_BLOCK_LIST_TYPE" data-toggle="collapse" data-target=".QP_BLOCK_LIST_TYPE .collapse">
+<h2>QP_BLOCK_LIST_TYPE</h2>
+<pre>QP_BLOCK_LIST_TYPE </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><p class="long_description"></p></div></div>
+</div>
+<a name="QP_COMP" id="QP_COMP"> </a><div class="element clickable constant  QP_COMP" data-toggle="collapse" data-target=".QP_COMP .collapse">
+<h2>QP_COMP</h2>
+<pre>QP_COMP </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><p class="long_description"></p></div></div>
+</div>
+<a name="QP_DELIMITER" id="QP_DELIMITER"> </a><div class="element clickable constant  QP_DELIMITER" data-toggle="collapse" data-target=".QP_DELIMITER .collapse">
+<h2>QP_DELIMITER</h2>
+<pre>QP_DELIMITER </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><p class="long_description"></p></div></div>
+</div>
+<a name="QP_FILTER" id="QP_FILTER"> </a><div class="element clickable constant  QP_FILTER" data-toggle="collapse" data-target=".QP_FILTER .collapse">
+<h2>QP_FILTER</h2>
+<pre>QP_FILTER </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><p class="long_description"></p></div></div>
+</div>
+<a name="QP_INCLUDE" id="QP_INCLUDE"> </a><div class="element clickable constant  QP_INCLUDE" data-toggle="collapse" data-target=".QP_INCLUDE .collapse">
+<h2>QP_INCLUDE</h2>
+<pre>QP_INCLUDE </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><p class="long_description"></p></div></div>
+</div>
+<a name="QP_MARKER" id="QP_MARKER"> </a><div class="element clickable constant  QP_MARKER" data-toggle="collapse" data-target=".QP_MARKER .collapse">
+<h2>QP_MARKER</h2>
+<pre>QP_MARKER </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><p class="long_description"></p></div></div>
+</div>
+<a name="QP_MAX_RESULTS" id="QP_MAX_RESULTS"> </a><div class="element clickable constant  QP_MAX_RESULTS" data-toggle="collapse" data-target=".QP_MAX_RESULTS .collapse">
+<h2>QP_MAX_RESULTS</h2>
+<pre>QP_MAX_RESULTS </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><p class="long_description"></p></div></div>
+</div>
+<a name="QP_MESSAGE_TTL" id="QP_MESSAGE_TTL"> </a><div class="element clickable constant  QP_MESSAGE_TTL" data-toggle="collapse" data-target=".QP_MESSAGE_TTL .collapse">
+<h2>QP_MESSAGE_TTL</h2>
+<pre>QP_MESSAGE_TTL </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><p class="long_description"></p></div></div>
+</div>
+<a name="QP_METADATA" id="QP_METADATA"> </a><div class="element clickable constant  QP_METADATA" data-toggle="collapse" data-target=".QP_METADATA .collapse">
+<h2>QP_METADATA</h2>
+<pre>QP_METADATA </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><p class="long_description"></p></div></div>
+</div>
+<a name="QP_NEXT_MARKER" id="QP_NEXT_MARKER"> </a><div class="element clickable constant  QP_NEXT_MARKER" data-toggle="collapse" data-target=".QP_NEXT_MARKER .collapse">
+<h2>QP_NEXT_MARKER</h2>
+<pre>QP_NEXT_MARKER </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><p class="long_description"></p></div></div>
+</div>
+<a name="QP_NEXT_PK" id="QP_NEXT_PK"> </a><div class="element clickable constant  QP_NEXT_PK" data-toggle="collapse" data-target=".QP_NEXT_PK .collapse">
+<h2>QP_NEXT_PK</h2>
+<pre>QP_NEXT_PK </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><p class="long_description"></p></div></div>
+</div>
+<a name="QP_NEXT_RK" id="QP_NEXT_RK"> </a><div class="element clickable constant  QP_NEXT_RK" data-toggle="collapse" data-target=".QP_NEXT_RK .collapse">
+<h2>QP_NEXT_RK</h2>
+<pre>QP_NEXT_RK </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><p class="long_description"></p></div></div>
+</div>
+<a name="QP_NEXT_TABLE_NAME" id="QP_NEXT_TABLE_NAME"> </a><div class="element clickable constant  QP_NEXT_TABLE_NAME" data-toggle="collapse" data-target=".QP_NEXT_TABLE_NAME .collapse">
+<h2>QP_NEXT_TABLE_NAME</h2>
+<pre>QP_NEXT_TABLE_NAME </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><p class="long_description"></p></div></div>
+</div>
+<a name="QP_NUM_OF_MESSAGES" id="QP_NUM_OF_MESSAGES"> </a><div class="element clickable constant  QP_NUM_OF_MESSAGES" data-toggle="collapse" data-target=".QP_NUM_OF_MESSAGES .collapse">
+<h2>QP_NUM_OF_MESSAGES</h2>
+<pre>QP_NUM_OF_MESSAGES </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><p class="long_description"></p></div></div>
+</div>
+<a name="QP_PEEK_ONLY" id="QP_PEEK_ONLY"> </a><div class="element clickable constant  QP_PEEK_ONLY" data-toggle="collapse" data-target=".QP_PEEK_ONLY .collapse">
+<h2>QP_PEEK_ONLY</h2>
+<pre>QP_PEEK_ONLY </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><p class="long_description"></p></div></div>
+</div>
+<a name="QP_POPRECEIPT" id="QP_POPRECEIPT"> </a><div class="element clickable constant  QP_POPRECEIPT" data-toggle="collapse" data-target=".QP_POPRECEIPT .collapse">
+<h2>QP_POPRECEIPT</h2>
+<pre>QP_POPRECEIPT </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><p class="long_description"></p></div></div>
+</div>
+<a name="QP_PREFIX" id="QP_PREFIX"> </a><div class="element clickable constant  QP_PREFIX" data-toggle="collapse" data-target=".QP_PREFIX .collapse">
+<h2>QP_PREFIX</h2>
+<pre>QP_PREFIX </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><p class="long_description"></p></div></div>
+</div>
+<a name="QP_REST_TYPE" id="QP_REST_TYPE"> </a><div class="element clickable constant  QP_REST_TYPE" data-toggle="collapse" data-target=".QP_REST_TYPE .collapse">
+<h2>QP_REST_TYPE</h2>
+<pre>QP_REST_TYPE </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><p class="long_description"></p></div></div>
+</div>
+<a name="QP_SELECT" id="QP_SELECT"> </a><div class="element clickable constant  QP_SELECT" data-toggle="collapse" data-target=".QP_SELECT .collapse">
+<h2>QP_SELECT</h2>
+<pre>QP_SELECT </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><p class="long_description"></p></div></div>
+</div>
+<a name="QP_SKIP" id="QP_SKIP"> </a><div class="element clickable constant  QP_SKIP" data-toggle="collapse" data-target=".QP_SKIP .collapse">
+<h2>QP_SKIP</h2>
+<pre>QP_SKIP </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><p class="long_description"></p></div></div>
+</div>
+<a name="QP_SNAPSHOT" id="QP_SNAPSHOT"> </a><div class="element clickable constant  QP_SNAPSHOT" data-toggle="collapse" data-target=".QP_SNAPSHOT .collapse">
+<h2>QP_SNAPSHOT</h2>
+<pre>QP_SNAPSHOT </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><p class="long_description"></p></div></div>
+</div>
+<a name="QP_TIMEOUT" id="QP_TIMEOUT"> </a><div class="element clickable constant  QP_TIMEOUT" data-toggle="collapse" data-target=".QP_TIMEOUT .collapse">
+<h2>QP_TIMEOUT</h2>
+<pre>QP_TIMEOUT </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><p class="long_description"></p></div></div>
+</div>
+<a name="QP_TOP" id="QP_TOP"> </a><div class="element clickable constant  QP_TOP" data-toggle="collapse" data-target=".QP_TOP .collapse">
+<h2>QP_TOP</h2>
+<pre>QP_TOP </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><p class="long_description"></p></div></div>
+</div>
+<a name="QP_VISIBILITY_TIMEOUT" id="QP_VISIBILITY_TIMEOUT"> </a><div class="element clickable constant  QP_VISIBILITY_TIMEOUT" data-toggle="collapse" data-target=".QP_VISIBILITY_TIMEOUT .collapse">
+<h2>QP_VISIBILITY_TIMEOUT</h2>
+<pre>QP_VISIBILITY_TIMEOUT </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><p class="long_description"></p></div></div>
+</div>
+<a name="QUEUE_BASE_DNS_NAME" id="QUEUE_BASE_DNS_NAME"> </a><div class="element clickable constant  QUEUE_BASE_DNS_NAME" data-toggle="collapse" data-target=".QUEUE_BASE_DNS_NAME .collapse">
+<h2>QUEUE_BASE_DNS_NAME</h2>
+<pre>QUEUE_BASE_DNS_NAME </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><p class="long_description"></p></div></div>
+</div>
+<a name="QUEUE_ENDPOINT_NAME" id="QUEUE_ENDPOINT_NAME"> </a><div class="element clickable constant  QUEUE_ENDPOINT_NAME" data-toggle="collapse" data-target=".QUEUE_ENDPOINT_NAME .collapse">
+<h2>QUEUE_ENDPOINT_NAME</h2>
+<pre>QUEUE_ENDPOINT_NAME </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><p class="long_description"></p></div></div>
+</div>
+<a name="QUEUE_TYPE_NAME" id="QUEUE_TYPE_NAME"> </a><div class="element clickable constant  QUEUE_TYPE_NAME" data-toggle="collapse" data-target=".QUEUE_TYPE_NAME .collapse">
+<h2>QUEUE_TYPE_NAME</h2>
+<pre>QUEUE_TYPE_NAME </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><p class="long_description"></p></div></div>
+</div>
+<a name="RANGE" id="RANGE"> </a><div class="element clickable constant  RANGE" data-toggle="collapse" data-target=".RANGE .collapse">
+<h2>RANGE</h2>
+<pre>RANGE </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><p class="long_description"></p></div></div>
+</div>
+<a name="RECEIVE_MESSAGE_PATH" id="RECEIVE_MESSAGE_PATH"> </a><div class="element clickable constant  RECEIVE_MESSAGE_PATH" data-toggle="collapse" data-target=".RECEIVE_MESSAGE_PATH .collapse">
+<h2>RECEIVE_MESSAGE_PATH</h2>
+<pre>RECEIVE_MESSAGE_PATH </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><p class="long_description"></p></div></div>
+</div>
+<a name="RECEIVE_SUBSCRIPTION_MESSAGE_PATH" id="RECEIVE_SUBSCRIPTION_MESSAGE_PATH"> </a><div class="element clickable constant  RECEIVE_SUBSCRIPTION_MESSAGE_PATH" data-toggle="collapse" data-target=".RECEIVE_SUBSCRIPTION_MESSAGE_PATH .collapse">
+<h2>RECEIVE_SUBSCRIPTION_MESSAGE_PATH</h2>
+<pre>RECEIVE_SUBSCRIPTION_MESSAGE_PATH </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><p class="long_description"></p></div></div>
+</div>
+<a name="RULE_PATH" id="RULE_PATH"> </a><div class="element clickable constant  RULE_PATH" data-toggle="collapse" data-target=".RULE_PATH .collapse">
+<h2>RULE_PATH</h2>
+<pre>RULE_PATH </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><p class="long_description"></p></div></div>
+</div>
+<a name="SEND_MESSAGE_PATH" id="SEND_MESSAGE_PATH"> </a><div class="element clickable constant  SEND_MESSAGE_PATH" data-toggle="collapse" data-target=".SEND_MESSAGE_PATH .collapse">
+<h2>SEND_MESSAGE_PATH</h2>
+<pre>SEND_MESSAGE_PATH </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><p class="long_description"></p></div></div>
+</div>
+<a name="SEPARATOR" id="SEPARATOR"> </a><div class="element clickable constant  SEPARATOR" data-toggle="collapse" data-target=".SEPARATOR .collapse">
+<h2>SEPARATOR</h2>
+<pre>SEPARATOR </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><p class="long_description"></p></div></div>
+</div>
+<a name="SERVICE_BUS_ENDPOINT_NAME" id="SERVICE_BUS_ENDPOINT_NAME"> </a><div class="element clickable constant  SERVICE_BUS_ENDPOINT_NAME" data-toggle="collapse" data-target=".SERVICE_BUS_ENDPOINT_NAME .collapse">
+<h2>SERVICE_BUS_ENDPOINT_NAME</h2>
+<pre>SERVICE_BUS_ENDPOINT_NAME </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><p class="long_description"></p></div></div>
+</div>
+<a name="SERVICE_BUS_NAMESPACE" id="SERVICE_BUS_NAMESPACE"> </a><div class="element clickable constant  SERVICE_BUS_NAMESPACE" data-toggle="collapse" data-target=".SERVICE_BUS_NAMESPACE .collapse">
+<h2>SERVICE_BUS_NAMESPACE</h2>
+<pre>SERVICE_BUS_NAMESPACE </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><p class="long_description"></p></div></div>
+</div>
+<a name="SERVICE_BUS_TYPE_NAME" id="SERVICE_BUS_TYPE_NAME"> </a><div class="element clickable constant  SERVICE_BUS_TYPE_NAME" data-toggle="collapse" data-target=".SERVICE_BUS_TYPE_NAME .collapse">
+<h2>SERVICE_BUS_TYPE_NAME</h2>
+<pre>SERVICE_BUS_TYPE_NAME </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><p class="long_description"></p></div></div>
+</div>
+<a name="SERVICE_MANAGEMENT_ENDPOINT_NAME" id="SERVICE_MANAGEMENT_ENDPOINT_NAME"> </a><div class="element clickable constant  SERVICE_MANAGEMENT_ENDPOINT_NAME" data-toggle="collapse" data-target=".SERVICE_MANAGEMENT_ENDPOINT_NAME .collapse">
+<h2>SERVICE_MANAGEMENT_ENDPOINT_NAME</h2>
+<pre>SERVICE_MANAGEMENT_ENDPOINT_NAME </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><p class="long_description"></p></div></div>
+</div>
+<a name="SERVICE_MANAGEMENT_TYPE_NAME" id="SERVICE_MANAGEMENT_TYPE_NAME"> </a><div class="element clickable constant  SERVICE_MANAGEMENT_TYPE_NAME" data-toggle="collapse" data-target=".SERVICE_MANAGEMENT_TYPE_NAME .collapse">
+<h2>SERVICE_MANAGEMENT_TYPE_NAME</h2>
+<pre>SERVICE_MANAGEMENT_TYPE_NAME </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><p class="long_description"></p></div></div>
+</div>
+<a name="SERVICE_MANAGEMENT_URL" id="SERVICE_MANAGEMENT_URL"> </a><div class="element clickable constant  SERVICE_MANAGEMENT_URL" data-toggle="collapse" data-target=".SERVICE_MANAGEMENT_URL .collapse">
+<h2>SERVICE_MANAGEMENT_URL</h2>
+<pre>SERVICE_MANAGEMENT_URL </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><p class="long_description"></p></div></div>
+</div>
+<a name="SERVICE_URI_FORMAT" id="SERVICE_URI_FORMAT"> </a><div class="element clickable constant  SERVICE_URI_FORMAT" data-toggle="collapse" data-target=".SERVICE_URI_FORMAT .collapse">
+<h2>SERVICE_URI_FORMAT</h2>
+<pre>SERVICE_URI_FORMAT </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><p class="long_description"></p></div></div>
+</div>
+<a name="SETTING_CONSTRAINT" id="SETTING_CONSTRAINT"> </a><div class="element clickable constant  SETTING_CONSTRAINT" data-toggle="collapse" data-target=".SETTING_CONSTRAINT .collapse">
+<h2>SETTING_CONSTRAINT</h2>
+<pre>SETTING_CONSTRAINT </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><p class="long_description"></p></div></div>
+</div>
+<a name="SETTING_NAME" id="SETTING_NAME"> </a><div class="element clickable constant  SETTING_NAME" data-toggle="collapse" data-target=".SETTING_NAME .collapse">
+<h2>SETTING_NAME</h2>
+<pre>SETTING_NAME </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><p class="long_description"></p></div></div>
+</div>
+<a name="SHARED_ACCESS_SIGNATURE_NAME" id="SHARED_ACCESS_SIGNATURE_NAME"> </a><div class="element clickable constant  SHARED_ACCESS_SIGNATURE_NAME" data-toggle="collapse" data-target=".SHARED_ACCESS_SIGNATURE_NAME .collapse">
+<h2>SHARED_ACCESS_SIGNATURE_NAME</h2>
+<pre>SHARED_ACCESS_SIGNATURE_NAME </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><p class="long_description"></p></div></div>
+</div>
+<a name="SHARED_SECRET_ISSUER_NAME" id="SHARED_SECRET_ISSUER_NAME"> </a><div class="element clickable constant  SHARED_SECRET_ISSUER_NAME" data-toggle="collapse" data-target=".SHARED_SECRET_ISSUER_NAME .collapse">
+<h2>SHARED_SECRET_ISSUER_NAME</h2>
+<pre>SHARED_SECRET_ISSUER_NAME </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><p class="long_description"></p></div></div>
+</div>
+<a name="SHARED_SECRET_VALUE_NAME" id="SHARED_SECRET_VALUE_NAME"> </a><div class="element clickable constant  SHARED_SECRET_VALUE_NAME" data-toggle="collapse" data-target=".SHARED_SECRET_VALUE_NAME .collapse">
+<h2>SHARED_SECRET_VALUE_NAME</h2>
+<pre>SHARED_SECRET_VALUE_NAME </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><p class="long_description"></p></div></div>
+</div>
+<a name="SM_API_LATEST_VERSION" id="SM_API_LATEST_VERSION"> </a><div class="element clickable constant  SM_API_LATEST_VERSION" data-toggle="collapse" data-target=".SM_API_LATEST_VERSION .collapse">
+<h2>SM_API_LATEST_VERSION</h2>
+<pre>SM_API_LATEST_VERSION </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><p class="long_description"></p></div></div>
+</div>
+<a name="SSL_CAFILE" id="SSL_CAFILE"> </a><div class="element clickable constant  SSL_CAFILE" data-toggle="collapse" data-target=".SSL_CAFILE .collapse">
+<h2>SSL_CAFILE</h2>
+<pre>SSL_CAFILE </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><p class="long_description"></p></div></div>
+</div>
+<a name="SSL_LOCAL_CERT" id="SSL_LOCAL_CERT"> </a><div class="element clickable constant  SSL_LOCAL_CERT" data-toggle="collapse" data-target=".SSL_LOCAL_CERT .collapse">
+<h2>SSL_LOCAL_CERT</h2>
+<pre>SSL_LOCAL_CERT </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><p class="long_description"></p></div></div>
+</div>
+<a name="SSL_VERIFY_HOST" id="SSL_VERIFY_HOST"> </a><div class="element clickable constant  SSL_VERIFY_HOST" data-toggle="collapse" data-target=".SSL_VERIFY_HOST .collapse">
+<h2>SSL_VERIFY_HOST</h2>
+<pre>SSL_VERIFY_HOST </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><p class="long_description"></p></div></div>
+</div>
+<a name="SSL_VERIFY_PEER" id="SSL_VERIFY_PEER"> </a><div class="element clickable constant  SSL_VERIFY_PEER" data-toggle="collapse" data-target=".SSL_VERIFY_PEER .collapse">
+<h2>SSL_VERIFY_PEER</h2>
+<pre>SSL_VERIFY_PEER </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><p class="long_description"></p></div></div>
+</div>
+<a name="STATUS_ACCEPTED" id="STATUS_ACCEPTED"> </a><div class="element clickable constant  STATUS_ACCEPTED" data-toggle="collapse" data-target=".STATUS_ACCEPTED .collapse">
+<h2>STATUS_ACCEPTED</h2>
+<pre>STATUS_ACCEPTED </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><p class="long_description"></p></div></div>
+</div>
+<a name="STATUS_CREATED" id="STATUS_CREATED"> </a><div class="element clickable constant  STATUS_CREATED" data-toggle="collapse" data-target=".STATUS_CREATED .collapse">
+<h2>STATUS_CREATED</h2>
+<pre>STATUS_CREATED </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><p class="long_description"></p></div></div>
+</div>
+<a name="STATUS_NO_CONTENT" id="STATUS_NO_CONTENT"> </a><div class="element clickable constant  STATUS_NO_CONTENT" data-toggle="collapse" data-target=".STATUS_NO_CONTENT .collapse">
+<h2>STATUS_NO_CONTENT</h2>
+<pre>STATUS_NO_CONTENT </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><p class="long_description"></p></div></div>
+</div>
+<a name="STATUS_OK" id="STATUS_OK"> </a><div class="element clickable constant  STATUS_OK" data-toggle="collapse" data-target=".STATUS_OK .collapse">
+<h2>STATUS_OK</h2>
+<pre>STATUS_OK </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><p class="long_description"></p></div></div>
+</div>
+<a name="STATUS_PARTIAL_CONTENT" id="STATUS_PARTIAL_CONTENT"> </a><div class="element clickable constant  STATUS_PARTIAL_CONTENT" data-toggle="collapse" data-target=".STATUS_PARTIAL_CONTENT .collapse">
+<h2>STATUS_PARTIAL_CONTENT</h2>
+<pre>STATUS_PARTIAL_CONTENT </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><p class="long_description"></p></div></div>
+</div>
+<a name="STORAGE_API_LATEST_VERSION" id="STORAGE_API_LATEST_VERSION"> </a><div class="element clickable constant  STORAGE_API_LATEST_VERSION" data-toggle="collapse" data-target=".STORAGE_API_LATEST_VERSION .collapse">
+<h2>STORAGE_API_LATEST_VERSION</h2>
+<pre>STORAGE_API_LATEST_VERSION </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><p class="long_description"></p></div></div>
+</div>
+<a name="SUBSCRIPTION_ID_NAME" id="SUBSCRIPTION_ID_NAME"> </a><div class="element clickable constant  SUBSCRIPTION_ID_NAME" data-toggle="collapse" data-target=".SUBSCRIPTION_ID_NAME .collapse">
+<h2>SUBSCRIPTION_ID_NAME</h2>
+<pre>SUBSCRIPTION_ID_NAME </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><p class="long_description"></p></div></div>
+</div>
+<a name="SUBSCRIPTION_PATH" id="SUBSCRIPTION_PATH"> </a><div class="element clickable constant  SUBSCRIPTION_PATH" data-toggle="collapse" data-target=".SUBSCRIPTION_PATH .collapse">
+<h2>SUBSCRIPTION_PATH</h2>
+<pre>SUBSCRIPTION_PATH </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><p class="long_description"></p></div></div>
+</div>
+<a name="TABLE_BASE_DNS_NAME" id="TABLE_BASE_DNS_NAME"> </a><div class="element clickable constant  TABLE_BASE_DNS_NAME" data-toggle="collapse" data-target=".TABLE_BASE_DNS_NAME .collapse">
+<h2>TABLE_BASE_DNS_NAME</h2>
+<pre>TABLE_BASE_DNS_NAME </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><p class="long_description"></p></div></div>
+</div>
+<a name="TABLE_ENDPOINT_NAME" id="TABLE_ENDPOINT_NAME"> </a><div class="element clickable constant  TABLE_ENDPOINT_NAME" data-toggle="collapse" data-target=".TABLE_ENDPOINT_NAME .collapse">
+<h2>TABLE_ENDPOINT_NAME</h2>
+<pre>TABLE_ENDPOINT_NAME </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><p class="long_description"></p></div></div>
+</div>
+<a name="TABLE_TYPE_NAME" id="TABLE_TYPE_NAME"> </a><div class="element clickable constant  TABLE_TYPE_NAME" data-toggle="collapse" data-target=".TABLE_TYPE_NAME .collapse">
+<h2>TABLE_TYPE_NAME</h2>
+<pre>TABLE_TYPE_NAME </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><p class="long_description"></p></div></div>
+</div>
+<a name="TIMESTAMP_FORMAT" id="TIMESTAMP_FORMAT"> </a><div class="element clickable constant  TIMESTAMP_FORMAT" data-toggle="collapse" data-target=".TIMESTAMP_FORMAT .collapse">
+<h2>TIMESTAMP_FORMAT</h2>
+<pre>TIMESTAMP_FORMAT </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><p class="long_description"></p></div></div>
+</div>
+<a name="UNIQUE_ID_PREFIX" id="UNIQUE_ID_PREFIX"> </a><div class="element clickable constant  UNIQUE_ID_PREFIX" data-toggle="collapse" data-target=".UNIQUE_ID_PREFIX .collapse">
+<h2>UNIQUE_ID_PREFIX</h2>
+<pre>UNIQUE_ID_PREFIX </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><p class="long_description"></p></div></div>
+</div>
+<a name="UNKNOWN_SRILZER_MSG" id="UNKNOWN_SRILZER_MSG"> </a><div class="element clickable constant  UNKNOWN_SRILZER_MSG" data-toggle="collapse" data-target=".UNKNOWN_SRILZER_MSG .collapse">
+<h2>UNKNOWN_SRILZER_MSG</h2>
+<pre>UNKNOWN_SRILZER_MSG </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><p class="long_description"></p></div></div>
+</div>
+<a name="URL_ENCODED_CONTENT_TYPE" id="URL_ENCODED_CONTENT_TYPE"> </a><div class="element clickable constant  URL_ENCODED_CONTENT_TYPE" data-toggle="collapse" data-target=".URL_ENCODED_CONTENT_TYPE .collapse">
+<h2>URL_ENCODED_CONTENT_TYPE</h2>
+<pre>URL_ENCODED_CONTENT_TYPE </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><p class="long_description"></p></div></div>
+</div>
+<a name="USE_BRACKETS" id="USE_BRACKETS"> </a><div class="element clickable constant  USE_BRACKETS" data-toggle="collapse" data-target=".USE_BRACKETS .collapse">
+<h2>USE_BRACKETS</h2>
+<pre>USE_BRACKETS </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><p class="long_description"></p></div></div>
+</div>
+<a name="USE_DEVELOPMENT_STORAGE_NAME" id="USE_DEVELOPMENT_STORAGE_NAME"> </a><div class="element clickable constant  USE_DEVELOPMENT_STORAGE_NAME" data-toggle="collapse" data-target=".USE_DEVELOPMENT_STORAGE_NAME .collapse">
+<h2>USE_DEVELOPMENT_STORAGE_NAME</h2>
+<pre>USE_DEVELOPMENT_STORAGE_NAME </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><p class="long_description"></p></div></div>
+</div>
+<a name="WA_XML_NAMESPACE" id="WA_XML_NAMESPACE"> </a><div class="element clickable constant  WA_XML_NAMESPACE" data-toggle="collapse" data-target=".WA_XML_NAMESPACE .collapse">
+<h2>WA_XML_NAMESPACE</h2>
+<pre>WA_XML_NAMESPACE </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><p class="long_description"></p></div></div>
+</div>
+<a name="WRAP_ACCESS_TOKEN" id="WRAP_ACCESS_TOKEN"> </a><div class="element clickable constant  WRAP_ACCESS_TOKEN" data-toggle="collapse" data-target=".WRAP_ACCESS_TOKEN .collapse">
+<h2>WRAP_ACCESS_TOKEN</h2>
+<pre>WRAP_ACCESS_TOKEN </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><p class="long_description"></p></div></div>
+</div>
+<a name="WRAP_ACCESS_TOKEN_EXPIRES_IN" id="WRAP_ACCESS_TOKEN_EXPIRES_IN"> </a><div class="element clickable constant  WRAP_ACCESS_TOKEN_EXPIRES_IN" data-toggle="collapse" data-target=".WRAP_ACCESS_TOKEN_EXPIRES_IN .collapse">
+<h2>WRAP_ACCESS_TOKEN_EXPIRES_IN</h2>
+<pre>WRAP_ACCESS_TOKEN_EXPIRES_IN </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><p class="long_description"></p></div></div>
+</div>
+<a name="WRAP_AUTHORIZATION" id="WRAP_AUTHORIZATION"> </a><div class="element clickable constant  WRAP_AUTHORIZATION" data-toggle="collapse" data-target=".WRAP_AUTHORIZATION .collapse">
+<h2>WRAP_AUTHORIZATION</h2>
+<pre>WRAP_AUTHORIZATION </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><p class="long_description"></p></div></div>
+</div>
+<a name="WRAP_ENDPOINT_URI_FORMAT" id="WRAP_ENDPOINT_URI_FORMAT"> </a><div class="element clickable constant  WRAP_ENDPOINT_URI_FORMAT" data-toggle="collapse" data-target=".WRAP_ENDPOINT_URI_FORMAT .collapse">
+<h2>WRAP_ENDPOINT_URI_FORMAT</h2>
+<pre>WRAP_ENDPOINT_URI_FORMAT </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><p class="long_description"></p></div></div>
+</div>
+<a name="WRAP_NAME" id="WRAP_NAME"> </a><div class="element clickable constant  WRAP_NAME" data-toggle="collapse" data-target=".WRAP_NAME .collapse">
+<h2>WRAP_NAME</h2>
+<pre>WRAP_NAME </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><p class="long_description"></p></div></div>
+</div>
+<a name="WRAP_PASSWORD" id="WRAP_PASSWORD"> </a><div class="element clickable constant  WRAP_PASSWORD" data-toggle="collapse" data-target=".WRAP_PASSWORD .collapse">
+<h2>WRAP_PASSWORD</h2>
+<pre>WRAP_PASSWORD </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><p class="long_description"></p></div></div>
+</div>
+<a name="WRAP_SCOPE" id="WRAP_SCOPE"> </a><div class="element clickable constant  WRAP_SCOPE" data-toggle="collapse" data-target=".WRAP_SCOPE .collapse">
+<h2>WRAP_SCOPE</h2>
+<pre>WRAP_SCOPE </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><p class="long_description"></p></div></div>
+</div>
+<a name="WRAP_TYPE_NAME" id="WRAP_TYPE_NAME"> </a><div class="element clickable constant  WRAP_TYPE_NAME" data-toggle="collapse" data-target=".WRAP_TYPE_NAME .collapse">
+<h2>WRAP_TYPE_NAME</h2>
+<pre>WRAP_TYPE_NAME </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><p class="long_description"></p></div></div>
+</div>
+<a name="XMLNS" id="XMLNS"> </a><div class="element clickable constant  XMLNS" data-toggle="collapse" data-target=".XMLNS .collapse">
+<h2>XMLNS</h2>
+<pre>XMLNS </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><p class="long_description"></p></div></div>
+</div>
+<a name="XMLNS_ATOM" id="XMLNS_ATOM"> </a><div class="element clickable constant  XMLNS_ATOM" data-toggle="collapse" data-target=".XMLNS_ATOM .collapse">
+<h2>XMLNS_ATOM</h2>
+<pre>XMLNS_ATOM </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><p class="long_description"></p></div></div>
+</div>
+<a name="XML_ATOM_CONTENT_TYPE" id="XML_ATOM_CONTENT_TYPE"> </a><div class="element clickable constant  XML_ATOM_CONTENT_TYPE" data-toggle="collapse" data-target=".XML_ATOM_CONTENT_TYPE .collapse">
+<h2>XML_ATOM_CONTENT_TYPE</h2>
+<pre>XML_ATOM_CONTENT_TYPE </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><p class="long_description"></p></div></div>
+</div>
+<a name="XML_CONTENT_TYPE" id="XML_CONTENT_TYPE"> </a><div class="element clickable constant  XML_CONTENT_TYPE" data-toggle="collapse" data-target=".XML_CONTENT_TYPE .collapse">
+<h2>XML_CONTENT_TYPE</h2>
+<pre>XML_CONTENT_TYPE </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><p class="long_description"></p></div></div>
+</div>
+<a name="XSI_XML_NAMESPACE" id="XSI_XML_NAMESPACE"> </a><div class="element clickable constant  XSI_XML_NAMESPACE" data-toggle="collapse" data-target=".XSI_XML_NAMESPACE .collapse">
+<h2>XSI_XML_NAMESPACE</h2>
+<pre>XSI_XML_NAMESPACE </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><p class="long_description"></p></div></div>
+</div>
+<a name="XTAG_AFFINITY_GROUP" id="XTAG_AFFINITY_GROUP"> </a><div class="element clickable constant  XTAG_AFFINITY_GROUP" data-toggle="collapse" data-target=".XTAG_AFFINITY_GROUP .collapse">
+<h2>XTAG_AFFINITY_GROUP</h2>
+<pre>XTAG_AFFINITY_GROUP </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><p class="long_description"></p></div></div>
+</div>
+<a name="XTAG_ATTRIBUTES" id="XTAG_ATTRIBUTES"> </a><div class="element clickable constant  XTAG_ATTRIBUTES" data-toggle="collapse" data-target=".XTAG_ATTRIBUTES .collapse">
+<h2>XTAG_ATTRIBUTES</h2>
+<pre>XTAG_ATTRIBUTES </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><p class="long_description"></p></div></div>
+</div>
+<a name="XTAG_CODE" id="XTAG_CODE"> </a><div class="element clickable constant  XTAG_CODE" data-toggle="collapse" data-target=".XTAG_CODE .collapse">
+<h2>XTAG_CODE</h2>
+<pre>XTAG_CODE </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><p class="long_description"></p></div></div>
+</div>
+<a name="XTAG_DESCRIPTION" id="XTAG_DESCRIPTION"> </a><div class="element clickable constant  XTAG_DESCRIPTION" data-toggle="collapse" data-target=".XTAG_DESCRIPTION .collapse">
+<h2>XTAG_DESCRIPTION</h2>
+<pre>XTAG_DESCRIPTION </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><p class="long_description"></p></div></div>
+</div>
+<a name="XTAG_DISPLAY_NAME" id="XTAG_DISPLAY_NAME"> </a><div class="element clickable constant  XTAG_DISPLAY_NAME" data-toggle="collapse" data-target=".XTAG_DISPLAY_NAME .collapse">
+<h2>XTAG_DISPLAY_NAME</h2>
+<pre>XTAG_DISPLAY_NAME </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><p class="long_description"></p></div></div>
+</div>
+<a name="XTAG_ENDPOINT" id="XTAG_ENDPOINT"> </a><div class="element clickable constant  XTAG_ENDPOINT" data-toggle="collapse" data-target=".XTAG_ENDPOINT .collapse">
+<h2>XTAG_ENDPOINT</h2>
+<pre>XTAG_ENDPOINT </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><p class="long_description"></p></div></div>
+</div>
+<a name="XTAG_ENDPOINTS" id="XTAG_ENDPOINTS"> </a><div class="element clickable constant  XTAG_ENDPOINTS" data-toggle="collapse" data-target=".XTAG_ENDPOINTS .collapse">
+<h2>XTAG_ENDPOINTS</h2>
+<pre>XTAG_ENDPOINTS </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><p class="long_description"></p></div></div>
+</div>
+<a name="XTAG_ERROR" id="XTAG_ERROR"> </a><div class="element clickable constant  XTAG_ERROR" data-toggle="collapse" data-target=".XTAG_ERROR .collapse">
+<h2>XTAG_ERROR</h2>
+<pre>XTAG_ERROR </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><p class="long_description"></p></div></div>
+</div>
+<a name="XTAG_HOSTED_SERVICES" id="XTAG_HOSTED_SERVICES"> </a><div class="element clickable constant  XTAG_HOSTED_SERVICES" data-toggle="collapse" data-target=".XTAG_HOSTED_SERVICES .collapse">
+<h2>XTAG_HOSTED_SERVICES</h2>
+<pre>XTAG_HOSTED_SERVICES </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><p class="long_description"></p></div></div>
+</div>
+<a name="XTAG_HTTP_STATUS_CODE" id="XTAG_HTTP_STATUS_CODE"> </a><div class="element clickable constant  XTAG_HTTP_STATUS_CODE" data-toggle="collapse" data-target=".XTAG_HTTP_STATUS_CODE .collapse">
+<h2>XTAG_HTTP_STATUS_CODE</h2>
+<pre>XTAG_HTTP_STATUS_CODE </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><p class="long_description"></p></div></div>
+</div>
+<a name="XTAG_ID" id="XTAG_ID"> </a><div class="element clickable constant  XTAG_ID" data-toggle="collapse" data-target=".XTAG_ID .collapse">
+<h2>XTAG_ID</h2>
+<pre>XTAG_ID </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><p class="long_description"></p></div></div>
+</div>
+<a name="XTAG_KEY_TYPE" id="XTAG_KEY_TYPE"> </a><div class="element clickable constant  XTAG_KEY_TYPE" data-toggle="collapse" data-target=".XTAG_KEY_TYPE .collapse">
+<h2>XTAG_KEY_TYPE</h2>
+<pre>XTAG_KEY_TYPE </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><p class="long_description"></p></div></div>
+</div>
+<a name="XTAG_LABEL" id="XTAG_LABEL"> </a><div class="element clickable constant  XTAG_LABEL" data-toggle="collapse" data-target=".XTAG_LABEL .collapse">
+<h2>XTAG_LABEL</h2>
+<pre>XTAG_LABEL </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><p class="long_description"></p></div></div>
+</div>
+<a name="XTAG_LOCATION" id="XTAG_LOCATION"> </a><div class="element clickable constant  XTAG_LOCATION" data-toggle="collapse" data-target=".XTAG_LOCATION .collapse">
+<h2>XTAG_LOCATION</h2>
+<pre>XTAG_LOCATION </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><p class="long_description"></p></div></div>
+</div>
+<a name="XTAG_MESSAGE" id="XTAG_MESSAGE"> </a><div class="element clickable constant  XTAG_MESSAGE" data-toggle="collapse" data-target=".XTAG_MESSAGE .collapse">
+<h2>XTAG_MESSAGE</h2>
+<pre>XTAG_MESSAGE </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><p class="long_description"></p></div></div>
+</div>
+<a name="XTAG_NAME" id="XTAG_NAME"> </a><div class="element clickable constant  XTAG_NAME" data-toggle="collapse" data-target=".XTAG_NAME .collapse">
+<h2>XTAG_NAME</h2>
+<pre>XTAG_NAME </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><p class="long_description"></p></div></div>
+</div>
+<a name="XTAG_NAMESPACE" id="XTAG_NAMESPACE"> </a><div class="element clickable constant  XTAG_NAMESPACE" data-toggle="collapse" data-target=".XTAG_NAMESPACE .collapse">
+<h2>XTAG_NAMESPACE</h2>
+<pre>XTAG_NAMESPACE </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><p class="long_description"></p></div></div>
+</div>
+<a name="XTAG_PRIMARY" id="XTAG_PRIMARY"> </a><div class="element clickable constant  XTAG_PRIMARY" data-toggle="collapse" data-target=".XTAG_PRIMARY .collapse">
+<h2>XTAG_PRIMARY</h2>
+<pre>XTAG_PRIMARY </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><p class="long_description"></p></div></div>
+</div>
+<a name="XTAG_SECONDARY" id="XTAG_SECONDARY"> </a><div class="element clickable constant  XTAG_SECONDARY" data-toggle="collapse" data-target=".XTAG_SECONDARY .collapse">
+<h2>XTAG_SECONDARY</h2>
+<pre>XTAG_SECONDARY </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><p class="long_description"></p></div></div>
+</div>
+<a name="XTAG_SERVICE_NAME" id="XTAG_SERVICE_NAME"> </a><div class="element clickable constant  XTAG_SERVICE_NAME" data-toggle="collapse" data-target=".XTAG_SERVICE_NAME .collapse">
+<h2>XTAG_SERVICE_NAME</h2>
+<pre>XTAG_SERVICE_NAME </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><p class="long_description"></p></div></div>
+</div>
+<a name="XTAG_STATUS" id="XTAG_STATUS"> </a><div class="element clickable constant  XTAG_STATUS" data-toggle="collapse" data-target=".XTAG_STATUS .collapse">
+<h2>XTAG_STATUS</h2>
+<pre>XTAG_STATUS </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><p class="long_description"></p></div></div>
+</div>
+<a name="XTAG_STORAGE_SERVICE" id="XTAG_STORAGE_SERVICE"> </a><div class="element clickable constant  XTAG_STORAGE_SERVICE" data-toggle="collapse" data-target=".XTAG_STORAGE_SERVICE .collapse">
+<h2>XTAG_STORAGE_SERVICE</h2>
+<pre>XTAG_STORAGE_SERVICE </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><p class="long_description"></p></div></div>
+</div>
+<a name="XTAG_STORAGE_SERVICES" id="XTAG_STORAGE_SERVICES"> </a><div class="element clickable constant  XTAG_STORAGE_SERVICES" data-toggle="collapse" data-target=".XTAG_STORAGE_SERVICES .collapse">
+<h2>XTAG_STORAGE_SERVICES</h2>
+<pre>XTAG_STORAGE_SERVICES </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><p class="long_description"></p></div></div>
+</div>
+<a name="XTAG_STORAGE_SERVICE_KEYS" id="XTAG_STORAGE_SERVICE_KEYS"> </a><div class="element clickable constant  XTAG_STORAGE_SERVICE_KEYS" data-toggle="collapse" data-target=".XTAG_STORAGE_SERVICE_KEYS .collapse">
+<h2>XTAG_STORAGE_SERVICE_KEYS</h2>
+<pre>XTAG_STORAGE_SERVICE_KEYS </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><p class="long_description"></p></div></div>
+</div>
+<a name="XTAG_STORAGE_SERVICE_PROPERTIES" id="XTAG_STORAGE_SERVICE_PROPERTIES"> </a><div class="element clickable constant  XTAG_STORAGE_SERVICE_PROPERTIES" data-toggle="collapse" data-target=".XTAG_STORAGE_SERVICE_PROPERTIES .collapse">
+<h2>XTAG_STORAGE_SERVICE_PROPERTIES</h2>
+<pre>XTAG_STORAGE_SERVICE_PROPERTIES </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><p class="long_description"></p></div></div>
+</div>
+<a name="XTAG_URL" id="XTAG_URL"> </a><div class="element clickable constant  XTAG_URL" data-toggle="collapse" data-target=".XTAG_URL .collapse">
+<h2>XTAG_URL</h2>
+<pre>XTAG_URL </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><p class="long_description"></p></div></div>
+</div>
+<a name="X_MS_APPROXIMATE_MESSAGES_COUNT" id="X_MS_APPROXIMATE_MESSAGES_COUNT"> </a><div class="element clickable constant  X_MS_APPROXIMATE_MESSAGES_COUNT" data-toggle="collapse" data-target=".X_MS_APPROXIMATE_MESSAGES_COUNT .collapse">
+<h2>X_MS_APPROXIMATE_MESSAGES_COUNT</h2>
+<pre>X_MS_APPROXIMATE_MESSAGES_COUNT </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><p class="long_description"></p></div></div>
+</div>
+<a name="X_MS_BLOB_CACHE_CONTROL" id="X_MS_BLOB_CACHE_CONTROL"> </a><div class="element clickable constant  X_MS_BLOB_CACHE_CONTROL" data-toggle="collapse" data-target=".X_MS_BLOB_CACHE_CONTROL .collapse">
+<h2>X_MS_BLOB_CACHE_CONTROL</h2>
+<pre>X_MS_BLOB_CACHE_CONTROL </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><p class="long_description"></p></div></div>
+</div>
+<a name="X_MS_BLOB_CONTENT_ENCODING" id="X_MS_BLOB_CONTENT_ENCODING"> </a><div class="element clickable constant  X_MS_BLOB_CONTENT_ENCODING" data-toggle="collapse" data-target=".X_MS_BLOB_CONTENT_ENCODING .collapse">
+<h2>X_MS_BLOB_CONTENT_ENCODING</h2>
+<pre>X_MS_BLOB_CONTENT_ENCODING </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><p class="long_description"></p></div></div>
+</div>
+<a name="X_MS_BLOB_CONTENT_LANGUAGE" id="X_MS_BLOB_CONTENT_LANGUAGE"> </a><div class="element clickable constant  X_MS_BLOB_CONTENT_LANGUAGE" data-toggle="collapse" data-target=".X_MS_BLOB_CONTENT_LANGUAGE .collapse">
+<h2>X_MS_BLOB_CONTENT_LANGUAGE</h2>
+<pre>X_MS_BLOB_CONTENT_LANGUAGE </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><p class="long_description"></p></div></div>
+</div>
+<a name="X_MS_BLOB_CONTENT_LENGTH" id="X_MS_BLOB_CONTENT_LENGTH"> </a><div class="element clickable constant  X_MS_BLOB_CONTENT_LENGTH" data-toggle="collapse" data-target=".X_MS_BLOB_CONTENT_LENGTH .collapse">
+<h2>X_MS_BLOB_CONTENT_LENGTH</h2>
+<pre>X_MS_BLOB_CONTENT_LENGTH </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><p class="long_description"></p></div></div>
+</div>
+<a name="X_MS_BLOB_CONTENT_MD5" id="X_MS_BLOB_CONTENT_MD5"> </a><div class="element clickable constant  X_MS_BLOB_CONTENT_MD5" data-toggle="collapse" data-target=".X_MS_BLOB_CONTENT_MD5 .collapse">
+<h2>X_MS_BLOB_CONTENT_MD5</h2>
+<pre>X_MS_BLOB_CONTENT_MD5 </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><p class="long_description"></p></div></div>
+</div>
+<a name="X_MS_BLOB_CONTENT_TYPE" id="X_MS_BLOB_CONTENT_TYPE"> </a><div class="element clickable constant  X_MS_BLOB_CONTENT_TYPE" data-toggle="collapse" data-target=".X_MS_BLOB_CONTENT_TYPE .collapse">
+<h2>X_MS_BLOB_CONTENT_TYPE</h2>
+<pre>X_MS_BLOB_CONTENT_TYPE </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><p class="long_description"></p></div></div>
+</div>
+<a name="X_MS_BLOB_PUBLIC_ACCESS" id="X_MS_BLOB_PUBLIC_ACCESS"> </a><div class="element clickable constant  X_MS_BLOB_PUBLIC_ACCESS" data-toggle="collapse" data-target=".X_MS_BLOB_PUBLIC_ACCESS .collapse">
+<h2>X_MS_BLOB_PUBLIC_ACCESS</h2>
+<pre>X_MS_BLOB_PUBLIC_ACCESS </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><p class="long_description"></p></div></div>
+</div>
+<a name="X_MS_BLOB_SEQUENCE_NUMBER" id="X_MS_BLOB_SEQUENCE_NUMBER"> </a><div class="element clickable constant  X_MS_BLOB_SEQUENCE_NUMBER" data-toggle="collapse" data-target=".X_MS_BLOB_SEQUENCE_NUMBER .collapse">
+<h2>X_MS_BLOB_SEQUENCE_NUMBER</h2>
+<pre>X_MS_BLOB_SEQUENCE_NUMBER </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><p class="long_description"></p></div></div>
+</div>
+<a name="X_MS_BLOB_SEQUENCE_NUMBER_ACTION" id="X_MS_BLOB_SEQUENCE_NUMBER_ACTION"> </a><div class="element clickable constant  X_MS_BLOB_SEQUENCE_NUMBER_ACTION" data-toggle="collapse" data-target=".X_MS_BLOB_SEQUENCE_NUMBER_ACTION .collapse">
+<h2>X_MS_BLOB_SEQUENCE_NUMBER_ACTION</h2>
+<pre>X_MS_BLOB_SEQUENCE_NUMBER_ACTION </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><p class="long_description"></p></div></div>
+</div>
+<a name="X_MS_BLOB_TYPE" id="X_MS_BLOB_TYPE"> </a><div class="element clickable constant  X_MS_BLOB_TYPE" data-toggle="collapse" data-target=".X_MS_BLOB_TYPE .collapse">
+<h2>X_MS_BLOB_TYPE</h2>
+<pre>X_MS_BLOB_TYPE </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><p class="long_description"></p></div></div>
+</div>
+<a name="X_MS_CONTINUATION_NEXTPARTITIONKEY" id="X_MS_CONTINUATION_NEXTPARTITIONKEY"> </a><div class="element clickable constant  X_MS_CONTINUATION_NEXTPARTITIONKEY" data-toggle="collapse" data-target=".X_MS_CONTINUATION_NEXTPARTITIONKEY .collapse">
+<h2>X_MS_CONTINUATION_NEXTPARTITIONKEY</h2>
+<pre>X_MS_CONTINUATION_NEXTPARTITIONKEY </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><p class="long_description"></p></div></div>
+</div>
+<a name="X_MS_CONTINUATION_NEXTROWKEY" id="X_MS_CONTINUATION_NEXTROWKEY"> </a><div class="element clickable constant  X_MS_CONTINUATION_NEXTROWKEY" data-toggle="collapse" data-target=".X_MS_CONTINUATION_NEXTROWKEY .collapse">
+<h2>X_MS_CONTINUATION_NEXTROWKEY</h2>
+<pre>X_MS_CONTINUATION_NEXTROWKEY </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><p class="long_description"></p></div></div>
+</div>
+<a name="X_MS_CONTINUATION_NEXTTABLENAME" id="X_MS_CONTINUATION_NEXTTABLENAME"> </a><div class="element clickable constant  X_MS_CONTINUATION_NEXTTABLENAME" data-toggle="collapse" data-target=".X_MS_CONTINUATION_NEXTTABLENAME .collapse">
+<h2>X_MS_CONTINUATION_NEXTTABLENAME</h2>
+<pre>X_MS_CONTINUATION_NEXTTABLENAME </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><p class="long_description"></p></div></div>
+</div>
+<a name="X_MS_COPY_SOURCE" id="X_MS_COPY_SOURCE"> </a><div class="element clickable constant  X_MS_COPY_SOURCE" data-toggle="collapse" data-target=".X_MS_COPY_SOURCE .collapse">
+<h2>X_MS_COPY_SOURCE</h2>
+<pre>X_MS_COPY_SOURCE </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><p class="long_description"></p></div></div>
+</div>
+<a name="X_MS_DATE" id="X_MS_DATE"> </a><div class="element clickable constant  X_MS_DATE" data-toggle="collapse" data-target=".X_MS_DATE .collapse">
+<h2>X_MS_DATE</h2>
+<pre>X_MS_DATE </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><p class="long_description"></p></div></div>
+</div>
+<a name="X_MS_DELETE_SNAPSHOTS" id="X_MS_DELETE_SNAPSHOTS"> </a><div class="element clickable constant  X_MS_DELETE_SNAPSHOTS" data-toggle="collapse" data-target=".X_MS_DELETE_SNAPSHOTS .collapse">
+<h2>X_MS_DELETE_SNAPSHOTS</h2>
+<pre>X_MS_DELETE_SNAPSHOTS </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><p class="long_description"></p></div></div>
+</div>
+<a name="X_MS_HEADER_PREFIX" id="X_MS_HEADER_PREFIX"> </a><div class="element clickable constant  X_MS_HEADER_PREFIX" data-toggle="collapse" data-target=".X_MS_HEADER_PREFIX .collapse">
+<h2>X_MS_HEADER_PREFIX</h2>
+<pre>X_MS_HEADER_PREFIX </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><p class="long_description"></p></div></div>
+</div>
+<a name="X_MS_LEASE_ACTION" id="X_MS_LEASE_ACTION"> </a><div class="element clickable constant  X_MS_LEASE_ACTION" data-toggle="collapse" data-target=".X_MS_LEASE_ACTION .collapse">
+<h2>X_MS_LEASE_ACTION</h2>
+<pre>X_MS_LEASE_ACTION </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><p class="long_description"></p></div></div>
+</div>
+<a name="X_MS_LEASE_ID" id="X_MS_LEASE_ID"> </a><div class="element clickable constant  X_MS_LEASE_ID" data-toggle="collapse" data-target=".X_MS_LEASE_ID .collapse">
+<h2>X_MS_LEASE_ID</h2>
+<pre>X_MS_LEASE_ID </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><p class="long_description"></p></div></div>
+</div>
+<a name="X_MS_LEASE_STATUS" id="X_MS_LEASE_STATUS"> </a><div class="element clickable constant  X_MS_LEASE_STATUS" data-toggle="collapse" data-target=".X_MS_LEASE_STATUS .collapse">
+<h2>X_MS_LEASE_STATUS</h2>
+<pre>X_MS_LEASE_STATUS </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><p class="long_description"></p></div></div>
+</div>
+<a name="X_MS_META_HEADER_PREFIX" id="X_MS_META_HEADER_PREFIX"> </a><div class="element clickable constant  X_MS_META_HEADER_PREFIX" data-toggle="collapse" data-target=".X_MS_META_HEADER_PREFIX .collapse">
+<h2>X_MS_META_HEADER_PREFIX</h2>
+<pre>X_MS_META_HEADER_PREFIX </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><p class="long_description"></p></div></div>
+</div>
+<a name="X_MS_PAGE_WRITE" id="X_MS_PAGE_WRITE"> </a><div class="element clickable constant  X_MS_PAGE_WRITE" data-toggle="collapse" data-target=".X_MS_PAGE_WRITE .collapse">
+<h2>X_MS_PAGE_WRITE</h2>
+<pre>X_MS_PAGE_WRITE </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><p class="long_description"></p></div></div>
+</div>
+<a name="X_MS_POPRECEIPT" id="X_MS_POPRECEIPT"> </a><div class="element clickable constant  X_MS_POPRECEIPT" data-toggle="collapse" data-target=".X_MS_POPRECEIPT .collapse">
+<h2>X_MS_POPRECEIPT</h2>
+<pre>X_MS_POPRECEIPT </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><p class="long_description"></p></div></div>
+</div>
+<a name="X_MS_RANGE" id="X_MS_RANGE"> </a><div class="element clickable constant  X_MS_RANGE" data-toggle="collapse" data-target=".X_MS_RANGE .collapse">
+<h2>X_MS_RANGE</h2>
+<pre>X_MS_RANGE </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><p class="long_description"></p></div></div>
+</div>
+<a name="X_MS_RANGE_GET_CONTENT_MD5" id="X_MS_RANGE_GET_CONTENT_MD5"> </a><div class="element clickable constant  X_MS_RANGE_GET_CONTENT_MD5" data-toggle="collapse" data-target=".X_MS_RANGE_GET_CONTENT_MD5 .collapse">
+<h2>X_MS_RANGE_GET_CONTENT_MD5</h2>
+<pre>X_MS_RANGE_GET_CONTENT_MD5 </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><p class="long_description"></p></div></div>
+</div>
+<a name="X_MS_REQUEST_ID" id="X_MS_REQUEST_ID"> </a><div class="element clickable constant  X_MS_REQUEST_ID" data-toggle="collapse" data-target=".X_MS_REQUEST_ID .collapse">
+<h2>X_MS_REQUEST_ID</h2>
+<pre>X_MS_REQUEST_ID </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><p class="long_description"></p></div></div>
+</div>
+<a name="X_MS_SNAPSHOT" id="X_MS_SNAPSHOT"> </a><div class="element clickable constant  X_MS_SNAPSHOT" data-toggle="collapse" data-target=".X_MS_SNAPSHOT .collapse">
+<h2>X_MS_SNAPSHOT</h2>
+<pre>X_MS_SNAPSHOT </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><p class="long_description"></p></div></div>
+</div>
+<a name="X_MS_SOURCE_IF_MATCH" id="X_MS_SOURCE_IF_MATCH"> </a><div class="element clickable constant  X_MS_SOURCE_IF_MATCH" data-toggle="collapse" data-target=".X_MS_SOURCE_IF_MATCH .collapse">
+<h2>X_MS_SOURCE_IF_MATCH</h2>
+<pre>X_MS_SOURCE_IF_MATCH </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><p class="long_description"></p></div></div>
+</div>
+<a name="X_MS_SOURCE_IF_MODIFIED_SINCE" id="X_MS_SOURCE_IF_MODIFIED_SINCE"> </a><div class="element clickable constant  X_MS_SOURCE_IF_MODIFIED_SINCE" data-toggle="collapse" data-target=".X_MS_SOURCE_IF_MODIFIED_SINCE .collapse">
+<h2>X_MS_SOURCE_IF_MODIFIED_SINCE</h2>
+<pre>X_MS_SOURCE_IF_MODIFIED_SINCE </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><p class="long_description"></p></div></div>
+</div>
+<a name="X_MS_SOURCE_IF_NONE_MATCH" id="X_MS_SOURCE_IF_NONE_MATCH"> </a><div class="element clickable constant  X_MS_SOURCE_IF_NONE_MATCH" data-toggle="collapse" data-target=".X_MS_SOURCE_IF_NONE_MATCH .collapse">
+<h2>X_MS_SOURCE_IF_NONE_MATCH</h2>
+<pre>X_MS_SOURCE_IF_NONE_MATCH </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><p class="long_description"></p></div></div>
+</div>
+<a name="X_MS_SOURCE_IF_UNMODIFIED_SINCE" id="X_MS_SOURCE_IF_UNMODIFIED_SINCE"> </a><div class="element clickable constant  X_MS_SOURCE_IF_UNMODIFIED_SINCE" data-toggle="collapse" data-target=".X_MS_SOURCE_IF_UNMODIFIED_SINCE .collapse">
+<h2>X_MS_SOURCE_IF_UNMODIFIED_SINCE</h2>
+<pre>X_MS_SOURCE_IF_UNMODIFIED_SINCE </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><p class="long_description"></p></div></div>
+</div>
+<a name="X_MS_SOURCE_LEASE_ID" id="X_MS_SOURCE_LEASE_ID"> </a><div class="element clickable constant  X_MS_SOURCE_LEASE_ID" data-toggle="collapse" data-target=".X_MS_SOURCE_LEASE_ID .collapse">
+<h2>X_MS_SOURCE_LEASE_ID</h2>
+<pre>X_MS_SOURCE_LEASE_ID </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><p class="long_description"></p></div></div>
+</div>
+<a name="X_MS_TIME_NEXT_VISIBLE" id="X_MS_TIME_NEXT_VISIBLE"> </a><div class="element clickable constant  X_MS_TIME_NEXT_VISIBLE" data-toggle="collapse" data-target=".X_MS_TIME_NEXT_VISIBLE .collapse">
+<h2>X_MS_TIME_NEXT_VISIBLE</h2>
+<pre>X_MS_TIME_NEXT_VISIBLE </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><p class="long_description"></p></div></div>
+</div>
+<a name="X_MS_VERSION" id="X_MS_VERSION"> </a><div class="element clickable constant  X_MS_VERSION" data-toggle="collapse" data-target=".X_MS_VERSION .collapse">
+<h2>X_MS_VERSION</h2>
+<pre>X_MS_VERSION </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><p class="long_description"></p></div></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="row"><footer class="span12">
+            Template is built using <a href="http://twitter.github.com/bootstrap/">Twitter Bootstrap 2</a> and icons provided by <a href="http://glyphicons.com/">Glyphicons</a>.<br>
+            Documentation is powered by <a href="http://www.phpdoc.org/">phpDocumentor 2.0.0a6</a> and<br>
+            generated on 2012-07-17T21:10:38-07:00.<br></footer></div>
+</div>
+</body>
+</html>

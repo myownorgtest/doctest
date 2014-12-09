@@ -1,0 +1,1158 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>batchapps.job &mdash; azure-batch-apps 0.2.0 documentation</title>
+    
+    <link rel="stylesheet" href="../../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '0.2.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <link rel="top" title="azure-batch-apps 0.2.0 documentation" href="../../index.html" />
+    <link rel="up" title="Module code" href="../index.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../../index.html">azure-batch-apps 0.2.0 documentation</a> &raquo;</li>
+          <li><a href="../index.html" accesskey="U">Module code</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <h1>Source code for batchapps.job</h1><div class="highlight"><pre>
+<span class="c">#-------------------------------------------------------------------------</span>
+<span class="c"># The Azure Batch Apps Python Client</span>
+<span class="c">#</span>
+<span class="c"># Copyright (c) Microsoft Corporation. All rights reserved. </span>
+<span class="c">#</span>
+<span class="c"># The MIT License (MIT)</span>
+<span class="c">#</span>
+<span class="c"># Permission is hereby granted, free of charge, to any person obtaining a copy</span>
+<span class="c"># of this software and associated documentation files (the &quot;&quot;Software&quot;&quot;), to deal</span>
+<span class="c"># in the Software without restriction, including without limitation the rights</span>
+<span class="c"># to use, copy, modify, merge, publish, distribute, sublicense, and/or sell</span>
+<span class="c"># copies of the Software, and to permit persons to whom the Software is</span>
+<span class="c"># furnished to do so, subject to the following conditions:</span>
+<span class="c">#</span>
+<span class="c"># The above copyright notice and this permission notice shall be included in</span>
+<span class="c"># all copies or substantial portions of the Software.</span>
+<span class="c">#</span>
+<span class="c"># THE SOFTWARE IS PROVIDED *AS IS*, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR</span>
+<span class="c"># IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,</span>
+<span class="c"># FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE</span>
+<span class="c"># AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER</span>
+<span class="c"># LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,</span>
+<span class="c"># OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN</span>
+<span class="c"># THE SOFTWARE.</span>
+<span class="c">#</span>
+<span class="c">#--------------------------------------------------------------------------</span>
+
+<span class="kn">from</span> <span class="nn">batchapps.exceptions</span> <span class="kn">import</span> <span class="n">FileDownloadException</span>
+<span class="kn">from</span> <span class="nn">batchapps</span> <span class="kn">import</span> <span class="n">utils</span>
+<span class="kn">from</span> <span class="nn">batchapps.utils</span> <span class="kn">import</span> <span class="n">Listener</span>
+<span class="kn">from</span> <span class="nn">batchapps.files</span> <span class="kn">import</span> <span class="p">(</span>
+    <span class="n">UserFile</span><span class="p">,</span>
+    <span class="n">FileCollection</span><span class="p">)</span>
+
+<span class="kn">import</span> <span class="nn">multiprocessing</span>
+<span class="kn">import</span> <span class="nn">time</span>
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">tempfile</span>
+<span class="kn">import</span> <span class="nn">random</span>
+<span class="kn">import</span> <span class="nn">string</span>
+<span class="kn">import</span> <span class="nn">logging</span>
+
+
+<div class="viewcode-block" id="JobSubmission"><a class="viewcode-back" href="../../batch_apps.job.html#batchapps.job.JobSubmission">[docs]</a><span class="k">class</span> <span class="nc">JobSubmission</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Description of a new processing request to be sent to the cloud.</span>
+<span class="sd">    Specifies application to be used, the files required for processing and</span>
+<span class="sd">    any additional parameters required for the processing.</span>
+<span class="sd">    It also specifies the requested compute resouces to be dedicated to the</span>
+<span class="sd">    job on submission.</span>
+
+<span class="sd">    :Attributes:</span>
+<span class="sd">        - name (str)</span>
+<span class="sd">        - required_files (:py:class:`.FileCollection`)</span>
+<span class="sd">        - source (str)</span>
+<span class="sd">        - instances (int)</span>
+<span class="sd">        - params (dict)</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">client</span><span class="p">,</span> <span class="n">job_name</span><span class="p">,</span> <span class="o">**</span><span class="n">job_settings</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        :Args:</span>
+<span class="sd">            - client (:py:class:`.BatchAppsApi`): A configured and</span>
+<span class="sd">              authenticated API instance.</span>
+<span class="sd">            - job_name (str): A name for the new job.</span>
+
+<span class="sd">        :Kwargs:</span>
+<span class="sd">            - job_settings (dict): *Optional* Additional job settings or</span>
+<span class="sd">              parameters can be added as keyword arguments. These include:</span>
+<span class="sd">                  - &#39;params&#39;: A string dict of job parameters to add to the</span>
+<span class="sd">                    submission.</span>
+<span class="sd">                  - &#39;files&#39;: A :py:class:`.FileCollection` of required files</span>
+<span class="sd">                    to include with the job.</span>
+<span class="sd">                  - &#39;job_file&#39;: The name (str) of the file that should be</span>
+<span class="sd">                    used to start the job. This filename should be</span>
+<span class="sd">                    included in the above ``files`` collection.</span>
+<span class="sd">                  - &#39;instances&#39;: The number (int) of instances to allocate</span>
+<span class="sd">                    to the job on submission.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">client</span><span class="p">,</span> <span class="s">&#39;send_job&#39;</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span>
+                <span class="s">&quot;client must be an authenticated BatchAppsApi object.&quot;</span><span class="p">)</span>
+
+        <span class="nb">super</span><span class="p">(</span><span class="n">JobSubmission</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">__setattr__</span><span class="p">(</span>
+            <span class="s">&#39;_api&#39;</span><span class="p">,</span> <span class="n">client</span><span class="p">)</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">JobSubmission</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">__setattr__</span><span class="p">(</span>
+            <span class="s">&#39;_log&#39;</span><span class="p">,</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="s">&#39;batch_apps&#39;</span><span class="p">))</span>
+
+        <span class="nb">super</span><span class="p">(</span><span class="n">JobSubmission</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">__setattr__</span><span class="p">(</span>
+            <span class="s">&#39;name&#39;</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="n">job_name</span><span class="p">))</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">JobSubmission</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">__setattr__</span><span class="p">(</span>
+            <span class="s">&#39;params&#39;</span><span class="p">,</span> <span class="n">job_settings</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">&#39;params&#39;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_default_params</span><span class="p">()))</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">JobSubmission</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">__setattr__</span><span class="p">(</span>
+            <span class="s">&#39;required_files&#39;</span><span class="p">,</span> <span class="n">job_settings</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">&#39;files&#39;</span><span class="p">,</span> <span class="bp">None</span><span class="p">))</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">JobSubmission</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">__setattr__</span><span class="p">(</span>
+            <span class="s">&#39;source&#39;</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="n">job_settings</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">&#39;job_file&#39;</span><span class="p">,</span> <span class="s">&quot;&quot;</span><span class="p">)))</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">JobSubmission</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">__setattr__</span><span class="p">(</span>
+            <span class="s">&#39;instances&#39;</span><span class="p">,</span> <span class="nb">int</span><span class="p">(</span><span class="n">job_settings</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">&#39;instances&#39;</span><span class="p">,</span> <span class="mi">0</span><span class="p">)))</span>
+
+    <span class="k">def</span> <span class="nf">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Job submission as a string</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            - A string of the jobsubmission object as dict</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">__dict__</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">__getattr__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Get job attribute, or job parameter.</span>
+<span class="sd">        This will only be called if :py:class:`.JobSubmission` object does</span>
+<span class="sd">        not have the requested attribute, in which case the job parameters</span>
+<span class="sd">        dictionary will be searched for a matching key.</span>
+
+<span class="sd">        :Returns:</span>
+<span class="sd">            - The value (str) of the parameter if it is found.</span>
+
+<span class="sd">        :Raises:</span>
+<span class="sd">            - :py:exc:`AttributeError` if the requested attribute/parameter</span>
+<span class="sd">              does not exist.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c">#TODO: Make all parameters case-insensitive.</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="k">return</span> <span class="nb">super</span><span class="p">(</span>
+                <span class="n">JobSubmission</span><span class="p">,</span>
+                <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">__getattribute__</span><span class="p">(</span><span class="s">&#39;params&#39;</span><span class="p">)[</span><span class="nb">str</span><span class="p">(</span><span class="n">name</span><span class="p">)]</span>
+
+        <span class="k">except</span> <span class="ne">KeyError</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">AttributeError</span><span class="p">(</span><span class="s">&quot;&#39;JobSubmission&#39; object has no attribute or &quot;</span>
+                                 <span class="s">&quot;parameter: {atr}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">atr</span><span class="o">=</span><span class="n">name</span><span class="p">))</span>
+
+    <span class="k">def</span> <span class="nf">__setattr__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Set job attribte if it exists, or add job parameter.</span>
+<span class="sd">        If the :py:class:`.JobSubmission` object has the named attribute</span>
+<span class="sd">        this will be set. If no such attribute exists, the key and value will</span>
+<span class="sd">        be added as a string pair to the job parameters dictionary.</span>
+
+<span class="sd">        :Args:</span>
+<span class="sd">            - name (str): The name of the attribute/parameter to be set.</span>
+<span class="sd">            - value: The value of the attribute/parameter to set to. If this</span>
+<span class="sd">              value is added as a parameter, it will be converted to a string</span>
+<span class="sd">              regardless of its initial type.</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">):</span>
+            <span class="nb">super</span><span class="p">(</span><span class="n">JobSubmission</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">__setattr__</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span>
+
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">params</span><span class="p">[</span><span class="nb">str</span><span class="p">(</span><span class="n">name</span><span class="p">)]</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">value</span><span class="p">)</span> <span class="c">#TODO: resolve parameter cases</span>
+
+    <span class="k">def</span> <span class="nf">__delattr__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Clear job attribute or delete parameter if it exists</span>
+
+<span class="sd">        :Args:</span>
+<span class="sd">            - name (str): The name of the attribute/parameter to wipe.</span>
+
+<span class="sd">        :Raises:</span>
+<span class="sd">            - :py:class:`AttributeError` if the :py:class:`.JobSubmission`</span>
+<span class="sd">              object has no attribute or parameter of that name.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="nb">super</span><span class="p">(</span><span class="n">JobSubmission</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">__delattr__</span><span class="p">(</span><span class="n">name</span><span class="p">)</span>
+            <span class="k">return</span>
+
+        <span class="k">except</span> <span class="ne">AttributeError</span><span class="p">:</span>
+            <span class="k">pass</span>
+
+        <span class="k">try</span><span class="p">:</span>
+            <span class="k">del</span> <span class="bp">self</span><span class="o">.</span><span class="n">params</span><span class="p">[</span><span class="nb">str</span><span class="p">(</span><span class="n">name</span><span class="p">)]</span> <span class="c"># TODO: resolve parameter cases</span>
+
+        <span class="k">except</span> <span class="ne">KeyError</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">AttributeError</span><span class="p">(</span><span class="s">&quot;&#39;JobSubmission&#39; object has no attribute or &quot;</span>
+                                 <span class="s">&quot;parameter: {atr}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">atr</span><span class="o">=</span><span class="n">name</span><span class="p">))</span>
+
+    <span class="k">def</span> <span class="nf">_filter_params</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Parses job parameters before submission.</span>
+<span class="sd">        Checks the job submission parameters against the defaults for that</span>
+<span class="sd">        application, and adds additional parameters where necessary.</span>
+<span class="sd">        The new dictionary is formatted for the REST client (See</span>
+<span class="sd">        :py:func:`batchapps.utils.format_dictionary()`).</span>
+
+<span class="sd">        :Returns:</span>
+<span class="sd">            - Updated, formatted, parameters dictionary after cross-referencing</span>
+<span class="sd">              against defaults.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">default_params</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_default_params</span><span class="p">()</span>
+        <span class="n">complete_params</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">get_default_params</span><span class="p">())</span>
+        <span class="n">complete_params</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">params</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">utils</span><span class="o">.</span><span class="n">format_dictionary</span><span class="p">(</span><span class="n">complete_params</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">_create_job_message</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Create job message for submitting to the REST API.</span>
+<span class="sd">        Only used internally on job submission (see :py:meth:.submit()).</span>
+
+<span class="sd">        :Returns:</span>
+<span class="sd">            - Dictionary of the job submission formatted for the REST API.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c">#TODO: Final check of source file, add xml settings, allow for user</span>
+        <span class="c">#      to set priority, verify all job data is correct format</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">hasattr</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">required_files</span><span class="p">,</span> <span class="s">&#39;_get_message&#39;</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">add_file_collection</span><span class="p">()</span>
+
+        <span class="n">job_message</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s">&#39;Name&#39;</span><span class="p">:</span> <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">),</span>
+            <span class="s">&#39;Type&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">_api</span><span class="o">.</span><span class="n">jobtype</span><span class="p">(),</span>
+            <span class="s">&#39;RequiredFiles&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">required_files</span><span class="o">.</span><span class="n">_get_message</span><span class="p">(</span><span class="s">&quot;submit&quot;</span><span class="p">),</span>
+            <span class="s">&#39;Pool&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s">&#39;InstanceCount&#39;</span><span class="p">:</span> <span class="nb">str</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">instances</span><span class="p">))},</span>
+            <span class="s">&#39;Parameters&#39;</span><span class="p">:</span> <span class="nb">list</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_filter_params</span><span class="p">()),</span>
+            <span class="s">&#39;JobFile&#39;</span><span class="p">:</span> <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">source</span><span class="p">),</span>
+            <span class="s">&#39;Settings&#39;</span><span class="p">:</span> <span class="s">&#39;&#39;</span><span class="p">,</span>
+            <span class="s">&#39;Priority&#39;</span><span class="p">:</span> <span class="s">&#39;Medium&#39;</span>
+        <span class="p">}</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_log</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s">&quot;Job message: {0}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">job_message</span><span class="p">))</span>
+        <span class="k">return</span> <span class="n">job_message</span>
+
+<div class="viewcode-block" id="JobSubmission.add_file_collection"><a class="viewcode-back" href="../../batch_apps.job.html#batchapps.job.JobSubmission.add_file_collection">[docs]</a>    <span class="k">def</span> <span class="nf">add_file_collection</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">file_collection</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Assign a file collection to the job.</span>
+<span class="sd">        The userfiles assigned to a job submission will be loaded onto each</span>
+<span class="sd">        node prior to the job being executed.</span>
+
+<span class="sd">        :Kwargs:</span>
+<span class="sd">            - file_collection (:py:class:`.FileCollection`): If set, this will</span>
+<span class="sd">              be assigned as the :py:class:`.FileCollection` of the job. If</span>
+<span class="sd">              not set, a new :py:class:`.FileCollection` will be created.</span>
+
+<span class="sd">        :Raises:</span>
+<span class="sd">            - :py:exc:`TypeError` if a non-:py:class:`.FileCollection` is</span>
+<span class="sd">              passed in.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">file_collection</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_log</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s">&quot;Assigning empty FileCollection to job&quot;</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">required_files</span> <span class="o">=</span> <span class="n">FileCollection</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_api</span><span class="p">)</span>
+
+        <span class="k">elif</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">file_collection</span><span class="p">,</span> <span class="s">&#39;add&#39;</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_log</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s">&quot;Assigning FileCollection with {0} &quot;</span>
+                            <span class="s">&quot;userfiles to job&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">file_collection</span><span class="p">)))</span>
+
+            <span class="bp">self</span><span class="o">.</span><span class="n">required_files</span> <span class="o">=</span> <span class="n">file_collection</span>
+
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s">&quot;Can only assign an object of type FileCollection&quot;</span>
+                            <span class="s">&quot;, not {type}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="nb">type</span><span class="o">=</span><span class="nb">type</span><span class="p">(</span><span class="n">file_collection</span><span class="p">)))</span>
+</div>
+<div class="viewcode-block" id="JobSubmission.get_default_params"><a class="viewcode-back" href="../../batch_apps.job.html#batchapps.job.JobSubmission.get_default_params">[docs]</a>    <span class="k">def</span> <span class="nf">get_default_params</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Get default parameters.</span>
+<span class="sd">        Get the parameters specified in the :class:`.Configuration` for the</span>
+<span class="sd">        current application.</span>
+
+<span class="sd">        :Returns:</span>
+<span class="sd">            - The parameters as a dictionary of strings.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_api</span><span class="o">.</span><span class="n">default_params</span><span class="p">()</span>
+</div>
+<div class="viewcode-block" id="JobSubmission.add_file"><a class="viewcode-back" href="../../batch_apps.job.html#batchapps.job.JobSubmission.add_file">[docs]</a>    <span class="k">def</span> <span class="nf">add_file</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">userfile</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Add userfile to required files list.</span>
+<span class="sd">        If the job does not have an :class:`.FileCollection` already assigned,</span>
+<span class="sd">        a new one will be created.</span>
+
+<span class="sd">        :Args:</span>
+<span class="sd">            - userfile (:class:`.UserFile`): The userfile to be added to</span>
+<span class="sd">              the job.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">required_files</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">required_files</span> <span class="o">=</span> <span class="n">FileCollection</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_api</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">required_files</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">userfile</span><span class="p">)</span>
+</div>
+<div class="viewcode-block" id="JobSubmission.set_job_file"><a class="viewcode-back" href="../../batch_apps.job.html#batchapps.job.JobSubmission.set_job_file">[docs]</a>    <span class="k">def</span> <span class="nf">set_job_file</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">jobfile</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Set file as the source from which the job will be started.</span>
+<span class="sd">        This will be the file that is executed to started the job.</span>
+
+<span class="sd">        :Args:</span>
+<span class="sd">            - jobfile (:class:`.UserFile`, int): The userfile to be used. This</span>
+<span class="sd">              can also be the index of a userfile in the collection, or it</span>
+<span class="sd">              can be an :class:`.UserFile` object.</span>
+<span class="sd">              If a new :class:`.UserFile` object is passed in, it will also</span>
+<span class="sd">              be added to the required files collection.</span>
+
+<span class="sd">        :Raises:</span>
+<span class="sd">            - :exc:`ValueError` if ``jobfile`` is not an in-range index,</span>
+<span class="sd">              or of an invalid type.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">required_files</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s">&quot;This job has no associated FileCollection.&quot;</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">jobfile</span><span class="p">,</span> <span class="s">&quot;create_query_specifier&quot;</span><span class="p">):</span>
+
+            <span class="k">if</span> <span class="n">jobfile</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">required_files</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_log</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s">&quot;Assigned job file not in collection, &quot;</span>
+                               <span class="s">&quot;adding to required files&quot;</span><span class="p">)</span>
+
+                <span class="bp">self</span><span class="o">.</span><span class="n">required_files</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">jobfile</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">source</span> <span class="o">=</span> <span class="n">jobfile</span><span class="o">.</span><span class="n">name</span>
+
+        <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">jobfile</span><span class="p">,</span> <span class="nb">int</span><span class="p">)</span> <span class="ow">and</span> <span class="n">jobfile</span> <span class="o">&lt;</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">required_files</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">source</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">required_files</span><span class="p">[</span><span class="n">jobfile</span><span class="p">]</span><span class="o">.</span><span class="n">name</span>
+
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+                <span class="s">&quot;No job file to match {0} could be found.&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">jobfile</span><span class="p">))</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_log</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span>
+            <span class="s">&quot;Assigned file: {0} as starting job file&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">source</span><span class="p">))</span>
+</div>
+<div class="viewcode-block" id="JobSubmission.submit"><a class="viewcode-back" href="../../batch_apps.job.html#batchapps.job.JobSubmission.submit">[docs]</a>    <span class="k">def</span> <span class="nf">submit</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Submit the job.</span>
+
+<span class="sd">        :Returns:</span>
+<span class="sd">            - If successful, a dictionary holding the new job&#39;s ID and a URL</span>
+<span class="sd">              to get the job details (See: :meth:`.SubmittedJob.update()`).</span>
+<span class="sd">              Dictionary has the keys: ``[&#39;jobId&#39;, &#39;link&#39;]``</span>
+
+<span class="sd">        :Raises:</span>
+<span class="sd">            - :class:`.RestCallException` if job submission failed.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">resp</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_api</span><span class="o">.</span><span class="n">send_job</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_create_job_message</span><span class="p">())</span>
+
+        <span class="k">if</span> <span class="n">resp</span><span class="o">.</span><span class="n">success</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_log</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s">&quot;Job successfull submitted with ID: &quot;</span>
+                           <span class="s">&quot;{0}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">resp</span><span class="o">.</span><span class="n">result</span><span class="p">[</span><span class="s">&#39;jobId&#39;</span><span class="p">]))</span>
+
+            <span class="k">return</span> <span class="n">resp</span><span class="o">.</span><span class="n">result</span>
+
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">resp</span><span class="o">.</span><span class="n">result</span>
+</div></div>
+<div class="viewcode-block" id="SubmittedJob"><a class="viewcode-back" href="../../batch_apps.job.html#batchapps.job.SubmittedJob">[docs]</a><span class="k">class</span> <span class="nc">SubmittedJob</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Representation of a job that has been submitted for processing in</span>
+<span class="sd">    the cloud. Can be used to track the process of the job and to collect</span>
+<span class="sd">    it&#39;s outputs.</span>
+
+<span class="sd">    :Attributes:</span>
+<span class="sd">        - type (str)</span>
+<span class="sd">        - name (str)</span>
+<span class="sd">        - tasks (list of :class:`.Task`)</span>
+<span class="sd">        - percentage</span>
+<span class="sd">        - xml_settings (str)</span>
+<span class="sd">        - status (str)</span>
+<span class="sd">        - time_submitted</span>
+<span class="sd">        - time_started</span>
+<span class="sd">        - time_completed</span>
+<span class="sd">        - requested_instances</span>
+<span class="sd">        - number_tasks</span>
+<span class="sd">        - output_filename (str)</span>
+<span class="sd">        - output_url (str)</span>
+<span class="sd">        - thumb_url (str)</span>
+<span class="sd">        - tasks_url (str)</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">client</span><span class="p">,</span> <span class="n">job_id</span><span class="p">,</span> <span class="n">job_name</span><span class="p">,</span> <span class="n">job_type</span><span class="p">,</span> <span class="o">**</span><span class="n">job_settings</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        :Args:</span>
+<span class="sd">            - client (:class:`.BatchAppsApi`): A configured and authenticated</span>
+<span class="sd">              Batch Apps Management API instance.</span>
+<span class="sd">            - job_id (str): The ID of the job.</span>
+<span class="sd">            - job_name (str): The name of the job.</span>
+<span class="sd">            - job_type (str): The job type.</span>
+
+<span class="sd">        :Kwargs:</span>
+<span class="sd">            - job_settings (dict): Additional job submission settings.</span>
+<span class="sd">              Will vary depending on what stage during processing the job</span>
+<span class="sd">              is at when the data is collected.</span>
+<span class="sd">              See :meth:`._format_submission()`</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">SubmittedJob</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">__setattr__</span><span class="p">(</span>
+            <span class="s">&#39;_api&#39;</span><span class="p">,</span> <span class="n">client</span><span class="p">)</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">SubmittedJob</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">__setattr__</span><span class="p">(</span>
+            <span class="s">&#39;_log&#39;</span><span class="p">,</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="s">&#39;batch_apps&#39;</span><span class="p">))</span>
+
+        <span class="nb">super</span><span class="p">(</span><span class="n">SubmittedJob</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">__setattr__</span><span class="p">(</span>
+            <span class="s">&#39;id&#39;</span><span class="p">,</span> <span class="n">job_id</span><span class="p">)</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">SubmittedJob</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">__setattr__</span><span class="p">(</span>
+            <span class="s">&#39;name&#39;</span><span class="p">,</span> <span class="n">job_name</span><span class="p">)</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">SubmittedJob</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">__setattr__</span><span class="p">(</span>
+            <span class="s">&#39;type&#39;</span><span class="p">,</span> <span class="n">job_type</span><span class="p">)</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">SubmittedJob</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">__setattr__</span><span class="p">(</span>
+            <span class="s">&#39;tasks&#39;</span><span class="p">,</span> <span class="p">[])</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">SubmittedJob</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">__setattr__</span><span class="p">(</span>
+            <span class="s">&#39;submission&#39;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_format_submission</span><span class="p">(</span><span class="n">job_settings</span><span class="p">))</span>
+
+    <span class="k">def</span> <span class="nf">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;String representation of job.</span>
+
+<span class="sd">        :Returns:</span>
+<span class="sd">            - The dict of the job object.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">__dict__</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">__len__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Length of a job.</span>
+
+<span class="sd">        :Returns:</span>
+<span class="sd">            -The number of tasks in the job is available.</span>
+<span class="sd">             Otherwise 0.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">number_tasks</span>
+        <span class="k">except</span> <span class="ne">AttributeError</span><span class="p">:</span>
+            <span class="k">return</span> <span class="mi">0</span>
+
+    <span class="k">def</span> <span class="nf">__getattr__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Get job attribute, or job submission value.</span>
+<span class="sd">        This will only be called if :class:`.SubmittedJob` object does not</span>
+<span class="sd">        have the requested attribute, in which case the job submission</span>
+<span class="sd">        dictionary will be searched for a matching key.</span>
+
+<span class="sd">        :Returns:</span>
+<span class="sd">            - The value (str) of the parameter if it is found.</span>
+
+<span class="sd">        :Raises:</span>
+<span class="sd">            - :exc:`AttributeError` if the requested attribute/parameter does</span>
+<span class="sd">              not exist.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="k">return</span> <span class="nb">super</span><span class="p">(</span>
+                <span class="n">SubmittedJob</span><span class="p">,</span>
+                <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">__getattribute__</span><span class="p">(</span><span class="s">&#39;submission&#39;</span><span class="p">)[</span><span class="nb">str</span><span class="p">(</span><span class="n">name</span><span class="p">)]</span>
+
+        <span class="k">except</span> <span class="ne">KeyError</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">AttributeError</span><span class="p">(</span><span class="s">&quot;&#39;SubmittedJob&#39; object has no attribute or &quot;</span>
+                                 <span class="s">&quot;parameter: {atr}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">atr</span><span class="o">=</span><span class="n">name</span><span class="p">))</span>
+
+    <span class="k">def</span> <span class="nf">__setattr__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Set job attribte if it exists.</span>
+<span class="sd">        The submission data cannot be overwritten except through using the</span>
+<span class="sd">        :meth:`.update()` call to collect updated date from the server.</span>
+
+<span class="sd">        :Args:</span>
+<span class="sd">            - name (str): Name of the attribte to be set.</span>
+<span class="sd">            - value: Value to set to the attribute.</span>
+
+<span class="sd">        :Raises:</span>
+<span class="sd">            - :exc:`ValueError` if attempts to overwrite submission data.</span>
+<span class="sd">            - :exc:`AttributeError` if attribute or submission key of that</span>
+<span class="sd">              name does not exist.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="k">if</span> <span class="n">name</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">submission</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s">&quot;Can&#39;t override job submission data: &quot;</span>
+                             <span class="s">&quot;{data}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">submission</span><span class="p">[</span><span class="n">name</span><span class="p">]))</span>
+
+        <span class="k">else</span><span class="p">:</span>
+            <span class="nb">super</span><span class="p">(</span><span class="n">SubmittedJob</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">__setattr__</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">__delattr__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Prevent clearing of jobs submission data.</span>
+<span class="sd">        Job submission can only be cleared by deleting the object, or changed</span>
+<span class="sd">        by using :meth:`.update()` to update the status of the job from</span>
+<span class="sd">        the server.</span>
+
+<span class="sd">        :Args:</span>
+<span class="sd">            - name (str): Name of the attribute to be cleared.</span>
+
+<span class="sd">        :Raises:</span>
+<span class="sd">            - :exc:`ValueError` if attribute exists, and deleting is not</span>
+<span class="sd">              allowed.</span>
+<span class="sd">            - :exc:`AttributeError` if attribute or submission data does</span>
+<span class="sd">              not exist.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">SubmittedJob</span><span class="p">,</span> <span class="n">name</span><span class="p">)</span> <span class="ow">or</span> <span class="n">name</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">submission</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s">&quot;Can&#39;t clear job submission data: &quot;</span>
+                             <span class="s">&quot;{data}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">name</span><span class="p">))</span>
+
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">AttributeError</span><span class="p">(</span><span class="s">&quot;&#39;SubmittedJob&#39; object has no attribute: &quot;</span>
+                                 <span class="s">&quot;{atr}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">atr</span><span class="o">=</span><span class="n">name</span><span class="p">))</span>
+
+    <span class="k">def</span> <span class="nf">_format_submission</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">sub</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Format the job submission details dict to be more usable.</span>
+<span class="sd">        The specific data parameters present in submission will vary depending</span>
+<span class="sd">        on the status of the job. Calling :meth:`.update()` will keep the</span>
+<span class="sd">        submission data up-to-date as the job progress in the cloud.</span>
+
+<span class="sd">        :Args:</span>
+<span class="sd">            - sub (dict): Submission dictionary retrieved from calling</span>
+<span class="sd">              :meth:`.update()` or :meth:`.JobManager.get_job()`.</span>
+
+<span class="sd">        :Returns:</span>
+<span class="sd">            - String dictionary. And values not present in ``sub`` are</span>
+<span class="sd">              set to None.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c">#TODO: Format time strings to datetime objects</span>
+        <span class="n">formatted</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="n">formatted</span><span class="p">[</span><span class="s">&#39;percentage&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">sub</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">&#39;percentComplete&#39;</span><span class="p">,</span> <span class="bp">None</span><span class="p">)</span>
+        <span class="n">formatted</span><span class="p">[</span><span class="s">&#39;xml_settings&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">sub</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">&#39;settings&#39;</span><span class="p">,</span> <span class="bp">None</span><span class="p">)</span>
+        <span class="n">formatted</span><span class="p">[</span><span class="s">&#39;status&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">sub</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">&#39;status&#39;</span><span class="p">,</span> <span class="s">&#39;NotStarted&#39;</span><span class="p">)</span>
+        <span class="n">formatted</span><span class="p">[</span><span class="s">&#39;time_submitted&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">sub</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">&#39;submissionTime&#39;</span><span class="p">,</span> <span class="bp">None</span><span class="p">)</span>
+        <span class="n">formatted</span><span class="p">[</span><span class="s">&#39;time_started&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">sub</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">&#39;startTime&#39;</span><span class="p">,</span> <span class="bp">None</span><span class="p">)</span>
+        <span class="n">formatted</span><span class="p">[</span><span class="s">&#39;time_completed&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">sub</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">&#39;completionTime&#39;</span><span class="p">,</span> <span class="bp">None</span><span class="p">)</span>
+        <span class="c">#formatted[&#39;requested_instances&#39;] = sub.get(&#39;pool&#39;, {&#39;instanceCount&#39;:0})[&#39;instanceCount&#39;]</span>
+        <span class="n">formatted</span><span class="p">[</span><span class="s">&#39;requested_instances&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">sub</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">&#39;instanceCount&#39;</span><span class="p">,</span> <span class="mi">0</span><span class="p">))</span>
+        <span class="n">formatted</span><span class="p">[</span><span class="s">&#39;number_tasks&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">sub</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">&#39;taskCount&#39;</span><span class="p">,</span> <span class="mi">0</span><span class="p">))</span>
+        <span class="n">formatted</span><span class="p">[</span><span class="s">&#39;output_filename&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">sub</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">&#39;outputFileName&#39;</span><span class="p">,</span> <span class="bp">None</span><span class="p">)</span>
+        <span class="n">formatted</span><span class="p">[</span><span class="s">&#39;output_url&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">sub</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">&#39;outputLink&#39;</span><span class="p">,</span> <span class="p">{</span><span class="s">&#39;href&#39;</span><span class="p">:</span><span class="bp">None</span><span class="p">})[</span><span class="s">&#39;href&#39;</span><span class="p">]</span>
+        <span class="n">formatted</span><span class="p">[</span><span class="s">&#39;thumb_url&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">sub</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">&#39;previewLink&#39;</span><span class="p">,</span> <span class="p">{</span><span class="s">&#39;href&#39;</span><span class="p">:</span><span class="bp">None</span><span class="p">})[</span><span class="s">&#39;href&#39;</span><span class="p">]</span>
+        <span class="n">formatted</span><span class="p">[</span><span class="s">&#39;tasks_url&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">sub</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">&#39;taskListLink&#39;</span><span class="p">,</span> <span class="p">{</span><span class="s">&#39;href&#39;</span><span class="p">:</span><span class="bp">None</span><span class="p">})[</span><span class="s">&#39;href&#39;</span><span class="p">]</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_log</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s">&quot;Extracted job submission data: {0}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">formatted</span><span class="p">))</span>
+        <span class="k">return</span> <span class="n">formatted</span>
+
+    <span class="k">def</span> <span class="nf">_get_final_output</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">download_dir</span><span class="p">,</span> <span class="n">overwrite</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Internal method to download jobs final output.</span>
+
+<span class="sd">        :Args:</span>
+<span class="sd">            - download_dir (str): The directory the output file will be</span>
+<span class="sd">              written to.</span>
+<span class="sd">            - overwrite (bool): Whether to overwrite the file is it already</span>
+<span class="sd">              exists.</span>
+
+<span class="sd">        :Returns:</span>
+<span class="sd">            - :class:`.Response` object returned directly from</span>
+<span class="sd">              :class:`.BatchAppsApi`.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_log</span><span class="o">.</span><span class="n">info</span><span class="p">(</span>
+            <span class="s">&quot;About to check size of requested output file before downloading&quot;</span><span class="p">)</span>
+
+        <span class="n">output_props</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_api</span><span class="o">.</span><span class="n">props_output</span><span class="p">(</span><span class="n">url</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">output_url</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">output_props</span><span class="o">.</span><span class="n">success</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_log</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s">&quot;Successfully retrieved output size data: &quot;</span>
+                            <span class="s">&quot;{0}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">output_props</span><span class="o">.</span><span class="n">result</span><span class="p">))</span>
+
+            <span class="n">size</span> <span class="o">=</span> <span class="n">output_props</span><span class="o">.</span><span class="n">result</span>
+
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_log</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="s">&quot;Failed to retrieve output size: &quot;</span>
+                            <span class="s">&quot;{0}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">output_props</span><span class="o">.</span><span class="n">result</span><span class="p">))</span>
+            <span class="k">return</span> <span class="n">output_props</span>
+
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_api</span><span class="o">.</span><span class="n">get_output</span><span class="p">(</span><span class="n">download_dir</span><span class="p">,</span>
+                                    <span class="n">size</span><span class="p">,</span>
+                                    <span class="bp">self</span><span class="o">.</span><span class="n">output_filename</span><span class="p">,</span>
+                                    <span class="n">overwrite</span><span class="p">,</span>
+                                    <span class="n">url</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">output_url</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">_get_final_preview</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">download_dir</span><span class="p">,</span> <span class="n">filename</span><span class="p">,</span> <span class="n">overwrite</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Internal method to download jobs final thumbnail.</span>
+<span class="sd">        We don&#39;t bother to check file size for download feedback, as it&#39;s</span>
+<span class="sd">        assumed to be very small.</span>
+
+<span class="sd">        :Args:</span>
+<span class="sd">            - download_dir (str): The directory the output file will be</span>
+<span class="sd">              written to.</span>
+<span class="sd">            - filename (str): The thumbnail filename to use.</span>
+<span class="sd">            - overwrite (bool): Whether to overwrite the file is it already</span>
+<span class="sd">              exists.</span>
+
+<span class="sd">        :Returns:</span>
+<span class="sd">            - :class:`.Response` object returned directly from</span>
+<span class="sd">              :class:`.BatchAppsApi`.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_api</span><span class="o">.</span><span class="n">get_output</span><span class="p">(</span><span class="n">download_dir</span><span class="p">,</span>
+                                    <span class="mi">0</span><span class="p">,</span>
+                                    <span class="n">filename</span><span class="p">,</span>
+                                    <span class="n">overwrite</span><span class="p">,</span>
+                                    <span class="n">url</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">thumb_url</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">_get_intermediate_output</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">output</span><span class="p">,</span> <span class="n">download_dir</span><span class="p">,</span> <span class="n">overwrite</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Internal method to download any file from the job output.</span>
+
+<span class="sd">        :Args:</span>
+<span class="sd">            - output (dict): The output specification dictonary as created</span>
+<span class="sd">              by :meth:`.list_all_outputs()`.</span>
+<span class="sd">            - download_dir (str): The directory the output file will be</span>
+<span class="sd">              written to.</span>
+<span class="sd">            - overwrite (bool): Whether to overwrite the file is it already</span>
+<span class="sd">              exists.</span>
+
+<span class="sd">        :Returns:</span>
+<span class="sd">            - :class:`.Response` object returned directly from</span>
+<span class="sd">              :class:`.BatchAppsApi`.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_log</span><span class="o">.</span><span class="n">info</span><span class="p">(</span>
+            <span class="s">&quot;About to check size of requested output file before downloading&quot;</span><span class="p">)</span>
+
+        <span class="n">output_props</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_api</span><span class="o">.</span><span class="n">props_output_file</span><span class="p">(</span><span class="n">url</span><span class="o">=</span><span class="n">output</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">&#39;link&#39;</span><span class="p">))</span>
+
+        <span class="k">if</span> <span class="n">output_props</span><span class="o">.</span><span class="n">success</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_log</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s">&quot;Successfull retrieved output size data: &quot;</span>
+                            <span class="s">&quot;{0}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">output_props</span><span class="o">.</span><span class="n">result</span><span class="p">))</span>
+
+            <span class="n">size</span> <span class="o">=</span> <span class="n">output_props</span><span class="o">.</span><span class="n">result</span>
+
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_log</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="s">&quot;Failed to retrieve output size: &quot;</span>
+                            <span class="s">&quot;{0}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">output_props</span><span class="o">.</span><span class="n">result</span><span class="p">))</span>
+
+            <span class="k">return</span> <span class="n">output_props</span>
+
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_api</span><span class="o">.</span><span class="n">get_output_file</span><span class="p">(</span><span class="n">download_dir</span><span class="p">,</span>
+                                         <span class="n">size</span><span class="p">,</span>
+                                         <span class="n">overwrite</span><span class="p">,</span>
+                                         <span class="n">fname</span><span class="o">=</span><span class="n">output</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">&#39;name&#39;</span><span class="p">),</span>
+                                         <span class="n">url</span><span class="o">=</span><span class="n">output</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">&#39;link&#39;</span><span class="p">))</span>
+
+<div class="viewcode-block" id="SubmittedJob.get_tasks"><a class="viewcode-back" href="../../batch_apps.job.html#batchapps.job.SubmittedJob.get_tasks">[docs]</a>    <span class="k">def</span> <span class="nf">get_tasks</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Get a list of the jobs tasks.</span>
+<span class="sd">        This will only return those tasks that have been started so far.</span>
+
+<span class="sd">        :Returns:</span>
+<span class="sd">            - A list of :class:`.Task` objects.</span>
+
+<span class="sd">        :Raises:</span>
+<span class="sd">            - :exc:`.RestCallException` if an error occurred during call</span>
+<span class="sd">              to the service.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">tasks_url</span><span class="p">:</span>
+            <span class="n">resp</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_api</span><span class="o">.</span><span class="n">list_tasks</span><span class="p">(</span><span class="n">url</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">tasks_url</span><span class="p">)</span>
+
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">resp</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_api</span><span class="o">.</span><span class="n">list_tasks</span><span class="p">(</span><span class="n">job_id</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">id</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">resp</span><span class="o">.</span><span class="n">success</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">tasks</span> <span class="o">=</span> <span class="p">[</span><span class="n">Task</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_api</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">id</span><span class="p">,</span> <span class="o">**</span><span class="n">task_def</span><span class="p">)</span>
+                          <span class="k">for</span> <span class="n">task_def</span> <span class="ow">in</span> <span class="n">resp</span><span class="o">.</span><span class="n">result</span><span class="p">]</span>
+
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">tasks</span>
+
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">resp</span><span class="o">.</span><span class="n">result</span>
+</div>
+<div class="viewcode-block" id="SubmittedJob.get_output"><a class="viewcode-back" href="../../batch_apps.job.html#batchapps.job.SubmittedJob.get_output">[docs]</a>    <span class="k">def</span> <span class="nf">get_output</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">download_dir</span><span class="p">,</span> <span class="n">output</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">overwrite</span><span class="o">=</span><span class="bp">False</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Download a job output file.</span>
+<span class="sd">        This could be the jobs final output, or if specified, any intermediate</span>
+<span class="sd">        output file.</span>
+
+<span class="sd">        :Args:</span>
+<span class="sd">            - download_dir (str): Full path to the directory to download the</span>
+<span class="sd">              output to.</span>
+
+<span class="sd">        :Kwargs:</span>
+<span class="sd">            - output: An output dictionary (as created by</span>
+<span class="sd">              :meth:`.list_all_outputs()`). If specified, the specific output</span>
+<span class="sd">              will be downloaded, otheriwse the jobs final output will be</span>
+<span class="sd">              downloaded.</span>
+
+<span class="sd">        :Returns:</span>
+<span class="sd">            - The full path to the downloaded file (str).</span>
+
+<span class="sd">        :Raises:</span>
+<span class="sd">            - :exc:`.FileDownloadException` if the SubmittedJob has no URL</span>
+<span class="sd">              to a final output yet. This may be because the job has not yet</span>
+<span class="sd">              finished, or has not been updated.</span>
+<span class="sd">            - :exc:`.RestCallException` if an error occured during the request.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">output</span><span class="p">:</span>
+            <span class="n">name</span> <span class="o">=</span> <span class="n">output</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">&#39;name&#39;</span><span class="p">,</span> <span class="s">&quot;&quot;</span><span class="p">)</span>
+            <span class="n">download</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_intermediate_output</span><span class="p">(</span><span class="n">output</span><span class="p">,</span>
+                                                     <span class="n">download_dir</span><span class="p">,</span>
+                                                     <span class="n">overwrite</span><span class="p">)</span>
+
+        <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">output_url</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">output_filename</span><span class="p">:</span>
+            <span class="n">name</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">output_filename</span>
+            <span class="n">download</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_final_output</span><span class="p">(</span><span class="n">download_dir</span><span class="p">,</span> <span class="n">overwrite</span><span class="p">)</span>
+
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">FileDownloadException</span><span class="p">(</span>
+                <span class="s">&quot;Job has no reference to an output file, &quot;</span>
+                <span class="s">&quot;please update to check if the output is ready&quot;</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">download</span><span class="o">.</span><span class="n">success</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">download_dir</span><span class="p">,</span> <span class="n">name</span><span class="p">)</span>
+
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">download</span><span class="o">.</span><span class="n">result</span>
+</div>
+<div class="viewcode-block" id="SubmittedJob.list_all_outputs"><a class="viewcode-back" href="../../batch_apps.job.html#batchapps.job.SubmittedJob.list_all_outputs">[docs]</a>    <span class="k">def</span> <span class="nf">list_all_outputs</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        List all outputs created by the job.</span>
+<span class="sd">        This includes processed outputs, intermediary outputs and log files.</span>
+
+<span class="sd">        :Returns:</span>
+<span class="sd">            - List of outputs as dictionaries with keys</span>
+<span class="sd">              ``[&#39;name&#39;, &#39;link&#39;, &#39;type&#39;]``.</span>
+
+<span class="sd">        :Raises:</span>
+<span class="sd">            - :exc:`.RestCallException` if error occured during request.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">all_outputs</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_api</span><span class="o">.</span><span class="n">list_output_files</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">id</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">all_outputs</span><span class="o">.</span><span class="n">success</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">all_outputs</span><span class="o">.</span><span class="n">result</span>
+
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">all_outputs</span><span class="o">.</span><span class="n">result</span>
+</div>
+<div class="viewcode-block" id="SubmittedJob.get_thumbnail"><a class="viewcode-back" href="../../batch_apps.job.html#batchapps.job.SubmittedJob.get_thumbnail">[docs]</a>    <span class="k">def</span> <span class="nf">get_thumbnail</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">download_dir</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">filename</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">overwrite</span><span class="o">=</span><span class="bp">True</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Download the preview thumbnail for job.</span>
+<span class="sd">        This thumbnail will only be available if the job has completed.</span>
+
+<span class="sd">        :Kwargs:</span>
+<span class="sd">            - download_dir (str): The full path to the directory to download</span>
+<span class="sd">              the thumbnail. If not specified, the OS temp directory will</span>
+<span class="sd">              be used.</span>
+<span class="sd">            - filename (str): A name to give the thumbnail file. If not</span>
+<span class="sd">              specified a randomly generated filename will be used.</span>
+<span class="sd">            - overwrite (bool): Whether an existing file will be overwritten.</span>
+<span class="sd">              Default is ``True``.</span>
+
+<span class="sd">        :Returns:</span>
+<span class="sd">            - The full path to the downloaded file (str).</span>
+
+<span class="sd">        :Raises:</span>
+<span class="sd">            - :exc:`.FileDownloadException` if the SubmittedJob has no</span>
+<span class="sd">              reference to a job thumbnail. This could mean that the job</span>
+<span class="sd">              has not yet completed or the object has not been updated.</span>
+<span class="sd">            - :exc:`.RestCallException` if an error occured during the request.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">download_dir</span><span class="p">:</span>
+            <span class="n">download_dir</span> <span class="o">=</span> <span class="n">tempfile</span><span class="o">.</span><span class="n">gettempdir</span><span class="p">()</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">filename</span><span class="p">:</span>
+            <span class="n">rdm</span> <span class="o">=</span> <span class="p">[</span><span class="n">random</span><span class="o">.</span><span class="n">choice</span><span class="p">(</span><span class="n">string</span><span class="o">.</span><span class="n">hexdigits</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">8</span><span class="p">)]</span>
+            <span class="n">filename</span> <span class="o">=</span> <span class="s">&#39;&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">rdm</span><span class="p">)</span> <span class="o">+</span> <span class="s">&quot;.png&quot;</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">thumb_url</span><span class="p">:</span>
+            <span class="n">download</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_final_preview</span><span class="p">(</span><span class="n">download_dir</span><span class="p">,</span>
+                                               <span class="n">filename</span><span class="p">,</span>
+                                               <span class="n">overwrite</span><span class="p">)</span>
+
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">FileDownloadException</span><span class="p">(</span>
+                <span class="s">&quot;Job has no reference to a thumbnail, &quot;</span>
+                <span class="s">&quot;please update to check if the thumbnail is ready&quot;</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">download</span><span class="o">.</span><span class="n">success</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">download_dir</span><span class="p">,</span> <span class="n">filename</span><span class="p">)</span>
+
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">download</span><span class="o">.</span><span class="n">result</span>
+</div>
+<div class="viewcode-block" id="SubmittedJob.get_logs"><a class="viewcode-back" href="../../batch_apps.job.html#batchapps.job.SubmittedJob.get_logs">[docs]</a>    <span class="k">def</span> <span class="nf">get_logs</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">start</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">max_lines</span><span class="o">=</span><span class="mi">100</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Get the system log messages for the job.</span>
+
+<span class="sd">        :Kwargs:</span>
+<span class="sd">            - start (str): The UTC time from which log messages will be</span>
+<span class="sd">              retrieved. If not set, will retrieve messages from the start</span>
+<span class="sd">              of the job. Default is ``None``.</span>
+<span class="sd">            - max_lines (int): The max number of log messages to be retrieved.</span>
+<span class="sd">              Default is 100.</span>
+
+<span class="sd">        :Returns:</span>
+<span class="sd">            - If successful, a dict in the format:</span>
+<span class="sd">              ``{&#39;upTo&#39;: &#39;&#39;, &#39;messages&#39;: {&#39;taskId&#39;, &#39;timestamp&#39;, &#39;text&#39;}}``.</span>
+<span class="sd">              Where ``&#39;upTo&#39;`` will contain the timestamp of the last log</span>
+<span class="sd">              message retrieved, and ``&#39;messages&#39;`` will contain a list of</span>
+<span class="sd">              dictionaries with the details of each log message.</span>
+<span class="sd">            - If unsuccessful, returns ``None``.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="n">logs</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_api</span><span class="o">.</span><span class="n">get_log</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">id</span><span class="p">,</span> <span class="n">start</span><span class="p">,</span> <span class="n">max_lines</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">logs</span><span class="o">.</span><span class="n">success</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">logs</span><span class="o">.</span><span class="n">result</span>
+
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_log</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="s">&quot;Failed to retrieve job logs. Error: &quot;</span>
+                            <span class="s">&quot;{0}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">logs</span><span class="o">.</span><span class="n">result</span><span class="o">.</span><span class="n">msg</span><span class="p">))</span>
+            <span class="k">return</span> <span class="bp">None</span>
+</div>
+<div class="viewcode-block" id="SubmittedJob.update"><a class="viewcode-back" href="../../batch_apps.job.html#batchapps.job.SubmittedJob.update">[docs]</a>    <span class="k">def</span> <span class="nf">update</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Update the job object.</span>
+<span class="sd">        Used to keep the submission data up-to-date as the job progresses</span>
+<span class="sd">        on the cloud.</span>
+
+<span class="sd">        :Returns:</span>
+<span class="sd">            - ``True`` if the job has been successfully updated.</span>
+
+<span class="sd">        :Raises:</span>
+<span class="sd">            - :exc:`.RestCallException` if an error occured during the request.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_log</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s">&quot;About to update job {0}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">id</span><span class="p">))</span>
+        <span class="n">resp</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_api</span><span class="o">.</span><span class="n">get_job</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">id</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">resp</span><span class="o">.</span><span class="n">success</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">submission</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_format_submission</span><span class="p">(</span><span class="n">resp</span><span class="o">.</span><span class="n">result</span><span class="p">)</span>
+            <span class="k">return</span> <span class="bp">True</span>
+
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">resp</span><span class="o">.</span><span class="n">result</span>
+</div>
+<div class="viewcode-block" id="SubmittedJob.cancel"><a class="viewcode-back" href="../../batch_apps.job.html#batchapps.job.SubmittedJob.cancel">[docs]</a>    <span class="k">def</span> <span class="nf">cancel</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Cancel the job.</span>
+<span class="sd">        This can only be called if the job is queued or running.</span>
+
+<span class="sd">        :Returns:</span>
+<span class="sd">            - ``True`` if the job is successfully cancelled.</span>
+<span class="sd">            - ``False`` if the job is unable to be cancelled,</span>
+<span class="sd">              e.g. it has completed.</span>
+
+<span class="sd">        :Raises:</span>
+<span class="sd">            - :exc:`.RestCallException` if the request failed.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_log</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s">&quot;About to cancel job {0}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">id</span><span class="p">))</span>
+        <span class="n">resp</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_api</span><span class="o">.</span><span class="n">cancel</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">id</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">resp</span><span class="o">.</span><span class="n">success</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">update</span><span class="p">()</span>
+            <span class="k">return</span> <span class="bp">True</span>
+
+        <span class="k">if</span> <span class="n">resp</span><span class="o">.</span><span class="n">result</span><span class="o">.</span><span class="n">type</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
+            <span class="c"># Call was successful but job was unable to be cancelled.</span>
+            <span class="k">return</span> <span class="bp">False</span>
+
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">resp</span><span class="o">.</span><span class="n">result</span>
+</div>
+<div class="viewcode-block" id="SubmittedJob.reprocess"><a class="viewcode-back" href="../../batch_apps.job.html#batchapps.job.SubmittedJob.reprocess">[docs]</a>    <span class="k">def</span> <span class="nf">reprocess</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Reprocess any failed tasks in a job.</span>
+
+<span class="sd">        :Returns:</span>
+<span class="sd">            - ``True`` if the failed tasks have been successfully requeued.</span>
+<span class="sd">            - ``False`` if the job is unable to be requeued,</span>
+<span class="sd">              e.g. it has already completed.</span>
+
+<span class="sd">        :Raises:</span>
+<span class="sd">            - :exc:`.RestCallException` if the request failed.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_log</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s">&quot;About to reprocess job {0}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">id</span><span class="p">))</span>
+        <span class="n">resp</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_api</span><span class="o">.</span><span class="n">reprocess</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">id</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">resp</span><span class="o">.</span><span class="n">success</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">True</span>
+
+        <span class="k">if</span> <span class="n">resp</span><span class="o">.</span><span class="n">result</span><span class="o">.</span><span class="n">type</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
+            <span class="c"># Call was successful but job was unable to be reprocessed.</span>
+            <span class="k">return</span> <span class="bp">False</span>
+
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">resp</span><span class="o">.</span><span class="n">result</span>
+</div></div>
+<div class="viewcode-block" id="Task"><a class="viewcode-back" href="../../batch_apps.job.html#batchapps.job.Task">[docs]</a><span class="k">class</span> <span class="nc">Task</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Definition for a single job task. Can only exist after a task has been</span>
+<span class="sd">    launched in the cloud. The data associated with a task will vary depending</span>
+<span class="sd">    on the status of that task.</span>
+<span class="sd">    To update a task object, it must be done from the job parent,</span>
+<span class="sd">    :meth:`.SubmittedJob.get_tasks()`.</span>
+
+<span class="sd">    :Attributes:</span>
+<span class="sd">        - status (str)</span>
+<span class="sd">        - completion_time (str)</span>
+<span class="sd">        - instance (str)</span>
+<span class="sd">        - deployment (str)</span>
+<span class="sd">        - cores (str)</span>
+<span class="sd">        - charge_time (str)</span>
+<span class="sd">        - non_charge_time (str)</span>
+<span class="sd">        - outputs (list)</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">client</span><span class="p">,</span> <span class="n">job_id</span><span class="p">,</span> <span class="o">**</span><span class="n">props</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        :Args:</span>
+<span class="sd">            - client (:class:`.BatchAppsApi`): A configured and authenticated</span>
+<span class="sd">              Batch Apps Management API instance.</span>
+<span class="sd">            - job_id (str): The ID of the parent job of the task.</span>
+
+<span class="sd">        :Kwargs:</span>
+<span class="sd">            - props (dict): All additional data related the to progress of the</span>
+<span class="sd">              task. What data is available will depend on the status.</span>
+<span class="sd">              Data that is not available will be set to ``None``.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">client</span><span class="p">,</span> <span class="s">&#39;get_output_file&#39;</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span>
+                <span class="s">&#39;client must be authenticated BatchAppsApi object.&#39;</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_api</span> <span class="o">=</span> <span class="n">client</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_job</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">job_id</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_log</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="s">&#39;batch_apps&#39;</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">id</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">props</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">&#39;id&#39;</span><span class="p">,</span> <span class="mi">0</span><span class="p">))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">status</span> <span class="o">=</span> <span class="n">props</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">&#39;status&#39;</span><span class="p">,</span> <span class="bp">None</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">completion_time</span> <span class="o">=</span> <span class="n">props</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">&#39;completionTime&#39;</span><span class="p">,</span> <span class="bp">None</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">instance</span> <span class="o">=</span> <span class="n">props</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">&#39;instanceId&#39;</span><span class="p">,</span> <span class="bp">None</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">deployment</span> <span class="o">=</span> <span class="n">props</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">&#39;deploymentId&#39;</span><span class="p">,</span> <span class="bp">None</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">cores</span> <span class="o">=</span> <span class="n">props</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">&#39;coreCount&#39;</span><span class="p">,</span> <span class="bp">None</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">charge_time</span> <span class="o">=</span> <span class="n">props</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">&#39;chargeTime&#39;</span><span class="p">,</span> <span class="bp">None</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">non_charge_time</span> <span class="o">=</span> <span class="n">props</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">&#39;nonChargeTime&#39;</span><span class="p">,</span> <span class="bp">None</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">outputs</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="n">raw_outputs</span> <span class="o">=</span> <span class="n">props</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">&#39;outputs&#39;</span><span class="p">,</span> <span class="p">[])</span>
+
+        <span class="k">for</span> <span class="n">_output</span> <span class="ow">in</span> <span class="n">raw_outputs</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">outputs</span><span class="o">.</span><span class="n">append</span><span class="p">({</span>
+                <span class="s">&#39;name&#39;</span><span class="p">:</span> <span class="n">_output</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">&#39;name&#39;</span><span class="p">),</span>
+                <span class="s">&#39;link&#39;</span><span class="p">:</span> <span class="n">_output</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">&#39;link&#39;</span><span class="p">,</span> <span class="p">{</span><span class="s">&#39;href&#39;</span><span class="p">:</span><span class="bp">None</span><span class="p">})[</span><span class="s">&#39;href&#39;</span><span class="p">],</span>
+                <span class="s">&#39;type&#39;</span><span class="p">:</span> <span class="n">_output</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">&#39;kind&#39;</span><span class="p">)</span>
+                <span class="p">})</span>
+
+    <span class="k">def</span> <span class="nf">_get_file</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">output</span><span class="p">,</span> <span class="n">download_dir</span><span class="p">,</span> <span class="n">overwrite</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Internal method to download a task output.</span>
+
+<span class="sd">        :Args:</span>
+<span class="sd">            - output (dict): An output specification such as created</span>
+<span class="sd">              by :meth:`.list_outputs()`.</span>
+<span class="sd">            - download_dir (str): The directory the output file will be</span>
+<span class="sd">              written to.</span>
+<span class="sd">            - overwrite (bool): Whether to overwrite the file is it already</span>
+<span class="sd">              exists.</span>
+
+<span class="sd">        :Returns:</span>
+<span class="sd">            - :class:`.Response` object returned directly from</span>
+<span class="sd">              :class:`.BatchAppsApi`.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">output</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">&#39;type&#39;</span><span class="p">)</span> <span class="o">==</span> <span class="s">&#39;TaskPreview&#39;</span><span class="p">:</span>
+            <span class="n">size</span> <span class="o">=</span> <span class="bp">None</span>
+
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">output_props</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_api</span><span class="o">.</span><span class="n">props_output_file</span><span class="p">(</span><span class="n">url</span><span class="o">=</span><span class="n">output</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">&#39;link&#39;</span><span class="p">))</span>
+
+            <span class="k">if</span> <span class="n">output_props</span><span class="o">.</span><span class="n">success</span><span class="p">:</span>
+                <span class="n">size</span> <span class="o">=</span> <span class="n">output_props</span><span class="o">.</span><span class="n">result</span>
+
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="n">output_props</span><span class="o">.</span><span class="n">result</span>
+
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_api</span><span class="o">.</span><span class="n">get_output_file</span><span class="p">(</span><span class="n">download_dir</span><span class="p">,</span>
+                                         <span class="n">size</span><span class="p">,</span>
+                                         <span class="n">overwrite</span><span class="p">,</span>
+                                         <span class="n">fname</span><span class="o">=</span><span class="n">output</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">&#39;name&#39;</span><span class="p">),</span>
+                                         <span class="n">url</span><span class="o">=</span><span class="n">output</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">&#39;link&#39;</span><span class="p">))</span>
+
+<div class="viewcode-block" id="Task.get_thumbnail"><a class="viewcode-back" href="../../batch_apps.job.html#batchapps.job.Task.get_thumbnail">[docs]</a>    <span class="k">def</span> <span class="nf">get_thumbnail</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">download_dir</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">filename</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">overwrite</span><span class="o">=</span><span class="bp">True</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Download the preview thumbnail for task.</span>
+<span class="sd">        This thumbnail will only be available if the task has completed.</span>
+
+<span class="sd">        :Kwargs:</span>
+<span class="sd">            - download_dir (str): The full path to the directory to download</span>
+<span class="sd">              the thumbnail. If not specified, the OS temp directory will</span>
+<span class="sd">              be used.</span>
+<span class="sd">            - filename (str): A name to give the thumbnail file. If not</span>
+<span class="sd">              specified and one has not been specified by the server, a</span>
+<span class="sd">              randomly generated filename will be used.</span>
+<span class="sd">            - overwrite (bool): Whether an existing file will be overwritten.</span>
+<span class="sd">              Default is ``True``.</span>
+
+<span class="sd">        :Returns:</span>
+<span class="sd">            - The full path to the downloaded file (str).</span>
+
+<span class="sd">        :Raises:</span>
+<span class="sd">            - :exc:`.FileDownloadException` if the Task has no reference to</span>
+<span class="sd">              a thumbnail. This could mean that the task has not yet</span>
+<span class="sd">              completed or the object has not been updated.</span>
+<span class="sd">            - :exc:`.RestCallException` if an error occured during the request.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">download_dir</span><span class="p">:</span>
+            <span class="n">download_dir</span> <span class="o">=</span> <span class="n">tempfile</span><span class="o">.</span><span class="n">gettempdir</span><span class="p">()</span>
+
+        <span class="n">thumbs</span> <span class="o">=</span> <span class="p">[</span><span class="n">o</span> <span class="k">for</span> <span class="n">o</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">outputs</span> <span class="k">if</span> <span class="n">o</span><span class="p">[</span><span class="s">&#39;type&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s">&#39;TaskPreview&#39;</span><span class="p">]</span>
+
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">thumbs</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">FileDownloadException</span><span class="p">(</span>
+                <span class="s">&quot;Task has no reference to a thumbnail, &quot;</span>
+                <span class="s">&quot;please update tasklist to check if the thumbnail is ready&quot;</span><span class="p">)</span>
+
+        <span class="n">thumb</span> <span class="o">=</span> <span class="n">thumbs</span><span class="o">.</span><span class="n">pop</span><span class="p">()</span>
+
+        <span class="k">if</span> <span class="n">filename</span><span class="p">:</span>
+            <span class="n">thumb</span><span class="p">[</span><span class="s">&#39;name&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span>
+
+        <span class="k">elif</span> <span class="ow">not</span> <span class="s">&#39;name&#39;</span> <span class="ow">in</span> <span class="n">thumb</span><span class="p">:</span>
+            <span class="n">rdm</span> <span class="o">=</span> <span class="p">[</span><span class="n">random</span><span class="o">.</span><span class="n">choice</span><span class="p">(</span><span class="n">string</span><span class="o">.</span><span class="n">hexdigits</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">8</span><span class="p">)]</span>
+            <span class="n">thumb</span><span class="p">[</span><span class="s">&#39;name&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s">&#39;&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">rdm</span><span class="p">)</span><span class="o">+</span><span class="s">&quot;.png&quot;</span>
+
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_log</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s">&quot;Found thumbnails in task object: {0}, &quot;</span>
+                       <span class="s">&quot;downloading {1}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">thumbs</span><span class="p">,</span> <span class="n">thumb</span><span class="p">))</span>
+
+        <span class="n">download</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_file</span><span class="p">(</span><span class="n">thumb</span><span class="p">,</span> <span class="n">download_dir</span><span class="p">,</span> <span class="n">overwrite</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">download</span><span class="o">.</span><span class="n">success</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">download_dir</span><span class="p">,</span> <span class="n">thumb</span><span class="p">[</span><span class="s">&#39;name&#39;</span><span class="p">])</span>
+
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">download</span><span class="o">.</span><span class="n">result</span>
+</div>
+<div class="viewcode-block" id="Task.list_outputs"><a class="viewcode-back" href="../../batch_apps.job.html#batchapps.job.Task.list_outputs">[docs]</a>    <span class="k">def</span> <span class="nf">list_outputs</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        List all outputs created by the task.</span>
+<span class="sd">        This includes processed outputs, intermediary outputs and log files.</span>
+
+<span class="sd">        :Returns:</span>
+<span class="sd">            - List of outputs as dictionaries with keys</span>
+<span class="sd">              ``[&#39;name&#39;, &#39;link&#39;, &#39;type&#39;]``.</span>
+
+<span class="sd">        :Raises:</span>
+<span class="sd">            - :exc:`.RestCallException` if error occured during request.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">resp</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_api</span><span class="o">.</span><span class="n">list_task_outputs</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_job</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">id</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">resp</span><span class="o">.</span><span class="n">success</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">outputs</span> <span class="o">=</span> <span class="n">resp</span><span class="o">.</span><span class="n">result</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">outputs</span>
+
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">resp</span><span class="o">.</span><span class="n">result</span>
+</div>
+<div class="viewcode-block" id="Task.get_output"><a class="viewcode-back" href="../../batch_apps.job.html#batchapps.job.Task.get_output">[docs]</a>    <span class="k">def</span> <span class="nf">get_output</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">output</span><span class="p">,</span> <span class="n">download_dir</span><span class="p">,</span> <span class="n">overwrite</span><span class="o">=</span><span class="bp">False</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Download a task output file.</span>
+
+<span class="sd">        :Args:</span>
+<span class="sd">            - output: An output dictionary (as created by</span>
+<span class="sd">              :meth:`.Task.list_outputs()`).</span>
+<span class="sd">            - download_dir (str): Full path to the directory to download</span>
+<span class="sd">              the output to.</span>
+
+<span class="sd">        :Kwargs:</span>
+<span class="sd">            - overwrite (bool): Whether to overwrite an existing file.</span>
+<span class="sd">              Default is ``False``.</span>
+
+<span class="sd">        :Returns:</span>
+<span class="sd">            - The full path to the downloaded file (str).</span>
+
+<span class="sd">        :Raises:</span>
+<span class="sd">            - :exc:`.RestCallException` if an error occured during the request.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">download</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_file</span><span class="p">(</span><span class="n">output</span><span class="p">,</span> <span class="n">download_dir</span><span class="p">,</span> <span class="n">overwrite</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">download</span><span class="o">.</span><span class="n">success</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">download_dir</span><span class="p">,</span> <span class="n">output</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">&#39;name&#39;</span><span class="p">,</span> <span class="s">&#39;&#39;</span><span class="p">))</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">download</span><span class="o">.</span><span class="n">result</span>
+</div>
+<div class="viewcode-block" id="Task.cancel"><a class="viewcode-back" href="../../batch_apps.job.html#batchapps.job.Task.cancel">[docs]</a>    <span class="k">def</span> <span class="nf">cancel</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Cancel the task.</span>
+<span class="sd">        This can only be called if the task is running.</span>
+
+<span class="sd">        :Returns:</span>
+<span class="sd">            - ``True`` if the task is successfully cancelled.</span>
+
+<span class="sd">        :Raises:</span>
+<span class="sd">            - :exc:`.RestCallException` if the request failed or the task was</span>
+<span class="sd">              not able to be cancelled.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">resp</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_api</span><span class="o">.</span><span class="n">cancel_task</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_job</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">id</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">resp</span><span class="o">.</span><span class="n">success</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">True</span>
+
+        <span class="k">if</span> <span class="n">resp</span><span class="o">.</span><span class="n">result</span><span class="o">.</span><span class="n">type</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
+            <span class="c"># Call was successful but task was unable to be cancelled.</span>
+            <span class="k">return</span> <span class="bp">False</span>
+
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">resp</span><span class="o">.</span><span class="n">result</span></div></div>
+</pre></div>
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../../index.html">azure-batch-apps 0.2.0 documentation</a> &raquo;</li>
+          <li><a href="../index.html" >Module code</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2014, Microsoft Corporation.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2.2.
+    </div>
+  </body>
+</html>

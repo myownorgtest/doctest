@@ -1,0 +1,998 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>batchapps.config &mdash; azure-batch-apps 0.2.0 documentation</title>
+    
+    <link rel="stylesheet" href="../../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '0.2.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <link rel="top" title="azure-batch-apps 0.2.0 documentation" href="../../index.html" />
+    <link rel="up" title="Module code" href="../index.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../../index.html">azure-batch-apps 0.2.0 documentation</a> &raquo;</li>
+          <li><a href="../index.html" accesskey="U">Module code</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <h1>Source code for batchapps.config</h1><div class="highlight"><pre>
+<span class="c">#-------------------------------------------------------------------------</span>
+<span class="c"># The Azure Batch Apps Python Client</span>
+<span class="c">#</span>
+<span class="c"># Copyright (c) Microsoft Corporation. All rights reserved. </span>
+<span class="c">#</span>
+<span class="c"># The MIT License (MIT)</span>
+<span class="c">#</span>
+<span class="c"># Permission is hereby granted, free of charge, to any person obtaining a copy</span>
+<span class="c"># of this software and associated documentation files (the &quot;&quot;Software&quot;&quot;), to deal</span>
+<span class="c"># in the Software without restriction, including without limitation the rights</span>
+<span class="c"># to use, copy, modify, merge, publish, distribute, sublicense, and/or sell</span>
+<span class="c"># copies of the Software, and to permit persons to whom the Software is</span>
+<span class="c"># furnished to do so, subject to the following conditions:</span>
+<span class="c">#</span>
+<span class="c"># The above copyright notice and this permission notice shall be included in</span>
+<span class="c"># all copies or substantial portions of the Software.</span>
+<span class="c">#</span>
+<span class="c"># THE SOFTWARE IS PROVIDED *AS IS*, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR</span>
+<span class="c"># IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,</span>
+<span class="c"># FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE</span>
+<span class="c"># AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER</span>
+<span class="c"># LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,</span>
+<span class="c"># OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN</span>
+<span class="c"># THE SOFTWARE.</span>
+<span class="c">#</span>
+<span class="c">#--------------------------------------------------------------------------</span>
+
+<span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">with_statement</span>
+
+<span class="kn">import</span> <span class="nn">logging</span>
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">shutil</span>
+<span class="kn">import</span> <span class="nn">time</span>
+<span class="kn">import</span> <span class="nn">sys</span>
+    
+<span class="k">try</span><span class="p">:</span>
+    <span class="kn">import</span> <span class="nn">configparser</span>
+
+<span class="k">except</span> <span class="ne">ImportError</span><span class="p">:</span>
+    <span class="kn">import</span> <span class="nn">ConfigParser</span> <span class="kn">as</span> <span class="nn">configparser</span>
+
+<span class="kn">from</span> <span class="nn">.exceptions</span> <span class="kn">import</span> <span class="n">InvalidConfigException</span>
+<span class="kn">from</span> <span class="nn">.</span> <span class="kn">import</span> <span class="n">utils</span>
+
+<span class="n">LOGGERS</span> <span class="o">=</span> <span class="p">{}</span>
+<span class="n">API_RESOURCE</span> <span class="o">=</span> <span class="s">&quot;https://batchapps.core.windows.net/&quot;</span>
+
+<div class="viewcode-block" id="Configuration"><a class="viewcode-back" href="../../batch_apps.config.html#batchapps.config.Configuration">[docs]</a><span class="k">class</span> <span class="nc">Configuration</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Manage the configuration of the Batch Apps module, logging and job service.</span>
+<span class="sd">    A Configuration object, either default or custom, is used to create both</span>
+<span class="sd">    Job and File managers.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
+                 <span class="n">data_path</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span>
+                 <span class="n">log_level</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span>
+                 <span class="n">jobtype</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span>
+                 <span class="n">name</span><span class="o">=</span><span class="s">&quot;batch_apps.ini&quot;</span><span class="p">,</span>
+                 <span class="n">datadir</span><span class="o">=</span><span class="s">&quot;BatchAppsData&quot;</span><span class="p">,</span>
+                 <span class="n">default</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span>
+                 <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        A new :class:`.Configuration` will attempt to use an existing saved</span>
+<span class="sd">        config, and if one is not found default configuration will be used.</span>
+<span class="sd">        Default configuration can also be forced, though this will overwrite</span>
+<span class="sd">        an existing config if one exists.</span>
+
+<span class="sd">        :Kwargs:</span>
+<span class="sd">            - data_path (str): The path where Batch Apps client data</span>
+<span class="sd">              (logs, configs) will be saved. If not set, will default to User</span>
+<span class="sd">              directory, i.e. ``os.path.expanduser(&quot;~&quot;)``</span>
+<span class="sd">            - log_level (str): The level of logging during Batch Apps session.</span>
+<span class="sd">              Must be a string in ``[&#39;debug&#39;, &#39;info&#39;, &#39;warning&#39;, &#39;error&#39;,</span>
+<span class="sd">              &#39;critical&#39;]``. If not set default is &#39;warning&#39;.</span>
+<span class="sd">            - jobtype (str): The application job type, used to determine</span>
+<span class="sd">              how a job will be processed in the cloud. The list of available</span>
+<span class="sd">              job types will depend on the configuration and can checked</span>
+<span class="sd">              using the :meth:`.list_jobtypes()` method.</span>
+<span class="sd">              Default job type is &#39;Blender&#39;, unless overridden in config.</span>
+<span class="sd">            - name (str): The name of the configuration file to read from and</span>
+<span class="sd">              save to. Unless set, the default &#39;batch_apps.ini&#39; will be used.</span>
+<span class="sd">            - datadir (str): The name of the directory that will be created to</span>
+<span class="sd">              hold the date (logs etc). Unless set the default</span>
+<span class="sd">              &#39;BatchAppsData&#39; will be used.</span>
+<span class="sd">            - default (bool): If ``True``, the default configuration will be</span>
+<span class="sd">              used regardless of whether an existing configuration file is</span>
+<span class="sd">              found. Any existing config will be overwritten by defaults</span>
+<span class="sd">              (unless an alternative config ``name`` is set).</span>
+
+<span class="sd">        :Raises:</span>
+<span class="sd">            - :exc:`.InvalidConfigException` if the specified job type is</span>
+<span class="sd">              not defined in the config.</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_config</span> <span class="o">=</span> <span class="n">configparser</span><span class="o">.</span><span class="n">RawConfigParser</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_config</span><span class="o">.</span><span class="n">optionxform</span> <span class="o">=</span> <span class="nb">str</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_dir</span> <span class="o">=</span> <span class="n">datadir</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">jobtype</span> <span class="o">=</span> <span class="s">&#39;Blender&#39;</span>
+
+        <span class="k">if</span> <span class="n">data_path</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">_check_directory</span><span class="p">(</span><span class="n">data_path</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_write_file</span> <span class="o">=</span> <span class="bp">True</span>
+            <span class="n">cfg_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">data_path</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_dir</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_write_file</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_check_directory</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">expanduser</span><span class="p">(</span><span class="s">&quot;~&quot;</span><span class="p">))</span>
+            <span class="n">cfg_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">expanduser</span><span class="p">(</span><span class="s">&quot;~&quot;</span><span class="p">),</span> <span class="bp">self</span><span class="o">.</span><span class="n">_dir</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_cfg_file</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">cfg_path</span><span class="p">,</span> <span class="n">name</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_log</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_configure_logging</span><span class="p">(</span><span class="n">cfg_path</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">default</span> <span class="ow">and</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isfile</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_cfg_file</span><span class="p">):</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_config</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_cfg_file</span><span class="p">)</span>
+                <span class="k">for</span> <span class="n">sec</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_config</span><span class="o">.</span><span class="n">sections</span><span class="p">():</span>
+
+                    <span class="k">if</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_config</span><span class="o">.</span><span class="n">has_option</span><span class="p">(</span><span class="n">sec</span><span class="p">,</span> <span class="s">&quot;default_jobtype&quot;</span><span class="p">)</span> <span class="ow">and</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">_config</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">sec</span><span class="p">,</span> <span class="s">&quot;default_jobtype&quot;</span><span class="p">)</span> <span class="o">==</span> <span class="s">&quot;True&quot;</span><span class="p">):</span>
+                        <span class="bp">self</span><span class="o">.</span><span class="n">jobtype</span> <span class="o">=</span> <span class="n">sec</span>
+                        <span class="k">break</span>
+
+                    <span class="k">if</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_config</span><span class="o">.</span><span class="n">has_option</span><span class="p">(</span><span class="n">sec</span><span class="p">,</span> <span class="s">&quot;default_app&quot;</span><span class="p">)</span> <span class="ow">and</span> <span class="c">#DEP</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">_config</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">sec</span><span class="p">,</span> <span class="s">&quot;default_app&quot;</span><span class="p">)</span> <span class="o">==</span> <span class="s">&quot;True&quot;</span><span class="p">):</span>
+                        <span class="bp">self</span><span class="o">.</span><span class="n">_log</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span>
+                            <span class="s">&quot;Use of setting &#39;default_app&#39; is &quot;</span>
+                            <span class="s">&quot;deprecated. Please use &#39;default_jobtype.&#39;&quot;</span><span class="p">)</span>
+
+                        <span class="bp">self</span><span class="o">.</span><span class="n">jobtype</span> <span class="o">=</span> <span class="n">sec</span>
+                        <span class="k">break</span>
+
+            <span class="k">except</span> <span class="ne">EnvironmentError</span> <span class="k">as</span> <span class="n">exp</span><span class="p">:</span>
+                <span class="k">print</span><span class="p">(</span><span class="s">&quot;Failed to load config {0} with error: {0}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">exp</span><span class="p">))</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_set_defaults</span><span class="p">()</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_set_defaults</span><span class="p">()</span>
+
+        <span class="k">if</span> <span class="n">LOGGERS</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">&#39;level&#39;</span><span class="p">):</span>
+            <span class="n">current_level</span> <span class="o">=</span> <span class="n">LOGGERS</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">&#39;level&#39;</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">current_level</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_config</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">&quot;Logging&quot;</span><span class="p">,</span> <span class="s">&quot;level&quot;</span><span class="p">))</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_set_logging_level</span><span class="p">(</span><span class="n">log_level</span> <span class="k">if</span> <span class="n">log_level</span> <span class="k">else</span> <span class="n">current_level</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">jobtype</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">jobtype</span> <span class="o">=</span> <span class="n">jobtype</span>
+
+        <span class="k">elif</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">&#39;application&#39;</span><span class="p">):</span> <span class="c">#DEP</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_log</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="s">&quot;Use of kwarg &#39;application&#39; is deprecated. &quot;</span>
+                              <span class="s">&quot;Please replace with &#39;jobtype&#39;.&quot;</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">jobtype</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">&#39;application&#39;</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">_config</span><span class="o">.</span><span class="n">has_section</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">jobtype</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="n">InvalidConfigException</span><span class="p">(</span>
+                <span class="s">&quot;Config file has no setting for job type: {type}. &quot;</span>
+                <span class="s">&quot;Please specify alternative config or job type.&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+                    <span class="nb">type</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">jobtype</span><span class="p">))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">job_type</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">jobtype</span> <span class="c">#DEP</span>
+
+    <span class="k">def</span> <span class="nf">_set_defaults</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Create all default config data.</span>
+
+<span class="sd">        This will save the default configuration file.</span>
+<span class="sd">        It will also set global logging variables to be used throughout the</span>
+<span class="sd">        session unless overridden.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_config</span><span class="o">.</span><span class="n">add_section</span><span class="p">(</span><span class="s">&quot;Blender&quot;</span><span class="p">)</span> <span class="c"># Sample Job Type Config</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_config</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="s">&quot;Blender&quot;</span><span class="p">,</span> <span class="s">&quot;filename&quot;</span><span class="p">,</span> <span class="s">&quot;output&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_config</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="s">&quot;Blender&quot;</span><span class="p">,</span> <span class="s">&quot;format&quot;</span><span class="p">,</span> <span class="s">&quot;png&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_config</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="s">&quot;Blender&quot;</span><span class="p">,</span> <span class="s">&quot;start&quot;</span><span class="p">,</span> <span class="s">&quot;1&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_config</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="s">&quot;Blender&quot;</span><span class="p">,</span> <span class="s">&quot;end&quot;</span><span class="p">,</span> <span class="s">&quot;10&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_config</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="s">&quot;Blender&quot;</span><span class="p">,</span> <span class="s">&quot;command&quot;</span><span class="p">,</span> <span class="s">&quot;PNG&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_config</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="s">&quot;Blender&quot;</span><span class="p">,</span> <span class="s">&quot;default_jobtype&quot;</span><span class="p">,</span> <span class="s">&quot;True&quot;</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_config</span><span class="o">.</span><span class="n">add_section</span><span class="p">(</span><span class="s">&quot;Test&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_config</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="s">&quot;Test&quot;</span><span class="p">,</span> <span class="s">&quot;param1&quot;</span><span class="p">,</span> <span class="s">&quot;abc&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_config</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="s">&quot;Test&quot;</span><span class="p">,</span> <span class="s">&quot;param2&quot;</span><span class="p">,</span> <span class="s">&quot;xyz&quot;</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">_config</span><span class="o">.</span><span class="n">has_section</span><span class="p">(</span><span class="s">&#39;Logging&#39;</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_config</span><span class="o">.</span><span class="n">add_section</span><span class="p">(</span><span class="s">&quot;Logging&quot;</span><span class="p">)</span>
+
+        <span class="n">log_dir</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_cfg_file</span><span class="p">)</span>
+        <span class="n">gb_log</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">log_dir</span><span class="p">,</span> <span class="s">&quot;batch_apps.log&quot;</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_config</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="s">&quot;Logging&quot;</span><span class="p">,</span> <span class="s">&quot;output&quot;</span><span class="p">,</span> <span class="n">gb_log</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_config</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="s">&quot;Logging&quot;</span><span class="p">,</span> <span class="s">&quot;level&quot;</span><span class="p">,</span> <span class="mi">30</span><span class="p">)</span>
+        <span class="n">LOGGERS</span><span class="o">.</span><span class="n">update</span><span class="p">({</span><span class="s">&#39;level&#39;</span><span class="p">:</span><span class="mi">30</span><span class="p">})</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_config</span><span class="o">.</span><span class="n">add_section</span><span class="p">(</span><span class="s">&quot;Authentication&quot;</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_config</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="s">&quot;Authentication&quot;</span><span class="p">,</span> <span class="s">&quot;endpoint&quot;</span><span class="p">,</span> <span class="s">&quot;&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_config</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="s">&quot;Authentication&quot;</span><span class="p">,</span> <span class="s">&quot;unattended_account&quot;</span><span class="p">,</span> <span class="s">&quot;&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_config</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="s">&quot;Authentication&quot;</span><span class="p">,</span> <span class="s">&quot;unattended_key&quot;</span><span class="p">,</span> <span class="s">&quot;&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_config</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="s">&quot;Authentication&quot;</span><span class="p">,</span> <span class="s">&quot;client_id&quot;</span><span class="p">,</span> <span class="s">&quot;&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_config</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="s">&quot;Authentication&quot;</span><span class="p">,</span> <span class="s">&quot;redirect_uri&quot;</span><span class="p">,</span> <span class="s">&quot;&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_config</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="s">&quot;Authentication&quot;</span><span class="p">,</span> <span class="s">&quot;tenant&quot;</span><span class="p">,</span> <span class="s">&quot;common&quot;</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_config</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="s">&quot;Authentication&quot;</span><span class="p">,</span> <span class="s">&quot;auth_uri&quot;</span><span class="p">,</span> <span class="s">&quot;/oauth2/authorize&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_config</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="s">&quot;Authentication&quot;</span><span class="p">,</span> <span class="s">&quot;token_uri&quot;</span><span class="p">,</span> <span class="s">&quot;/oauth2/token&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_config</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="s">&quot;Authentication&quot;</span><span class="p">,</span> <span class="s">&quot;root&quot;</span><span class="p">,</span> <span class="s">&quot;login.windows.net/&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_config</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="s">&quot;Authentication&quot;</span><span class="p">,</span> <span class="s">&quot;resource&quot;</span><span class="p">,</span> <span class="n">API_RESOURCE</span><span class="p">)</span>
+        
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">save_config</span><span class="p">()</span>
+
+    <span class="k">def</span> <span class="nf">_check_directory</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">test_dir</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Check that the assigned directory exists and is able to be</span>
+<span class="sd">        written to. Because logging has not yet been configured at this</span>
+<span class="sd">        point, any errors will only be printed to stdout.</span>
+<span class="sd">        If the directory check fails, the configuration object can still</span>
+<span class="sd">        be used however no data (including logging) will be written to disk.</span>
+
+<span class="sd">        :Args:</span>
+<span class="sd">            - test_dir (str): Full path to the directory to be tested. If this</span>
+<span class="sd">              directory does not yet exist it will attempt to create it.</span>
+<span class="sd">              It will also attempt to write and then remove a temp file to</span>
+<span class="sd">              this directory to ensure the correct permissions are available.</span>
+
+<span class="sd">        :Returns:</span>
+<span class="sd">            - ``True`` if the directory exists and can be written to,</span>
+<span class="sd">              else ``False``.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">test_dir</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">test_dir</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_dir</span><span class="p">)</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isdir</span><span class="p">(</span><span class="n">test_dir</span><span class="p">):</span>
+                <span class="n">os</span><span class="o">.</span><span class="n">mkdir</span><span class="p">(</span><span class="n">test_dir</span><span class="p">)</span>
+
+            <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">test_dir</span><span class="p">,</span> <span class="s">&quot;aba_test&quot;</span><span class="p">),</span> <span class="s">&#39;w&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">test_file</span><span class="p">:</span>
+                <span class="n">test_file</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s">&quot;All good to go!&quot;</span><span class="p">)</span>
+
+            <span class="n">os</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">test_dir</span><span class="p">,</span> <span class="s">&quot;aba_test&quot;</span><span class="p">))</span>
+            <span class="k">return</span> <span class="bp">True</span>
+
+        <span class="k">except</span> <span class="p">(</span><span class="ne">IOError</span><span class="p">,</span> <span class="ne">OSError</span><span class="p">,</span> <span class="ne">EnvironmentError</span><span class="p">)</span> <span class="k">as</span> <span class="n">exp</span><span class="p">:</span>
+            <span class="n">message</span> <span class="o">=</span> <span class="p">(</span>
+                <span class="s">&quot;</span><span class="se">\n</span><span class="s">Batch Apps client is unable to write to directory: {path}</span><span class="se">\n</span><span class="s">&quot;</span>
+                <span class="s">&quot;Error: {error}</span><span class="se">\n</span><span class="s">&quot;</span>
+                <span class="s">&quot;Batch Apps session will continue without writing any &quot;</span>
+                <span class="s">&quot;data to disk.</span><span class="se">\n</span><span class="s">Warning: This includes logging.</span><span class="se">\n</span><span class="s">&quot;</span>
+                <span class="s">&quot;Please reconfigure output directory to enable file &quot;</span>
+                <span class="s">&quot;logging.</span><span class="se">\n</span><span class="s">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">path</span><span class="o">=</span><span class="n">test_dir</span><span class="p">,</span> <span class="n">error</span><span class="o">=</span><span class="n">exp</span><span class="p">))</span>
+            <span class="k">print</span><span class="p">(</span><span class="n">message</span><span class="p">)</span>
+            <span class="k">return</span> <span class="bp">False</span>
+
+    <span class="k">def</span> <span class="nf">_configure_logging</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data_path</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Create logger and configure message format and output.</span>
+<span class="sd">        A new session will append to an existing log file if one exists.</span>
+<span class="sd">        If an existing log file has exceeded 10mb, it will be &#39;archived&#39;,</span>
+<span class="sd">        and a new log file created.</span>
+
+<span class="sd">        All logging statements will be in the folowing format:</span>
+<span class="sd">            ``&quot;%(asctime)-15s [%(levelname)s] %(module)s: %(message)s&quot;``</span>
+
+<span class="sd">        :Args:</span>
+<span class="sd">            - data_path (str): The path that the log file will be written to</span>
+<span class="sd">              if file writting is enabled in the configuration</span>
+<span class="sd">              (see :meth:._check_directory())</span>
+
+<span class="sd">        :Returns:</span>
+<span class="sd">            - :class:`.PickleLogger`: Configured logging singleton, using</span>
+<span class="sd">              custom serializable Logger extension class.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">_config</span><span class="o">.</span><span class="n">has_section</span><span class="p">(</span><span class="s">&#39;Logging&#39;</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_config</span><span class="o">.</span><span class="n">add_section</span><span class="p">(</span><span class="s">&#39;Logging&#39;</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">LOGGERS</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">&#39;batch_apps&#39;</span><span class="p">):</span>
+            <span class="k">return</span> <span class="n">LOGGERS</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">&#39;batch_apps&#39;</span><span class="p">)</span>
+
+        <span class="n">log_format</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">Formatter</span><span class="p">(</span>
+            <span class="s">&quot;</span><span class="si">%(asctime)-15s</span><span class="s"> [</span><span class="si">%(levelname)s</span><span class="s">] </span><span class="si">%(module)s</span><span class="s">: </span><span class="si">%(message)s</span><span class="s">&quot;</span><span class="p">)</span>
+
+        <span class="n">logger</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="s">&#39;batch_apps&#39;</span><span class="p">)</span>
+        <span class="n">console_logging</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">StreamHandler</span><span class="p">()</span>
+        <span class="n">console_logging</span><span class="o">.</span><span class="n">setFormatter</span><span class="p">(</span><span class="n">log_format</span><span class="p">)</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">addHandler</span><span class="p">(</span><span class="n">console_logging</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_write_file</span><span class="p">:</span>
+            <span class="n">logfile</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">data_path</span><span class="p">,</span> <span class="s">&quot;batch_apps.log&quot;</span><span class="p">)</span>
+
+            <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isfile</span><span class="p">(</span><span class="n">logfile</span><span class="p">)</span> <span class="ow">and</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">getsize</span><span class="p">(</span><span class="n">logfile</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">10485760</span><span class="p">:</span>
+                <span class="n">split_log</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">splitext</span><span class="p">(</span><span class="n">logfile</span><span class="p">)</span>
+                <span class="n">timestamp</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s">&quot;%Y-%m-</span><span class="si">%d</span><span class="s">-%H-%M-%S&quot;</span><span class="p">)</span>
+                <span class="n">shutil</span><span class="o">.</span><span class="n">move</span><span class="p">(</span><span class="n">logfile</span><span class="p">,</span> <span class="s">&quot;{root}-{date}{ext}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+                    <span class="n">root</span><span class="o">=</span><span class="n">split_log</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span>
+                    <span class="n">date</span><span class="o">=</span><span class="n">timestamp</span><span class="p">,</span>
+                    <span class="n">ext</span><span class="o">=</span><span class="n">split_log</span><span class="p">[</span><span class="mi">1</span><span class="p">]))</span>
+
+            <span class="n">file_logging</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">FileHandler</span><span class="p">(</span><span class="n">logfile</span><span class="p">)</span>
+            <span class="n">file_logging</span><span class="o">.</span><span class="n">setFormatter</span><span class="p">(</span><span class="n">log_format</span><span class="p">)</span>
+            <span class="n">logger</span><span class="o">.</span><span class="n">addHandler</span><span class="p">(</span><span class="n">file_logging</span><span class="p">)</span>
+
+        <span class="n">LOGGERS</span><span class="o">.</span><span class="n">update</span><span class="p">({</span><span class="s">&#39;batch_apps&#39;</span><span class="p">:</span><span class="n">logger</span><span class="p">})</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s">&quot;Logger created with file={0}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_write_file</span><span class="p">))</span>
+        <span class="k">return</span> <span class="n">logger</span>
+
+    <span class="k">def</span> <span class="nf">_set_logging_level</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">level</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Set logging level.</span>
+
+<span class="sd">        :Args:</span>
+<span class="sd">            - level (str): The logging level required for the session.</span>
+<span class="sd">              Must be one of the following:</span>
+<span class="sd">              ``[&#39;debug&#39;, &#39;info&#39;, &#39;warning&#39;, &#39;error&#39;, &#39;critical&#39;]``.</span>
+<span class="sd">              The input is not case sensitive. If an invalid input is</span>
+<span class="sd">              supplied, the default level - &#39;warning&#39; - will be set.</span>
+
+<span class="sd">        :Returns:</span>
+<span class="sd">            - The level applied (int).</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">levels</span> <span class="o">=</span> <span class="p">{</span><span class="s">&#39;debug&#39;</span><span class="p">:</span> <span class="mi">10</span><span class="p">,</span>
+                  <span class="s">&#39;info&#39;</span><span class="p">:</span> <span class="mi">20</span><span class="p">,</span>
+                  <span class="s">&#39;warning&#39;</span><span class="p">:</span> <span class="mi">30</span><span class="p">,</span>
+                  <span class="s">&#39;error&#39;</span><span class="p">:</span> <span class="mi">40</span><span class="p">,</span>
+                  <span class="s">&#39;critical&#39;</span><span class="p">:</span> <span class="mi">50</span><span class="p">}</span>
+
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">level</span><span class="p">,</span> <span class="nb">str</span><span class="p">)</span> <span class="ow">and</span> <span class="n">level</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="ow">in</span> <span class="n">levels</span><span class="p">:</span>
+            <span class="n">level</span> <span class="o">=</span> <span class="n">levels</span><span class="p">[</span><span class="n">level</span><span class="o">.</span><span class="n">lower</span><span class="p">()]</span>
+
+        <span class="k">elif</span> <span class="p">((</span><span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">level</span><span class="p">,</span> <span class="nb">int</span><span class="p">))</span> <span class="ow">or</span>
+              <span class="p">(</span><span class="n">level</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">levels</span><span class="o">.</span><span class="n">values</span><span class="p">())):</span>
+
+            <span class="k">print</span><span class="p">(</span><span class="s">&quot;Logging level &#39;{level}&#39; not recognized. Must be a string &quot;</span>
+                  <span class="s">&quot;name such as &#39;debug&#39; or the associated integer. Defaulting&quot;</span>
+                  <span class="s">&quot; to level WARNING.&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">level</span><span class="o">=</span><span class="n">level</span><span class="p">))</span>
+            <span class="n">level</span> <span class="o">=</span> <span class="mi">30</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_config</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="s">&quot;Logging&quot;</span><span class="p">,</span> <span class="s">&quot;level&quot;</span><span class="p">,</span> <span class="n">level</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_log</span><span class="o">.</span><span class="n">setLevel</span><span class="p">(</span><span class="n">level</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">handle</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_log</span><span class="o">.</span><span class="n">handlers</span><span class="p">:</span>
+            <span class="n">handle</span><span class="o">.</span><span class="n">setLevel</span><span class="p">(</span><span class="n">level</span><span class="p">)</span>
+
+        <span class="n">LOGGERS</span><span class="o">.</span><span class="n">update</span><span class="p">({</span><span class="s">&#39;level&#39;</span><span class="p">:</span><span class="n">level</span><span class="p">})</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_log</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s">&quot;Logging level set to {0}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">level</span><span class="p">))</span>
+        <span class="k">return</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLevelName</span><span class="p">(</span><span class="n">level</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">_reformat_config</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">old_auth</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Reformat a deprecated config to allow for backwards</span>
+<span class="sd">        compatibility with v0.1.1.</span>
+
+<span class="sd">        :Args:</span>
+<span class="sd">            - old_auth (dict): Authentication config setting.</span>
+
+<span class="sd">        :Returns:</span>
+<span class="sd">            - A dictionary containing compatible auth config.</span>
+
+<span class="sd">        :Raises:</span>
+<span class="sd">            - :class:`.InvalidConfigException` if unable to reformat</span>
+<span class="sd">              auth into correct format.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_log</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="s">&quot;Configuration file format is deprecated. &quot;</span>
+                          <span class="s">&quot;Please regenerate.&quot;</span><span class="p">)</span>
+
+        <span class="n">new_auth</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="n">new_auth</span><span class="p">[</span><span class="s">&quot;resource&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">old_auth</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">&quot;resource&quot;</span><span class="p">)</span>
+        <span class="n">new_auth</span><span class="p">[</span><span class="s">&quot;root&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s">&quot;login.windows.net/&quot;</span>
+        <span class="n">new_auth</span><span class="p">[</span><span class="s">&quot;auth_uri&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s">&quot;/oauth2/authorize&quot;</span>
+        <span class="n">new_auth</span><span class="p">[</span><span class="s">&quot;token_uri&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s">&quot;/oauth2/token&quot;</span>
+
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">old_job</span> <span class="o">=</span>  <span class="nb">dict</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_config</span><span class="o">.</span><span class="n">items</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">jobtype</span><span class="p">))</span>
+            <span class="n">new_auth</span><span class="p">[</span><span class="s">&quot;endpoint&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">old_job</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">&quot;endpoint&quot;</span><span class="p">)</span>
+            <span class="n">new_auth</span><span class="p">[</span><span class="s">&quot;client_id&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">old_job</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">&quot;client_id&quot;</span><span class="p">)</span>
+            <span class="n">new_auth</span><span class="p">[</span><span class="s">&quot;redirect_uri&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">old_job</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">&quot;redirect_uri&quot;</span><span class="p">)</span>
+
+            <span class="n">auth_uri</span> <span class="o">=</span> <span class="n">old_auth</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">&quot;auth_uri&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s">&quot;/&quot;</span><span class="p">)</span>
+            <span class="n">tenant_index</span> <span class="o">=</span> <span class="n">auth_uri</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="s">&quot;login.windows.net&quot;</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span>
+            <span class="n">new_auth</span><span class="p">[</span><span class="s">&quot;tenant&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">auth_uri</span><span class="p">[</span><span class="n">tenant_index</span><span class="p">]</span>
+
+            <span class="n">new_auth</span><span class="p">[</span><span class="s">&quot;unattended_account&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">old_auth</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">&quot;service_principal&quot;</span><span class="p">)</span>
+            <span class="n">new_auth</span><span class="p">[</span><span class="s">&quot;unattended_key&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">old_auth</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">&quot;service_principal_key&quot;</span><span class="p">)</span>
+
+        <span class="k">except</span><span class="p">(</span><span class="ne">ValueError</span><span class="p">,</span> <span class="ne">KeyError</span><span class="p">,</span> <span class="ne">IndexError</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="n">InvalidConfigException</span><span class="p">(</span>
+                <span class="s">&quot;Configuration file is out-of-date and &quot;</span>
+                <span class="s">&quot;unable to be reconciled. Please regenerate&quot;</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">new_auth</span>
+
+<div class="viewcode-block" id="Configuration.set_default_application"><a class="viewcode-back" href="../../batch_apps.config.html#batchapps.config.Configuration.set_default_application">[docs]</a>    <span class="k">def</span> <span class="nf">set_default_application</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        .. warning:: Deprecated. Use :meth:`.set_default_jobtype()`.</span>
+<span class="sd">        Set the job type to be used by default when creating a</span>
+<span class="sd">        :class:`.Configuration` object. This method will set the current</span>
+<span class="sd">        job type to be the default, and will save the changes.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_log</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="s">&quot;set_default_application() has been deprecated. &quot;</span>
+                          <span class="s">&quot;Please use set_default_jobtype()&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">set_default_jobtype</span><span class="p">()</span>
+</div>
+<div class="viewcode-block" id="Configuration.set_default_jobtype"><a class="viewcode-back" href="../../batch_apps.config.html#batchapps.config.Configuration.set_default_jobtype">[docs]</a>    <span class="k">def</span> <span class="nf">set_default_jobtype</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Set the job type to be used by default when creating a</span>
+<span class="sd">        :class:`.Configuration` object. This method will set the current</span>
+<span class="sd">        job type to be the default, and will save the changes.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">for</span> <span class="n">sec</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_config</span><span class="o">.</span><span class="n">sections</span><span class="p">():</span>
+
+            <span class="k">if</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_config</span><span class="o">.</span><span class="n">has_option</span><span class="p">(</span><span class="n">sec</span><span class="p">,</span> <span class="s">&quot;default_app&quot;</span><span class="p">)</span> <span class="ow">and</span> <span class="c">#DEP</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_config</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">sec</span><span class="p">,</span> <span class="s">&quot;default_app&quot;</span><span class="p">)</span> <span class="o">==</span> <span class="s">&quot;True&quot;</span><span class="p">):</span>
+
+                <span class="bp">self</span><span class="o">.</span><span class="n">_config</span><span class="o">.</span><span class="n">remove_option</span><span class="p">(</span><span class="n">sec</span><span class="p">,</span> <span class="s">&quot;default_app&quot;</span><span class="p">)</span>
+
+            <span class="k">if</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_config</span><span class="o">.</span><span class="n">has_option</span><span class="p">(</span><span class="n">sec</span><span class="p">,</span> <span class="s">&quot;default_jobtype&quot;</span><span class="p">)</span> <span class="ow">and</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_config</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">sec</span><span class="p">,</span> <span class="s">&quot;default_jobtype&quot;</span><span class="p">)</span> <span class="o">==</span> <span class="s">&quot;True&quot;</span><span class="p">):</span>
+
+                <span class="bp">self</span><span class="o">.</span><span class="n">_config</span><span class="o">.</span><span class="n">remove_option</span><span class="p">(</span><span class="n">sec</span><span class="p">,</span> <span class="s">&quot;default_jobtype&quot;</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_config</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">jobtype</span><span class="p">,</span> <span class="s">&quot;default_jobtype&quot;</span><span class="p">,</span> <span class="s">&quot;True&quot;</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_write_file</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">save_config</span><span class="p">()</span>
+
+</div>
+<div class="viewcode-block" id="Configuration.save_config"><a class="viewcode-back" href="../../batch_apps.config.html#batchapps.config.Configuration.save_config">[docs]</a>    <span class="k">def</span> <span class="nf">save_config</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Save configuration settings to file.</span>
+<span class="sd">        Any changes made to the configuration will not be saved by default.</span>
+<span class="sd">        So this method must be called to persist any changes to future</span>
+<span class="sd">        sessions. Any saved changes will be lost if a new default</span>
+<span class="sd">        :class:`.Configuration` object is created with the same path, or if</span>
+<span class="sd">        :meth:`.clear_config()` is called. If an error occurs during file</span>
+<span class="sd">        writing, this will be logged but not raised.</span>
+
+<span class="sd">        :Returns:</span>
+<span class="sd">            - ``True`` if save was successful, else ``False``.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">_write_file</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_log</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="s">&quot;Config file writing disabled - &quot;</span>
+                              <span class="s">&quot;cannot save config changes&quot;</span><span class="p">)</span>
+            <span class="k">return</span> <span class="bp">False</span>
+
+        <span class="k">try</span><span class="p">:</span>
+            <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_cfg_file</span><span class="p">,</span> <span class="s">&#39;w&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">configfile</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_config</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">configfile</span><span class="p">)</span>
+            <span class="k">return</span> <span class="bp">True</span>
+
+        <span class="k">except</span> <span class="p">(</span><span class="ne">IOError</span><span class="p">,</span> <span class="ne">OSError</span><span class="p">)</span> <span class="k">as</span> <span class="n">exp</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_log</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="s">&quot;Failed to create configuration file: {file}. &quot;</span>
+                            <span class="s">&quot;Error: {error}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="nb">file</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_cfg_file</span><span class="p">,</span>
+                                                    <span class="n">error</span><span class="o">=</span><span class="n">exp</span><span class="p">))</span>
+            <span class="k">return</span> <span class="bp">False</span>
+</div>
+<div class="viewcode-block" id="Configuration.clear_config"><a class="viewcode-back" href="../../batch_apps.config.html#batchapps.config.Configuration.clear_config">[docs]</a>    <span class="k">def</span> <span class="nf">clear_config</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Delete any existing config file and reset defaults.</span>
+<span class="sd">        This will save a new default config file to the allocated path.</span>
+<span class="sd">        If an error occurs during removing of the old config, this will be</span>
+<span class="sd">        logged but not raised.</span>
+
+<span class="sd">        :Returns:</span>
+<span class="sd">            - ``True`` is the config was successfully cleared, else ``False``.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_log</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s">&quot;Attempting to clear config &quot;</span>
+                            <span class="s">&quot;file {0}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_cfg_file</span><span class="p">))</span>
+
+            <span class="n">os</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_cfg_file</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_config</span> <span class="o">=</span> <span class="n">configparser</span><span class="o">.</span><span class="n">RawConfigParser</span><span class="p">()</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_config</span><span class="o">.</span><span class="n">optionxform</span> <span class="o">=</span> <span class="nb">str</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_set_defaults</span><span class="p">()</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_log</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s">&quot;Deleted config file and reset config to defaults&quot;</span><span class="p">)</span>
+            <span class="k">return</span> <span class="bp">True</span>
+
+        <span class="k">except</span> <span class="p">(</span><span class="ne">IOError</span><span class="p">,</span> <span class="ne">OSError</span><span class="p">)</span> <span class="k">as</span> <span class="n">exp</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_log</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="s">&quot;Failed to remove configuration file: {file}. &quot;</span>
+                            <span class="s">&quot;Error: {error}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="nb">file</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_cfg_file</span><span class="p">,</span>
+                                                    <span class="n">error</span><span class="o">=</span><span class="n">exp</span><span class="p">))</span>
+            <span class="k">return</span> <span class="bp">False</span>
+</div>
+<div class="viewcode-block" id="Configuration.endpoint"><a class="viewcode-back" href="../../batch_apps.config.html#batchapps.config.Configuration.endpoint">[docs]</a>    <span class="k">def</span> <span class="nf">endpoint</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">endpoint</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Get and set the endpoint for the Batch Apps service.</span>
+
+<span class="sd">        :Args:</span>
+<span class="sd">            - endpoint (str): *optional* A new endpoint, if supplied, will</span>
+<span class="sd">              change the configured endpoint. To persist changes</span>
+<span class="sd">              :meth:`.save_config()` must be called.</span>
+
+<span class="sd">        :Returns:</span>
+<span class="sd">            - If ``endpoint`` is not supplied, the current endpoint will</span>
+<span class="sd">              be returned (str). Otherwise the new endpoint (str).</span>
+
+<span class="sd">        :Raises:</span>
+<span class="sd">            - :exc:`.InvalidConfigException` if no endpoint found in the</span>
+<span class="sd">              configuration.</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">end_p</span> <span class="o">=</span> <span class="s">&quot;&quot;</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">_config</span><span class="o">.</span><span class="n">has_section</span><span class="p">(</span><span class="s">&quot;Authentication&quot;</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="n">InvalidConfigException</span><span class="p">(</span><span class="s">&quot;Config has no Authentication&quot;</span><span class="p">)</span>
+
+        <span class="k">elif</span> <span class="nb">len</span><span class="p">(</span><span class="n">endpoint</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_log</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s">&quot;Changing endpoint from {old} to {new}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+                <span class="n">old</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">endpoint</span><span class="p">(),</span> <span class="n">new</span><span class="o">=</span><span class="n">endpoint</span><span class="p">))</span>
+
+            <span class="bp">self</span><span class="o">.</span><span class="n">_config</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="s">&quot;Authentication&quot;</span><span class="p">,</span> <span class="s">&#39;endpoint&#39;</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="n">endpoint</span><span class="p">[</span><span class="mi">0</span><span class="p">]))</span>
+            <span class="n">end_p</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">endpoint</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+
+        <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">_config</span><span class="o">.</span><span class="n">has_option</span><span class="p">(</span><span class="s">&quot;Authentication&quot;</span><span class="p">,</span> <span class="s">&quot;endpoint&quot;</span><span class="p">):</span>
+            <span class="n">end_p</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_config</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">&quot;Authentication&quot;</span><span class="p">,</span> <span class="s">&quot;endpoint&quot;</span><span class="p">)</span>
+
+        <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">_config</span><span class="o">.</span><span class="n">has_option</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">jobtype</span><span class="p">,</span> <span class="s">&quot;endpoint&quot;</span><span class="p">):</span> <span class="c">#DEP</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_log</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="s">&quot;Job type config in deprecated format. &quot;</span>
+                              <span class="s">&quot;Please regenerate.&quot;</span><span class="p">)</span>
+            <span class="n">end_p</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_config</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">jobtype</span><span class="p">,</span> <span class="s">&quot;endpoint&quot;</span><span class="p">)</span>
+
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">InvalidConfigException</span><span class="p">(</span><span class="s">&quot;No valid endpoint value for &quot;</span>
+                                         <span class="s">&quot;{type}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="nb">type</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">jobtype</span><span class="p">))</span>
+        <span class="k">if</span> <span class="n">end_p</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s">&quot;http://&quot;</span><span class="p">):</span>
+            <span class="n">end_p</span> <span class="o">=</span> <span class="n">end_p</span><span class="p">[</span><span class="mi">7</span><span class="p">:]</span>
+
+        <span class="k">elif</span> <span class="n">end_p</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s">&quot;https://&quot;</span><span class="p">):</span>
+            <span class="n">end_p</span> <span class="o">=</span> <span class="n">end_p</span><span class="p">[</span><span class="mi">8</span><span class="p">:]</span>
+
+        <span class="k">return</span> <span class="n">end_p</span>
+</div>
+<div class="viewcode-block" id="Configuration.logging_level"><a class="viewcode-back" href="../../batch_apps.config.html#batchapps.config.Configuration.logging_level">[docs]</a>    <span class="k">def</span> <span class="nf">logging_level</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">level</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Gets and sets the current logging level.</span>
+
+<span class="sd">        :Args:</span>
+<span class="sd">            - level (str): *optional* A new level, if supplied, all further</span>
+<span class="sd">              logging in the current session will be at the new level. To</span>
+<span class="sd">              persist changes :meth:`.save_config()` must be called.</span>
+
+<span class="sd">        :Returns:</span>
+<span class="sd">            - If ``level`` is not supplied, the current level used will be</span>
+<span class="sd">              returned (str). Otherwise the new level (str).</span>
+
+<span class="sd">        :Raises:</span>
+<span class="sd">            - :exc:`.InvalidConfigException` if current configuration does not</span>
+<span class="sd">              have a logging level configured.</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">level</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">_config</span><span class="o">.</span><span class="n">has_option</span><span class="p">(</span><span class="s">&#39;Logging&#39;</span><span class="p">,</span> <span class="s">&#39;level&#39;</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_log</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s">&quot;Setting logging level from {0}&quot;</span>
+                           <span class="s">&quot; to {1}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">logging_level</span><span class="p">(),</span> <span class="n">level</span><span class="p">))</span>
+
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_set_logging_level</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">level</span><span class="p">[</span><span class="mi">0</span><span class="p">]))</span>
+
+        <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">_config</span><span class="o">.</span><span class="n">has_option</span><span class="p">(</span><span class="s">&#39;Logging&#39;</span><span class="p">,</span> <span class="s">&#39;level&#39;</span><span class="p">):</span>
+            <span class="k">return</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLevelName</span><span class="p">(</span>
+                <span class="nb">int</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_config</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">&#39;Logging&#39;</span><span class="p">,</span> <span class="s">&#39;level&#39;</span><span class="p">)))</span>
+
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">InvalidConfigException</span><span class="p">(</span>
+                <span class="s">&quot;No valid logging level found. Please set.&quot;</span><span class="p">)</span>
+</div>
+<div class="viewcode-block" id="Configuration.application"><a class="viewcode-back" href="../../batch_apps.config.html#batchapps.config.Configuration.application">[docs]</a>    <span class="k">def</span> <span class="nf">application</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">jobtype</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        .. warning:: Deprecated. Please use :meth:`.current_jobtype()`.</span>
+<span class="sd">        Gets and sets the current job type.</span>
+
+<span class="sd">        :Args:</span>
+<span class="sd">            - jobtype (str): *optional* A job type, if supplied,</span>
+<span class="sd">              will update the current job type and job configuration for new</span>
+<span class="sd">              job submissions.</span>
+
+<span class="sd">        :Returns:</span>
+<span class="sd">            - The current job type (str)</span>
+
+<span class="sd">        :Raises:</span>
+<span class="sd">            - :exc:`.InvalidConfigException` if the supplied job type has no</span>
+<span class="sd">              associated configuration.</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_log</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="s">&quot;application() has been deprecated. &quot;</span>
+                          <span class="s">&quot;Please use current_jobtype()&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">current_jobtype</span><span class="p">(</span><span class="o">*</span><span class="n">jobtype</span><span class="p">)</span>
+</div>
+<div class="viewcode-block" id="Configuration.current_jobtype"><a class="viewcode-back" href="../../batch_apps.config.html#batchapps.config.Configuration.current_jobtype">[docs]</a>    <span class="k">def</span> <span class="nf">current_jobtype</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">jobtype</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Gets and sets the current job type.</span>
+
+<span class="sd">        :Args:</span>
+<span class="sd">            - jobtype (str): *optional* A job type, if supplied,</span>
+<span class="sd">              will update the current job type and job configuration for new</span>
+<span class="sd">              job submissions.</span>
+
+<span class="sd">        :Returns:</span>
+<span class="sd">            - The current job type (str)</span>
+
+<span class="sd">        :Raises:</span>
+<span class="sd">            - :exc:`.InvalidConfigException` if the supplied job type has no</span>
+<span class="sd">              associated configuration.</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">jobtype</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">_config</span><span class="o">.</span><span class="n">has_section</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">jobtype</span><span class="p">[</span><span class="mi">0</span><span class="p">])):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_log</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s">&quot;Setting job type from {0} to {1}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">jobtype</span><span class="p">,</span>
+                <span class="nb">str</span><span class="p">(</span><span class="n">jobtype</span><span class="p">[</span><span class="mi">0</span><span class="p">])))</span>
+
+            <span class="bp">self</span><span class="o">.</span><span class="n">jobtype</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">jobtype</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+
+        <span class="k">elif</span> <span class="n">jobtype</span> <span class="ow">and</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">_config</span><span class="o">.</span><span class="n">has_section</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">jobtype</span><span class="p">[</span><span class="mi">0</span><span class="p">])):</span>
+            <span class="k">raise</span> <span class="n">InvalidConfigException</span><span class="p">(</span>
+                <span class="s">&quot;No configuration for &#39;{type}&#39; found.&quot;</span>
+                <span class="s">&quot; Please add it.&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="nb">type</span><span class="o">=</span><span class="n">jobtype</span><span class="p">))</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">job_type</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">jobtype</span> <span class="c">#DEP</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">jobtype</span>
+</div>
+<div class="viewcode-block" id="Configuration.applications"><a class="viewcode-back" href="../../batch_apps.config.html#batchapps.config.Configuration.applications">[docs]</a>    <span class="k">def</span> <span class="nf">applications</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        .. warning:: Deprecated. Please use :meth:`.list_jobtypes()`.</span>
+<span class="sd">        Gets a list of all the job types defined in the configuration.</span>
+
+<span class="sd">        :Returns:</span>
+<span class="sd">            - A list of strings of the job types options configured.</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_log</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="s">&quot;applications() is deprecated. &quot;</span>
+                          <span class="s">&quot;Please use list_jobtypes().&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">list_jobtypes</span><span class="p">()</span>
+</div>
+<div class="viewcode-block" id="Configuration.list_jobtypes"><a class="viewcode-back" href="../../batch_apps.config.html#batchapps.config.Configuration.list_jobtypes">[docs]</a>    <span class="k">def</span> <span class="nf">list_jobtypes</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Gets a list of all the job types defined in the configuration.</span>
+
+<span class="sd">        :Returns:</span>
+<span class="sd">            - A list of strings of the job types options configured.</span>
+
+<span class="sd">        :Raises:</span>
+<span class="sd">            - :class:`.InvalidConfigException` if either Logging or</span>
+<span class="sd">              Authentication sections are missing from the config.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">types</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_config</span><span class="o">.</span><span class="n">sections</span><span class="p">())</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">types</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="s">&quot;Logging&quot;</span><span class="p">)</span>
+            <span class="n">types</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="s">&quot;Authentication&quot;</span><span class="p">)</span>
+        <span class="k">except</span> <span class="ne">ValueError</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">InvalidConfigException</span><span class="p">(</span><span class="s">&quot;Config missing key element&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">types</span>
+</div>
+<div class="viewcode-block" id="Configuration.default_params"><a class="viewcode-back" href="../../batch_apps.config.html#batchapps.config.Configuration.default_params">[docs]</a>    <span class="k">def</span> <span class="nf">default_params</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Gets the default parameters for the current job type.</span>
+
+<span class="sd">        :Returns:</span>
+<span class="sd">            - A dictionary of all the string parameters tied to the job type.</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="nb">dict</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_config</span><span class="o">.</span><span class="n">items</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">jobtype</span><span class="p">))</span>
+</div>
+<div class="viewcode-block" id="Configuration.add_application"><a class="viewcode-back" href="../../batch_apps.config.html#batchapps.config.Configuration.add_application">[docs]</a>    <span class="k">def</span> <span class="nf">add_application</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">jobtype</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">params</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        .. warning:: Deprecated. Please use :meth:`.add_jobtype()`.</span>
+<span class="sd">        Add a new job type section to the configuration.</span>
+
+<span class="sd">        :Args:</span>
+<span class="sd">            - jobtype (str): The name of the job type to be added.</span>
+
+<span class="sd">        :Kwargs:</span>
+<span class="sd">            - params: *optional* Any additional parameters to be submitted</span>
+<span class="sd">              with a job of this type can be added as keyword arguments.</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_log</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="s">&quot;add_application() is deprecated. &quot;</span>
+                          <span class="s">&quot;Please use add_jobtype().&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">add_jobtype</span><span class="p">(</span><span class="n">jobtype</span><span class="p">,</span> <span class="o">**</span><span class="n">params</span><span class="p">)</span>
+</div>
+<div class="viewcode-block" id="Configuration.add_jobtype"><a class="viewcode-back" href="../../batch_apps.config.html#batchapps.config.Configuration.add_jobtype">[docs]</a>    <span class="k">def</span> <span class="nf">add_jobtype</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">jobtype</span><span class="p">,</span> <span class="o">**</span><span class="n">params</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Add a new job type section to the configuration.</span>
+
+<span class="sd">        :Args:</span>
+<span class="sd">            - jobtype (str): The name of the job type to be added.</span>
+
+<span class="sd">        :Kwargs:</span>
+<span class="sd">            - params: *optional* Any additional parameters to be submitted</span>
+<span class="sd">              with a job of this type can be added as keyword arguments.</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_log</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s">&quot;Configuring new job type: {type}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+            <span class="nb">type</span><span class="o">=</span><span class="n">jobtype</span><span class="p">))</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">_config</span><span class="o">.</span><span class="n">has_section</span><span class="p">(</span><span class="n">jobtype</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_config</span><span class="o">.</span><span class="n">add_section</span><span class="p">(</span><span class="n">jobtype</span><span class="p">)</span>
+
+        <span class="k">for</span> <span class="p">(</span><span class="n">option</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span> <span class="ow">in</span> <span class="n">params</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_config</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">jobtype</span><span class="p">,</span> <span class="n">option</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span>
+</div>
+<div class="viewcode-block" id="Configuration.set"><a class="viewcode-back" href="../../batch_apps.config.html#batchapps.config.Configuration.set">[docs]</a>    <span class="k">def</span> <span class="nf">set</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">param</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Set or add a parameter to the configuration of the current</span>
+<span class="sd">        job type.</span>
+
+<span class="sd">        :Args:</span>
+<span class="sd">            - param (str): The parameter to set, either new or already</span>
+<span class="sd">              existing.</span>
+<span class="sd">            - value (str): The value to assign to the given parameter.</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_log</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s">&quot;Setting {jt} parameter {prm} to {val}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+            <span class="n">jt</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">jobtype</span><span class="p">,</span>
+            <span class="n">prm</span><span class="o">=</span><span class="n">param</span><span class="p">,</span>
+            <span class="n">val</span><span class="o">=</span><span class="n">value</span><span class="p">))</span>
+
+        <span class="k">try</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_config</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">jobtype</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="n">param</span><span class="p">),</span> <span class="nb">str</span><span class="p">(</span><span class="n">value</span><span class="p">))</span>
+
+        <span class="k">except</span> <span class="n">configparser</span><span class="o">.</span><span class="n">NoSectionError</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">InvalidConfigException</span><span class="p">(</span>
+                <span class="s">&quot;Current job type {0} has no valid&quot;</span>
+                <span class="s">&quot; configuration to set to.&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">jobtype</span><span class="p">))</span>
+</div>
+<div class="viewcode-block" id="Configuration.get"><a class="viewcode-back" href="../../batch_apps.config.html#batchapps.config.Configuration.get">[docs]</a>    <span class="k">def</span> <span class="nf">get</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">param</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Get a parameter from the current job type configuration.</span>
+
+<span class="sd">        :Args:</span>
+<span class="sd">            - param (str): The parameter to retrieve.</span>
+
+<span class="sd">        :Returns:</span>
+<span class="sd">            - The value of the given parameter (str) if it exists.</span>
+<span class="sd">            - ``None`` if the parameter doesn&#39;t exist and a warning will be logged.</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_config</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">jobtype</span><span class="p">,</span> <span class="n">param</span><span class="p">)</span>
+
+        <span class="k">except</span> <span class="p">(</span><span class="ne">AttributeError</span><span class="p">,</span> <span class="n">configparser</span><span class="o">.</span><span class="n">Error</span><span class="p">)</span> <span class="k">as</span> <span class="n">exp</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_log</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span>
+                <span class="s">&quot;Couldn&#39;t get {prm} parameter for {jt}. Error: &quot;</span>
+                <span class="s">&quot;{err}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">prm</span><span class="o">=</span><span class="n">param</span><span class="p">,</span> <span class="n">jt</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">jobtype</span><span class="p">,</span> <span class="n">err</span><span class="o">=</span><span class="n">exp</span><span class="p">))</span>
+
+            <span class="k">return</span> <span class="bp">None</span>
+</div>
+<div class="viewcode-block" id="Configuration.remove"><a class="viewcode-back" href="../../batch_apps.config.html#batchapps.config.Configuration.remove">[docs]</a>    <span class="k">def</span> <span class="nf">remove</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">setting</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Remove a parameter or job type from the config.</span>
+<span class="sd">        For these changes to be persisted :meth:`.save_config()`</span>
+<span class="sd">        must be called.</span>
+
+<span class="sd">        :Args:</span>
+<span class="sd">            - setting (str): Job type or parameter to be removed from</span>
+<span class="sd">              the config. If the supplied setting is not a job type or</span>
+<span class="sd">              current job type parameter, nothing will happen. The</span>
+<span class="sd">              current job type, or &#39;Logging&#39; and &#39;Authentication&#39; sections</span>
+<span class="sd">              cannot be removed.</span>
+<span class="sd">        </span>
+<span class="sd">        :Returns:</span>
+<span class="sd">            - ``True`` if the parameter of section was found as removed.</span>
+<span class="sd">            - ``False`` if the selected section was the current job type</span>
+<span class="sd">              or &quot;Authentication&quot; or &quot;Logging&quot;. Will also be ``False`` if</span>
+<span class="sd">              the job type or parameter were not found.</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">setting</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">setting</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">setting</span> <span class="ow">in</span> <span class="p">[</span><span class="s">&#39;Logging&#39;</span><span class="p">,</span> <span class="s">&#39;Authentication&#39;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">jobtype</span><span class="p">]:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_log</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="s">&quot;Cannot remove config for {0}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">setting</span><span class="p">))</span>
+            <span class="k">return</span> <span class="bp">False</span>
+
+        <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">_config</span><span class="o">.</span><span class="n">has_section</span><span class="p">(</span><span class="n">setting</span><span class="p">):</span>
+
+            <span class="bp">self</span><span class="o">.</span><span class="n">_log</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s">&quot;Removing {jt} from &quot;</span>
+                            <span class="s">&quot;configuration&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">jt</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">jobtype</span><span class="p">))</span>
+
+            <span class="bp">self</span><span class="o">.</span><span class="n">_config</span><span class="o">.</span><span class="n">remove_section</span><span class="p">(</span><span class="n">setting</span><span class="p">)</span>
+            <span class="k">return</span> <span class="bp">True</span>
+
+        <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">_config</span><span class="o">.</span><span class="n">has_option</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">jobtype</span><span class="p">,</span> <span class="n">setting</span><span class="p">):</span>
+
+            <span class="bp">self</span><span class="o">.</span><span class="n">_log</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s">&quot;Removing {jt} parameter {prm}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+                <span class="n">jt</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">jobtype</span><span class="p">,</span>
+                <span class="n">prm</span><span class="o">=</span><span class="n">setting</span><span class="p">))</span>
+
+            <span class="bp">self</span><span class="o">.</span><span class="n">_config</span><span class="o">.</span><span class="n">remove_option</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">jobtype</span><span class="p">,</span> <span class="n">setting</span><span class="p">)</span>
+            <span class="k">return</span> <span class="bp">True</span>
+
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_log</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s">&quot;Configuration has no job type or &quot;</span>
+                           <span class="s">&quot;parameter {0}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">setting</span><span class="p">))</span>
+            <span class="k">return</span> <span class="bp">False</span>
+</div>
+<div class="viewcode-block" id="Configuration.aad_config"><a class="viewcode-back" href="../../batch_apps.config.html#batchapps.config.Configuration.aad_config">[docs]</a>    <span class="k">def</span> <span class="nf">aad_config</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">account</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">key</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">client_id</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">tenant</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span>
+                  <span class="n">redirect</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">endpoint</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">unattended</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Configure AAD authentication parameters to accompany an existing</span>
+<span class="sd">        Batch Apps Service.</span>
+<span class="sd">        If new values are set, :meth:`.save_config()` must be called for</span>
+<span class="sd">        changes to be persisted.</span>
+<span class="sd">        Backwards compatible with v0.1.1.</span>
+
+<span class="sd">        :Kwargs:</span>
+<span class="sd">            - account (str): The account string in the format as retrieved</span>
+<span class="sd">              from the Batch Apps portal: ``ClientID=abc;TenantID=xyz``.</span>
+<span class="sd">            - key (str): An Unattended Account key. This can be created in</span>
+<span class="sd">              the Batch Apps portal.</span>
+<span class="sd">            - client_id (str): The client GUID, this can be retrieved from</span>
+<span class="sd">              the AAD portal (not required if using an Unattended Account).</span>
+<span class="sd">            - tenant (str): The auth tenant, this can be retrieved from</span>
+<span class="sd">              the AAD portal (not required if using an Unattended Account).</span>
+<span class="sd">            - redirect (str): The redirect url used for web UI login. This</span>
+<span class="sd">              can be configured in the AAD portal (not required if using an</span>
+<span class="sd">              Unattended Account).</span>
+<span class="sd">            - endpoint (str): The Batch Apps service endpoint. This can be</span>
+<span class="sd">              found in the service details in the Batch Apps Portal.</span>
+<span class="sd">            - unattended (bool): Whether the intended authentication method</span>
+<span class="sd">              will be unattended. Default is ``False``.</span>
+
+<span class="sd">        :Returns:</span>
+<span class="sd">            - dict containing the authentication parameters.</span>
+
+<span class="sd">        :Raises:</span>
+<span class="sd">            - :class:`.InvalidConfigException` if the authentication defaults</span>
+<span class="sd">              are not found in the configuration or if any required information</span>
+<span class="sd">              is missing. This will be raised after any new values passed in</span>
+<span class="sd">              have been set.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">_config</span><span class="o">.</span><span class="n">has_section</span><span class="p">(</span><span class="s">&quot;Authentication&quot;</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="n">InvalidConfigException</span><span class="p">(</span><span class="s">&quot;Config file has no Auth details.&quot;</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">_config</span><span class="o">.</span><span class="n">has_option</span><span class="p">(</span><span class="s">&quot;Authentication&quot;</span><span class="p">,</span> <span class="s">&quot;root&quot;</span><span class="p">):</span> <span class="c"># old config</span>
+
+            <span class="n">auth_cfg</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_config</span><span class="o">.</span><span class="n">items</span><span class="p">(</span><span class="s">&quot;Authentication&quot;</span><span class="p">))</span>
+            <span class="n">auth_cfg</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_reformat_config</span><span class="p">(</span><span class="n">auth_cfg</span><span class="p">)</span>
+
+            <span class="bp">self</span><span class="o">.</span><span class="n">_config</span><span class="o">.</span><span class="n">remove_section</span><span class="p">(</span><span class="s">&quot;Authentication&quot;</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_config</span><span class="o">.</span><span class="n">add_section</span><span class="p">(</span><span class="s">&quot;Authentication&quot;</span><span class="p">)</span>
+
+            <span class="k">for</span> <span class="n">setting</span> <span class="ow">in</span> <span class="n">auth_cfg</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_config</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="s">&quot;Authentication&quot;</span><span class="p">,</span> <span class="n">setting</span><span class="p">,</span> <span class="n">auth_cfg</span><span class="p">[</span><span class="n">setting</span><span class="p">])</span>
+
+        <span class="k">if</span> <span class="n">account</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_config</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="s">&quot;Authentication&quot;</span><span class="p">,</span> <span class="s">&quot;unattended_account&quot;</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="n">account</span><span class="p">))</span>
+
+        <span class="k">if</span> <span class="n">key</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_config</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="s">&quot;Authentication&quot;</span><span class="p">,</span> <span class="s">&quot;unattended_key&quot;</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="n">key</span><span class="p">))</span>
+
+        <span class="k">if</span> <span class="n">client_id</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_config</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="s">&quot;Authentication&quot;</span><span class="p">,</span> <span class="s">&quot;client_id&quot;</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="n">client_id</span><span class="p">))</span>
+
+        <span class="k">if</span> <span class="n">tenant</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_config</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="s">&quot;Authentication&quot;</span><span class="p">,</span> <span class="s">&quot;tenant&quot;</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="n">tenant</span><span class="p">))</span>
+
+        <span class="k">if</span> <span class="n">redirect</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_config</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="s">&quot;Authentication&quot;</span><span class="p">,</span> <span class="s">&quot;redirect_uri&quot;</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="n">redirect</span><span class="p">))</span>
+
+        <span class="k">if</span> <span class="n">endpoint</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_config</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="s">&quot;Authentication&quot;</span><span class="p">,</span> <span class="s">&quot;endpoint&quot;</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="n">endpoint</span><span class="p">))</span>
+
+        <span class="n">auth_dict</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_validate_auth</span><span class="p">(</span><span class="n">unattended</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">auth_dict</span>
+</div>
+    <span class="k">def</span> <span class="nf">_invalid_data</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Check that config value is neither ``None`` or empty.</span>
+
+<span class="sd">        :Args:</span>
+<span class="sd">            - value (str): The config value to check.</span>
+
+<span class="sd">        :Returns:</span>
+<span class="sd">            - ``True`` if value is invalid, else ``False``.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">value</span> <span class="ow">or</span> <span class="n">value</span> <span class="o">==</span> <span class="s">&quot;&quot;</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">True</span>
+
+        <span class="k">if</span> <span class="s">&#39;{&#39;</span> <span class="ow">in</span> <span class="n">value</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">True</span>
+
+        <span class="k">return</span> <span class="bp">False</span>
+
+    <span class="k">def</span> <span class="nf">_validate_auth</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">unattended</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Check all the authentication settings in the config for</span>
+<span class="sd">        valid entries based on auth type.</span>
+
+<span class="sd">        :Args:</span>
+<span class="sd">            - unattended (bool): ``True`` if authenticating via unattended</span>
+<span class="sd">              account, else ``False``.</span>
+
+<span class="sd">        :Returns:</span>
+<span class="sd">            - Dictionary of all values in the Authentication config.</span>
+
+<span class="sd">        :Raises:</span>
+<span class="sd">            - :class:`.InvalidConfigException` if any required values are</span>
+<span class="sd">              ``None`` or empty.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="n">auth</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_config</span><span class="o">.</span><span class="n">items</span><span class="p">(</span><span class="s">&quot;Authentication&quot;</span><span class="p">))</span>
+        <span class="n">required</span> <span class="o">=</span> <span class="p">[</span><span class="s">&#39;endpoint&#39;</span><span class="p">,</span>
+                    <span class="s">&#39;resource&#39;</span><span class="p">,</span>
+                    <span class="s">&#39;root&#39;</span><span class="p">,</span>
+                    <span class="s">&#39;auth_uri&#39;</span><span class="p">,</span>
+                    <span class="s">&#39;token_uri&#39;</span><span class="p">]</span>
+
+        <span class="k">if</span> <span class="n">unattended</span><span class="p">:</span>
+            <span class="n">required</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s">&quot;unattended_account&quot;</span><span class="p">)</span>
+            <span class="n">required</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s">&quot;unattended_key&quot;</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">required</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s">&quot;client_id&quot;</span><span class="p">)</span>
+            <span class="n">required</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s">&quot;tenant&quot;</span><span class="p">)</span>
+            <span class="n">required</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s">&quot;redirect_uri&quot;</span><span class="p">)</span>
+
+        <span class="n">valid_data</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">req_key</span> <span class="ow">in</span> <span class="n">required</span><span class="p">:</span>
+            <span class="n">valid_data</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">auth</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">req_key</span><span class="p">))</span>
+
+        <span class="n">validated</span> <span class="o">=</span> <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">_invalid_data</span><span class="p">(</span><span class="n">d</span><span class="p">)</span> <span class="k">for</span> <span class="n">d</span> <span class="ow">in</span> <span class="n">valid_data</span><span class="p">]</span>
+        <span class="k">if</span> <span class="nb">any</span><span class="p">(</span><span class="n">validated</span><span class="p">):</span>
+            <span class="n">missing_val</span> <span class="o">=</span> <span class="n">required</span><span class="p">[</span><span class="n">validated</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="bp">True</span><span class="p">)]</span>
+            <span class="k">raise</span> <span class="n">InvalidConfigException</span><span class="p">(</span>
+                <span class="s">&quot;Authentication configuration incomplete. &quot;</span>
+                <span class="s">&quot;Missing data for: {0}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">missing_val</span><span class="p">))</span>
+
+        <span class="k">return</span> <span class="n">auth</span>
+
+        </div>
+</pre></div>
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../../index.html">azure-batch-apps 0.2.0 documentation</a> &raquo;</li>
+          <li><a href="../index.html" >Module code</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2014, Microsoft Corporation.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2.2.
+    </div>
+  </body>
+</html>

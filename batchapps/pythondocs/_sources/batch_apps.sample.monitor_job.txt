@@ -1,0 +1,14 @@
+Sample Script - Monitoring Jobs
+================================
+
+Get Job Status
+---------------
+.. literalinclude:: BatchAppsExample-job_status.py
+
+Update Job Details
+-------------------
+.. literalinclude:: BatchAppsExample-update_job.py
+
+Download Task Preview
+----------------------
+.. literalinclude:: BatchAppsExample-task_thumbnail.py

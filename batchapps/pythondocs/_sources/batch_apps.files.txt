@@ -1,0 +1,18 @@
+batchapps.files module
+========================
+
+Representation of a file to be used in a job.
+
+.. automodule:: batchapps.files
+
+FileCollection
+---------------
+.. autoclass:: batchapps.files.FileCollection
+    :members: add, extend, remove, upload, is_uploaded
+    :undoc-members:
+
+UserFile
+---------------
+.. autoclass:: batchapps.files.UserFile
+    :members: compare_lastmodified, create_query_specifier, create_submit_specifier, upload, is_uploaded, get_last_modified, get_checksum, download
+    :undoc-members:

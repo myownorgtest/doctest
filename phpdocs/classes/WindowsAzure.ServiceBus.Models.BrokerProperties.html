@@ -1,0 +1,741 @@
+<!DOCTYPE html><html xmlns:date="http://exslt.org/dates-and-times" lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0; user-scalable=0;">
+<meta charset="utf-8">
+<title>Windows Azure SDK for PHP » \WindowsAzure\ServiceBus\Models\BrokerProperties</title>
+<meta name="author" content="Mike van Riel">
+<meta name="description" content="">
+<link href="../css/template.css" rel="stylesheet" media="all">
+<script src="../js/jquery-1.7.1.min.js" type="text/javascript"></script><script src="../js/jquery-ui-1.8.2.custom.min.js" type="text/javascript"></script><script src="../js/jquery.mousewheel.min.js" type="text/javascript"></script><script src="../js/bootstrap.js" type="text/javascript"></script><script src="../js/template.js" type="text/javascript"></script><script src="../js/prettify/prettify.min.js" type="text/javascript"></script><link rel="shortcut icon" href="../img/favicon.ico">
+<link rel="apple-touch-icon" href="../img/apple-touch-icon.png">
+<link rel="apple-touch-icon" sizes="72x72" href="../img/apple-touch-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="114x114" href="../img/apple-touch-icon-114x114.png">
+</head>
+<body>
+<div class="navbar navbar-fixed-top">
+<div class="navbar-inner"><div class="container">
+<a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse"><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></a><a class="brand" href="../index.html">Windows Azure SDK for PHP</a><div class="nav-collapse"><ul class="nav">
+<li class="dropdown">
+<a href="#api" class="dropdown-toggle" data-toggle="dropdown">
+                                    API Documentation <b class="caret"></b></a><ul class="dropdown-menu">
+<li><a>Namespaces</a></li>
+<li><a href="../namespaces/WindowsAzure.html"><i class="icon-th"></i> WindowsAzure</a></li>
+<li><a>Packages</a></li>
+<li><a href="../packages/WindowsAzure.html"><i class="icon-folder-open"></i> WindowsAzure</a></li>
+</ul>
+</li>
+<li class="dropdown" id="charts-menu">
+<a href="#charts" class="dropdown-toggle" data-toggle="dropdown">
+                                    Charts <b class="caret"></b></a><ul class="dropdown-menu"><li><a href="../graph_class.html"><i class="icon-list-alt"></i> Class hierarchy diagram</a></li></ul>
+</li>
+<li class="dropdown" id="reports-menu">
+<a href="#reports" class="dropdown-toggle" data-toggle="dropdown">
+                                    Reports <b class="caret"></b></a><ul class="dropdown-menu">
+<li><a href="../errors.html"><i class="icon-remove-sign"></i> Errors 
+                <span class="label label-info">385</span></a></li>
+<li><a href="../markers.html"><i class="icon-map-marker"></i> Markers 
+                <ul></ul></a></li>
+<li><a href="../deprecated.html"><i class="icon-stop"></i> Deprecated elements 
+                <span class="label label-info">0</span></a></li>
+</ul>
+</li>
+</ul></div>
+</div></div>
+<div class="go_to_top"><a href="#___" style="color: inherit">Back to top  <i class="icon-upload icon-white"></i></a></div>
+</div>
+<div id="___" class="container">
+<noscript><div class="alert alert-warning">
+                            Javascript is disabled; several features are only available
+                            if Javascript is enabled.
+                        </div></noscript>
+<div class="row">
+<div class="span4">
+<span class="btn-group visibility" data-toggle="buttons-checkbox"><button class="btn public active" title="Show public elements">Public</button><button class="btn protected" title="Show protected elements">Protected</button><button class="btn private" title="Show private elements">Private</button><button class="btn inherited active" title="Show inherited elements">Inherited</button></span><div class="btn-group view pull-right" data-toggle="buttons-radio">
+<button class="btn details" title="Show descriptions and method names"><i class="icon-list"></i></button><button class="btn simple" title="Show only method names"><i class="icon-align-justify"></i></button>
+</div>
+<ul class="side-nav nav nav-list">
+<li class="nav-header">
+<i class="icon-custom icon-method"></i> Methods</li>
+<li class="method public "><a href="#__construct" title="__construct :: Creates a broker properties instance with default parameters."><span class="description">Creates a broker properties instance with default parameters.</span><pre>__construct()</pre></a></li>
+<li class="method public "><a href="#create" title="create :: Creates a broker properties instance with specified JSON message."><span class="description">Creates a broker properties instance with specified JSON message.</span><pre>create()</pre></a></li>
+<li class="method public "><a href="#getCorrelationId" title="getCorrelationId :: Gets the correlation ID."><span class="description">Gets the correlation ID.</span><pre>getCorrelationId()</pre></a></li>
+<li class="method public "><a href="#getDeliveryCount" title="getDeliveryCount :: Gets the delivery count."><span class="description">Gets the delivery count.</span><pre>getDeliveryCount()</pre></a></li>
+<li class="method public "><a href="#getLabel" title="getLabel :: Gets the label."><span class="description">Gets the label.</span><pre>getLabel()</pre></a></li>
+<li class="method public "><a href="#getLockLocation" title="getLockLocation :: Gets the location of the lock."><span class="description">Gets the location of the lock.</span><pre>getLockLocation()</pre></a></li>
+<li class="method public "><a href="#getLockToken" title="getLockToken :: Gets lock token."><span class="description">Gets lock token.</span><pre>getLockToken()</pre></a></li>
+<li class="method public "><a href="#getLockedUntilUtc" title="getLockedUntilUtc :: Gets the locked until time."><span class="description">Gets the locked until time.</span><pre>getLockedUntilUtc()</pre></a></li>
+<li class="method public "><a href="#getMessageId" title="getMessageId :: Gets the message ID."><span class="description">Gets the message ID.</span><pre>getMessageId()</pre></a></li>
+<li class="method public "><a href="#getMessageLocation" title="getMessageLocation :: Gets message location."><span class="description">Gets message location.</span><pre>getMessageLocation()</pre></a></li>
+<li class="method public "><a href="#getReplyTo" title="getReplyTo :: Gets the reply to."><span class="description">Gets the reply to.</span><pre>getReplyTo()</pre></a></li>
+<li class="method public "><a href="#getReplyToSessionId" title="getReplyToSessionId :: Gets reply to session ID."><span class="description">Gets reply to session ID.</span><pre>getReplyToSessionId()</pre></a></li>
+<li class="method public "><a href="#getScheduledEnqueueTimeUtc" title="getScheduledEnqueueTimeUtc :: Gets scheduled enqueue time UTC."><span class="description">Gets scheduled enqueue time UTC.</span><pre>getScheduledEnqueueTimeUtc()</pre></a></li>
+<li class="method public "><a href="#getSequenceNumber" title="getSequenceNumber :: Gets the sequence number."><span class="description">Gets the sequence number.</span><pre>getSequenceNumber()</pre></a></li>
+<li class="method public "><a href="#getSessionId" title="getSessionId :: Gets the session ID."><span class="description">Gets the session ID.</span><pre>getSessionId()</pre></a></li>
+<li class="method public "><a href="#getTimeToLive" title="getTimeToLive :: Gets time to live."><span class="description">Gets time to live.</span><pre>getTimeToLive()</pre></a></li>
+<li class="method public "><a href="#getTo" title="getTo :: Gets to."><span class="description">Gets to.</span><pre>getTo()</pre></a></li>
+<li class="method public "><a href="#setCorrelationId" title="setCorrelationId :: Sets the correlation ID."><span class="description">Sets the correlation ID.</span><pre>setCorrelationId()</pre></a></li>
+<li class="method public "><a href="#setDeliveryCount" title="setDeliveryCount :: Sets the delivery count."><span class="description">Sets the delivery count.</span><pre>setDeliveryCount()</pre></a></li>
+<li class="method public "><a href="#setLabel" title="setLabel :: Sets the label."><span class="description">Sets the label.</span><pre>setLabel()</pre></a></li>
+<li class="method public "><a href="#setLockLocation" title="setLockLocation :: Sets the location of the lock."><span class="description">Sets the location of the lock.</span><pre>setLockLocation()</pre></a></li>
+<li class="method public "><a href="#setLockToken" title="setLockToken :: Sets the lock token."><span class="description">Sets the lock token.</span><pre>setLockToken()</pre></a></li>
+<li class="method public "><a href="#setLockedUntilUtc" title="setLockedUntilUtc :: Sets the locked until time."><span class="description">Sets the locked until time.</span><pre>setLockedUntilUtc()</pre></a></li>
+<li class="method public "><a href="#setMessageId" title="setMessageId :: Sets the message ID."><span class="description">Sets the message ID.</span><pre>setMessageId()</pre></a></li>
+<li class="method public "><a href="#setMessageLocation" title="setMessageLocation :: Sets the location of the message."><span class="description">Sets the location of the message.</span><pre>setMessageLocation()</pre></a></li>
+<li class="method public "><a href="#setReplyTo" title="setReplyTo :: Sets the reply to."><span class="description">Sets the reply to.</span><pre>setReplyTo()</pre></a></li>
+<li class="method public "><a href="#setReplyToSessionId" title="setReplyToSessionId :: Sets reply to session."><span class="description">Sets reply to session.</span><pre>setReplyToSessionId()</pre></a></li>
+<li class="method public "><a href="#setScheduledEnqueueTimeUtc" title="setScheduledEnqueueTimeUtc :: Sets scheduled enqueue time UTC."><span class="description">Sets scheduled enqueue time UTC.</span><pre>setScheduledEnqueueTimeUtc()</pre></a></li>
+<li class="method public "><a href="#setSequenceNumber" title="setSequenceNumber :: Sets the sequence number."><span class="description">Sets the sequence number.</span><pre>setSequenceNumber()</pre></a></li>
+<li class="method public "><a href="#setSessionId" title="setSessionId :: Sets the session ID."><span class="description">Sets the session ID.</span><pre>setSessionId()</pre></a></li>
+<li class="method public "><a href="#setTimeToLive" title="setTimeToLive :: Sets time to live."><span class="description">Sets time to live.</span><pre>setTimeToLive()</pre></a></li>
+<li class="method public "><a href="#setTo" title="setTo :: Sets to."><span class="description">Sets to.</span><pre>setTo()</pre></a></li>
+<li class="method public "><a href="#setValueArrayDateTime" title="setValueArrayDateTime :: Sets a DateTime value in an array."><span class="description">Sets a DateTime value in an array.</span><pre>setValueArrayDateTime()</pre></a></li>
+<li class="method public "><a href="#setValueArrayFloat" title="setValueArrayFloat :: Sets a float value in an array."><span class="description">Sets a float value in an array.</span><pre>setValueArrayFloat()</pre></a></li>
+<li class="method public "><a href="#setValueArrayInt" title="setValueArrayInt :: Sets an integer value in an array."><span class="description">Sets an integer value in an array.</span><pre>setValueArrayInt()</pre></a></li>
+<li class="method public "><a href="#setValueArrayString" title="setValueArrayString :: Sets a string in an array."><span class="description">Sets a string in an array.</span><pre>setValueArrayString()</pre></a></li>
+<li class="method public "><a href="#toString" title="toString :: Gets a string representing the broker property."><span class="description">Gets a string representing the broker property.</span><pre>toString()</pre></a></li>
+<li class="nav-header">
+<i class="icon-custom icon-property"></i> Properties</li>
+<li class="nav-header private">» Private</li>
+<li class="property private "><a href="#%24_correlationId" title="$_correlationId :: The correlation ID."><span class="description">The correlation ID.</span><pre>$_correlationId</pre></a></li>
+<li class="property private "><a href="#%24_deliveryCount" title="$_deliveryCount :: The delivery count."><span class="description">The delivery count.</span><pre>$_deliveryCount</pre></a></li>
+<li class="property private "><a href="#%24_label" title="$_label :: The label."><span class="description">The label.</span><pre>$_label</pre></a></li>
+<li class="property private "><a href="#%24_lockLocation" title="$_lockLocation :: The location of the lock."><span class="description">The location of the lock.</span><pre>$_lockLocation</pre></a></li>
+<li class="property private "><a href="#%24_lockToken" title="$_lockToken :: The lock token."><span class="description">The lock token.</span><pre>$_lockToken</pre></a></li>
+<li class="property private "><a href="#%24_lockedUntilUtc" title="$_lockedUntilUtc :: The locked until time."><span class="description">The locked until time.</span><pre>$_lockedUntilUtc</pre></a></li>
+<li class="property private "><a href="#%24_messageId" title="$_messageId :: The message Id."><span class="description">The message Id.</span><pre>$_messageId</pre></a></li>
+<li class="property private "><a href="#%24_messageLocation" title="$_messageLocation :: The location of the message."><span class="description">The location of the message.</span><pre>$_messageLocation</pre></a></li>
+<li class="property private "><a href="#%24_replyTo" title="$_replyTo :: The reply to."><span class="description">The reply to.</span><pre>$_replyTo</pre></a></li>
+<li class="property private "><a href="#%24_replyToSessionId" title="$_replyToSessionId :: The reply to session ID."><span class="description">The reply to session ID.</span><pre>$_replyToSessionId</pre></a></li>
+<li class="property private "><a href="#%24_scheduledEnqueueTimeUtc" title="$_scheduledEnqueueTimeUtc :: The scheduled enqueue time."><span class="description">The scheduled enqueue time.</span><pre>$_scheduledEnqueueTimeUtc</pre></a></li>
+<li class="property private "><a href="#%24_sequenceNumber" title="$_sequenceNumber :: The sequence number."><span class="description">The sequence number.</span><pre>$_sequenceNumber</pre></a></li>
+<li class="property private "><a href="#%24_sessionId" title="$_sessionId :: The session ID."><span class="description">The session ID.</span><pre>$_sessionId</pre></a></li>
+<li class="property private "><a href="#%24_timeToLive" title="$_timeToLive :: The time to live."><span class="description">The time to live.</span><pre>$_timeToLive</pre></a></li>
+<li class="property private "><a href="#%24_to" title="$_to :: The to."><span class="description">The to.</span><pre>$_to</pre></a></li>
+</ul>
+</div>
+<div class="span8">
+<a name="%5CWindowsAzure%5CServiceBus%5CModels%5CBrokerProperties" id="\WindowsAzure\ServiceBus\Models\BrokerProperties"></a><ul class="breadcrumb">
+<li>
+<a href="../index.html"><i class="icon-custom icon-class"></i></a><span class="divider">\</span>
+</li>
+<li><a href="../namespaces/WindowsAzure.html">WindowsAzure</a></li>
+<span class="divider">\</span><li><a href="../namespaces/WindowsAzure.ServiceBus.html">ServiceBus</a></li>
+<span class="divider">\</span><li><a href="../namespaces/WindowsAzure.ServiceBus.Models.html">Models</a></li>
+<li class="active">
+<span class="divider">\</span><a href="../classes/WindowsAzure.ServiceBus.Models.BrokerProperties.html">BrokerProperties</a>
+</li>
+</ul>
+<div href="../classes/WindowsAzure.ServiceBus.Models.BrokerProperties.html" class="element class">
+<p class="short_description">The properties of the broker of a brokered message.</p>
+<div class="details">
+<p class="long_description"></p>
+<table class="table table-bordered">
+<tr>
+<th>category</th>
+<td>Microsoft</td>
+</tr>
+<tr>
+<th>package</th>
+<td><a href="../packages/WindowsAzure.ServiceBus.Models.html">WindowsAzure\ServiceBus\Models</a></td>
+</tr>
+<tr>
+<th>author</th>
+<td><a href="mailto:azurephpsdk@microsoft.com">Azure PHP SDK</a></td>
+</tr>
+<tr>
+<th>copyright</th>
+<td>2012 Microsoft Corporation</td>
+</tr>
+<tr>
+<th>license</th>
+<td><a href="http://www.apache.org/licenses/LICENSE-2.0">Apache License 2.0</a></td>
+</tr>
+<tr>
+<th>version</th>
+<td>Release: @package_version@</td>
+</tr>
+<tr>
+<th>link</th>
+<td><a href="https://github.com/WindowsAzure/azure-sdk-for-php">https://github.com/WindowsAzure/azure-sdk-for-php</a></td>
+</tr>
+</table>
+<h3>
+<i class="icon-custom icon-method"></i> Methods</h3>
+<a name="__construct" id="__construct"></a><div class="element clickable method public __construct" data-toggle="collapse" data-target=".__construct .collapse">
+<h2>Creates a broker properties instance with default parameters.</h2>
+<pre>__construct() </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><p class="long_description"></p></div></div>
+</div>
+<a name="create" id="create"></a><div class="element clickable method public create" data-toggle="collapse" data-target=".create .collapse">
+<h2>Creates a broker properties instance with specified JSON message.</h2>
+<pre>create(string $brokerPropertiesJson) : \none</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<p class="long_description"></p>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$brokerPropertiesJson</h4>
+<code>string</code><p>A JSON message representing a broker properties.</p></div>
+<h3>Returns</h3>
+<div class="subelement response"><code>\none</code></div>
+</div></div>
+</div>
+<a name="getCorrelationId" id="getCorrelationId"></a><div class="element clickable method public getCorrelationId" data-toggle="collapse" data-target=".getCorrelationId .collapse">
+<h2>Gets the correlation ID.</h2>
+<pre>getCorrelationId() : string</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<p class="long_description"></p>
+<h3>Returns</h3>
+<div class="subelement response"><code>string</code></div>
+</div></div>
+</div>
+<a name="getDeliveryCount" id="getDeliveryCount"></a><div class="element clickable method public getDeliveryCount" data-toggle="collapse" data-target=".getDeliveryCount .collapse">
+<h2>Gets the delivery count.</h2>
+<pre>getDeliveryCount() : integer</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<p class="long_description"></p>
+<h3>Returns</h3>
+<div class="subelement response"><code>integer</code></div>
+</div></div>
+</div>
+<a name="getLabel" id="getLabel"></a><div class="element clickable method public getLabel" data-toggle="collapse" data-target=".getLabel .collapse">
+<h2>Gets the label.</h2>
+<pre>getLabel() : string</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<p class="long_description"></p>
+<h3>Returns</h3>
+<div class="subelement response"><code>string</code></div>
+</div></div>
+</div>
+<a name="getLockLocation" id="getLockLocation"></a><div class="element clickable method public getLockLocation" data-toggle="collapse" data-target=".getLockLocation .collapse">
+<h2>Gets the location of the lock.</h2>
+<pre>getLockLocation() : string</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<p class="long_description"></p>
+<h3>Returns</h3>
+<div class="subelement response"><code>string</code></div>
+</div></div>
+</div>
+<a name="getLockToken" id="getLockToken"></a><div class="element clickable method public getLockToken" data-toggle="collapse" data-target=".getLockToken .collapse">
+<h2>Gets lock token.</h2>
+<pre>getLockToken() : \string.</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<p class="long_description"></p>
+<h3>Returns</h3>
+<div class="subelement response"><code>\string.</code></div>
+</div></div>
+</div>
+<a name="getLockedUntilUtc" id="getLockedUntilUtc"></a><div class="element clickable method public getLockedUntilUtc" data-toggle="collapse" data-target=".getLockedUntilUtc .collapse">
+<h2>Gets the locked until time.</h2>
+<pre>getLockedUntilUtc() : string</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<p class="long_description"></p>
+<h3>Returns</h3>
+<div class="subelement response"><code>string</code></div>
+</div></div>
+</div>
+<a name="getMessageId" id="getMessageId"></a><div class="element clickable method public getMessageId" data-toggle="collapse" data-target=".getMessageId .collapse">
+<h2>Gets the message ID.</h2>
+<pre>getMessageId() : string</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<p class="long_description"></p>
+<h3>Returns</h3>
+<div class="subelement response"><code>string</code></div>
+</div></div>
+</div>
+<a name="getMessageLocation" id="getMessageLocation"></a><div class="element clickable method public getMessageLocation" data-toggle="collapse" data-target=".getMessageLocation .collapse">
+<h2>Gets message location.</h2>
+<pre>getMessageLocation() : string</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<p class="long_description"></p>
+<h3>Returns</h3>
+<div class="subelement response"><code>string</code></div>
+</div></div>
+</div>
+<a name="getReplyTo" id="getReplyTo"></a><div class="element clickable method public getReplyTo" data-toggle="collapse" data-target=".getReplyTo .collapse">
+<h2>Gets the reply to.</h2>
+<pre>getReplyTo() : string</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<p class="long_description"></p>
+<h3>Returns</h3>
+<div class="subelement response"><code>string</code></div>
+</div></div>
+</div>
+<a name="getReplyToSessionId" id="getReplyToSessionId"></a><div class="element clickable method public getReplyToSessionId" data-toggle="collapse" data-target=".getReplyToSessionId .collapse">
+<h2>Gets reply to session ID.</h2>
+<pre>getReplyToSessionId() : string</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<p class="long_description"></p>
+<h3>Returns</h3>
+<div class="subelement response"><code>string</code></div>
+</div></div>
+</div>
+<a name="getScheduledEnqueueTimeUtc" id="getScheduledEnqueueTimeUtc"></a><div class="element clickable method public getScheduledEnqueueTimeUtc" data-toggle="collapse" data-target=".getScheduledEnqueueTimeUtc .collapse">
+<h2>Gets scheduled enqueue time UTC.</h2>
+<pre>getScheduledEnqueueTimeUtc() : string</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<p class="long_description"></p>
+<h3>Returns</h3>
+<div class="subelement response"><code>string</code></div>
+</div></div>
+</div>
+<a name="getSequenceNumber" id="getSequenceNumber"></a><div class="element clickable method public getSequenceNumber" data-toggle="collapse" data-target=".getSequenceNumber .collapse">
+<h2>Gets the sequence number.</h2>
+<pre>getSequenceNumber() : integer</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<p class="long_description"></p>
+<h3>Returns</h3>
+<div class="subelement response"><code>integer</code></div>
+</div></div>
+</div>
+<a name="getSessionId" id="getSessionId"></a><div class="element clickable method public getSessionId" data-toggle="collapse" data-target=".getSessionId .collapse">
+<h2>Gets the session ID.</h2>
+<pre>getSessionId() : string</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<p class="long_description"></p>
+<h3>Returns</h3>
+<div class="subelement response"><code>string</code></div>
+</div></div>
+</div>
+<a name="getTimeToLive" id="getTimeToLive"></a><div class="element clickable method public getTimeToLive" data-toggle="collapse" data-target=".getTimeToLive .collapse">
+<h2>Gets time to live.</h2>
+<pre>getTimeToLive() : string</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<p class="long_description"></p>
+<h3>Returns</h3>
+<div class="subelement response"><code>string</code></div>
+</div></div>
+</div>
+<a name="getTo" id="getTo"></a><div class="element clickable method public getTo" data-toggle="collapse" data-target=".getTo .collapse">
+<h2>Gets to.</h2>
+<pre>getTo() : string</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<p class="long_description"></p>
+<h3>Returns</h3>
+<div class="subelement response"><code>string</code></div>
+</div></div>
+</div>
+<a name="setCorrelationId" id="setCorrelationId"></a><div class="element clickable method public setCorrelationId" data-toggle="collapse" data-target=".setCorrelationId .collapse">
+<h2>Sets the correlation ID.</h2>
+<pre>setCorrelationId(string $correlationId) : \none</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<p class="long_description"></p>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$correlationId</h4>
+<code>string</code><p>The correlation ID.</p></div>
+<h3>Returns</h3>
+<div class="subelement response"><code>\none</code></div>
+</div></div>
+</div>
+<a name="setDeliveryCount" id="setDeliveryCount"></a><div class="element clickable method public setDeliveryCount" data-toggle="collapse" data-target=".setDeliveryCount .collapse">
+<h2>Sets the delivery count.</h2>
+<pre>setDeliveryCount(integer $deliveryCount) : \none</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<p class="long_description"></p>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$deliveryCount</h4>
+<code>integer</code><p>The count of the delivery.</p></div>
+<h3>Returns</h3>
+<div class="subelement response"><code>\none</code></div>
+</div></div>
+</div>
+<a name="setLabel" id="setLabel"></a><div class="element clickable method public setLabel" data-toggle="collapse" data-target=".setLabel .collapse">
+<h2>Sets the label.</h2>
+<pre>setLabel(string $label) : \none</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<p class="long_description"></p>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$label</h4>
+<code>string</code><p>The label of the broker property.</p></div>
+<h3>Returns</h3>
+<div class="subelement response"><code>\none</code></div>
+</div></div>
+</div>
+<a name="setLockLocation" id="setLockLocation"></a><div class="element clickable method public setLockLocation" data-toggle="collapse" data-target=".setLockLocation .collapse">
+<h2>Sets the location of the lock.</h2>
+<pre>setLockLocation(string $lockLocation) : \none</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<p class="long_description"></p>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$lockLocation</h4>
+<code>string</code><p>The location of the lock.</p></div>
+<h3>Returns</h3>
+<div class="subelement response"><code>\none</code></div>
+</div></div>
+</div>
+<a name="setLockToken" id="setLockToken"></a><div class="element clickable method public setLockToken" data-toggle="collapse" data-target=".setLockToken .collapse">
+<h2>Sets the lock token.</h2>
+<pre>setLockToken(string $lockToken) : \none</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<p class="long_description"></p>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$lockToken</h4>
+<code>string</code><p>The lock token.</p></div>
+<h3>Returns</h3>
+<div class="subelement response"><code>\none</code></div>
+</div></div>
+</div>
+<a name="setLockedUntilUtc" id="setLockedUntilUtc"></a><div class="element clickable method public setLockedUntilUtc" data-toggle="collapse" data-target=".setLockedUntilUtc .collapse">
+<h2>Sets the locked until time.</h2>
+<pre>setLockedUntilUtc(string $lockedUntilUtc) : \none</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<p class="long_description"></p>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$lockedUntilUtc</h4>
+<code>string</code><p>The locked until time.</p></div>
+<h3>Returns</h3>
+<div class="subelement response"><code>\none</code></div>
+</div></div>
+</div>
+<a name="setMessageId" id="setMessageId"></a><div class="element clickable method public setMessageId" data-toggle="collapse" data-target=".setMessageId .collapse">
+<h2>Sets the message ID.</h2>
+<pre>setMessageId(string $messageId) : \none</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<p class="long_description"></p>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$messageId</h4>
+<code>string</code><p>The ID of the message.</p></div>
+<h3>Returns</h3>
+<div class="subelement response"><code>\none</code></div>
+</div></div>
+</div>
+<a name="setMessageLocation" id="setMessageLocation"></a><div class="element clickable method public setMessageLocation" data-toggle="collapse" data-target=".setMessageLocation .collapse">
+<h2>Sets the location of the message.</h2>
+<pre>setMessageLocation(string $messageLocation) : \none</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<p class="long_description"></p>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$messageLocation</h4>
+<code>string</code><p>The location of the message.</p></div>
+<h3>Returns</h3>
+<div class="subelement response"><code>\none</code></div>
+</div></div>
+</div>
+<a name="setReplyTo" id="setReplyTo"></a><div class="element clickable method public setReplyTo" data-toggle="collapse" data-target=".setReplyTo .collapse">
+<h2>Sets the reply to.</h2>
+<pre>setReplyTo(string $replyTo) : \none</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<p class="long_description"></p>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$replyTo</h4>
+<code>string</code><p>The reply to.</p></div>
+<h3>Returns</h3>
+<div class="subelement response"><code>\none</code></div>
+</div></div>
+</div>
+<a name="setReplyToSessionId" id="setReplyToSessionId"></a><div class="element clickable method public setReplyToSessionId" data-toggle="collapse" data-target=".setReplyToSessionId .collapse">
+<h2>Sets reply to session.</h2>
+<pre>setReplyToSessionId(string $replyToSessionId) : \none</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<p class="long_description"></p>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$replyToSessionId</h4>
+<code>string</code><p>reply to session.</p></div>
+<h3>Returns</h3>
+<div class="subelement response"><code>\none</code></div>
+</div></div>
+</div>
+<a name="setScheduledEnqueueTimeUtc" id="setScheduledEnqueueTimeUtc"></a><div class="element clickable method public setScheduledEnqueueTimeUtc" data-toggle="collapse" data-target=".setScheduledEnqueueTimeUtc .collapse">
+<h2>Sets scheduled enqueue time UTC.</h2>
+<pre>setScheduledEnqueueTimeUtc(string $scheduledEnqueueTimeUtc) : \none</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<p class="long_description"></p>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$scheduledEnqueueTimeUtc</h4>
+<code>string</code><p>The scheduled enqueue time.</p></div>
+<h3>Returns</h3>
+<div class="subelement response"><code>\none</code></div>
+</div></div>
+</div>
+<a name="setSequenceNumber" id="setSequenceNumber"></a><div class="element clickable method public setSequenceNumber" data-toggle="collapse" data-target=".setSequenceNumber .collapse">
+<h2>Sets the sequence number.</h2>
+<pre>setSequenceNumber(integer $sequenceNumber) : \none</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<p class="long_description"></p>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$sequenceNumber</h4>
+<code>integer</code><p>The sequence number.</p></div>
+<h3>Returns</h3>
+<div class="subelement response"><code>\none</code></div>
+</div></div>
+</div>
+<a name="setSessionId" id="setSessionId"></a><div class="element clickable method public setSessionId" data-toggle="collapse" data-target=".setSessionId .collapse">
+<h2>Sets the session ID.</h2>
+<pre>setSessionId(string $sessionId) : \none</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<p class="long_description"></p>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$sessionId</h4>
+<code>string</code><p>The ID of the session.</p></div>
+<h3>Returns</h3>
+<div class="subelement response"><code>\none</code></div>
+</div></div>
+</div>
+<a name="setTimeToLive" id="setTimeToLive"></a><div class="element clickable method public setTimeToLive" data-toggle="collapse" data-target=".setTimeToLive .collapse">
+<h2>Sets time to live.</h2>
+<pre>setTimeToLive(string $timeToLive) : \none</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<p class="long_description"></p>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$timeToLive</h4>
+<code>string</code><p>The time to live.</p></div>
+<h3>Returns</h3>
+<div class="subelement response"><code>\none</code></div>
+</div></div>
+</div>
+<a name="setTo" id="setTo"></a><div class="element clickable method public setTo" data-toggle="collapse" data-target=".setTo .collapse">
+<h2>Sets to.</h2>
+<pre>setTo(string $to) : \none</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<p class="long_description"></p>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$to</h4>
+<code>string</code><p>To.</p></div>
+<h3>Returns</h3>
+<div class="subelement response"><code>\none</code></div>
+</div></div>
+</div>
+<a name="setValueArrayDateTime" id="setValueArrayDateTime"></a><div class="element clickable method public setValueArrayDateTime" data-toggle="collapse" data-target=".setValueArrayDateTime .collapse">
+<h2>Sets a DateTime value in an array.</h2>
+<pre>setValueArrayDateTime(array $valueArray, string $key, <a href="http://php.net/manual/en/class.datetime.php">\DateTime</a> $value) : \none</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<p class="long_description"></p>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$valueArray</h4>
+<code>array</code><p>&$valueArray The array of a set of values.</p>
+</div>
+<div class="subelement argument">
+<h4>$key</h4>
+<code>string</code><p>The key of the key value pair.</p></div>
+<div class="subelement argument">
+<h4>$value</h4>
+<code><a href="http://php.net/manual/en/class.datetime.php">\DateTime</a></code><p>The value of the key value pair.</p></div>
+<h3>Returns</h3>
+<div class="subelement response"><code>\none</code></div>
+</div></div>
+</div>
+<a name="setValueArrayFloat" id="setValueArrayFloat"></a><div class="element clickable method public setValueArrayFloat" data-toggle="collapse" data-target=".setValueArrayFloat .collapse">
+<h2>Sets a float value in an array.</h2>
+<pre>setValueArrayFloat(array $valueArray, string $key, float $value) : \none</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<p class="long_description"></p>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$valueArray</h4>
+<code>array</code><p>&$valueArray The array of a set of values.</p>
+</div>
+<div class="subelement argument">
+<h4>$key</h4>
+<code>string</code><p>The key of the key value pair.</p></div>
+<div class="subelement argument">
+<h4>$value</h4>
+<code>float</code><p>The value of the key value pair.</p></div>
+<h3>Returns</h3>
+<div class="subelement response"><code>\none</code></div>
+</div></div>
+</div>
+<a name="setValueArrayInt" id="setValueArrayInt"></a><div class="element clickable method public setValueArrayInt" data-toggle="collapse" data-target=".setValueArrayInt .collapse">
+<h2>Sets an integer value in an array.</h2>
+<pre>setValueArrayInt(array $valueArray, string $key, int $value) : \none</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<p class="long_description"></p>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$valueArray</h4>
+<code>array</code><p>&$valueArray The array of a set of values.</p>
+</div>
+<div class="subelement argument">
+<h4>$key</h4>
+<code>string</code><p>The key of the key value pair.</p></div>
+<div class="subelement argument">
+<h4>$value</h4>
+<code>int</code><p>The value of the key value pair.</p></div>
+<h3>Returns</h3>
+<div class="subelement response"><code>\none</code></div>
+</div></div>
+</div>
+<a name="setValueArrayString" id="setValueArrayString"></a><div class="element clickable method public setValueArrayString" data-toggle="collapse" data-target=".setValueArrayString .collapse">
+<h2>Sets a string in an array.</h2>
+<pre>setValueArrayString(array $valueArray, string $key, string $value) : \none</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<p class="long_description"></p>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$valueArray</h4>
+<code>array</code><p>&$valueArray The array of a set of values.</p>
+</div>
+<div class="subelement argument">
+<h4>$key</h4>
+<code>string</code><p>The key of the key value pair.</p></div>
+<div class="subelement argument">
+<h4>$value</h4>
+<code>string</code><p>The value of the key value pair.</p></div>
+<h3>Returns</h3>
+<div class="subelement response"><code>\none</code></div>
+</div></div>
+</div>
+<a name="toString" id="toString"></a><div class="element clickable method public toString" data-toggle="collapse" data-target=".toString .collapse">
+<h2>Gets a string representing the broker property.</h2>
+<pre>toString() : string</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<p class="long_description"></p>
+<h3>Returns</h3>
+<div class="subelement response"><code>string</code></div>
+</div></div>
+</div>
+<h3>
+<i class="icon-custom icon-property"></i> Properties</h3>
+<a name="%24_correlationId" id="$_correlationId"> </a><div class="element clickable property private $_correlationId" data-toggle="collapse" data-target=".$_correlationId .collapse">
+<h2>The correlation ID.</h2>
+<pre>$_correlationId : string</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><p class="long_description"></p></div></div>
+</div>
+<a name="%24_deliveryCount" id="$_deliveryCount"> </a><div class="element clickable property private $_deliveryCount" data-toggle="collapse" data-target=".$_deliveryCount .collapse">
+<h2>The delivery count.</h2>
+<pre>$_deliveryCount : integer</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><p class="long_description"></p></div></div>
+</div>
+<a name="%24_label" id="$_label"> </a><div class="element clickable property private $_label" data-toggle="collapse" data-target=".$_label .collapse">
+<h2>The label.</h2>
+<pre>$_label : string</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><p class="long_description"></p></div></div>
+</div>
+<a name="%24_lockLocation" id="$_lockLocation"> </a><div class="element clickable property private $_lockLocation" data-toggle="collapse" data-target=".$_lockLocation .collapse">
+<h2>The location of the lock.</h2>
+<pre>$_lockLocation : string</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><p class="long_description"></p></div></div>
+</div>
+<a name="%24_lockToken" id="$_lockToken"> </a><div class="element clickable property private $_lockToken" data-toggle="collapse" data-target=".$_lockToken .collapse">
+<h2>The lock token.</h2>
+<pre>$_lockToken : string</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><p class="long_description"></p></div></div>
+</div>
+<a name="%24_lockedUntilUtc" id="$_lockedUntilUtc"> </a><div class="element clickable property private $_lockedUntilUtc" data-toggle="collapse" data-target=".$_lockedUntilUtc .collapse">
+<h2>The locked until time.</h2>
+<pre>$_lockedUntilUtc : <a href="http://php.net/manual/en/class.datetime.php">\DateTime</a></pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><p class="long_description"></p></div></div>
+</div>
+<a name="%24_messageId" id="$_messageId"> </a><div class="element clickable property private $_messageId" data-toggle="collapse" data-target=".$_messageId .collapse">
+<h2>The message Id.</h2>
+<pre>$_messageId : string</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><p class="long_description"></p></div></div>
+</div>
+<a name="%24_messageLocation" id="$_messageLocation"> </a><div class="element clickable property private $_messageLocation" data-toggle="collapse" data-target=".$_messageLocation .collapse">
+<h2>The location of the message.</h2>
+<pre>$_messageLocation : string</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><p class="long_description"></p></div></div>
+</div>
+<a name="%24_replyTo" id="$_replyTo"> </a><div class="element clickable property private $_replyTo" data-toggle="collapse" data-target=".$_replyTo .collapse">
+<h2>The reply to.</h2>
+<pre>$_replyTo : string</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><p class="long_description"></p></div></div>
+</div>
+<a name="%24_replyToSessionId" id="$_replyToSessionId"> </a><div class="element clickable property private $_replyToSessionId" data-toggle="collapse" data-target=".$_replyToSessionId .collapse">
+<h2>The reply to session ID.</h2>
+<pre>$_replyToSessionId : string</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><p class="long_description"></p></div></div>
+</div>
+<a name="%24_scheduledEnqueueTimeUtc" id="$_scheduledEnqueueTimeUtc"> </a><div class="element clickable property private $_scheduledEnqueueTimeUtc" data-toggle="collapse" data-target=".$_scheduledEnqueueTimeUtc .collapse">
+<h2>The scheduled enqueue time.</h2>
+<pre>$_scheduledEnqueueTimeUtc : <a href="http://php.net/manual/en/class.datetime.php">\DateTime</a></pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><p class="long_description"></p></div></div>
+</div>
+<a name="%24_sequenceNumber" id="$_sequenceNumber"> </a><div class="element clickable property private $_sequenceNumber" data-toggle="collapse" data-target=".$_sequenceNumber .collapse">
+<h2>The sequence number.</h2>
+<pre>$_sequenceNumber : string</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><p class="long_description"></p></div></div>
+</div>
+<a name="%24_sessionId" id="$_sessionId"> </a><div class="element clickable property private $_sessionId" data-toggle="collapse" data-target=".$_sessionId .collapse">
+<h2>The session ID.</h2>
+<pre>$_sessionId : string</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><p class="long_description"></p></div></div>
+</div>
+<a name="%24_timeToLive" id="$_timeToLive"> </a><div class="element clickable property private $_timeToLive" data-toggle="collapse" data-target=".$_timeToLive .collapse">
+<h2>The time to live.</h2>
+<pre>$_timeToLive : float</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><p class="long_description"></p></div></div>
+</div>
+<a name="%24_to" id="$_to"> </a><div class="element clickable property private $_to" data-toggle="collapse" data-target=".$_to .collapse">
+<h2>The to.</h2>
+<pre>$_to : string</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><p class="long_description"></p></div></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="row"><footer class="span12">
+            Template is built using <a href="http://twitter.github.com/bootstrap/">Twitter Bootstrap 2</a> and icons provided by <a href="http://glyphicons.com/">Glyphicons</a>.<br>
+            Documentation is powered by <a href="http://www.phpdoc.org/">phpDocumentor 2.0.0a6</a> and<br>
+            generated on 2012-07-17T21:10:39-07:00.<br></footer></div>
+</div>
+</body>
+</html>

@@ -1,0 +1,840 @@
+<!DOCTYPE html><html xmlns:date="http://exslt.org/dates-and-times" lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0; user-scalable=0;">
+<meta charset="utf-8">
+<title>Windows Azure SDK for PHP » \WindowsAzure\ServiceRuntime\RoleEnvironment</title>
+<meta name="author" content="Mike van Riel">
+<meta name="description" content="">
+<link href="../css/template.css" rel="stylesheet" media="all">
+<script src="../js/jquery-1.7.1.min.js" type="text/javascript"></script><script src="../js/jquery-ui-1.8.2.custom.min.js" type="text/javascript"></script><script src="../js/jquery.mousewheel.min.js" type="text/javascript"></script><script src="../js/bootstrap.js" type="text/javascript"></script><script src="../js/template.js" type="text/javascript"></script><script src="../js/prettify/prettify.min.js" type="text/javascript"></script><link rel="shortcut icon" href="../img/favicon.ico">
+<link rel="apple-touch-icon" href="../img/apple-touch-icon.png">
+<link rel="apple-touch-icon" sizes="72x72" href="../img/apple-touch-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="114x114" href="../img/apple-touch-icon-114x114.png">
+</head>
+<body>
+<div class="navbar navbar-fixed-top">
+<div class="navbar-inner"><div class="container">
+<a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse"><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></a><a class="brand" href="../index.html">Windows Azure SDK for PHP</a><div class="nav-collapse"><ul class="nav">
+<li class="dropdown">
+<a href="#api" class="dropdown-toggle" data-toggle="dropdown">
+                                    API Documentation <b class="caret"></b></a><ul class="dropdown-menu">
+<li><a>Namespaces</a></li>
+<li><a href="../namespaces/WindowsAzure.html"><i class="icon-th"></i> WindowsAzure</a></li>
+<li><a>Packages</a></li>
+<li><a href="../packages/WindowsAzure.html"><i class="icon-folder-open"></i> WindowsAzure</a></li>
+</ul>
+</li>
+<li class="dropdown" id="charts-menu">
+<a href="#charts" class="dropdown-toggle" data-toggle="dropdown">
+                                    Charts <b class="caret"></b></a><ul class="dropdown-menu"><li><a href="../graph_class.html"><i class="icon-list-alt"></i> Class hierarchy diagram</a></li></ul>
+</li>
+<li class="dropdown" id="reports-menu">
+<a href="#reports" class="dropdown-toggle" data-toggle="dropdown">
+                                    Reports <b class="caret"></b></a><ul class="dropdown-menu">
+<li><a href="../errors.html"><i class="icon-remove-sign"></i> Errors 
+                <span class="label label-info">385</span></a></li>
+<li><a href="../markers.html"><i class="icon-map-marker"></i> Markers 
+                <ul></ul></a></li>
+<li><a href="../deprecated.html"><i class="icon-stop"></i> Deprecated elements 
+                <span class="label label-info">0</span></a></li>
+</ul>
+</li>
+</ul></div>
+</div></div>
+<div class="go_to_top"><a href="#___" style="color: inherit">Back to top  <i class="icon-upload icon-white"></i></a></div>
+</div>
+<div id="___" class="container">
+<noscript><div class="alert alert-warning">
+                            Javascript is disabled; several features are only available
+                            if Javascript is enabled.
+                        </div></noscript>
+<div class="row">
+<div class="span4">
+<span class="btn-group visibility" data-toggle="buttons-checkbox"><button class="btn public active" title="Show public elements">Public</button><button class="btn protected" title="Show protected elements">Protected</button><button class="btn private" title="Show private elements">Private</button><button class="btn inherited active" title="Show inherited elements">Inherited</button></span><div class="btn-group view pull-right" data-toggle="buttons-radio">
+<button class="btn details" title="Show descriptions and method names"><i class="icon-list"></i></button><button class="btn simple" title="Show only method names"><i class="icon-align-justify"></i></button>
+</div>
+<ul class="side-nav nav nav-list">
+<li class="nav-header">
+<i class="icon-custom icon-method"></i> Methods</li>
+<li class="method public "><a href="#addRoleEnvironmentChangedListener" title="addRoleEnvironmentChangedListener :: Adds an event listener for the changed event, which occurs
+after a configuration change has been applied to a role instance."><span class="description">Adds an event listener for the changed event, which occurs
+after a configuration change has been applied to a role instance.</span><pre>addRoleEnvironmentChangedListener()</pre></a></li>
+<li class="method public "><a href="#addRoleEnvironmentChangingListener" title="addRoleEnvironmentChangingListener :: Adds an event listener for the Changing event, which occurs
+before a change to the service configuration is applied to the running
+instances of the role."><span class="description">Adds an event listener for the Changing event, which occurs
+before a change to the service configuration is applied to the running
+instances of the role.</span><pre>addRoleEnvironmentChangingListener()</pre></a></li>
+<li class="method public "><a href="#addRoleEnvironmentStoppingListener" title="addRoleEnvironmentStoppingListener :: Adds an event listener for the Stopping event, which occurs
+when the role is stopping."><span class="description">Adds an event listener for the Stopping event, which occurs
+when the role is stopping.</span><pre>addRoleEnvironmentStoppingListener()</pre></a></li>
+<li class="method public "><a href="#clearStatus" title="clearStatus :: Clears the status of the role instance."><span class="description">Clears the status of the role instance.</span><pre>clearStatus()</pre></a></li>
+<li class="method public "><a href="#getClientId" title="getClientId :: Returns the client identifier."><span class="description">Returns the client identifier.</span><pre>getClientId()</pre></a></li>
+<li class="method public "><a href="#getConfigurationSettings" title="getConfigurationSettings :: Retrieves the settings in the service configuration file."><span class="description">Retrieves the settings in the service configuration file.</span><pre>getConfigurationSettings()</pre></a></li>
+<li class="method public "><a href="#getCurrentRoleInstance" title="getCurrentRoleInstance :: Returns a RoleInstance object that represents the role instance
+in which this code is currently executing."><span class="description">Returns a RoleInstance object that represents the role instance
+in which this code is currently executing.</span><pre>getCurrentRoleInstance()</pre></a></li>
+<li class="method public "><a href="#getDeploymentId" title="getDeploymentId :: Returns the deployment ID that uniquely identifies the deployment in
+which this role instance is running."><span class="description">Returns the deployment ID that uniquely identifies the deployment in
+which this role instance is running.</span><pre>getDeploymentId()</pre></a></li>
+<li class="method public "><a href="#getLocalResources" title="getLocalResources :: Retrieves the set of named local storage resources."><span class="description">Retrieves the set of named local storage resources.</span><pre>getLocalResources()</pre></a></li>
+<li class="method public "><a href="#getRoles" title="getRoles :: Returns the set of Role objects defined for your service."><span class="description">Returns the set of Role objects defined for your service.</span><pre>getRoles()</pre></a></li>
+<li class="method public "><a href="#init" title="init :: Initializes the role environment."><span class="description">Initializes the role environment.</span><pre>init()</pre></a></li>
+<li class="method public "><a href="#isAvailable" title="isAvailable :: Indicates whether the role instance is running in the Windows Azure
+environment."><span class="description">Indicates whether the role instance is running in the Windows Azure
+environment.</span><pre>isAvailable()</pre></a></li>
+<li class="method public "><a href="#isEmulated" title="isEmulated :: Indicates whether the role instance is running in the development fabric."><span class="description">Indicates whether the role instance is running in the development fabric.</span><pre>isEmulated()</pre></a></li>
+<li class="method public "><a href="#removeRoleEnvironmentChangedListener" title="removeRoleEnvironmentChangedListener :: Removes an event listener for the Changed event."><span class="description">Removes an event listener for the Changed event.</span><pre>removeRoleEnvironmentChangedListener()</pre></a></li>
+<li class="method public "><a href="#removeRoleEnvironmentChangingListener" title="removeRoleEnvironmentChangingListener :: Removes an event listener for the Changing event."><span class="description">Removes an event listener for the Changing event.</span><pre>removeRoleEnvironmentChangingListener()</pre></a></li>
+<li class="method public "><a href="#removeRoleEnvironmentStoppingListener" title="removeRoleEnvironmentStoppingListener :: Removes an event listener for the Stopping event."><span class="description">Removes an event listener for the Stopping event.</span><pre>removeRoleEnvironmentStoppingListener()</pre></a></li>
+<li class="method public "><a href="#requestRecycle" title="requestRecycle :: Requests that the current role instance be stopped and restarted."><span class="description">Requests that the current role instance be stopped and restarted.</span><pre>requestRecycle()</pre></a></li>
+<li class="method public "><a href="#setStatus" title="setStatus :: Sets the status of the role instance."><span class="description">Sets the status of the role instance.</span><pre>setStatus()</pre></a></li>
+<li class="method public "><a href="#trackChanges" title="trackChanges :: Tracks role environment changes raising events as necessary."><span class="description">Tracks role environment changes raising events as necessary.</span><pre>trackChanges()</pre></a></li>
+<li class="nav-header private">» Private</li>
+<li class="method private "><a href="#_acceptLatestIncarnation" title="_acceptLatestIncarnation :: Accepts the latest incarnation."><span class="description">Accepts the latest incarnation.</span><pre>_acceptLatestIncarnation()</pre></a></li>
+<li class="method private "><a href="#_calculateChanges" title="_calculateChanges :: Calculates changes."><span class="description">Calculates changes.</span><pre>_calculateChanges()</pre></a></li>
+<li class="method private "><a href="#_calculateConfigurationChanges" title="_calculateConfigurationChanges :: Calculates the configuration changes."><span class="description">Calculates the configuration changes.</span><pre>_calculateConfigurationChanges()</pre></a></li>
+<li class="method private "><a href="#_calculateCurrentRoleInstanceChanges" title="_calculateCurrentRoleInstanceChanges :: Calculates which instances / instance endpoints were removed from the current
+role to the new role."><span class="description">Calculates which instances / instance endpoints were removed from the current
+role to the new role.</span><pre>_calculateCurrentRoleInstanceChanges()</pre></a></li>
+<li class="method private "><a href="#_calculateCurrentRoleInstanceEndpointsChanges" title="_calculateCurrentRoleInstanceEndpointsChanges :: Calculates which endpoints / endpoint were removed from the current
+role to the new role."><span class="description">Calculates which endpoints / endpoint were removed from the current
+role to the new role.</span><pre>_calculateCurrentRoleInstanceEndpointsChanges()</pre></a></li>
+<li class="method private "><a href="#_calculateNewRoleInstanceChanges" title="_calculateNewRoleInstanceChanges :: Calculates which instances / instance endpoints were added from the current
+role to the new role."><span class="description">Calculates which instances / instance endpoints were added from the current
+role to the new role.</span><pre>_calculateNewRoleInstanceChanges()</pre></a></li>
+<li class="method private "><a href="#_calculateNewRoleInstanceEndpointsChanges" title="_calculateNewRoleInstanceEndpointsChanges :: Calculates which endpoints / endpoint were added from the current
+role to the new role."><span class="description">Calculates which endpoints / endpoint were added from the current
+role to the new role.</span><pre>_calculateNewRoleInstanceEndpointsChanges()</pre></a></li>
+<li class="method private "><a href="#_initialize" title="_initialize :: Initializes the runtime client."><span class="description">Initializes the runtime client.</span><pre>_initialize()</pre></a></li>
+<li class="method private "><a href="#_processGoalStateChange" title="_processGoalStateChange :: Processes a goal state change."><span class="description">Processes a goal state change.</span><pre>_processGoalStateChange()</pre></a></li>
+<li class="method private "><a href="#_raiseChangedEvent" title="_raiseChangedEvent :: Raises a changed event."><span class="description">Raises a changed event.</span><pre>_raiseChangedEvent()</pre></a></li>
+<li class="method private "><a href="#_raiseChangingEvent" title="_raiseChangingEvent :: Raises a changing event."><span class="description">Raises a changing event.</span><pre>_raiseChangingEvent()</pre></a></li>
+<li class="method private "><a href="#_raiseStoppingEvent" title="_raiseStoppingEvent :: Raises a stopping event."><span class="description">Raises a stopping event.</span><pre>_raiseStoppingEvent()</pre></a></li>
+<li class="nav-header">
+<i class="icon-custom icon-property"></i> Properties</li>
+<li class="nav-header private">» Private</li>
+<li class="property private "><a href="#%24_changedListeners" title="$_changedListeners :: "><span class="description">$_changedListeners</span><pre>$_changedListeners</pre></a></li>
+<li class="property private "><a href="#%24_changingListeners" title="$_changingListeners :: "><span class="description">$_changingListeners</span><pre>$_changingListeners</pre></a></li>
+<li class="property private "><a href="#%24_clientId" title="$_clientId :: "><span class="description">$_clientId</span><pre>$_clientId</pre></a></li>
+<li class="property private "><a href="#%24_currentEnvironmentData" title="$_currentEnvironmentData :: "><span class="description">$_currentEnvironmentData</span><pre>$_currentEnvironmentData</pre></a></li>
+<li class="property private "><a href="#%24_currentGoalState" title="$_currentGoalState :: "><span class="description">$_currentGoalState</span><pre>$_currentGoalState</pre></a></li>
+<li class="property private "><a href="#%24_lastState" title="$_lastState :: "><span class="description">$_lastState</span><pre>$_lastState</pre></a></li>
+<li class="property private "><a href="#%24_maxDateTime" title="$_maxDateTime :: "><span class="description">$_maxDateTime</span><pre>$_maxDateTime</pre></a></li>
+<li class="property private "><a href="#%24_runtimeClient" title="$_runtimeClient :: "><span class="description">$_runtimeClient</span><pre>$_runtimeClient</pre></a></li>
+<li class="property private "><a href="#%24_stoppingListeners" title="$_stoppingListeners :: "><span class="description">$_stoppingListeners</span><pre>$_stoppingListeners</pre></a></li>
+<li class="property private "><a href="#%24_tracking" title="$_tracking :: "><span class="description">$_tracking</span><pre>$_tracking</pre></a></li>
+<li class="property private "><a href="#%24_versionEndpoint" title="$_versionEndpoint :: "><span class="description">$_versionEndpoint</span><pre>$_versionEndpoint</pre></a></li>
+<li class="nav-header">
+<i class="icon-custom icon-constant"></i> Constants</li>
+<li class="constant  "><a href="#VERSION_ENDPOINT_ENVIRONMENT_NAME" title="VERSION_ENDPOINT_ENVIRONMENT_NAME :: "><span class="description">VERSION_ENDPOINT_ENVIRONMENT_NAME</span><pre>VERSION_ENDPOINT_ENVIRONMENT_NAME</pre></a></li>
+<li class="constant  "><a href="#VERSION_ENDPOINT_FIXED_PATH" title="VERSION_ENDPOINT_FIXED_PATH :: "><span class="description">VERSION_ENDPOINT_FIXED_PATH</span><pre>VERSION_ENDPOINT_FIXED_PATH</pre></a></li>
+</ul>
+</div>
+<div class="span8">
+<a name="%5CWindowsAzure%5CServiceRuntime%5CRoleEnvironment" id="\WindowsAzure\ServiceRuntime\RoleEnvironment"></a><ul class="breadcrumb">
+<li>
+<a href="../index.html"><i class="icon-custom icon-class"></i></a><span class="divider">\</span>
+</li>
+<li><a href="../namespaces/WindowsAzure.html">WindowsAzure</a></li>
+<span class="divider">\</span><li><a href="../namespaces/WindowsAzure.ServiceRuntime.html">ServiceRuntime</a></li>
+<li class="active">
+<span class="divider">\</span><a href="../classes/WindowsAzure.ServiceRuntime.RoleEnvironment.html">RoleEnvironment</a>
+</li>
+</ul>
+<div href="../classes/WindowsAzure.ServiceRuntime.RoleEnvironment.html" class="element class">
+<p class="short_description">Represents the Windows Azure environment in which an instance of a role is
+running.</p>
+<div class="details">
+<p class="long_description"></p>
+<table class="table table-bordered">
+<tr>
+<th>category</th>
+<td>Microsoft</td>
+</tr>
+<tr>
+<th>package</th>
+<td><a href="../packages/WindowsAzure.ServiceRuntime.html">WindowsAzure\ServiceRuntime</a></td>
+</tr>
+<tr>
+<th>author</th>
+<td><a href="mailto:azurephpsdk@microsoft.com">Azure PHP SDK</a></td>
+</tr>
+<tr>
+<th>copyright</th>
+<td>2012 Microsoft Corporation</td>
+</tr>
+<tr>
+<th>license</th>
+<td><a href="http://www.apache.org/licenses/LICENSE-2.0">Apache License 2.0</a></td>
+</tr>
+<tr>
+<th>version</th>
+<td>Release: @package_version@</td>
+</tr>
+<tr>
+<th>link</th>
+<td><a href="https://github.com/windowsazure/azure-sdk-for-php">https://github.com/windowsazure/azure-sdk-for-php</a></td>
+</tr>
+</table>
+<h3>
+<i class="icon-custom icon-method"></i> Methods</h3>
+<a name="addRoleEnvironmentChangedListener" id="addRoleEnvironmentChangedListener"></a><div class="element clickable method public addRoleEnvironmentChangedListener" data-toggle="collapse" data-target=".addRoleEnvironmentChangedListener .collapse">
+<h2>Adds an event listener for the changed event, which occurs
+after a configuration change has been applied to a role instance.</h2>
+<pre>addRoleEnvironmentChangedListener(\function $listener) : \none</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<p class="long_description"><p>To listen for events, one should call trackChanges.</p></p>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$listener</h4>
+<code>\function</code><p>The changed listener.</p></div>
+<h3>Returns</h3>
+<div class="subelement response"><code>\none</code></div>
+</div></div>
+</div>
+<a name="addRoleEnvironmentChangingListener" id="addRoleEnvironmentChangingListener"></a><div class="element clickable method public addRoleEnvironmentChangingListener" data-toggle="collapse" data-target=".addRoleEnvironmentChangingListener .collapse">
+<h2>Adds an event listener for the Changing event, which occurs
+before a change to the service configuration is applied to the running
+instances of the role.</h2>
+<pre>addRoleEnvironmentChangingListener(\function $listener) : \none</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<p class="long_description"><p>Service configuration changes are applied on-the-fly to running role
+instances. Configuration changes include changes to the service
+configuration changes and changes to the number of instances in the
+service.</p>
+
+<p>This event occurs after the new configuration file has been submitted to
+Windows Azure but before the changes have been applied to each running
+role instance. This event can be cancelled for a given instance to
+prevent the configuration change.</p>
+
+<p>Note that cancelling this event causes the instance to be automatically
+recycled. When the instance is recycled, the configuration change is
+applied when it restarts.</p>
+
+<p>To listen for events, one should call trackChanges.</p></p>
+<table class="table table-bordered"><tr>
+<th>static</th>
+<td></td>
+</tr></table>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$listener</h4>
+<code>\function</code><p>The changing listener.</p></div>
+<h3>Returns</h3>
+<div class="subelement response"><code>\none</code></div>
+</div></div>
+</div>
+<a name="addRoleEnvironmentStoppingListener" id="addRoleEnvironmentStoppingListener"></a><div class="element clickable method public addRoleEnvironmentStoppingListener" data-toggle="collapse" data-target=".addRoleEnvironmentStoppingListener .collapse">
+<h2>Adds an event listener for the Stopping event, which occurs
+when the role is stopping.</h2>
+<pre>addRoleEnvironmentStoppingListener(\function $listener) : \none</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<p class="long_description"><p>To listen for events, one should call trackChanges.</p></p>
+<table class="table table-bordered"><tr>
+<th>static</th>
+<td></td>
+</tr></table>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$listener</h4>
+<code>\function</code><p>The stopping listener.</p></div>
+<h3>Returns</h3>
+<div class="subelement response"><code>\none</code></div>
+</div></div>
+</div>
+<a name="clearStatus" id="clearStatus"></a><div class="element clickable method public clearStatus" data-toggle="collapse" data-target=".clearStatus .collapse">
+<h2>Clears the status of the role instance.</h2>
+<pre>clearStatus() : \none</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<p class="long_description"><p>An instance may indicate that it has completed communicating status by
+calling this method.</p></p>
+<table class="table table-bordered"><tr>
+<th>static</th>
+<td></td>
+</tr></table>
+<h3>Returns</h3>
+<div class="subelement response"><code>\none</code></div>
+</div></div>
+</div>
+<a name="getClientId" id="getClientId"></a><div class="element clickable method public getClientId" data-toggle="collapse" data-target=".getClientId .collapse">
+<h2>Returns the client identifier.</h2>
+<pre>getClientId() : string</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<p class="long_description"></p>
+<table class="table table-bordered"><tr>
+<th>static</th>
+<td></td>
+</tr></table>
+<h3>Returns</h3>
+<div class="subelement response"><code>string</code></div>
+</div></div>
+</div>
+<a name="getConfigurationSettings" id="getConfigurationSettings"></a><div class="element clickable method public getConfigurationSettings" data-toggle="collapse" data-target=".getConfigurationSettings .collapse">
+<h2>Retrieves the settings in the service configuration file.</h2>
+<pre>getConfigurationSettings() : array</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<p class="long_description"><p>A role's configuration settings are defined in the service definition
+file. Values for configuration settings are set in the service
+configuration file.</p></p>
+<table class="table table-bordered"><tr>
+<th>static</th>
+<td></td>
+</tr></table>
+<h3>Returns</h3>
+<div class="subelement response"><code>array</code></div>
+</div></div>
+</div>
+<a name="getCurrentRoleInstance" id="getCurrentRoleInstance"></a><div class="element clickable method public getCurrentRoleInstance" data-toggle="collapse" data-target=".getCurrentRoleInstance .collapse">
+<h2>Returns a RoleInstance object that represents the role instance
+in which this code is currently executing.</h2>
+<pre>getCurrentRoleInstance() : \RoleInstance</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<p class="long_description"></p>
+<table class="table table-bordered"><tr>
+<th>static</th>
+<td></td>
+</tr></table>
+<h3>Returns</h3>
+<div class="subelement response"><code>\RoleInstance</code></div>
+</div></div>
+</div>
+<a name="getDeploymentId" id="getDeploymentId"></a><div class="element clickable method public getDeploymentId" data-toggle="collapse" data-target=".getDeploymentId .collapse">
+<h2>Returns the deployment ID that uniquely identifies the deployment in
+which this role instance is running.</h2>
+<pre>getDeploymentId() : string</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<p class="long_description"></p>
+<table class="table table-bordered"><tr>
+<th>static</th>
+<td></td>
+</tr></table>
+<h3>Returns</h3>
+<div class="subelement response"><code>string</code></div>
+</div></div>
+</div>
+<a name="getLocalResources" id="getLocalResources"></a><div class="element clickable method public getLocalResources" data-toggle="collapse" data-target=".getLocalResources .collapse">
+<h2>Retrieves the set of named local storage resources.</h2>
+<pre>getLocalResources() : array</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<p class="long_description"></p>
+<table class="table table-bordered"><tr>
+<th>static</th>
+<td></td>
+</tr></table>
+<h3>Returns</h3>
+<div class="subelement response"><code>array</code></div>
+</div></div>
+</div>
+<a name="getRoles" id="getRoles"></a><div class="element clickable method public getRoles" data-toggle="collapse" data-target=".getRoles .collapse">
+<h2>Returns the set of Role objects defined for your service.</h2>
+<pre>getRoles() : array</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<p class="long_description"><p>Roles are defined in the service definition file.</p></p>
+<table class="table table-bordered"><tr>
+<th>static</th>
+<td></td>
+</tr></table>
+<h3>Returns</h3>
+<div class="subelement response"><code>array</code></div>
+</div></div>
+</div>
+<a name="init" id="init"></a><div class="element clickable method public init" data-toggle="collapse" data-target=".init .collapse">
+<h2>Initializes the role environment.</h2>
+<pre>init() : \none</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<p class="long_description"></p>
+<table class="table table-bordered"><tr>
+<th>static</th>
+<td></td>
+</tr></table>
+<h3>Returns</h3>
+<div class="subelement response"><code>\none</code></div>
+</div></div>
+</div>
+<a name="isAvailable" id="isAvailable"></a><div class="element clickable method public isAvailable" data-toggle="collapse" data-target=".isAvailable .collapse">
+<h2>Indicates whether the role instance is running in the Windows Azure
+environment.</h2>
+<pre>isAvailable() : boolean</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<p class="long_description"></p>
+<table class="table table-bordered"><tr>
+<th>static</th>
+<td></td>
+</tr></table>
+<h3>Returns</h3>
+<div class="subelement response"><code>boolean</code></div>
+</div></div>
+</div>
+<a name="isEmulated" id="isEmulated"></a><div class="element clickable method public isEmulated" data-toggle="collapse" data-target=".isEmulated .collapse">
+<h2>Indicates whether the role instance is running in the development fabric.</h2>
+<pre>isEmulated() : boolean</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<p class="long_description"></p>
+<table class="table table-bordered"><tr>
+<th>static</th>
+<td></td>
+</tr></table>
+<h3>Returns</h3>
+<div class="subelement response"><code>boolean</code></div>
+</div></div>
+</div>
+<a name="removeRoleEnvironmentChangedListener" id="removeRoleEnvironmentChangedListener"></a><div class="element clickable method public removeRoleEnvironmentChangedListener" data-toggle="collapse" data-target=".removeRoleEnvironmentChangedListener .collapse">
+<h2>Removes an event listener for the Changed event.</h2>
+<pre>removeRoleEnvironmentChangedListener(\function $listener) : bool</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<p class="long_description"></p>
+<table class="table table-bordered"><tr>
+<th>static</th>
+<td></td>
+</tr></table>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$listener</h4>
+<code>\function</code><p>The changed listener.</p></div>
+<h3>Returns</h3>
+<div class="subelement response"><code>bool</code></div>
+</div></div>
+</div>
+<a name="removeRoleEnvironmentChangingListener" id="removeRoleEnvironmentChangingListener"></a><div class="element clickable method public removeRoleEnvironmentChangingListener" data-toggle="collapse" data-target=".removeRoleEnvironmentChangingListener .collapse">
+<h2>Removes an event listener for the Changing event.</h2>
+<pre>removeRoleEnvironmentChangingListener(\function $listener) : bool</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<p class="long_description"></p>
+<table class="table table-bordered"><tr>
+<th>static</th>
+<td></td>
+</tr></table>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$listener</h4>
+<code>\function</code><p>The changing listener.</p></div>
+<h3>Returns</h3>
+<div class="subelement response"><code>bool</code></div>
+</div></div>
+</div>
+<a name="removeRoleEnvironmentStoppingListener" id="removeRoleEnvironmentStoppingListener"></a><div class="element clickable method public removeRoleEnvironmentStoppingListener" data-toggle="collapse" data-target=".removeRoleEnvironmentStoppingListener .collapse">
+<h2>Removes an event listener for the Stopping event.</h2>
+<pre>removeRoleEnvironmentStoppingListener(\function $listener) : bool</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<p class="long_description"></p>
+<table class="table table-bordered"><tr>
+<th>static</th>
+<td></td>
+</tr></table>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$listener</h4>
+<code>\function</code><p>The stopping listener.</p></div>
+<h3>Returns</h3>
+<div class="subelement response"><code>bool</code></div>
+</div></div>
+</div>
+<a name="requestRecycle" id="requestRecycle"></a><div class="element clickable method public requestRecycle" data-toggle="collapse" data-target=".requestRecycle .collapse">
+<h2>Requests that the current role instance be stopped and restarted.</h2>
+<pre>requestRecycle() : \none</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<p class="long_description"><p>Before the role instance is recycled, the Windows Azure load balancer
+takes the role instance out of rotation.</p>
+
+<p>This ensures that no new requests are routed to the instance while it
+is restarting.</p></p>
+<table class="table table-bordered"><tr>
+<th>static</th>
+<td></td>
+</tr></table>
+<h3>Returns</h3>
+<div class="subelement response"><code>\none</code></div>
+</div></div>
+</div>
+<a name="setStatus" id="setStatus"></a><div class="element clickable method public setStatus" data-toggle="collapse" data-target=".setStatus .collapse">
+<h2>Sets the status of the role instance.</h2>
+<pre>setStatus(\RoleInstanceStatus $status, <a href="http://php.net/manual/en/class.datetime.php">\DateTime</a> $expirationUtc) : \none</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<p class="long_description"><p>An instance may indicate that it is in one of two states: Ready or Busy.
+If an instance's state is Ready, it is prepared to receive requests from
+the load balancer. If the instance's state is Busy, it will not receive
+requests from the load balancer.</p></p>
+<table class="table table-bordered"><tr>
+<th>static</th>
+<td></td>
+</tr></table>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$status</h4>
+<code>\RoleInstanceStatus</code><p>The new role status.</p></div>
+<div class="subelement argument">
+<h4>$expirationUtc</h4>
+<code><a href="http://php.net/manual/en/class.datetime.php">\DateTime</a></code><p>The expiration UTC time.</p></div>
+<h3>Returns</h3>
+<div class="subelement response"><code>\none</code></div>
+</div></div>
+</div>
+<a name="trackChanges" id="trackChanges"></a><div class="element clickable method public trackChanges" data-toggle="collapse" data-target=".trackChanges .collapse">
+<h2>Tracks role environment changes raising events as necessary.</h2>
+<pre>trackChanges() : \none</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<p class="long_description"><p>This method is blocking and can/should be called in a separate fork.</p></p>
+<table class="table table-bordered"><tr>
+<th>static</th>
+<td></td>
+</tr></table>
+<h3>Returns</h3>
+<div class="subelement response"><code>\none</code></div>
+</div></div>
+</div>
+<a name="_acceptLatestIncarnation" id="_acceptLatestIncarnation"></a><div class="element clickable method private _acceptLatestIncarnation" data-toggle="collapse" data-target="._acceptLatestIncarnation .collapse">
+<h2>Accepts the latest incarnation.</h2>
+<pre>_acceptLatestIncarnation(\GoalState $newGoalState, \CurrentState $last) : \none</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<p class="long_description"></p>
+<table class="table table-bordered"><tr>
+<th>static</th>
+<td></td>
+</tr></table>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$newGoalState</h4>
+<code>\GoalState</code><p>The new goal state.</p></div>
+<div class="subelement argument">
+<h4>$last</h4>
+<code>\CurrentState</code><p>The last state.</p></div>
+<h3>Returns</h3>
+<div class="subelement response"><code>\none</code></div>
+</div></div>
+</div>
+<a name="_calculateChanges" id="_calculateChanges"></a><div class="element clickable method private _calculateChanges" data-toggle="collapse" data-target="._calculateChanges .collapse">
+<h2>Calculates changes.</h2>
+<pre>_calculateChanges() : array</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<p class="long_description"></p>
+<table class="table table-bordered"><tr>
+<th>static</th>
+<td></td>
+</tr></table>
+<h3>Returns</h3>
+<div class="subelement response"><code>array</code></div>
+</div></div>
+</div>
+<a name="_calculateConfigurationChanges" id="_calculateConfigurationChanges"></a><div class="element clickable method private _calculateConfigurationChanges" data-toggle="collapse" data-target="._calculateConfigurationChanges .collapse">
+<h2>Calculates the configuration changes.</h2>
+<pre>_calculateConfigurationChanges(\RoleEnvironmentData $currentRoleEnvironment, \RoleEnvionrmentData $newRoleEnvironment) : array</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<p class="long_description"></p>
+<table class="table table-bordered"><tr>
+<th>static</th>
+<td></td>
+</tr></table>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$currentRoleEnvironment</h4>
+<code>\RoleEnvironmentData</code><p>The current role environment data.</p></div>
+<div class="subelement argument">
+<h4>$newRoleEnvironment</h4>
+<code>\RoleEnvionrmentData</code><p>The new role environment data.</p></div>
+<h3>Returns</h3>
+<div class="subelement response"><code>array</code></div>
+</div></div>
+</div>
+<a name="_calculateCurrentRoleInstanceChanges" id="_calculateCurrentRoleInstanceChanges"></a><div class="element clickable method private _calculateCurrentRoleInstanceChanges" data-toggle="collapse" data-target="._calculateCurrentRoleInstanceChanges .collapse">
+<h2>Calculates which instances / instance endpoints were removed from the current
+role to the new role.</h2>
+<pre>_calculateCurrentRoleInstanceChanges(\RoleInstance $role, array $currentRoleInstances, array $newRoleInstances) : array</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<p class="long_description"></p>
+<table class="table table-bordered"><tr>
+<th>static</th>
+<td></td>
+</tr></table>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$role</h4>
+<code>\RoleInstance</code><p>The current role.</p></div>
+<div class="subelement argument">
+<h4>$currentRoleInstances</h4>
+<code>array</code><p>The current role instances.</p></div>
+<div class="subelement argument">
+<h4>$newRoleInstances</h4>
+<code>array</code><p>The new role instances.</p></div>
+<h3>Returns</h3>
+<div class="subelement response"><code>array</code></div>
+</div></div>
+</div>
+<a name="_calculateCurrentRoleInstanceEndpointsChanges" id="_calculateCurrentRoleInstanceEndpointsChanges"></a><div class="element clickable method private _calculateCurrentRoleInstanceEndpointsChanges" data-toggle="collapse" data-target="._calculateCurrentRoleInstanceEndpointsChanges .collapse">
+<h2>Calculates which endpoints / endpoint were removed from the current
+role to the new role.</h2>
+<pre>_calculateCurrentRoleInstanceEndpointsChanges(\RoleInstance $role, array $currentInstanceEndpoints, array $newInstanceEndpoints) : array</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<p class="long_description"></p>
+<table class="table table-bordered"><tr>
+<th>static</th>
+<td></td>
+</tr></table>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$role</h4>
+<code>\RoleInstance</code><p>The current changed role set.</p></div>
+<div class="subelement argument">
+<h4>$currentInstanceEndpoints</h4>
+<code>array</code><p>The current instance endpoints.</p></div>
+<div class="subelement argument">
+<h4>$newInstanceEndpoints</h4>
+<code>array</code><p>The new instance endpoints.</p></div>
+<h3>Returns</h3>
+<div class="subelement response"><code>array</code></div>
+</div></div>
+</div>
+<a name="_calculateNewRoleInstanceChanges" id="_calculateNewRoleInstanceChanges"></a><div class="element clickable method private _calculateNewRoleInstanceChanges" data-toggle="collapse" data-target="._calculateNewRoleInstanceChanges .collapse">
+<h2>Calculates which instances / instance endpoints were added from the current
+role to the new role.</h2>
+<pre>_calculateNewRoleInstanceChanges(\RoleInstance $role, array $currentRoleInstances, array $newRoleInstances) : array</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<p class="long_description"></p>
+<table class="table table-bordered"><tr>
+<th>static</th>
+<td></td>
+</tr></table>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$role</h4>
+<code>\RoleInstance</code><p>The current role.</p></div>
+<div class="subelement argument">
+<h4>$currentRoleInstances</h4>
+<code>array</code><p>The current role instances.</p></div>
+<div class="subelement argument">
+<h4>$newRoleInstances</h4>
+<code>array</code><p>The new role instances.</p></div>
+<h3>Returns</h3>
+<div class="subelement response"><code>array</code></div>
+</div></div>
+</div>
+<a name="_calculateNewRoleInstanceEndpointsChanges" id="_calculateNewRoleInstanceEndpointsChanges"></a><div class="element clickable method private _calculateNewRoleInstanceEndpointsChanges" data-toggle="collapse" data-target="._calculateNewRoleInstanceEndpointsChanges .collapse">
+<h2>Calculates which endpoints / endpoint were added from the current
+role to the new role.</h2>
+<pre>_calculateNewRoleInstanceEndpointsChanges(\RoleInstance $role, array $currentInstanceEndpoints, array $newInstanceEndpoints) : array</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<p class="long_description"></p>
+<table class="table table-bordered"><tr>
+<th>static</th>
+<td></td>
+</tr></table>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$role</h4>
+<code>\RoleInstance</code><p>The current role.</p></div>
+<div class="subelement argument">
+<h4>$currentInstanceEndpoints</h4>
+<code>array</code><p>The current instance endpoints.</p></div>
+<div class="subelement argument">
+<h4>$newInstanceEndpoints</h4>
+<code>array</code><p>The new instance endpoints.</p></div>
+<h3>Returns</h3>
+<div class="subelement response"><code>array</code></div>
+</div></div>
+</div>
+<a name="_initialize" id="_initialize"></a><div class="element clickable method private _initialize" data-toggle="collapse" data-target="._initialize .collapse">
+<h2>Initializes the runtime client.</h2>
+<pre>_initialize(bool $keepOpen) : \none</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<p class="long_description"></p>
+<table class="table table-bordered"><tr>
+<th>static</th>
+<td></td>
+</tr></table>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$keepOpen</h4>
+<code>bool</code><p>Boolean value indicating if the connection should remain open.</p></div>
+<h3>Returns</h3>
+<div class="subelement response"><code>\none</code></div>
+</div></div>
+</div>
+<a name="_processGoalStateChange" id="_processGoalStateChange"></a><div class="element clickable method private _processGoalStateChange" data-toggle="collapse" data-target="._processGoalStateChange .collapse">
+<h2>Processes a goal state change.</h2>
+<pre>_processGoalStateChange(\GoalState $newGoalState) : \none</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<p class="long_description"></p>
+<table class="table table-bordered"><tr>
+<th>static</th>
+<td></td>
+</tr></table>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$newGoalState</h4>
+<code>\GoalState</code><p>The new goal state.</p></div>
+<h3>Returns</h3>
+<div class="subelement response"><code>\none</code></div>
+</div></div>
+</div>
+<a name="_raiseChangedEvent" id="_raiseChangedEvent"></a><div class="element clickable method private _raiseChangedEvent" data-toggle="collapse" data-target="._raiseChangedEvent .collapse">
+<h2>Raises a changed event.</h2>
+<pre>_raiseChangedEvent(array $changes) : \none</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<p class="long_description"></p>
+<table class="table table-bordered"><tr>
+<th>static</th>
+<td></td>
+</tr></table>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$changes</h4>
+<code>array</code><p>The changes.</p></div>
+<h3>Returns</h3>
+<div class="subelement response"><code>\none</code></div>
+</div></div>
+</div>
+<a name="_raiseChangingEvent" id="_raiseChangingEvent"></a><div class="element clickable method private _raiseChangingEvent" data-toggle="collapse" data-target="._raiseChangingEvent .collapse">
+<h2>Raises a changing event.</h2>
+<pre>_raiseChangingEvent(array $changes) : \none</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<p class="long_description"></p>
+<table class="table table-bordered"><tr>
+<th>static</th>
+<td></td>
+</tr></table>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$changes</h4>
+<code>array</code><p>The changes.</p></div>
+<h3>Returns</h3>
+<div class="subelement response"><code>\none</code></div>
+</div></div>
+</div>
+<a name="_raiseStoppingEvent" id="_raiseStoppingEvent"></a><div class="element clickable method private _raiseStoppingEvent" data-toggle="collapse" data-target="._raiseStoppingEvent .collapse">
+<h2>Raises a stopping event.</h2>
+<pre>_raiseStoppingEvent() : \none</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<p class="long_description"></p>
+<table class="table table-bordered"><tr>
+<th>static</th>
+<td></td>
+</tr></table>
+<h3>Returns</h3>
+<div class="subelement response"><code>\none</code></div>
+</div></div>
+</div>
+<h3>
+<i class="icon-custom icon-property"></i> Properties</h3>
+<a name="%24_changedListeners" id="$_changedListeners"> </a><div class="element clickable property private $_changedListeners" data-toggle="collapse" data-target=".$_changedListeners .collapse">
+<h2>$_changedListeners</h2>
+<pre>$_changedListeners : array</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><p class="long_description"></p></div></div>
+</div>
+<a name="%24_changingListeners" id="$_changingListeners"> </a><div class="element clickable property private $_changingListeners" data-toggle="collapse" data-target=".$_changingListeners .collapse">
+<h2>$_changingListeners</h2>
+<pre>$_changingListeners : array</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><p class="long_description"></p></div></div>
+</div>
+<a name="%24_clientId" id="$_clientId"> </a><div class="element clickable property private $_clientId" data-toggle="collapse" data-target=".$_clientId .collapse">
+<h2>$_clientId</h2>
+<pre>$_clientId : string</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><p class="long_description"></p></div></div>
+</div>
+<a name="%24_currentEnvironmentData" id="$_currentEnvironmentData"> </a><div class="element clickable property private $_currentEnvironmentData" data-toggle="collapse" data-target=".$_currentEnvironmentData .collapse">
+<h2>$_currentEnvironmentData</h2>
+<pre>$_currentEnvironmentData : \RoleEnvironmentData</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><p class="long_description"></p></div></div>
+</div>
+<a name="%24_currentGoalState" id="$_currentGoalState"> </a><div class="element clickable property private $_currentGoalState" data-toggle="collapse" data-target=".$_currentGoalState .collapse">
+<h2>$_currentGoalState</h2>
+<pre>$_currentGoalState : \GoalState</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><p class="long_description"></p></div></div>
+</div>
+<a name="%24_lastState" id="$_lastState"> </a><div class="element clickable property private $_lastState" data-toggle="collapse" data-target=".$_lastState .collapse">
+<h2>$_lastState</h2>
+<pre>$_lastState : \CurrentState</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><p class="long_description"></p></div></div>
+</div>
+<a name="%24_maxDateTime" id="$_maxDateTime"> </a><div class="element clickable property private $_maxDateTime" data-toggle="collapse" data-target=".$_maxDateTime .collapse">
+<h2>$_maxDateTime</h2>
+<pre>$_maxDateTime : <a href="http://php.net/manual/en/class.datetime.php">\DateTime</a></pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><p class="long_description"></p></div></div>
+</div>
+<a name="%24_runtimeClient" id="$_runtimeClient"> </a><div class="element clickable property private $_runtimeClient" data-toggle="collapse" data-target=".$_runtimeClient .collapse">
+<h2>$_runtimeClient</h2>
+<pre>$_runtimeClient : \IRuntimeClient</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><p class="long_description"></p></div></div>
+</div>
+<a name="%24_stoppingListeners" id="$_stoppingListeners"> </a><div class="element clickable property private $_stoppingListeners" data-toggle="collapse" data-target=".$_stoppingListeners .collapse">
+<h2>$_stoppingListeners</h2>
+<pre>$_stoppingListeners : array</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><p class="long_description"></p></div></div>
+</div>
+<a name="%24_tracking" id="$_tracking"> </a><div class="element clickable property private $_tracking" data-toggle="collapse" data-target=".$_tracking .collapse">
+<h2>$_tracking</h2>
+<pre>$_tracking : \mix</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><p class="long_description"></p></div></div>
+</div>
+<a name="%24_versionEndpoint" id="$_versionEndpoint"> </a><div class="element clickable property private $_versionEndpoint" data-toggle="collapse" data-target=".$_versionEndpoint .collapse">
+<h2>$_versionEndpoint</h2>
+<pre>$_versionEndpoint : string</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><p class="long_description"></p></div></div>
+</div>
+<h3>
+<i class="icon-custom icon-constant"></i> Constants</h3>
+<a name="VERSION_ENDPOINT_ENVIRONMENT_NAME" id="VERSION_ENDPOINT_ENVIRONMENT_NAME"> </a><div class="element clickable constant  VERSION_ENDPOINT_ENVIRONMENT_NAME" data-toggle="collapse" data-target=".VERSION_ENDPOINT_ENVIRONMENT_NAME .collapse">
+<h2>VERSION_ENDPOINT_ENVIRONMENT_NAME</h2>
+<pre>VERSION_ENDPOINT_ENVIRONMENT_NAME </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><p class="long_description"></p></div></div>
+</div>
+<a name="VERSION_ENDPOINT_FIXED_PATH" id="VERSION_ENDPOINT_FIXED_PATH"> </a><div class="element clickable constant  VERSION_ENDPOINT_FIXED_PATH" data-toggle="collapse" data-target=".VERSION_ENDPOINT_FIXED_PATH .collapse">
+<h2>VERSION_ENDPOINT_FIXED_PATH</h2>
+<pre>VERSION_ENDPOINT_FIXED_PATH </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><p class="long_description"></p></div></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="row"><footer class="span12">
+            Template is built using <a href="http://twitter.github.com/bootstrap/">Twitter Bootstrap 2</a> and icons provided by <a href="http://glyphicons.com/">Glyphicons</a>.<br>
+            Documentation is powered by <a href="http://www.phpdoc.org/">phpDocumentor 2.0.0a6</a> and<br>
+            generated on 2012-07-17T21:10:40-07:00.<br></footer></div>
+</div>
+</body>
+</html>

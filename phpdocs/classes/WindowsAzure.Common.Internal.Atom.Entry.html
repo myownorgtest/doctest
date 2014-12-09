@@ -1,0 +1,607 @@
+<!DOCTYPE html><html xmlns:date="http://exslt.org/dates-and-times" lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0; user-scalable=0;">
+<meta charset="utf-8">
+<title>Windows Azure SDK for PHP » \WindowsAzure\Common\Internal\Atom\Entry</title>
+<meta name="author" content="Mike van Riel">
+<meta name="description" content="">
+<link href="../css/template.css" rel="stylesheet" media="all">
+<script src="../js/jquery-1.7.1.min.js" type="text/javascript"></script><script src="../js/jquery-ui-1.8.2.custom.min.js" type="text/javascript"></script><script src="../js/jquery.mousewheel.min.js" type="text/javascript"></script><script src="../js/bootstrap.js" type="text/javascript"></script><script src="../js/template.js" type="text/javascript"></script><script src="../js/prettify/prettify.min.js" type="text/javascript"></script><link rel="shortcut icon" href="../img/favicon.ico">
+<link rel="apple-touch-icon" href="../img/apple-touch-icon.png">
+<link rel="apple-touch-icon" sizes="72x72" href="../img/apple-touch-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="114x114" href="../img/apple-touch-icon-114x114.png">
+</head>
+<body>
+<div class="navbar navbar-fixed-top">
+<div class="navbar-inner"><div class="container">
+<a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse"><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></a><a class="brand" href="../index.html">Windows Azure SDK for PHP</a><div class="nav-collapse"><ul class="nav">
+<li class="dropdown">
+<a href="#api" class="dropdown-toggle" data-toggle="dropdown">
+                                    API Documentation <b class="caret"></b></a><ul class="dropdown-menu">
+<li><a>Namespaces</a></li>
+<li><a href="../namespaces/WindowsAzure.html"><i class="icon-th"></i> WindowsAzure</a></li>
+<li><a>Packages</a></li>
+<li><a href="../packages/WindowsAzure.html"><i class="icon-folder-open"></i> WindowsAzure</a></li>
+</ul>
+</li>
+<li class="dropdown" id="charts-menu">
+<a href="#charts" class="dropdown-toggle" data-toggle="dropdown">
+                                    Charts <b class="caret"></b></a><ul class="dropdown-menu"><li><a href="../graph_class.html"><i class="icon-list-alt"></i> Class hierarchy diagram</a></li></ul>
+</li>
+<li class="dropdown" id="reports-menu">
+<a href="#reports" class="dropdown-toggle" data-toggle="dropdown">
+                                    Reports <b class="caret"></b></a><ul class="dropdown-menu">
+<li><a href="../errors.html"><i class="icon-remove-sign"></i> Errors 
+                <span class="label label-info">385</span></a></li>
+<li><a href="../markers.html"><i class="icon-map-marker"></i> Markers 
+                <ul></ul></a></li>
+<li><a href="../deprecated.html"><i class="icon-stop"></i> Deprecated elements 
+                <span class="label label-info">0</span></a></li>
+</ul>
+</li>
+</ul></div>
+</div></div>
+<div class="go_to_top"><a href="#___" style="color: inherit">Back to top  <i class="icon-upload icon-white"></i></a></div>
+</div>
+<div id="___" class="container">
+<noscript><div class="alert alert-warning">
+                            Javascript is disabled; several features are only available
+                            if Javascript is enabled.
+                        </div></noscript>
+<div class="row">
+<div class="span4">
+<span class="btn-group visibility" data-toggle="buttons-checkbox"><button class="btn public active" title="Show public elements">Public</button><button class="btn protected" title="Show protected elements">Protected</button><button class="btn private" title="Show private elements">Private</button><button class="btn inherited active" title="Show inherited elements">Inherited</button></span><div class="btn-group view pull-right" data-toggle="buttons-radio">
+<button class="btn details" title="Show descriptions and method names"><i class="icon-list"></i></button><button class="btn simple" title="Show only method names"><i class="icon-align-justify"></i></button>
+</div>
+<ul class="side-nav nav nav-list">
+<li class="nav-header">
+<i class="icon-custom icon-method"></i> Methods</li>
+<li class="method public "><a href="#__construct" title="__construct :: Creates an ATOM Entry instance with default parameters."><span class="description">Creates an ATOM Entry instance with default parameters.</span><pre>__construct()</pre></a></li>
+<li class="method public "><a href="#getAuthor" title="getAuthor :: Gets the author of the entry."><span class="description">Gets the author of the entry.</span><pre>getAuthor()</pre></a></li>
+<li class="method public "><a href="#getCategory" title="getCategory :: Gets the category."><span class="description">Gets the category.</span><pre>getCategory()</pre></a></li>
+<li class="method public "><a href="#getContent" title="getContent :: Gets the content."><span class="description">Gets the content.</span><pre>getContent()</pre></a></li>
+<li class="method public "><a href="#getContributor" title="getContributor :: Gets the contributor."><span class="description">Gets the contributor.</span><pre>getContributor()</pre></a></li>
+<li class="method public "><a href="#getExtensionElement" title="getExtensionElement :: Gets extension element."><span class="description">Gets extension element.</span><pre>getExtensionElement()</pre></a></li>
+<li class="method public "><a href="#getId" title="getId :: Gets the ID of the entry."><span class="description">Gets the ID of the entry.</span><pre>getId()</pre></a></li>
+<li class="method public "><a href="#getLink" title="getLink :: Gets the link of the entry."><span class="description">Gets the link of the entry.</span><pre>getLink()</pre></a></li>
+<li class="method public "><a href="#getPublished" title="getPublished :: Gets published of the entry."><span class="description">Gets published of the entry.</span><pre>getPublished()</pre></a></li>
+<li class="method public "><a href="#getRights" title="getRights :: Gets the rights of the entry."><span class="description">Gets the rights of the entry.</span><pre>getRights()</pre></a></li>
+<li class="method public "><a href="#getSource" title="getSource :: Gets the source of the entry."><span class="description">Gets the source of the entry.</span><pre>getSource()</pre></a></li>
+<li class="method public "><a href="#getSummary" title="getSummary :: Gets the summary of the entry."><span class="description">Gets the summary of the entry.</span><pre>getSummary()</pre></a></li>
+<li class="method public "><a href="#getTitle" title="getTitle :: Gets the title of the entry."><span class="description">Gets the title of the entry.</span><pre>getTitle()</pre></a></li>
+<li class="method public "><a href="#getUpdated" title="getUpdated :: Gets updated."><span class="description">Gets updated.</span><pre>getUpdated()</pre></a></li>
+<li class="method public "><a href="#parseXml" title="parseXml :: Populate the properties of an ATOM Entry instance with specified XML.."><span class="description">Populate the properties of an ATOM Entry instance with specified XML..</span><pre>parseXml()</pre></a></li>
+<li class="method public "><a href="#setAuthor" title="setAuthor :: Sets the author of the entry."><span class="description">Sets the author of the entry.</span><pre>setAuthor()</pre></a></li>
+<li class="method public "><a href="#setCategory" title="setCategory :: Sets the category."><span class="description">Sets the category.</span><pre>setCategory()</pre></a></li>
+<li class="method public "><a href="#setContent" title="setContent :: Sets the content."><span class="description">Sets the content.</span><pre>setContent()</pre></a></li>
+<li class="method public "><a href="#setContributor" title="setContributor :: Sets the contributor."><span class="description">Sets the contributor.</span><pre>setContributor()</pre></a></li>
+<li class="method public "><a href="#setExtensionElement" title="setExtensionElement :: Sets extension element."><span class="description">Sets extension element.</span><pre>setExtensionElement()</pre></a></li>
+<li class="method public "><a href="#setId" title="setId :: Sets the ID of the entry."><span class="description">Sets the ID of the entry.</span><pre>setId()</pre></a></li>
+<li class="method public "><a href="#setLink" title="setLink :: Sets the link of the entry."><span class="description">Sets the link of the entry.</span><pre>setLink()</pre></a></li>
+<li class="method public "><a href="#setPublished" title="setPublished :: Sets published of the entry."><span class="description">Sets published of the entry.</span><pre>setPublished()</pre></a></li>
+<li class="method public "><a href="#setRights" title="setRights :: Sets the rights of the entry."><span class="description">Sets the rights of the entry.</span><pre>setRights()</pre></a></li>
+<li class="method public "><a href="#setSource" title="setSource :: Sets the source of the entry."><span class="description">Sets the source of the entry.</span><pre>setSource()</pre></a></li>
+<li class="method public "><a href="#setSummary" title="setSummary :: Sets the summary of the entry."><span class="description">Sets the summary of the entry.</span><pre>setSummary()</pre></a></li>
+<li class="method public "><a href="#setTitle" title="setTitle :: Sets the title of the entry."><span class="description">Sets the title of the entry.</span><pre>setTitle()</pre></a></li>
+<li class="method public "><a href="#setUpdated" title="setUpdated :: Sets updated"><span class="description">Sets updated</span><pre>setUpdated()</pre></a></li>
+<li class="method public "><a href="#writeInnerXml" title="writeInnerXml :: Writes a inner XML string representing the entry."><span class="description">Writes a inner XML string representing the entry.</span><pre>writeInnerXml()</pre></a></li>
+<li class="method public "><a href="#writeXml" title="writeXml :: Writes a inner XML string representing the entry."><span class="description">Writes a inner XML string representing the entry.</span><pre>writeXml()</pre></a></li>
+<li class="nav-header">
+<i class="icon-custom icon-property"></i> Properties</li>
+<li class="nav-header protected">» Protected</li>
+<li class="property protected "><a href="#%24author" title="$author :: The author of the entry."><span class="description">The author of the entry.</span><pre>$author</pre></a></li>
+<li class="property protected "><a href="#%24category" title="$category :: The category of the entry."><span class="description">The category of the entry.</span><pre>$category</pre></a></li>
+<li class="property protected "><a href="#%24content" title="$content :: The content of the entry."><span class="description">The content of the entry.</span><pre>$content</pre></a></li>
+<li class="property protected "><a href="#%24contributor" title="$contributor :: The contributor of the entry."><span class="description">The contributor of the entry.</span><pre>$contributor</pre></a></li>
+<li class="property protected "><a href="#%24extensionElement" title="$extensionElement :: The extension element of the entry."><span class="description">The extension element of the entry.</span><pre>$extensionElement</pre></a></li>
+<li class="property protected "><a href="#%24id" title="$id :: An unqiue ID representing the entry."><span class="description">An unqiue ID representing the entry.</span><pre>$id</pre></a></li>
+<li class="property protected "><a href="#%24link" title="$link :: The link of the entry."><span class="description">The link of the entry.</span><pre>$link</pre></a></li>
+<li class="property protected "><a href="#%24published" title="$published :: Is the entry published."><span class="description">Is the entry published.</span><pre>$published</pre></a></li>
+<li class="property protected "><a href="#%24rights" title="$rights :: The copy right of the entry."><span class="description">The copy right of the entry.</span><pre>$rights</pre></a></li>
+<li class="property protected "><a href="#%24source" title="$source :: The source of the entry."><span class="description">The source of the entry.</span><pre>$source</pre></a></li>
+<li class="property protected "><a href="#%24summary" title="$summary :: The summary of the entry."><span class="description">The summary of the entry.</span><pre>$summary</pre></a></li>
+<li class="property protected "><a href="#%24title" title="$title :: The title of the entry."><span class="description">The title of the entry.</span><pre>$title</pre></a></li>
+<li class="property protected "><a href="#%24updated" title="$updated :: Is the entry updated."><span class="description">Is the entry updated.</span><pre>$updated</pre></a></li>
+</ul>
+</div>
+<div class="span8">
+<a name="%5CWindowsAzure%5CCommon%5CInternal%5CAtom%5CEntry" id="\WindowsAzure\Common\Internal\Atom\Entry"></a><ul class="breadcrumb">
+<li>
+<a href="../index.html"><i class="icon-custom icon-class"></i></a><span class="divider">\</span>
+</li>
+<li><a href="../namespaces/WindowsAzure.html">WindowsAzure</a></li>
+<span class="divider">\</span><li><a href="../namespaces/WindowsAzure.Common.html">Common</a></li>
+<span class="divider">\</span><li><a href="../namespaces/WindowsAzure.Common.Internal.html">Internal</a></li>
+<span class="divider">\</span><li><a href="../namespaces/WindowsAzure.Common.Internal.Atom.html">Atom</a></li>
+<li class="active">
+<span class="divider">\</span><a href="../classes/WindowsAzure.Common.Internal.Atom.Entry.html">Entry</a>
+</li>
+</ul>
+<div href="../classes/WindowsAzure.Common.Internal.Atom.Entry.html" class="element class">
+<p class="short_description">The Entry class of ATOM standard.</p>
+<div class="details">
+<p class="long_description"></p>
+<table class="table table-bordered">
+<tr>
+<th>category</th>
+<td>Microsoft</td>
+</tr>
+<tr>
+<th>package</th>
+<td><a href="../packages/WindowsAzure.Common.Internal.Atom.html">WindowsAzure\Common\Internal\Atom</a></td>
+</tr>
+<tr>
+<th>author</th>
+<td><a href="mailto:azurephpsdk@microsoft.com">Azure PHP SDK</a></td>
+</tr>
+<tr>
+<th>copyright</th>
+<td>2012 Microsoft Corporation</td>
+</tr>
+<tr>
+<th>license</th>
+<td><a href="http://www.apache.org/licenses/LICENSE-2.0">Apache License 2.0</a></td>
+</tr>
+<tr>
+<th>version</th>
+<td>Release: @package_version@</td>
+</tr>
+<tr>
+<th>link</th>
+<td><a href="https://github.com/WindowsAzure/azure-sdk-for-php">https://github.com/WindowsAzure/azure-sdk-for-php</a></td>
+</tr>
+</table>
+<h3>
+<i class="icon-custom icon-method"></i> Methods</h3>
+<a name="__construct" id="__construct"></a><div class="element clickable method public __construct" data-toggle="collapse" data-target=".__construct .collapse">
+<h2>Creates an ATOM Entry instance with default parameters.</h2>
+<pre>__construct() </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><p class="long_description"></p></div></div>
+</div>
+<a name="getAuthor" id="getAuthor"></a><div class="element clickable method public getAuthor" data-toggle="collapse" data-target=".getAuthor .collapse">
+<h2>Gets the author of the entry.</h2>
+<pre>getAuthor() : \Person</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<p class="long_description"></p>
+<h3>Returns</h3>
+<div class="subelement response"><code>\Person</code></div>
+</div></div>
+</div>
+<a name="getCategory" id="getCategory"></a><div class="element clickable method public getCategory" data-toggle="collapse" data-target=".getCategory .collapse">
+<h2>Gets the category.</h2>
+<pre>getCategory() : array</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<p class="long_description"></p>
+<h3>Returns</h3>
+<div class="subelement response"><code>array</code></div>
+</div></div>
+</div>
+<a name="getContent" id="getContent"></a><div class="element clickable method public getContent" data-toggle="collapse" data-target=".getContent .collapse">
+<h2>Gets the content.</h2>
+<pre>getContent() : \Content.</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<p class="long_description"></p>
+<h3>Returns</h3>
+<div class="subelement response"><code>\Content.</code></div>
+</div></div>
+</div>
+<a name="getContributor" id="getContributor"></a><div class="element clickable method public getContributor" data-toggle="collapse" data-target=".getContributor .collapse">
+<h2>Gets the contributor.</h2>
+<pre>getContributor() : string</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<p class="long_description"></p>
+<h3>Returns</h3>
+<div class="subelement response"><code>string</code></div>
+</div></div>
+</div>
+<a name="getExtensionElement" id="getExtensionElement"></a><div class="element clickable method public getExtensionElement" data-toggle="collapse" data-target=".getExtensionElement .collapse">
+<h2>Gets extension element.</h2>
+<pre>getExtensionElement() : string</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<p class="long_description"></p>
+<h3>Returns</h3>
+<div class="subelement response"><code>string</code></div>
+</div></div>
+</div>
+<a name="getId" id="getId"></a><div class="element clickable method public getId" data-toggle="collapse" data-target=".getId .collapse">
+<h2>Gets the ID of the entry.</h2>
+<pre>getId() : string</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<p class="long_description"></p>
+<h3>Returns</h3>
+<div class="subelement response"><code>string</code></div>
+</div></div>
+</div>
+<a name="getLink" id="getLink"></a><div class="element clickable method public getLink" data-toggle="collapse" data-target=".getLink .collapse">
+<h2>Gets the link of the entry.</h2>
+<pre>getLink() : string</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<p class="long_description"></p>
+<h3>Returns</h3>
+<div class="subelement response"><code>string</code></div>
+</div></div>
+</div>
+<a name="getPublished" id="getPublished"></a><div class="element clickable method public getPublished" data-toggle="collapse" data-target=".getPublished .collapse">
+<h2>Gets published of the entry.</h2>
+<pre>getPublished() : boolean</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<p class="long_description"></p>
+<h3>Returns</h3>
+<div class="subelement response"><code>boolean</code></div>
+</div></div>
+</div>
+<a name="getRights" id="getRights"></a><div class="element clickable method public getRights" data-toggle="collapse" data-target=".getRights .collapse">
+<h2>Gets the rights of the entry.</h2>
+<pre>getRights() : string</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<p class="long_description"></p>
+<h3>Returns</h3>
+<div class="subelement response"><code>string</code></div>
+</div></div>
+</div>
+<a name="getSource" id="getSource"></a><div class="element clickable method public getSource" data-toggle="collapse" data-target=".getSource .collapse">
+<h2>Gets the source of the entry.</h2>
+<pre>getSource() : string</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<p class="long_description"></p>
+<h3>Returns</h3>
+<div class="subelement response"><code>string</code></div>
+</div></div>
+</div>
+<a name="getSummary" id="getSummary"></a><div class="element clickable method public getSummary" data-toggle="collapse" data-target=".getSummary .collapse">
+<h2>Gets the summary of the entry.</h2>
+<pre>getSummary() : string</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<p class="long_description"></p>
+<h3>Returns</h3>
+<div class="subelement response"><code>string</code></div>
+</div></div>
+</div>
+<a name="getTitle" id="getTitle"></a><div class="element clickable method public getTitle" data-toggle="collapse" data-target=".getTitle .collapse">
+<h2>Gets the title of the entry.</h2>
+<pre>getTitle() : string</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<p class="long_description"></p>
+<h3>Returns</h3>
+<div class="subelement response"><code>string</code></div>
+</div></div>
+</div>
+<a name="getUpdated" id="getUpdated"></a><div class="element clickable method public getUpdated" data-toggle="collapse" data-target=".getUpdated .collapse">
+<h2>Gets updated.</h2>
+<pre>getUpdated() : <a href="http://php.net/manual/en/class.datetime.php">\DateTime</a></pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<p class="long_description"></p>
+<h3>Returns</h3>
+<div class="subelement response"><code><a href="http://php.net/manual/en/class.datetime.php">\DateTime</a></code></div>
+</div></div>
+</div>
+<a name="parseXml" id="parseXml"></a><div class="element clickable method public parseXml" data-toggle="collapse" data-target=".parseXml .collapse">
+<h2>Populate the properties of an ATOM Entry instance with specified XML..</h2>
+<pre>parseXml(string $xmlString) : \none</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<p class="long_description"></p>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$xmlString</h4>
+<code>string</code><p>A string representing an ATOM entry instance.</p></div>
+<h3>Returns</h3>
+<div class="subelement response"><code>\none</code></div>
+</div></div>
+</div>
+<a name="setAuthor" id="setAuthor"></a><div class="element clickable method public setAuthor" data-toggle="collapse" data-target=".setAuthor .collapse">
+<h2>Sets the author of the entry.</h2>
+<pre>setAuthor(\Person $author) : \none</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<p class="long_description"></p>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$author</h4>
+<code>\Person</code><p>The author of the entry.</p></div>
+<h3>Returns</h3>
+<div class="subelement response"><code>\none</code></div>
+</div></div>
+</div>
+<a name="setCategory" id="setCategory"></a><div class="element clickable method public setCategory" data-toggle="collapse" data-target=".setCategory .collapse">
+<h2>Sets the category.</h2>
+<pre>setCategory(string $category) : \none</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<p class="long_description"></p>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$category</h4>
+<code>string</code><p>The category of the entry.</p></div>
+<h3>Returns</h3>
+<div class="subelement response"><code>\none</code></div>
+</div></div>
+</div>
+<a name="setContent" id="setContent"></a><div class="element clickable method public setContent" data-toggle="collapse" data-target=".setContent .collapse">
+<h2>Sets the content.</h2>
+<pre>setContent(\Content $content) : \none</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<p class="long_description"></p>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$content</h4>
+<code>\Content</code><p>Sets the content of the entry.</p></div>
+<h3>Returns</h3>
+<div class="subelement response"><code>\none</code></div>
+</div></div>
+</div>
+<a name="setContributor" id="setContributor"></a><div class="element clickable method public setContributor" data-toggle="collapse" data-target=".setContributor .collapse">
+<h2>Sets the contributor.</h2>
+<pre>setContributor(string $contributor) : \none</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<p class="long_description"></p>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$contributor</h4>
+<code>string</code><p>The contributor of the entry.</p></div>
+<h3>Returns</h3>
+<div class="subelement response"><code>\none</code></div>
+</div></div>
+</div>
+<a name="setExtensionElement" id="setExtensionElement"></a><div class="element clickable method public setExtensionElement" data-toggle="collapse" data-target=".setExtensionElement .collapse">
+<h2>Sets extension element.</h2>
+<pre>setExtensionElement(string $extensionElement) : \none</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<p class="long_description"></p>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$extensionElement</h4>
+<code>string</code><p>The extension element of the entry.</p></div>
+<h3>Returns</h3>
+<div class="subelement response"><code>\none</code></div>
+</div></div>
+</div>
+<a name="setId" id="setId"></a><div class="element clickable method public setId" data-toggle="collapse" data-target=".setId .collapse">
+<h2>Sets the ID of the entry.</h2>
+<pre>setId(string $id) : \none</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<p class="long_description"></p>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$id</h4>
+<code>string</code><p>The id of the entry.</p></div>
+<h3>Returns</h3>
+<div class="subelement response"><code>\none</code></div>
+</div></div>
+</div>
+<a name="setLink" id="setLink"></a><div class="element clickable method public setLink" data-toggle="collapse" data-target=".setLink .collapse">
+<h2>Sets the link of the entry.</h2>
+<pre>setLink(string $link) : \none</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<p class="long_description"></p>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$link</h4>
+<code>string</code><p>The link of the entry.</p></div>
+<h3>Returns</h3>
+<div class="subelement response"><code>\none</code></div>
+</div></div>
+</div>
+<a name="setPublished" id="setPublished"></a><div class="element clickable method public setPublished" data-toggle="collapse" data-target=".setPublished .collapse">
+<h2>Sets published of the entry.</h2>
+<pre>setPublished(boolean $published) : \none</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<p class="long_description"></p>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$published</h4>
+<code>boolean</code><p>Is the entry published.</p></div>
+<h3>Returns</h3>
+<div class="subelement response"><code>\none</code></div>
+</div></div>
+</div>
+<a name="setRights" id="setRights"></a><div class="element clickable method public setRights" data-toggle="collapse" data-target=".setRights .collapse">
+<h2>Sets the rights of the entry.</h2>
+<pre>setRights(string $rights) : \none</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<p class="long_description"></p>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$rights</h4>
+<code>string</code><p>The rights of the entry.</p></div>
+<h3>Returns</h3>
+<div class="subelement response"><code>\none</code></div>
+</div></div>
+</div>
+<a name="setSource" id="setSource"></a><div class="element clickable method public setSource" data-toggle="collapse" data-target=".setSource .collapse">
+<h2>Sets the source of the entry.</h2>
+<pre>setSource(string $source) : \none</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<p class="long_description"></p>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$source</h4>
+<code>string</code><p>The source of the entry.</p></div>
+<h3>Returns</h3>
+<div class="subelement response"><code>\none</code></div>
+</div></div>
+</div>
+<a name="setSummary" id="setSummary"></a><div class="element clickable method public setSummary" data-toggle="collapse" data-target=".setSummary .collapse">
+<h2>Sets the summary of the entry.</h2>
+<pre>setSummary(string $summary) : \none</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<p class="long_description"></p>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$summary</h4>
+<code>string</code><p>The summary of the entry.</p></div>
+<h3>Returns</h3>
+<div class="subelement response"><code>\none</code></div>
+</div></div>
+</div>
+<a name="setTitle" id="setTitle"></a><div class="element clickable method public setTitle" data-toggle="collapse" data-target=".setTitle .collapse">
+<h2>Sets the title of the entry.</h2>
+<pre>setTitle(string $title) : \none</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<p class="long_description"></p>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$title</h4>
+<code>string</code><p>The title of the entry.</p></div>
+<h3>Returns</h3>
+<div class="subelement response"><code>\none</code></div>
+</div></div>
+</div>
+<a name="setUpdated" id="setUpdated"></a><div class="element clickable method public setUpdated" data-toggle="collapse" data-target=".setUpdated .collapse">
+<h2>Sets updated</h2>
+<pre>setUpdated(<a href="http://php.net/manual/en/class.datetime.php">\DateTime</a> $updated) : \none</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<p class="long_description"></p>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$updated</h4>
+<code><a href="http://php.net/manual/en/class.datetime.php">\DateTime</a></code><p>updated.</p></div>
+<h3>Returns</h3>
+<div class="subelement response"><code>\none</code></div>
+</div></div>
+</div>
+<a name="writeInnerXml" id="writeInnerXml"></a><div class="element clickable method public writeInnerXml" data-toggle="collapse" data-target=".writeInnerXml .collapse">
+<h2>Writes a inner XML string representing the entry.</h2>
+<pre>writeInnerXml(<a href="http://php.net/manual/en/class.xmlwriter.php">\XMLWriter</a> $xmlWriter) : \none</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<p class="long_description"></p>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$xmlWriter</h4>
+<code><a href="http://php.net/manual/en/class.xmlwriter.php">\XMLWriter</a></code><p>The XML writer.</p></div>
+<h3>Returns</h3>
+<div class="subelement response"><code>\none</code></div>
+</div></div>
+</div>
+<a name="writeXml" id="writeXml"></a><div class="element clickable method public writeXml" data-toggle="collapse" data-target=".writeXml .collapse">
+<h2>Writes a inner XML string representing the entry.</h2>
+<pre>writeXml(<a href="http://php.net/manual/en/class.xmlwriter.php">\XMLWriter</a> $xmlWriter) : \none</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<p class="long_description"></p>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$xmlWriter</h4>
+<code><a href="http://php.net/manual/en/class.xmlwriter.php">\XMLWriter</a></code><p>The XML writer.</p></div>
+<h3>Returns</h3>
+<div class="subelement response"><code>\none</code></div>
+</div></div>
+</div>
+<h3>
+<i class="icon-custom icon-property"></i> Properties</h3>
+<a name="%24author" id="$author"> </a><div class="element clickable property protected $author" data-toggle="collapse" data-target=".$author .collapse">
+<h2>The author of the entry.</h2>
+<pre>$author : \Person</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><p class="long_description"></p></div></div>
+</div>
+<a name="%24category" id="$category"> </a><div class="element clickable property protected $category" data-toggle="collapse" data-target=".$category .collapse">
+<h2>The category of the entry.</h2>
+<pre>$category : array</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><p class="long_description"></p></div></div>
+</div>
+<a name="%24content" id="$content"> </a><div class="element clickable property protected $content" data-toggle="collapse" data-target=".$content .collapse">
+<h2>The content of the entry.</h2>
+<pre>$content : string</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><p class="long_description"></p></div></div>
+</div>
+<a name="%24contributor" id="$contributor"> </a><div class="element clickable property protected $contributor" data-toggle="collapse" data-target=".$contributor .collapse">
+<h2>The contributor of the entry.</h2>
+<pre>$contributor : string</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><p class="long_description"></p></div></div>
+</div>
+<a name="%24extensionElement" id="$extensionElement"> </a><div class="element clickable property protected $extensionElement" data-toggle="collapse" data-target=".$extensionElement .collapse">
+<h2>The extension element of the entry.</h2>
+<pre>$extensionElement : string</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><p class="long_description"></p></div></div>
+</div>
+<a name="%24id" id="$id"> </a><div class="element clickable property protected $id" data-toggle="collapse" data-target=".$id .collapse">
+<h2>An unqiue ID representing the entry.</h2>
+<pre>$id : string</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><p class="long_description"></p></div></div>
+</div>
+<a name="%24link" id="$link"> </a><div class="element clickable property protected $link" data-toggle="collapse" data-target=".$link .collapse">
+<h2>The link of the entry.</h2>
+<pre>$link : string</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><p class="long_description"></p></div></div>
+</div>
+<a name="%24published" id="$published"> </a><div class="element clickable property protected $published" data-toggle="collapse" data-target=".$published .collapse">
+<h2>Is the entry published.</h2>
+<pre>$published : boolean</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><p class="long_description"></p></div></div>
+</div>
+<a name="%24rights" id="$rights"> </a><div class="element clickable property protected $rights" data-toggle="collapse" data-target=".$rights .collapse">
+<h2>The copy right of the entry.</h2>
+<pre>$rights : string</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><p class="long_description"></p></div></div>
+</div>
+<a name="%24source" id="$source"> </a><div class="element clickable property protected $source" data-toggle="collapse" data-target=".$source .collapse">
+<h2>The source of the entry.</h2>
+<pre>$source : string</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><p class="long_description"></p></div></div>
+</div>
+<a name="%24summary" id="$summary"> </a><div class="element clickable property protected $summary" data-toggle="collapse" data-target=".$summary .collapse">
+<h2>The summary of the entry.</h2>
+<pre>$summary : string</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><p class="long_description"></p></div></div>
+</div>
+<a name="%24title" id="$title"> </a><div class="element clickable property protected $title" data-toggle="collapse" data-target=".$title .collapse">
+<h2>The title of the entry.</h2>
+<pre>$title : string</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><p class="long_description"></p></div></div>
+</div>
+<a name="%24updated" id="$updated"> </a><div class="element clickable property protected $updated" data-toggle="collapse" data-target=".$updated .collapse">
+<h2>Is the entry updated.</h2>
+<pre>$updated : <a href="http://php.net/manual/en/class.datetime.php">\DateTime</a></pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><p class="long_description"></p></div></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="row"><footer class="span12">
+            Template is built using <a href="http://twitter.github.com/bootstrap/">Twitter Bootstrap 2</a> and icons provided by <a href="http://glyphicons.com/">Glyphicons</a>.<br>
+            Documentation is powered by <a href="http://www.phpdoc.org/">phpDocumentor 2.0.0a6</a> and<br>
+            generated on 2012-07-17T21:10:38-07:00.<br></footer></div>
+</div>
+</body>
+</html>

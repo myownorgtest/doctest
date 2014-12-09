@@ -1,0 +1,479 @@
+<!DOCTYPE html><html xmlns:date="http://exslt.org/dates-and-times" lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0; user-scalable=0;">
+<meta charset="utf-8">
+<title>Windows Azure SDK for PHP » \WindowsAzure\Table\Internal\ITable</title>
+<meta name="author" content="Mike van Riel">
+<meta name="description" content="">
+<link href="../css/template.css" rel="stylesheet" media="all">
+<script src="../js/jquery-1.7.1.min.js" type="text/javascript"></script><script src="../js/jquery-ui-1.8.2.custom.min.js" type="text/javascript"></script><script src="../js/jquery.mousewheel.min.js" type="text/javascript"></script><script src="../js/bootstrap.js" type="text/javascript"></script><script src="../js/template.js" type="text/javascript"></script><script src="../js/prettify/prettify.min.js" type="text/javascript"></script><link rel="shortcut icon" href="../img/favicon.ico">
+<link rel="apple-touch-icon" href="../img/apple-touch-icon.png">
+<link rel="apple-touch-icon" sizes="72x72" href="../img/apple-touch-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="114x114" href="../img/apple-touch-icon-114x114.png">
+</head>
+<body>
+<div class="navbar navbar-fixed-top">
+<div class="navbar-inner"><div class="container">
+<a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse"><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></a><a class="brand" href="../index.html">Windows Azure SDK for PHP</a><div class="nav-collapse"><ul class="nav">
+<li class="dropdown">
+<a href="#api" class="dropdown-toggle" data-toggle="dropdown">
+                                    API Documentation <b class="caret"></b></a><ul class="dropdown-menu">
+<li><a>Namespaces</a></li>
+<li><a href="../namespaces/WindowsAzure.html"><i class="icon-th"></i> WindowsAzure</a></li>
+<li><a>Packages</a></li>
+<li><a href="../packages/WindowsAzure.html"><i class="icon-folder-open"></i> WindowsAzure</a></li>
+</ul>
+</li>
+<li class="dropdown" id="charts-menu">
+<a href="#charts" class="dropdown-toggle" data-toggle="dropdown">
+                                    Charts <b class="caret"></b></a><ul class="dropdown-menu"><li><a href="../graph_class.html"><i class="icon-list-alt"></i> Class hierarchy diagram</a></li></ul>
+</li>
+<li class="dropdown" id="reports-menu">
+<a href="#reports" class="dropdown-toggle" data-toggle="dropdown">
+                                    Reports <b class="caret"></b></a><ul class="dropdown-menu">
+<li><a href="../errors.html"><i class="icon-remove-sign"></i> Errors 
+                <span class="label label-info">385</span></a></li>
+<li><a href="../markers.html"><i class="icon-map-marker"></i> Markers 
+                <ul></ul></a></li>
+<li><a href="../deprecated.html"><i class="icon-stop"></i> Deprecated elements 
+                <span class="label label-info">0</span></a></li>
+</ul>
+</li>
+</ul></div>
+</div></div>
+<div class="go_to_top"><a href="#___" style="color: inherit">Back to top  <i class="icon-upload icon-white"></i></a></div>
+</div>
+<div id="___" class="container">
+<noscript><div class="alert alert-warning">
+                            Javascript is disabled; several features are only available
+                            if Javascript is enabled.
+                        </div></noscript>
+<div class="row">
+<div class="span4">
+<span class="btn-group visibility" data-toggle="buttons-checkbox"><button class="btn public active" title="Show public elements">Public</button><button class="btn protected" title="Show protected elements">Protected</button><button class="btn private" title="Show private elements">Private</button><button class="btn inherited active" title="Show inherited elements">Inherited</button></span><div class="btn-group view pull-right" data-toggle="buttons-radio">
+<button class="btn details" title="Show descriptions and method names"><i class="icon-list"></i></button><button class="btn simple" title="Show only method names"><i class="icon-align-justify"></i></button>
+</div>
+<ul class="side-nav nav nav-list">
+<li class="nav-header">
+<i class="icon-custom icon-method"></i> Methods</li>
+<li class="method public "><a href="#batch" title="batch :: Does batch of operations on given table service."><span class="description">Does batch of operations on given table service.</span><pre>batch()</pre></a></li>
+<li class="method public "><a href="#createTable" title="createTable :: Creates new table in the storage account"><span class="description">Creates new table in the storage account</span><pre>createTable()</pre></a></li>
+<li class="method public "><a href="#deleteEntity" title="deleteEntity :: Deletes an existing entity in a table."><span class="description">Deletes an existing entity in a table.</span><pre>deleteEntity()</pre></a></li>
+<li class="method public "><a href="#deleteTable" title="deleteTable :: Deletes the specified table and any data it contains."><span class="description">Deletes the specified table and any data it contains.</span><pre>deleteTable()</pre></a></li>
+<li class="method public "><a href="#getEntity" title="getEntity :: Gets table entity."><span class="description">Gets table entity.</span><pre>getEntity()</pre></a></li>
+<li class="method public "><a href="#getServiceProperties" title="getServiceProperties :: Gets the properties of the Table service."><span class="description">Gets the properties of the Table service.</span><pre>getServiceProperties()</pre></a></li>
+<li class="method public "><a href="#getTable" title="getTable :: Gets the table."><span class="description">Gets the table.</span><pre>getTable()</pre></a></li>
+<li class="method public "><a href="#insertEntity" title="insertEntity :: Inserts new entity to the table"><span class="description">Inserts new entity to the table</span><pre>insertEntity()</pre></a></li>
+<li class="method public "><a href="#insertOrMergeEntity" title="insertOrMergeEntity :: Updates an existing entity or inserts a new entity if it does not exist in the
+table."><span class="description">Updates an existing entity or inserts a new entity if it does not exist in the
+table.</span><pre>insertOrMergeEntity()</pre></a></li>
+<li class="method public "><a href="#insertOrReplaceEntity" title="insertOrReplaceEntity :: Replaces an existing entity or inserts a new entity if it does not exist in
+the table."><span class="description">Replaces an existing entity or inserts a new entity if it does not exist in
+the table.</span><pre>insertOrReplaceEntity()</pre></a></li>
+<li class="method public "><a href="#mergeEntity" title="mergeEntity :: Updates an existing entity by updating the entity's properties. This operation
+does not replace the existing entity, as the updateEntity operation does."><span class="description">Updates an existing entity by updating the entity's properties. This operation
+does not replace the existing entity, as the updateEntity operation does.</span><pre>mergeEntity()</pre></a></li>
+<li class="method public "><a href="#queryEntities" title="queryEntities :: Quries entities for the given table name"><span class="description">Quries entities for the given table name</span><pre>queryEntities()</pre></a></li>
+<li class="method public "><a href="#queryTables" title="queryTables :: Quries tables in the given storage account."><span class="description">Quries tables in the given storage account.</span><pre>queryTables()</pre></a></li>
+<li class="method public "><a href="#setServiceProperties" title="setServiceProperties :: Sets the properties of the Table service."><span class="description">Sets the properties of the Table service.</span><pre>setServiceProperties()</pre></a></li>
+<li class="method public "><a href="#updateEntity" title="updateEntity :: Updates an existing entity in a table. The Update Entity operation replaces
+the entire entity and can be used to remove properties."><span class="description">Updates an existing entity in a table. The Update Entity operation replaces
+the entire entity and can be used to remove properties.</span><pre>updateEntity()</pre></a></li>
+</ul>
+</div>
+<div class="span8">
+<a name="%5CWindowsAzure%5CTable%5CInternal%5CITable" id="\WindowsAzure\Table\Internal\ITable"></a><ul class="breadcrumb">
+<li>
+<a href="../index.html"><i class="icon-custom icon-class"></i></a><span class="divider">\</span>
+</li>
+<li><a href="../namespaces/WindowsAzure.html">WindowsAzure</a></li>
+<span class="divider">\</span><li><a href="../namespaces/WindowsAzure.Table.html">Table</a></li>
+<span class="divider">\</span><li><a href="../namespaces/WindowsAzure.Table.Internal.html">Internal</a></li>
+<li class="active">
+<span class="divider">\</span><a href="../classes/WindowsAzure.Table.Internal.ITable.html">ITable</a>
+</li>
+</ul>
+<div href="../classes/WindowsAzure.Table.Internal.ITable.html" class="element interface">
+<p class="short_description">This interface has all REST APIs provided by Windows Azure for Table service.</p>
+<div class="details">
+<p class="long_description"></p>
+<table class="table table-bordered">
+<tr>
+<th>category</th>
+<td>Microsoft</td>
+</tr>
+<tr>
+<th>package</th>
+<td><a href="../packages/WindowsAzure.Table.Internal.html">WindowsAzure\Table\Internal</a></td>
+</tr>
+<tr>
+<th>author</th>
+<td><a href="mailto:azurephpsdk@microsoft.com">Azure PHP SDK</a></td>
+</tr>
+<tr>
+<th>copyright</th>
+<td>2012 Microsoft Corporation</td>
+</tr>
+<tr>
+<th>license</th>
+<td><a href="http://www.apache.org/licenses/LICENSE-2.0">Apache License 2.0</a></td>
+</tr>
+<tr>
+<th>version</th>
+<td>Release: @package_version@</td>
+</tr>
+<tr>
+<th>link</th>
+<td><a href="https://github.com/windowsazure/azure-sdk-for-php">https://github.com/windowsazure/azure-sdk-for-php</a></td>
+</tr>
+<tr>
+<th>see</th>
+<td>\WindowsAzure\Table\Internal\http://msdn.microsoft.com/en-us/library/windowsazure/dd179423.aspx</td>
+</tr>
+</table>
+<h3>
+<i class="icon-custom icon-method"></i> Methods</h3>
+<a name="batch" id="batch"></a><div class="element clickable method public batch" data-toggle="collapse" data-target=".batch .collapse">
+<h2>Does batch of operations on given table service.</h2>
+<pre>batch(\BatchOperations $operations, \Models\TableServiceOptions $options) : \Models\BatchResult</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<p class="long_description"></p>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$operations</h4>
+<code>\BatchOperations</code><p>the operations to apply</p></div>
+<div class="subelement argument">
+<h4>$options</h4>
+<code>\Models\TableServiceOptions</code><p>optional parameters</p></div>
+<h3>Returns</h3>
+<div class="subelement response"><code>\Models\BatchResult</code></div>
+</div></div>
+</div>
+<a name="createTable" id="createTable"></a><div class="element clickable method public createTable" data-toggle="collapse" data-target=".createTable .collapse">
+<h2>Creates new table in the storage account</h2>
+<pre>createTable(string $table, \Models\TableServiceOptions $options) : \none</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<p class="long_description"></p>
+<table class="table table-bordered"><tr>
+<th>see</th>
+<td>\http://msdn.microsoft.com/en-us/library/windowsazure/dd135729.aspx</td>
+</tr></table>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$table</h4>
+<code>string</code><p>The name of the table.</p></div>
+<div class="subelement argument">
+<h4>$options</h4>
+<code>\Models\TableServiceOptions</code><p>optional parameters</p></div>
+<h3>Returns</h3>
+<div class="subelement response"><code>\none</code></div>
+</div></div>
+</div>
+<a name="deleteEntity" id="deleteEntity"></a><div class="element clickable method public deleteEntity" data-toggle="collapse" data-target=".deleteEntity .collapse">
+<h2>Deletes an existing entity in a table.</h2>
+<pre>deleteEntity(string $table, string $partitionKey, string $rowKey, \Models\DeleteEntityOptions $options) : \none</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<p class="long_description"></p>
+<table class="table table-bordered"><tr>
+<th>see</th>
+<td>\http://msdn.microsoft.com/en-us/library/windowsazure/dd135727.aspx</td>
+</tr></table>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$table</h4>
+<code>string</code><p>The name of the table.</p></div>
+<div class="subelement argument">
+<h4>$partitionKey</h4>
+<code>string</code><p>The entity partition key.</p></div>
+<div class="subelement argument">
+<h4>$rowKey</h4>
+<code>string</code><p>The entity row key.</p></div>
+<div class="subelement argument">
+<h4>$options</h4>
+<code>\Models\DeleteEntityOptions</code><p>The optional parameters.</p></div>
+<h3>Returns</h3>
+<div class="subelement response"><code>\none</code></div>
+</div></div>
+</div>
+<a name="deleteTable" id="deleteTable"></a><div class="element clickable method public deleteTable" data-toggle="collapse" data-target=".deleteTable .collapse">
+<h2>Deletes the specified table and any data it contains.</h2>
+<pre>deleteTable(string $table, \Models\TableServiceOptions $options) : \none</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<p class="long_description"></p>
+<table class="table table-bordered"><tr>
+<th>see</th>
+<td>\http://msdn.microsoft.com/en-us/library/windowsazure/dd179387.aspx</td>
+</tr></table>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$table</h4>
+<code>string</code><p>The name of the table.</p></div>
+<div class="subelement argument">
+<h4>$options</h4>
+<code>\Models\TableServiceOptions</code><p>optional parameters</p></div>
+<h3>Returns</h3>
+<div class="subelement response"><code>\none</code></div>
+</div></div>
+</div>
+<a name="getEntity" id="getEntity"></a><div class="element clickable method public getEntity" data-toggle="collapse" data-target=".getEntity .collapse">
+<h2>Gets table entity.</h2>
+<pre>getEntity(string $table, string $partitionKey, string $rowKey, \Models\TableServiceOptions $options) : \Models\GetEntityResult</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<p class="long_description"></p>
+<table class="table table-bordered"><tr>
+<th>see</th>
+<td>\http://msdn.microsoft.com/en-us/library/windowsazure/dd179421.aspx</td>
+</tr></table>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$table</h4>
+<code>string</code><p>The name of the table.</p></div>
+<div class="subelement argument">
+<h4>$partitionKey</h4>
+<code>string</code><p>The entity partition key.</p></div>
+<div class="subelement argument">
+<h4>$rowKey</h4>
+<code>string</code><p>The entity row key.</p></div>
+<div class="subelement argument">
+<h4>$options</h4>
+<code>\Models\TableServiceOptions</code><p>The optional parameters.</p></div>
+<h3>Returns</h3>
+<div class="subelement response"><code>\Models\GetEntityResult</code></div>
+</div></div>
+</div>
+<a name="getServiceProperties" id="getServiceProperties"></a><div class="element clickable method public getServiceProperties" data-toggle="collapse" data-target=".getServiceProperties .collapse">
+<h2>Gets the properties of the Table service.</h2>
+<pre>getServiceProperties(\Models\TableServiceOptions $options) : <a href="../classes/WindowsAzure.Common.Models.GetServicePropertiesResult.html">\WindowsAzure\Common\Models\GetServicePropertiesResult</a></pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<p class="long_description"></p>
+<table class="table table-bordered"><tr>
+<th>see</th>
+<td>\http://msdn.microsoft.com/en-us/library/windowsazure/hh452238.aspx</td>
+</tr></table>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$options</h4>
+<code>\Models\TableServiceOptions</code><p>optional table service options.</p></div>
+<h3>Returns</h3>
+<div class="subelement response"><code><a href="../classes/WindowsAzure.Common.Models.GetServicePropertiesResult.html">\WindowsAzure\Common\Models\GetServicePropertiesResult</a></code></div>
+</div></div>
+</div>
+<a name="getTable" id="getTable"></a><div class="element clickable method public getTable" data-toggle="collapse" data-target=".getTable .collapse">
+<h2>Gets the table.</h2>
+<pre>getTable(string $table, \Models\TableServiceOptions $options) : \Models\GetTableResult</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<p class="long_description"></p>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$table</h4>
+<code>string</code><p>The The name of the table..</p></div>
+<div class="subelement argument">
+<h4>$options</h4>
+<code>\Models\TableServiceOptions</code><p>The optional parameters.</p></div>
+<h3>Returns</h3>
+<div class="subelement response"><code>\Models\GetTableResult</code></div>
+</div></div>
+</div>
+<a name="insertEntity" id="insertEntity"></a><div class="element clickable method public insertEntity" data-toggle="collapse" data-target=".insertEntity .collapse">
+<h2>Inserts new entity to the table</h2>
+<pre>insertEntity(string $table, \Models\Entity $entity, \Models\TableServiceOptions $options) : \Models\InsertEntityResult</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<p class="long_description"></p>
+<table class="table table-bordered"><tr>
+<th>see</th>
+<td>\http://msdn.microsoft.com/en-us/library/windowsazure/dd179433.aspx</td>
+</tr></table>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$table</h4>
+<code>string</code><p>name of the table</p></div>
+<div class="subelement argument">
+<h4>$entity</h4>
+<code>\Models\Entity</code><p>table entity</p></div>
+<div class="subelement argument">
+<h4>$options</h4>
+<code>\Models\TableServiceOptions</code><p>optional parameters</p></div>
+<h3>Returns</h3>
+<div class="subelement response"><code>\Models\InsertEntityResult</code></div>
+</div></div>
+</div>
+<a name="insertOrMergeEntity" id="insertOrMergeEntity"></a><div class="element clickable method public insertOrMergeEntity" data-toggle="collapse" data-target=".insertOrMergeEntity .collapse">
+<h2>Updates an existing entity or inserts a new entity if it does not exist in the
+table.</h2>
+<pre>insertOrMergeEntity(string $table, \Models\Entity $entity, \Models\TableServiceOptions $options) : \Models\UpdateEntityResult</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<p class="long_description"></p>
+<table class="table table-bordered"><tr>
+<th>see</th>
+<td>\http://msdn.microsoft.com/en-us/library/windowsazure/hh452241.aspx</td>
+</tr></table>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$table</h4>
+<code>string</code><p>name of the table</p></div>
+<div class="subelement argument">
+<h4>$entity</h4>
+<code>\Models\Entity</code><p>table entity</p></div>
+<div class="subelement argument">
+<h4>$options</h4>
+<code>\Models\TableServiceOptions</code><p>optional parameters</p></div>
+<h3>Returns</h3>
+<div class="subelement response"><code>\Models\UpdateEntityResult</code></div>
+</div></div>
+</div>
+<a name="insertOrReplaceEntity" id="insertOrReplaceEntity"></a><div class="element clickable method public insertOrReplaceEntity" data-toggle="collapse" data-target=".insertOrReplaceEntity .collapse">
+<h2>Replaces an existing entity or inserts a new entity if it does not exist in
+the table.</h2>
+<pre>insertOrReplaceEntity(string $table, \Models\Entity $entity, \Models\TableServiceOptions $options) : \Models\UpdateEntityResult</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<p class="long_description"></p>
+<table class="table table-bordered"><tr>
+<th>see</th>
+<td>\http://msdn.microsoft.com/en-us/library/windowsazure/hh452242.aspx</td>
+</tr></table>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$table</h4>
+<code>string</code><p>name of the table</p></div>
+<div class="subelement argument">
+<h4>$entity</h4>
+<code>\Models\Entity</code><p>table entity</p></div>
+<div class="subelement argument">
+<h4>$options</h4>
+<code>\Models\TableServiceOptions</code><p>optional parameters</p></div>
+<h3>Returns</h3>
+<div class="subelement response"><code>\Models\UpdateEntityResult</code></div>
+</div></div>
+</div>
+<a name="mergeEntity" id="mergeEntity"></a><div class="element clickable method public mergeEntity" data-toggle="collapse" data-target=".mergeEntity .collapse">
+<h2>Updates an existing entity by updating the entity's properties. This operation
+does not replace the existing entity, as the updateEntity operation does.</h2>
+<pre>mergeEntity(string $table, \Models\Entity $entity, \Models\TableServiceOptions $options) : \Models\UpdateEntityResult</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<p class="long_description"></p>
+<table class="table table-bordered"><tr>
+<th>see</th>
+<td>\http://msdn.microsoft.com/en-us/library/windowsazure/dd179392.aspx</td>
+</tr></table>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$table</h4>
+<code>string</code><p>The table name.</p></div>
+<div class="subelement argument">
+<h4>$entity</h4>
+<code>\Models\Entity</code><p>The table entity.</p></div>
+<div class="subelement argument">
+<h4>$options</h4>
+<code>\Models\TableServiceOptions</code><p>The optional parameters.</p></div>
+<h3>Returns</h3>
+<div class="subelement response"><code>\Models\UpdateEntityResult</code></div>
+</div></div>
+</div>
+<a name="queryEntities" id="queryEntities"></a><div class="element clickable method public queryEntities" data-toggle="collapse" data-target=".queryEntities .collapse">
+<h2>Quries entities for the given table name</h2>
+<pre>queryEntities(string $table, \Models\QueryEntitiesOptions | string | \Models\Filter $options) : \Models\QueryEntitiesResult</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<p class="long_description"></p>
+<table class="table table-bordered"><tr>
+<th>see</th>
+<td>\http://msdn.microsoft.com/en-us/library/windowsazure/dd179421.aspx</td>
+</tr></table>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$table</h4>
+<code>string</code><p>The name of the table.</p></div>
+<div class="subelement argument">
+<h4>$options</h4>
+<code>\Models\QueryEntitiesOptionsstring\Models\Filter</code><p>Coule be optional parameters, query string or filter to apply.</p></div>
+<h3>Returns</h3>
+<div class="subelement response"><code>\Models\QueryEntitiesResult</code></div>
+</div></div>
+</div>
+<a name="queryTables" id="queryTables"></a><div class="element clickable method public queryTables" data-toggle="collapse" data-target=".queryTables .collapse">
+<h2>Quries tables in the given storage account.</h2>
+<pre>queryTables(\Models\QueryTablesOptions | string | \Models\Filter $options) : \Models\QueryTablesResult</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<p class="long_description"></p>
+<table class="table table-bordered"><tr>
+<th>see</th>
+<td>\http://msdn.microsoft.com/en-us/library/windowsazure/dd179405.aspx</td>
+</tr></table>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$options</h4>
+<code>\Models\QueryTablesOptionsstring\Models\Filter</code><p>Could be optional parameters, table prefix or filter to apply.</p></div>
+<h3>Returns</h3>
+<div class="subelement response"><code>\Models\QueryTablesResult</code></div>
+</div></div>
+</div>
+<a name="setServiceProperties" id="setServiceProperties"></a><div class="element clickable method public setServiceProperties" data-toggle="collapse" data-target=".setServiceProperties .collapse">
+<h2>Sets the properties of the Table service.</h2>
+<pre>setServiceProperties(\ServiceProperties $serviceProperties, \Models\TableServiceOptions $options) : \none.</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<p class="long_description"></p>
+<table class="table table-bordered"><tr>
+<th>see</th>
+<td>\http://msdn.microsoft.com/en-us/library/windowsazure/hh452240.aspx</td>
+</tr></table>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$serviceProperties</h4>
+<code>\ServiceProperties</code><p>new service properties</p></div>
+<div class="subelement argument">
+<h4>$options</h4>
+<code>\Models\TableServiceOptions</code><p>optional parameters</p></div>
+<h3>Returns</h3>
+<div class="subelement response"><code>\none.</code></div>
+</div></div>
+</div>
+<a name="updateEntity" id="updateEntity"></a><div class="element clickable method public updateEntity" data-toggle="collapse" data-target=".updateEntity .collapse">
+<h2>Updates an existing entity in a table. The Update Entity operation replaces
+the entire entity and can be used to remove properties.</h2>
+<pre>updateEntity(string $table, \Models\Entity $entity, \Models\TableServiceOptions $options) : \Models\UpdateEntityResult</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<p class="long_description"></p>
+<table class="table table-bordered"><tr>
+<th>see</th>
+<td>\http://msdn.microsoft.com/en-us/library/windowsazure/dd179427.aspx</td>
+</tr></table>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$table</h4>
+<code>string</code><p>The table name.</p></div>
+<div class="subelement argument">
+<h4>$entity</h4>
+<code>\Models\Entity</code><p>The table entity.</p></div>
+<div class="subelement argument">
+<h4>$options</h4>
+<code>\Models\TableServiceOptions</code><p>The optional parameters.</p></div>
+<h3>Returns</h3>
+<div class="subelement response"><code>\Models\UpdateEntityResult</code></div>
+</div></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="row"><footer class="span12">
+            Template is built using <a href="http://twitter.github.com/bootstrap/">Twitter Bootstrap 2</a> and icons provided by <a href="http://glyphicons.com/">Glyphicons</a>.<br>
+            Documentation is powered by <a href="http://www.phpdoc.org/">phpDocumentor 2.0.0a6</a> and<br>
+            generated on 2012-07-17T21:10:40-07:00.<br></footer></div>
+</div>
+</body>
+</html>

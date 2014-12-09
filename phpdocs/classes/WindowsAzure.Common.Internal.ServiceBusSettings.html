@@ -1,0 +1,301 @@
+<!DOCTYPE html><html xmlns:date="http://exslt.org/dates-and-times" lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0; user-scalable=0;">
+<meta charset="utf-8">
+<title>Windows Azure SDK for PHP » \WindowsAzure\Common\Internal\ServiceBusSettings</title>
+<meta name="author" content="Mike van Riel">
+<meta name="description" content="">
+<link href="../css/template.css" rel="stylesheet" media="all">
+<script src="../js/jquery-1.7.1.min.js" type="text/javascript"></script><script src="../js/jquery-ui-1.8.2.custom.min.js" type="text/javascript"></script><script src="../js/jquery.mousewheel.min.js" type="text/javascript"></script><script src="../js/bootstrap.js" type="text/javascript"></script><script src="../js/template.js" type="text/javascript"></script><script src="../js/prettify/prettify.min.js" type="text/javascript"></script><link rel="shortcut icon" href="../img/favicon.ico">
+<link rel="apple-touch-icon" href="../img/apple-touch-icon.png">
+<link rel="apple-touch-icon" sizes="72x72" href="../img/apple-touch-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="114x114" href="../img/apple-touch-icon-114x114.png">
+</head>
+<body>
+<div class="navbar navbar-fixed-top">
+<div class="navbar-inner"><div class="container">
+<a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse"><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></a><a class="brand" href="../index.html">Windows Azure SDK for PHP</a><div class="nav-collapse"><ul class="nav">
+<li class="dropdown">
+<a href="#api" class="dropdown-toggle" data-toggle="dropdown">
+                                    API Documentation <b class="caret"></b></a><ul class="dropdown-menu">
+<li><a>Namespaces</a></li>
+<li><a href="../namespaces/WindowsAzure.html"><i class="icon-th"></i> WindowsAzure</a></li>
+<li><a>Packages</a></li>
+<li><a href="../packages/WindowsAzure.html"><i class="icon-folder-open"></i> WindowsAzure</a></li>
+</ul>
+</li>
+<li class="dropdown" id="charts-menu">
+<a href="#charts" class="dropdown-toggle" data-toggle="dropdown">
+                                    Charts <b class="caret"></b></a><ul class="dropdown-menu"><li><a href="../graph_class.html"><i class="icon-list-alt"></i> Class hierarchy diagram</a></li></ul>
+</li>
+<li class="dropdown" id="reports-menu">
+<a href="#reports" class="dropdown-toggle" data-toggle="dropdown">
+                                    Reports <b class="caret"></b></a><ul class="dropdown-menu">
+<li><a href="../errors.html"><i class="icon-remove-sign"></i> Errors 
+                <span class="label label-info">385</span></a></li>
+<li><a href="../markers.html"><i class="icon-map-marker"></i> Markers 
+                <ul></ul></a></li>
+<li><a href="../deprecated.html"><i class="icon-stop"></i> Deprecated elements 
+                <span class="label label-info">0</span></a></li>
+</ul>
+</li>
+</ul></div>
+</div></div>
+<div class="go_to_top"><a href="#___" style="color: inherit">Back to top  <i class="icon-upload icon-white"></i></a></div>
+</div>
+<div id="___" class="container">
+<noscript><div class="alert alert-warning">
+                            Javascript is disabled; several features are only available
+                            if Javascript is enabled.
+                        </div></noscript>
+<div class="row">
+<div class="span4">
+<span class="btn-group visibility" data-toggle="buttons-checkbox"><button class="btn public active" title="Show public elements">Public</button><button class="btn protected" title="Show protected elements">Protected</button><button class="btn private" title="Show private elements">Private</button><button class="btn inherited active" title="Show inherited elements">Inherited</button></span><div class="btn-group view pull-right" data-toggle="buttons-radio">
+<button class="btn details" title="Show descriptions and method names"><i class="icon-list"></i></button><button class="btn simple" title="Show only method names"><i class="icon-align-justify"></i></button>
+</div>
+<ul class="side-nav nav nav-list">
+<li class="nav-header">
+<i class="icon-custom icon-method"></i> Methods</li>
+<li class="method public "><a href="#__construct" title="__construct :: Creates new Service Bus settings instance."><span class="description">Creates new Service Bus settings instance.</span><pre>__construct()</pre></a></li>
+<li class="method public "><a href="#createFromConnectionString" title="createFromConnectionString :: Creates a ServiceBusSettings object from the given connection string."><span class="description">Creates a ServiceBusSettings object from the given connection string.</span><pre>createFromConnectionString()</pre></a></li>
+<li class="method public "><a href="#getNamespace" title="getNamespace :: Gets the namespace name."><span class="description">Gets the namespace name.</span><pre>getNamespace()</pre></a></li>
+<li class="method public "><a href="#getServiceBusEndpointUri" title="getServiceBusEndpointUri :: Gets the Service Bus endpoint URI."><span class="description">Gets the Service Bus endpoint URI.</span><pre>getServiceBusEndpointUri()</pre></a></li>
+<li class="method public "><a href="#getWrapEndpointUri" title="getWrapEndpointUri :: Gets the wrap endpoint URI."><span class="description">Gets the wrap endpoint URI.</span><pre>getWrapEndpointUri()</pre></a></li>
+<li class="method public "><a href="#getWrapName" title="getWrapName :: Gets the wrap name."><span class="description">Gets the wrap name.</span><pre>getWrapName()</pre></a></li>
+<li class="method public "><a href="#getWrapPassword" title="getWrapPassword :: Gets the wrap password."><span class="description">Gets the wrap password.</span><pre>getWrapPassword()</pre></a></li>
+<li class="nav-header protected">» Protected</li>
+<li class="method protected "><a href="#init" title="init :: Initializes static members of the class."><span class="description">Initializes static members of the class.</span><pre>init()</pre></a></li>
+<li class="nav-header">
+<i class="icon-custom icon-property"></i> Properties</li>
+<li class="nav-header protected">» Protected</li>
+<li class="property protected "><a href="#%24isInitialized" title="$isInitialized :: "><span class="description">$isInitialized</span><pre>$isInitialized</pre></a></li>
+<li class="property protected "><a href="#%24validSettingKeys" title="$validSettingKeys :: Holds the expected setting keys."><span class="description">Holds the expected setting keys.</span><pre>$validSettingKeys</pre></a></li>
+<li class="nav-header private">» Private</li>
+<li class="property private "><a href="#%24_namespace" title="$_namespace :: "><span class="description">$_namespace</span><pre>$_namespace</pre></a></li>
+<li class="property private "><a href="#%24_serviceBusEndpointSetting" title="$_serviceBusEndpointSetting :: Validator for the Endpoint setting. Must be a valid Uri."><span class="description">Validator for the Endpoint setting. Must be a valid Uri.</span><pre>$_serviceBusEndpointSetting</pre></a></li>
+<li class="property private "><a href="#%24_serviceBusEndpointUri" title="$_serviceBusEndpointUri :: "><span class="description">$_serviceBusEndpointUri</span><pre>$_serviceBusEndpointUri</pre></a></li>
+<li class="property private "><a href="#%24_wrapEndpointUri" title="$_wrapEndpointUri :: "><span class="description">$_wrapEndpointUri</span><pre>$_wrapEndpointUri</pre></a></li>
+<li class="property private "><a href="#%24_wrapName" title="$_wrapName :: "><span class="description">$_wrapName</span><pre>$_wrapName</pre></a></li>
+<li class="property private "><a href="#%24_wrapNameSetting" title="$_wrapNameSetting :: Validator for the SharedSecretIssuer setting. It has to be provided."><span class="description">Validator for the SharedSecretIssuer setting. It has to be provided.</span><pre>$_wrapNameSetting</pre></a></li>
+<li class="property private "><a href="#%24_wrapPassword" title="$_wrapPassword :: "><span class="description">$_wrapPassword</span><pre>$_wrapPassword</pre></a></li>
+<li class="property private "><a href="#%24_wrapPasswordSetting" title="$_wrapPasswordSetting :: Validator for the SharedSecretValue setting. It has to be provided."><span class="description">Validator for the SharedSecretValue setting. It has to be provided.</span><pre>$_wrapPasswordSetting</pre></a></li>
+</ul>
+</div>
+<div class="span8">
+<a name="%5CWindowsAzure%5CCommon%5CInternal%5CServiceBusSettings" id="\WindowsAzure\Common\Internal\ServiceBusSettings"></a><ul class="breadcrumb">
+<li>
+<a href="../index.html"><i class="icon-custom icon-class"></i></a><span class="divider">\</span>
+</li>
+<li><a href="../namespaces/WindowsAzure.html">WindowsAzure</a></li>
+<span class="divider">\</span><li><a href="../namespaces/WindowsAzure.Common.html">Common</a></li>
+<span class="divider">\</span><li><a href="../namespaces/WindowsAzure.Common.Internal.html">Internal</a></li>
+<li class="active">
+<span class="divider">\</span><a href="../classes/WindowsAzure.Common.Internal.ServiceBusSettings.html">ServiceBusSettings</a>
+</li>
+</ul>
+<div href="../classes/WindowsAzure.Common.Internal.ServiceBusSettings.html" class="element class">
+<p class="short_description">Represents the settings used to sign and access a request against the service
+bus.</p>
+<div class="details">
+<p class="long_description"></p>
+<table class="table table-bordered">
+<tr>
+<th>category</th>
+<td>Microsoft</td>
+</tr>
+<tr>
+<th>package</th>
+<td><a href="../packages/WindowsAzure.Common.Internal.html">WindowsAzure\Common\Internal</a></td>
+</tr>
+<tr>
+<th>author</th>
+<td><a href="mailto:azurephpsdk@microsoft.com">Azure PHP SDK</a></td>
+</tr>
+<tr>
+<th>copyright</th>
+<td>2012 Microsoft Corporation</td>
+</tr>
+<tr>
+<th>license</th>
+<td><a href="http://www.apache.org/licenses/LICENSE-2.0">Apache License 2.0</a></td>
+</tr>
+<tr>
+<th>version</th>
+<td>Release: @package_version@</td>
+</tr>
+<tr>
+<th>link</th>
+<td><a href="https://github.com/windowsazure/azure-sdk-for-php">https://github.com/windowsazure/azure-sdk-for-php</a></td>
+</tr>
+</table>
+<h3>
+<i class="icon-custom icon-method"></i> Methods</h3>
+<a name="__construct" id="__construct"></a><div class="element clickable method public __construct" data-toggle="collapse" data-target=".__construct .collapse">
+<h2>Creates new Service Bus settings instance.</h2>
+<pre>__construct(string $serviceBusEndpoint, string $namespace, string $wrapName, string $wrapPassword) </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<p class="long_description"></p>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$serviceBusEndpoint</h4>
+<code>string</code><p>The Service Bus endpoint uri.</p></div>
+<div class="subelement argument">
+<h4>$namespace</h4>
+<code>string</code><p>The service namespace.</p></div>
+<div class="subelement argument">
+<h4>$wrapName</h4>
+<code>string</code><p>The wrap name.</p></div>
+<div class="subelement argument">
+<h4>$wrapPassword</h4>
+<code>string</code><p>The wrap password.</p></div>
+</div></div>
+</div>
+<a name="createFromConnectionString" id="createFromConnectionString"></a><div class="element clickable method public createFromConnectionString" data-toggle="collapse" data-target=".createFromConnectionString .collapse">
+<h2>Creates a ServiceBusSettings object from the given connection string.</h2>
+<pre>createFromConnectionString(string $connectionString) : \ServiceBusSettings</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<p class="long_description"></p>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$connectionString</h4>
+<code>string</code><p>The storage settings connection string.</p></div>
+<h3>Returns</h3>
+<div class="subelement response"><code>\ServiceBusSettings</code></div>
+</div></div>
+</div>
+<a name="getNamespace" id="getNamespace"></a><div class="element clickable method public getNamespace" data-toggle="collapse" data-target=".getNamespace .collapse">
+<h2>Gets the namespace name.</h2>
+<pre>getNamespace() : string</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<p class="long_description"></p>
+<h3>Returns</h3>
+<div class="subelement response"><code>string</code></div>
+</div></div>
+</div>
+<a name="getServiceBusEndpointUri" id="getServiceBusEndpointUri"></a><div class="element clickable method public getServiceBusEndpointUri" data-toggle="collapse" data-target=".getServiceBusEndpointUri .collapse">
+<h2>Gets the Service Bus endpoint URI.</h2>
+<pre>getServiceBusEndpointUri() : string</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<p class="long_description"></p>
+<h3>Returns</h3>
+<div class="subelement response"><code>string</code></div>
+</div></div>
+</div>
+<a name="getWrapEndpointUri" id="getWrapEndpointUri"></a><div class="element clickable method public getWrapEndpointUri" data-toggle="collapse" data-target=".getWrapEndpointUri .collapse">
+<h2>Gets the wrap endpoint URI.</h2>
+<pre>getWrapEndpointUri() : string</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<p class="long_description"></p>
+<h3>Returns</h3>
+<div class="subelement response"><code>string</code></div>
+</div></div>
+</div>
+<a name="getWrapName" id="getWrapName"></a><div class="element clickable method public getWrapName" data-toggle="collapse" data-target=".getWrapName .collapse">
+<h2>Gets the wrap name.</h2>
+<pre>getWrapName() : string</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<p class="long_description"></p>
+<h3>Returns</h3>
+<div class="subelement response"><code>string</code></div>
+</div></div>
+</div>
+<a name="getWrapPassword" id="getWrapPassword"></a><div class="element clickable method public getWrapPassword" data-toggle="collapse" data-target=".getWrapPassword .collapse">
+<h2>Gets the wrap password.</h2>
+<pre>getWrapPassword() : string</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<p class="long_description"></p>
+<h3>Returns</h3>
+<div class="subelement response"><code>string</code></div>
+</div></div>
+</div>
+<a name="init" id="init"></a><div class="element clickable method protected init" data-toggle="collapse" data-target=".init .collapse">
+<h2>Initializes static members of the class.</h2>
+<pre>init() : \none</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<p class="long_description"></p>
+<h3>Returns</h3>
+<div class="subelement response"><code>\none</code></div>
+</div></div>
+</div>
+<h3>
+<i class="icon-custom icon-property"></i> Properties</h3>
+<a name="%24isInitialized" id="$isInitialized"> </a><div class="element clickable property protected $isInitialized" data-toggle="collapse" data-target=".$isInitialized .collapse">
+<h2>$isInitialized</h2>
+<pre>$isInitialized : boolean</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><p class="long_description"></p></div></div>
+</div>
+<a name="%24validSettingKeys" id="$validSettingKeys"> </a><div class="element clickable property protected $validSettingKeys" data-toggle="collapse" data-target=".$validSettingKeys .collapse">
+<h2>Holds the expected setting keys.</h2>
+<pre>$validSettingKeys : array</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><p class="long_description"></p></div></div>
+</div>
+<a name="%24_namespace" id="$_namespace"> </a><div class="element clickable property private $_namespace" data-toggle="collapse" data-target=".$_namespace .collapse">
+<h2>$_namespace</h2>
+<pre>$_namespace : string</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><p class="long_description"></p></div></div>
+</div>
+<a name="%24_serviceBusEndpointSetting" id="$_serviceBusEndpointSetting"> </a><div class="element clickable property private $_serviceBusEndpointSetting" data-toggle="collapse" data-target=".$_serviceBusEndpointSetting .collapse">
+<h2>Validator for the Endpoint setting. Must be a valid Uri.</h2>
+<pre>$_serviceBusEndpointSetting : array</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><p class="long_description"></p></div></div>
+</div>
+<a name="%24_serviceBusEndpointUri" id="$_serviceBusEndpointUri"> </a><div class="element clickable property private $_serviceBusEndpointUri" data-toggle="collapse" data-target=".$_serviceBusEndpointUri .collapse">
+<h2>$_serviceBusEndpointUri</h2>
+<pre>$_serviceBusEndpointUri : string</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><p class="long_description"></p></div></div>
+</div>
+<a name="%24_wrapEndpointUri" id="$_wrapEndpointUri"> </a><div class="element clickable property private $_wrapEndpointUri" data-toggle="collapse" data-target=".$_wrapEndpointUri .collapse">
+<h2>$_wrapEndpointUri</h2>
+<pre>$_wrapEndpointUri : string</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><p class="long_description"></p></div></div>
+</div>
+<a name="%24_wrapName" id="$_wrapName"> </a><div class="element clickable property private $_wrapName" data-toggle="collapse" data-target=".$_wrapName .collapse">
+<h2>$_wrapName</h2>
+<pre>$_wrapName : string</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><p class="long_description"></p></div></div>
+</div>
+<a name="%24_wrapNameSetting" id="$_wrapNameSetting"> </a><div class="element clickable property private $_wrapNameSetting" data-toggle="collapse" data-target=".$_wrapNameSetting .collapse">
+<h2>Validator for the SharedSecretIssuer setting. It has to be provided.</h2>
+<pre>$_wrapNameSetting : array</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><p class="long_description"></p></div></div>
+</div>
+<a name="%24_wrapPassword" id="$_wrapPassword"> </a><div class="element clickable property private $_wrapPassword" data-toggle="collapse" data-target=".$_wrapPassword .collapse">
+<h2>$_wrapPassword</h2>
+<pre>$_wrapPassword : string</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><p class="long_description"></p></div></div>
+</div>
+<a name="%24_wrapPasswordSetting" id="$_wrapPasswordSetting"> </a><div class="element clickable property private $_wrapPasswordSetting" data-toggle="collapse" data-target=".$_wrapPasswordSetting .collapse">
+<h2>Validator for the SharedSecretValue setting. It has to be provided.</h2>
+<pre>$_wrapPasswordSetting : array</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><p class="long_description"></p></div></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="row"><footer class="span12">
+            Template is built using <a href="http://twitter.github.com/bootstrap/">Twitter Bootstrap 2</a> and icons provided by <a href="http://glyphicons.com/">Glyphicons</a>.<br>
+            Documentation is powered by <a href="http://www.phpdoc.org/">phpDocumentor 2.0.0a6</a> and<br>
+            generated on 2012-07-17T21:10:38-07:00.<br></footer></div>
+</div>
+</body>
+</html>

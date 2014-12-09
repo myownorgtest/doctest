@@ -1,0 +1,4075 @@
+<!DOCTYPE html><html xmlns:date="http://exslt.org/dates-and-times" lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0; user-scalable=0;">
+<meta charset="utf-8">
+<title>Windows Azure SDK for PHP</title>
+<meta name="author" content="Mike van Riel">
+<meta name="description" content="">
+<link href="css/template.css" rel="stylesheet" media="all">
+<script src="js/jquery-1.7.1.min.js" type="text/javascript"></script><script src="js/jquery-ui-1.8.2.custom.min.js" type="text/javascript"></script><script src="js/jquery.mousewheel.min.js" type="text/javascript"></script><script src="js/bootstrap.js" type="text/javascript"></script><script src="js/template.js" type="text/javascript"></script><script src="js/prettify/prettify.min.js" type="text/javascript"></script><link rel="shortcut icon" href="img/favicon.ico">
+<link rel="apple-touch-icon" href="img/apple-touch-icon.png">
+<link rel="apple-touch-icon" sizes="72x72" href="img/apple-touch-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="114x114" href="img/apple-touch-icon-114x114.png">
+</head>
+<body>
+<div class="navbar navbar-fixed-top">
+<div class="navbar-inner"><div class="container">
+<a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse"><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></a><a class="brand" href="index.html">Windows Azure SDK for PHP</a><div class="nav-collapse"><ul class="nav">
+<li class="dropdown">
+<a href="#api" class="dropdown-toggle" data-toggle="dropdown">
+                                    API Documentation <b class="caret"></b></a><ul class="dropdown-menu">
+<li><a>Namespaces</a></li>
+<li><a href="namespaces/WindowsAzure.html"><i class="icon-th"></i> WindowsAzure</a></li>
+<li><a>Packages</a></li>
+<li><a href="packages/WindowsAzure.html"><i class="icon-folder-open"></i> WindowsAzure</a></li>
+</ul>
+</li>
+<li class="dropdown" id="charts-menu">
+<a href="#charts" class="dropdown-toggle" data-toggle="dropdown">
+                                    Charts <b class="caret"></b></a><ul class="dropdown-menu"><li><a href="graph_class.html"><i class="icon-list-alt"></i> Class hierarchy diagram</a></li></ul>
+</li>
+<li class="dropdown" id="reports-menu">
+<a href="#reports" class="dropdown-toggle" data-toggle="dropdown">
+                                    Reports <b class="caret"></b></a><ul class="dropdown-menu">
+<li><a href="errors.html"><i class="icon-remove-sign"></i> Errors 
+                <span class="label label-info">385</span></a></li>
+<li><a href="markers.html"><i class="icon-map-marker"></i> Markers 
+                <ul></ul></a></li>
+<li><a href="deprecated.html"><i class="icon-stop"></i> Deprecated elements 
+                <span class="label label-info">0</span></a></li>
+</ul>
+</li>
+</ul></div>
+</div></div>
+<div class="go_to_top"><a href="#___" style="color: inherit">Back to top  <i class="icon-upload icon-white"></i></a></div>
+</div>
+<div id="___" class="container">
+<noscript><div class="alert alert-warning">
+                            Javascript is disabled; several features are only available
+                            if Javascript is enabled.
+                        </div></noscript>
+<div class="row">
+<div class="span4"><ul class="side-nav nav nav-list">
+<li class="nav-header">Filter type</li>
+<li><div class="btn-group type-filter" data-toggle="buttons-checkbox">
+<button class="btn critical">Critical</button><button class="btn error">Error</button><button class="btn notice">Notice</button>
+</div></li>
+<li class="nav-header">Navigation</li>
+<li><a href="#Blob%5CModels%5CAccessPolicy.php"><i class="icon-file"></i>Blob\Models\AccessPolicy.php</a></li>
+<li><a href="#Blob%5CModels%5CAcquireLeaseOptions.php"><i class="icon-file"></i>Blob\Models\AcquireLeaseOptions.php</a></li>
+<li><a href="#Blob%5CModels%5CAcquireLeaseResult.php"><i class="icon-file"></i>Blob\Models\AcquireLeaseResult.php</a></li>
+<li><a href="#Blob%5CModels%5CBlob.php"><i class="icon-file"></i>Blob\Models\Blob.php</a></li>
+<li><a href="#Blob%5CModels%5CBlobPrefix.php"><i class="icon-file"></i>Blob\Models\BlobPrefix.php</a></li>
+<li><a href="#Blob%5CModels%5CBlobProperties.php"><i class="icon-file"></i>Blob\Models\BlobProperties.php</a></li>
+<li><a href="#Blob%5CModels%5CBlobServiceOptions.php"><i class="icon-file"></i>Blob\Models\BlobServiceOptions.php</a></li>
+<li><a href="#Blob%5CModels%5CBlock.php"><i class="icon-file"></i>Blob\Models\Block.php</a></li>
+<li><a href="#Blob%5CModels%5CBlockList.php"><i class="icon-file"></i>Blob\Models\BlockList.php</a></li>
+<li><a href="#Blob%5CModels%5CCommitBlobBlocksOptions.php"><i class="icon-file"></i>Blob\Models\CommitBlobBlocksOptions.php</a></li>
+<li><a href="#Blob%5CModels%5CContainer.php"><i class="icon-file"></i>Blob\Models\Container.php</a></li>
+<li><a href="#Blob%5CModels%5CContainerACL.php"><i class="icon-file"></i>Blob\Models\ContainerACL.php</a></li>
+<li><a href="#Blob%5CModels%5CContainerProperties.php"><i class="icon-file"></i>Blob\Models\ContainerProperties.php</a></li>
+<li><a href="#Blob%5CModels%5CCopyBlobOptions.php"><i class="icon-file"></i>Blob\Models\CopyBlobOptions.php</a></li>
+<li><a href="#Blob%5CModels%5CCopyBlobResult.php"><i class="icon-file"></i>Blob\Models\CopyBlobResult.php</a></li>
+<li><a href="#Blob%5CModels%5CCreateBlobBlockOptions.php"><i class="icon-file"></i>Blob\Models\CreateBlobBlockOptions.php</a></li>
+<li><a href="#Blob%5CModels%5CCreateBlobOptions.php"><i class="icon-file"></i>Blob\Models\CreateBlobOptions.php</a></li>
+<li><a href="#Blob%5CModels%5CCreateBlobPagesOptions.php"><i class="icon-file"></i>Blob\Models\CreateBlobPagesOptions.php</a></li>
+<li><a href="#Blob%5CModels%5CCreateBlobPagesResult.php"><i class="icon-file"></i>Blob\Models\CreateBlobPagesResult.php</a></li>
+<li><a href="#Blob%5CModels%5CCreateBlobSnapshotOptions.php"><i class="icon-file"></i>Blob\Models\CreateBlobSnapshotOptions.php</a></li>
+<li><a href="#Blob%5CModels%5CCreateContainerOptions.php"><i class="icon-file"></i>Blob\Models\CreateContainerOptions.php</a></li>
+<li><a href="#Blob%5CModels%5CDeleteBlobOptions.php"><i class="icon-file"></i>Blob\Models\DeleteBlobOptions.php</a></li>
+<li><a href="#Blob%5CModels%5CDeleteContainerOptions.php"><i class="icon-file"></i>Blob\Models\DeleteContainerOptions.php</a></li>
+<li><a href="#Blob%5CModels%5CGetBlobMetadataOptions.php"><i class="icon-file"></i>Blob\Models\GetBlobMetadataOptions.php</a></li>
+<li><a href="#Blob%5CModels%5CGetBlobMetadataResult.php"><i class="icon-file"></i>Blob\Models\GetBlobMetadataResult.php</a></li>
+<li><a href="#Blob%5CModels%5CGetBlobOptions.php"><i class="icon-file"></i>Blob\Models\GetBlobOptions.php</a></li>
+<li><a href="#Blob%5CModels%5CGetBlobPropertiesOptions.php"><i class="icon-file"></i>Blob\Models\GetBlobPropertiesOptions.php</a></li>
+<li><a href="#Blob%5CModels%5CGetBlobPropertiesResult.php"><i class="icon-file"></i>Blob\Models\GetBlobPropertiesResult.php</a></li>
+<li><a href="#Blob%5CModels%5CGetBlobResult.php"><i class="icon-file"></i>Blob\Models\GetBlobResult.php</a></li>
+<li><a href="#Blob%5CModels%5CGetContainerACLResult.php"><i class="icon-file"></i>Blob\Models\GetContainerACLResult.php</a></li>
+<li><a href="#Blob%5CModels%5CGetContainerPropertiesResult.php"><i class="icon-file"></i>Blob\Models\GetContainerPropertiesResult.php</a></li>
+<li><a href="#Blob%5CModels%5CListBlobBlocksOptions.php"><i class="icon-file"></i>Blob\Models\ListBlobBlocksOptions.php</a></li>
+<li><a href="#Blob%5CModels%5CListBlobBlocksResult.php"><i class="icon-file"></i>Blob\Models\ListBlobBlocksResult.php</a></li>
+<li><a href="#Blob%5CModels%5CListBlobsOptions.php"><i class="icon-file"></i>Blob\Models\ListBlobsOptions.php</a></li>
+<li><a href="#Blob%5CModels%5CListBlobsResult.php"><i class="icon-file"></i>Blob\Models\ListBlobsResult.php</a></li>
+<li><a href="#Blob%5CModels%5CListContainersResult.php"><i class="icon-file"></i>Blob\Models\ListContainersResult.php</a></li>
+<li><a href="#Blob%5CModels%5CListPageBlobRangesOptions.php"><i class="icon-file"></i>Blob\Models\ListPageBlobRangesOptions.php</a></li>
+<li><a href="#Blob%5CModels%5CListPageBlobRangesResult.php"><i class="icon-file"></i>Blob\Models\ListPageBlobRangesResult.php</a></li>
+<li><a href="#Blob%5CModels%5CPageRange.php"><i class="icon-file"></i>Blob\Models\PageRange.php</a></li>
+<li><a href="#Blob%5CModels%5CSetBlobMetadataOptions.php"><i class="icon-file"></i>Blob\Models\SetBlobMetadataOptions.php</a></li>
+<li><a href="#Blob%5CModels%5CSetBlobMetadataResult.php"><i class="icon-file"></i>Blob\Models\SetBlobMetadataResult.php</a></li>
+<li><a href="#Blob%5CModels%5CSetBlobPropertiesOptions.php"><i class="icon-file"></i>Blob\Models\SetBlobPropertiesOptions.php</a></li>
+<li><a href="#Blob%5CModels%5CSetBlobPropertiesResult.php"><i class="icon-file"></i>Blob\Models\SetBlobPropertiesResult.php</a></li>
+<li><a href="#Blob%5CModels%5CSetContainerMetadataOptions.php"><i class="icon-file"></i>Blob\Models\SetContainerMetadataOptions.php</a></li>
+<li><a href="#Blob%5CModels%5CSignedIdentifier.php"><i class="icon-file"></i>Blob\Models\SignedIdentifier.php</a></li>
+<li><a href="#Common%5CCloudConfigurationManager.php"><i class="icon-file"></i>Common\CloudConfigurationManager.php</a></li>
+<li><a href="#Common%5CInternal%5CAuthentication%5CSharedKeyAuthScheme.php"><i class="icon-file"></i>Common\Internal\Authentication\SharedKeyAuthScheme.php</a></li>
+<li><a href="#Common%5CInternal%5CAuthentication%5CStorageAuthScheme.php"><i class="icon-file"></i>Common\Internal\Authentication\StorageAuthScheme.php</a></li>
+<li><a href="#Common%5CInternal%5CAuthentication%5CTableSharedKeyLiteAuthScheme.php"><i class="icon-file"></i>Common\Internal\Authentication\TableSharedKeyLiteAuthScheme.php</a></li>
+<li><a href="#Common%5CInternal%5CConnectionStringParser.php"><i class="icon-file"></i>Common\Internal\ConnectionStringParser.php</a></li>
+<li><a href="#Common%5CInternal%5CConnectionStringSource.php"><i class="icon-file"></i>Common\Internal\ConnectionStringSource.php</a></li>
+<li><a href="#Common%5CInternal%5CFilters%5CAuthenticationFilter.php"><i class="icon-file"></i>Common\Internal\Filters\AuthenticationFilter.php</a></li>
+<li><a href="#Common%5CInternal%5CFilters%5CExponentialRetryPolicy.php"><i class="icon-file"></i>Common\Internal\Filters\ExponentialRetryPolicy.php</a></li>
+<li><a href="#Common%5CInternal%5CFilters%5CHeadersFilter.php"><i class="icon-file"></i>Common\Internal\Filters\HeadersFilter.php</a></li>
+<li><a href="#Common%5CInternal%5CFilters%5CRetryPolicyFilter.php"><i class="icon-file"></i>Common\Internal\Filters\RetryPolicyFilter.php</a></li>
+<li><a href="#Common%5CInternal%5CFilters%5CWrapFilter.php"><i class="icon-file"></i>Common\Internal\Filters\WrapFilter.php</a></li>
+<li><a href="#Common%5CInternal%5CHttp%5CHttpCallContext.php"><i class="icon-file"></i>Common\Internal\Http\HttpCallContext.php</a></li>
+<li><a href="#Common%5CInternal%5CHttp%5CHttpClient.php"><i class="icon-file"></i>Common\Internal\Http\HttpClient.php</a></li>
+<li><a href="#Common%5CInternal%5CHttp%5CUrl.php"><i class="icon-file"></i>Common\Internal\Http\Url.php</a></li>
+<li><a href="#Common%5CInternal%5CLogger.php"><i class="icon-file"></i>Common\Internal\Logger.php</a></li>
+<li><a href="#Common%5CInternal%5CRestProxy.php"><i class="icon-file"></i>Common\Internal\RestProxy.php</a></li>
+<li><a href="#Common%5CInternal%5CServiceBusSettings.php"><i class="icon-file"></i>Common\Internal\ServiceBusSettings.php</a></li>
+<li><a href="#Common%5CInternal%5CServiceManagementSettings.php"><i class="icon-file"></i>Common\Internal\ServiceManagementSettings.php</a></li>
+<li><a href="#Common%5CInternal%5CServiceRestProxy.php"><i class="icon-file"></i>Common\Internal\ServiceRestProxy.php</a></li>
+<li><a href="#Common%5CInternal%5CServiceSettings.php"><i class="icon-file"></i>Common\Internal\ServiceSettings.php</a></li>
+<li><a href="#Common%5CInternal%5CStorageServiceSettings.php"><i class="icon-file"></i>Common\Internal\StorageServiceSettings.php</a></li>
+<li><a href="#Common%5CInternal%5CUtilities.php"><i class="icon-file"></i>Common\Internal\Utilities.php</a></li>
+<li><a href="#Common%5CModels%5CGetServicePropertiesResult.php"><i class="icon-file"></i>Common\Models\GetServicePropertiesResult.php</a></li>
+<li><a href="#Common%5CModels%5CLogging.php"><i class="icon-file"></i>Common\Models\Logging.php</a></li>
+<li><a href="#Common%5CModels%5CMetrics.php"><i class="icon-file"></i>Common\Models\Metrics.php</a></li>
+<li><a href="#Common%5CModels%5CServiceProperties.php"><i class="icon-file"></i>Common\Models\ServiceProperties.php</a></li>
+<li><a href="#Common%5CServiceException.php"><i class="icon-file"></i>Common\ServiceException.php</a></li>
+<li><a href="#Common%5CServicesBuilder.php"><i class="icon-file"></i>Common\ServicesBuilder.php</a></li>
+<li><a href="#Queue%5CModels%5CCreateQueueOptions.php"><i class="icon-file"></i>Queue\Models\CreateQueueOptions.php</a></li>
+<li><a href="#Queue%5CModels%5CListQueuesOptions.php"><i class="icon-file"></i>Queue\Models\ListQueuesOptions.php</a></li>
+<li><a href="#Queue%5CModels%5CListQueuesResult.php"><i class="icon-file"></i>Queue\Models\ListQueuesResult.php</a></li>
+<li><a href="#Queue%5CModels%5CQueue.php"><i class="icon-file"></i>Queue\Models\Queue.php</a></li>
+<li><a href="#Queue%5CModels%5CQueueMessage.php"><i class="icon-file"></i>Queue\Models\QueueMessage.php</a></li>
+<li><a href="#Queue%5CModels%5CQueueServiceOptions.php"><i class="icon-file"></i>Queue\Models\QueueServiceOptions.php</a></li>
+<li><a href="#ServiceBus%5CInternal%5CIServiceBus.php"><i class="icon-file"></i>ServiceBus\Internal\IServiceBus.php</a></li>
+<li><a href="#ServiceBus%5CModels%5CWrapAccessTokenResult.php"><i class="icon-file"></i>ServiceBus\Models\WrapAccessTokenResult.php</a></li>
+<li><a href="#ServiceBus%5CServiceBusRestProxy.php"><i class="icon-file"></i>ServiceBus\ServiceBusRestProxy.php</a></li>
+<li><a href="#ServiceManagement%5CModels%5CAsynchronousOperationResult.php"><i class="icon-file"></i>ServiceManagement\Models\AsynchronousOperationResult.php</a></li>
+<li><a href="#ServiceManagement%5CModels%5CCreateAffinityGroupOptions.php"><i class="icon-file"></i>ServiceManagement\Models\CreateAffinityGroupOptions.php</a></li>
+<li><a href="#ServiceManagement%5CModels%5CCreateStorageServiceOptions.php"><i class="icon-file"></i>ServiceManagement\Models\CreateStorageServiceOptions.php</a></li>
+<li><a href="#ServiceManagement%5CModels%5CGetAffinityGroupPropertiesResult.php"><i class="icon-file"></i>ServiceManagement\Models\GetAffinityGroupPropertiesResult.php</a></li>
+<li><a href="#ServiceManagement%5CModels%5CGetOperationStatusResult.php"><i class="icon-file"></i>ServiceManagement\Models\GetOperationStatusResult.php</a></li>
+<li><a href="#ServiceManagement%5CModels%5CGetStorageServiceKeysResult.php"><i class="icon-file"></i>ServiceManagement\Models\GetStorageServiceKeysResult.php</a></li>
+<li><a href="#ServiceManagement%5CModels%5CGetStorageServicePropertiesResult.php"><i class="icon-file"></i>ServiceManagement\Models\GetStorageServicePropertiesResult.php</a></li>
+<li><a href="#ServiceManagement%5CModels%5CListAffinityGroupsResult.php"><i class="icon-file"></i>ServiceManagement\Models\ListAffinityGroupsResult.php</a></li>
+<li><a href="#ServiceManagement%5CModels%5CListLocationsResult.php"><i class="icon-file"></i>ServiceManagement\Models\ListLocationsResult.php</a></li>
+<li><a href="#ServiceManagement%5CModels%5CListStorageServicesResult.php"><i class="icon-file"></i>ServiceManagement\Models\ListStorageServicesResult.php</a></li>
+<li><a href="#ServiceManagement%5CModels%5CLocation.php"><i class="icon-file"></i>ServiceManagement\Models\Location.php</a></li>
+<li><a href="#ServiceManagement%5CModels%5CService.php"><i class="icon-file"></i>ServiceManagement\Models\Service.php</a></li>
+<li><a href="#ServiceManagement%5CModels%5CServiceProperties.php"><i class="icon-file"></i>ServiceManagement\Models\ServiceProperties.php</a></li>
+<li><a href="#ServiceManagement%5CModels%5CStorageService.php"><i class="icon-file"></i>ServiceManagement\Models\StorageService.php</a></li>
+<li><a href="#ServiceManagement%5CModels%5CUpdateStorageServiceOptions.php"><i class="icon-file"></i>ServiceManagement\Models\UpdateStorageServiceOptions.php</a></li>
+<li><a href="#ServiceManagement%5CServiceManagementRestProxy.php"><i class="icon-file"></i>ServiceManagement\ServiceManagementRestProxy.php</a></li>
+<li><a href="#ServiceRuntime%5CInternal%5CAcquireCurrentState.php"><i class="icon-file"></i>ServiceRuntime\Internal\AcquireCurrentState.php</a></li>
+<li><a href="#ServiceRuntime%5CInternal%5CChunkedGoalStateDeserializer.php"><i class="icon-file"></i>ServiceRuntime\Internal\ChunkedGoalStateDeserializer.php</a></li>
+<li><a href="#ServiceRuntime%5CInternal%5CCurrentState.php"><i class="icon-file"></i>ServiceRuntime\Internal\CurrentState.php</a></li>
+<li><a href="#ServiceRuntime%5CInternal%5CFileInputChannel.php"><i class="icon-file"></i>ServiceRuntime\Internal\FileInputChannel.php</a></li>
+<li><a href="#ServiceRuntime%5CInternal%5CGoalState.php"><i class="icon-file"></i>ServiceRuntime\Internal\GoalState.php</a></li>
+<li><a href="#ServiceRuntime%5CInternal%5CLocalResource.php"><i class="icon-file"></i>ServiceRuntime\Internal\LocalResource.php</a></li>
+<li><a href="#ServiceRuntime%5CInternal%5CProtocol1RuntimeClient.php"><i class="icon-file"></i>ServiceRuntime\Internal\Protocol1RuntimeClient.php</a></li>
+<li><a href="#ServiceRuntime%5CInternal%5CProtocol1RuntimeCurrentStateClient.php"><i class="icon-file"></i>ServiceRuntime\Internal\Protocol1RuntimeCurrentStateClient.php</a></li>
+<li><a href="#ServiceRuntime%5CInternal%5CProtocol1RuntimeGoalStateClient.php"><i class="icon-file"></i>ServiceRuntime\Internal\Protocol1RuntimeGoalStateClient.php</a></li>
+<li><a href="#ServiceRuntime%5CInternal%5CRole.php"><i class="icon-file"></i>ServiceRuntime\Internal\Role.php</a></li>
+<li><a href="#ServiceRuntime%5CInternal%5CRoleEnvironmentConfigurationSettingChange.php"><i class="icon-file"></i>ServiceRuntime\Internal\RoleEnvironmentConfigurationSettingChange.php</a></li>
+<li><a href="#ServiceRuntime%5CInternal%5CRoleEnvironmentData.php"><i class="icon-file"></i>ServiceRuntime\Internal\RoleEnvironmentData.php</a></li>
+<li><a href="#ServiceRuntime%5CInternal%5CRoleEnvironmentTopologyChange.php"><i class="icon-file"></i>ServiceRuntime\Internal\RoleEnvironmentTopologyChange.php</a></li>
+<li><a href="#ServiceRuntime%5CInternal%5CRoleInstance.php"><i class="icon-file"></i>ServiceRuntime\Internal\RoleInstance.php</a></li>
+<li><a href="#ServiceRuntime%5CInternal%5CRoleInstanceEndpoint.php"><i class="icon-file"></i>ServiceRuntime\Internal\RoleInstanceEndpoint.php</a></li>
+<li><a href="#ServiceRuntime%5CRoleEnvironment.php"><i class="icon-file"></i>ServiceRuntime\RoleEnvironment.php</a></li>
+<li><a href="#Table%5CInternal%5CAtomReaderWriter.php"><i class="icon-file"></i>Table\Internal\AtomReaderWriter.php</a></li>
+<li><a href="#Table%5CModels%5CBatchError.php"><i class="icon-file"></i>Table\Models\BatchError.php</a></li>
+<li><a href="#Table%5CModels%5CBatchOperation.php"><i class="icon-file"></i>Table\Models\BatchOperation.php</a></li>
+<li><a href="#Table%5CModels%5CBatchOperations.php"><i class="icon-file"></i>Table\Models\BatchOperations.php</a></li>
+<li><a href="#Table%5CModels%5CDeleteEntityOptions.php"><i class="icon-file"></i>Table\Models\DeleteEntityOptions.php</a></li>
+<li><a href="#Table%5CModels%5CEntity.php"><i class="icon-file"></i>Table\Models\Entity.php</a></li>
+<li><a href="#Table%5CModels%5CFilters%5CBinaryFilter.php"><i class="icon-file"></i>Table\Models\Filters\BinaryFilter.php</a></li>
+<li><a href="#Table%5CModels%5CFilters%5CConstantFilter.php"><i class="icon-file"></i>Table\Models\Filters\ConstantFilter.php</a></li>
+<li><a href="#Table%5CModels%5CFilters%5CPropertyNameFilter.php"><i class="icon-file"></i>Table\Models\Filters\PropertyNameFilter.php</a></li>
+<li><a href="#Table%5CModels%5CFilters%5CQueryStringFilter.php"><i class="icon-file"></i>Table\Models\Filters\QueryStringFilter.php</a></li>
+<li><a href="#Table%5CModels%5CFilters%5CUnaryFilter.php"><i class="icon-file"></i>Table\Models\Filters\UnaryFilter.php</a></li>
+<li><a href="#Table%5CModels%5CGetEntityResult.php"><i class="icon-file"></i>Table\Models\GetEntityResult.php</a></li>
+<li><a href="#Table%5CModels%5CGetTableResult.php"><i class="icon-file"></i>Table\Models\GetTableResult.php</a></li>
+<li><a href="#Table%5CModels%5CInsertEntityResult.php"><i class="icon-file"></i>Table\Models\InsertEntityResult.php</a></li>
+<li><a href="#Table%5CModels%5CProperty.php"><i class="icon-file"></i>Table\Models\Property.php</a></li>
+<li><a href="#Table%5CModels%5CQuery.php"><i class="icon-file"></i>Table\Models\Query.php</a></li>
+<li><a href="#Table%5CModels%5CQueryEntitiesOptions.php"><i class="icon-file"></i>Table\Models\QueryEntitiesOptions.php</a></li>
+<li><a href="#Table%5CModels%5CQueryEntitiesResult.php"><i class="icon-file"></i>Table\Models\QueryEntitiesResult.php</a></li>
+<li><a href="#Table%5CModels%5CQueryTablesOptions.php"><i class="icon-file"></i>Table\Models\QueryTablesOptions.php</a></li>
+<li><a href="#Table%5CModels%5CQueryTablesResult.php"><i class="icon-file"></i>Table\Models\QueryTablesResult.php</a></li>
+<li><a href="#Table%5CModels%5CTableServiceOptions.php"><i class="icon-file"></i>Table\Models\TableServiceOptions.php</a></li>
+<li><a href="#Table%5CModels%5CUpdateEntityResult.php"><i class="icon-file"></i>Table\Models\UpdateEntityResult.php</a></li>
+<li><a href="#Table%5CTableRestProxy.php"><i class="icon-file"></i>Table\TableRestProxy.php</a></li>
+</ul></div>
+<div class="span8">
+<ul class="breadcrumb">
+<li>
+<a href=""><i class="icon-remove-sign"></i></a><span class="divider">\</span>
+</li>
+<li>Compilation Errors</li>
+</ul>
+<div class="package-contents"></div>
+<div class="package-contents"></div>
+<div class="package-contents"></div>
+<div class="package-contents">
+<a name="Blob%5CModels%5CAccessPolicy.php" id="Blob\Models\AccessPolicy.php"></a><h3>
+<i class="icon-file"></i>Blob\Models\AccessPolicy.php<small style="float: right;padding-right: 10px;">3</small>
+</h3>
+<div><table class="table markers table-bordered">
+<thead><tr>
+<th>Type</th>
+<th>Line</th>
+<th>Description</th>
+</tr></thead>
+<tbody>
+<tr class="critical">
+<td>critical</td>
+<td>46</td>
+<td>No short description for property $_start</td>
+</tr>
+<tr class="critical">
+<td>critical</td>
+<td>51</td>
+<td>No short description for property $_expiry</td>
+</tr>
+<tr class="critical">
+<td>critical</td>
+<td>56</td>
+<td>No short description for property $_permission</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<div class="package-contents">
+<a name="Blob%5CModels%5CAcquireLeaseOptions.php" id="Blob\Models\AcquireLeaseOptions.php"></a><h3>
+<i class="icon-file"></i>Blob\Models\AcquireLeaseOptions.php<small style="float: right;padding-right: 10px;">1</small>
+</h3>
+<div><table class="table markers table-bordered">
+<thead><tr>
+<th>Type</th>
+<th>Line</th>
+<th>Description</th>
+</tr></thead>
+<tbody><tr class="critical">
+<td>critical</td>
+<td>43</td>
+<td>No short description for property $_accessCondition</td>
+</tr></tbody>
+</table></div>
+</div>
+<div class="package-contents">
+<a name="Blob%5CModels%5CAcquireLeaseResult.php" id="Blob\Models\AcquireLeaseResult.php"></a><h3>
+<i class="icon-file"></i>Blob\Models\AcquireLeaseResult.php<small style="float: right;padding-right: 10px;">1</small>
+</h3>
+<div><table class="table markers table-bordered">
+<thead><tr>
+<th>Type</th>
+<th>Line</th>
+<th>Description</th>
+</tr></thead>
+<tbody><tr class="critical">
+<td>critical</td>
+<td>45</td>
+<td>No short description for property $_leaseId</td>
+</tr></tbody>
+</table></div>
+</div>
+<div class="package-contents">
+<a name="Blob%5CModels%5CBlob.php" id="Blob\Models\Blob.php"></a><h3>
+<i class="icon-file"></i>Blob\Models\Blob.php<small style="float: right;padding-right: 10px;">5</small>
+</h3>
+<div><table class="table markers table-bordered">
+<thead><tr>
+<th>Type</th>
+<th>Line</th>
+<th>Description</th>
+</tr></thead>
+<tbody>
+<tr class="critical">
+<td>critical</td>
+<td>43</td>
+<td>No short description for property $_name</td>
+</tr>
+<tr class="critical">
+<td>critical</td>
+<td>48</td>
+<td>No short description for property $_url</td>
+</tr>
+<tr class="critical">
+<td>critical</td>
+<td>53</td>
+<td>No short description for property $_snapshot</td>
+</tr>
+<tr class="critical">
+<td>critical</td>
+<td>58</td>
+<td>No short description for property $_metadata</td>
+</tr>
+<tr class="critical">
+<td>critical</td>
+<td>63</td>
+<td>No short description for property $_properties</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<div class="package-contents"></div>
+<div class="package-contents">
+<a name="Blob%5CModels%5CBlobPrefix.php" id="Blob\Models\BlobPrefix.php"></a><h3>
+<i class="icon-file"></i>Blob\Models\BlobPrefix.php<small style="float: right;padding-right: 10px;">1</small>
+</h3>
+<div><table class="table markers table-bordered">
+<thead><tr>
+<th>Type</th>
+<th>Line</th>
+<th>Description</th>
+</tr></thead>
+<tbody><tr class="critical">
+<td>critical</td>
+<td>43</td>
+<td>No short description for property $_name</td>
+</tr></tbody>
+</table></div>
+</div>
+<div class="package-contents">
+<a name="Blob%5CModels%5CBlobProperties.php" id="Blob\Models\BlobProperties.php"></a><h3>
+<i class="icon-file"></i>Blob\Models\BlobProperties.php<small style="float: right;padding-right: 10px;">12</small>
+</h3>
+<div><table class="table markers table-bordered">
+<thead><tr>
+<th>Type</th>
+<th>Line</th>
+<th>Description</th>
+</tr></thead>
+<tbody>
+<tr class="critical">
+<td>critical</td>
+<td>46</td>
+<td>No short description for property $_lastModified</td>
+</tr>
+<tr class="critical">
+<td>critical</td>
+<td>51</td>
+<td>No short description for property $_etag</td>
+</tr>
+<tr class="critical">
+<td>critical</td>
+<td>56</td>
+<td>No short description for property $_contentType</td>
+</tr>
+<tr class="critical">
+<td>critical</td>
+<td>61</td>
+<td>No short description for property $_contentLength</td>
+</tr>
+<tr class="critical">
+<td>critical</td>
+<td>66</td>
+<td>No short description for property $_contentEncoding</td>
+</tr>
+<tr class="critical">
+<td>critical</td>
+<td>71</td>
+<td>No short description for property $_contentLanguage</td>
+</tr>
+<tr class="critical">
+<td>critical</td>
+<td>76</td>
+<td>No short description for property $_contentMD5</td>
+</tr>
+<tr class="critical">
+<td>critical</td>
+<td>81</td>
+<td>No short description for property $_contentRange</td>
+</tr>
+<tr class="critical">
+<td>critical</td>
+<td>86</td>
+<td>No short description for property $_cacheControl</td>
+</tr>
+<tr class="critical">
+<td>critical</td>
+<td>91</td>
+<td>No short description for property $_blobType</td>
+</tr>
+<tr class="critical">
+<td>critical</td>
+<td>96</td>
+<td>No short description for property $_leaseStatus</td>
+</tr>
+<tr class="critical">
+<td>critical</td>
+<td>101</td>
+<td>No short description for property $_sequenceNumber</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<div class="package-contents">
+<a name="Blob%5CModels%5CBlobServiceOptions.php" id="Blob\Models\BlobServiceOptions.php"></a><h3>
+<i class="icon-file"></i>Blob\Models\BlobServiceOptions.php<small style="float: right;padding-right: 10px;">1</small>
+</h3>
+<div><table class="table markers table-bordered">
+<thead><tr>
+<th>Type</th>
+<th>Line</th>
+<th>Description</th>
+</tr></thead>
+<tbody><tr class="error">
+<td>error</td>
+<td>40</td>
+<td>No DocBlock was found for property $_timeout</td>
+</tr></tbody>
+</table></div>
+</div>
+<div class="package-contents"></div>
+<div class="package-contents">
+<a name="Blob%5CModels%5CBlock.php" id="Blob\Models\Block.php"></a><h3>
+<i class="icon-file"></i>Blob\Models\Block.php<small style="float: right;padding-right: 10px;">2</small>
+</h3>
+<div><table class="table markers table-bordered">
+<thead><tr>
+<th>Type</th>
+<th>Line</th>
+<th>Description</th>
+</tr></thead>
+<tbody>
+<tr class="critical">
+<td>critical</td>
+<td>43</td>
+<td>No short description for property $_blockId</td>
+</tr>
+<tr class="critical">
+<td>critical</td>
+<td>48</td>
+<td>No short description for property $_type</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<div class="package-contents">
+<a name="Blob%5CModels%5CBlockList.php" id="Blob\Models\BlockList.php"></a><h3>
+<i class="icon-file"></i>Blob\Models\BlockList.php<small style="float: right;padding-right: 10px;">2</small>
+</h3>
+<div><table class="table markers table-bordered">
+<thead><tr>
+<th>Type</th>
+<th>Line</th>
+<th>Description</th>
+</tr></thead>
+<tbody>
+<tr class="critical">
+<td>critical</td>
+<td>47</td>
+<td>No short description for property $_entries</td>
+</tr>
+<tr class="error">
+<td>error</td>
+<td>48</td>
+<td>No DocBlock was found for property $xmlRootName</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<div class="package-contents">
+<a name="Blob%5CModels%5CCommitBlobBlocksOptions.php" id="Blob\Models\CommitBlobBlocksOptions.php"></a><h3>
+<i class="icon-file"></i>Blob\Models\CommitBlobBlocksOptions.php<small style="float: right;padding-right: 10px;">8</small>
+</h3>
+<div><table class="table markers table-bordered">
+<thead><tr>
+<th>Type</th>
+<th>Line</th>
+<th>Description</th>
+</tr></thead>
+<tbody>
+<tr class="critical">
+<td>critical</td>
+<td>44</td>
+<td>No short description for property $_blobContentType</td>
+</tr>
+<tr class="critical">
+<td>critical</td>
+<td>49</td>
+<td>No short description for property $_blobContentEncoding</td>
+</tr>
+<tr class="critical">
+<td>critical</td>
+<td>54</td>
+<td>No short description for property $_blobContentLanguage</td>
+</tr>
+<tr class="critical">
+<td>critical</td>
+<td>59</td>
+<td>No short description for property $_blobContentMD5</td>
+</tr>
+<tr class="critical">
+<td>critical</td>
+<td>64</td>
+<td>No short description for property $_blobCacheControl</td>
+</tr>
+<tr class="critical">
+<td>critical</td>
+<td>69</td>
+<td>No short description for property $_metadata</td>
+</tr>
+<tr class="critical">
+<td>critical</td>
+<td>74</td>
+<td>No short description for property $_leaseId</td>
+</tr>
+<tr class="critical">
+<td>critical</td>
+<td>79</td>
+<td>No short description for property $_accessCondition</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<div class="package-contents">
+<a name="Blob%5CModels%5CContainer.php" id="Blob\Models\Container.php"></a><h3>
+<i class="icon-file"></i>Blob\Models\Container.php<small style="float: right;padding-right: 10px;">4</small>
+</h3>
+<div><table class="table markers table-bordered">
+<thead><tr>
+<th>Type</th>
+<th>Line</th>
+<th>Description</th>
+</tr></thead>
+<tbody>
+<tr class="critical">
+<td>critical</td>
+<td>45</td>
+<td>No short description for property $_name</td>
+</tr>
+<tr class="critical">
+<td>critical</td>
+<td>50</td>
+<td>No short description for property $_url</td>
+</tr>
+<tr class="critical">
+<td>critical</td>
+<td>55</td>
+<td>No short description for property $_metadata</td>
+</tr>
+<tr class="critical">
+<td>critical</td>
+<td>60</td>
+<td>No short description for property $_properties</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<div class="package-contents">
+<a name="Blob%5CModels%5CContainerACL.php" id="Blob\Models\ContainerACL.php"></a><h3>
+<i class="icon-file"></i>Blob\Models\ContainerACL.php<small style="float: right;padding-right: 10px;">2</small>
+</h3>
+<div><table class="table markers table-bordered">
+<thead><tr>
+<th>Type</th>
+<th>Line</th>
+<th>Description</th>
+</tr></thead>
+<tbody>
+<tr class="critical">
+<td>critical</td>
+<td>57</td>
+<td>No short description for property $_signedIdentifiers</td>
+</tr>
+<tr class="error">
+<td>error</td>
+<td>64</td>
+<td>No DocBlock was found for property $xmlRootName</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<div class="package-contents">
+<a name="Blob%5CModels%5CContainerProperties.php" id="Blob\Models\ContainerProperties.php"></a><h3>
+<i class="icon-file"></i>Blob\Models\ContainerProperties.php<small style="float: right;padding-right: 10px;">2</small>
+</h3>
+<div><table class="table markers table-bordered">
+<thead><tr>
+<th>Type</th>
+<th>Line</th>
+<th>Description</th>
+</tr></thead>
+<tbody>
+<tr class="critical">
+<td>critical</td>
+<td>43</td>
+<td>No short description for property $_lastModified</td>
+</tr>
+<tr class="critical">
+<td>critical</td>
+<td>48</td>
+<td>No short description for property $_etag</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<div class="package-contents">
+<a name="Blob%5CModels%5CCopyBlobOptions.php" id="Blob\Models\CopyBlobOptions.php"></a><h3>
+<i class="icon-file"></i>Blob\Models\CopyBlobOptions.php<small style="float: right;padding-right: 10px;">6</small>
+</h3>
+<div><table class="table markers table-bordered">
+<thead><tr>
+<th>Type</th>
+<th>Line</th>
+<th>Description</th>
+</tr></thead>
+<tbody>
+<tr class="critical">
+<td>critical</td>
+<td>45</td>
+<td>No short description for property $_accessCondition</td>
+</tr>
+<tr class="critical">
+<td>critical</td>
+<td>50</td>
+<td>No short description for property $_sourceAccessCondition</td>
+</tr>
+<tr class="critical">
+<td>critical</td>
+<td>55</td>
+<td>No short description for property $_metadata</td>
+</tr>
+<tr class="critical">
+<td>critical</td>
+<td>60</td>
+<td>No short description for property $_sourceSnapshot</td>
+</tr>
+<tr class="critical">
+<td>critical</td>
+<td>65</td>
+<td>No short description for property $_leaseId</td>
+</tr>
+<tr class="critical">
+<td>critical</td>
+<td>70</td>
+<td>No short description for property $_sourceLeaseId</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<div class="package-contents">
+<a name="Blob%5CModels%5CCopyBlobResult.php" id="Blob\Models\CopyBlobResult.php"></a><h3>
+<i class="icon-file"></i>Blob\Models\CopyBlobResult.php<small style="float: right;padding-right: 10px;">2</small>
+</h3>
+<div><table class="table markers table-bordered">
+<thead><tr>
+<th>Type</th>
+<th>Line</th>
+<th>Description</th>
+</tr></thead>
+<tbody>
+<tr class="critical">
+<td>critical</td>
+<td>45</td>
+<td>No short description for property $_etag</td>
+</tr>
+<tr class="critical">
+<td>critical</td>
+<td>50</td>
+<td>No short description for property $_lastModified</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<div class="package-contents">
+<a name="Blob%5CModels%5CCreateBlobBlockOptions.php" id="Blob\Models\CreateBlobBlockOptions.php"></a><h3>
+<i class="icon-file"></i>Blob\Models\CreateBlobBlockOptions.php<small style="float: right;padding-right: 10px;">2</small>
+</h3>
+<div><table class="table markers table-bordered">
+<thead><tr>
+<th>Type</th>
+<th>Line</th>
+<th>Description</th>
+</tr></thead>
+<tbody>
+<tr class="critical">
+<td>critical</td>
+<td>43</td>
+<td>No short description for property $_contentMD5</td>
+</tr>
+<tr class="critical">
+<td>critical</td>
+<td>48</td>
+<td>No short description for property $_leaseId</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<div class="package-contents">
+<a name="Blob%5CModels%5CCreateBlobOptions.php" id="Blob\Models\CreateBlobOptions.php"></a><h3>
+<i class="icon-file"></i>Blob\Models\CreateBlobOptions.php<small style="float: right;padding-right: 10px;">14</small>
+</h3>
+<div><table class="table markers table-bordered">
+<thead><tr>
+<th>Type</th>
+<th>Line</th>
+<th>Description</th>
+</tr></thead>
+<tbody>
+<tr class="critical">
+<td>critical</td>
+<td>44</td>
+<td>No short description for property $_contentType</td>
+</tr>
+<tr class="critical">
+<td>critical</td>
+<td>49</td>
+<td>No short description for property $_contentEncoding</td>
+</tr>
+<tr class="critical">
+<td>critical</td>
+<td>54</td>
+<td>No short description for property $_contentLanguage</td>
+</tr>
+<tr class="critical">
+<td>critical</td>
+<td>59</td>
+<td>No short description for property $_contentMD5</td>
+</tr>
+<tr class="critical">
+<td>critical</td>
+<td>64</td>
+<td>No short description for property $_cacheControl</td>
+</tr>
+<tr class="critical">
+<td>critical</td>
+<td>69</td>
+<td>No short description for property $_blobContentType</td>
+</tr>
+<tr class="critical">
+<td>critical</td>
+<td>74</td>
+<td>No short description for property $_blobContentEncoding</td>
+</tr>
+<tr class="critical">
+<td>critical</td>
+<td>79</td>
+<td>No short description for property $_blobContentLanguage</td>
+</tr>
+<tr class="critical">
+<td>critical</td>
+<td>84</td>
+<td>No short description for property $_blobContentMD5</td>
+</tr>
+<tr class="critical">
+<td>critical</td>
+<td>89</td>
+<td>No short description for property $_blobCacheControl</td>
+</tr>
+<tr class="critical">
+<td>critical</td>
+<td>94</td>
+<td>No short description for property $_metadata</td>
+</tr>
+<tr class="critical">
+<td>critical</td>
+<td>99</td>
+<td>No short description for property $_leaseId</td>
+</tr>
+<tr class="critical">
+<td>critical</td>
+<td>104</td>
+<td>No short description for property $_sequenceNumber</td>
+</tr>
+<tr class="critical">
+<td>critical</td>
+<td>109</td>
+<td>No short description for property $_accessCondition</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<div class="package-contents">
+<a name="Blob%5CModels%5CCreateBlobPagesOptions.php" id="Blob\Models\CreateBlobPagesOptions.php"></a><h3>
+<i class="icon-file"></i>Blob\Models\CreateBlobPagesOptions.php<small style="float: right;padding-right: 10px;">3</small>
+</h3>
+<div><table class="table markers table-bordered">
+<thead><tr>
+<th>Type</th>
+<th>Line</th>
+<th>Description</th>
+</tr></thead>
+<tbody>
+<tr class="critical">
+<td>critical</td>
+<td>43</td>
+<td>No short description for property $_contentMD5</td>
+</tr>
+<tr class="critical">
+<td>critical</td>
+<td>48</td>
+<td>No short description for property $_leaseId</td>
+</tr>
+<tr class="critical">
+<td>critical</td>
+<td>53</td>
+<td>No short description for property $_accessCondition</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<div class="package-contents">
+<a name="Blob%5CModels%5CCreateBlobPagesResult.php" id="Blob\Models\CreateBlobPagesResult.php"></a><h3>
+<i class="icon-file"></i>Blob\Models\CreateBlobPagesResult.php<small style="float: right;padding-right: 10px;">4</small>
+</h3>
+<div><table class="table markers table-bordered">
+<thead><tr>
+<th>Type</th>
+<th>Line</th>
+<th>Description</th>
+</tr></thead>
+<tbody>
+<tr class="critical">
+<td>critical</td>
+<td>46</td>
+<td>No short description for property $_lastModified</td>
+</tr>
+<tr class="critical">
+<td>critical</td>
+<td>51</td>
+<td>No short description for property $_etag</td>
+</tr>
+<tr class="critical">
+<td>critical</td>
+<td>56</td>
+<td>No short description for property $_sequenceNumber</td>
+</tr>
+<tr class="critical">
+<td>critical</td>
+<td>61</td>
+<td>No short description for property $_contentMD5</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<div class="package-contents">
+<a name="Blob%5CModels%5CCreateBlobSnapshotOptions.php" id="Blob\Models\CreateBlobSnapshotOptions.php"></a><h3>
+<i class="icon-file"></i>Blob\Models\CreateBlobSnapshotOptions.php<small style="float: right;padding-right: 10px;">3</small>
+</h3>
+<div><table class="table markers table-bordered">
+<thead><tr>
+<th>Type</th>
+<th>Line</th>
+<th>Description</th>
+</tr></thead>
+<tbody>
+<tr class="critical">
+<td>critical</td>
+<td>43</td>
+<td>No short description for property $_metadata</td>
+</tr>
+<tr class="critical">
+<td>critical</td>
+<td>48</td>
+<td>No short description for property $_accessCondition</td>
+</tr>
+<tr class="critical">
+<td>critical</td>
+<td>53</td>
+<td>No short description for property $_leaseId</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<div class="package-contents"></div>
+<div class="package-contents">
+<a name="Blob%5CModels%5CCreateContainerOptions.php" id="Blob\Models\CreateContainerOptions.php"></a><h3>
+<i class="icon-file"></i>Blob\Models\CreateContainerOptions.php<small style="float: right;padding-right: 10px;">2</small>
+</h3>
+<div><table class="table markers table-bordered">
+<thead><tr>
+<th>Type</th>
+<th>Line</th>
+<th>Description</th>
+</tr></thead>
+<tbody>
+<tr class="critical">
+<td>critical</td>
+<td>45</td>
+<td>No short description for property $_publicAccess</td>
+</tr>
+<tr class="critical">
+<td>critical</td>
+<td>50</td>
+<td>No short description for property $_metadata</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<div class="package-contents">
+<a name="Blob%5CModels%5CDeleteBlobOptions.php" id="Blob\Models\DeleteBlobOptions.php"></a><h3>
+<i class="icon-file"></i>Blob\Models\DeleteBlobOptions.php<small style="float: right;padding-right: 10px;">4</small>
+</h3>
+<div><table class="table markers table-bordered">
+<thead><tr>
+<th>Type</th>
+<th>Line</th>
+<th>Description</th>
+</tr></thead>
+<tbody>
+<tr class="critical">
+<td>critical</td>
+<td>44</td>
+<td>No short description for property $_leaseId</td>
+</tr>
+<tr class="critical">
+<td>critical</td>
+<td>49</td>
+<td>No short description for property $_snapshot</td>
+</tr>
+<tr class="critical">
+<td>critical</td>
+<td>54</td>
+<td>No short description for property $_accessCondition</td>
+</tr>
+<tr class="critical">
+<td>critical</td>
+<td>59</td>
+<td>No short description for property $_deleteSnaphotsOnly</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<div class="package-contents">
+<a name="Blob%5CModels%5CDeleteContainerOptions.php" id="Blob\Models\DeleteContainerOptions.php"></a><h3>
+<i class="icon-file"></i>Blob\Models\DeleteContainerOptions.php<small style="float: right;padding-right: 10px;">1</small>
+</h3>
+<div><table class="table markers table-bordered">
+<thead><tr>
+<th>Type</th>
+<th>Line</th>
+<th>Description</th>
+</tr></thead>
+<tbody><tr class="critical">
+<td>critical</td>
+<td>43</td>
+<td>No short description for property $_accessCondition</td>
+</tr></tbody>
+</table></div>
+</div>
+<div class="package-contents">
+<a name="Blob%5CModels%5CGetBlobMetadataOptions.php" id="Blob\Models\GetBlobMetadataOptions.php"></a><h3>
+<i class="icon-file"></i>Blob\Models\GetBlobMetadataOptions.php<small style="float: right;padding-right: 10px;">3</small>
+</h3>
+<div><table class="table markers table-bordered">
+<thead><tr>
+<th>Type</th>
+<th>Line</th>
+<th>Description</th>
+</tr></thead>
+<tbody>
+<tr class="critical">
+<td>critical</td>
+<td>43</td>
+<td>No short description for property $_leaseId</td>
+</tr>
+<tr class="critical">
+<td>critical</td>
+<td>48</td>
+<td>No short description for property $_snapshot</td>
+</tr>
+<tr class="critical">
+<td>critical</td>
+<td>53</td>
+<td>No short description for property $_accessCondition</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<div class="package-contents">
+<a name="Blob%5CModels%5CGetBlobMetadataResult.php" id="Blob\Models\GetBlobMetadataResult.php"></a><h3>
+<i class="icon-file"></i>Blob\Models\GetBlobMetadataResult.php<small style="float: right;padding-right: 10px;">3</small>
+</h3>
+<div><table class="table markers table-bordered">
+<thead><tr>
+<th>Type</th>
+<th>Line</th>
+<th>Description</th>
+</tr></thead>
+<tbody>
+<tr class="critical">
+<td>critical</td>
+<td>47</td>
+<td>No short description for property $_lastModified</td>
+</tr>
+<tr class="critical">
+<td>critical</td>
+<td>52</td>
+<td>No short description for property $_etag</td>
+</tr>
+<tr class="critical">
+<td>critical</td>
+<td>57</td>
+<td>No short description for property $_metadata</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<div class="package-contents">
+<a name="Blob%5CModels%5CGetBlobOptions.php" id="Blob\Models\GetBlobOptions.php"></a><h3>
+<i class="icon-file"></i>Blob\Models\GetBlobOptions.php<small style="float: right;padding-right: 10px;">6</small>
+</h3>
+<div><table class="table markers table-bordered">
+<thead><tr>
+<th>Type</th>
+<th>Line</th>
+<th>Description</th>
+</tr></thead>
+<tbody>
+<tr class="critical">
+<td>critical</td>
+<td>44</td>
+<td>No short description for property $_leaseId</td>
+</tr>
+<tr class="critical">
+<td>critical</td>
+<td>49</td>
+<td>No short description for property $_snapshot</td>
+</tr>
+<tr class="critical">
+<td>critical</td>
+<td>54</td>
+<td>No short description for property $_accessCondition</td>
+</tr>
+<tr class="critical">
+<td>critical</td>
+<td>59</td>
+<td>No short description for property $_computeRangeMD5</td>
+</tr>
+<tr class="critical">
+<td>critical</td>
+<td>64</td>
+<td>No short description for property $_rangeStart</td>
+</tr>
+<tr class="critical">
+<td>critical</td>
+<td>69</td>
+<td>No short description for property $_rangeEnd</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<div class="package-contents">
+<a name="Blob%5CModels%5CGetBlobPropertiesOptions.php" id="Blob\Models\GetBlobPropertiesOptions.php"></a><h3>
+<i class="icon-file"></i>Blob\Models\GetBlobPropertiesOptions.php<small style="float: right;padding-right: 10px;">3</small>
+</h3>
+<div><table class="table markers table-bordered">
+<thead><tr>
+<th>Type</th>
+<th>Line</th>
+<th>Description</th>
+</tr></thead>
+<tbody>
+<tr class="critical">
+<td>critical</td>
+<td>43</td>
+<td>No short description for property $_leaseId</td>
+</tr>
+<tr class="critical">
+<td>critical</td>
+<td>48</td>
+<td>No short description for property $_snapshot</td>
+</tr>
+<tr class="critical">
+<td>critical</td>
+<td>53</td>
+<td>No short description for property $_accessCondition</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<div class="package-contents">
+<a name="Blob%5CModels%5CGetBlobPropertiesResult.php" id="Blob\Models\GetBlobPropertiesResult.php"></a><h3>
+<i class="icon-file"></i>Blob\Models\GetBlobPropertiesResult.php<small style="float: right;padding-right: 10px;">2</small>
+</h3>
+<div><table class="table markers table-bordered">
+<thead><tr>
+<th>Type</th>
+<th>Line</th>
+<th>Description</th>
+</tr></thead>
+<tbody>
+<tr class="critical">
+<td>critical</td>
+<td>43</td>
+<td>No short description for property $_properties</td>
+</tr>
+<tr class="critical">
+<td>critical</td>
+<td>48</td>
+<td>No short description for property $_metadata</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<div class="package-contents">
+<a name="Blob%5CModels%5CGetBlobResult.php" id="Blob\Models\GetBlobResult.php"></a><h3>
+<i class="icon-file"></i>Blob\Models\GetBlobResult.php<small style="float: right;padding-right: 10px;">3</small>
+</h3>
+<div><table class="table markers table-bordered">
+<thead><tr>
+<th>Type</th>
+<th>Line</th>
+<th>Description</th>
+</tr></thead>
+<tbody>
+<tr class="critical">
+<td>critical</td>
+<td>45</td>
+<td>No short description for property $_properties</td>
+</tr>
+<tr class="critical">
+<td>critical</td>
+<td>50</td>
+<td>No short description for property $_metadata</td>
+</tr>
+<tr class="critical">
+<td>critical</td>
+<td>55</td>
+<td>No short description for property $_contentStream</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<div class="package-contents">
+<a name="Blob%5CModels%5CGetContainerACLResult.php" id="Blob\Models\GetContainerACLResult.php"></a><h3>
+<i class="icon-file"></i>Blob\Models\GetContainerACLResult.php<small style="float: right;padding-right: 10px;">3</small>
+</h3>
+<div><table class="table markers table-bordered">
+<thead><tr>
+<th>Type</th>
+<th>Line</th>
+<th>Description</th>
+</tr></thead>
+<tbody>
+<tr class="critical">
+<td>critical</td>
+<td>44</td>
+<td>No short description for property $_containerACL</td>
+</tr>
+<tr class="critical">
+<td>critical</td>
+<td>49</td>
+<td>No short description for property $_lastModified</td>
+</tr>
+<tr class="critical">
+<td>critical</td>
+<td>54</td>
+<td>No short description for property $_etag</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<div class="package-contents">
+<a name="Blob%5CModels%5CGetContainerPropertiesResult.php" id="Blob\Models\GetContainerPropertiesResult.php"></a><h3>
+<i class="icon-file"></i>Blob\Models\GetContainerPropertiesResult.php<small style="float: right;padding-right: 10px;">3</small>
+</h3>
+<div><table class="table markers table-bordered">
+<thead><tr>
+<th>Type</th>
+<th>Line</th>
+<th>Description</th>
+</tr></thead>
+<tbody>
+<tr class="critical">
+<td>critical</td>
+<td>43</td>
+<td>No short description for property $_lastModified</td>
+</tr>
+<tr class="critical">
+<td>critical</td>
+<td>48</td>
+<td>No short description for property $_etag</td>
+</tr>
+<tr class="critical">
+<td>critical</td>
+<td>53</td>
+<td>No short description for property $_metadata</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<div class="package-contents"></div>
+<div class="package-contents">
+<a name="Blob%5CModels%5CListBlobBlocksOptions.php" id="Blob\Models\ListBlobBlocksOptions.php"></a><h3>
+<i class="icon-file"></i>Blob\Models\ListBlobBlocksOptions.php<small style="float: right;padding-right: 10px;">4</small>
+</h3>
+<div><table class="table markers table-bordered">
+<thead><tr>
+<th>Type</th>
+<th>Line</th>
+<th>Description</th>
+</tr></thead>
+<tbody>
+<tr class="critical">
+<td>critical</td>
+<td>44</td>
+<td>No short description for property $_leaseId</td>
+</tr>
+<tr class="critical">
+<td>critical</td>
+<td>49</td>
+<td>No short description for property $_snapshot</td>
+</tr>
+<tr class="critical">
+<td>critical</td>
+<td>54</td>
+<td>No short description for property $_includeUncommittedBlobs</td>
+</tr>
+<tr class="critical">
+<td>critical</td>
+<td>59</td>
+<td>No short description for property $_includeCommittedBlobs</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<div class="package-contents">
+<a name="Blob%5CModels%5CListBlobBlocksResult.php" id="Blob\Models\ListBlobBlocksResult.php"></a><h3>
+<i class="icon-file"></i>Blob\Models\ListBlobBlocksResult.php<small style="float: right;padding-right: 10px;">6</small>
+</h3>
+<div><table class="table markers table-bordered">
+<thead><tr>
+<th>Type</th>
+<th>Line</th>
+<th>Description</th>
+</tr></thead>
+<tbody>
+<tr class="critical">
+<td>critical</td>
+<td>46</td>
+<td>No short description for property $_lastModified</td>
+</tr>
+<tr class="critical">
+<td>critical</td>
+<td>51</td>
+<td>No short description for property $_etag</td>
+</tr>
+<tr class="critical">
+<td>critical</td>
+<td>56</td>
+<td>No short description for property $_contentType</td>
+</tr>
+<tr class="critical">
+<td>critical</td>
+<td>61</td>
+<td>No short description for property $_contentLength</td>
+</tr>
+<tr class="critical">
+<td>critical</td>
+<td>66</td>
+<td>No short description for property $_committedBlocks</td>
+</tr>
+<tr class="critical">
+<td>critical</td>
+<td>71</td>
+<td>No short description for property $_uncommittedBlocks</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<div class="package-contents">
+<a name="Blob%5CModels%5CListBlobsOptions.php" id="Blob\Models\ListBlobsOptions.php"></a><h3>
+<i class="icon-file"></i>Blob\Models\ListBlobsOptions.php<small style="float: right;padding-right: 10px;">7</small>
+</h3>
+<div><table class="table markers table-bordered">
+<thead><tr>
+<th>Type</th>
+<th>Line</th>
+<th>Description</th>
+</tr></thead>
+<tbody>
+<tr class="critical">
+<td>critical</td>
+<td>44</td>
+<td>No short description for property $_prefix</td>
+</tr>
+<tr class="critical">
+<td>critical</td>
+<td>49</td>
+<td>No short description for property $_marker</td>
+</tr>
+<tr class="critical">
+<td>critical</td>
+<td>54</td>
+<td>No short description for property $_delimiter</td>
+</tr>
+<tr class="critical">
+<td>critical</td>
+<td>59</td>
+<td>No short description for property $_maxResults</td>
+</tr>
+<tr class="critical">
+<td>critical</td>
+<td>64</td>
+<td>No short description for property $_includeMetadata</td>
+</tr>
+<tr class="critical">
+<td>critical</td>
+<td>69</td>
+<td>No short description for property $_includeSnapshots</td>
+</tr>
+<tr class="critical">
+<td>critical</td>
+<td>74</td>
+<td>No short description for property $_includeUncommittedBlobs</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<div class="package-contents">
+<a name="Blob%5CModels%5CListBlobsResult.php" id="Blob\Models\ListBlobsResult.php"></a><h3>
+<i class="icon-file"></i>Blob\Models\ListBlobsResult.php<small style="float: right;padding-right: 10px;">7</small>
+</h3>
+<div><table class="table markers table-bordered">
+<thead><tr>
+<th>Type</th>
+<th>Line</th>
+<th>Description</th>
+</tr></thead>
+<tbody>
+<tr class="critical">
+<td>critical</td>
+<td>47</td>
+<td>No short description for property $_blobPrefixes</td>
+</tr>
+<tr class="critical">
+<td>critical</td>
+<td>52</td>
+<td>No short description for property $_blobs</td>
+</tr>
+<tr class="critical">
+<td>critical</td>
+<td>57</td>
+<td>No short description for property $_delimiter</td>
+</tr>
+<tr class="critical">
+<td>critical</td>
+<td>62</td>
+<td>No short description for property $_prefix</td>
+</tr>
+<tr class="critical">
+<td>critical</td>
+<td>67</td>
+<td>No short description for property $_marker</td>
+</tr>
+<tr class="critical">
+<td>critical</td>
+<td>72</td>
+<td>No short description for property $_nextMarker</td>
+</tr>
+<tr class="critical">
+<td>critical</td>
+<td>77</td>
+<td>No short description for property $_maxResults</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<div class="package-contents"></div>
+<div class="package-contents">
+<a name="Blob%5CModels%5CListContainersResult.php" id="Blob\Models\ListContainersResult.php"></a><h3>
+<i class="icon-file"></i>Blob\Models\ListContainersResult.php<small style="float: right;padding-right: 10px;">5</small>
+</h3>
+<div><table class="table markers table-bordered">
+<thead><tr>
+<th>Type</th>
+<th>Line</th>
+<th>Description</th>
+</tr></thead>
+<tbody>
+<tr class="error">
+<td>error</td>
+<td>43</td>
+<td>No DocBlock was found for property $_containers</td>
+</tr>
+<tr class="error">
+<td>error</td>
+<td>44</td>
+<td>No DocBlock was found for property $_prefix</td>
+</tr>
+<tr class="error">
+<td>error</td>
+<td>45</td>
+<td>No DocBlock was found for property $_marker</td>
+</tr>
+<tr class="error">
+<td>error</td>
+<td>46</td>
+<td>No DocBlock was found for property $_nextMarker</td>
+</tr>
+<tr class="error">
+<td>error</td>
+<td>47</td>
+<td>No DocBlock was found for property $_maxResults</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<div class="package-contents">
+<a name="Blob%5CModels%5CListPageBlobRangesOptions.php" id="Blob\Models\ListPageBlobRangesOptions.php"></a><h3>
+<i class="icon-file"></i>Blob\Models\ListPageBlobRangesOptions.php<small style="float: right;padding-right: 10px;">5</small>
+</h3>
+<div><table class="table markers table-bordered">
+<thead><tr>
+<th>Type</th>
+<th>Line</th>
+<th>Description</th>
+</tr></thead>
+<tbody>
+<tr class="critical">
+<td>critical</td>
+<td>44</td>
+<td>No short description for property $_leaseId</td>
+</tr>
+<tr class="critical">
+<td>critical</td>
+<td>49</td>
+<td>No short description for property $_snapshot</td>
+</tr>
+<tr class="critical">
+<td>critical</td>
+<td>54</td>
+<td>No short description for property $_rangeStart</td>
+</tr>
+<tr class="critical">
+<td>critical</td>
+<td>59</td>
+<td>No short description for property $_rangeEnd</td>
+</tr>
+<tr class="critical">
+<td>critical</td>
+<td>64</td>
+<td>No short description for property $_accessCondition</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<div class="package-contents">
+<a name="Blob%5CModels%5CListPageBlobRangesResult.php" id="Blob\Models\ListPageBlobRangesResult.php"></a><h3>
+<i class="icon-file"></i>Blob\Models\ListPageBlobRangesResult.php<small style="float: right;padding-right: 10px;">4</small>
+</h3>
+<div><table class="table markers table-bordered">
+<thead><tr>
+<th>Type</th>
+<th>Line</th>
+<th>Description</th>
+</tr></thead>
+<tbody>
+<tr class="critical">
+<td>critical</td>
+<td>47</td>
+<td>No short description for property $_lastModified</td>
+</tr>
+<tr class="critical">
+<td>critical</td>
+<td>52</td>
+<td>No short description for property $_etag</td>
+</tr>
+<tr class="critical">
+<td>critical</td>
+<td>57</td>
+<td>No short description for property $_contentLength</td>
+</tr>
+<tr class="critical">
+<td>critical</td>
+<td>62</td>
+<td>No short description for property $_pageRanges</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<div class="package-contents">
+<a name="Blob%5CModels%5CPageRange.php" id="Blob\Models\PageRange.php"></a><h3>
+<i class="icon-file"></i>Blob\Models\PageRange.php<small style="float: right;padding-right: 10px;">2</small>
+</h3>
+<div><table class="table markers table-bordered">
+<thead><tr>
+<th>Type</th>
+<th>Line</th>
+<th>Description</th>
+</tr></thead>
+<tbody>
+<tr class="critical">
+<td>critical</td>
+<td>43</td>
+<td>No short description for property $_start</td>
+</tr>
+<tr class="critical">
+<td>critical</td>
+<td>48</td>
+<td>No short description for property $_end</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<div class="package-contents"></div>
+<div class="package-contents"></div>
+<div class="package-contents">
+<a name="Blob%5CModels%5CSetBlobMetadataOptions.php" id="Blob\Models\SetBlobMetadataOptions.php"></a><h3>
+<i class="icon-file"></i>Blob\Models\SetBlobMetadataOptions.php<small style="float: right;padding-right: 10px;">2</small>
+</h3>
+<div><table class="table markers table-bordered">
+<thead><tr>
+<th>Type</th>
+<th>Line</th>
+<th>Description</th>
+</tr></thead>
+<tbody>
+<tr class="critical">
+<td>critical</td>
+<td>43</td>
+<td>No short description for property $_leaseId</td>
+</tr>
+<tr class="critical">
+<td>critical</td>
+<td>48</td>
+<td>No short description for property $_accessCondition</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<div class="package-contents">
+<a name="Blob%5CModels%5CSetBlobMetadataResult.php" id="Blob\Models\SetBlobMetadataResult.php"></a><h3>
+<i class="icon-file"></i>Blob\Models\SetBlobMetadataResult.php<small style="float: right;padding-right: 10px;">2</small>
+</h3>
+<div><table class="table markers table-bordered">
+<thead><tr>
+<th>Type</th>
+<th>Line</th>
+<th>Description</th>
+</tr></thead>
+<tbody>
+<tr class="critical">
+<td>critical</td>
+<td>47</td>
+<td>No short description for property $_lastModified</td>
+</tr>
+<tr class="critical">
+<td>critical</td>
+<td>52</td>
+<td>No short description for property $_etag</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<div class="package-contents">
+<a name="Blob%5CModels%5CSetBlobPropertiesOptions.php" id="Blob\Models\SetBlobPropertiesOptions.php"></a><h3>
+<i class="icon-file"></i>Blob\Models\SetBlobPropertiesOptions.php<small style="float: right;padding-right: 10px;">10</small>
+</h3>
+<div><table class="table markers table-bordered">
+<thead><tr>
+<th>Type</th>
+<th>Line</th>
+<th>Description</th>
+</tr></thead>
+<tbody>
+<tr class="critical">
+<td>critical</td>
+<td>44</td>
+<td>No short description for property $_blobContentType</td>
+</tr>
+<tr class="critical">
+<td>critical</td>
+<td>49</td>
+<td>No short description for property $_blobContentEncoding</td>
+</tr>
+<tr class="critical">
+<td>critical</td>
+<td>54</td>
+<td>No short description for property $_blobContentLanguage</td>
+</tr>
+<tr class="critical">
+<td>critical</td>
+<td>59</td>
+<td>No short description for property $_blobContentLength</td>
+</tr>
+<tr class="critical">
+<td>critical</td>
+<td>64</td>
+<td>No short description for property $_blobContentMD5</td>
+</tr>
+<tr class="critical">
+<td>critical</td>
+<td>69</td>
+<td>No short description for property $_blobCacheControl</td>
+</tr>
+<tr class="critical">
+<td>critical</td>
+<td>74</td>
+<td>No short description for property $_leaseId</td>
+</tr>
+<tr class="critical">
+<td>critical</td>
+<td>79</td>
+<td>No short description for property $_sequenceNumber</td>
+</tr>
+<tr class="critical">
+<td>critical</td>
+<td>84</td>
+<td>No short description for property $_sequenceNumberAction</td>
+</tr>
+<tr class="critical">
+<td>critical</td>
+<td>89</td>
+<td>No short description for property $_accessCondition</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<div class="package-contents">
+<a name="Blob%5CModels%5CSetBlobPropertiesResult.php" id="Blob\Models\SetBlobPropertiesResult.php"></a><h3>
+<i class="icon-file"></i>Blob\Models\SetBlobPropertiesResult.php<small style="float: right;padding-right: 10px;">3</small>
+</h3>
+<div><table class="table markers table-bordered">
+<thead><tr>
+<th>Type</th>
+<th>Line</th>
+<th>Description</th>
+</tr></thead>
+<tbody>
+<tr class="critical">
+<td>critical</td>
+<td>46</td>
+<td>No short description for property $_lastModified</td>
+</tr>
+<tr class="critical">
+<td>critical</td>
+<td>51</td>
+<td>No short description for property $_etag</td>
+</tr>
+<tr class="critical">
+<td>critical</td>
+<td>56</td>
+<td>No short description for property $_sequenceNumber</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<div class="package-contents">
+<a name="Blob%5CModels%5CSetContainerMetadataOptions.php" id="Blob\Models\SetContainerMetadataOptions.php"></a><h3>
+<i class="icon-file"></i>Blob\Models\SetContainerMetadataOptions.php<small style="float: right;padding-right: 10px;">1</small>
+</h3>
+<div><table class="table markers table-bordered">
+<thead><tr>
+<th>Type</th>
+<th>Line</th>
+<th>Description</th>
+</tr></thead>
+<tbody><tr class="critical">
+<td>critical</td>
+<td>45</td>
+<td>No short description for property $_accessCondition</td>
+</tr></tbody>
+</table></div>
+</div>
+<div class="package-contents">
+<a name="Blob%5CModels%5CSignedIdentifier.php" id="Blob\Models\SignedIdentifier.php"></a><h3>
+<i class="icon-file"></i>Blob\Models\SignedIdentifier.php<small style="float: right;padding-right: 10px;">2</small>
+</h3>
+<div><table class="table markers table-bordered">
+<thead><tr>
+<th>Type</th>
+<th>Line</th>
+<th>Description</th>
+</tr></thead>
+<tbody>
+<tr class="error">
+<td>error</td>
+<td>41</td>
+<td>No DocBlock was found for property $_id</td>
+</tr>
+<tr class="error">
+<td>error</td>
+<td>42</td>
+<td>No DocBlock was found for property $_accessPolicy</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<div class="package-contents">
+<a name="Common%5CCloudConfigurationManager.php" id="Common\CloudConfigurationManager.php"></a><h3>
+<i class="icon-file"></i>Common\CloudConfigurationManager.php<small style="float: right;padding-right: 10px;">1</small>
+</h3>
+<div><table class="table markers table-bordered">
+<thead><tr>
+<th>Type</th>
+<th>Line</th>
+<th>Description</th>
+</tr></thead>
+<tbody><tr class="critical">
+<td>critical</td>
+<td>47</td>
+<td>No short description for property $_isInitialized</td>
+</tr></tbody>
+</table></div>
+</div>
+<div class="package-contents"></div>
+<div class="package-contents"></div>
+<div class="package-contents"></div>
+<div class="package-contents"></div>
+<div class="package-contents"></div>
+<div class="package-contents"></div>
+<div class="package-contents"></div>
+<div class="package-contents"></div>
+<div class="package-contents"></div>
+<div class="package-contents">
+<a name="Common%5CInternal%5CAuthentication%5CSharedKeyAuthScheme.php" id="Common\Internal\Authentication\SharedKeyAuthScheme.php"></a><h3>
+<i class="icon-file"></i>Common\Internal\Authentication\SharedKeyAuthScheme.php<small style="float: right;padding-right: 10px;">1</small>
+</h3>
+<div><table class="table markers table-bordered">
+<thead><tr>
+<th>Type</th>
+<th>Line</th>
+<th>Description</th>
+</tr></thead>
+<tbody><tr class="error">
+<td>error</td>
+<td>44</td>
+<td>No DocBlock was found for property $includedHeaders</td>
+</tr></tbody>
+</table></div>
+</div>
+<div class="package-contents">
+<a name="Common%5CInternal%5CAuthentication%5CStorageAuthScheme.php" id="Common\Internal\Authentication\StorageAuthScheme.php"></a><h3>
+<i class="icon-file"></i>Common\Internal\Authentication\StorageAuthScheme.php<small style="float: right;padding-right: 10px;">2</small>
+</h3>
+<div><table class="table markers table-bordered">
+<thead><tr>
+<th>Type</th>
+<th>Line</th>
+<th>Description</th>
+</tr></thead>
+<tbody>
+<tr class="error">
+<td>error</td>
+<td>42</td>
+<td>No DocBlock was found for property $accountName</td>
+</tr>
+<tr class="error">
+<td>error</td>
+<td>43</td>
+<td>No DocBlock was found for property $accountKey</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<div class="package-contents">
+<a name="Common%5CInternal%5CAuthentication%5CTableSharedKeyLiteAuthScheme.php" id="Common\Internal\Authentication\TableSharedKeyLiteAuthScheme.php"></a><h3>
+<i class="icon-file"></i>Common\Internal\Authentication\TableSharedKeyLiteAuthScheme.php<small style="float: right;padding-right: 10px;">1</small>
+</h3>
+<div><table class="table markers table-bordered">
+<thead><tr>
+<th>Type</th>
+<th>Line</th>
+<th>Description</th>
+</tr></thead>
+<tbody><tr class="error">
+<td>error</td>
+<td>44</td>
+<td>No DocBlock was found for property $includedHeaders</td>
+</tr></tbody>
+</table></div>
+</div>
+<div class="package-contents">
+<a name="Common%5CInternal%5CConnectionStringParser.php" id="Common\Internal\ConnectionStringParser.php"></a><h3>
+<i class="icon-file"></i>Common\Internal\ConnectionStringParser.php<small style="float: right;padding-right: 10px;">4</small>
+</h3>
+<div><table class="table markers table-bordered">
+<thead><tr>
+<th>Type</th>
+<th>Line</th>
+<th>Description</th>
+</tr></thead>
+<tbody>
+<tr class="critical">
+<td>critical</td>
+<td>45</td>
+<td>No short description for property $_argumentName</td>
+</tr>
+<tr class="critical">
+<td>critical</td>
+<td>50</td>
+<td>No short description for property $_value</td>
+</tr>
+<tr class="critical">
+<td>critical</td>
+<td>55</td>
+<td>No short description for property $_pos</td>
+</tr>
+<tr class="critical">
+<td>critical</td>
+<td>60</td>
+<td>No short description for property $_state</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<div class="package-contents">
+<a name="Common%5CInternal%5CConnectionStringSource.php" id="Common\Internal\ConnectionStringSource.php"></a><h3>
+<i class="icon-file"></i>Common\Internal\ConnectionStringSource.php<small style="float: right;padding-right: 10px;">1</small>
+</h3>
+<div><table class="table markers table-bordered">
+<thead><tr>
+<th>Type</th>
+<th>Line</th>
+<th>Description</th>
+</tr></thead>
+<tbody><tr class="critical">
+<td>critical</td>
+<td>50</td>
+<td>No short description for property $_isInitialized</td>
+</tr></tbody>
+</table></div>
+</div>
+<div class="package-contents"></div>
+<div class="package-contents">
+<a name="Common%5CInternal%5CFilters%5CAuthenticationFilter.php" id="Common\Internal\Filters\AuthenticationFilter.php"></a><h3>
+<i class="icon-file"></i>Common\Internal\Filters\AuthenticationFilter.php<small style="float: right;padding-right: 10px;">1</small>
+</h3>
+<div><table class="table markers table-bordered">
+<thead><tr>
+<th>Type</th>
+<th>Line</th>
+<th>Description</th>
+</tr></thead>
+<tbody><tr class="critical">
+<td>critical</td>
+<td>48</td>
+<td>No short description for property $_authenticationScheme</td>
+</tr></tbody>
+</table></div>
+</div>
+<div class="package-contents"></div>
+<div class="package-contents">
+<a name="Common%5CInternal%5CFilters%5CExponentialRetryPolicy.php" id="Common\Internal\Filters\ExponentialRetryPolicy.php"></a><h3>
+<i class="icon-file"></i>Common\Internal\Filters\ExponentialRetryPolicy.php<small style="float: right;padding-right: 10px;">5</small>
+</h3>
+<div><table class="table markers table-bordered">
+<thead><tr>
+<th>Type</th>
+<th>Line</th>
+<th>Description</th>
+</tr></thead>
+<tbody>
+<tr class="critical">
+<td>critical</td>
+<td>43</td>
+<td>No short description for property $_deltaBackoffIntervalInMs</td>
+</tr>
+<tr class="critical">
+<td>critical</td>
+<td>48</td>
+<td>No short description for property $_maximumAttempts</td>
+</tr>
+<tr class="critical">
+<td>critical</td>
+<td>53</td>
+<td>No short description for property $_resolvedMaxBackoff</td>
+</tr>
+<tr class="critical">
+<td>critical</td>
+<td>58</td>
+<td>No short description for property $_resolvedMinBackoff</td>
+</tr>
+<tr class="critical">
+<td>critical</td>
+<td>63</td>
+<td>No short description for property $_retryableStatusCodes</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<div class="package-contents">
+<a name="Common%5CInternal%5CFilters%5CHeadersFilter.php" id="Common\Internal\Filters\HeadersFilter.php"></a><h3>
+<i class="icon-file"></i>Common\Internal\Filters\HeadersFilter.php<small style="float: right;padding-right: 10px;">1</small>
+</h3>
+<div><table class="table markers table-bordered">
+<thead><tr>
+<th>Type</th>
+<th>Line</th>
+<th>Description</th>
+</tr></thead>
+<tbody><tr class="critical">
+<td>critical</td>
+<td>45</td>
+<td>No short description for property $_headers</td>
+</tr></tbody>
+</table></div>
+</div>
+<div class="package-contents"></div>
+<div class="package-contents">
+<a name="Common%5CInternal%5CFilters%5CRetryPolicyFilter.php" id="Common\Internal\Filters\RetryPolicyFilter.php"></a><h3>
+<i class="icon-file"></i>Common\Internal\Filters\RetryPolicyFilter.php<small style="float: right;padding-right: 10px;">1</small>
+</h3>
+<div><table class="table markers table-bordered">
+<thead><tr>
+<th>Type</th>
+<th>Line</th>
+<th>Description</th>
+</tr></thead>
+<tbody><tr class="critical">
+<td>critical</td>
+<td>44</td>
+<td>No short description for property $_retryPolicy</td>
+</tr></tbody>
+</table></div>
+</div>
+<div class="package-contents">
+<a name="Common%5CInternal%5CFilters%5CWrapFilter.php" id="Common\Internal\Filters\WrapFilter.php"></a><h3>
+<i class="icon-file"></i>Common\Internal\Filters\WrapFilter.php<small style="float: right;padding-right: 10px;">1</small>
+</h3>
+<div><table class="table markers table-bordered">
+<thead><tr>
+<th>Type</th>
+<th>Line</th>
+<th>Description</th>
+</tr></thead>
+<tbody><tr class="critical">
+<td>critical</td>
+<td>51</td>
+<td>No short description for property $_wrapTokenManager</td>
+</tr></tbody>
+</table></div>
+</div>
+<div class="package-contents">
+<a name="Common%5CInternal%5CHttp%5CHttpCallContext.php" id="Common\Internal\Http\HttpCallContext.php"></a><h3>
+<i class="icon-file"></i>Common\Internal\Http\HttpCallContext.php<small style="float: right;padding-right: 10px;">1</small>
+</h3>
+<div><table class="table markers table-bordered">
+<thead><tr>
+<th>Type</th>
+<th>Line</th>
+<th>Description</th>
+</tr></thead>
+<tbody><tr class="critical">
+<td>critical</td>
+<td>75</td>
+<td>No short description for property $_uri</td>
+</tr></tbody>
+</table></div>
+</div>
+<div class="package-contents">
+<a name="Common%5CInternal%5CHttp%5CHttpClient.php" id="Common\Internal\Http\HttpClient.php"></a><h3>
+<i class="icon-file"></i>Common\Internal\Http\HttpClient.php<small style="float: right;padding-right: 10px;">2</small>
+</h3>
+<div><table class="table markers table-bordered">
+<thead><tr>
+<th>Type</th>
+<th>Line</th>
+<th>Description</th>
+</tr></thead>
+<tbody>
+<tr class="critical">
+<td>critical</td>
+<td>51</td>
+<td>No short description for property $_request</td>
+</tr>
+<tr class="critical">
+<td>critical</td>
+<td>56</td>
+<td>No short description for property $_requestUrl</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<div class="package-contents"></div>
+<div class="package-contents"></div>
+<div class="package-contents">
+<a name="Common%5CInternal%5CHttp%5CUrl.php" id="Common\Internal\Http\Url.php"></a><h3>
+<i class="icon-file"></i>Common\Internal\Http\Url.php<small style="float: right;padding-right: 10px;">1</small>
+</h3>
+<div><table class="table markers table-bordered">
+<thead><tr>
+<th>Type</th>
+<th>Line</th>
+<th>Description</th>
+</tr></thead>
+<tbody><tr class="critical">
+<td>critical</td>
+<td>47</td>
+<td>No short description for property $_url</td>
+</tr></tbody>
+</table></div>
+</div>
+<div class="package-contents"></div>
+<div class="package-contents"></div>
+<div class="package-contents">
+<a name="Common%5CInternal%5CLogger.php" id="Common\Internal\Logger.php"></a><h3>
+<i class="icon-file"></i>Common\Internal\Logger.php<small style="float: right;padding-right: 10px;">1</small>
+</h3>
+<div><table class="table markers table-bordered">
+<thead><tr>
+<th>Type</th>
+<th>Line</th>
+<th>Description</th>
+</tr></thead>
+<tbody><tr class="critical">
+<td>critical</td>
+<td>43</td>
+<td>No short description for property $_filePath</td>
+</tr></tbody>
+</table></div>
+</div>
+<div class="package-contents"></div>
+<div class="package-contents">
+<a name="Common%5CInternal%5CRestProxy.php" id="Common\Internal\RestProxy.php"></a><h3>
+<i class="icon-file"></i>Common\Internal\RestProxy.php<small style="float: right;padding-right: 10px;">4</small>
+</h3>
+<div><table class="table markers table-bordered">
+<thead><tr>
+<th>Type</th>
+<th>Line</th>
+<th>Description</th>
+</tr></thead>
+<tbody>
+<tr class="critical">
+<td>critical</td>
+<td>46</td>
+<td>No short description for property $_channel</td>
+</tr>
+<tr class="critical">
+<td>critical</td>
+<td>51</td>
+<td>No short description for property $_filters</td>
+</tr>
+<tr class="critical">
+<td>critical</td>
+<td>56</td>
+<td>No short description for property $dataSerializer</td>
+</tr>
+<tr class="critical">
+<td>critical</td>
+<td>61</td>
+<td>No short description for property $_uri</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<div class="package-contents"></div>
+<div class="package-contents"></div>
+<div class="package-contents">
+<a name="Common%5CInternal%5CServiceBusSettings.php" id="Common\Internal\ServiceBusSettings.php"></a><h3>
+<i class="icon-file"></i>Common\Internal\ServiceBusSettings.php<small style="float: right;padding-right: 10px;">6</small>
+</h3>
+<div><table class="table markers table-bordered">
+<thead><tr>
+<th>Type</th>
+<th>Line</th>
+<th>Description</th>
+</tr></thead>
+<tbody>
+<tr class="critical">
+<td>critical</td>
+<td>45</td>
+<td>No short description for property $_serviceBusEndpointUri</td>
+</tr>
+<tr class="critical">
+<td>critical</td>
+<td>50</td>
+<td>No short description for property $_wrapEndpointUri</td>
+</tr>
+<tr class="critical">
+<td>critical</td>
+<td>55</td>
+<td>No short description for property $_wrapName</td>
+</tr>
+<tr class="critical">
+<td>critical</td>
+<td>60</td>
+<td>No short description for property $_wrapPassword</td>
+</tr>
+<tr class="critical">
+<td>critical</td>
+<td>65</td>
+<td>No short description for property $_namespace</td>
+</tr>
+<tr class="critical">
+<td>critical</td>
+<td>91</td>
+<td>No short description for property $isInitialized</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<div class="package-contents">
+<a name="Common%5CInternal%5CServiceManagementSettings.php" id="Common\Internal\ServiceManagementSettings.php"></a><h3>
+<i class="icon-file"></i>Common\Internal\ServiceManagementSettings.php<small style="float: right;padding-right: 10px;">4</small>
+</h3>
+<div><table class="table markers table-bordered">
+<thead><tr>
+<th>Type</th>
+<th>Line</th>
+<th>Description</th>
+</tr></thead>
+<tbody>
+<tr class="critical">
+<td>critical</td>
+<td>46</td>
+<td>No short description for property $_subscriptionId</td>
+</tr>
+<tr class="critical">
+<td>critical</td>
+<td>51</td>
+<td>No short description for property $_certificatePath</td>
+</tr>
+<tr class="critical">
+<td>critical</td>
+<td>56</td>
+<td>No short description for property $_endpointUri</td>
+</tr>
+<tr class="critical">
+<td>critical</td>
+<td>82</td>
+<td>No short description for property $isInitialized</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<div class="package-contents">
+<a name="Common%5CInternal%5CServiceRestProxy.php" id="Common\Internal\ServiceRestProxy.php"></a><h3>
+<i class="icon-file"></i>Common\Internal\ServiceRestProxy.php<small style="float: right;padding-right: 10px;">1</small>
+</h3>
+<div><table class="table markers table-bordered">
+<thead><tr>
+<th>Type</th>
+<th>Line</th>
+<th>Description</th>
+</tr></thead>
+<tbody><tr class="critical">
+<td>critical</td>
+<td>49</td>
+<td>No short description for property $_accountName</td>
+</tr></tbody>
+</table></div>
+</div>
+<div class="package-contents">
+<a name="Common%5CInternal%5CServiceSettings.php" id="Common\Internal\ServiceSettings.php"></a><h3>
+<i class="icon-file"></i>Common\Internal\ServiceSettings.php<small style="float: right;padding-right: 10px;">1</small>
+</h3>
+<div><table class="table markers table-bordered">
+<thead><tr>
+<th>Type</th>
+<th>Line</th>
+<th>Description</th>
+</tr></thead>
+<tbody><tr class="notice">
+<td>notice</td>
+<td>60</td>
+<td>The type for the @param tag in noMatch() is "type"; isn't this an IDE default?</td>
+</tr></tbody>
+</table></div>
+</div>
+<div class="package-contents">
+<a name="Common%5CInternal%5CStorageServiceSettings.php" id="Common\Internal\StorageServiceSettings.php"></a><h3>
+<i class="icon-file"></i>Common\Internal\StorageServiceSettings.php<small style="float: right;padding-right: 10px;">2</small>
+</h3>
+<div><table class="table markers table-bordered">
+<thead><tr>
+<th>Type</th>
+<th>Line</th>
+<th>Description</th>
+</tr></thead>
+<tbody>
+<tr class="critical">
+<td>critical</td>
+<td>82</td>
+<td>No short description for property $_devStoreAccount</td>
+</tr>
+<tr class="critical">
+<td>critical</td>
+<td>144</td>
+<td>No short description for property $isInitialized</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<div class="package-contents">
+<a name="Common%5CInternal%5CUtilities.php" id="Common\Internal\Utilities.php"></a><h3>
+<i class="icon-file"></i>Common\Internal\Utilities.php<small style="float: right;padding-right: 10px;">1</small>
+</h3>
+<div><table class="table markers table-bordered">
+<thead><tr>
+<th>Type</th>
+<th>Line</th>
+<th>Description</th>
+</tr></thead>
+<tbody><tr class="notice">
+<td>notice</td>
+<td>448</td>
+<td>The type for the @param tag in stringToStream() is "type"; isn't this an IDE default?</td>
+</tr></tbody>
+</table></div>
+</div>
+<div class="package-contents"></div>
+<div class="package-contents">
+<a name="Common%5CModels%5CGetServicePropertiesResult.php" id="Common\Models\GetServicePropertiesResult.php"></a><h3>
+<i class="icon-file"></i>Common\Models\GetServicePropertiesResult.php<small style="float: right;padding-right: 10px;">1</small>
+</h3>
+<div><table class="table markers table-bordered">
+<thead><tr>
+<th>Type</th>
+<th>Line</th>
+<th>Description</th>
+</tr></thead>
+<tbody><tr class="error">
+<td>error</td>
+<td>41</td>
+<td>No DocBlock was found for property $_serviceProperties</td>
+</tr></tbody>
+</table></div>
+</div>
+<div class="package-contents">
+<a name="Common%5CModels%5CLogging.php" id="Common\Models\Logging.php"></a><h3>
+<i class="icon-file"></i>Common\Models\Logging.php<small style="float: right;padding-right: 10px;">1</small>
+</h3>
+<div><table class="table markers table-bordered">
+<thead><tr>
+<th>Type</th>
+<th>Line</th>
+<th>Description</th>
+</tr></thead>
+<tbody><tr class="critical">
+<td>critical</td>
+<td>76</td>
+<td>No short description for property $_retentionPolicy</td>
+</tr></tbody>
+</table></div>
+</div>
+<div class="package-contents">
+<a name="Common%5CModels%5CMetrics.php" id="Common\Models\Metrics.php"></a><h3>
+<i class="icon-file"></i>Common\Models\Metrics.php<small style="float: right;padding-right: 10px;">1</small>
+</h3>
+<div><table class="table markers table-bordered">
+<thead><tr>
+<th>Type</th>
+<th>Line</th>
+<th>Description</th>
+</tr></thead>
+<tbody><tr class="critical">
+<td>critical</td>
+<td>65</td>
+<td>No short description for property $_retentionPolicy</td>
+</tr></tbody>
+</table></div>
+</div>
+<div class="package-contents"></div>
+<div class="package-contents">
+<a name="Common%5CModels%5CServiceProperties.php" id="Common\Models\ServiceProperties.php"></a><h3>
+<i class="icon-file"></i>Common\Models\ServiceProperties.php<small style="float: right;padding-right: 10px;">3</small>
+</h3>
+<div><table class="table markers table-bordered">
+<thead><tr>
+<th>Type</th>
+<th>Line</th>
+<th>Description</th>
+</tr></thead>
+<tbody>
+<tr class="error">
+<td>error</td>
+<td>44</td>
+<td>No DocBlock was found for property $_logging</td>
+</tr>
+<tr class="error">
+<td>error</td>
+<td>45</td>
+<td>No DocBlock was found for property $_metrics</td>
+</tr>
+<tr class="error">
+<td>error</td>
+<td>46</td>
+<td>No DocBlock was found for property $xmlRootName</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<div class="package-contents">
+<a name="Common%5CServiceException.php" id="Common\ServiceException.php"></a><h3>
+<i class="icon-file"></i>Common\ServiceException.php<small style="float: right;padding-right: 10px;">2</small>
+</h3>
+<div><table class="table markers table-bordered">
+<thead><tr>
+<th>Type</th>
+<th>Line</th>
+<th>Description</th>
+</tr></thead>
+<tbody>
+<tr class="error">
+<td>error</td>
+<td>41</td>
+<td>No DocBlock was found for property $_error</td>
+</tr>
+<tr class="error">
+<td>error</td>
+<td>42</td>
+<td>No DocBlock was found for property $_reason</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<div class="package-contents">
+<a name="Common%5CServicesBuilder.php" id="Common\ServicesBuilder.php"></a><h3>
+<i class="icon-file"></i>Common\ServicesBuilder.php<small style="float: right;padding-right: 10px;">1</small>
+</h3>
+<div><table class="table markers table-bordered">
+<thead><tr>
+<th>Type</th>
+<th>Line</th>
+<th>Description</th>
+</tr></thead>
+<tbody><tr class="critical">
+<td>critical</td>
+<td>67</td>
+<td>No short description for property $_instance</td>
+</tr></tbody>
+</table></div>
+</div>
+<div class="package-contents"></div>
+<div class="package-contents"></div>
+<div class="package-contents">
+<a name="Queue%5CModels%5CCreateQueueOptions.php" id="Queue\Models\CreateQueueOptions.php"></a><h3>
+<i class="icon-file"></i>Queue\Models\CreateQueueOptions.php<small style="float: right;padding-right: 10px;">1</small>
+</h3>
+<div><table class="table markers table-bordered">
+<thead><tr>
+<th>Type</th>
+<th>Line</th>
+<th>Description</th>
+</tr></thead>
+<tbody><tr class="error">
+<td>error</td>
+<td>40</td>
+<td>No DocBlock was found for property $_metadata</td>
+</tr></tbody>
+</table></div>
+</div>
+<div class="package-contents"></div>
+<div class="package-contents"></div>
+<div class="package-contents"></div>
+<div class="package-contents">
+<a name="Queue%5CModels%5CListQueuesOptions.php" id="Queue\Models\ListQueuesOptions.php"></a><h3>
+<i class="icon-file"></i>Queue\Models\ListQueuesOptions.php<small style="float: right;padding-right: 10px;">4</small>
+</h3>
+<div><table class="table markers table-bordered">
+<thead><tr>
+<th>Type</th>
+<th>Line</th>
+<th>Description</th>
+</tr></thead>
+<tbody>
+<tr class="error">
+<td>error</td>
+<td>42</td>
+<td>No DocBlock was found for property $_prefix</td>
+</tr>
+<tr class="error">
+<td>error</td>
+<td>43</td>
+<td>No DocBlock was found for property $_marker</td>
+</tr>
+<tr class="error">
+<td>error</td>
+<td>44</td>
+<td>No DocBlock was found for property $_maxResults</td>
+</tr>
+<tr class="error">
+<td>error</td>
+<td>45</td>
+<td>No DocBlock was found for property $_includeMetadata</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<div class="package-contents">
+<a name="Queue%5CModels%5CListQueuesResult.php" id="Queue\Models\ListQueuesResult.php"></a><h3>
+<i class="icon-file"></i>Queue\Models\ListQueuesResult.php<small style="float: right;padding-right: 10px;">5</small>
+</h3>
+<div><table class="table markers table-bordered">
+<thead><tr>
+<th>Type</th>
+<th>Line</th>
+<th>Description</th>
+</tr></thead>
+<tbody>
+<tr class="error">
+<td>error</td>
+<td>43</td>
+<td>No DocBlock was found for property $_queues</td>
+</tr>
+<tr class="error">
+<td>error</td>
+<td>44</td>
+<td>No DocBlock was found for property $_prefix</td>
+</tr>
+<tr class="error">
+<td>error</td>
+<td>45</td>
+<td>No DocBlock was found for property $_marker</td>
+</tr>
+<tr class="error">
+<td>error</td>
+<td>46</td>
+<td>No DocBlock was found for property $_nextMarker</td>
+</tr>
+<tr class="error">
+<td>error</td>
+<td>47</td>
+<td>No DocBlock was found for property $_maxResults</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<div class="package-contents"></div>
+<div class="package-contents"></div>
+<div class="package-contents">
+<a name="Queue%5CModels%5CQueue.php" id="Queue\Models\Queue.php"></a><h3>
+<i class="icon-file"></i>Queue\Models\Queue.php<small style="float: right;padding-right: 10px;">3</small>
+</h3>
+<div><table class="table markers table-bordered">
+<thead><tr>
+<th>Type</th>
+<th>Line</th>
+<th>Description</th>
+</tr></thead>
+<tbody>
+<tr class="error">
+<td>error</td>
+<td>42</td>
+<td>No DocBlock was found for property $_name</td>
+</tr>
+<tr class="error">
+<td>error</td>
+<td>43</td>
+<td>No DocBlock was found for property $_url</td>
+</tr>
+<tr class="error">
+<td>error</td>
+<td>44</td>
+<td>No DocBlock was found for property $_metadata</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<div class="package-contents">
+<a name="Queue%5CModels%5CQueueMessage.php" id="Queue\Models\QueueMessage.php"></a><h3>
+<i class="icon-file"></i>Queue\Models\QueueMessage.php<small style="float: right;padding-right: 10px;">2</small>
+</h3>
+<div><table class="table markers table-bordered">
+<thead><tr>
+<th>Type</th>
+<th>Line</th>
+<th>Description</th>
+</tr></thead>
+<tbody>
+<tr class="error">
+<td>error</td>
+<td>42</td>
+<td>No DocBlock was found for property $_messageText</td>
+</tr>
+<tr class="error">
+<td>error</td>
+<td>43</td>
+<td>No DocBlock was found for property $xmlRootName</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<div class="package-contents">
+<a name="Queue%5CModels%5CQueueServiceOptions.php" id="Queue\Models\QueueServiceOptions.php"></a><h3>
+<i class="icon-file"></i>Queue\Models\QueueServiceOptions.php<small style="float: right;padding-right: 10px;">1</small>
+</h3>
+<div><table class="table markers table-bordered">
+<thead><tr>
+<th>Type</th>
+<th>Line</th>
+<th>Description</th>
+</tr></thead>
+<tbody><tr class="error">
+<td>error</td>
+<td>40</td>
+<td>No DocBlock was found for property $_timeout</td>
+</tr></tbody>
+</table></div>
+</div>
+<div class="package-contents"></div>
+<div class="package-contents"></div>
+<div class="package-contents"></div>
+<div class="package-contents">
+<a name="ServiceBus%5CInternal%5CIServiceBus.php" id="ServiceBus\Internal\IServiceBus.php"></a><h3>
+<i class="icon-file"></i>ServiceBus\Internal\IServiceBus.php<small style="float: right;padding-right: 10px;">2</small>
+</h3>
+<div><table class="table markers table-bordered">
+<thead><tr>
+<th>Type</th>
+<th>Line</th>
+<th>Description</th>
+</tr></thead>
+<tbody>
+<tr class="notice">
+<td>notice</td>
+<td>50</td>
+<td>The type for the @param tag in sendMessage() is "type"; isn't this an IDE default?</td>
+</tr>
+<tr class="notice">
+<td>notice</td>
+<td>50</td>
+<td>The type for the @param tag in sendMessage() is "type"; isn't this an IDE default?</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<div class="package-contents"></div>
+<div class="package-contents"></div>
+<div class="package-contents"></div>
+<div class="package-contents"></div>
+<div class="package-contents"></div>
+<div class="package-contents"></div>
+<div class="package-contents"></div>
+<div class="package-contents"></div>
+<div class="package-contents"></div>
+<div class="package-contents"></div>
+<div class="package-contents"></div>
+<div class="package-contents"></div>
+<div class="package-contents"></div>
+<div class="package-contents"></div>
+<div class="package-contents"></div>
+<div class="package-contents"></div>
+<div class="package-contents"></div>
+<div class="package-contents"></div>
+<div class="package-contents"></div>
+<div class="package-contents"></div>
+<div class="package-contents"></div>
+<div class="package-contents"></div>
+<div class="package-contents"></div>
+<div class="package-contents"></div>
+<div class="package-contents"></div>
+<div class="package-contents"></div>
+<div class="package-contents"></div>
+<div class="package-contents"></div>
+<div class="package-contents"></div>
+<div class="package-contents"></div>
+<div class="package-contents"></div>
+<div class="package-contents"></div>
+<div class="package-contents">
+<a name="ServiceBus%5CModels%5CWrapAccessTokenResult.php" id="ServiceBus\Models\WrapAccessTokenResult.php"></a><h3>
+<i class="icon-file"></i>ServiceBus\Models\WrapAccessTokenResult.php<small style="float: right;padding-right: 10px;">2</small>
+</h3>
+<div><table class="table markers table-bordered">
+<thead><tr>
+<th>Type</th>
+<th>Line</th>
+<th>Description</th>
+</tr></thead>
+<tbody>
+<tr class="critical">
+<td>critical</td>
+<td>46</td>
+<td>No short description for property $_accessToken</td>
+</tr>
+<tr class="critical">
+<td>critical</td>
+<td>51</td>
+<td>No short description for property $_expiresIn</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<div class="package-contents">
+<a name="ServiceBus%5CServiceBusRestProxy.php" id="ServiceBus\ServiceBusRestProxy.php"></a><h3>
+<i class="icon-file"></i>ServiceBus\ServiceBusRestProxy.php<small style="float: right;padding-right: 10px;">2</small>
+</h3>
+<div><table class="table markers table-bordered">
+<thead><tr>
+<th>Type</th>
+<th>Line</th>
+<th>Description</th>
+</tr></thead>
+<tbody>
+<tr class="notice">
+<td>notice</td>
+<td>100</td>
+<td>The type for the @param tag in sendMessage() is "type"; isn't this an IDE default?</td>
+</tr>
+<tr class="notice">
+<td>notice</td>
+<td>100</td>
+<td>The type for the @param tag in sendMessage() is "type"; isn't this an IDE default?</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<div class="package-contents"></div>
+<div class="package-contents"></div>
+<div class="package-contents"></div>
+<div class="package-contents">
+<a name="ServiceManagement%5CModels%5CAsynchronousOperationResult.php" id="ServiceManagement\Models\AsynchronousOperationResult.php"></a><h3>
+<i class="icon-file"></i>ServiceManagement\Models\AsynchronousOperationResult.php<small style="float: right;padding-right: 10px;">1</small>
+</h3>
+<div><table class="table markers table-bordered">
+<thead><tr>
+<th>Type</th>
+<th>Line</th>
+<th>Description</th>
+</tr></thead>
+<tbody><tr class="critical">
+<td>critical</td>
+<td>45</td>
+<td>No short description for property $_requestId</td>
+</tr></tbody>
+</table></div>
+</div>
+<div class="package-contents">
+<a name="ServiceManagement%5CModels%5CCreateAffinityGroupOptions.php" id="ServiceManagement\Models\CreateAffinityGroupOptions.php"></a><h3>
+<i class="icon-file"></i>ServiceManagement\Models\CreateAffinityGroupOptions.php<small style="float: right;padding-right: 10px;">1</small>
+</h3>
+<div><table class="table markers table-bordered">
+<thead><tr>
+<th>Type</th>
+<th>Line</th>
+<th>Description</th>
+</tr></thead>
+<tbody><tr class="critical">
+<td>critical</td>
+<td>44</td>
+<td>No short description for property $_description</td>
+</tr></tbody>
+</table></div>
+</div>
+<div class="package-contents">
+<a name="ServiceManagement%5CModels%5CCreateStorageServiceOptions.php" id="ServiceManagement\Models\CreateStorageServiceOptions.php"></a><h3>
+<i class="icon-file"></i>ServiceManagement\Models\CreateStorageServiceOptions.php<small style="float: right;padding-right: 10px;">3</small>
+</h3>
+<div><table class="table markers table-bordered">
+<thead><tr>
+<th>Type</th>
+<th>Line</th>
+<th>Description</th>
+</tr></thead>
+<tbody>
+<tr class="critical">
+<td>critical</td>
+<td>44</td>
+<td>No short description for property $_location</td>
+</tr>
+<tr class="critical">
+<td>critical</td>
+<td>49</td>
+<td>No short description for property $_affinityGroup</td>
+</tr>
+<tr class="critical">
+<td>critical</td>
+<td>54</td>
+<td>No short description for property $_description</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<div class="package-contents">
+<a name="ServiceManagement%5CModels%5CGetAffinityGroupPropertiesResult.php" id="ServiceManagement\Models\GetAffinityGroupPropertiesResult.php"></a><h3>
+<i class="icon-file"></i>ServiceManagement\Models\GetAffinityGroupPropertiesResult.php<small style="float: right;padding-right: 10px;">3</small>
+</h3>
+<div><table class="table markers table-bordered">
+<thead><tr>
+<th>Type</th>
+<th>Line</th>
+<th>Description</th>
+</tr></thead>
+<tbody>
+<tr class="critical">
+<td>critical</td>
+<td>45</td>
+<td>No short description for property $_affinityGroup</td>
+</tr>
+<tr class="critical">
+<td>critical</td>
+<td>50</td>
+<td>No short description for property $_hostedServices</td>
+</tr>
+<tr class="critical">
+<td>critical</td>
+<td>55</td>
+<td>No short description for property $_storageServices</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<div class="package-contents">
+<a name="ServiceManagement%5CModels%5CGetOperationStatusResult.php" id="ServiceManagement\Models\GetOperationStatusResult.php"></a><h3>
+<i class="icon-file"></i>ServiceManagement\Models\GetOperationStatusResult.php<small style="float: right;padding-right: 10px;">4</small>
+</h3>
+<div><table class="table markers table-bordered">
+<thead><tr>
+<th>Type</th>
+<th>Line</th>
+<th>Description</th>
+</tr></thead>
+<tbody>
+<tr class="critical">
+<td>critical</td>
+<td>46</td>
+<td>No short description for property $_id</td>
+</tr>
+<tr class="critical">
+<td>critical</td>
+<td>51</td>
+<td>No short description for property $_status</td>
+</tr>
+<tr class="critical">
+<td>critical</td>
+<td>56</td>
+<td>No short description for property $_httpStatusCode</td>
+</tr>
+<tr class="critical">
+<td>critical</td>
+<td>61</td>
+<td>No short description for property $_error</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<div class="package-contents">
+<a name="ServiceManagement%5CModels%5CGetStorageServiceKeysResult.php" id="ServiceManagement\Models\GetStorageServiceKeysResult.php"></a><h3>
+<i class="icon-file"></i>ServiceManagement\Models\GetStorageServiceKeysResult.php<small style="float: right;padding-right: 10px;">3</small>
+</h3>
+<div><table class="table markers table-bordered">
+<thead><tr>
+<th>Type</th>
+<th>Line</th>
+<th>Description</th>
+</tr></thead>
+<tbody>
+<tr class="critical">
+<td>critical</td>
+<td>45</td>
+<td>No short description for property $_url</td>
+</tr>
+<tr class="critical">
+<td>critical</td>
+<td>50</td>
+<td>No short description for property $_primary</td>
+</tr>
+<tr class="critical">
+<td>critical</td>
+<td>55</td>
+<td>No short description for property $_secondary</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<div class="package-contents">
+<a name="ServiceManagement%5CModels%5CGetStorageServicePropertiesResult.php" id="ServiceManagement\Models\GetStorageServicePropertiesResult.php"></a><h3>
+<i class="icon-file"></i>ServiceManagement\Models\GetStorageServicePropertiesResult.php<small style="float: right;padding-right: 10px;">4</small>
+</h3>
+<div><table class="table markers table-bordered">
+<thead><tr>
+<th>Type</th>
+<th>Line</th>
+<th>Description</th>
+</tr></thead>
+<tbody>
+<tr class="critical">
+<td>critical</td>
+<td>45</td>
+<td>No short description for property $_storageService</td>
+</tr>
+<tr class="critical">
+<td>critical</td>
+<td>50</td>
+<td>No short description for property $_url</td>
+</tr>
+<tr class="critical">
+<td>critical</td>
+<td>55</td>
+<td>No short description for property $_endpoints</td>
+</tr>
+<tr class="critical">
+<td>critical</td>
+<td>60</td>
+<td>No short description for property $_status</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<div class="package-contents"></div>
+<div class="package-contents">
+<a name="ServiceManagement%5CModels%5CListAffinityGroupsResult.php" id="ServiceManagement\Models\ListAffinityGroupsResult.php"></a><h3>
+<i class="icon-file"></i>ServiceManagement\Models\ListAffinityGroupsResult.php<small style="float: right;padding-right: 10px;">1</small>
+</h3>
+<div><table class="table markers table-bordered">
+<thead><tr>
+<th>Type</th>
+<th>Line</th>
+<th>Description</th>
+</tr></thead>
+<tbody><tr class="critical">
+<td>critical</td>
+<td>45</td>
+<td>No short description for property $_affinityGroups</td>
+</tr></tbody>
+</table></div>
+</div>
+<div class="package-contents">
+<a name="ServiceManagement%5CModels%5CListLocationsResult.php" id="ServiceManagement\Models\ListLocationsResult.php"></a><h3>
+<i class="icon-file"></i>ServiceManagement\Models\ListLocationsResult.php<small style="float: right;padding-right: 10px;">1</small>
+</h3>
+<div><table class="table markers table-bordered">
+<thead><tr>
+<th>Type</th>
+<th>Line</th>
+<th>Description</th>
+</tr></thead>
+<tbody><tr class="critical">
+<td>critical</td>
+<td>45</td>
+<td>No short description for property $_locations</td>
+</tr></tbody>
+</table></div>
+</div>
+<div class="package-contents">
+<a name="ServiceManagement%5CModels%5CListStorageServicesResult.php" id="ServiceManagement\Models\ListStorageServicesResult.php"></a><h3>
+<i class="icon-file"></i>ServiceManagement\Models\ListStorageServicesResult.php<small style="float: right;padding-right: 10px;">1</small>
+</h3>
+<div><table class="table markers table-bordered">
+<thead><tr>
+<th>Type</th>
+<th>Line</th>
+<th>Description</th>
+</tr></thead>
+<tbody><tr class="critical">
+<td>critical</td>
+<td>45</td>
+<td>No short description for property $_storageServices</td>
+</tr></tbody>
+</table></div>
+</div>
+<div class="package-contents">
+<a name="ServiceManagement%5CModels%5CLocation.php" id="ServiceManagement\Models\Location.php"></a><h3>
+<i class="icon-file"></i>ServiceManagement\Models\Location.php<small style="float: right;padding-right: 10px;">2</small>
+</h3>
+<div><table class="table markers table-bordered">
+<thead><tr>
+<th>Type</th>
+<th>Line</th>
+<th>Description</th>
+</tr></thead>
+<tbody>
+<tr class="critical">
+<td>critical</td>
+<td>43</td>
+<td>No short description for property $_name</td>
+</tr>
+<tr class="critical">
+<td>critical</td>
+<td>48</td>
+<td>No short description for property $_displayName</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<div class="package-contents"></div>
+<div class="package-contents"></div>
+<div class="package-contents">
+<a name="ServiceManagement%5CModels%5CService.php" id="ServiceManagement\Models\Service.php"></a><h3>
+<i class="icon-file"></i>ServiceManagement\Models\Service.php<small style="float: right;padding-right: 10px;">5</small>
+</h3>
+<div><table class="table markers table-bordered">
+<thead><tr>
+<th>Type</th>
+<th>Line</th>
+<th>Description</th>
+</tr></thead>
+<tbody>
+<tr class="critical">
+<td>critical</td>
+<td>46</td>
+<td>No short description for property $_name</td>
+</tr>
+<tr class="critical">
+<td>critical</td>
+<td>51</td>
+<td>No short description for property $_label</td>
+</tr>
+<tr class="critical">
+<td>critical</td>
+<td>56</td>
+<td>No short description for property $_description</td>
+</tr>
+<tr class="critical">
+<td>critical</td>
+<td>61</td>
+<td>No short description for property $_location</td>
+</tr>
+<tr class="critical">
+<td>critical</td>
+<td>66</td>
+<td>No short description for property $_serializationProperties</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<div class="package-contents">
+<a name="ServiceManagement%5CModels%5CServiceProperties.php" id="ServiceManagement\Models\ServiceProperties.php"></a><h3>
+<i class="icon-file"></i>ServiceManagement\Models\ServiceProperties.php<small style="float: right;padding-right: 10px;">2</small>
+</h3>
+<div><table class="table markers table-bordered">
+<thead><tr>
+<th>Type</th>
+<th>Line</th>
+<th>Description</th>
+</tr></thead>
+<tbody>
+<tr class="critical">
+<td>critical</td>
+<td>43</td>
+<td>No short description for property $_url</td>
+</tr>
+<tr class="critical">
+<td>critical</td>
+<td>48</td>
+<td>No short description for property $_serviceName</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<div class="package-contents">
+<a name="ServiceManagement%5CModels%5CStorageService.php" id="ServiceManagement\Models\StorageService.php"></a><h3>
+<i class="icon-file"></i>ServiceManagement\Models\StorageService.php<small style="float: right;padding-right: 10px;">1</small>
+</h3>
+<div><table class="table markers table-bordered">
+<thead><tr>
+<th>Type</th>
+<th>Line</th>
+<th>Description</th>
+</tr></thead>
+<tbody><tr class="critical">
+<td>critical</td>
+<td>45</td>
+<td>No short description for property $_affinityGroup</td>
+</tr></tbody>
+</table></div>
+</div>
+<div class="package-contents">
+<a name="ServiceManagement%5CModels%5CUpdateStorageServiceOptions.php" id="ServiceManagement\Models\UpdateStorageServiceOptions.php"></a><h3>
+<i class="icon-file"></i>ServiceManagement\Models\UpdateStorageServiceOptions.php<small style="float: right;padding-right: 10px;">2</small>
+</h3>
+<div><table class="table markers table-bordered">
+<thead><tr>
+<th>Type</th>
+<th>Line</th>
+<th>Description</th>
+</tr></thead>
+<tbody>
+<tr class="critical">
+<td>critical</td>
+<td>44</td>
+<td>No short description for property $_label</td>
+</tr>
+<tr class="critical">
+<td>critical</td>
+<td>49</td>
+<td>No short description for property $_description</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<div class="package-contents">
+<a name="ServiceManagement%5CServiceManagementRestProxy.php" id="ServiceManagement\ServiceManagementRestProxy.php"></a><h3>
+<i class="icon-file"></i>ServiceManagement\ServiceManagementRestProxy.php<small style="float: right;padding-right: 10px;">1</small>
+</h3>
+<div><table class="table markers table-bordered">
+<thead><tr>
+<th>Type</th>
+<th>Line</th>
+<th>Description</th>
+</tr></thead>
+<tbody><tr class="critical">
+<td>critical</td>
+<td>63</td>
+<td>No short description for property $_subscriptionId</td>
+</tr></tbody>
+</table></div>
+</div>
+<div class="package-contents">
+<a name="ServiceRuntime%5CInternal%5CAcquireCurrentState.php" id="ServiceRuntime\Internal\AcquireCurrentState.php"></a><h3>
+<i class="icon-file"></i>ServiceRuntime\Internal\AcquireCurrentState.php<small style="float: right;padding-right: 10px;">3</small>
+</h3>
+<div><table class="table markers table-bordered">
+<thead><tr>
+<th>Type</th>
+<th>Line</th>
+<th>Description</th>
+</tr></thead>
+<tbody>
+<tr class="critical">
+<td>critical</td>
+<td>43</td>
+<td>No short description for property $_incarnation</td>
+</tr>
+<tr class="critical">
+<td>critical</td>
+<td>48</td>
+<td>No short description for property $_status</td>
+</tr>
+<tr class="critical">
+<td>critical</td>
+<td>53</td>
+<td>No short description for property $_expiration</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<div class="package-contents"></div>
+<div class="package-contents">
+<a name="ServiceRuntime%5CInternal%5CChunkedGoalStateDeserializer.php" id="ServiceRuntime\Internal\ChunkedGoalStateDeserializer.php"></a><h3>
+<i class="icon-file"></i>ServiceRuntime\Internal\ChunkedGoalStateDeserializer.php<small style="float: right;padding-right: 10px;">2</small>
+</h3>
+<div><table class="table markers table-bordered">
+<thead><tr>
+<th>Type</th>
+<th>Line</th>
+<th>Description</th>
+</tr></thead>
+<tbody>
+<tr class="critical">
+<td>critical</td>
+<td>43</td>
+<td>No short description for property $_deserializer</td>
+</tr>
+<tr class="critical">
+<td>critical</td>
+<td>48</td>
+<td>No short description for property $_inputStream</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<div class="package-contents">
+<a name="ServiceRuntime%5CInternal%5CCurrentState.php" id="ServiceRuntime\Internal\CurrentState.php"></a><h3>
+<i class="icon-file"></i>ServiceRuntime\Internal\CurrentState.php<small style="float: right;padding-right: 10px;">1</small>
+</h3>
+<div><table class="table markers table-bordered">
+<thead><tr>
+<th>Type</th>
+<th>Line</th>
+<th>Description</th>
+</tr></thead>
+<tbody><tr class="critical">
+<td>critical</td>
+<td>43</td>
+<td>No short description for property $_clientId</td>
+</tr></tbody>
+</table></div>
+</div>
+<div class="package-contents"></div>
+<div class="package-contents">
+<a name="ServiceRuntime%5CInternal%5CFileInputChannel.php" id="ServiceRuntime\Internal\FileInputChannel.php"></a><h3>
+<i class="icon-file"></i>ServiceRuntime\Internal\FileInputChannel.php<small style="float: right;padding-right: 10px;">1</small>
+</h3>
+<div><table class="table markers table-bordered">
+<thead><tr>
+<th>Type</th>
+<th>Line</th>
+<th>Description</th>
+</tr></thead>
+<tbody><tr class="critical">
+<td>critical</td>
+<td>45</td>
+<td>No short description for property $_inputStream</td>
+</tr></tbody>
+</table></div>
+</div>
+<div class="package-contents"></div>
+<div class="package-contents">
+<a name="ServiceRuntime%5CInternal%5CGoalState.php" id="ServiceRuntime\Internal\GoalState.php"></a><h3>
+<i class="icon-file"></i>ServiceRuntime\Internal\GoalState.php<small style="float: right;padding-right: 10px;">5</small>
+</h3>
+<div><table class="table markers table-bordered">
+<thead><tr>
+<th>Type</th>
+<th>Line</th>
+<th>Description</th>
+</tr></thead>
+<tbody>
+<tr class="critical">
+<td>critical</td>
+<td>44</td>
+<td>No short description for property $_incarnation</td>
+</tr>
+<tr class="critical">
+<td>critical</td>
+<td>49</td>
+<td>No short description for property $_expectedState</td>
+</tr>
+<tr class="critical">
+<td>critical</td>
+<td>54</td>
+<td>No short description for property $_environmentPath</td>
+</tr>
+<tr class="critical">
+<td>critical</td>
+<td>59</td>
+<td>No short description for property $_deadline</td>
+</tr>
+<tr class="critical">
+<td>critical</td>
+<td>64</td>
+<td>No short description for property $_currentStateEndpoint</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<div class="package-contents"></div>
+<div class="package-contents"></div>
+<div class="package-contents"></div>
+<div class="package-contents"></div>
+<div class="package-contents"></div>
+<div class="package-contents"></div>
+<div class="package-contents"></div>
+<div class="package-contents"></div>
+<div class="package-contents"></div>
+<div class="package-contents"></div>
+<div class="package-contents">
+<a name="ServiceRuntime%5CInternal%5CLocalResource.php" id="ServiceRuntime\Internal\LocalResource.php"></a><h3>
+<i class="icon-file"></i>ServiceRuntime\Internal\LocalResource.php<small style="float: right;padding-right: 10px;">3</small>
+</h3>
+<div><table class="table markers table-bordered">
+<thead><tr>
+<th>Type</th>
+<th>Line</th>
+<th>Description</th>
+</tr></thead>
+<tbody>
+<tr class="critical">
+<td>critical</td>
+<td>43</td>
+<td>No short description for property $_maximumSizeInMegabytes</td>
+</tr>
+<tr class="critical">
+<td>critical</td>
+<td>48</td>
+<td>No short description for property $_name</td>
+</tr>
+<tr class="critical">
+<td>critical</td>
+<td>53</td>
+<td>No short description for property $_rootPath</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<div class="package-contents">
+<a name="ServiceRuntime%5CInternal%5CProtocol1RuntimeClient.php" id="ServiceRuntime\Internal\Protocol1RuntimeClient.php"></a><h3>
+<i class="icon-file"></i>ServiceRuntime\Internal\Protocol1RuntimeClient.php<small style="float: right;padding-right: 10px;">2</small>
+</h3>
+<div><table class="table markers table-bordered">
+<thead><tr>
+<th>Type</th>
+<th>Line</th>
+<th>Description</th>
+</tr></thead>
+<tbody>
+<tr class="critical">
+<td>critical</td>
+<td>43</td>
+<td>No short description for property $_goalStateClient</td>
+</tr>
+<tr class="critical">
+<td>critical</td>
+<td>48</td>
+<td>No short description for property $_currentStateClient</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<div class="package-contents"></div>
+<div class="package-contents">
+<a name="ServiceRuntime%5CInternal%5CProtocol1RuntimeCurrentStateClient.php" id="ServiceRuntime\Internal\Protocol1RuntimeCurrentStateClient.php"></a><h3>
+<i class="icon-file"></i>ServiceRuntime\Internal\Protocol1RuntimeCurrentStateClient.php<small style="float: right;padding-right: 10px;">3</small>
+</h3>
+<div><table class="table markers table-bordered">
+<thead><tr>
+<th>Type</th>
+<th>Line</th>
+<th>Description</th>
+</tr></thead>
+<tbody>
+<tr class="critical">
+<td>critical</td>
+<td>43</td>
+<td>No short description for property $_serializer</td>
+</tr>
+<tr class="critical">
+<td>critical</td>
+<td>48</td>
+<td>No short description for property $_outputChannel</td>
+</tr>
+<tr class="critical">
+<td>critical</td>
+<td>53</td>
+<td>No short description for property $_endpoint</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<div class="package-contents">
+<a name="ServiceRuntime%5CInternal%5CProtocol1RuntimeGoalStateClient.php" id="ServiceRuntime\Internal\Protocol1RuntimeGoalStateClient.php"></a><h3>
+<i class="icon-file"></i>ServiceRuntime\Internal\Protocol1RuntimeGoalStateClient.php<small style="float: right;padding-right: 10px;">8</small>
+</h3>
+<div><table class="table markers table-bordered">
+<thead><tr>
+<th>Type</th>
+<th>Line</th>
+<th>Description</th>
+</tr></thead>
+<tbody>
+<tr class="critical">
+<td>critical</td>
+<td>43</td>
+<td>No short description for property $_currentStateClient</td>
+</tr>
+<tr class="critical">
+<td>critical</td>
+<td>48</td>
+<td>No short description for property $_goalStateDeserializer</td>
+</tr>
+<tr class="critical">
+<td>critical</td>
+<td>53</td>
+<td>No short description for property $_roleEnvironmentDeserializer</td>
+</tr>
+<tr class="critical">
+<td>critical</td>
+<td>58</td>
+<td>No short description for property $_inputChannel</td>
+</tr>
+<tr class="critical">
+<td>critical</td>
+<td>63</td>
+<td>No short description for property $_endpoint</td>
+</tr>
+<tr class="critical">
+<td>critical</td>
+<td>68</td>
+<td>No short description for property $_currentGoalState</td>
+</tr>
+<tr class="critical">
+<td>critical</td>
+<td>73</td>
+<td>No short description for property $_currentEnvironmentData</td>
+</tr>
+<tr class="critical">
+<td>critical</td>
+<td>78</td>
+<td>No short description for property $_keepOpen</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<div class="package-contents"></div>
+<div class="package-contents">
+<a name="ServiceRuntime%5CInternal%5CRole.php" id="ServiceRuntime\Internal\Role.php"></a><h3>
+<i class="icon-file"></i>ServiceRuntime\Internal\Role.php<small style="float: right;padding-right: 10px;">2</small>
+</h3>
+<div><table class="table markers table-bordered">
+<thead><tr>
+<th>Type</th>
+<th>Line</th>
+<th>Description</th>
+</tr></thead>
+<tbody>
+<tr class="critical">
+<td>critical</td>
+<td>44</td>
+<td>No short description for property $_name</td>
+</tr>
+<tr class="critical">
+<td>critical</td>
+<td>49</td>
+<td>No short description for property $_instances</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<div class="package-contents">
+<a name="ServiceRuntime%5CInternal%5CRoleEnvironmentConfigurationSettingChange.php" id="ServiceRuntime\Internal\RoleEnvironmentConfigurationSettingChange.php"></a><h3>
+<i class="icon-file"></i>ServiceRuntime\Internal\RoleEnvironmentConfigurationSettingChange.php<small style="float: right;padding-right: 10px;">1</small>
+</h3>
+<div><table class="table markers table-bordered">
+<thead><tr>
+<th>Type</th>
+<th>Line</th>
+<th>Description</th>
+</tr></thead>
+<tbody><tr class="critical">
+<td>critical</td>
+<td>43</td>
+<td>No short description for property $_settingName</td>
+</tr></tbody>
+</table></div>
+</div>
+<div class="package-contents">
+<a name="ServiceRuntime%5CInternal%5CRoleEnvironmentData.php" id="ServiceRuntime\Internal\RoleEnvironmentData.php"></a><h3>
+<i class="icon-file"></i>ServiceRuntime\Internal\RoleEnvironmentData.php<small style="float: right;padding-right: 10px;">6</small>
+</h3>
+<div><table class="table markers table-bordered">
+<thead><tr>
+<th>Type</th>
+<th>Line</th>
+<th>Description</th>
+</tr></thead>
+<tbody>
+<tr class="critical">
+<td>critical</td>
+<td>43</td>
+<td>No short description for property $_deploymentId</td>
+</tr>
+<tr class="critical">
+<td>critical</td>
+<td>48</td>
+<td>No short description for property $_configurationSettings</td>
+</tr>
+<tr class="critical">
+<td>critical</td>
+<td>53</td>
+<td>No short description for property $_localResources</td>
+</tr>
+<tr class="critical">
+<td>critical</td>
+<td>58</td>
+<td>No short description for property $_currentInstance</td>
+</tr>
+<tr class="critical">
+<td>critical</td>
+<td>63</td>
+<td>No short description for property $_roles</td>
+</tr>
+<tr class="critical">
+<td>critical</td>
+<td>68</td>
+<td>No short description for property $_isEmulated</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<div class="package-contents"></div>
+<div class="package-contents">
+<a name="ServiceRuntime%5CInternal%5CRoleEnvironmentTopologyChange.php" id="ServiceRuntime\Internal\RoleEnvironmentTopologyChange.php"></a><h3>
+<i class="icon-file"></i>ServiceRuntime\Internal\RoleEnvironmentTopologyChange.php<small style="float: right;padding-right: 10px;">1</small>
+</h3>
+<div><table class="table markers table-bordered">
+<thead><tr>
+<th>Type</th>
+<th>Line</th>
+<th>Description</th>
+</tr></thead>
+<tbody><tr class="critical">
+<td>critical</td>
+<td>43</td>
+<td>No short description for property $_roleName</td>
+</tr></tbody>
+</table></div>
+</div>
+<div class="package-contents">
+<a name="ServiceRuntime%5CInternal%5CRoleInstance.php" id="ServiceRuntime\Internal\RoleInstance.php"></a><h3>
+<i class="icon-file"></i>ServiceRuntime\Internal\RoleInstance.php<small style="float: right;padding-right: 10px;">5</small>
+</h3>
+<div><table class="table markers table-bordered">
+<thead><tr>
+<th>Type</th>
+<th>Line</th>
+<th>Description</th>
+</tr></thead>
+<tbody>
+<tr class="critical">
+<td>critical</td>
+<td>43</td>
+<td>No short description for property $_id</td>
+</tr>
+<tr class="critical">
+<td>critical</td>
+<td>48</td>
+<td>No short description for property $_faultDomain</td>
+</tr>
+<tr class="critical">
+<td>critical</td>
+<td>53</td>
+<td>No short description for property $_updateDomain</td>
+</tr>
+<tr class="critical">
+<td>critical</td>
+<td>58</td>
+<td>No short description for property $_endpoints</td>
+</tr>
+<tr class="critical">
+<td>critical</td>
+<td>63</td>
+<td>No short description for property $_role</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<div class="package-contents">
+<a name="ServiceRuntime%5CInternal%5CRoleInstanceEndpoint.php" id="ServiceRuntime\Internal\RoleInstanceEndpoint.php"></a><h3>
+<i class="icon-file"></i>ServiceRuntime\Internal\RoleInstanceEndpoint.php<small style="float: right;padding-right: 10px;">4</small>
+</h3>
+<div><table class="table markers table-bordered">
+<thead><tr>
+<th>Type</th>
+<th>Line</th>
+<th>Description</th>
+</tr></thead>
+<tbody>
+<tr class="critical">
+<td>critical</td>
+<td>43</td>
+<td>No short description for property $_roleInstance</td>
+</tr>
+<tr class="critical">
+<td>critical</td>
+<td>48</td>
+<td>No short description for property $_protocol</td>
+</tr>
+<tr class="critical">
+<td>critical</td>
+<td>53</td>
+<td>No short description for property $_address</td>
+</tr>
+<tr class="critical">
+<td>critical</td>
+<td>58</td>
+<td>No short description for property $_port</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<div class="package-contents"></div>
+<div class="package-contents"></div>
+<div class="package-contents"></div>
+<div class="package-contents"></div>
+<div class="package-contents"></div>
+<div class="package-contents"></div>
+<div class="package-contents"></div>
+<div class="package-contents">
+<a name="ServiceRuntime%5CRoleEnvironment.php" id="ServiceRuntime\RoleEnvironment.php"></a><h3>
+<i class="icon-file"></i>ServiceRuntime\RoleEnvironment.php<small style="float: right;padding-right: 10px;">11</small>
+</h3>
+<div><table class="table markers table-bordered">
+<thead><tr>
+<th>Type</th>
+<th>Line</th>
+<th>Description</th>
+</tr></thead>
+<tbody>
+<tr class="critical">
+<td>critical</td>
+<td>68</td>
+<td>No short description for property $_clientId</td>
+</tr>
+<tr class="critical">
+<td>critical</td>
+<td>73</td>
+<td>No short description for property $_maxDateTime</td>
+</tr>
+<tr class="critical">
+<td>critical</td>
+<td>78</td>
+<td>No short description for property $_runtimeClient</td>
+</tr>
+<tr class="critical">
+<td>critical</td>
+<td>83</td>
+<td>No short description for property $_currentGoalState</td>
+</tr>
+<tr class="critical">
+<td>critical</td>
+<td>88</td>
+<td>No short description for property $_currentEnvironmentData</td>
+</tr>
+<tr class="critical">
+<td>critical</td>
+<td>93</td>
+<td>No short description for property $_changingListeners</td>
+</tr>
+<tr class="critical">
+<td>critical</td>
+<td>98</td>
+<td>No short description for property $_changedListeners</td>
+</tr>
+<tr class="critical">
+<td>critical</td>
+<td>103</td>
+<td>No short description for property $_stoppingListeners</td>
+</tr>
+<tr class="critical">
+<td>critical</td>
+<td>108</td>
+<td>No short description for property $_lastState</td>
+</tr>
+<tr class="critical">
+<td>critical</td>
+<td>113</td>
+<td>No short description for property $_versionEndpoint</td>
+</tr>
+<tr class="critical">
+<td>critical</td>
+<td>118</td>
+<td>No short description for property $_tracking</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<div class="package-contents">
+<a name="Table%5CInternal%5CAtomReaderWriter.php" id="Table\Internal\AtomReaderWriter.php"></a><h3>
+<i class="icon-file"></i>Table\Internal\AtomReaderWriter.php<small style="float: right;padding-right: 10px;">7</small>
+</h3>
+<div><table class="table markers table-bordered">
+<thead><tr>
+<th>Type</th>
+<th>Line</th>
+<th>Description</th>
+</tr></thead>
+<tbody>
+<tr class="critical">
+<td>critical</td>
+<td>47</td>
+<td>No short description for property $_atomNamespaceName</td>
+</tr>
+<tr class="critical">
+<td>critical</td>
+<td>52</td>
+<td>No short description for property $_dataServicesNamespaceName</td>
+</tr>
+<tr class="critical">
+<td>critical</td>
+<td>57</td>
+<td>No short description for property $_dataServicesMetadataNamespaceName</td>
+</tr>
+<tr class="critical">
+<td>critical</td>
+<td>62</td>
+<td>No short description for property $_xmlVersion</td>
+</tr>
+<tr class="critical">
+<td>critical</td>
+<td>67</td>
+<td>No short description for property $_xmlEncoding</td>
+</tr>
+<tr class="critical">
+<td>critical</td>
+<td>72</td>
+<td>No short description for property $_dataServicesPrefix</td>
+</tr>
+<tr class="critical">
+<td>critical</td>
+<td>77</td>
+<td>No short description for property $_dataServicesMetadataPrefix</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<div class="package-contents"></div>
+<div class="package-contents"></div>
+<div class="package-contents"></div>
+<div class="package-contents"></div>
+<div class="package-contents">
+<a name="Table%5CModels%5CBatchError.php" id="Table\Models\BatchError.php"></a><h3>
+<i class="icon-file"></i>Table\Models\BatchError.php<small style="float: right;padding-right: 10px;">2</small>
+</h3>
+<div><table class="table markers table-bordered">
+<thead><tr>
+<th>Type</th>
+<th>Line</th>
+<th>Description</th>
+</tr></thead>
+<tbody>
+<tr class="critical">
+<td>critical</td>
+<td>47</td>
+<td>No short description for property $_error</td>
+</tr>
+<tr class="critical">
+<td>critical</td>
+<td>52</td>
+<td>No short description for property $_contentId</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<div class="package-contents">
+<a name="Table%5CModels%5CBatchOperation.php" id="Table\Models\BatchOperation.php"></a><h3>
+<i class="icon-file"></i>Table\Models\BatchOperation.php<small style="float: right;padding-right: 10px;">2</small>
+</h3>
+<div><table class="table markers table-bordered">
+<thead><tr>
+<th>Type</th>
+<th>Line</th>
+<th>Description</th>
+</tr></thead>
+<tbody>
+<tr class="critical">
+<td>critical</td>
+<td>46</td>
+<td>No short description for property $_type</td>
+</tr>
+<tr class="critical">
+<td>critical</td>
+<td>51</td>
+<td>No short description for property $_params</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<div class="package-contents"></div>
+<div class="package-contents">
+<a name="Table%5CModels%5CBatchOperations.php" id="Table\Models\BatchOperations.php"></a><h3>
+<i class="icon-file"></i>Table\Models\BatchOperations.php<small style="float: right;padding-right: 10px;">1</small>
+</h3>
+<div><table class="table markers table-bordered">
+<thead><tr>
+<th>Type</th>
+<th>Line</th>
+<th>Description</th>
+</tr></thead>
+<tbody><tr class="critical">
+<td>critical</td>
+<td>45</td>
+<td>No short description for property $_operations</td>
+</tr></tbody>
+</table></div>
+</div>
+<div class="package-contents"></div>
+<div class="package-contents"></div>
+<div class="package-contents">
+<a name="Table%5CModels%5CDeleteEntityOptions.php" id="Table\Models\DeleteEntityOptions.php"></a><h3>
+<i class="icon-file"></i>Table\Models\DeleteEntityOptions.php<small style="float: right;padding-right: 10px;">1</small>
+</h3>
+<div><table class="table markers table-bordered">
+<thead><tr>
+<th>Type</th>
+<th>Line</th>
+<th>Description</th>
+</tr></thead>
+<tbody><tr class="critical">
+<td>critical</td>
+<td>45</td>
+<td>No short description for property $_etag</td>
+</tr></tbody>
+</table></div>
+</div>
+<div class="package-contents"></div>
+<div class="package-contents">
+<a name="Table%5CModels%5CEntity.php" id="Table\Models\Entity.php"></a><h3>
+<i class="icon-file"></i>Table\Models\Entity.php<small style="float: right;padding-right: 10px;">2</small>
+</h3>
+<div><table class="table markers table-bordered">
+<thead><tr>
+<th>Type</th>
+<th>Line</th>
+<th>Description</th>
+</tr></thead>
+<tbody>
+<tr class="critical">
+<td>critical</td>
+<td>46</td>
+<td>No short description for property $_etag</td>
+</tr>
+<tr class="critical">
+<td>critical</td>
+<td>51</td>
+<td>No short description for property $_properties</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<div class="package-contents">
+<a name="Table%5CModels%5CFilters%5CBinaryFilter.php" id="Table\Models\Filters\BinaryFilter.php"></a><h3>
+<i class="icon-file"></i>Table\Models\Filters\BinaryFilter.php<small style="float: right;padding-right: 10px;">3</small>
+</h3>
+<div><table class="table markers table-bordered">
+<thead><tr>
+<th>Type</th>
+<th>Line</th>
+<th>Description</th>
+</tr></thead>
+<tbody>
+<tr class="critical">
+<td>critical</td>
+<td>43</td>
+<td>No short description for property $_operator</td>
+</tr>
+<tr class="critical">
+<td>critical</td>
+<td>48</td>
+<td>No short description for property $_left</td>
+</tr>
+<tr class="critical">
+<td>critical</td>
+<td>53</td>
+<td>No short description for property $_right</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<div class="package-contents">
+<a name="Table%5CModels%5CFilters%5CConstantFilter.php" id="Table\Models\Filters\ConstantFilter.php"></a><h3>
+<i class="icon-file"></i>Table\Models\Filters\ConstantFilter.php<small style="float: right;padding-right: 10px;">2</small>
+</h3>
+<div><table class="table markers table-bordered">
+<thead><tr>
+<th>Type</th>
+<th>Line</th>
+<th>Description</th>
+</tr></thead>
+<tbody>
+<tr class="critical">
+<td>critical</td>
+<td>44</td>
+<td>No short description for property $_value</td>
+</tr>
+<tr class="critical">
+<td>critical</td>
+<td>49</td>
+<td>No short description for property $_edmType</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<div class="package-contents"></div>
+<div class="package-contents">
+<a name="Table%5CModels%5CFilters%5CPropertyNameFilter.php" id="Table\Models\Filters\PropertyNameFilter.php"></a><h3>
+<i class="icon-file"></i>Table\Models\Filters\PropertyNameFilter.php<small style="float: right;padding-right: 10px;">1</small>
+</h3>
+<div><table class="table markers table-bordered">
+<thead><tr>
+<th>Type</th>
+<th>Line</th>
+<th>Description</th>
+</tr></thead>
+<tbody><tr class="critical">
+<td>critical</td>
+<td>43</td>
+<td>No short description for property $_propertyName</td>
+</tr></tbody>
+</table></div>
+</div>
+<div class="package-contents">
+<a name="Table%5CModels%5CFilters%5CQueryStringFilter.php" id="Table\Models\Filters\QueryStringFilter.php"></a><h3>
+<i class="icon-file"></i>Table\Models\Filters\QueryStringFilter.php<small style="float: right;padding-right: 10px;">1</small>
+</h3>
+<div><table class="table markers table-bordered">
+<thead><tr>
+<th>Type</th>
+<th>Line</th>
+<th>Description</th>
+</tr></thead>
+<tbody><tr class="critical">
+<td>critical</td>
+<td>43</td>
+<td>No short description for property $_queryString</td>
+</tr></tbody>
+</table></div>
+</div>
+<div class="package-contents">
+<a name="Table%5CModels%5CFilters%5CUnaryFilter.php" id="Table\Models\Filters\UnaryFilter.php"></a><h3>
+<i class="icon-file"></i>Table\Models\Filters\UnaryFilter.php<small style="float: right;padding-right: 10px;">2</small>
+</h3>
+<div><table class="table markers table-bordered">
+<thead><tr>
+<th>Type</th>
+<th>Line</th>
+<th>Description</th>
+</tr></thead>
+<tbody>
+<tr class="critical">
+<td>critical</td>
+<td>43</td>
+<td>No short description for property $_operator</td>
+</tr>
+<tr class="critical">
+<td>critical</td>
+<td>48</td>
+<td>No short description for property $_operand</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<div class="package-contents">
+<a name="Table%5CModels%5CGetEntityResult.php" id="Table\Models\GetEntityResult.php"></a><h3>
+<i class="icon-file"></i>Table\Models\GetEntityResult.php<small style="float: right;padding-right: 10px;">1</small>
+</h3>
+<div><table class="table markers table-bordered">
+<thead><tr>
+<th>Type</th>
+<th>Line</th>
+<th>Description</th>
+</tr></thead>
+<tbody><tr class="critical">
+<td>critical</td>
+<td>43</td>
+<td>No short description for property $_entity</td>
+</tr></tbody>
+</table></div>
+</div>
+<div class="package-contents">
+<a name="Table%5CModels%5CGetTableResult.php" id="Table\Models\GetTableResult.php"></a><h3>
+<i class="icon-file"></i>Table\Models\GetTableResult.php<small style="float: right;padding-right: 10px;">1</small>
+</h3>
+<div><table class="table markers table-bordered">
+<thead><tr>
+<th>Type</th>
+<th>Line</th>
+<th>Description</th>
+</tr></thead>
+<tbody><tr class="critical">
+<td>critical</td>
+<td>44</td>
+<td>No short description for property $_name</td>
+</tr></tbody>
+</table></div>
+</div>
+<div class="package-contents">
+<a name="Table%5CModels%5CInsertEntityResult.php" id="Table\Models\InsertEntityResult.php"></a><h3>
+<i class="icon-file"></i>Table\Models\InsertEntityResult.php<small style="float: right;padding-right: 10px;">1</small>
+</h3>
+<div><table class="table markers table-bordered">
+<thead><tr>
+<th>Type</th>
+<th>Line</th>
+<th>Description</th>
+</tr></thead>
+<tbody><tr class="critical">
+<td>critical</td>
+<td>45</td>
+<td>No short description for property $_entity</td>
+</tr></tbody>
+</table></div>
+</div>
+<div class="package-contents">
+<a name="Table%5CModels%5CProperty.php" id="Table\Models\Property.php"></a><h3>
+<i class="icon-file"></i>Table\Models\Property.php<small style="float: right;padding-right: 10px;">2</small>
+</h3>
+<div><table class="table markers table-bordered">
+<thead><tr>
+<th>Type</th>
+<th>Line</th>
+<th>Description</th>
+</tr></thead>
+<tbody>
+<tr class="critical">
+<td>critical</td>
+<td>45</td>
+<td>No short description for property $_edmType</td>
+</tr>
+<tr class="critical">
+<td>critical</td>
+<td>50</td>
+<td>No short description for property $_value</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<div class="package-contents">
+<a name="Table%5CModels%5CQuery.php" id="Table\Models\Query.php"></a><h3>
+<i class="icon-file"></i>Table\Models\Query.php<small style="float: right;padding-right: 10px;">3</small>
+</h3>
+<div><table class="table markers table-bordered">
+<thead><tr>
+<th>Type</th>
+<th>Line</th>
+<th>Description</th>
+</tr></thead>
+<tbody>
+<tr class="critical">
+<td>critical</td>
+<td>43</td>
+<td>No short description for property $_selectFields</td>
+</tr>
+<tr class="critical">
+<td>critical</td>
+<td>48</td>
+<td>No short description for property $_filter</td>
+</tr>
+<tr class="critical">
+<td>critical</td>
+<td>53</td>
+<td>No short description for property $_top</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<div class="package-contents">
+<a name="Table%5CModels%5CQueryEntitiesOptions.php" id="Table\Models\QueryEntitiesOptions.php"></a><h3>
+<i class="icon-file"></i>Table\Models\QueryEntitiesOptions.php<small style="float: right;padding-right: 10px;">3</small>
+</h3>
+<div><table class="table markers table-bordered">
+<thead><tr>
+<th>Type</th>
+<th>Line</th>
+<th>Description</th>
+</tr></thead>
+<tbody>
+<tr class="critical">
+<td>critical</td>
+<td>43</td>
+<td>No short description for property $_query</td>
+</tr>
+<tr class="critical">
+<td>critical</td>
+<td>48</td>
+<td>No short description for property $_nextPartitionKey</td>
+</tr>
+<tr class="critical">
+<td>critical</td>
+<td>53</td>
+<td>No short description for property $_nextRowKey</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<div class="package-contents">
+<a name="Table%5CModels%5CQueryEntitiesResult.php" id="Table\Models\QueryEntitiesResult.php"></a><h3>
+<i class="icon-file"></i>Table\Models\QueryEntitiesResult.php<small style="float: right;padding-right: 10px;">3</small>
+</h3>
+<div><table class="table markers table-bordered">
+<thead><tr>
+<th>Type</th>
+<th>Line</th>
+<th>Description</th>
+</tr></thead>
+<tbody>
+<tr class="critical">
+<td>critical</td>
+<td>45</td>
+<td>No short description for property $_nextRowKey</td>
+</tr>
+<tr class="critical">
+<td>critical</td>
+<td>50</td>
+<td>No short description for property $_nextPartitionKey</td>
+</tr>
+<tr class="critical">
+<td>critical</td>
+<td>55</td>
+<td>No short description for property $_entities</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<div class="package-contents">
+<a name="Table%5CModels%5CQueryTablesOptions.php" id="Table\Models\QueryTablesOptions.php"></a><h3>
+<i class="icon-file"></i>Table\Models\QueryTablesOptions.php<small style="float: right;padding-right: 10px;">3</small>
+</h3>
+<div><table class="table markers table-bordered">
+<thead><tr>
+<th>Type</th>
+<th>Line</th>
+<th>Description</th>
+</tr></thead>
+<tbody>
+<tr class="critical">
+<td>critical</td>
+<td>43</td>
+<td>No short description for property $_nextTableName</td>
+</tr>
+<tr class="critical">
+<td>critical</td>
+<td>48</td>
+<td>No short description for property $_query</td>
+</tr>
+<tr class="critical">
+<td>critical</td>
+<td>53</td>
+<td>No short description for property $_prefix</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<div class="package-contents">
+<a name="Table%5CModels%5CQueryTablesResult.php" id="Table\Models\QueryTablesResult.php"></a><h3>
+<i class="icon-file"></i>Table\Models\QueryTablesResult.php<small style="float: right;padding-right: 10px;">2</small>
+</h3>
+<div><table class="table markers table-bordered">
+<thead><tr>
+<th>Type</th>
+<th>Line</th>
+<th>Description</th>
+</tr></thead>
+<tbody>
+<tr class="critical">
+<td>critical</td>
+<td>45</td>
+<td>No short description for property $_nextTableName</td>
+</tr>
+<tr class="critical">
+<td>critical</td>
+<td>50</td>
+<td>No short description for property $_tables</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<div class="package-contents">
+<a name="Table%5CModels%5CTableServiceOptions.php" id="Table\Models\TableServiceOptions.php"></a><h3>
+<i class="icon-file"></i>Table\Models\TableServiceOptions.php<small style="float: right;padding-right: 10px;">1</small>
+</h3>
+<div><table class="table markers table-bordered">
+<thead><tr>
+<th>Type</th>
+<th>Line</th>
+<th>Description</th>
+</tr></thead>
+<tbody><tr class="error">
+<td>error</td>
+<td>40</td>
+<td>No DocBlock was found for property $_timeout</td>
+</tr></tbody>
+</table></div>
+</div>
+<div class="package-contents">
+<a name="Table%5CModels%5CUpdateEntityResult.php" id="Table\Models\UpdateEntityResult.php"></a><h3>
+<i class="icon-file"></i>Table\Models\UpdateEntityResult.php<small style="float: right;padding-right: 10px;">1</small>
+</h3>
+<div><table class="table markers table-bordered">
+<thead><tr>
+<th>Type</th>
+<th>Line</th>
+<th>Description</th>
+</tr></thead>
+<tbody><tr class="critical">
+<td>critical</td>
+<td>45</td>
+<td>No short description for property $_etag</td>
+</tr></tbody>
+</table></div>
+</div>
+<div class="package-contents">
+<a name="Table%5CTableRestProxy.php" id="Table\TableRestProxy.php"></a><h3>
+<i class="icon-file"></i>Table\TableRestProxy.php<small style="float: right;padding-right: 10px;">2</small>
+</h3>
+<div><table class="table markers table-bordered">
+<thead><tr>
+<th>Type</th>
+<th>Line</th>
+<th>Description</th>
+</tr></thead>
+<tbody>
+<tr class="critical">
+<td>critical</td>
+<td>73</td>
+<td>No short description for property $_atomSerializer</td>
+</tr>
+<tr class="critical">
+<td>critical</td>
+<td>79</td>
+<td>No short description for property $_mimeSerializer</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<div class="package-contents"></div>
+</div>
+</div>
+<div class="row"><footer class="span12">
+            Template is built using <a href="http://twitter.github.com/bootstrap/">Twitter Bootstrap 2</a> and icons provided by <a href="http://glyphicons.com/">Glyphicons</a>.<br>
+            Documentation is powered by <a href="http://www.phpdoc.org/">phpDocumentor 2.0.0a6</a> and<br>
+            generated on 2012-07-17T21:10:41-07:00.<br></footer></div>
+</div>
+</body>
+</html>

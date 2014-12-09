@@ -1,0 +1,1213 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>batchapps.api &mdash; azure-batch-apps 0.2.0 documentation</title>
+    
+    <link rel="stylesheet" href="../../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '0.2.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <link rel="top" title="azure-batch-apps 0.2.0 documentation" href="../../index.html" />
+    <link rel="up" title="Module code" href="../index.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../../index.html">azure-batch-apps 0.2.0 documentation</a> &raquo;</li>
+          <li><a href="../index.html" accesskey="U">Module code</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <h1>Source code for batchapps.api</h1><div class="highlight"><pre>
+<span class="c">#-------------------------------------------------------------------------</span>
+<span class="c"># The Azure Batch Apps Python Client</span>
+<span class="c">#</span>
+<span class="c"># Copyright (c) Microsoft Corporation. All rights reserved. </span>
+<span class="c">#</span>
+<span class="c"># The MIT License (MIT)</span>
+<span class="c">#</span>
+<span class="c"># Permission is hereby granted, free of charge, to any person obtaining a copy</span>
+<span class="c"># of this software and associated documentation files (the &quot;&quot;Software&quot;&quot;), to deal</span>
+<span class="c"># in the Software without restriction, including without limitation the rights</span>
+<span class="c"># to use, copy, modify, merge, publish, distribute, sublicense, and/or sell</span>
+<span class="c"># copies of the Software, and to permit persons to whom the Software is</span>
+<span class="c"># furnished to do so, subject to the following conditions:</span>
+<span class="c">#</span>
+<span class="c"># The above copyright notice and this permission notice shall be included in</span>
+<span class="c"># all copies or substantial portions of the Software.</span>
+<span class="c">#</span>
+<span class="c"># THE SOFTWARE IS PROVIDED *AS IS*, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR</span>
+<span class="c"># IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,</span>
+<span class="c"># FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE</span>
+<span class="c"># AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER</span>
+<span class="c"># LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,</span>
+<span class="c"># OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN</span>
+<span class="c"># THE SOFTWARE.</span>
+<span class="c">#</span>
+<span class="c">#--------------------------------------------------------------------------</span>
+<span class="sd">&quot;&quot;&quot; Client for the Batch Apps Managment API.</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="kn">from</span> <span class="nn">batchapps</span> <span class="kn">import</span> <span class="n">rest_client</span>
+<span class="kn">from</span> <span class="nn">batchapps.files</span> <span class="kn">import</span> <span class="n">UserFile</span>
+<span class="kn">from</span> <span class="nn">batchapps</span> <span class="kn">import</span> <span class="n">utils</span>
+<span class="kn">from</span> <span class="nn">batchapps.exceptions</span> <span class="kn">import</span> <span class="p">(</span>
+    <span class="n">RestCallException</span><span class="p">,</span>
+    <span class="n">FileMissingException</span><span class="p">)</span>
+
+<span class="kn">import</span> <span class="nn">logging</span>
+
+<span class="n">API_VERSION</span> <span class="o">=</span> <span class="s">&quot;2014-10-01-preview&quot;</span>
+
+<div class="viewcode-block" id="Response"><a class="viewcode-back" href="../../batch_apps.api.html#batchapps.api.Response">[docs]</a><span class="k">class</span> <span class="nc">Response</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    A simple container object for the response of the REST call.</span>
+
+<span class="sd">    :Attributes:</span>
+<span class="sd">        - success (bool)</span>
+<span class="sd">        - result</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">success</span><span class="p">,</span> <span class="n">output</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        :Args:</span>
+<span class="sd">            - success (bool): Whether the REST call completed successfully and</span>
+<span class="sd">              returned an applicable result.</span>
+
+<span class="sd">        :Kwargs:</span>
+<span class="sd">            - output: The response from the REST client. This could be the</span>
+<span class="sd">              result of a successful api call, or it could hold exception</span>
+<span class="sd">              information for a failed call. Defaults to None.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">success</span> <span class="o">=</span> <span class="n">success</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">result</span> <span class="o">=</span> <span class="n">output</span>
+</div>
+<div class="viewcode-block" id="BatchAppsApi"><a class="viewcode-back" href="../../batch_apps.api.html#batchapps.api.BatchAppsApi">[docs]</a><span class="k">class</span> <span class="nc">BatchAppsApi</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Specification of Batch Apps Management API, abstracted away</span>
+<span class="sd">    from the implementation of the :mod:`rest_client`.</span>
+<span class="sd">    This class should directly reflect the full functionality of the API,</span>
+<span class="sd">    without adding any additional layers of data processing.</span>
+
+<span class="sd">    :Attributes:</span>
+<span class="sd">        - headers (dict)</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">credentials</span><span class="p">,</span> <span class="n">config</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        :Args:</span>
+<span class="sd">            - credentials (:class:`.Credentials`): Credentials with which all</span>
+<span class="sd">              API calls will be authenticated.</span>
+<span class="sd">            - config (:class:`.Configuration`): Configuration of the</span>
+<span class="sd">              job type the jobs will be submitted as, as well as endpoint</span>
+<span class="sd">              and logging configuration.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_config</span> <span class="o">=</span> <span class="n">config</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_log</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="s">&#39;batch_apps&#39;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_auth</span> <span class="o">=</span> <span class="n">credentials</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">headers</span> <span class="o">=</span> <span class="p">{</span><span class="s">&quot;Accept&quot;</span><span class="p">:</span> <span class="s">&quot;application/json&quot;</span><span class="p">,</span>
+                        <span class="s">&quot;x-ms-version&quot;</span><span class="p">:</span> <span class="n">API_VERSION</span><span class="p">,</span>
+                        <span class="s">&quot;Content-Type&quot;</span><span class="p">:</span> <span class="s">&quot;application/json&quot;</span><span class="p">}</span>
+
+<div class="viewcode-block" id="BatchAppsApi.app"><a class="viewcode-back" href="../../batch_apps.api.html#batchapps.api.BatchAppsApi.app">[docs]</a>    <span class="k">def</span> <span class="nf">app</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        .. warning:: Deprecated. Use :meth:`.jobtype()`.</span>
+<span class="sd">        Retrieve the current jobtype from the :class:`.Configuration`.</span>
+
+<span class="sd">        :Returns:</span>
+<span class="sd">            - The current job type from the configuration (str).</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_log</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="s">&quot;app() is deprecated. &quot;</span>
+                          <span class="s">&quot;Please use jobtype().&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_config</span><span class="o">.</span><span class="n">current_jobtype</span><span class="p">()</span>
+</div>
+<div class="viewcode-block" id="BatchAppsApi.jobtype"><a class="viewcode-back" href="../../batch_apps.api.html#batchapps.api.BatchAppsApi.jobtype">[docs]</a>    <span class="k">def</span> <span class="nf">jobtype</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Retrieve the current jobtype from the :class:`.Configuration`.</span>
+
+<span class="sd">        :Returns:</span>
+<span class="sd">            - The current jobtype from the configuration (str).</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_config</span><span class="o">.</span><span class="n">current_jobtype</span><span class="p">()</span>
+</div>
+<div class="viewcode-block" id="BatchAppsApi.url"><a class="viewcode-back" href="../../batch_apps.api.html#batchapps.api.BatchAppsApi.url">[docs]</a>    <span class="k">def</span> <span class="nf">url</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">api_call</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Format API endpoint URL.</span>
+
+<span class="sd">        :Args:</span>
+<span class="sd">            - api_call (str): the URL of the method that will be appended to</span>
+<span class="sd">              the root URL provided by the :class:`.Configuration`.</span>
+
+<span class="sd">        :Returns:</span>
+<span class="sd">            - The complete, formatted URL (str)</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">end_p</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_config</span><span class="o">.</span><span class="n">endpoint</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_log</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s">&quot;Formatting url: https://{endpoint}/api/{api}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+            <span class="n">endpoint</span><span class="o">=</span><span class="n">end_p</span><span class="p">,</span>
+            <span class="n">api</span><span class="o">=</span><span class="n">api_call</span><span class="p">))</span>
+
+        <span class="k">return</span> <span class="s">&quot;https://{endpoint}/api/{api}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+            <span class="n">endpoint</span><span class="o">=</span><span class="n">end_p</span><span class="p">,</span>
+            <span class="n">api</span><span class="o">=</span><span class="n">api_call</span><span class="p">)</span>
+</div>
+<div class="viewcode-block" id="BatchAppsApi.default_params"><a class="viewcode-back" href="../../batch_apps.api.html#batchapps.api.BatchAppsApi.default_params">[docs]</a>    <span class="k">def</span> <span class="nf">default_params</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Get the default parameters for the job type.</span>
+<span class="sd">        Retrieves the parameters tied to the job type from the</span>
+<span class="sd">        :class:`.Configuration`</span>
+
+<span class="sd">        :Returns:</span>
+<span class="sd">            - Dictionary of strings of the configured parameters</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_config</span><span class="o">.</span><span class="n">default_params</span><span class="p">()</span>
+</div>
+<div class="viewcode-block" id="BatchAppsApi.list_jobs"><a class="viewcode-back" href="../../batch_apps.api.html#batchapps.api.BatchAppsApi.list_jobs">[docs]</a>    <span class="k">def</span> <span class="nf">list_jobs</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">per_call</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Lists the users jobs.</span>
+
+<span class="sd">        :Kwargs:</span>
+<span class="sd">            - index (int): The starting index from which the list of jobs will</span>
+<span class="sd">              be returned. Default is 0, i.e. return all jobs from the start.</span>
+<span class="sd">            - per_call (int): The number of job entries from ``index`` to</span>
+<span class="sd">              return. Default is 10.</span>
+<span class="sd">            - name (str): Return only the jobs whose name contains the given</span>
+<span class="sd">              string. Default is None.</span>
+
+<span class="sd">        :Returns:</span>
+<span class="sd">            - :class:`.Response` object containing success of call. If</span>
+<span class="sd">              successful, the ``Response.result`` will contain a list of</span>
+<span class="sd">              jobs as dictionaries. If failed, ``Response.result`` will</span>
+<span class="sd">              hold the :exc:`.RestCallException`.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_log</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s">&quot;list_jobs, index={0}, per_call={1}, name={2}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+            <span class="n">index</span><span class="p">,</span>
+            <span class="n">per_call</span><span class="p">,</span> <span class="n">name</span><span class="p">))</span>
+
+        <span class="n">url</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">url</span><span class="p">(</span><span class="s">&quot;jobs&quot;</span><span class="p">)</span>
+        <span class="n">req_set</span> <span class="o">=</span> <span class="p">{</span><span class="s">&quot;maxResults&quot;</span><span class="p">:</span> <span class="n">per_call</span><span class="p">,</span> <span class="s">&quot;startIndex&quot;</span><span class="p">:</span> <span class="n">index</span><span class="p">}</span>
+
+        <span class="k">if</span> <span class="n">name</span><span class="p">:</span>
+            <span class="n">req_set</span><span class="p">[</span><span class="s">&quot;nameContains&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">name</span><span class="p">)</span>
+
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">get_resp</span> <span class="o">=</span> <span class="n">rest_client</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_auth</span><span class="p">,</span> <span class="n">url</span><span class="p">,</span>
+                                       <span class="bp">self</span><span class="o">.</span><span class="n">headers</span><span class="p">,</span>
+                                       <span class="n">params</span><span class="o">=</span><span class="n">req_set</span><span class="p">)</span>
+
+        <span class="k">except</span> <span class="n">RestCallException</span> <span class="k">as</span> <span class="n">exp</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">Response</span><span class="p">(</span><span class="bp">False</span><span class="p">,</span> <span class="n">exp</span><span class="p">)</span>
+
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">utils</span><span class="o">.</span><span class="n">valid_keys</span><span class="p">(</span><span class="n">get_resp</span><span class="p">,</span> <span class="p">[</span><span class="s">&#39;totalCount&#39;</span><span class="p">,</span> <span class="s">&#39;jobs&#39;</span><span class="p">]):</span>
+                <span class="k">return</span> <span class="n">Response</span><span class="p">(</span><span class="bp">True</span><span class="p">,</span> <span class="n">get_resp</span><span class="p">)</span>
+            <span class="k">return</span> <span class="n">Response</span><span class="p">(</span>
+                <span class="bp">False</span><span class="p">,</span>
+                <span class="n">RestCallException</span><span class="p">(</span><span class="ne">KeyError</span><span class="p">,</span>
+                                  <span class="s">&quot;Key not in response message&quot;</span><span class="p">,</span>
+                                  <span class="n">get_resp</span><span class="p">))</span>
+</div>
+<div class="viewcode-block" id="BatchAppsApi.get_job"><a class="viewcode-back" href="../../batch_apps.api.html#batchapps.api.BatchAppsApi.get_job">[docs]</a>    <span class="k">def</span> <span class="nf">get_job</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">job_id</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">url</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Gets information about a job.</span>
+<span class="sd">        Job info can be retrieved by supplying **either** the job&#39;s ID</span>
+<span class="sd">        **or** a URL to the job. If both are supplied, URL is used.</span>
+
+<span class="sd">        :Kwargs:</span>
+<span class="sd">            - job_id (str): Guid of the job on which info is requested.</span>
+<span class="sd">            - url (str): A complete URL to the job info.</span>
+
+<span class="sd">        :Returns:</span>
+<span class="sd">            - A :class:`.Response` object containing the job details as a</span>
+<span class="sd">              dictionary, if successful. Otherwise the Response will</span>
+<span class="sd">              contain the :exc:`.RestCallException`.</span>
+
+<span class="sd">        :Raises:</span>
+<span class="sd">            - :class:`.RestCallException` if neither job ID or URL are</span>
+<span class="sd">              supplied.</span>
+<span class="sd">            - :class:`.RestCallException` if job details dictionary is</span>
+<span class="sd">              malformed / missing necessary keys</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_log</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s">&quot;get_job, job_id={0}, url={1}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">job_id</span><span class="p">,</span> <span class="n">url</span><span class="p">))</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">url</span> <span class="ow">and</span> <span class="n">job_id</span><span class="p">:</span>
+            <span class="n">url</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">url</span><span class="p">(</span><span class="s">&quot;jobs/{jobid}&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">jobid</span><span class="o">=</span><span class="n">job_id</span><span class="p">)</span>
+
+        <span class="k">elif</span> <span class="ow">not</span> <span class="n">url</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">job_id</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">Response</span><span class="p">(</span>
+                <span class="bp">False</span><span class="p">,</span>
+                <span class="n">RestCallException</span><span class="p">(</span><span class="ne">AttributeError</span><span class="p">,</span>
+                                  <span class="s">&quot;Either job_id or url must be set&quot;</span><span class="p">,</span>
+                                  <span class="bp">None</span><span class="p">))</span>
+
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">get_resp</span> <span class="o">=</span> <span class="n">rest_client</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_auth</span><span class="p">,</span> <span class="n">url</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">headers</span><span class="p">)</span>
+
+        <span class="k">except</span> <span class="n">RestCallException</span> <span class="k">as</span> <span class="n">exp</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">Response</span><span class="p">(</span><span class="bp">False</span><span class="p">,</span> <span class="n">exp</span><span class="p">)</span>
+
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">utils</span><span class="o">.</span><span class="n">valid_keys</span><span class="p">(</span><span class="n">get_resp</span><span class="p">,</span> <span class="p">[</span><span class="s">&#39;id&#39;</span><span class="p">,</span> <span class="s">&#39;name&#39;</span><span class="p">,</span> <span class="s">&#39;type&#39;</span><span class="p">]):</span>
+                <span class="k">return</span> <span class="n">Response</span><span class="p">(</span><span class="bp">True</span><span class="p">,</span> <span class="n">get_resp</span><span class="p">)</span>
+            <span class="k">return</span> <span class="n">Response</span><span class="p">(</span>
+                <span class="bp">False</span><span class="p">,</span>
+                <span class="n">RestCallException</span><span class="p">(</span><span class="ne">KeyError</span><span class="p">,</span>
+                                  <span class="s">&quot;incorrectly formatted job response&quot;</span><span class="p">,</span>
+                                  <span class="n">get_resp</span><span class="p">))</span>
+</div>
+<div class="viewcode-block" id="BatchAppsApi.send_job"><a class="viewcode-back" href="../../batch_apps.api.html#batchapps.api.BatchAppsApi.send_job">[docs]</a>    <span class="k">def</span> <span class="nf">send_job</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">job_message</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Submits a job.</span>
+
+<span class="sd">        :Args:</span>
+<span class="sd">            - job_message (dict): A job specification formatted as a</span>
+<span class="sd">              dictionary.</span>
+
+<span class="sd">        :Returns:</span>
+<span class="sd">            - A :class:`.Response` object containing a dictionary of the newly</span>
+<span class="sd">              submitted job&#39;s ID and URL if successful. Otherwise the</span>
+<span class="sd">              Response will contain the :exc:`.RestCallException`.</span>
+
+<span class="sd">        :Raises:</span>
+<span class="sd">            - :class:`.RestCallException` if new job dictionary is</span>
+<span class="sd">              malformed / missing necessary keys.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_log</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s">&quot;send_job, job_message={0}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">job_message</span><span class="p">))</span>
+        <span class="n">url</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">url</span><span class="p">(</span><span class="s">&quot;jobs&quot;</span><span class="p">)</span>
+
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">post_resp</span> <span class="o">=</span> <span class="n">rest_client</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_auth</span><span class="p">,</span>
+                                         <span class="n">url</span><span class="p">,</span>
+                                         <span class="bp">self</span><span class="o">.</span><span class="n">headers</span><span class="p">,</span>
+                                         <span class="n">message</span><span class="o">=</span><span class="n">job_message</span><span class="p">)</span>
+
+        <span class="k">except</span> <span class="n">RestCallException</span> <span class="k">as</span> <span class="n">exp</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">Response</span><span class="p">(</span><span class="bp">False</span><span class="p">,</span> <span class="n">exp</span><span class="p">)</span>
+
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">utils</span><span class="o">.</span><span class="n">valid_keys</span><span class="p">(</span><span class="n">post_resp</span><span class="p">,</span> <span class="p">[</span><span class="s">&#39;jobId&#39;</span><span class="p">,</span> <span class="s">&#39;link&#39;</span><span class="p">]):</span>
+                <span class="k">return</span> <span class="n">Response</span><span class="p">(</span><span class="bp">True</span><span class="p">,</span> <span class="n">post_resp</span><span class="p">)</span>
+            <span class="k">return</span> <span class="n">Response</span><span class="p">(</span>
+                <span class="bp">False</span><span class="p">,</span>
+                <span class="n">RestCallException</span><span class="p">(</span><span class="ne">KeyError</span><span class="p">,</span>
+                                  <span class="s">&quot;incorrectly formatted job response&quot;</span><span class="p">,</span>
+                                  <span class="n">post_resp</span><span class="p">))</span>
+</div>
+<div class="viewcode-block" id="BatchAppsApi.get_log"><a class="viewcode-back" href="../../batch_apps.api.html#batchapps.api.BatchAppsApi.get_log">[docs]</a>    <span class="k">def</span> <span class="nf">get_log</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">job_id</span><span class="p">,</span> <span class="n">start</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">max_lines</span><span class="o">=</span><span class="mi">100</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Gets log messages for a job.</span>
+<span class="sd">        These are the Batch Apps system logs, rather than those of the</span>
+<span class="sd">        application.</span>
+
+<span class="sd">        :Args:</span>
+<span class="sd">            - job_id (str): The guid of the job on which to download the logs.</span>
+
+<span class="sd">        :Kwargs:</span>
+<span class="sd">            - start (str): The start time from which the logs will be</span>
+<span class="sd">              downloaded. If not specified, the default is from the</span>
+<span class="sd">              beginning of the job.</span>
+<span class="sd">            - max_lines (int): The max number of logging messages to retrieve.</span>
+<span class="sd">              Default is 100. If set to ``None``, all messages from start</span>
+<span class="sd">              time will be retrieved.</span>
+
+<span class="sd">        :Returns:</span>
+<span class="sd">            - A :class:`.Response` object with a dictionary containing the</span>
+<span class="sd">              timestamp of the most recent message returned and a list of</span>
+<span class="sd">              the log messages, represented as dictionaries, with the message</span>
+<span class="sd">              text, timestamp and task id that the message applies to.</span>
+<span class="sd">            - If the call failed, the response contains the</span>
+<span class="sd">              :class:`.RestCallException`.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_log</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s">&quot;get_log, job_id={0}, start={1}, max_lines={2}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+            <span class="n">job_id</span><span class="p">,</span>
+            <span class="n">start</span><span class="p">,</span>
+            <span class="n">max_lines</span><span class="p">))</span>
+
+        <span class="n">url</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">url</span><span class="p">(</span><span class="s">&quot;jobs/{jobid}/log&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">jobid</span><span class="o">=</span><span class="n">job_id</span><span class="p">)</span>
+        <span class="n">get_params</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="k">if</span> <span class="n">start</span><span class="p">:</span>
+            <span class="n">get_params</span><span class="p">[</span><span class="s">&#39;since&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">start</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">max_lines</span><span class="p">:</span>
+            <span class="n">get_params</span><span class="p">[</span><span class="s">&#39;maxResults&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">max_lines</span><span class="p">)</span>
+
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">get_resp</span> <span class="o">=</span> <span class="n">rest_client</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_auth</span><span class="p">,</span>
+                                       <span class="n">url</span><span class="p">,</span>
+                                       <span class="bp">self</span><span class="o">.</span><span class="n">headers</span><span class="p">,</span>
+                                       <span class="n">params</span><span class="o">=</span><span class="n">get_params</span><span class="p">)</span>
+
+        <span class="k">except</span> <span class="n">RestCallException</span> <span class="k">as</span> <span class="n">exp</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">Response</span><span class="p">(</span><span class="bp">False</span><span class="p">,</span> <span class="n">exp</span><span class="p">)</span>
+
+        <span class="k">else</span><span class="p">:</span>
+            <span class="c">#TODO: Check for specific keys here.</span>
+            <span class="k">return</span> <span class="n">Response</span><span class="p">(</span><span class="bp">True</span><span class="p">,</span> <span class="n">get_resp</span><span class="p">)</span>
+</div>
+<div class="viewcode-block" id="BatchAppsApi.cancel"><a class="viewcode-back" href="../../batch_apps.api.html#batchapps.api.BatchAppsApi.cancel">[docs]</a>    <span class="k">def</span> <span class="nf">cancel</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">job_id</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Cancels a running job.</span>
+
+<span class="sd">        :Args:</span>
+<span class="sd">            - job_id (str): guid of the job to be cancelled.</span>
+
+<span class="sd">        :Returns:</span>
+<span class="sd">            - A :class:`.Response` object with the POST response, however this</span>
+<span class="sd">              is not required if the call is successful. The call will only</span>
+<span class="sd">              be successful if the job can be and is cancelled.</span>
+<span class="sd">            - If the job is not running (and therefore cannot be cancelled),</span>
+<span class="sd">              the call will fail and the :class:`.RestCallException` will be</span>
+<span class="sd">              returned in the :class:`.Response` object.</span>
+<span class="sd">            - Any other communication failures will also return a</span>
+<span class="sd">              :class:`.RestCallException`.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_log</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s">&quot;cancel, job_id={0}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">job_id</span><span class="p">))</span>
+        <span class="n">url</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">url</span><span class="p">(</span><span class="s">&quot;jobs/{jobid}/actions/cancel&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">jobid</span><span class="o">=</span><span class="n">job_id</span><span class="p">)</span>
+
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">post_resp</span> <span class="o">=</span> <span class="n">rest_client</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_auth</span><span class="p">,</span> <span class="n">url</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">headers</span><span class="p">)</span>
+
+        <span class="k">except</span> <span class="n">RestCallException</span> <span class="k">as</span> <span class="n">exp</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">Response</span><span class="p">(</span><span class="bp">False</span><span class="p">,</span> <span class="n">exp</span><span class="p">)</span>
+
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">Response</span><span class="p">(</span><span class="bp">True</span><span class="p">,</span> <span class="n">post_resp</span><span class="p">)</span>
+</div>
+<div class="viewcode-block" id="BatchAppsApi.reprocess"><a class="viewcode-back" href="../../batch_apps.api.html#batchapps.api.BatchAppsApi.reprocess">[docs]</a>    <span class="k">def</span> <span class="nf">reprocess</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">job_id</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Reprocesses any failed tasks in the job.</span>
+<span class="sd">        This call will also re-activate a job if it has a &#39;Failed&#39; status.</span>
+
+<span class="sd">        :Args:</span>
+<span class="sd">            - job_id (str): ID of the job to be reprocessed.</span>
+
+<span class="sd">        :Returns:</span>
+<span class="sd">            - A :class:`.Response` object containing a dictionary with the job</span>
+<span class="sd">              ID of the reprocessed job and a URL to retrieve the job</span>
+<span class="sd">              information (see :meth:`.BatchAppsApi.get_job()`).</span>
+<span class="sd">            - If the call failed the response will hold the</span>
+<span class="sd">              :class:`.RestCallException`.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_log</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s">&quot;reprocess, job_id={0}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">job_id</span><span class="p">))</span>
+        <span class="n">url</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">url</span><span class="p">(</span><span class="s">&quot;jobs/{jobid}/actions/reprocess&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">jobid</span><span class="o">=</span><span class="n">job_id</span><span class="p">)</span>
+
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">post_resp</span> <span class="o">=</span> <span class="n">rest_client</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_auth</span><span class="p">,</span> <span class="n">url</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">headers</span><span class="p">)</span>
+
+        <span class="k">except</span> <span class="n">RestCallException</span> <span class="k">as</span> <span class="n">exp</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">Response</span><span class="p">(</span><span class="bp">False</span><span class="p">,</span> <span class="n">exp</span><span class="p">)</span>
+
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">Response</span><span class="p">(</span><span class="bp">True</span><span class="p">,</span> <span class="n">post_resp</span><span class="p">)</span>
+</div>
+<div class="viewcode-block" id="BatchAppsApi.list_outputs"><a class="viewcode-back" href="../../batch_apps.api.html#batchapps.api.BatchAppsApi.list_outputs">[docs]</a>    <span class="k">def</span> <span class="nf">list_outputs</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">job_id</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Lists the output files produced by a job.</span>
+<span class="sd">        This method will only list final outputs of the job, created by a</span>
+<span class="sd">        Merge Task.</span>
+<span class="sd">        To retrieve a list of all files created by all tasks of the job use</span>
+<span class="sd">        :meth:`.list_output_files()`.</span>
+<span class="sd">        Can be used to ascertain the output filenames before calling the</span>
+<span class="sd">        generic output download URL.</span>
+
+<span class="sd">        :Args:</span>
+<span class="sd">            - job_id (str): ID of the job whose outputs will be listed.</span>
+
+<span class="sd">        :Returns:</span>
+<span class="sd">            - A list of the outputs represented as dictionaries, each with</span>
+<span class="sd">              the &#39;name&#39; and &#39;type&#39; of the output as well as a download</span>
+<span class="sd">              &#39;link&#39;. Contained in a :class:`.Response`. If the call failed,</span>
+<span class="sd">              Response will contain the :class:`.RestCallException`.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_log</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s">&quot;list_outputs, job_id={0}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">job_id</span><span class="p">))</span>
+        <span class="n">url</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">url</span><span class="p">(</span><span class="s">&quot;jobs/{jobid}/outputs&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">jobid</span><span class="o">=</span><span class="n">job_id</span><span class="p">)</span>
+
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">get_resp</span> <span class="o">=</span> <span class="n">rest_client</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_auth</span><span class="p">,</span> <span class="n">url</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">headers</span><span class="p">)</span>
+
+        <span class="k">except</span>  <span class="n">RestCallException</span> <span class="k">as</span> <span class="n">exp</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">Response</span><span class="p">(</span><span class="bp">False</span><span class="p">,</span> <span class="n">exp</span><span class="p">)</span>
+
+        <span class="n">outputs</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">if</span> <span class="p">(</span><span class="ow">not</span> <span class="s">&#39;jobOutputs&#39;</span> <span class="ow">in</span> <span class="n">get_resp</span>
+            <span class="ow">or</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">get_resp</span><span class="p">[</span><span class="s">&#39;jobOutputs&#39;</span><span class="p">],</span> <span class="nb">list</span><span class="p">)):</span>
+
+            <span class="k">return</span> <span class="n">Response</span><span class="p">(</span>
+                <span class="bp">False</span><span class="p">,</span>
+                <span class="n">RestCallException</span><span class="p">(</span><span class="ne">KeyError</span><span class="p">,</span>
+                                  <span class="s">&quot;jobOutputs key not in response message&quot;</span><span class="p">,</span>
+                                  <span class="n">get_resp</span><span class="p">))</span>
+
+        <span class="c"># Reformat output dictrionary to be more manageable</span>
+        <span class="k">for</span> <span class="n">output</span> <span class="ow">in</span> <span class="n">get_resp</span><span class="p">[</span><span class="s">&#39;jobOutputs&#39;</span><span class="p">]:</span>
+            <span class="n">outputs</span><span class="o">.</span><span class="n">append</span><span class="p">({</span>
+                <span class="s">&#39;name&#39;</span><span class="p">:</span> <span class="n">output</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">&#39;name&#39;</span><span class="p">),</span>
+                <span class="s">&#39;link&#39;</span><span class="p">:</span> <span class="n">output</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">&#39;link&#39;</span><span class="p">,</span> <span class="p">{</span><span class="s">&#39;href&#39;</span><span class="p">:</span><span class="bp">None</span><span class="p">})</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">&#39;href&#39;</span><span class="p">),</span>
+                <span class="s">&#39;type&#39;</span><span class="p">:</span> <span class="n">output</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">&#39;kind&#39;</span><span class="p">)</span>
+                <span class="p">})</span>
+        <span class="k">return</span> <span class="n">Response</span><span class="p">(</span><span class="bp">True</span><span class="p">,</span> <span class="n">outputs</span><span class="p">)</span>
+</div>
+<div class="viewcode-block" id="BatchAppsApi.get_output"><a class="viewcode-back" href="../../batch_apps.api.html#batchapps.api.BatchAppsApi.get_output">[docs]</a>    <span class="k">def</span> <span class="nf">get_output</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
+                   <span class="n">download_dir</span><span class="p">,</span>
+                   <span class="n">size</span><span class="p">,</span>
+                   <span class="n">fname</span><span class="p">,</span>
+                   <span class="n">overwrite</span><span class="p">,</span>
+                   <span class="n">job_id</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span>
+                   <span class="n">otype</span><span class="o">=</span><span class="s">&#39;output&#39;</span><span class="p">,</span>
+                   <span class="n">url</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Gets the content of the job output or its thumbnail.</span>
+<span class="sd">        Either ``url``, or both ``job_id`` and ``otype`` must be set.</span>
+<span class="sd">        If all three are set, URL will be used.</span>
+
+<span class="sd">        :Args:</span>
+<span class="sd">            - download_dir (str): The full path to the directory where the</span>
+<span class="sd">              output will be downloaded to.</span>
+<span class="sd">            - size (int): The size in bytes of the file to be downloaded.</span>
+<span class="sd">              Used for progress reporting.</span>
+<span class="sd">            - fname (str): The name of the output file to be downloaded.</span>
+<span class="sd">            - overwrite (bool): Whether to overwrite an existing file if</span>
+<span class="sd">              present.</span>
+
+<span class="sd">        :Kwargs:</span>
+<span class="sd">            - job_id (str): The ID of the job whose output will be downloaded.</span>
+<span class="sd">              Default is None.</span>
+<span class="sd">            - otype (str): The type of output to be downloaded, must be a</span>
+<span class="sd">              string in ``[&#39;output&#39;, &#39;preview&#39;]``.</span>
+<span class="sd">            - url (str): The URL directly to the file to be downloaded. If</span>
+<span class="sd">              supplied, ``job_id`` and ``otype`` will not be used.</span>
+<span class="sd">              Default is None.</span>
+
+<span class="sd">        :Returns:</span>
+<span class="sd">            - :class:`.Response` with the GET response, however this is not</span>
+<span class="sd">              required if the call was successful.</span>
+<span class="sd">            - :class:`.Response` with :exc:`AttributeError` if the correct</span>
+<span class="sd">              URL arguments are not supplied.</span>
+<span class="sd">            - :class:`.Response` with :class:`.RestCallException` if the</span>
+<span class="sd">              download failed.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_log</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span>
+            <span class="s">&quot;get_output, download_dir={dd}, size={sz}, fname={fn}, &quot;</span>
+            <span class="s">&quot;overwrite={ow}, job_id={ji}, url={ur}, otype={ot}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+                <span class="n">dd</span><span class="o">=</span><span class="n">download_dir</span><span class="p">,</span>
+                <span class="n">sz</span><span class="o">=</span><span class="n">size</span><span class="p">,</span>
+                <span class="n">fn</span><span class="o">=</span><span class="n">fname</span><span class="p">,</span>
+                <span class="n">ow</span><span class="o">=</span><span class="n">overwrite</span><span class="p">,</span>
+                <span class="n">ji</span><span class="o">=</span><span class="n">job_id</span><span class="p">,</span>
+                <span class="n">ur</span><span class="o">=</span><span class="n">url</span><span class="p">,</span>
+                <span class="n">ot</span><span class="o">=</span><span class="n">otype</span><span class="p">))</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">url</span> <span class="ow">and</span> <span class="n">job_id</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">otype</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">[</span><span class="s">&#39;output&#39;</span><span class="p">,</span> <span class="s">&#39;preview&#39;</span><span class="p">]:</span>
+                <span class="k">return</span> <span class="n">Response</span><span class="p">(</span>
+                    <span class="bp">False</span><span class="p">,</span>
+                    <span class="n">RestCallException</span><span class="p">(</span>
+                        <span class="ne">ValueError</span><span class="p">,</span>
+                        <span class="s">&quot;output type must be &#39;output&#39; or &#39;preview&#39;&quot;</span><span class="p">,</span>
+                        <span class="bp">None</span><span class="p">))</span>
+
+            <span class="n">url</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">url</span><span class="p">(</span><span class="s">&quot;jobs/{jobid}/outputs/{type}&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">jobid</span><span class="o">=</span><span class="n">job_id</span><span class="p">,</span>
+                                                                 <span class="nb">type</span><span class="o">=</span><span class="n">otype</span><span class="p">)</span>
+
+        <span class="k">elif</span> <span class="ow">not</span> <span class="n">url</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">job_id</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">Response</span><span class="p">(</span>
+                <span class="bp">False</span><span class="p">,</span>
+                <span class="n">RestCallException</span><span class="p">(</span><span class="ne">AttributeError</span><span class="p">,</span>
+                                  <span class="s">&quot;Either job_id or url must be set&quot;</span><span class="p">,</span>
+                                  <span class="bp">None</span><span class="p">))</span>
+
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">get_resp</span> <span class="o">=</span> <span class="n">rest_client</span><span class="o">.</span><span class="n">download</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_auth</span><span class="p">,</span>
+                                            <span class="n">url</span><span class="p">,</span>
+                                            <span class="bp">self</span><span class="o">.</span><span class="n">headers</span><span class="p">,</span>
+                                            <span class="n">download_dir</span><span class="p">,</span>
+                                            <span class="n">size</span><span class="p">,</span>
+                                            <span class="n">overwrite</span><span class="p">,</span>
+                                            <span class="n">f_name</span><span class="o">=</span><span class="n">fname</span><span class="p">)</span>
+
+        <span class="k">except</span> <span class="n">RestCallException</span> <span class="k">as</span> <span class="n">exp</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">Response</span><span class="p">(</span><span class="bp">False</span><span class="p">,</span> <span class="n">exp</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">Response</span><span class="p">(</span><span class="bp">True</span><span class="p">,</span> <span class="n">get_resp</span><span class="p">)</span>
+</div>
+<div class="viewcode-block" id="BatchAppsApi.props_output"><a class="viewcode-back" href="../../batch_apps.api.html#batchapps.api.BatchAppsApi.props_output">[docs]</a>    <span class="k">def</span> <span class="nf">props_output</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">job_id</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">otype</span><span class="o">=</span><span class="s">&#39;output&#39;</span><span class="p">,</span> <span class="n">url</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Gets the properties of the job output or preview.</span>
+<span class="sd">        Used to obtain the size of the final job output or its thumbnail,</span>
+<span class="sd">        which is returned in the response Content Length header.</span>
+<span class="sd">        Either ``url``, or both ``job_id`` and ``otype`` must be set (although</span>
+<span class="sd">        ``otype`` is already set by default).</span>
+<span class="sd">        If all three are set, URL will be used.</span>
+
+<span class="sd">        :Kwargs:</span>
+<span class="sd">            - job_id (str): The ID of the job whose output will be checked.</span>
+<span class="sd">              Default is None.</span>
+<span class="sd">            - otype (str): The type of output to be checked, must be a</span>
+<span class="sd">              string in ``[&#39;output&#39;, &#39;preview&#39;]``.</span>
+<span class="sd">            - url (str): The URL directly to the file to be checked. If</span>
+<span class="sd">              supplied, ``job_id`` and ``otype`` will not be used.</span>
+<span class="sd">              Default is None.</span>
+
+<span class="sd">        :Returns:</span>
+<span class="sd">            - :class:`.Response` with the requested output size in bytes (int)</span>
+<span class="sd">              if the call was successful.</span>
+<span class="sd">            - :class:`.Response` with :exc:`AttributeError` if the correct URL</span>
+<span class="sd">              arguments are not supplied.</span>
+<span class="sd">            - :class:`.Response` with :class:`.RestCallException` if the</span>
+<span class="sd">              download failed.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_log</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s">&quot;props_output, job_id={0}, &quot;</span>
+                        <span class="s">&quot;otype={1}, url={2}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">job_id</span><span class="p">,</span> <span class="n">otype</span><span class="p">,</span> <span class="n">url</span><span class="p">))</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">url</span> <span class="ow">and</span> <span class="n">job_id</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">otype</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">[</span><span class="s">&#39;output&#39;</span><span class="p">,</span> <span class="s">&#39;preview&#39;</span><span class="p">]:</span>
+                <span class="k">return</span> <span class="n">Response</span><span class="p">(</span>
+                    <span class="bp">False</span><span class="p">,</span>
+                    <span class="n">RestCallException</span><span class="p">(</span>
+                        <span class="ne">ValueError</span><span class="p">,</span>
+                        <span class="s">&quot;output type must be &#39;output&#39; or &#39;preview&#39;&quot;</span><span class="p">,</span>
+                        <span class="bp">None</span><span class="p">))</span>
+
+            <span class="n">url</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">url</span><span class="p">(</span><span class="s">&quot;jobs/{jobid}/outputs/{type}&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">jobid</span><span class="o">=</span><span class="n">job_id</span><span class="p">,</span>
+                                                                 <span class="nb">type</span><span class="o">=</span><span class="n">otype</span><span class="p">)</span>
+
+        <span class="k">elif</span> <span class="ow">not</span> <span class="n">url</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">job_id</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">Response</span><span class="p">(</span>
+                <span class="bp">False</span><span class="p">,</span>
+                <span class="n">RestCallException</span><span class="p">(</span><span class="ne">AttributeError</span><span class="p">,</span>
+                                  <span class="s">&quot;Either job_id or url must be set&quot;</span><span class="p">,</span>
+                                  <span class="bp">None</span><span class="p">))</span>
+
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">head_resp</span> <span class="o">=</span> <span class="n">rest_client</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_auth</span><span class="p">,</span> <span class="n">url</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">headers</span><span class="p">)</span>
+
+        <span class="k">except</span> <span class="n">RestCallException</span> <span class="k">as</span> <span class="n">exp</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">Response</span><span class="p">(</span><span class="bp">False</span><span class="p">,</span> <span class="n">exp</span><span class="p">)</span>
+
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">Response</span><span class="p">(</span><span class="bp">True</span><span class="p">,</span> <span class="n">head_resp</span><span class="p">)</span>
+</div>
+<div class="viewcode-block" id="BatchAppsApi.list_output_files"><a class="viewcode-back" href="../../batch_apps.api.html#batchapps.api.BatchAppsApi.list_output_files">[docs]</a>    <span class="k">def</span> <span class="nf">list_output_files</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">job_id</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Lists the intermediate output files produced during a job.</span>
+
+<span class="sd">        :Args:</span>
+<span class="sd">            - job_id (str): The ID of the job whose outputs will be listed.</span>
+
+<span class="sd">        :Returns:</span>
+<span class="sd">            - A list of the outputs represented as dictionaries, each with the</span>
+<span class="sd">              &#39;name&#39; and &#39;type&#39; of the output as well as a download &#39;link&#39;.</span>
+<span class="sd">              Contained in a :class:`.Response`. If the call failed, Response</span>
+<span class="sd">              will contain the :class:`.RestCallException`.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_log</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s">&quot;list_output_files, job_id={0}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">job_id</span><span class="p">))</span>
+        <span class="n">url</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">url</span><span class="p">(</span><span class="s">&quot;jobs/{jobid}/outputs/files&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">jobid</span><span class="o">=</span><span class="n">job_id</span><span class="p">)</span>
+
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">get_resp</span> <span class="o">=</span> <span class="n">rest_client</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_auth</span><span class="p">,</span> <span class="n">url</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">headers</span><span class="p">)</span>
+
+        <span class="k">except</span>  <span class="n">RestCallException</span> <span class="k">as</span> <span class="n">exp</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">Response</span><span class="p">(</span><span class="bp">False</span><span class="p">,</span> <span class="n">exp</span><span class="p">)</span>
+
+        <span class="n">outputs</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">if</span> <span class="p">(</span><span class="ow">not</span> <span class="s">&#39;outputs&#39;</span> <span class="ow">in</span> <span class="n">get_resp</span>
+            <span class="ow">or</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">get_resp</span><span class="p">[</span><span class="s">&#39;outputs&#39;</span><span class="p">],</span> <span class="nb">list</span><span class="p">)):</span>
+
+            <span class="k">return</span> <span class="n">Response</span><span class="p">(</span><span class="bp">False</span><span class="p">,</span>
+                            <span class="n">RestCallException</span><span class="p">(</span>
+                                <span class="ne">KeyError</span><span class="p">,</span>
+                                <span class="s">&quot;outputs key not in response message&quot;</span><span class="p">,</span>
+                                <span class="n">get_resp</span><span class="p">))</span>
+
+        <span class="k">for</span> <span class="n">output</span> <span class="ow">in</span> <span class="n">get_resp</span><span class="p">[</span><span class="s">&#39;outputs&#39;</span><span class="p">]:</span>
+            <span class="n">outputs</span><span class="o">.</span><span class="n">append</span><span class="p">({</span>
+                <span class="s">&#39;name&#39;</span><span class="p">:</span> <span class="n">output</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">&#39;name&#39;</span><span class="p">),</span>
+                <span class="s">&#39;link&#39;</span><span class="p">:</span> <span class="n">output</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">&#39;link&#39;</span><span class="p">,</span> <span class="p">{</span><span class="s">&#39;href&#39;</span><span class="p">:</span><span class="bp">None</span><span class="p">})</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">&#39;href&#39;</span><span class="p">),</span>
+                <span class="s">&#39;type&#39;</span><span class="p">:</span> <span class="n">output</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">&#39;kind&#39;</span><span class="p">)</span>
+                <span class="p">})</span>
+        <span class="k">return</span> <span class="n">Response</span><span class="p">(</span><span class="bp">True</span><span class="p">,</span> <span class="n">outputs</span><span class="p">)</span>
+
+</div>
+<div class="viewcode-block" id="BatchAppsApi.get_output_file"><a class="viewcode-back" href="../../batch_apps.api.html#batchapps.api.BatchAppsApi.get_output_file">[docs]</a>    <span class="k">def</span> <span class="nf">get_output_file</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
+                        <span class="n">download_dir</span><span class="p">,</span>
+                        <span class="n">size</span><span class="p">,</span>
+                        <span class="n">overwrite</span><span class="p">,</span>
+                        <span class="n">job_id</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span>
+                        <span class="n">fname</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span>
+                        <span class="n">url</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Gets the content of a file created in a job.</span>
+<span class="sd">        Either ``url``, or both ``job_id`` and ``fname`` must be set.</span>
+<span class="sd">        If all three are set, job_id &amp; fname will be used.</span>
+
+<span class="sd">        :Args:</span>
+<span class="sd">            - download_dir (str): The full path to the directory where the</span>
+<span class="sd">              output will be downloaded to.</span>
+<span class="sd">            - size (int): The size in bytes of the file to be downloaded.</span>
+<span class="sd">              Used for progress reporting.</span>
+<span class="sd">            - overwrite (bool): Whether to overwrite an existing file if</span>
+<span class="sd">              present.</span>
+
+<span class="sd">        :Kwargs:</span>
+<span class="sd">            - job_id (str): The ID of the job whose output will be downloaded.</span>
+<span class="sd">              Default is None.</span>
+<span class="sd">            - fname (str): The name of the output file to be downloaded.</span>
+<span class="sd">            - url (str): The URL directly to the file to be downloaded.</span>
+<span class="sd">              Default is None.</span>
+
+<span class="sd">        :Returns:</span>
+<span class="sd">            - :class:`.Response` with the GET response, however this is not</span>
+<span class="sd">              required if the call was successful.</span>
+<span class="sd">            - :class:`.Response` with :exc:`AttributeError` if the correct URL</span>
+<span class="sd">              arguments are not supplied.</span>
+<span class="sd">            - :class:`.Response` with :class:`.RestCallException` if the</span>
+<span class="sd">              download failed.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_log</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s">&quot;get_output_file, download_dir={dd}, size={sz}, &quot;</span>
+                        <span class="s">&quot;overwrite={ow}, job_id={ji}, fname={fn}, &quot;</span>
+                        <span class="s">&quot;url={ur}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">dd</span><span class="o">=</span><span class="n">download_dir</span><span class="p">,</span>
+                                          <span class="n">sz</span><span class="o">=</span><span class="n">size</span><span class="p">,</span>
+                                          <span class="n">ow</span><span class="o">=</span><span class="n">overwrite</span><span class="p">,</span>
+                                          <span class="n">ji</span><span class="o">=</span><span class="n">job_id</span><span class="p">,</span>
+                                          <span class="n">fn</span><span class="o">=</span><span class="n">fname</span><span class="p">,</span>
+                                          <span class="n">ur</span><span class="o">=</span><span class="n">url</span><span class="p">))</span>
+
+        <span class="n">name</span> <span class="o">=</span> <span class="n">fname</span> <span class="k">if</span> <span class="n">fname</span> <span class="k">else</span> <span class="bp">None</span>
+
+        <span class="k">if</span> <span class="n">job_id</span> <span class="ow">and</span> <span class="n">name</span><span class="p">:</span>
+            <span class="n">url</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">url</span><span class="p">(</span><span class="s">&quot;jobs/{jobid}/outputs/files/{name}&quot;</span><span class="p">)</span>
+            <span class="n">url</span> <span class="o">=</span> <span class="n">url</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">jobid</span><span class="o">=</span><span class="n">job_id</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="n">name</span><span class="p">)</span>
+
+        <span class="k">elif</span> <span class="n">url</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">Response</span><span class="p">(</span>
+                <span class="bp">False</span><span class="p">,</span>
+                <span class="n">RestCallException</span><span class="p">(</span>
+                    <span class="ne">AttributeError</span><span class="p">,</span>
+                    <span class="s">&quot;Either output url or job id and filename required.&quot;</span><span class="p">,</span>
+                    <span class="bp">None</span><span class="p">))</span>
+
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">get_resp</span> <span class="o">=</span> <span class="n">rest_client</span><span class="o">.</span><span class="n">download</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_auth</span><span class="p">,</span>
+                                            <span class="n">url</span><span class="p">,</span>
+                                            <span class="bp">self</span><span class="o">.</span><span class="n">headers</span><span class="p">,</span>
+                                            <span class="n">download_dir</span><span class="p">,</span>
+                                            <span class="n">size</span><span class="p">,</span> <span class="n">overwrite</span><span class="p">,</span>
+                                            <span class="n">f_name</span><span class="o">=</span><span class="n">name</span><span class="p">)</span>
+
+        <span class="k">except</span> <span class="n">RestCallException</span> <span class="k">as</span> <span class="n">exp</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">Response</span><span class="p">(</span><span class="bp">False</span><span class="p">,</span> <span class="n">exp</span><span class="p">)</span>
+
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">Response</span><span class="p">(</span><span class="bp">True</span><span class="p">,</span> <span class="n">get_resp</span><span class="p">)</span>
+</div>
+<div class="viewcode-block" id="BatchAppsApi.props_output_file"><a class="viewcode-back" href="../../batch_apps.api.html#batchapps.api.BatchAppsApi.props_output_file">[docs]</a>    <span class="k">def</span> <span class="nf">props_output_file</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">job_id</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">fname</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">url</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Get the file size of a given task output.</span>
+<span class="sd">        Used to obtain the size of the requested file, which is returned in</span>
+<span class="sd">        the response Content Length header. Either ``url``, or both ``job_id``</span>
+<span class="sd">        and ``fname`` must be set. If all three are set, job_id &amp; fname will</span>
+<span class="sd">        be used.</span>
+
+<span class="sd">        :Kwargs:</span>
+<span class="sd">            - job_id (str): The ID of the job whose output will be checked.</span>
+<span class="sd">              Default is None.</span>
+<span class="sd">            - fname (str): The name of the output file to be downloaded.</span>
+<span class="sd">            - url (str): The URL directly to the file to be checked.</span>
+<span class="sd">              Default is None.</span>
+
+<span class="sd">        :Returns:</span>
+<span class="sd">            - :class:`.Response` with the requested output size in bytes (int)</span>
+<span class="sd">              if the call was successful.</span>
+<span class="sd">            - :class:`.Response` with :exc:`AttributeError` if the correct</span>
+<span class="sd">              URL arguments are not supplied.</span>
+<span class="sd">            - :class:`.Response` with :class:`.RestCallException` if the</span>
+<span class="sd">              download failed.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_log</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s">&quot;props_output_file, job_id={0}, &quot;</span>
+                        <span class="s">&quot;fname={1}, url={2}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">job_id</span><span class="p">,</span> <span class="n">fname</span><span class="p">,</span> <span class="n">url</span><span class="p">))</span>
+        <span class="k">if</span> <span class="n">job_id</span> <span class="ow">and</span> <span class="n">fname</span><span class="p">:</span>
+            <span class="n">url</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">url</span><span class="p">(</span><span class="s">&quot;jobs/{jobid}/outputs/files/{name}&quot;</span><span class="p">)</span>
+            <span class="n">url</span> <span class="o">=</span> <span class="n">url</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">jobid</span><span class="o">=</span><span class="n">job_id</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="n">fname</span><span class="p">)</span>
+
+        <span class="k">elif</span> <span class="ow">not</span> <span class="n">url</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">Response</span><span class="p">(</span>
+                <span class="bp">False</span><span class="p">,</span>
+                <span class="n">RestCallException</span><span class="p">(</span>
+                    <span class="ne">AttributeError</span><span class="p">,</span>
+                    <span class="s">&quot;Either output url or job id and filename required.&quot;</span><span class="p">,</span>
+                    <span class="bp">None</span><span class="p">))</span>
+
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">head_resp</span> <span class="o">=</span> <span class="n">rest_client</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_auth</span><span class="p">,</span> <span class="n">url</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">headers</span><span class="p">)</span>
+
+        <span class="k">except</span> <span class="n">RestCallException</span> <span class="k">as</span> <span class="n">exp</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">Response</span><span class="p">(</span><span class="bp">False</span><span class="p">,</span> <span class="n">exp</span><span class="p">)</span>
+
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">Response</span><span class="p">(</span><span class="bp">True</span><span class="p">,</span> <span class="n">head_resp</span><span class="p">)</span>
+</div>
+<div class="viewcode-block" id="BatchAppsApi.list_tasks"><a class="viewcode-back" href="../../batch_apps.api.html#batchapps.api.BatchAppsApi.list_tasks">[docs]</a>    <span class="k">def</span> <span class="nf">list_tasks</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">job_id</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">url</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        List the tasks of a job.</span>
+<span class="sd">        Either ``job_id`` *or* ``url`` must be set. If both are set ``url``</span>
+<span class="sd">        will be used.</span>
+
+<span class="sd">        :Kwargs:</span>
+<span class="sd">            - job_id (str): ID of of the job to list the tasks for.</span>
+<span class="sd">              Default is None.</span>
+<span class="sd">            - url (str): Direct URL to the task list of the job</span>
+<span class="sd">              (supplied by :meth:`.BatchAppsApi.get_job()`)</span>
+
+<span class="sd">        :Returns:</span>
+<span class="sd">            - A :class:`.Response` object containing the list of task</span>
+<span class="sd">              dictionaries if the call is successfull.</span>
+<span class="sd">            - A :class:`.Response` object containing the</span>
+<span class="sd">              :class:`.RestCallException` is the call failed.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_log</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s">&quot;list_tasks, job_id={0}, url={1}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">job_id</span><span class="p">,</span> <span class="n">url</span><span class="p">))</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">url</span> <span class="ow">and</span> <span class="n">job_id</span><span class="p">:</span>
+            <span class="n">url</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">url</span><span class="p">(</span><span class="s">&quot;jobs/{jobid}/tasks&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">jobid</span><span class="o">=</span><span class="n">job_id</span><span class="p">)</span>
+
+        <span class="k">elif</span> <span class="ow">not</span> <span class="n">url</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">job_id</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">Response</span><span class="p">(</span><span class="bp">False</span><span class="p">,</span>
+                            <span class="n">RestCallException</span><span class="p">(</span>
+                                <span class="ne">AttributeError</span><span class="p">,</span>
+                                <span class="s">&quot;Either job_id or url must get set&quot;</span><span class="p">,</span>
+                                <span class="bp">None</span><span class="p">))</span>
+
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">resp</span> <span class="o">=</span> <span class="n">rest_client</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_auth</span><span class="p">,</span> <span class="n">url</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">headers</span><span class="p">)</span>
+
+        <span class="k">except</span>  <span class="n">RestCallException</span> <span class="k">as</span> <span class="n">exp</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">Response</span><span class="p">(</span><span class="bp">False</span><span class="p">,</span> <span class="n">exp</span><span class="p">)</span>
+
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">if</span> <span class="s">&#39;tasks&#39;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">resp</span> <span class="ow">or</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">resp</span><span class="p">[</span><span class="s">&#39;tasks&#39;</span><span class="p">],</span> <span class="nb">list</span><span class="p">):</span>
+                <span class="k">return</span> <span class="n">Response</span><span class="p">(</span><span class="bp">False</span><span class="p">,</span>
+                                <span class="n">RestCallException</span><span class="p">(</span>
+                                    <span class="ne">KeyError</span><span class="p">,</span>
+                                    <span class="s">&quot;tasks key not in response message&quot;</span><span class="p">,</span>
+                                    <span class="n">resp</span><span class="p">))</span>
+
+            <span class="k">return</span> <span class="n">Response</span><span class="p">(</span><span class="bp">True</span><span class="p">,</span> <span class="n">resp</span><span class="p">[</span><span class="s">&#39;tasks&#39;</span><span class="p">])</span>
+</div>
+<div class="viewcode-block" id="BatchAppsApi.list_task_outputs"><a class="viewcode-back" href="../../batch_apps.api.html#batchapps.api.BatchAppsApi.list_task_outputs">[docs]</a>    <span class="k">def</span> <span class="nf">list_task_outputs</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">job_id</span><span class="p">,</span> <span class="n">task</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Lists the output files produced by a task.</span>
+
+<span class="sd">        :Args:</span>
+<span class="sd">            - job_id (str): The ID of the job the task outputs belong to.</span>
+<span class="sd">            - task (int, str): The ID of the task whose outputs will be listed.</span>
+
+<span class="sd">        :Returns:</span>
+<span class="sd">            - A list of the outputs represented as dictionaries, each with the</span>
+<span class="sd">              &#39;name&#39; and &#39;type&#39; of the output as well as a download &#39;link&#39;.</span>
+<span class="sd">              Contained in a :class:`.Response`. If the call failed,</span>
+<span class="sd">              Response will contain the :class:`.RestCallException`.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_log</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s">&quot;list_task_outputs, job_id={0}, &quot;</span>
+                        <span class="s">&quot;task={1}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">job_id</span><span class="p">,</span> <span class="n">task</span><span class="p">))</span>
+
+        <span class="n">url</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">url</span><span class="p">(</span><span class="s">&quot;jobs/{jobid}/tasks/{taskid}/outputs/files&quot;</span><span class="p">)</span>
+        <span class="n">url</span> <span class="o">=</span> <span class="n">url</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">jobid</span><span class="o">=</span><span class="n">job_id</span><span class="p">,</span> <span class="n">taskid</span><span class="o">=</span><span class="n">task</span><span class="p">)</span>
+
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">resp</span> <span class="o">=</span> <span class="n">rest_client</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_auth</span><span class="p">,</span> <span class="n">url</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">headers</span><span class="p">)</span>
+
+        <span class="k">except</span>  <span class="n">RestCallException</span> <span class="k">as</span> <span class="n">exp</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">Response</span><span class="p">(</span><span class="bp">False</span><span class="p">,</span> <span class="n">exp</span><span class="p">)</span>
+
+        <span class="n">outputs</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">if</span> <span class="s">&#39;outputs&#39;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">resp</span> <span class="ow">or</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">resp</span><span class="p">[</span><span class="s">&#39;outputs&#39;</span><span class="p">],</span> <span class="nb">list</span><span class="p">):</span>
+            <span class="k">return</span> <span class="n">Response</span><span class="p">(</span><span class="bp">False</span><span class="p">,</span>
+                            <span class="n">RestCallException</span><span class="p">(</span>
+                                <span class="ne">KeyError</span><span class="p">,</span>
+                                <span class="s">&quot;outputs key not in response message&quot;</span><span class="p">,</span>
+                                <span class="n">resp</span><span class="p">))</span>
+
+        <span class="k">for</span> <span class="n">output</span> <span class="ow">in</span> <span class="n">resp</span><span class="p">[</span><span class="s">&#39;outputs&#39;</span><span class="p">]:</span>
+            <span class="n">outputs</span><span class="o">.</span><span class="n">append</span><span class="p">({</span>
+                <span class="s">&#39;name&#39;</span><span class="p">:</span> <span class="n">output</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">&#39;name&#39;</span><span class="p">),</span>
+                <span class="s">&#39;link&#39;</span><span class="p">:</span> <span class="n">output</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">&#39;link&#39;</span><span class="p">,</span> <span class="p">{</span><span class="s">&#39;href&#39;</span><span class="p">:</span><span class="bp">None</span><span class="p">})</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">&#39;href&#39;</span><span class="p">),</span>
+                <span class="s">&#39;type&#39;</span><span class="p">:</span> <span class="n">output</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">&#39;kind&#39;</span><span class="p">)</span>
+                <span class="p">})</span>
+        <span class="k">return</span> <span class="n">Response</span><span class="p">(</span><span class="bp">True</span><span class="p">,</span> <span class="n">outputs</span><span class="p">)</span>
+</div>
+<div class="viewcode-block" id="BatchAppsApi.cancel_task"><a class="viewcode-back" href="../../batch_apps.api.html#batchapps.api.BatchAppsApi.cancel_task">[docs]</a>    <span class="k">def</span> <span class="nf">cancel_task</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">job_id</span><span class="p">,</span> <span class="n">task</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Cancel a running task of a job in progress.</span>
+
+<span class="sd">        :Args:</span>
+<span class="sd">            - job_id (str): The ID of the job whose task will be cancelled.</span>
+<span class="sd">            - task (int, str): The ID of the task to be cancelled.</span>
+
+<span class="sd">        :Returns:</span>
+<span class="sd">            - A :class:`.Response` object with the POST response, however this</span>
+<span class="sd">              is not required if the call is successful. The call will only</span>
+<span class="sd">              be successful if the task can be and is cancelled.</span>
+<span class="sd">            - If the task is not running (and therefore cannot be cancelled),</span>
+<span class="sd">              the call will fail and the :class:`.RestCallException` will be</span>
+<span class="sd">              returned in the :class:`.Response` object.</span>
+<span class="sd">            - Any other communication failures will also return a</span>
+<span class="sd">              :class:`.RestCallException`.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_log</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s">&quot;cancel_task, job_id={0}, task={1}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">job_id</span><span class="p">,</span>
+                                                                   <span class="n">task</span><span class="p">))</span>
+        <span class="n">url</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">url</span><span class="p">(</span><span class="s">&quot;jobs/{jobid}/tasks/{taskid}/actions/cancel&quot;</span><span class="p">)</span>
+        <span class="n">url</span> <span class="o">=</span> <span class="n">url</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">jobid</span><span class="o">=</span><span class="n">job_id</span><span class="p">,</span> <span class="n">taskid</span><span class="o">=</span><span class="n">task</span><span class="p">)</span>
+
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">resp</span> <span class="o">=</span> <span class="n">rest_client</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_auth</span><span class="p">,</span> <span class="n">url</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">headers</span><span class="p">)</span>
+
+        <span class="k">except</span> <span class="n">RestCallException</span> <span class="k">as</span> <span class="n">exp</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">Response</span><span class="p">(</span><span class="bp">False</span><span class="p">,</span> <span class="n">exp</span><span class="p">)</span>
+
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">Response</span><span class="p">(</span><span class="bp">True</span><span class="p">,</span> <span class="n">resp</span><span class="p">)</span>
+</div>
+<div class="viewcode-block" id="BatchAppsApi.list_files"><a class="viewcode-back" href="../../batch_apps.api.html#batchapps.api.BatchAppsApi.list_files">[docs]</a>    <span class="k">def</span> <span class="nf">list_files</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Lists the users files.</span>
+<span class="sd">        This refers to files loaded by the user (sometimes referred to as</span>
+<span class="sd">        assets) as distinct from task or job outputs generated during</span>
+<span class="sd">        task processing.</span>
+
+<span class="sd">        :Returns:</span>
+<span class="sd">            - A :class:`.Response` object containing a list of files as</span>
+<span class="sd">              dictionaries, with data:</span>
+<span class="sd">              ``[&#39;id&#39;,&#39;name&#39;,&#39;lastModifiedBy&#39;,&#39;lastModifiedTime&#39;,&#39;link&#39;]``</span>
+<span class="sd">            - If the call failed or if the response is incomplete/malformed</span>
+<span class="sd">              a :class:`.Response` object with a :class:`.RestCallException`.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_log</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s">&quot;list_files, no params&quot;</span><span class="p">)</span>
+        <span class="n">url</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">url</span><span class="p">(</span><span class="s">&quot;files&quot;</span><span class="p">)</span>
+
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">resp</span> <span class="o">=</span> <span class="n">rest_client</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_auth</span><span class="p">,</span> <span class="n">url</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">headers</span><span class="p">)</span>
+
+        <span class="k">except</span>  <span class="n">RestCallException</span> <span class="k">as</span> <span class="n">exp</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">Response</span><span class="p">(</span><span class="bp">False</span><span class="p">,</span> <span class="n">exp</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="s">&#39;files&#39;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">resp</span> <span class="ow">or</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">resp</span><span class="p">[</span><span class="s">&#39;files&#39;</span><span class="p">],</span> <span class="nb">list</span><span class="p">):</span>
+            <span class="k">return</span> <span class="n">Response</span><span class="p">(</span><span class="bp">False</span><span class="p">,</span>
+                            <span class="n">RestCallException</span><span class="p">(</span>
+                                <span class="ne">KeyError</span><span class="p">,</span>
+                                <span class="s">&quot;files key not in response message&quot;</span><span class="p">,</span>
+                                <span class="n">resp</span><span class="p">))</span>
+
+        <span class="k">return</span> <span class="n">Response</span><span class="p">(</span><span class="bp">True</span><span class="p">,</span> <span class="n">resp</span><span class="p">[</span><span class="s">&#39;files&#39;</span><span class="p">])</span>
+</div>
+<div class="viewcode-block" id="BatchAppsApi.query_files"><a class="viewcode-back" href="../../batch_apps.api.html#batchapps.api.BatchAppsApi.query_files">[docs]</a>    <span class="k">def</span> <span class="nf">query_files</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">files</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Queries for user files matching specified criteria.</span>
+<span class="sd">        This is used to detect whether user&#39;s files already exist in the cloud,</span>
+<span class="sd">        and if they&#39;re up-to-date. Any number of files can be queried in a</span>
+<span class="sd">        single call.</span>
+
+<span class="sd">        :Args:</span>
+<span class="sd">            - files (list, dict, str): The files to query.</span>
+<span class="sd">              If this is in the form of a single filename, or list of</span>
+<span class="sd">              filenames, the call will query for user files that match</span>
+<span class="sd">              that filename. If this is in the form of a dict, or list of</span>
+<span class="sd">              dicts, the call will query for a more specific match.</span>
+<span class="sd">              Query dict should have the keys ``{&#39;fileName&#39;, &#39;timestamp&#39;}``</span>
+<span class="sd">              and optionally ``{&#39;originalPath&#39;}``.</span>
+
+<span class="sd">        :Returns:</span>
+<span class="sd">            - If the query was by filename, a :class:`.Response` containing a</span>
+<span class="sd">              list of all the files (as dicts) with that name will be</span>
+<span class="sd">              returned.</span>
+<span class="sd">            - If the query was by specification, a :class:`.Response`</span>
+<span class="sd">              containing a list of all the matching files (as dicts) will</span>
+<span class="sd">              be returned.</span>
+<span class="sd">            - If the call failed, a :class:`.Response` object containing a</span>
+<span class="sd">              :class:`.RestCallException` will be returned.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_log</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s">&quot;query_files, files={0}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">files</span><span class="p">))</span>
+        <span class="n">url</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">url</span><span class="p">(</span><span class="s">&quot;files/query/{queryby}&quot;</span><span class="p">)</span>
+        <span class="n">operations</span> <span class="o">=</span> <span class="p">{</span><span class="nb">str</span><span class="p">:</span><span class="s">&#39;byname&#39;</span><span class="p">,</span> <span class="nb">dict</span><span class="p">:</span><span class="s">&#39;byspecification&#39;</span><span class="p">}</span>
+
+        <span class="n">optype</span> <span class="o">=</span> <span class="nb">type</span><span class="p">(</span><span class="n">files</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">optype</span> <span class="o">==</span> <span class="nb">list</span> <span class="ow">and</span> <span class="nb">len</span><span class="p">(</span><span class="n">files</span><span class="p">)</span> <span class="o">&gt;=</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="n">optype</span> <span class="o">=</span> <span class="nb">type</span><span class="p">(</span><span class="n">files</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+        <span class="k">elif</span> <span class="n">optype</span> <span class="o">==</span> <span class="nb">list</span> <span class="ow">and</span> <span class="nb">len</span><span class="p">(</span><span class="n">files</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">Response</span><span class="p">(</span><span class="bp">False</span><span class="p">,</span>
+                            <span class="n">RestCallException</span><span class="p">(</span>
+                                <span class="ne">ValueError</span><span class="p">,</span>
+                                <span class="s">&quot;File list empty&quot;</span><span class="p">,</span>
+                                <span class="ne">ValueError</span><span class="p">(</span><span class="s">&quot;File list empty&quot;</span><span class="p">)))</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">files</span> <span class="o">=</span> <span class="p">[</span><span class="n">files</span><span class="p">]</span>
+
+        <span class="k">if</span> <span class="n">optype</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">operations</span><span class="p">:</span>
+            <span class="n">error</span> <span class="o">=</span> <span class="p">(</span><span class="s">&quot;File query can be done with single &quot;</span>
+                     <span class="s">&quot;file name, list of names, or userfile &quot;</span>
+                     <span class="s">&quot;spec dict. Not {t}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">t</span><span class="o">=</span><span class="nb">type</span><span class="p">(</span><span class="n">files</span><span class="p">)))</span>
+
+            <span class="k">return</span> <span class="n">Response</span><span class="p">(</span><span class="bp">False</span><span class="p">,</span> <span class="n">RestCallException</span><span class="p">(</span><span class="ne">TypeError</span><span class="p">,</span>
+                                                     <span class="n">error</span><span class="p">,</span>
+                                                     <span class="ne">TypeError</span><span class="p">(</span><span class="n">error</span><span class="p">)))</span>
+
+        <span class="n">req_type</span> <span class="o">=</span> <span class="n">operations</span><span class="p">[</span><span class="n">optype</span><span class="p">]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_log</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s">&quot;Querying files using {0}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">req_type</span><span class="p">))</span>
+        <span class="n">url</span> <span class="o">=</span> <span class="n">url</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">queryby</span><span class="o">=</span><span class="n">req_type</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">req_type</span> <span class="o">==</span> <span class="s">&#39;byspecification&#39;</span><span class="p">:</span>
+            <span class="n">message</span> <span class="o">=</span> <span class="p">{</span><span class="s">&quot;Specifications&quot;</span><span class="p">:</span> <span class="n">files</span><span class="p">}</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">message</span> <span class="o">=</span> <span class="p">{</span><span class="s">&quot;Names&quot;</span><span class="p">:</span> <span class="n">files</span><span class="p">}</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_log</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s">&quot;File query url={0}, message={1}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">message</span><span class="p">))</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">resp</span> <span class="o">=</span> <span class="n">rest_client</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_auth</span><span class="p">,</span> <span class="n">url</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">headers</span><span class="p">,</span> <span class="n">message</span><span class="p">)</span>
+
+        <span class="k">except</span>  <span class="n">RestCallException</span> <span class="k">as</span> <span class="n">exp</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">Response</span><span class="p">(</span><span class="bp">False</span><span class="p">,</span> <span class="n">exp</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="s">&#39;files&#39;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">resp</span> <span class="ow">or</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">resp</span><span class="p">[</span><span class="s">&#39;files&#39;</span><span class="p">],</span> <span class="nb">list</span><span class="p">):</span>
+            <span class="k">return</span> <span class="n">Response</span><span class="p">(</span><span class="bp">False</span><span class="p">,</span>
+                            <span class="n">RestCallException</span><span class="p">(</span>
+                                <span class="ne">KeyError</span><span class="p">,</span>
+                                <span class="s">&quot;files key not in response message&quot;</span><span class="p">,</span>
+                                <span class="n">resp</span><span class="p">))</span>
+
+        <span class="k">return</span> <span class="n">Response</span><span class="p">(</span><span class="bp">True</span><span class="p">,</span> <span class="n">resp</span><span class="p">[</span><span class="s">&#39;files&#39;</span><span class="p">])</span>
+
+</div>
+<div class="viewcode-block" id="BatchAppsApi.query_missing_files"><a class="viewcode-back" href="../../batch_apps.api.html#batchapps.api.BatchAppsApi.query_missing_files">[docs]</a>    <span class="k">def</span> <span class="nf">query_missing_files</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">files</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Checks whether user files are present in the cloud.</span>
+<span class="sd">        As opposed to :meth:`.query_files()`, this call returns the files that</span>
+<span class="sd">        are **not** present in the cloud.</span>
+
+<span class="sd">        :Args:</span>
+<span class="sd">            - files (dict, list): Either a file specification dictionary, or a</span>
+<span class="sd">              list of file spec dictionaries.</span>
+
+<span class="sd">        :Returns:</span>
+<span class="sd">            - A :class:`.Response` object containing a list of the files that</span>
+<span class="sd">              don&#39;t yet exist in the cloud. The files are represented as a</span>
+<span class="sd">              dict with only a &#39;name&#39; key.</span>
+<span class="sd">            - If the call failed, a :class:`.Response` object containing</span>
+<span class="sd">              a :class:`.RestCallException` is returned.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c">#TODO: Check whether &#39;FileHash&#39; is supported.</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_log</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s">&quot;query_missing_files, files={0}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">files</span><span class="p">))</span>
+        <span class="n">url</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">url</span><span class="p">(</span><span class="s">&quot;files/query/missing&quot;</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="nb">type</span><span class="p">(</span><span class="n">files</span><span class="p">)</span> <span class="o">==</span> <span class="nb">dict</span><span class="p">:</span>
+            <span class="n">files</span> <span class="o">=</span> <span class="p">[</span><span class="n">files</span><span class="p">]</span>
+
+        <span class="k">elif</span> <span class="ow">not</span> <span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">files</span><span class="p">)</span> <span class="o">==</span> <span class="nb">list</span>
+                  <span class="ow">and</span> <span class="nb">len</span><span class="p">(</span><span class="n">files</span><span class="p">)</span> <span class="o">&gt;=</span> <span class="mi">1</span>
+                  <span class="ow">and</span> <span class="nb">type</span><span class="p">(</span><span class="n">files</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span> <span class="o">==</span> <span class="nb">dict</span><span class="p">):</span>
+
+            <span class="n">error</span> <span class="o">=</span> <span class="p">(</span><span class="s">&quot;File query can be done with single userfile &quot;</span>
+                     <span class="s">&quot;spec dict, or list of userfile spec dicts. &quot;</span>
+                     <span class="s">&quot;Not {t}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">t</span><span class="o">=</span><span class="nb">type</span><span class="p">(</span><span class="n">files</span><span class="p">)))</span>
+            <span class="k">return</span> <span class="n">Response</span><span class="p">(</span><span class="bp">False</span><span class="p">,</span> <span class="n">RestCallException</span><span class="p">(</span><span class="ne">TypeError</span><span class="p">,</span> <span class="n">error</span><span class="p">,</span> <span class="bp">None</span><span class="p">))</span>
+
+        <span class="n">message</span> <span class="o">=</span> <span class="p">{</span><span class="s">&quot;Specifications&quot;</span><span class="p">:</span> <span class="n">files</span><span class="p">}</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">resp</span> <span class="o">=</span> <span class="n">rest_client</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_auth</span><span class="p">,</span> <span class="n">url</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">headers</span><span class="p">,</span> <span class="n">message</span><span class="p">)</span>
+
+        <span class="k">except</span>  <span class="n">RestCallException</span> <span class="k">as</span> <span class="n">exp</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">Response</span><span class="p">(</span><span class="bp">False</span><span class="p">,</span> <span class="n">exp</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="s">&#39;files&#39;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">resp</span> <span class="ow">or</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">resp</span><span class="p">[</span><span class="s">&#39;files&#39;</span><span class="p">],</span> <span class="nb">list</span><span class="p">):</span>
+            <span class="k">return</span> <span class="n">Response</span><span class="p">(</span>
+                <span class="bp">False</span><span class="p">,</span>
+                <span class="n">RestCallException</span><span class="p">(</span><span class="ne">KeyError</span><span class="p">,</span>
+                                  <span class="s">&quot;files key not in response message&quot;</span><span class="p">,</span>
+                                  <span class="n">resp</span><span class="p">))</span>
+
+        <span class="k">return</span> <span class="n">Response</span><span class="p">(</span><span class="bp">True</span><span class="p">,</span> <span class="n">resp</span><span class="p">[</span><span class="s">&#39;files&#39;</span><span class="p">])</span>
+
+</div>
+<div class="viewcode-block" id="BatchAppsApi.get_file"><a class="viewcode-back" href="../../batch_apps.api.html#batchapps.api.BatchAppsApi.get_file">[docs]</a>    <span class="k">def</span> <span class="nf">get_file</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">userfile</span><span class="p">,</span> <span class="n">size</span><span class="p">,</span> <span class="n">download_dir</span><span class="p">,</span> <span class="n">overwrite</span><span class="o">=</span><span class="bp">False</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Gets the content of a file previously uploaded by the user.</span>
+
+<span class="sd">        :Args:</span>
+<span class="sd">            - userfile (:class:`.UserFile`): The userfile reference for the</span>
+<span class="sd">              file to be downloaded. Could be generated from a</span>
+<span class="sd">              :meth:`.FileManager.list_files()` call or file query.</span>
+<span class="sd">              Must have &#39;url&#39; attr.</span>
+<span class="sd">            - size (int): Size of the file in byte to be downloaded</span>
+<span class="sd">              (see :meth:`.props_file()`).</span>
+<span class="sd">            - download_dir (str): The full path to the destination directory.</span>
+
+<span class="sd">        :Kwargs:</span>
+<span class="sd">            - overwrite (bool): Whether to overwrite a destination file if it</span>
+<span class="sd">              already exists. Default is ``False``.</span>
+
+<span class="sd">        :Returns:</span>
+<span class="sd">            - :class:`.Response` with the GET response, however this is not</span>
+<span class="sd">              required if the call was successful.</span>
+<span class="sd">            - :class:`.Response` with :class:`.RestCallException` if the</span>
+<span class="sd">              download failed.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">userfile</span><span class="p">,</span> <span class="n">UserFile</span><span class="p">):</span>
+            <span class="k">return</span> <span class="n">Response</span><span class="p">(</span><span class="bp">False</span><span class="p">,</span> <span class="n">RestCallException</span><span class="p">(</span><span class="ne">TypeError</span><span class="p">,</span>
+                                                     <span class="s">&quot;Not a valid UserFile&quot;</span><span class="p">,</span>
+                                                     <span class="bp">None</span><span class="p">))</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_log</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s">&quot;get_file, file={0}, size={1}, &quot;</span>
+                        <span class="s">&quot;download_dir={2}, overwrite={3}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">userfile</span><span class="p">,</span>
+                                                                 <span class="n">size</span><span class="p">,</span>
+                                                                 <span class="n">download_dir</span><span class="p">,</span>
+                                                                 <span class="n">overwrite</span><span class="p">))</span>
+        <span class="n">url</span> <span class="o">=</span> <span class="n">userfile</span><span class="o">.</span><span class="n">url</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_log</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s">&quot;Get file url: {0}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">url</span><span class="p">))</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">get_resp</span> <span class="o">=</span> <span class="n">rest_client</span><span class="o">.</span><span class="n">download</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_auth</span><span class="p">,</span>
+                                            <span class="n">url</span><span class="p">,</span>
+                                            <span class="bp">self</span><span class="o">.</span><span class="n">headers</span><span class="p">,</span>
+                                            <span class="n">download_dir</span><span class="p">,</span>
+                                            <span class="n">size</span><span class="p">,</span>
+                                            <span class="n">overwrite</span><span class="o">=</span><span class="n">overwrite</span><span class="p">)</span>
+
+        <span class="k">except</span> <span class="n">RestCallException</span> <span class="k">as</span> <span class="n">exp</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">Response</span><span class="p">(</span><span class="bp">False</span><span class="p">,</span> <span class="n">exp</span><span class="p">)</span>
+
+        <span class="k">else</span><span class="p">:</span>
+            <span class="c">#TODO: Reconfigure original userfile?</span>
+            <span class="k">return</span> <span class="n">Response</span><span class="p">(</span><span class="bp">True</span><span class="p">,</span> <span class="n">get_resp</span><span class="p">)</span>
+</div>
+<div class="viewcode-block" id="BatchAppsApi.props_file"><a class="viewcode-back" href="../../batch_apps.api.html#batchapps.api.BatchAppsApi.props_file">[docs]</a>    <span class="k">def</span> <span class="nf">props_file</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">userfile</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Gets the properties of a file previously uploaded by the user.</span>
+
+<span class="sd">        :Args:</span>
+<span class="sd">            - userfile (:class:`.UserFile`): The userfile reference for the</span>
+<span class="sd">              file to be checked. Could be generated from a</span>
+<span class="sd">              :meth:`.FileManager.list_files()` call or file query.</span>
+<span class="sd">              Must have &#39;url&#39; attr.</span>
+
+<span class="sd">        :Returns:</span>
+<span class="sd">            - :class:`.Response` with the requested file size in bytes (int) if</span>
+<span class="sd">              the call was successful.</span>
+<span class="sd">            - :class:`.Response` with :class:`.RestCallException` if the</span>
+<span class="sd">              download failed.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">userfile</span><span class="p">,</span> <span class="n">UserFile</span><span class="p">):</span>
+            <span class="k">return</span> <span class="n">Response</span><span class="p">(</span><span class="bp">False</span><span class="p">,</span>
+                            <span class="n">RestCallException</span><span class="p">(</span><span class="ne">TypeError</span><span class="p">,</span>
+                                              <span class="s">&quot;Not a valid UserFile&quot;</span><span class="p">,</span>
+                                              <span class="bp">None</span><span class="p">))</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_log</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s">&quot;props_file, file={0}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">userfile</span><span class="p">))</span>
+        <span class="n">url</span> <span class="o">=</span> <span class="n">userfile</span><span class="o">.</span><span class="n">url</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">head_resp</span> <span class="o">=</span> <span class="n">rest_client</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_auth</span><span class="p">,</span> <span class="n">url</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">headers</span><span class="p">)</span>
+
+        <span class="k">except</span> <span class="n">RestCallException</span> <span class="k">as</span> <span class="n">exp</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">Response</span><span class="p">(</span><span class="bp">False</span><span class="p">,</span> <span class="n">exp</span><span class="p">)</span>
+
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">Response</span><span class="p">(</span><span class="bp">True</span><span class="p">,</span> <span class="n">head_resp</span><span class="p">)</span>
+</div>
+<div class="viewcode-block" id="BatchAppsApi.send_file"><a class="viewcode-back" href="../../batch_apps.api.html#batchapps.api.BatchAppsApi.send_file">[docs]</a>    <span class="k">def</span> <span class="nf">send_file</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">userfile</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Uploads a user file for use in a job.</span>
+
+<span class="sd">        :Args:</span>
+<span class="sd">            - userfile (:class:`.UserFile`): The userfile reference for the</span>
+<span class="sd">              file to be uploaded. Must be created from a file that exists</span>
+<span class="sd">              locally.</span>
+
+<span class="sd">        :Returns:</span>
+<span class="sd">            - :class:`.Response` with the PUT response, however this is not</span>
+<span class="sd">              required if the call was successful.</span>
+<span class="sd">            - :class:`.Response` with :class:`.RestCallException` if the</span>
+<span class="sd">              upload failed of ``userfile`` was invalid.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c">#TODO: Get progress feedback working</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">userfile</span><span class="p">,</span> <span class="s">&quot;create_query_specifier&quot;</span><span class="p">):</span>
+            <span class="k">return</span> <span class="n">Response</span><span class="p">(</span>
+                <span class="bp">False</span><span class="p">,</span>
+                <span class="n">RestCallException</span><span class="p">(</span><span class="ne">TypeError</span><span class="p">,</span>
+                                  <span class="s">&quot;Not a valid UserFile&quot;</span><span class="p">,</span>
+                                  <span class="bp">None</span><span class="p">))</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_log</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s">&quot;send_file, file={0}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">userfile</span><span class="p">))</span>
+        <span class="n">url</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">url</span><span class="p">(</span><span class="s">&quot;files/{name}&quot;</span><span class="p">)</span>
+
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">file_spec</span> <span class="o">=</span> <span class="n">userfile</span><span class="o">.</span><span class="n">create_query_specifier</span><span class="p">()</span>
+            <span class="n">params</span> <span class="o">=</span> <span class="p">{</span><span class="s">&#39;timestamp&#39;</span><span class="p">:</span><span class="n">file_spec</span><span class="p">[</span><span class="s">&#39;Timestamp&#39;</span><span class="p">],</span>
+                      <span class="s">&#39;originalFilePath&#39;</span><span class="p">:</span><span class="n">file_spec</span><span class="p">[</span><span class="s">&#39;OriginalPath&#39;</span><span class="p">]}</span>
+
+            <span class="bp">self</span><span class="o">.</span><span class="n">_log</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s">&quot;File description: {0}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">params</span><span class="p">))</span>
+
+            <span class="n">put_resp</span> <span class="o">=</span> <span class="n">rest_client</span><span class="o">.</span><span class="n">put</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_auth</span><span class="p">,</span>
+                                        <span class="n">url</span><span class="p">,</span>
+                                        <span class="bp">self</span><span class="o">.</span><span class="n">headers</span><span class="p">,</span>
+                                        <span class="n">userfile</span><span class="p">,</span>
+                                        <span class="n">params</span><span class="p">)</span>
+
+        <span class="k">except</span> <span class="p">(</span><span class="n">RestCallException</span><span class="p">,</span> <span class="n">FileMissingException</span><span class="p">)</span> <span class="k">as</span> <span class="n">exp</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">Response</span><span class="p">(</span><span class="bp">False</span><span class="p">,</span> <span class="n">exp</span><span class="p">)</span>
+
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">Response</span><span class="p">(</span><span class="bp">True</span><span class="p">,</span> <span class="n">put_resp</span><span class="p">)</span></div></div>
+</pre></div>
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../../index.html">azure-batch-apps 0.2.0 documentation</a> &raquo;</li>
+          <li><a href="../index.html" >Module code</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2014, Microsoft Corporation.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2.2.
+    </div>
+  </body>
+</html>

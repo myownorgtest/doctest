@@ -1,0 +1,753 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>batchapps.job module &mdash; azure-batch-apps 0.2.0 documentation</title>
+    
+    <link rel="stylesheet" href="_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '0.2.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="top" title="azure-batch-apps 0.2.0 documentation" href="index.html" />
+    <link rel="up" title="batchapps package" href="batch_apps.html" />
+    <link rel="next" title="FileManager" href="batch_apps.file_manager.html" />
+    <link rel="prev" title="JobManager" href="batch_apps.job_manager.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="batch_apps.file_manager.html" title="FileManager"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="batch_apps.job_manager.html" title="JobManager"
+             accesskey="P">previous</a> |</li>
+        <li><a href="index.html">azure-batch-apps 0.2.0 documentation</a> &raquo;</li>
+          <li><a href="batch_apps.html" accesskey="U">batchapps package</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="batchapps-job-module">
+<h1>batchapps.job module<a class="headerlink" href="#batchapps-job-module" title="Permalink to this headline">¶</a></h1>
+<p>Representations of a job submission and a submitted job.</p>
+<span class="target" id="module-batchapps.job"></span><div class="section" id="jobsubmission">
+<h2>JobSubmission<a class="headerlink" href="#jobsubmission" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="batchapps.job.JobSubmission">
+<em class="property">class </em><tt class="descclassname">batchapps.job.</tt><tt class="descname">JobSubmission</tt><big>(</big><em>client</em>, <em>job_name</em>, <em>**job_settings</em><big>)</big><a class="reference internal" href="_modules/batchapps/job.html#JobSubmission"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#batchapps.job.JobSubmission" title="Permalink to this definition">¶</a></dt>
+<dd><p>Description of a new processing request to be sent to the cloud.
+Specifies application to be used, the files required for processing and
+any additional parameters required for the processing.
+It also specifies the requested compute resouces to be dedicated to the
+job on submission.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Attributes:</th><td class="field-body"><ul class="first simple">
+<li>name (str)</li>
+<li>required_files (<a class="reference internal" href="batch_apps.files.html#batchapps.files.FileCollection" title="batchapps.files.FileCollection"><tt class="xref py py-class docutils literal"><span class="pre">FileCollection</span></tt></a>)</li>
+<li>source (str)</li>
+<li>instances (int)</li>
+<li>params (dict)</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Args:</th><td class="field-body"><ul class="first simple">
+<li>client (<a class="reference internal" href="batch_apps.api.html#batchapps.api.BatchAppsApi" title="batchapps.api.BatchAppsApi"><tt class="xref py py-class docutils literal"><span class="pre">BatchAppsApi</span></tt></a>): A configured and
+authenticated API instance.</li>
+<li>job_name (str): A name for the new job.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Kwargs:</th><td class="field-body"><ul class="first last">
+<li><p class="first">job_settings (dict): <em>Optional</em> Additional job settings or
+parameters can be added as keyword arguments. These include:</p>
+<blockquote>
+<div><ul class="simple">
+<li>&#8216;params&#8217;: A string dict of job parameters to add to the
+submission.</li>
+<li>&#8216;files&#8217;: A <a class="reference internal" href="batch_apps.files.html#batchapps.files.FileCollection" title="batchapps.files.FileCollection"><tt class="xref py py-class docutils literal"><span class="pre">FileCollection</span></tt></a> of required files
+to include with the job.</li>
+<li>&#8216;job_file&#8217;: The name (str) of the file that should be
+used to start the job. This filename should be
+included in the above <tt class="docutils literal"><span class="pre">files</span></tt> collection.</li>
+<li>&#8216;instances&#8217;: The number (int) of instances to allocate
+to the job on submission.</li>
+</ul>
+</div></blockquote>
+</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<dl class="method">
+<dt id="batchapps.job.JobSubmission.add_file">
+<tt class="descname">add_file</tt><big>(</big><em>userfile</em><big>)</big><a class="reference internal" href="_modules/batchapps/job.html#JobSubmission.add_file"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#batchapps.job.JobSubmission.add_file" title="Permalink to this definition">¶</a></dt>
+<dd><p>Add userfile to required files list.
+If the job does not have an <a class="reference internal" href="batch_apps.files.html#batchapps.files.FileCollection" title="batchapps.files.FileCollection"><tt class="xref py py-class docutils literal"><span class="pre">FileCollection</span></tt></a> already assigned,
+a new one will be created.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Args:</th><td class="field-body"><ul class="first last simple">
+<li>userfile (<a class="reference internal" href="batch_apps.files.html#batchapps.files.UserFile" title="batchapps.files.UserFile"><tt class="xref py py-class docutils literal"><span class="pre">UserFile</span></tt></a>): The userfile to be added to
+the job.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="batchapps.job.JobSubmission.add_file_collection">
+<tt class="descname">add_file_collection</tt><big>(</big><em>file_collection=None</em><big>)</big><a class="reference internal" href="_modules/batchapps/job.html#JobSubmission.add_file_collection"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#batchapps.job.JobSubmission.add_file_collection" title="Permalink to this definition">¶</a></dt>
+<dd><p>Assign a file collection to the job.
+The userfiles assigned to a job submission will be loaded onto each
+node prior to the job being executed.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Kwargs:</th><td class="field-body"><ul class="first simple">
+<li>file_collection (<a class="reference internal" href="batch_apps.files.html#batchapps.files.FileCollection" title="batchapps.files.FileCollection"><tt class="xref py py-class docutils literal"><span class="pre">FileCollection</span></tt></a>): If set, this will
+be assigned as the <a class="reference internal" href="batch_apps.files.html#batchapps.files.FileCollection" title="batchapps.files.FileCollection"><tt class="xref py py-class docutils literal"><span class="pre">FileCollection</span></tt></a> of the job. If
+not set, a new <a class="reference internal" href="batch_apps.files.html#batchapps.files.FileCollection" title="batchapps.files.FileCollection"><tt class="xref py py-class docutils literal"><span class="pre">FileCollection</span></tt></a> will be created.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Raises:</th><td class="field-body"><ul class="first last simple">
+<li><tt class="xref py py-exc docutils literal"><span class="pre">TypeError</span></tt> if a non-<a class="reference internal" href="batch_apps.files.html#batchapps.files.FileCollection" title="batchapps.files.FileCollection"><tt class="xref py py-class docutils literal"><span class="pre">FileCollection</span></tt></a> is
+passed in.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="batchapps.job.JobSubmission.get_default_params">
+<tt class="descname">get_default_params</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/batchapps/job.html#JobSubmission.get_default_params"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#batchapps.job.JobSubmission.get_default_params" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get default parameters.
+Get the parameters specified in the <a class="reference internal" href="batch_apps.config.html#batchapps.config.Configuration" title="batchapps.config.Configuration"><tt class="xref py py-class docutils literal"><span class="pre">Configuration</span></tt></a> for the
+current application.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><ul class="first last simple">
+<li>The parameters as a dictionary of strings.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="batchapps.job.JobSubmission.set_job_file">
+<tt class="descname">set_job_file</tt><big>(</big><em>jobfile</em><big>)</big><a class="reference internal" href="_modules/batchapps/job.html#JobSubmission.set_job_file"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#batchapps.job.JobSubmission.set_job_file" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set file as the source from which the job will be started.
+This will be the file that is executed to started the job.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Args:</th><td class="field-body"><ul class="first simple">
+<li>jobfile (<a class="reference internal" href="batch_apps.files.html#batchapps.files.UserFile" title="batchapps.files.UserFile"><tt class="xref py py-class docutils literal"><span class="pre">UserFile</span></tt></a>, int): The userfile to be used. This
+can also be the index of a userfile in the collection, or it
+can be an <a class="reference internal" href="batch_apps.files.html#batchapps.files.UserFile" title="batchapps.files.UserFile"><tt class="xref py py-class docutils literal"><span class="pre">UserFile</span></tt></a> object.
+If a new <a class="reference internal" href="batch_apps.files.html#batchapps.files.UserFile" title="batchapps.files.UserFile"><tt class="xref py py-class docutils literal"><span class="pre">UserFile</span></tt></a> object is passed in, it will also
+be added to the required files collection.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Raises:</th><td class="field-body"><ul class="first last simple">
+<li><tt class="xref py py-exc docutils literal"><span class="pre">ValueError</span></tt> if <tt class="docutils literal"><span class="pre">jobfile</span></tt> is not an in-range index,
+or of an invalid type.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="batchapps.job.JobSubmission.submit">
+<tt class="descname">submit</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/batchapps/job.html#JobSubmission.submit"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#batchapps.job.JobSubmission.submit" title="Permalink to this definition">¶</a></dt>
+<dd><p>Submit the job.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><ul class="first simple">
+<li>If successful, a dictionary holding the new job&#8217;s ID and a URL
+to get the job details (See: <a class="reference internal" href="#batchapps.job.SubmittedJob.update" title="batchapps.job.SubmittedJob.update"><tt class="xref py py-meth docutils literal"><span class="pre">SubmittedJob.update()</span></tt></a>).
+Dictionary has the keys: <tt class="docutils literal"><span class="pre">['jobId',</span> <span class="pre">'link']</span></tt></li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Raises:</th><td class="field-body"><ul class="first last simple">
+<li><a class="reference internal" href="batch_apps.exceptions.html#batchapps.exceptions.RestCallException" title="batchapps.exceptions.RestCallException"><tt class="xref py py-class docutils literal"><span class="pre">RestCallException</span></tt></a> if job submission failed.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="submittedjob">
+<h2>SubmittedJob<a class="headerlink" href="#submittedjob" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="batchapps.job.SubmittedJob">
+<em class="property">class </em><tt class="descclassname">batchapps.job.</tt><tt class="descname">SubmittedJob</tt><big>(</big><em>client</em>, <em>job_id</em>, <em>job_name</em>, <em>job_type</em>, <em>**job_settings</em><big>)</big><a class="reference internal" href="_modules/batchapps/job.html#SubmittedJob"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#batchapps.job.SubmittedJob" title="Permalink to this definition">¶</a></dt>
+<dd><p>Representation of a job that has been submitted for processing in
+the cloud. Can be used to track the process of the job and to collect
+it&#8217;s outputs.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Attributes:</th><td class="field-body"><ul class="first simple">
+<li>type (str)</li>
+<li>name (str)</li>
+<li>tasks (list of <a class="reference internal" href="#batchapps.job.Task" title="batchapps.job.Task"><tt class="xref py py-class docutils literal"><span class="pre">Task</span></tt></a>)</li>
+<li>percentage</li>
+<li>xml_settings (str)</li>
+<li>status (str)</li>
+<li>time_submitted</li>
+<li>time_started</li>
+<li>time_completed</li>
+<li>requested_instances</li>
+<li>number_tasks</li>
+<li>output_filename (str)</li>
+<li>output_url (str)</li>
+<li>thumb_url (str)</li>
+<li>tasks_url (str)</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Args:</th><td class="field-body"><ul class="first simple">
+<li>client (<a class="reference internal" href="batch_apps.api.html#batchapps.api.BatchAppsApi" title="batchapps.api.BatchAppsApi"><tt class="xref py py-class docutils literal"><span class="pre">BatchAppsApi</span></tt></a>): A configured and authenticated
+Batch Apps Management API instance.</li>
+<li>job_id (str): The ID of the job.</li>
+<li>job_name (str): The name of the job.</li>
+<li>job_type (str): The job type.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Kwargs:</th><td class="field-body"><ul class="first last simple">
+<li>job_settings (dict): Additional job submission settings.
+Will vary depending on what stage during processing the job
+is at when the data is collected.
+See <tt class="xref py py-meth docutils literal"><span class="pre">_format_submission()</span></tt></li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<dl class="method">
+<dt id="batchapps.job.SubmittedJob.cancel">
+<tt class="descname">cancel</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/batchapps/job.html#SubmittedJob.cancel"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#batchapps.job.SubmittedJob.cancel" title="Permalink to this definition">¶</a></dt>
+<dd><p>Cancel the job.
+This can only be called if the job is queued or running.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><ul class="first simple">
+<li><tt class="docutils literal"><span class="pre">True</span></tt> if the job is successfully cancelled.</li>
+<li><tt class="docutils literal"><span class="pre">False</span></tt> if the job is unable to be cancelled,
+e.g. it has completed.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Raises:</th><td class="field-body"><ul class="first last simple">
+<li><a class="reference internal" href="batch_apps.exceptions.html#batchapps.exceptions.RestCallException" title="batchapps.exceptions.RestCallException"><tt class="xref py py-exc docutils literal"><span class="pre">RestCallException</span></tt></a> if the request failed.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="batchapps.job.SubmittedJob.get_logs">
+<tt class="descname">get_logs</tt><big>(</big><em>start=None</em>, <em>max_lines=100</em><big>)</big><a class="reference internal" href="_modules/batchapps/job.html#SubmittedJob.get_logs"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#batchapps.job.SubmittedJob.get_logs" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the system log messages for the job.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Kwargs:</th><td class="field-body"><ul class="first simple">
+<li>start (str): The UTC time from which log messages will be
+retrieved. If not set, will retrieve messages from the start
+of the job. Default is <tt class="docutils literal"><span class="pre">None</span></tt>.</li>
+<li>max_lines (int): The max number of log messages to be retrieved.
+Default is 100.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><ul class="first last simple">
+<li>If successful, a dict in the format:
+<tt class="docutils literal"><span class="pre">{'upTo':</span> <span class="pre">'',</span> <span class="pre">'messages':</span> <span class="pre">{'taskId',</span> <span class="pre">'timestamp',</span> <span class="pre">'text'}}</span></tt>.
+Where <tt class="docutils literal"><span class="pre">'upTo'</span></tt> will contain the timestamp of the last log
+message retrieved, and <tt class="docutils literal"><span class="pre">'messages'</span></tt> will contain a list of
+dictionaries with the details of each log message.</li>
+<li>If unsuccessful, returns <tt class="docutils literal"><span class="pre">None</span></tt>.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="batchapps.job.SubmittedJob.get_output">
+<tt class="descname">get_output</tt><big>(</big><em>download_dir</em>, <em>output=None</em>, <em>overwrite=False</em><big>)</big><a class="reference internal" href="_modules/batchapps/job.html#SubmittedJob.get_output"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#batchapps.job.SubmittedJob.get_output" title="Permalink to this definition">¶</a></dt>
+<dd><p>Download a job output file.
+This could be the jobs final output, or if specified, any intermediate
+output file.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Args:</th><td class="field-body"><ul class="first simple">
+<li>download_dir (str): Full path to the directory to download the
+output to.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Kwargs:</th><td class="field-body"><ul class="first simple">
+<li>output: An output dictionary (as created by
+<a class="reference internal" href="#batchapps.job.SubmittedJob.list_all_outputs" title="batchapps.job.SubmittedJob.list_all_outputs"><tt class="xref py py-meth docutils literal"><span class="pre">list_all_outputs()</span></tt></a>). If specified, the specific output
+will be downloaded, otheriwse the jobs final output will be
+downloaded.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><ul class="first simple">
+<li>The full path to the downloaded file (str).</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Raises:</th><td class="field-body"><ul class="first last simple">
+<li><a class="reference internal" href="batch_apps.exceptions.html#batchapps.exceptions.FileDownloadException" title="batchapps.exceptions.FileDownloadException"><tt class="xref py py-exc docutils literal"><span class="pre">FileDownloadException</span></tt></a> if the SubmittedJob has no URL
+to a final output yet. This may be because the job has not yet
+finished, or has not been updated.</li>
+<li><a class="reference internal" href="batch_apps.exceptions.html#batchapps.exceptions.RestCallException" title="batchapps.exceptions.RestCallException"><tt class="xref py py-exc docutils literal"><span class="pre">RestCallException</span></tt></a> if an error occured during the request.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="batchapps.job.SubmittedJob.get_tasks">
+<tt class="descname">get_tasks</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/batchapps/job.html#SubmittedJob.get_tasks"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#batchapps.job.SubmittedJob.get_tasks" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get a list of the jobs tasks.
+This will only return those tasks that have been started so far.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><ul class="first simple">
+<li>A list of <a class="reference internal" href="#batchapps.job.Task" title="batchapps.job.Task"><tt class="xref py py-class docutils literal"><span class="pre">Task</span></tt></a> objects.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Raises:</th><td class="field-body"><ul class="first last simple">
+<li><a class="reference internal" href="batch_apps.exceptions.html#batchapps.exceptions.RestCallException" title="batchapps.exceptions.RestCallException"><tt class="xref py py-exc docutils literal"><span class="pre">RestCallException</span></tt></a> if an error occurred during call
+to the service.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="batchapps.job.SubmittedJob.get_thumbnail">
+<tt class="descname">get_thumbnail</tt><big>(</big><em>download_dir=None</em>, <em>filename=None</em>, <em>overwrite=True</em><big>)</big><a class="reference internal" href="_modules/batchapps/job.html#SubmittedJob.get_thumbnail"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#batchapps.job.SubmittedJob.get_thumbnail" title="Permalink to this definition">¶</a></dt>
+<dd><p>Download the preview thumbnail for job.
+This thumbnail will only be available if the job has completed.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Kwargs:</th><td class="field-body"><ul class="first simple">
+<li>download_dir (str): The full path to the directory to download
+the thumbnail. If not specified, the OS temp directory will
+be used.</li>
+<li>filename (str): A name to give the thumbnail file. If not
+specified a randomly generated filename will be used.</li>
+<li>overwrite (bool): Whether an existing file will be overwritten.
+Default is <tt class="docutils literal"><span class="pre">True</span></tt>.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><ul class="first simple">
+<li>The full path to the downloaded file (str).</li>
+</ul>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Raises:</th><td class="field-body"><ul class="first last simple">
+<li><a class="reference internal" href="batch_apps.exceptions.html#batchapps.exceptions.FileDownloadException" title="batchapps.exceptions.FileDownloadException"><tt class="xref py py-exc docutils literal"><span class="pre">FileDownloadException</span></tt></a> if the SubmittedJob has no
+reference to a job thumbnail. This could mean that the job
+has not yet completed or the object has not been updated.</li>
+<li><a class="reference internal" href="batch_apps.exceptions.html#batchapps.exceptions.RestCallException" title="batchapps.exceptions.RestCallException"><tt class="xref py py-exc docutils literal"><span class="pre">RestCallException</span></tt></a> if an error occured during the request.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="batchapps.job.SubmittedJob.list_all_outputs">
+<tt class="descname">list_all_outputs</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/batchapps/job.html#SubmittedJob.list_all_outputs"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#batchapps.job.SubmittedJob.list_all_outputs" title="Permalink to this definition">¶</a></dt>
+<dd><p>List all outputs created by the job.
+This includes processed outputs, intermediary outputs and log files.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><ul class="first simple">
+<li>List of outputs as dictionaries with keys
+<tt class="docutils literal"><span class="pre">['name',</span> <span class="pre">'link',</span> <span class="pre">'type']</span></tt>.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Raises:</th><td class="field-body"><ul class="first last simple">
+<li><a class="reference internal" href="batch_apps.exceptions.html#batchapps.exceptions.RestCallException" title="batchapps.exceptions.RestCallException"><tt class="xref py py-exc docutils literal"><span class="pre">RestCallException</span></tt></a> if error occured during request.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="batchapps.job.SubmittedJob.reprocess">
+<tt class="descname">reprocess</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/batchapps/job.html#SubmittedJob.reprocess"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#batchapps.job.SubmittedJob.reprocess" title="Permalink to this definition">¶</a></dt>
+<dd><p>Reprocess any failed tasks in a job.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><ul class="first simple">
+<li><tt class="docutils literal"><span class="pre">True</span></tt> if the failed tasks have been successfully requeued.</li>
+<li><tt class="docutils literal"><span class="pre">False</span></tt> if the job is unable to be requeued,
+e.g. it has already completed.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Raises:</th><td class="field-body"><ul class="first last simple">
+<li><a class="reference internal" href="batch_apps.exceptions.html#batchapps.exceptions.RestCallException" title="batchapps.exceptions.RestCallException"><tt class="xref py py-exc docutils literal"><span class="pre">RestCallException</span></tt></a> if the request failed.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="batchapps.job.SubmittedJob.update">
+<tt class="descname">update</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/batchapps/job.html#SubmittedJob.update"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#batchapps.job.SubmittedJob.update" title="Permalink to this definition">¶</a></dt>
+<dd><p>Update the job object.
+Used to keep the submission data up-to-date as the job progresses
+on the cloud.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><ul class="first simple">
+<li><tt class="docutils literal"><span class="pre">True</span></tt> if the job has been successfully updated.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Raises:</th><td class="field-body"><ul class="first last simple">
+<li><a class="reference internal" href="batch_apps.exceptions.html#batchapps.exceptions.RestCallException" title="batchapps.exceptions.RestCallException"><tt class="xref py py-exc docutils literal"><span class="pre">RestCallException</span></tt></a> if an error occured during the request.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="task">
+<h2>Task<a class="headerlink" href="#task" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="batchapps.job.Task">
+<em class="property">class </em><tt class="descclassname">batchapps.job.</tt><tt class="descname">Task</tt><big>(</big><em>client</em>, <em>job_id</em>, <em>**props</em><big>)</big><a class="reference internal" href="_modules/batchapps/job.html#Task"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#batchapps.job.Task" title="Permalink to this definition">¶</a></dt>
+<dd><p>Definition for a single job task. Can only exist after a task has been
+launched in the cloud. The data associated with a task will vary depending
+on the status of that task.
+To update a task object, it must be done from the job parent,
+<a class="reference internal" href="#batchapps.job.SubmittedJob.get_tasks" title="batchapps.job.SubmittedJob.get_tasks"><tt class="xref py py-meth docutils literal"><span class="pre">SubmittedJob.get_tasks()</span></tt></a>.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Attributes:</th><td class="field-body"><ul class="first simple">
+<li>status (str)</li>
+<li>completion_time (str)</li>
+<li>instance (str)</li>
+<li>deployment (str)</li>
+<li>cores (str)</li>
+<li>charge_time (str)</li>
+<li>non_charge_time (str)</li>
+<li>outputs (list)</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Args:</th><td class="field-body"><ul class="first simple">
+<li>client (<a class="reference internal" href="batch_apps.api.html#batchapps.api.BatchAppsApi" title="batchapps.api.BatchAppsApi"><tt class="xref py py-class docutils literal"><span class="pre">BatchAppsApi</span></tt></a>): A configured and authenticated
+Batch Apps Management API instance.</li>
+<li>job_id (str): The ID of the parent job of the task.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Kwargs:</th><td class="field-body"><ul class="first last simple">
+<li>props (dict): All additional data related the to progress of the
+task. What data is available will depend on the status.
+Data that is not available will be set to <tt class="docutils literal"><span class="pre">None</span></tt>.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<dl class="method">
+<dt id="batchapps.job.Task.cancel">
+<tt class="descname">cancel</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/batchapps/job.html#Task.cancel"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#batchapps.job.Task.cancel" title="Permalink to this definition">¶</a></dt>
+<dd><p>Cancel the task.
+This can only be called if the task is running.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><ul class="first simple">
+<li><tt class="docutils literal"><span class="pre">True</span></tt> if the task is successfully cancelled.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Raises:</th><td class="field-body"><ul class="first last simple">
+<li><a class="reference internal" href="batch_apps.exceptions.html#batchapps.exceptions.RestCallException" title="batchapps.exceptions.RestCallException"><tt class="xref py py-exc docutils literal"><span class="pre">RestCallException</span></tt></a> if the request failed or the task was
+not able to be cancelled.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="batchapps.job.Task.get_output">
+<tt class="descname">get_output</tt><big>(</big><em>output</em>, <em>download_dir</em>, <em>overwrite=False</em><big>)</big><a class="reference internal" href="_modules/batchapps/job.html#Task.get_output"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#batchapps.job.Task.get_output" title="Permalink to this definition">¶</a></dt>
+<dd><p>Download a task output file.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Args:</th><td class="field-body"><ul class="first simple">
+<li>output: An output dictionary (as created by
+<a class="reference internal" href="#batchapps.job.Task.list_outputs" title="batchapps.job.Task.list_outputs"><tt class="xref py py-meth docutils literal"><span class="pre">Task.list_outputs()</span></tt></a>).</li>
+<li>download_dir (str): Full path to the directory to download
+the output to.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Kwargs:</th><td class="field-body"><ul class="first simple">
+<li>overwrite (bool): Whether to overwrite an existing file.
+Default is <tt class="docutils literal"><span class="pre">False</span></tt>.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><ul class="first simple">
+<li>The full path to the downloaded file (str).</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Raises:</th><td class="field-body"><ul class="first last simple">
+<li><a class="reference internal" href="batch_apps.exceptions.html#batchapps.exceptions.RestCallException" title="batchapps.exceptions.RestCallException"><tt class="xref py py-exc docutils literal"><span class="pre">RestCallException</span></tt></a> if an error occured during the request.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="batchapps.job.Task.get_thumbnail">
+<tt class="descname">get_thumbnail</tt><big>(</big><em>download_dir=None</em>, <em>filename=None</em>, <em>overwrite=True</em><big>)</big><a class="reference internal" href="_modules/batchapps/job.html#Task.get_thumbnail"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#batchapps.job.Task.get_thumbnail" title="Permalink to this definition">¶</a></dt>
+<dd><p>Download the preview thumbnail for task.
+This thumbnail will only be available if the task has completed.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Kwargs:</th><td class="field-body"><ul class="first simple">
+<li>download_dir (str): The full path to the directory to download
+the thumbnail. If not specified, the OS temp directory will
+be used.</li>
+<li>filename (str): A name to give the thumbnail file. If not
+specified and one has not been specified by the server, a
+randomly generated filename will be used.</li>
+<li>overwrite (bool): Whether an existing file will be overwritten.
+Default is <tt class="docutils literal"><span class="pre">True</span></tt>.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><ul class="first simple">
+<li>The full path to the downloaded file (str).</li>
+</ul>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Raises:</th><td class="field-body"><ul class="first last simple">
+<li><a class="reference internal" href="batch_apps.exceptions.html#batchapps.exceptions.FileDownloadException" title="batchapps.exceptions.FileDownloadException"><tt class="xref py py-exc docutils literal"><span class="pre">FileDownloadException</span></tt></a> if the Task has no reference to
+a thumbnail. This could mean that the task has not yet
+completed or the object has not been updated.</li>
+<li><a class="reference internal" href="batch_apps.exceptions.html#batchapps.exceptions.RestCallException" title="batchapps.exceptions.RestCallException"><tt class="xref py py-exc docutils literal"><span class="pre">RestCallException</span></tt></a> if an error occured during the request.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="batchapps.job.Task.list_outputs">
+<tt class="descname">list_outputs</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/batchapps/job.html#Task.list_outputs"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#batchapps.job.Task.list_outputs" title="Permalink to this definition">¶</a></dt>
+<dd><p>List all outputs created by the task.
+This includes processed outputs, intermediary outputs and log files.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><ul class="first simple">
+<li>List of outputs as dictionaries with keys
+<tt class="docutils literal"><span class="pre">['name',</span> <span class="pre">'link',</span> <span class="pre">'type']</span></tt>.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Raises:</th><td class="field-body"><ul class="first last simple">
+<li><a class="reference internal" href="batch_apps.exceptions.html#batchapps.exceptions.RestCallException" title="batchapps.exceptions.RestCallException"><tt class="xref py py-exc docutils literal"><span class="pre">RestCallException</span></tt></a> if error occured during request.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">batchapps.job module</a><ul>
+<li><a class="reference internal" href="#jobsubmission">JobSubmission</a></li>
+<li><a class="reference internal" href="#submittedjob">SubmittedJob</a></li>
+<li><a class="reference internal" href="#task">Task</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="batch_apps.job_manager.html"
+                        title="previous chapter">JobManager</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="batch_apps.file_manager.html"
+                        title="next chapter">FileManager</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="_sources/batch_apps.job.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="batch_apps.file_manager.html" title="FileManager"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="batch_apps.job_manager.html" title="JobManager"
+             >previous</a> |</li>
+        <li><a href="index.html">azure-batch-apps 0.2.0 documentation</a> &raquo;</li>
+          <li><a href="batch_apps.html" >batchapps package</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2014, Microsoft Corporation.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2.2.
+    </div>
+  </body>
+</html>

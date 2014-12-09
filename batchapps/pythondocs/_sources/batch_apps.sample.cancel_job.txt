@@ -1,0 +1,4 @@
+Sample Script - Cancel Job
+===========================
+
+.. literalinclude:: BatchAppsExample-cancel_job.py

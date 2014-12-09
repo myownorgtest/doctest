@@ -1,0 +1,518 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>batchapps.files module &mdash; azure-batch-apps 0.2.0 documentation</title>
+    
+    <link rel="stylesheet" href="_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '0.2.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="top" title="azure-batch-apps 0.2.0 documentation" href="index.html" />
+    <link rel="up" title="batchapps package" href="batch_apps.html" />
+    <link rel="next" title="batchapps.api module" href="batch_apps.api.html" />
+    <link rel="prev" title="FileManager" href="batch_apps.file_manager.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="batch_apps.api.html" title="batchapps.api module"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="batch_apps.file_manager.html" title="FileManager"
+             accesskey="P">previous</a> |</li>
+        <li><a href="index.html">azure-batch-apps 0.2.0 documentation</a> &raquo;</li>
+          <li><a href="batch_apps.html" accesskey="U">batchapps package</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="batchapps-files-module">
+<h1>batchapps.files module<a class="headerlink" href="#batchapps-files-module" title="Permalink to this headline">¶</a></h1>
+<p>Representation of a file to be used in a job.</p>
+<span class="target" id="module-batchapps.files"></span><div class="section" id="filecollection">
+<h2>FileCollection<a class="headerlink" href="#filecollection" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="batchapps.files.FileCollection">
+<em class="property">class </em><tt class="descclassname">batchapps.files.</tt><tt class="descname">FileCollection</tt><big>(</big><em>client</em>, <em>*files</em><big>)</big><a class="reference internal" href="_modules/batchapps/files.html#FileCollection"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#batchapps.files.FileCollection" title="Permalink to this definition">¶</a></dt>
+<dd><p>A set of userfiles which can be applied to a job.
+Behaves like a <tt class="docutils literal"><span class="pre">list</span></tt>.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Args:</th><td class="field-body"></td>
+</tr>
+</tbody>
+</table>
+<ul class="simple">
+<li>client (<a class="reference internal" href="batch_apps.api.html#batchapps.api.BatchAppsApi" title="batchapps.api.BatchAppsApi"><tt class="xref py py-class docutils literal"><span class="pre">BatchAppsApi</span></tt></a>): An authorized Batch Apps
+Management API REST client.</li>
+<li>files (<a class="reference internal" href="#batchapps.files.UserFile" title="batchapps.files.UserFile"><tt class="xref py py-class docutils literal"><span class="pre">UserFile</span></tt></a>, list): <em>Optional</em>. Any files to be
+included in the collection. Can be individual
+<a class="reference internal" href="#batchapps.files.UserFile" title="batchapps.files.UserFile"><tt class="xref py py-class docutils literal"><span class="pre">UserFile</span></tt></a> objects or a list of them.</li>
+</ul>
+<dl class="method">
+<dt id="batchapps.files.FileCollection.add">
+<tt class="descname">add</tt><big>(</big><em>userfile</em><big>)</big><a class="reference internal" href="_modules/batchapps/files.html#FileCollection.add"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#batchapps.files.FileCollection.add" title="Permalink to this definition">¶</a></dt>
+<dd><p>Add a userfile to the collection.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Args:</th><td class="field-body"><ul class="first simple">
+<li>userfile (<a class="reference internal" href="#batchapps.files.UserFile" title="batchapps.files.UserFile"><tt class="xref py py-class docutils literal"><span class="pre">UserFile</span></tt></a>, list): File to be added to the
+collection. Must be unique or FileInvalidException will be
+raised. <tt class="docutils literal"><span class="pre">userfile</span></tt> can also be a list, all non-unique and
+non-<a class="reference internal" href="#batchapps.files.UserFile" title="batchapps.files.UserFile"><tt class="xref py py-class docutils literal"><span class="pre">UserFile</span></tt></a> objects will be removed with a warning
+before the list is added to the collection.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Raises:</th><td class="field-body"><ul class="first last simple">
+<li><a class="reference internal" href="batch_apps.exceptions.html#batchapps.exceptions.FileInvalidException" title="batchapps.exceptions.FileInvalidException"><tt class="xref py py-class docutils literal"><span class="pre">FileInvalidException</span></tt></a> if called with a non:class:<cite>.UserFile</cite> object
+or the file is already in the collection.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="batchapps.files.FileCollection.extend">
+<tt class="descname">extend</tt><big>(</big><em>file_collection</em><big>)</big><a class="reference internal" href="_modules/batchapps/files.html#FileCollection.extend"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#batchapps.files.FileCollection.extend" title="Permalink to this definition">¶</a></dt>
+<dd><p>Extend a file collection by merging two together</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Args:</th><td class="field-body"><ul class="first simple">
+<li>file_collection (<a class="reference internal" href="#batchapps.files.FileCollection" title="batchapps.files.FileCollection"><tt class="xref py py-class docutils literal"><span class="pre">FileCollection</span></tt></a>): A file collection to
+be merged into the current collection. Any duplicate userfiles
+will be removed.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Raises:</th><td class="field-body"><ul class="first last simple">
+<li>AttributeError if <tt class="docutils literal"><span class="pre">file_collection</span></tt> is not a
+<a class="reference internal" href="#batchapps.files.FileCollection" title="batchapps.files.FileCollection"><tt class="xref py py-class docutils literal"><span class="pre">FileCollection</span></tt></a></li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="batchapps.files.FileCollection.is_uploaded">
+<tt class="descname">is_uploaded</tt><big>(</big><em>per_call=50</em><big>)</big><a class="reference internal" href="_modules/batchapps/files.html#FileCollection.is_uploaded"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#batchapps.files.FileCollection.is_uploaded" title="Permalink to this definition">¶</a></dt>
+<dd><p>Check if all files in set have already been uploaded</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Kwargs:</th><td class="field-body"><ul class="first simple">
+<li>per_call (int): Number of files to check against the server
+at a time. The more per call, the slower the call and the
+bigger the return object, but too few per call could mean a
+large number of calls for a big file collection. Default is 50.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><ul class="first simple">
+<li>An <a class="reference internal" href="#batchapps.files.FileCollection" title="batchapps.files.FileCollection"><tt class="xref py py-class docutils literal"><span class="pre">FileCollection</span></tt></a> containing the files that have yet
+to be uploaded.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Raises:</th><td class="field-body"><ul class="first last simple">
+<li><a class="reference internal" href="batch_apps.exceptions.html#batchapps.exceptions.RestCallException" title="batchapps.exceptions.RestCallException"><tt class="xref py py-class docutils literal"><span class="pre">RestCallException</span></tt></a>. If an exception has been thrown be the REST
+client, it will be raised here.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="batchapps.files.FileCollection.remove">
+<tt class="descname">remove</tt><big>(</big><em>userfile</em><big>)</big><a class="reference internal" href="_modules/batchapps/files.html#FileCollection.remove"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#batchapps.files.FileCollection.remove" title="Permalink to this definition">¶</a></dt>
+<dd><p>Remove a userfile from the collection, via index or name.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Args:</th><td class="field-body"><ul class="first simple">
+<li>userfile (str, int, <a class="reference internal" href="#batchapps.files.UserFile" title="batchapps.files.UserFile"><tt class="xref py py-class docutils literal"><span class="pre">UserFile</span></tt></a>, list, slice): The name,
+object or index of the file to be removed. If a name is passed
+in, only the first occurance of that name will be removed. To
+remove all occurances, use <tt class="xref py py-meth docutils literal"><span class="pre">__delitem__()</span></tt>.
+A <a class="reference internal" href="#batchapps.files.UserFile" title="batchapps.files.UserFile"><tt class="xref py py-class docutils literal"><span class="pre">UserFile</span></tt></a> object can also be passed in or a list
+of any of the above.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Raises:</th><td class="field-body"><ul class="first last simple">
+<li>TypeError if <tt class="docutils literal"><span class="pre">userfile</span></tt> is not a <a class="reference internal" href="#batchapps.files.UserFile" title="batchapps.files.UserFile"><tt class="xref py py-class docutils literal"><span class="pre">UserFile</span></tt></a>, int, str,
+slice or list thereof.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="batchapps.files.FileCollection.upload">
+<tt class="descname">upload</tt><big>(</big><em>force=False</em>, <em>threads=None</em><big>)</big><a class="reference internal" href="_modules/batchapps/files.html#FileCollection.upload"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#batchapps.files.FileCollection.upload" title="Permalink to this definition">¶</a></dt>
+<dd><p>Upload all files in a set, optionally in parallel</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Kwargs:</th><td class="field-body"><ul class="first simple">
+<li>force (bool): Whether the client will only upload if the file
+has not be previously uploaded. Default is <tt class="docutils literal"><span class="pre">False</span></tt>,
+i.e. always check and if file has been uploaded, don&#8217;t
+re-uplod. Set to <tt class="docutils literal"><span class="pre">True</span></tt> to upload regardless.</li>
+<li>threads (int): number of parallel uploads, default is 1
+(i.e. not parallel). Max threads is 10.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><ul class="first last simple">
+<li>A list of tuples containing any files that failed to upload and
+the exception information. In the format:
+<tt class="docutils literal"><span class="pre">[(UserFile(),</span> <span class="pre">ExceptionStr),</span> <span class="pre">(UserFile(),</span> <span class="pre">ExceptionStr)..]</span></tt>
+If all files successfully uploaded this list will be empty.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">During parallel uploads, messages will only be logged to the
+console, not to file.</p>
+</div>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="userfile">
+<h2>UserFile<a class="headerlink" href="#userfile" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="batchapps.files.UserFile">
+<em class="property">class </em><tt class="descclassname">batchapps.files.</tt><tt class="descname">UserFile</tt><big>(</big><em>client</em>, <em>file_def</em><big>)</big><a class="reference internal" href="_modules/batchapps/files.html#UserFile"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#batchapps.files.UserFile" title="Permalink to this definition">¶</a></dt>
+<dd><p>Definition of a single file to be used during the running of a
+particular job.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Attributes:</th><td class="field-body"><ul class="first simple">
+<li>name (str)</li>
+<li>path (str)</li>
+<li>url (str)</li>
+<li>tag (str)</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Args:</th><td class="field-body"></td>
+</tr>
+</tbody>
+</table>
+<ul class="simple">
+<li>client (<tt class="xref py py-class docutils literal"><span class="pre">BatchAppsApi</span></tt>): Authenticated and configured
+REST API client.</li>
+<li>file_def (str, dict): Defining information on the file. To create
+a userfile of a local file, this will be a string of the full
+path to the file. To represent a userfile that exists in the
+cloud, this will be a dictionary containing the path, name,
+last modified date, and URL to the file.</li>
+</ul>
+<dl class="method">
+<dt id="batchapps.files.UserFile.compare_lastmodified">
+<tt class="descname">compare_lastmodified</tt><big>(</big><em>compare_to</em><big>)</big><a class="reference internal" href="_modules/batchapps/files.html#UserFile.compare_lastmodified"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#batchapps.files.UserFile.compare_lastmodified" title="Permalink to this definition">¶</a></dt>
+<dd><p>Compare files based on their last modified date.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Args:</th><td class="field-body"><ul class="first simple">
+<li>compare_to (<a class="reference internal" href="#batchapps.files.UserFile" title="batchapps.files.UserFile"><tt class="xref py py-class docutils literal"><span class="pre">UserFile</span></tt></a>): UserFile to compare to
+current userfile.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><ul class="first last simple">
+<li><tt class="docutils literal"><span class="pre">True</span></tt> if the files were last modified at the same time,
+else <tt class="docutils literal"><span class="pre">False</span></tt>.</li>
+<li>Returns <tt class="docutils literal"><span class="pre">False</span></tt> if either of the UserFiles don&#8217;t exist locally.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="batchapps.files.UserFile.create_query_specifier">
+<tt class="descname">create_query_specifier</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/batchapps/files.html#UserFile.create_query_specifier"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#batchapps.files.UserFile.create_query_specifier" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create the file specifier for REST API communications</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><ul class="first simple">
+<li>Dictionary of the file specification.
+Format: <tt class="docutils literal"><span class="pre">{'FileName':'',</span> <span class="pre">'Timestamp':'',</span> <span class="pre">'OriginalPath':''}</span></tt></li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Raises:</th><td class="field-body"><ul class="first last simple">
+<li><a class="reference internal" href="batch_apps.exceptions.html#batchapps.exceptions.FileMissingException" title="batchapps.exceptions.FileMissingException"><tt class="xref py py-class docutils literal"><span class="pre">FileMissingException</span></tt></a> if the file of which the specifier
+is requested does not exist locally.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="batchapps.files.UserFile.create_submit_specifier">
+<tt class="descname">create_submit_specifier</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/batchapps/files.html#UserFile.create_submit_specifier"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#batchapps.files.UserFile.create_submit_specifier" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create the file specifier for REST API communications.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><ul class="first simple">
+<li>Dictionary of the file specification.
+Format: <tt class="docutils literal"><span class="pre">{'Name':'',</span> <span class="pre">'Timestamp':''}</span></tt></li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Raises:</th><td class="field-body"><ul class="first last simple">
+<li><a class="reference internal" href="batch_apps.exceptions.html#batchapps.exceptions.FileMissingException" title="batchapps.exceptions.FileMissingException"><tt class="xref py py-class docutils literal"><span class="pre">FileMissingException</span></tt></a> if the file of which the specifier
+is requested does not exist locally.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="batchapps.files.UserFile.download">
+<tt class="descname">download</tt><big>(</big><em>download_dir</em><big>)</big><a class="reference internal" href="_modules/batchapps/files.html#UserFile.download"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#batchapps.files.UserFile.download" title="Permalink to this definition">¶</a></dt>
+<dd><p>Download file.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Args:</th><td class="field-body"><ul class="first simple">
+<li>download_dir (str): Path to the directory that to which the file 
+will be downloaded.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Raises:</th><td class="field-body"><ul class="first last simple">
+<li><a class="reference internal" href="batch_apps.exceptions.html#batchapps.exceptions.RestCallException" title="batchapps.exceptions.RestCallException"><tt class="xref py py-class docutils literal"><span class="pre">RestCallException</span></tt></a> if any errors occured in the API
+client.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="batchapps.files.UserFile.get_checksum">
+<tt class="descname">get_checksum</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/batchapps/files.html#UserFile.get_checksum"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#batchapps.files.UserFile.get_checksum" title="Permalink to this definition">¶</a></dt>
+<dd><p>Generate md5 checksum for file.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><ul class="first last simple">
+<li>If the file exists locally, the md5 checksum of the file (bytes).</li>
+<li>If the file doesn&#8217;t exist locally, an empty string.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="batchapps.files.UserFile.get_last_modified">
+<tt class="descname">get_last_modified</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/batchapps/files.html#UserFile.get_last_modified"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#batchapps.files.UserFile.get_last_modified" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the last modified datetime stamp formatted for the REST API.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><ul class="first last simple">
+<li>If the file exists locally, the last modified
+timestamp (string).</li>
+<li>If the file doesn&#8217;t exist locally, an empty string.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="batchapps.files.UserFile.is_uploaded">
+<tt class="descname">is_uploaded</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/batchapps/files.html#UserFile.is_uploaded"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#batchapps.files.UserFile.is_uploaded" title="Permalink to this definition">¶</a></dt>
+<dd><p>Check if a file has already been uploaded.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><ul class="first simple">
+<li><a class="reference internal" href="#batchapps.files.UserFile" title="batchapps.files.UserFile"><tt class="xref py py-class docutils literal"><span class="pre">UserFile</span></tt></a> if file has already been uploaded, else <tt class="docutils literal"><span class="pre">None</span></tt>.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Raises:</th><td class="field-body"><ul class="first last simple">
+<li><a class="reference internal" href="batch_apps.exceptions.html#batchapps.exceptions.RestCallException" title="batchapps.exceptions.RestCallException"><tt class="xref py py-class docutils literal"><span class="pre">RestCallException</span></tt></a> if any errors occured in the API
+client.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="batchapps.files.UserFile.upload">
+<tt class="descname">upload</tt><big>(</big><em>force=False</em><big>)</big><a class="reference internal" href="_modules/batchapps/files.html#UserFile.upload"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#batchapps.files.UserFile.upload" title="Permalink to this definition">¶</a></dt>
+<dd><p>Upload file.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Kwargs:</th><td class="field-body"><ul class="first simple">
+<li>force (bool): If <tt class="docutils literal"><span class="pre">True</span></tt>, uploads regardless of whether the
+file has already been uploaded. Else, checks if file has been
+uploaded, and if so, skips.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><ul class="first last simple">
+<li>Client <a class="reference internal" href="batch_apps.api.html#batchapps.api.Response" title="batchapps.api.Response"><tt class="xref py py-class docutils literal"><span class="pre">Response</span></tt></a> object if upload was attempted.</li>
+<li><tt class="docutils literal"><span class="pre">None</span></tt> if upload was skipped.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">batchapps.files module</a><ul>
+<li><a class="reference internal" href="#filecollection">FileCollection</a></li>
+<li><a class="reference internal" href="#userfile">UserFile</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="batch_apps.file_manager.html"
+                        title="previous chapter">FileManager</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="batch_apps.api.html"
+                        title="next chapter">batchapps.api module</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="_sources/batch_apps.files.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="batch_apps.api.html" title="batchapps.api module"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="batch_apps.file_manager.html" title="FileManager"
+             >previous</a> |</li>
+        <li><a href="index.html">azure-batch-apps 0.2.0 documentation</a> &raquo;</li>
+          <li><a href="batch_apps.html" >batchapps package</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2014, Microsoft Corporation.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2.2.
+    </div>
+  </body>
+</html>

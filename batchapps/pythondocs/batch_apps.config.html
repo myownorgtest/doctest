@@ -1,0 +1,589 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Configuration &mdash; azure-batch-apps 0.2.0 documentation</title>
+    
+    <link rel="stylesheet" href="_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '0.2.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="top" title="azure-batch-apps 0.2.0 documentation" href="index.html" />
+    <link rel="up" title="batchapps package" href="batch_apps.html" />
+    <link rel="next" title="batchapps.credentials module" href="batch_apps.credentials.html" />
+    <link rel="prev" title="batchapps package" href="batch_apps.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="batch_apps.credentials.html" title="batchapps.credentials module"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="batch_apps.html" title="batchapps package"
+             accesskey="P">previous</a> |</li>
+        <li><a href="index.html">azure-batch-apps 0.2.0 documentation</a> &raquo;</li>
+          <li><a href="batch_apps.html" accesskey="U">batchapps package</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="module-batchapps.config">
+<span id="configuration"></span><h1>Configuration<a class="headerlink" href="#module-batchapps.config" title="Permalink to this headline">¶</a></h1>
+<dl class="class">
+<dt id="batchapps.config.Configuration">
+<em class="property">class </em><tt class="descclassname">batchapps.config.</tt><tt class="descname">Configuration</tt><big>(</big><em>data_path=None</em>, <em>log_level=None</em>, <em>jobtype=None</em>, <em>name='batch_apps.ini'</em>, <em>datadir='BatchAppsData'</em>, <em>default=False</em>, <em>**kwargs</em><big>)</big><a class="reference internal" href="_modules/batchapps/config.html#Configuration"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#batchapps.config.Configuration" title="Permalink to this definition">¶</a></dt>
+<dd><p>Manage the configuration of the Batch Apps module, logging and job service.
+A Configuration object, either default or custom, is used to create both
+Job and File managers.</p>
+<p>A new <a class="reference internal" href="#batchapps.config.Configuration" title="batchapps.config.Configuration"><tt class="xref py py-class docutils literal"><span class="pre">Configuration</span></tt></a> will attempt to use an existing saved
+config, and if one is not found default configuration will be used.
+Default configuration can also be forced, though this will overwrite
+an existing config if one exists.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Kwargs:</th><td class="field-body"><ul class="first simple">
+<li>data_path (str): The path where Batch Apps client data
+(logs, configs) will be saved. If not set, will default to User
+directory, i.e. <tt class="docutils literal"><span class="pre">os.path.expanduser(&quot;~&quot;)</span></tt></li>
+<li>log_level (str): The level of logging during Batch Apps session.
+Must be a string in <tt class="docutils literal"><span class="pre">['debug',</span> <span class="pre">'info',</span> <span class="pre">'warning',</span> <span class="pre">'error',</span>
+<span class="pre">'critical']</span></tt>. If not set default is &#8216;warning&#8217;.</li>
+<li>jobtype (str): The application job type, used to determine
+how a job will be processed in the cloud. The list of available
+job types will depend on the configuration and can checked
+using the <a class="reference internal" href="#batchapps.config.Configuration.list_jobtypes" title="batchapps.config.Configuration.list_jobtypes"><tt class="xref py py-meth docutils literal"><span class="pre">list_jobtypes()</span></tt></a> method.
+Default job type is &#8216;Blender&#8217;, unless overridden in config.</li>
+<li>name (str): The name of the configuration file to read from and
+save to. Unless set, the default &#8216;batch_apps.ini&#8217; will be used.</li>
+<li>datadir (str): The name of the directory that will be created to
+hold the date (logs etc). Unless set the default
+&#8216;BatchAppsData&#8217; will be used.</li>
+<li>default (bool): If <tt class="docutils literal"><span class="pre">True</span></tt>, the default configuration will be
+used regardless of whether an existing configuration file is
+found. Any existing config will be overwritten by defaults
+(unless an alternative config <tt class="docutils literal"><span class="pre">name</span></tt> is set).</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Raises:</th><td class="field-body"><ul class="first last simple">
+<li><a class="reference internal" href="batch_apps.exceptions.html#batchapps.exceptions.InvalidConfigException" title="batchapps.exceptions.InvalidConfigException"><tt class="xref py py-exc docutils literal"><span class="pre">InvalidConfigException</span></tt></a> if the specified job type is
+not defined in the config.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<dl class="method">
+<dt id="batchapps.config.Configuration.aad_config">
+<tt class="descname">aad_config</tt><big>(</big><em>account=None</em>, <em>key=None</em>, <em>client_id=None</em>, <em>tenant=None</em>, <em>redirect=None</em>, <em>endpoint=None</em>, <em>unattended=False</em>, <em>**kwargs</em><big>)</big><a class="reference internal" href="_modules/batchapps/config.html#Configuration.aad_config"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#batchapps.config.Configuration.aad_config" title="Permalink to this definition">¶</a></dt>
+<dd><p>Configure AAD authentication parameters to accompany an existing
+Batch Apps Service.
+If new values are set, <a class="reference internal" href="#batchapps.config.Configuration.save_config" title="batchapps.config.Configuration.save_config"><tt class="xref py py-meth docutils literal"><span class="pre">save_config()</span></tt></a> must be called for
+changes to be persisted.
+Backwards compatible with v0.1.1.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Kwargs:</th><td class="field-body"><ul class="first simple">
+<li>account (str): The account string in the format as retrieved
+from the Batch Apps portal: <tt class="docutils literal"><span class="pre">ClientID=abc;TenantID=xyz</span></tt>.</li>
+<li>key (str): An Unattended Account key. This can be created in
+the Batch Apps portal.</li>
+<li>client_id (str): The client GUID, this can be retrieved from
+the AAD portal (not required if using an Unattended Account).</li>
+<li>tenant (str): The auth tenant, this can be retrieved from
+the AAD portal (not required if using an Unattended Account).</li>
+<li>redirect (str): The redirect url used for web UI login. This
+can be configured in the AAD portal (not required if using an
+Unattended Account).</li>
+<li>endpoint (str): The Batch Apps service endpoint. This can be
+found in the service details in the Batch Apps Portal.</li>
+<li>unattended (bool): Whether the intended authentication method
+will be unattended. Default is <tt class="docutils literal"><span class="pre">False</span></tt>.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><ul class="first simple">
+<li>dict containing the authentication parameters.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Raises:</th><td class="field-body"><ul class="first last simple">
+<li><a class="reference internal" href="batch_apps.exceptions.html#batchapps.exceptions.InvalidConfigException" title="batchapps.exceptions.InvalidConfigException"><tt class="xref py py-class docutils literal"><span class="pre">InvalidConfigException</span></tt></a> if the authentication defaults
+are not found in the configuration or if any required information
+is missing. This will be raised after any new values passed in
+have been set.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="batchapps.config.Configuration.add_application">
+<tt class="descname">add_application</tt><big>(</big><em>jobtype</em>, <em>*args</em>, <em>**params</em><big>)</big><a class="reference internal" href="_modules/batchapps/config.html#Configuration.add_application"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#batchapps.config.Configuration.add_application" title="Permalink to this definition">¶</a></dt>
+<dd><div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">Deprecated. Please use <a class="reference internal" href="#batchapps.config.Configuration.add_jobtype" title="batchapps.config.Configuration.add_jobtype"><tt class="xref py py-meth docutils literal"><span class="pre">add_jobtype()</span></tt></a>.</p>
+</div>
+<p>Add a new job type section to the configuration.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Args:</th><td class="field-body"><ul class="first simple">
+<li>jobtype (str): The name of the job type to be added.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Kwargs:</th><td class="field-body"><ul class="first last simple">
+<li>params: <em>optional</em> Any additional parameters to be submitted
+with a job of this type can be added as keyword arguments.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="batchapps.config.Configuration.add_jobtype">
+<tt class="descname">add_jobtype</tt><big>(</big><em>jobtype</em>, <em>**params</em><big>)</big><a class="reference internal" href="_modules/batchapps/config.html#Configuration.add_jobtype"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#batchapps.config.Configuration.add_jobtype" title="Permalink to this definition">¶</a></dt>
+<dd><p>Add a new job type section to the configuration.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Args:</th><td class="field-body"><ul class="first simple">
+<li>jobtype (str): The name of the job type to be added.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Kwargs:</th><td class="field-body"><ul class="first last simple">
+<li>params: <em>optional</em> Any additional parameters to be submitted
+with a job of this type can be added as keyword arguments.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="batchapps.config.Configuration.application">
+<tt class="descname">application</tt><big>(</big><em>*jobtype</em><big>)</big><a class="reference internal" href="_modules/batchapps/config.html#Configuration.application"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#batchapps.config.Configuration.application" title="Permalink to this definition">¶</a></dt>
+<dd><div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">Deprecated. Please use <a class="reference internal" href="#batchapps.config.Configuration.current_jobtype" title="batchapps.config.Configuration.current_jobtype"><tt class="xref py py-meth docutils literal"><span class="pre">current_jobtype()</span></tt></a>.</p>
+</div>
+<p>Gets and sets the current job type.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Args:</th><td class="field-body"><ul class="first simple">
+<li>jobtype (str): <em>optional</em> A job type, if supplied,
+will update the current job type and job configuration for new
+job submissions.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><ul class="first simple">
+<li>The current job type (str)</li>
+</ul>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Raises:</th><td class="field-body"><ul class="first last simple">
+<li><a class="reference internal" href="batch_apps.exceptions.html#batchapps.exceptions.InvalidConfigException" title="batchapps.exceptions.InvalidConfigException"><tt class="xref py py-exc docutils literal"><span class="pre">InvalidConfigException</span></tt></a> if the supplied job type has no
+associated configuration.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="batchapps.config.Configuration.applications">
+<tt class="descname">applications</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/batchapps/config.html#Configuration.applications"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#batchapps.config.Configuration.applications" title="Permalink to this definition">¶</a></dt>
+<dd><div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">Deprecated. Please use <a class="reference internal" href="#batchapps.config.Configuration.list_jobtypes" title="batchapps.config.Configuration.list_jobtypes"><tt class="xref py py-meth docutils literal"><span class="pre">list_jobtypes()</span></tt></a>.</p>
+</div>
+<p>Gets a list of all the job types defined in the configuration.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><ul class="first last simple">
+<li>A list of strings of the job types options configured.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="batchapps.config.Configuration.clear_config">
+<tt class="descname">clear_config</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/batchapps/config.html#Configuration.clear_config"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#batchapps.config.Configuration.clear_config" title="Permalink to this definition">¶</a></dt>
+<dd><p>Delete any existing config file and reset defaults.
+This will save a new default config file to the allocated path.
+If an error occurs during removing of the old config, this will be
+logged but not raised.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><ul class="first last simple">
+<li><tt class="docutils literal"><span class="pre">True</span></tt> is the config was successfully cleared, else <tt class="docutils literal"><span class="pre">False</span></tt>.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="batchapps.config.Configuration.current_jobtype">
+<tt class="descname">current_jobtype</tt><big>(</big><em>*jobtype</em><big>)</big><a class="reference internal" href="_modules/batchapps/config.html#Configuration.current_jobtype"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#batchapps.config.Configuration.current_jobtype" title="Permalink to this definition">¶</a></dt>
+<dd><p>Gets and sets the current job type.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Args:</th><td class="field-body"><ul class="first simple">
+<li>jobtype (str): <em>optional</em> A job type, if supplied,
+will update the current job type and job configuration for new
+job submissions.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><ul class="first simple">
+<li>The current job type (str)</li>
+</ul>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Raises:</th><td class="field-body"><ul class="first last simple">
+<li><a class="reference internal" href="batch_apps.exceptions.html#batchapps.exceptions.InvalidConfigException" title="batchapps.exceptions.InvalidConfigException"><tt class="xref py py-exc docutils literal"><span class="pre">InvalidConfigException</span></tt></a> if the supplied job type has no
+associated configuration.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="batchapps.config.Configuration.default_params">
+<tt class="descname">default_params</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/batchapps/config.html#Configuration.default_params"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#batchapps.config.Configuration.default_params" title="Permalink to this definition">¶</a></dt>
+<dd><p>Gets the default parameters for the current job type.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><ul class="first last simple">
+<li>A dictionary of all the string parameters tied to the job type.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="batchapps.config.Configuration.endpoint">
+<tt class="descname">endpoint</tt><big>(</big><em>*endpoint</em><big>)</big><a class="reference internal" href="_modules/batchapps/config.html#Configuration.endpoint"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#batchapps.config.Configuration.endpoint" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get and set the endpoint for the Batch Apps service.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Args:</th><td class="field-body"><ul class="first simple">
+<li>endpoint (str): <em>optional</em> A new endpoint, if supplied, will
+change the configured endpoint. To persist changes
+<a class="reference internal" href="#batchapps.config.Configuration.save_config" title="batchapps.config.Configuration.save_config"><tt class="xref py py-meth docutils literal"><span class="pre">save_config()</span></tt></a> must be called.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><ul class="first simple">
+<li>If <tt class="docutils literal"><span class="pre">endpoint</span></tt> is not supplied, the current endpoint will
+be returned (str). Otherwise the new endpoint (str).</li>
+</ul>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Raises:</th><td class="field-body"><ul class="first last simple">
+<li><a class="reference internal" href="batch_apps.exceptions.html#batchapps.exceptions.InvalidConfigException" title="batchapps.exceptions.InvalidConfigException"><tt class="xref py py-exc docutils literal"><span class="pre">InvalidConfigException</span></tt></a> if no endpoint found in the
+configuration.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="batchapps.config.Configuration.get">
+<tt class="descname">get</tt><big>(</big><em>param</em><big>)</big><a class="reference internal" href="_modules/batchapps/config.html#Configuration.get"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#batchapps.config.Configuration.get" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get a parameter from the current job type configuration.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Args:</th><td class="field-body"><ul class="first simple">
+<li>param (str): The parameter to retrieve.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><ul class="first last simple">
+<li>The value of the given parameter (str) if it exists.</li>
+<li><tt class="docutils literal"><span class="pre">None</span></tt> if the parameter doesn&#8217;t exist and a warning will be logged.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="batchapps.config.Configuration.list_jobtypes">
+<tt class="descname">list_jobtypes</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/batchapps/config.html#Configuration.list_jobtypes"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#batchapps.config.Configuration.list_jobtypes" title="Permalink to this definition">¶</a></dt>
+<dd><p>Gets a list of all the job types defined in the configuration.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><ul class="first simple">
+<li>A list of strings of the job types options configured.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Raises:</th><td class="field-body"><ul class="first last simple">
+<li><a class="reference internal" href="batch_apps.exceptions.html#batchapps.exceptions.InvalidConfigException" title="batchapps.exceptions.InvalidConfigException"><tt class="xref py py-class docutils literal"><span class="pre">InvalidConfigException</span></tt></a> if either Logging or
+Authentication sections are missing from the config.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="batchapps.config.Configuration.logging_level">
+<tt class="descname">logging_level</tt><big>(</big><em>*level</em><big>)</big><a class="reference internal" href="_modules/batchapps/config.html#Configuration.logging_level"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#batchapps.config.Configuration.logging_level" title="Permalink to this definition">¶</a></dt>
+<dd><p>Gets and sets the current logging level.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Args:</th><td class="field-body"><ul class="first simple">
+<li>level (str): <em>optional</em> A new level, if supplied, all further
+logging in the current session will be at the new level. To
+persist changes <a class="reference internal" href="#batchapps.config.Configuration.save_config" title="batchapps.config.Configuration.save_config"><tt class="xref py py-meth docutils literal"><span class="pre">save_config()</span></tt></a> must be called.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><ul class="first simple">
+<li>If <tt class="docutils literal"><span class="pre">level</span></tt> is not supplied, the current level used will be
+returned (str). Otherwise the new level (str).</li>
+</ul>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Raises:</th><td class="field-body"><ul class="first last simple">
+<li><a class="reference internal" href="batch_apps.exceptions.html#batchapps.exceptions.InvalidConfigException" title="batchapps.exceptions.InvalidConfigException"><tt class="xref py py-exc docutils literal"><span class="pre">InvalidConfigException</span></tt></a> if current configuration does not
+have a logging level configured.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="batchapps.config.Configuration.remove">
+<tt class="descname">remove</tt><big>(</big><em>setting</em><big>)</big><a class="reference internal" href="_modules/batchapps/config.html#Configuration.remove"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#batchapps.config.Configuration.remove" title="Permalink to this definition">¶</a></dt>
+<dd><p>Remove a parameter or job type from the config.
+For these changes to be persisted <a class="reference internal" href="#batchapps.config.Configuration.save_config" title="batchapps.config.Configuration.save_config"><tt class="xref py py-meth docutils literal"><span class="pre">save_config()</span></tt></a>
+must be called.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Args:</th><td class="field-body"><ul class="first simple">
+<li>setting (str): Job type or parameter to be removed from
+the config. If the supplied setting is not a job type or
+current job type parameter, nothing will happen. The
+current job type, or &#8216;Logging&#8217; and &#8216;Authentication&#8217; sections
+cannot be removed.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><ul class="first last simple">
+<li><tt class="docutils literal"><span class="pre">True</span></tt> if the parameter of section was found as removed.</li>
+<li><tt class="docutils literal"><span class="pre">False</span></tt> if the selected section was the current job type
+or &#8220;Authentication&#8221; or &#8220;Logging&#8221;. Will also be <tt class="docutils literal"><span class="pre">False</span></tt> if
+the job type or parameter were not found.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="batchapps.config.Configuration.save_config">
+<tt class="descname">save_config</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/batchapps/config.html#Configuration.save_config"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#batchapps.config.Configuration.save_config" title="Permalink to this definition">¶</a></dt>
+<dd><p>Save configuration settings to file.
+Any changes made to the configuration will not be saved by default.
+So this method must be called to persist any changes to future
+sessions. Any saved changes will be lost if a new default
+<a class="reference internal" href="#batchapps.config.Configuration" title="batchapps.config.Configuration"><tt class="xref py py-class docutils literal"><span class="pre">Configuration</span></tt></a> object is created with the same path, or if
+<a class="reference internal" href="#batchapps.config.Configuration.clear_config" title="batchapps.config.Configuration.clear_config"><tt class="xref py py-meth docutils literal"><span class="pre">clear_config()</span></tt></a> is called. If an error occurs during file
+writing, this will be logged but not raised.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><ul class="first last simple">
+<li><tt class="docutils literal"><span class="pre">True</span></tt> if save was successful, else <tt class="docutils literal"><span class="pre">False</span></tt>.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="batchapps.config.Configuration.set">
+<tt class="descname">set</tt><big>(</big><em>param</em>, <em>value</em><big>)</big><a class="reference internal" href="_modules/batchapps/config.html#Configuration.set"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#batchapps.config.Configuration.set" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set or add a parameter to the configuration of the current
+job type.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Args:</th><td class="field-body"><ul class="first last simple">
+<li>param (str): The parameter to set, either new or already
+existing.</li>
+<li>value (str): The value to assign to the given parameter.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="batchapps.config.Configuration.set_default_application">
+<tt class="descname">set_default_application</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/batchapps/config.html#Configuration.set_default_application"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#batchapps.config.Configuration.set_default_application" title="Permalink to this definition">¶</a></dt>
+<dd><div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">Deprecated. Use <a class="reference internal" href="#batchapps.config.Configuration.set_default_jobtype" title="batchapps.config.Configuration.set_default_jobtype"><tt class="xref py py-meth docutils literal"><span class="pre">set_default_jobtype()</span></tt></a>.</p>
+</div>
+<p>Set the job type to be used by default when creating a
+<a class="reference internal" href="#batchapps.config.Configuration" title="batchapps.config.Configuration"><tt class="xref py py-class docutils literal"><span class="pre">Configuration</span></tt></a> object. This method will set the current
+job type to be the default, and will save the changes.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="batchapps.config.Configuration.set_default_jobtype">
+<tt class="descname">set_default_jobtype</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/batchapps/config.html#Configuration.set_default_jobtype"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#batchapps.config.Configuration.set_default_jobtype" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set the job type to be used by default when creating a
+<a class="reference internal" href="#batchapps.config.Configuration" title="batchapps.config.Configuration"><tt class="xref py py-class docutils literal"><span class="pre">Configuration</span></tt></a> object. This method will set the current
+job type to be the default, and will save the changes.</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="batch_apps.html"
+                        title="previous chapter">batchapps package</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="batch_apps.credentials.html"
+                        title="next chapter">batchapps.credentials module</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="_sources/batch_apps.config.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="batch_apps.credentials.html" title="batchapps.credentials module"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="batch_apps.html" title="batchapps package"
+             >previous</a> |</li>
+        <li><a href="index.html">azure-batch-apps 0.2.0 documentation</a> &raquo;</li>
+          <li><a href="batch_apps.html" >batchapps package</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2014, Microsoft Corporation.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2.2.
+    </div>
+  </body>
+</html>

@@ -1,0 +1,4 @@
+Sample Script - Submit Job
+===========================
+
+.. literalinclude:: BatchAppsExample-submit_job.py

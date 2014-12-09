@@ -1,0 +1,211 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Welcome to the Batch Apps Python Client documentation! &mdash; azure-batch-apps 0.2.0 documentation</title>
+    
+    <link rel="stylesheet" href="_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '0.2.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="top" title="azure-batch-apps 0.2.0 documentation" href="#" />
+    <link rel="next" title="batchapps package" href="batch_apps.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="batch_apps.html" title="batchapps package"
+             accesskey="N">next</a> |</li>
+        <li><a href="#">azure-batch-apps 0.2.0 documentation</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="toctree-wrapper compound">
+<ul class="simple">
+</ul>
+</div>
+<div class="section" id="welcome-to-the-batch-apps-python-client-documentation">
+<h1>Welcome to the Batch Apps Python Client documentation!<a class="headerlink" href="#welcome-to-the-batch-apps-python-client-documentation" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="installation">
+<h2>Installation<a class="headerlink" href="#installation" title="Permalink to this headline">¶</a></h2>
+<p>Batch Apps Client can be installed using the Pip install manager:</p>
+<div class="highlight-python"><div class="highlight"><pre>&gt;&gt; pip install azure-batch-apps
+</pre></div>
+</div>
+<p>On installation, Requests, Requests-OAuthLib and Keyring will also be installed.</p>
+</div>
+<div class="section" id="contents">
+<h2>Contents<a class="headerlink" href="#contents" title="Permalink to this headline">¶</a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="batch_apps.html">batchapps package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="batch_apps.html#session-setup">Session Setup</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="batch_apps.config.html">Configuration</a></li>
+<li class="toctree-l3"><a class="reference internal" href="batch_apps.credentials.html">batchapps.credentials module</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="batch_apps.credentials.html#azureoauth">AzureOAuth</a></li>
+<li class="toctree-l4"><a class="reference internal" href="batch_apps.credentials.html#credentials">Credentials</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="batch_apps.html#job-management">Job Management</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="batch_apps.job_manager.html">JobManager</a></li>
+<li class="toctree-l3"><a class="reference internal" href="batch_apps.job.html">batchapps.job module</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="batch_apps.job.html#jobsubmission">JobSubmission</a></li>
+<li class="toctree-l4"><a class="reference internal" href="batch_apps.job.html#submittedjob">SubmittedJob</a></li>
+<li class="toctree-l4"><a class="reference internal" href="batch_apps.job.html#task">Task</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="batch_apps.html#file-management">File Management</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="batch_apps.file_manager.html">FileManager</a></li>
+<li class="toctree-l3"><a class="reference internal" href="batch_apps.files.html">batchapps.files module</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="batch_apps.files.html#filecollection">FileCollection</a></li>
+<li class="toctree-l4"><a class="reference internal" href="batch_apps.files.html#userfile">UserFile</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="batch_apps.html#batchapps-client">BatchApps Client</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="batch_apps.api.html">batchapps.api module</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="batch_apps.api.html#batchappsapi">BatchAppsApi</a></li>
+<li class="toctree-l4"><a class="reference internal" href="batch_apps.api.html#response">Response</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="batch_apps.rest_client.html">batchapps.rest_client module</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="batch_apps.html#additional-resources">Additional Resources</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="batch_apps.exceptions.html">batchapps.exceptions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="batch_apps.log.html">batchapps.log module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="batch_apps.utils.html">batchapps.utils</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="batch_apps.utils.html#listener">Listener</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+<div class="section" id="code-samples">
+<h2>Code Samples<a class="headerlink" href="#code-samples" title="Permalink to this headline">¶</a></h2>
+<p>All the following samples will be installed to the Python Scripts directory.</p>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="batch_apps.sample.cancel_job.html">Sample Script - Cancel Job</a></li>
+<li class="toctree-l1"><a class="reference internal" href="batch_apps.sample.download_output.html">Sample Script - Download Job Output</a></li>
+<li class="toctree-l1"><a class="reference internal" href="batch_apps.sample.monitor_job.html">Sample Script - Monitoring Jobs</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="batch_apps.sample.monitor_job.html#get-job-status">Get Job Status</a></li>
+<li class="toctree-l2"><a class="reference internal" href="batch_apps.sample.monitor_job.html#update-job-details">Update Job Details</a></li>
+<li class="toctree-l2"><a class="reference internal" href="batch_apps.sample.monitor_job.html#download-task-preview">Download Task Preview</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="batch_apps.sample.submit_job.html">Sample Script - Submit Job</a></li>
+<li class="toctree-l1"><a class="reference internal" href="batch_apps.sample.upload_files.html">Sample Script - Upload Files</a></li>
+</ul>
+</div>
+</div>
+<div class="section" id="index">
+<h2>Index<a class="headerlink" href="#index" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><a class="reference internal" href="genindex.html"><em>Index</em></a></li>
+<li><a class="reference internal" href="py-modindex.html"><em>Module Index</em></a></li>
+<li><a class="reference internal" href="search.html"><em>Search Page</em></a></li>
+</ul>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="#">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Welcome to the Batch Apps Python Client documentation!</a><ul>
+<li><a class="reference internal" href="#installation">Installation</a></li>
+<li><a class="reference internal" href="#contents">Contents</a></li>
+<li><a class="reference internal" href="#code-samples">Code Samples</a></li>
+<li><a class="reference internal" href="#index">Index</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Next topic</h4>
+  <p class="topless"><a href="batch_apps.html"
+                        title="next chapter">batchapps package</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="_sources/index.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="batch_apps.html" title="batchapps package"
+             >next</a> |</li>
+        <li><a href="#">azure-batch-apps 0.2.0 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2014, Microsoft Corporation.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2.2.
+    </div>
+  </body>
+</html>

@@ -1,0 +1,49 @@
+.. BatchApps documentation master file, created by
+   sphinx-quickstart on Thu Jul  3 13:09:21 2014.
+   You can adapt this file completely to your liking, but it should at least
+   contain the root `toctree` directive.
+
+.. toctree::
+   :maxdepth: 4
+  
+Welcome to the Batch Apps Python Client documentation!
+*******************************************************
+
+Installation
+==================
+
+Batch Apps Client can be installed using the Pip install manager::
+
+	>> pip install azure-batch-apps
+
+On installation, Requests, Requests-OAuthLib and Keyring will also be installed.
+
+Contents
+==================
+
+.. toctree::
+   :maxdepth: 4
+
+   batch_apps.rst
+
+Code Samples
+==================
+
+All the following samples will be installed to the Python Scripts directory.
+
+.. toctree::
+   :maxdepth: 2
+
+   batch_apps.sample.cancel_job.rst
+   batch_apps.sample.download_output.rst
+   batch_apps.sample.monitor_job.rst
+   batch_apps.sample.submit_job.rst
+   batch_apps.sample.upload_files.rst
+
+Index
+==================
+
+* :ref:`genindex`
+* :ref:`modindex`
+* :ref:`search`
+

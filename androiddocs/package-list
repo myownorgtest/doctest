@@ -1,0 +1,7 @@
+com.microsoft.azure.storage
+com.microsoft.azure.storage.blob
+com.microsoft.azure.storage.queue
+com.microsoft.azure.storage.table
+com.microsoft.windowsazure.messaging
+com.microsoft.windowsazure.mobileservices
+com.microsoft.windowsazure.notifications

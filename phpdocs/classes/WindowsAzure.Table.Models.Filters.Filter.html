@@ -1,0 +1,328 @@
+<!DOCTYPE html><html xmlns:date="http://exslt.org/dates-and-times" lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0; user-scalable=0;">
+<meta charset="utf-8">
+<title>Windows Azure SDK for PHP » \WindowsAzure\Table\Models\Filters\Filter</title>
+<meta name="author" content="Mike van Riel">
+<meta name="description" content="">
+<link href="../css/template.css" rel="stylesheet" media="all">
+<script src="../js/jquery-1.7.1.min.js" type="text/javascript"></script><script src="../js/jquery-ui-1.8.2.custom.min.js" type="text/javascript"></script><script src="../js/jquery.mousewheel.min.js" type="text/javascript"></script><script src="../js/bootstrap.js" type="text/javascript"></script><script src="../js/template.js" type="text/javascript"></script><script src="../js/prettify/prettify.min.js" type="text/javascript"></script><link rel="shortcut icon" href="../img/favicon.ico">
+<link rel="apple-touch-icon" href="../img/apple-touch-icon.png">
+<link rel="apple-touch-icon" sizes="72x72" href="../img/apple-touch-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="114x114" href="../img/apple-touch-icon-114x114.png">
+</head>
+<body>
+<div class="navbar navbar-fixed-top">
+<div class="navbar-inner"><div class="container">
+<a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse"><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></a><a class="brand" href="../index.html">Windows Azure SDK for PHP</a><div class="nav-collapse"><ul class="nav">
+<li class="dropdown">
+<a href="#api" class="dropdown-toggle" data-toggle="dropdown">
+                                    API Documentation <b class="caret"></b></a><ul class="dropdown-menu">
+<li><a>Namespaces</a></li>
+<li><a href="../namespaces/WindowsAzure.html"><i class="icon-th"></i> WindowsAzure</a></li>
+<li><a>Packages</a></li>
+<li><a href="../packages/WindowsAzure.html"><i class="icon-folder-open"></i> WindowsAzure</a></li>
+</ul>
+</li>
+<li class="dropdown" id="charts-menu">
+<a href="#charts" class="dropdown-toggle" data-toggle="dropdown">
+                                    Charts <b class="caret"></b></a><ul class="dropdown-menu"><li><a href="../graph_class.html"><i class="icon-list-alt"></i> Class hierarchy diagram</a></li></ul>
+</li>
+<li class="dropdown" id="reports-menu">
+<a href="#reports" class="dropdown-toggle" data-toggle="dropdown">
+                                    Reports <b class="caret"></b></a><ul class="dropdown-menu">
+<li><a href="../errors.html"><i class="icon-remove-sign"></i> Errors 
+                <span class="label label-info">385</span></a></li>
+<li><a href="../markers.html"><i class="icon-map-marker"></i> Markers 
+                <ul></ul></a></li>
+<li><a href="../deprecated.html"><i class="icon-stop"></i> Deprecated elements 
+                <span class="label label-info">0</span></a></li>
+</ul>
+</li>
+</ul></div>
+</div></div>
+<div class="go_to_top"><a href="#___" style="color: inherit">Back to top  <i class="icon-upload icon-white"></i></a></div>
+</div>
+<div id="___" class="container">
+<noscript><div class="alert alert-warning">
+                            Javascript is disabled; several features are only available
+                            if Javascript is enabled.
+                        </div></noscript>
+<div class="row">
+<div class="span4">
+<span class="btn-group visibility" data-toggle="buttons-checkbox"><button class="btn public active" title="Show public elements">Public</button><button class="btn protected" title="Show protected elements">Protected</button><button class="btn private" title="Show private elements">Private</button><button class="btn inherited active" title="Show inherited elements">Inherited</button></span><div class="btn-group view pull-right" data-toggle="buttons-radio">
+<button class="btn details" title="Show descriptions and method names"><i class="icon-list"></i></button><button class="btn simple" title="Show only method names"><i class="icon-align-justify"></i></button>
+</div>
+<ul class="side-nav nav nav-list">
+<li class="nav-header">
+<i class="icon-custom icon-method"></i> Methods</li>
+<li class="method public "><a href="#applyAnd" title="applyAnd :: Apply and operation between two filters"><span class="description">Apply and operation between two filters</span><pre>applyAnd()</pre></a></li>
+<li class="method public "><a href="#applyConstant" title="applyConstant :: Apply constant filter on value."><span class="description">Apply constant filter on value.</span><pre>applyConstant()</pre></a></li>
+<li class="method public "><a href="#applyEq" title="applyEq :: Apply eq operation on the passed filers"><span class="description">Apply eq operation on the passed filers</span><pre>applyEq()</pre></a></li>
+<li class="method public "><a href="#applyGe" title="applyGe :: Apply ge operation on the passed filers"><span class="description">Apply ge operation on the passed filers</span><pre>applyGe()</pre></a></li>
+<li class="method public "><a href="#applyGt" title="applyGt :: Apply gt operation on the passed filers"><span class="description">Apply gt operation on the passed filers</span><pre>applyGt()</pre></a></li>
+<li class="method public "><a href="#applyLe" title="applyLe :: Apply le operation on the passed filers"><span class="description">Apply le operation on the passed filers</span><pre>applyLe()</pre></a></li>
+<li class="method public "><a href="#applyLt" title="applyLt :: Apply lt operation on the passed filers"><span class="description">Apply lt operation on the passed filers</span><pre>applyLt()</pre></a></li>
+<li class="method public "><a href="#applyNe" title="applyNe :: Apply ne operation on the passed filers"><span class="description">Apply ne operation on the passed filers</span><pre>applyNe()</pre></a></li>
+<li class="method public "><a href="#applyNot" title="applyNot :: Applies not operation on $operand"><span class="description">Applies not operation on $operand</span><pre>applyNot()</pre></a></li>
+<li class="method public "><a href="#applyOr" title="applyOr :: Apply or operation on the passed filers"><span class="description">Apply or operation on the passed filers</span><pre>applyOr()</pre></a></li>
+<li class="method public "><a href="#applyPropertyName" title="applyPropertyName :: Apply propertyName filter on $value"><span class="description">Apply propertyName filter on $value</span><pre>applyPropertyName()</pre></a></li>
+<li class="method public "><a href="#applyQueryString" title="applyQueryString :: Takes raw string filter"><span class="description">Takes raw string filter</span><pre>applyQueryString()</pre></a></li>
+</ul>
+</div>
+<div class="span8">
+<a name="%5CWindowsAzure%5CTable%5CModels%5CFilters%5CFilter" id="\WindowsAzure\Table\Models\Filters\Filter"></a><ul class="breadcrumb">
+<li>
+<a href="../index.html"><i class="icon-custom icon-class"></i></a><span class="divider">\</span>
+</li>
+<li><a href="../namespaces/WindowsAzure.html">WindowsAzure</a></li>
+<span class="divider">\</span><li><a href="../namespaces/WindowsAzure.Table.html">Table</a></li>
+<span class="divider">\</span><li><a href="../namespaces/WindowsAzure.Table.Models.html">Models</a></li>
+<span class="divider">\</span><li><a href="../namespaces/WindowsAzure.Table.Models.Filters.html">Filters</a></li>
+<li class="active">
+<span class="divider">\</span><a href="../classes/WindowsAzure.Table.Models.Filters.Filter.html">Filter</a>
+</li>
+</ul>
+<div href="../classes/WindowsAzure.Table.Models.Filters.Filter.html" class="element class">
+<p class="short_description">Filter operations</p>
+<div class="details">
+<p class="long_description"></p>
+<table class="table table-bordered">
+<tr>
+<th>category</th>
+<td>Microsoft</td>
+</tr>
+<tr>
+<th>package</th>
+<td><a href="../packages/WindowsAzure.Table.Models.Filters.html">WindowsAzure\Table\Models\Filters</a></td>
+</tr>
+<tr>
+<th>author</th>
+<td><a href="mailto:azurephpsdk@microsoft.com">Azure PHP SDK</a></td>
+</tr>
+<tr>
+<th>copyright</th>
+<td>2012 Microsoft Corporation</td>
+</tr>
+<tr>
+<th>license</th>
+<td><a href="http://www.apache.org/licenses/LICENSE-2.0">Apache License 2.0</a></td>
+</tr>
+<tr>
+<th>version</th>
+<td>Release: @package_version@</td>
+</tr>
+<tr>
+<th>link</th>
+<td><a href="https://github.com/windowsazure/azure-sdk-for-php">https://github.com/windowsazure/azure-sdk-for-php</a></td>
+</tr>
+</table>
+<h3>
+<i class="icon-custom icon-method"></i> Methods</h3>
+<a name="applyAnd" id="applyAnd"></a><div class="element clickable method public applyAnd" data-toggle="collapse" data-target=".applyAnd .collapse">
+<h2>Apply and operation between two filters</h2>
+<pre>applyAnd(\Filter $left, \Filter $right) : <a href="../classes/WindowsAzure.Table.Models.Filters.BinaryFilter.html">\WindowsAzure\Table\Models\Filters\BinaryFilter</a></pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<p class="long_description"></p>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$left</h4>
+<code>\Filter</code><p>The left filter</p></div>
+<div class="subelement argument">
+<h4>$right</h4>
+<code>\Filter</code><p>The right filter</p></div>
+<h3>Returns</h3>
+<div class="subelement response"><code><a href="../classes/WindowsAzure.Table.Models.Filters.BinaryFilter.html">\WindowsAzure\Table\Models\Filters\BinaryFilter</a></code></div>
+</div></div>
+</div>
+<a name="applyConstant" id="applyConstant"></a><div class="element clickable method public applyConstant" data-toggle="collapse" data-target=".applyConstant .collapse">
+<h2>Apply constant filter on value.</h2>
+<pre>applyConstant(\mix $value, string $edmType) : <a href="../classes/WindowsAzure.Table.Models.Filters.ConstantFilter.html">\WindowsAzure\Table\Models\Filters\ConstantFilter</a></pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<p class="long_description"></p>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$value</h4>
+<code>\mix</code><p>The filter value</p></div>
+<div class="subelement argument">
+<h4>$edmType</h4>
+<code>string</code><p>The value EDM type.</p></div>
+<h3>Returns</h3>
+<div class="subelement response"><code><a href="../classes/WindowsAzure.Table.Models.Filters.ConstantFilter.html">\WindowsAzure\Table\Models\Filters\ConstantFilter</a></code></div>
+</div></div>
+</div>
+<a name="applyEq" id="applyEq"></a><div class="element clickable method public applyEq" data-toggle="collapse" data-target=".applyEq .collapse">
+<h2>Apply eq operation on the passed filers</h2>
+<pre>applyEq(\Filter $left, \Filter $right) : \BinaryFilter</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<p class="long_description"></p>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$left</h4>
+<code>\Filter</code><p>The left operand</p></div>
+<div class="subelement argument">
+<h4>$right</h4>
+<code>\Filter</code><p>The right operand</p></div>
+<h3>Returns</h3>
+<div class="subelement response"><code>\BinaryFilter</code></div>
+</div></div>
+</div>
+<a name="applyGe" id="applyGe"></a><div class="element clickable method public applyGe" data-toggle="collapse" data-target=".applyGe .collapse">
+<h2>Apply ge operation on the passed filers</h2>
+<pre>applyGe(\Filter $left, \Filter $right) : \BinaryFilter</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<p class="long_description"></p>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$left</h4>
+<code>\Filter</code><p>The left operand</p></div>
+<div class="subelement argument">
+<h4>$right</h4>
+<code>\Filter</code><p>The right operand</p></div>
+<h3>Returns</h3>
+<div class="subelement response"><code>\BinaryFilter</code></div>
+</div></div>
+</div>
+<a name="applyGt" id="applyGt"></a><div class="element clickable method public applyGt" data-toggle="collapse" data-target=".applyGt .collapse">
+<h2>Apply gt operation on the passed filers</h2>
+<pre>applyGt(\Filter $left, \Filter $right) : \BinaryFilter</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<p class="long_description"></p>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$left</h4>
+<code>\Filter</code><p>The left operand</p></div>
+<div class="subelement argument">
+<h4>$right</h4>
+<code>\Filter</code><p>The right operand</p></div>
+<h3>Returns</h3>
+<div class="subelement response"><code>\BinaryFilter</code></div>
+</div></div>
+</div>
+<a name="applyLe" id="applyLe"></a><div class="element clickable method public applyLe" data-toggle="collapse" data-target=".applyLe .collapse">
+<h2>Apply le operation on the passed filers</h2>
+<pre>applyLe(\Filter $left, \Filter $right) : \BinaryFilter</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<p class="long_description"></p>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$left</h4>
+<code>\Filter</code><p>The left operand</p></div>
+<div class="subelement argument">
+<h4>$right</h4>
+<code>\Filter</code><p>The right operand</p></div>
+<h3>Returns</h3>
+<div class="subelement response"><code>\BinaryFilter</code></div>
+</div></div>
+</div>
+<a name="applyLt" id="applyLt"></a><div class="element clickable method public applyLt" data-toggle="collapse" data-target=".applyLt .collapse">
+<h2>Apply lt operation on the passed filers</h2>
+<pre>applyLt(\Filter $left, \Filter $right) : \BinaryFilter</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<p class="long_description"></p>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$left</h4>
+<code>\Filter</code><p>The left operand</p></div>
+<div class="subelement argument">
+<h4>$right</h4>
+<code>\Filter</code><p>The right operand</p></div>
+<h3>Returns</h3>
+<div class="subelement response"><code>\BinaryFilter</code></div>
+</div></div>
+</div>
+<a name="applyNe" id="applyNe"></a><div class="element clickable method public applyNe" data-toggle="collapse" data-target=".applyNe .collapse">
+<h2>Apply ne operation on the passed filers</h2>
+<pre>applyNe(\Filter $left, \Filter $right) : \BinaryFilter</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<p class="long_description"></p>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$left</h4>
+<code>\Filter</code><p>The left operand</p></div>
+<div class="subelement argument">
+<h4>$right</h4>
+<code>\Filter</code><p>The right operand</p></div>
+<h3>Returns</h3>
+<div class="subelement response"><code>\BinaryFilter</code></div>
+</div></div>
+</div>
+<a name="applyNot" id="applyNot"></a><div class="element clickable method public applyNot" data-toggle="collapse" data-target=".applyNot .collapse">
+<h2>Applies not operation on $operand</h2>
+<pre>applyNot(\Filter $operand) : <a href="../classes/WindowsAzure.Table.Models.Filters.UnaryFilter.html">\WindowsAzure\Table\Models\Filters\UnaryFilter</a></pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<p class="long_description"></p>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$operand</h4>
+<code>\Filter</code><p>The operand</p></div>
+<h3>Returns</h3>
+<div class="subelement response"><code><a href="../classes/WindowsAzure.Table.Models.Filters.UnaryFilter.html">\WindowsAzure\Table\Models\Filters\UnaryFilter</a></code></div>
+</div></div>
+</div>
+<a name="applyOr" id="applyOr"></a><div class="element clickable method public applyOr" data-toggle="collapse" data-target=".applyOr .collapse">
+<h2>Apply or operation on the passed filers</h2>
+<pre>applyOr(\Filter $left, \Filter $right) : \BinaryFilter</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<p class="long_description"></p>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$left</h4>
+<code>\Filter</code><p>The left operand</p></div>
+<div class="subelement argument">
+<h4>$right</h4>
+<code>\Filter</code><p>The right operand</p></div>
+<h3>Returns</h3>
+<div class="subelement response"><code>\BinaryFilter</code></div>
+</div></div>
+</div>
+<a name="applyPropertyName" id="applyPropertyName"></a><div class="element clickable method public applyPropertyName" data-toggle="collapse" data-target=".applyPropertyName .collapse">
+<h2>Apply propertyName filter on $value</h2>
+<pre>applyPropertyName(string $value) : <a href="../classes/WindowsAzure.Table.Models.Filters.PropertyNameFilter.html">\WindowsAzure\Table\Models\Filters\PropertyNameFilter</a></pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<p class="long_description"></p>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$value</h4>
+<code>string</code><p>The filter value</p></div>
+<h3>Returns</h3>
+<div class="subelement response"><code><a href="../classes/WindowsAzure.Table.Models.Filters.PropertyNameFilter.html">\WindowsAzure\Table\Models\Filters\PropertyNameFilter</a></code></div>
+</div></div>
+</div>
+<a name="applyQueryString" id="applyQueryString"></a><div class="element clickable method public applyQueryString" data-toggle="collapse" data-target=".applyQueryString .collapse">
+<h2>Takes raw string filter</h2>
+<pre>applyQueryString(string $value) : <a href="../classes/WindowsAzure.Table.Models.Filters.QueryStringFilter.html">\WindowsAzure\Table\Models\Filters\QueryStringFilter</a></pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<p class="long_description"></p>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$value</h4>
+<code>string</code><p>The raw string filter expression</p></div>
+<h3>Returns</h3>
+<div class="subelement response"><code><a href="../classes/WindowsAzure.Table.Models.Filters.QueryStringFilter.html">\WindowsAzure\Table\Models\Filters\QueryStringFilter</a></code></div>
+</div></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="row"><footer class="span12">
+            Template is built using <a href="http://twitter.github.com/bootstrap/">Twitter Bootstrap 2</a> and icons provided by <a href="http://glyphicons.com/">Glyphicons</a>.<br>
+            Documentation is powered by <a href="http://www.phpdoc.org/">phpDocumentor 2.0.0a6</a> and<br>
+            generated on 2012-07-17T21:10:41-07:00.<br></footer></div>
+</div>
+</body>
+</html>

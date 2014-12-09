@@ -1,0 +1,263 @@
+<!DOCTYPE html><html xmlns:date="http://exslt.org/dates-and-times" lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0; user-scalable=0;">
+<meta charset="utf-8">
+<title>Windows Azure SDK for PHP » \WindowsAzure\Common\Internal\ServiceManagementSettings</title>
+<meta name="author" content="Mike van Riel">
+<meta name="description" content="">
+<link href="../css/template.css" rel="stylesheet" media="all">
+<script src="../js/jquery-1.7.1.min.js" type="text/javascript"></script><script src="../js/jquery-ui-1.8.2.custom.min.js" type="text/javascript"></script><script src="../js/jquery.mousewheel.min.js" type="text/javascript"></script><script src="../js/bootstrap.js" type="text/javascript"></script><script src="../js/template.js" type="text/javascript"></script><script src="../js/prettify/prettify.min.js" type="text/javascript"></script><link rel="shortcut icon" href="../img/favicon.ico">
+<link rel="apple-touch-icon" href="../img/apple-touch-icon.png">
+<link rel="apple-touch-icon" sizes="72x72" href="../img/apple-touch-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="114x114" href="../img/apple-touch-icon-114x114.png">
+</head>
+<body>
+<div class="navbar navbar-fixed-top">
+<div class="navbar-inner"><div class="container">
+<a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse"><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></a><a class="brand" href="../index.html">Windows Azure SDK for PHP</a><div class="nav-collapse"><ul class="nav">
+<li class="dropdown">
+<a href="#api" class="dropdown-toggle" data-toggle="dropdown">
+                                    API Documentation <b class="caret"></b></a><ul class="dropdown-menu">
+<li><a>Namespaces</a></li>
+<li><a href="../namespaces/WindowsAzure.html"><i class="icon-th"></i> WindowsAzure</a></li>
+<li><a>Packages</a></li>
+<li><a href="../packages/WindowsAzure.html"><i class="icon-folder-open"></i> WindowsAzure</a></li>
+</ul>
+</li>
+<li class="dropdown" id="charts-menu">
+<a href="#charts" class="dropdown-toggle" data-toggle="dropdown">
+                                    Charts <b class="caret"></b></a><ul class="dropdown-menu"><li><a href="../graph_class.html"><i class="icon-list-alt"></i> Class hierarchy diagram</a></li></ul>
+</li>
+<li class="dropdown" id="reports-menu">
+<a href="#reports" class="dropdown-toggle" data-toggle="dropdown">
+                                    Reports <b class="caret"></b></a><ul class="dropdown-menu">
+<li><a href="../errors.html"><i class="icon-remove-sign"></i> Errors 
+                <span class="label label-info">385</span></a></li>
+<li><a href="../markers.html"><i class="icon-map-marker"></i> Markers 
+                <ul></ul></a></li>
+<li><a href="../deprecated.html"><i class="icon-stop"></i> Deprecated elements 
+                <span class="label label-info">0</span></a></li>
+</ul>
+</li>
+</ul></div>
+</div></div>
+<div class="go_to_top"><a href="#___" style="color: inherit">Back to top  <i class="icon-upload icon-white"></i></a></div>
+</div>
+<div id="___" class="container">
+<noscript><div class="alert alert-warning">
+                            Javascript is disabled; several features are only available
+                            if Javascript is enabled.
+                        </div></noscript>
+<div class="row">
+<div class="span4">
+<span class="btn-group visibility" data-toggle="buttons-checkbox"><button class="btn public active" title="Show public elements">Public</button><button class="btn protected" title="Show protected elements">Protected</button><button class="btn private" title="Show private elements">Private</button><button class="btn inherited active" title="Show inherited elements">Inherited</button></span><div class="btn-group view pull-right" data-toggle="buttons-radio">
+<button class="btn details" title="Show descriptions and method names"><i class="icon-list"></i></button><button class="btn simple" title="Show only method names"><i class="icon-align-justify"></i></button>
+</div>
+<ul class="side-nav nav nav-list">
+<li class="nav-header">
+<i class="icon-custom icon-method"></i> Methods</li>
+<li class="method public "><a href="#__construct" title="__construct :: Creates new service management settings instance."><span class="description">Creates new service management settings instance.</span><pre>__construct()</pre></a></li>
+<li class="method public "><a href="#createFromConnectionString" title="createFromConnectionString :: Creates a ServiceManagementSettings object from the given connection string."><span class="description">Creates a ServiceManagementSettings object from the given connection string.</span><pre>createFromConnectionString()</pre></a></li>
+<li class="method public "><a href="#getCertificatePath" title="getCertificatePath :: Gets the certificate path."><span class="description">Gets the certificate path.</span><pre>getCertificatePath()</pre></a></li>
+<li class="method public "><a href="#getEndpointUri" title="getEndpointUri :: Gets service management endpoint uri."><span class="description">Gets service management endpoint uri.</span><pre>getEndpointUri()</pre></a></li>
+<li class="method public "><a href="#getSubscriptionId" title="getSubscriptionId :: Gets the subscription id."><span class="description">Gets the subscription id.</span><pre>getSubscriptionId()</pre></a></li>
+<li class="nav-header protected">» Protected</li>
+<li class="method protected "><a href="#init" title="init :: Initializes static members of the class."><span class="description">Initializes static members of the class.</span><pre>init()</pre></a></li>
+<li class="nav-header">
+<i class="icon-custom icon-property"></i> Properties</li>
+<li class="nav-header protected">» Protected</li>
+<li class="property protected "><a href="#%24isInitialized" title="$isInitialized :: "><span class="description">$isInitialized</span><pre>$isInitialized</pre></a></li>
+<li class="property protected "><a href="#%24validSettingKeys" title="$validSettingKeys :: Holds the expected setting keys."><span class="description">Holds the expected setting keys.</span><pre>$validSettingKeys</pre></a></li>
+<li class="nav-header private">» Private</li>
+<li class="property private "><a href="#%24_certificatePath" title="$_certificatePath :: "><span class="description">$_certificatePath</span><pre>$_certificatePath</pre></a></li>
+<li class="property private "><a href="#%24_certificatePathSetting" title="$_certificatePathSetting :: Validator for the CertificatePath setting. It has to be provided."><span class="description">Validator for the CertificatePath setting. It has to be provided.</span><pre>$_certificatePathSetting</pre></a></li>
+<li class="property private "><a href="#%24_endpointSetting" title="$_endpointSetting :: Validator for the ServiceManagementEndpoint setting. Must be a valid Uri."><span class="description">Validator for the ServiceManagementEndpoint setting. Must be a valid Uri.</span><pre>$_endpointSetting</pre></a></li>
+<li class="property private "><a href="#%24_endpointUri" title="$_endpointUri :: "><span class="description">$_endpointUri</span><pre>$_endpointUri</pre></a></li>
+<li class="property private "><a href="#%24_subscriptionId" title="$_subscriptionId :: "><span class="description">$_subscriptionId</span><pre>$_subscriptionId</pre></a></li>
+<li class="property private "><a href="#%24_subscriptionIdSetting" title="$_subscriptionIdSetting :: Validator for the SubscriptionId setting. It has to be provided."><span class="description">Validator for the SubscriptionId setting. It has to be provided.</span><pre>$_subscriptionIdSetting</pre></a></li>
+</ul>
+</div>
+<div class="span8">
+<a name="%5CWindowsAzure%5CCommon%5CInternal%5CServiceManagementSettings" id="\WindowsAzure\Common\Internal\ServiceManagementSettings"></a><ul class="breadcrumb">
+<li>
+<a href="../index.html"><i class="icon-custom icon-class"></i></a><span class="divider">\</span>
+</li>
+<li><a href="../namespaces/WindowsAzure.html">WindowsAzure</a></li>
+<span class="divider">\</span><li><a href="../namespaces/WindowsAzure.Common.html">Common</a></li>
+<span class="divider">\</span><li><a href="../namespaces/WindowsAzure.Common.Internal.html">Internal</a></li>
+<li class="active">
+<span class="divider">\</span><a href="../classes/WindowsAzure.Common.Internal.ServiceManagementSettings.html">ServiceManagementSettings</a>
+</li>
+</ul>
+<div href="../classes/WindowsAzure.Common.Internal.ServiceManagementSettings.html" class="element class">
+<p class="short_description">Represents the settings used to sign and access a request against the service
+management. For more information about service management connection strings check
+this page: http://msdn.microsoft.com/en-us/library/windowsazure/gg466228.aspx</p>
+<div class="details">
+<p class="long_description"></p>
+<table class="table table-bordered">
+<tr>
+<th>category</th>
+<td>Microsoft</td>
+</tr>
+<tr>
+<th>package</th>
+<td><a href="../packages/WindowsAzure.Common.Internal.html">WindowsAzure\Common\Internal</a></td>
+</tr>
+<tr>
+<th>author</th>
+<td><a href="mailto:azurephpsdk@microsoft.com">Azure PHP SDK</a></td>
+</tr>
+<tr>
+<th>copyright</th>
+<td>2012 Microsoft Corporation</td>
+</tr>
+<tr>
+<th>license</th>
+<td><a href="http://www.apache.org/licenses/LICENSE-2.0">Apache License 2.0</a></td>
+</tr>
+<tr>
+<th>version</th>
+<td>Release: @package_version@</td>
+</tr>
+<tr>
+<th>link</th>
+<td><a href="https://github.com/windowsazure/azure-sdk-for-php">https://github.com/windowsazure/azure-sdk-for-php</a></td>
+</tr>
+</table>
+<h3>
+<i class="icon-custom icon-method"></i> Methods</h3>
+<a name="__construct" id="__construct"></a><div class="element clickable method public __construct" data-toggle="collapse" data-target=".__construct .collapse">
+<h2>Creates new service management settings instance.</h2>
+<pre>__construct(string $subscriptionId, string $endpointUri, string $certificatePath) </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<p class="long_description"></p>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$subscriptionId</h4>
+<code>string</code><p>The user provided subscription id.</p></div>
+<div class="subelement argument">
+<h4>$endpointUri</h4>
+<code>string</code><p>The service management endpoint uri.</p></div>
+<div class="subelement argument">
+<h4>$certificatePath</h4>
+<code>string</code><p>The management certificate path.</p></div>
+</div></div>
+</div>
+<a name="createFromConnectionString" id="createFromConnectionString"></a><div class="element clickable method public createFromConnectionString" data-toggle="collapse" data-target=".createFromConnectionString .collapse">
+<h2>Creates a ServiceManagementSettings object from the given connection string.</h2>
+<pre>createFromConnectionString(string $connectionString) : \ServiceManagementSettings</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<p class="long_description"></p>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$connectionString</h4>
+<code>string</code><p>The storage settings connection string.</p></div>
+<h3>Returns</h3>
+<div class="subelement response"><code>\ServiceManagementSettings</code></div>
+</div></div>
+</div>
+<a name="getCertificatePath" id="getCertificatePath"></a><div class="element clickable method public getCertificatePath" data-toggle="collapse" data-target=".getCertificatePath .collapse">
+<h2>Gets the certificate path.</h2>
+<pre>getCertificatePath() : string</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<p class="long_description"></p>
+<h3>Returns</h3>
+<div class="subelement response"><code>string</code></div>
+</div></div>
+</div>
+<a name="getEndpointUri" id="getEndpointUri"></a><div class="element clickable method public getEndpointUri" data-toggle="collapse" data-target=".getEndpointUri .collapse">
+<h2>Gets service management endpoint uri.</h2>
+<pre>getEndpointUri() : string</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<p class="long_description"></p>
+<h3>Returns</h3>
+<div class="subelement response"><code>string</code></div>
+</div></div>
+</div>
+<a name="getSubscriptionId" id="getSubscriptionId"></a><div class="element clickable method public getSubscriptionId" data-toggle="collapse" data-target=".getSubscriptionId .collapse">
+<h2>Gets the subscription id.</h2>
+<pre>getSubscriptionId() : string</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<p class="long_description"></p>
+<h3>Returns</h3>
+<div class="subelement response"><code>string</code></div>
+</div></div>
+</div>
+<a name="init" id="init"></a><div class="element clickable method protected init" data-toggle="collapse" data-target=".init .collapse">
+<h2>Initializes static members of the class.</h2>
+<pre>init() : \none</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<p class="long_description"></p>
+<h3>Returns</h3>
+<div class="subelement response"><code>\none</code></div>
+</div></div>
+</div>
+<h3>
+<i class="icon-custom icon-property"></i> Properties</h3>
+<a name="%24isInitialized" id="$isInitialized"> </a><div class="element clickable property protected $isInitialized" data-toggle="collapse" data-target=".$isInitialized .collapse">
+<h2>$isInitialized</h2>
+<pre>$isInitialized : boolean</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><p class="long_description"></p></div></div>
+</div>
+<a name="%24validSettingKeys" id="$validSettingKeys"> </a><div class="element clickable property protected $validSettingKeys" data-toggle="collapse" data-target=".$validSettingKeys .collapse">
+<h2>Holds the expected setting keys.</h2>
+<pre>$validSettingKeys : array</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><p class="long_description"></p></div></div>
+</div>
+<a name="%24_certificatePath" id="$_certificatePath"> </a><div class="element clickable property private $_certificatePath" data-toggle="collapse" data-target=".$_certificatePath .collapse">
+<h2>$_certificatePath</h2>
+<pre>$_certificatePath : string</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><p class="long_description"></p></div></div>
+</div>
+<a name="%24_certificatePathSetting" id="$_certificatePathSetting"> </a><div class="element clickable property private $_certificatePathSetting" data-toggle="collapse" data-target=".$_certificatePathSetting .collapse">
+<h2>Validator for the CertificatePath setting. It has to be provided.</h2>
+<pre>$_certificatePathSetting : array</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><p class="long_description"></p></div></div>
+</div>
+<a name="%24_endpointSetting" id="$_endpointSetting"> </a><div class="element clickable property private $_endpointSetting" data-toggle="collapse" data-target=".$_endpointSetting .collapse">
+<h2>Validator for the ServiceManagementEndpoint setting. Must be a valid Uri.</h2>
+<pre>$_endpointSetting : array</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><p class="long_description"></p></div></div>
+</div>
+<a name="%24_endpointUri" id="$_endpointUri"> </a><div class="element clickable property private $_endpointUri" data-toggle="collapse" data-target=".$_endpointUri .collapse">
+<h2>$_endpointUri</h2>
+<pre>$_endpointUri : string</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><p class="long_description"></p></div></div>
+</div>
+<a name="%24_subscriptionId" id="$_subscriptionId"> </a><div class="element clickable property private $_subscriptionId" data-toggle="collapse" data-target=".$_subscriptionId .collapse">
+<h2>$_subscriptionId</h2>
+<pre>$_subscriptionId : string</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><p class="long_description"></p></div></div>
+</div>
+<a name="%24_subscriptionIdSetting" id="$_subscriptionIdSetting"> </a><div class="element clickable property private $_subscriptionIdSetting" data-toggle="collapse" data-target=".$_subscriptionIdSetting .collapse">
+<h2>Validator for the SubscriptionId setting. It has to be provided.</h2>
+<pre>$_subscriptionIdSetting : array</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><p class="long_description"></p></div></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="row"><footer class="span12">
+            Template is built using <a href="http://twitter.github.com/bootstrap/">Twitter Bootstrap 2</a> and icons provided by <a href="http://glyphicons.com/">Glyphicons</a>.<br>
+            Documentation is powered by <a href="http://www.phpdoc.org/">phpDocumentor 2.0.0a6</a> and<br>
+            generated on 2012-07-17T21:10:38-07:00.<br></footer></div>
+</div>
+</body>
+</html>

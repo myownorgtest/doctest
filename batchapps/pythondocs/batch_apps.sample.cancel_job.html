@@ -1,0 +1,274 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Sample Script - Cancel Job &mdash; azure-batch-apps 0.2.0 documentation</title>
+    
+    <link rel="stylesheet" href="_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '0.2.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="top" title="azure-batch-apps 0.2.0 documentation" href="index.html" />
+    <link rel="next" title="Sample Script - Download Job Output" href="batch_apps.sample.download_output.html" />
+    <link rel="prev" title="batchapps.utils" href="batch_apps.utils.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="batch_apps.sample.download_output.html" title="Sample Script - Download Job Output"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="batch_apps.utils.html" title="batchapps.utils"
+             accesskey="P">previous</a> |</li>
+        <li><a href="index.html">azure-batch-apps 0.2.0 documentation</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="sample-script-cancel-job">
+<h1>Sample Script - Cancel Job<a class="headerlink" href="#sample-script-cancel-job" title="Permalink to this headline">¶</a></h1>
+<div class="highlight-python"><div class="highlight"><pre><span class="c">#-------------------------------------------------------------------------</span>
+<span class="c"># The Azure Batch Apps Python Client</span>
+<span class="c">#</span>
+<span class="c"># Copyright (c) Microsoft Corporation. All rights reserved. </span>
+<span class="c">#</span>
+<span class="c"># The MIT License (MIT)</span>
+<span class="c">#</span>
+<span class="c"># Permission is hereby granted, free of charge, to any person obtaining a copy</span>
+<span class="c"># of this software and associated documentation files (the &quot;&quot;Software&quot;&quot;), to deal</span>
+<span class="c"># in the Software without restriction, including without limitation the rights</span>
+<span class="c"># to use, copy, modify, merge, publish, distribute, sublicense, and/or sell</span>
+<span class="c"># copies of the Software, and to permit persons to whom the Software is</span>
+<span class="c"># furnished to do so, subject to the following conditions:</span>
+<span class="c">#</span>
+<span class="c"># The above copyright notice and this permission notice shall be included in</span>
+<span class="c"># all copies or substantial portions of the Software.</span>
+<span class="c">#</span>
+<span class="c"># THE SOFTWARE IS PROVIDED *AS IS*, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR</span>
+<span class="c"># IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,</span>
+<span class="c"># FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE</span>
+<span class="c"># AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER</span>
+<span class="c"># LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,</span>
+<span class="c"># OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN</span>
+<span class="c"># THE SOFTWARE.</span>
+<span class="c">#</span>
+<span class="c">#--------------------------------------------------------------------------</span>
+
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">A sample script showing use of the batchapps module to cancel a running job.</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="kn">import</span> <span class="nn">getpass</span>
+<span class="kn">import</span> <span class="nn">sys</span>
+<span class="kn">import</span> <span class="nn">webbrowser</span>
+
+<span class="kn">from</span> <span class="nn">batchapps</span> <span class="kn">import</span> <span class="p">(</span>
+    <span class="n">FileManager</span><span class="p">,</span>
+    <span class="n">JobManager</span><span class="p">,</span>
+    <span class="n">Credentials</span><span class="p">,</span>
+    <span class="n">Configuration</span><span class="p">)</span>
+
+<span class="kn">from</span> <span class="nn">batchapps.credentials</span> <span class="kn">import</span> <span class="n">AzureOAuth</span>
+
+<span class="kn">from</span> <span class="nn">batchapps.exceptions</span> <span class="kn">import</span> <span class="p">(</span>
+    <span class="n">AuthenticationException</span><span class="p">,</span>
+    <span class="n">RestCallException</span><span class="p">,</span>
+    <span class="n">InvalidConfigException</span><span class="p">)</span>
+
+<span class="n">LOG_LEVEL</span> <span class="o">=</span> <span class="s">&quot;debug&quot;</span> 
+
+<span class="k">def</span> <span class="nf">authentication</span><span class="p">(</span><span class="n">mode</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Authenticates a username against a stored password, if any, otherwise</span>
+<span class="sd">    requires a password is to be entered.</span>
+
+<span class="sd">    :Args:</span>
+<span class="sd">        - cfg (:class:`.Configuration`): an instance of class Configuration as</span>
+<span class="sd">          returned by create_config()</span>
+
+<span class="sd">    :Returns:</span>
+<span class="sd">        - a :class:`.Credentials` instance object</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">try</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">AzureOAuth</span><span class="o">.</span><span class="n">get_unattended_session</span><span class="p">(</span><span class="n">config</span><span class="o">=</span><span class="n">mode</span><span class="p">)</span>
+
+    <span class="k">except</span> <span class="p">(</span><span class="n">AuthenticationException</span><span class="p">,</span> <span class="n">InvalidConfigException</span><span class="p">)</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+        <span class="k">print</span><span class="p">(</span><span class="s">&quot;Could not get existing session: {0}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">e</span><span class="p">))</span>
+        
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">auth_url</span> <span class="o">=</span> <span class="n">AzureOAuth</span><span class="o">.</span><span class="n">get_authorization_url</span><span class="p">(</span><span class="n">config</span><span class="o">=</span><span class="n">mode</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="n">webbrowser</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">auth_url</span><span class="p">)</span>
+        <span class="n">redirect_url</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s">&quot;Please enter authentication url: &quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">AzureOAuth</span><span class="o">.</span><span class="n">get_authorization_token</span><span class="p">(</span><span class="n">redirect_url</span><span class="p">,</span>
+                                                  <span class="n">config</span><span class="o">=</span><span class="n">mode</span><span class="p">,</span>
+                                                  <span class="n">state</span><span class="o">=</span><span class="bp">None</span><span class="p">)</span>
+
+    <span class="k">except</span> <span class="p">(</span><span class="n">AuthenticationException</span><span class="p">,</span> <span class="n">InvalidConfigException</span><span class="p">)</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+        <span class="k">print</span><span class="p">(</span><span class="s">&quot;Failed to get authorization: {0}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">e</span><span class="p">))</span>
+
+<span class="k">def</span> <span class="nf">logging_mode</span><span class="p">():</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Sets configuration to chosen log_level using existing</span>
+<span class="sd">    congifuration setup.</span>
+<span class="sd">    </span>
+<span class="sd">    :Returns:</span>
+<span class="sd">        - a :class:`.Configuration` instance object</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">global</span> <span class="n">LOG_LEVEL</span>
+
+    <span class="k">if</span> <span class="nb">input</span><span class="p">(</span><span class="s">&quot;Run in debug mode? (yes/no)&quot;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="o">==</span> <span class="s">&#39;n&#39;</span><span class="p">:</span>
+        <span class="n">LOG_LEVEL</span> <span class="o">=</span> <span class="s">&quot;info&quot;</span>
+
+    <span class="k">try</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">Configuration</span><span class="p">(</span><span class="n">log_level</span><span class="o">=</span><span class="n">LOG_LEVEL</span><span class="p">)</span>
+
+    <span class="k">except</span> <span class="n">InvalidConfigException</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+        <span class="k">print</span><span class="p">(</span><span class="s">&quot;Invalid Configuration: {0}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">e</span><span class="p">))</span>
+
+<span class="k">def</span> <span class="nf">retrieve_job</span><span class="p">(</span><span class="n">auth</span><span class="p">,</span> <span class="n">config</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Get the details of the most recently submitted job of a given name.</span>
+<span class="sd">    </span>
+<span class="sd">    :Args:</span>
+<span class="sd">        - auth (:class:`.Credentials`): instance of the Credentials</span>
+<span class="sd">          class as returned by authentication()</span>
+
+<span class="sd">    :Returns:</span>
+<span class="sd">        - The first from a list of :class:`.SubmittedJob` objects</span>
+<span class="sd">        </span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">job_mgr</span> <span class="o">=</span> <span class="n">JobManager</span><span class="p">(</span><span class="n">auth</span><span class="p">,</span> <span class="n">cfg</span><span class="o">=</span><span class="n">config</span><span class="p">)</span>
+    <span class="n">job</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s">&quot;Which job would you like to cancel? &quot;</span><span class="p">)</span>
+
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">job_ref</span> <span class="o">=</span> <span class="n">job_mgr</span><span class="o">.</span><span class="n">get_jobs</span><span class="p">(</span><span class="n">per_call</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+                                   <span class="n">name</span><span class="o">=</span><span class="n">job</span> <span class="k">if</span> <span class="n">job</span> <span class="ow">is</span> <span class="ow">not</span> <span class="s">&#39;&#39;</span> <span class="k">else</span> <span class="bp">None</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">job_ref</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s">&quot;Found no jobs by that name.&quot;</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">job_ref</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+
+    <span class="k">except</span> <span class="n">RestCallException</span><span class="p">:</span>
+        <span class="k">raise</span>
+
+<span class="k">def</span> <span class="nf">cancel_job</span><span class="p">(</span><span class="n">auth</span><span class="p">,</span> <span class="n">config</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Attempts to cancel the selected job and returns True or False depending</span>
+<span class="sd">    on the success of the operation.</span>
+<span class="sd">    </span>
+<span class="sd">    :Args:</span>
+<span class="sd">        - auth (:class:`.Credentials`): instance of the Credentials class</span>
+<span class="sd">          as returned by authentication()</span>
+<span class="sd">        - config (:class:`.Configuration`): instance of the Configuration class</span>
+<span class="sd">          as returned by logging_mode()</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">job</span> <span class="o">=</span> <span class="n">retrieve_job</span><span class="p">(</span><span class="n">auth</span><span class="p">,</span> <span class="n">config</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">job</span><span class="o">.</span><span class="n">cancel</span><span class="p">():</span>
+            <span class="k">print</span><span class="p">(</span><span class="s">&quot;Job successfully cancelled&quot;</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">print</span><span class="p">(</span><span class="s">&quot;Job cannot be cancelled either because the job has &quot;</span>
+                  <span class="s">&quot;completed or has been aborted.&quot;</span><span class="p">)</span>
+
+    <span class="k">except</span> <span class="p">(</span><span class="n">RestCallException</span><span class="p">,</span> <span class="ne">ValueError</span><span class="p">)</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+        <span class="k">print</span><span class="p">(</span><span class="s">&quot;Cancel attempt failed: {0}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">e</span><span class="p">))</span>
+
+
+<span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="s">&quot;__main__&quot;</span><span class="p">:</span>
+    <span class="n">mode</span> <span class="o">=</span> <span class="n">logging_mode</span><span class="p">()</span>
+    <span class="n">creds</span> <span class="o">=</span> <span class="n">authentication</span><span class="p">(</span><span class="n">mode</span><span class="p">)</span>
+    <span class="n">cancel_job</span><span class="p">(</span><span class="n">creds</span><span class="p">,</span> <span class="n">mode</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="batch_apps.utils.html"
+                        title="previous chapter">batchapps.utils</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="batch_apps.sample.download_output.html"
+                        title="next chapter">Sample Script - Download Job Output</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="_sources/batch_apps.sample.cancel_job.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="batch_apps.sample.download_output.html" title="Sample Script - Download Job Output"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="batch_apps.utils.html" title="batchapps.utils"
+             >previous</a> |</li>
+        <li><a href="index.html">azure-batch-apps 0.2.0 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2014, Microsoft Corporation.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2.2.
+    </div>
+  </body>
+</html>

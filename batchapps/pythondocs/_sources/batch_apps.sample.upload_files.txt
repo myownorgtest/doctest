@@ -1,0 +1,4 @@
+Sample Script - Upload Files
+=============================
+
+.. literalinclude:: BatchAppsExample-upload_files.py

@@ -1,0 +1,4 @@
+Sample Script - Download Job Output
+====================================
+
+.. literalinclude:: BatchAppsExample-job_output.py

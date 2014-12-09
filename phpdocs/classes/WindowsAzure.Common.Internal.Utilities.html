@@ -1,0 +1,624 @@
+<!DOCTYPE html><html xmlns:date="http://exslt.org/dates-and-times" lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0; user-scalable=0;">
+<meta charset="utf-8">
+<title>Windows Azure SDK for PHP » \WindowsAzure\Common\Internal\Utilities</title>
+<meta name="author" content="Mike van Riel">
+<meta name="description" content="">
+<link href="../css/template.css" rel="stylesheet" media="all">
+<script src="../js/jquery-1.7.1.min.js" type="text/javascript"></script><script src="../js/jquery-ui-1.8.2.custom.min.js" type="text/javascript"></script><script src="../js/jquery.mousewheel.min.js" type="text/javascript"></script><script src="../js/bootstrap.js" type="text/javascript"></script><script src="../js/template.js" type="text/javascript"></script><script src="../js/prettify/prettify.min.js" type="text/javascript"></script><link rel="shortcut icon" href="../img/favicon.ico">
+<link rel="apple-touch-icon" href="../img/apple-touch-icon.png">
+<link rel="apple-touch-icon" sizes="72x72" href="../img/apple-touch-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="114x114" href="../img/apple-touch-icon-114x114.png">
+</head>
+<body>
+<div class="navbar navbar-fixed-top">
+<div class="navbar-inner"><div class="container">
+<a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse"><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></a><a class="brand" href="../index.html">Windows Azure SDK for PHP</a><div class="nav-collapse"><ul class="nav">
+<li class="dropdown">
+<a href="#api" class="dropdown-toggle" data-toggle="dropdown">
+                                    API Documentation <b class="caret"></b></a><ul class="dropdown-menu">
+<li><a>Namespaces</a></li>
+<li><a href="../namespaces/WindowsAzure.html"><i class="icon-th"></i> WindowsAzure</a></li>
+<li><a>Packages</a></li>
+<li><a href="../packages/WindowsAzure.html"><i class="icon-folder-open"></i> WindowsAzure</a></li>
+</ul>
+</li>
+<li class="dropdown" id="charts-menu">
+<a href="#charts" class="dropdown-toggle" data-toggle="dropdown">
+                                    Charts <b class="caret"></b></a><ul class="dropdown-menu"><li><a href="../graph_class.html"><i class="icon-list-alt"></i> Class hierarchy diagram</a></li></ul>
+</li>
+<li class="dropdown" id="reports-menu">
+<a href="#reports" class="dropdown-toggle" data-toggle="dropdown">
+                                    Reports <b class="caret"></b></a><ul class="dropdown-menu">
+<li><a href="../errors.html"><i class="icon-remove-sign"></i> Errors 
+                <span class="label label-info">385</span></a></li>
+<li><a href="../markers.html"><i class="icon-map-marker"></i> Markers 
+                <ul></ul></a></li>
+<li><a href="../deprecated.html"><i class="icon-stop"></i> Deprecated elements 
+                <span class="label label-info">0</span></a></li>
+</ul>
+</li>
+</ul></div>
+</div></div>
+<div class="go_to_top"><a href="#___" style="color: inherit">Back to top  <i class="icon-upload icon-white"></i></a></div>
+</div>
+<div id="___" class="container">
+<noscript><div class="alert alert-warning">
+                            Javascript is disabled; several features are only available
+                            if Javascript is enabled.
+                        </div></noscript>
+<div class="row">
+<div class="span4">
+<span class="btn-group visibility" data-toggle="buttons-checkbox"><button class="btn public active" title="Show public elements">Public</button><button class="btn protected" title="Show protected elements">Protected</button><button class="btn private" title="Show private elements">Private</button><button class="btn inherited active" title="Show inherited elements">Inherited</button></span><div class="btn-group view pull-right" data-toggle="buttons-radio">
+<button class="btn details" title="Show descriptions and method names"><i class="icon-list"></i></button><button class="btn simple" title="Show only method names"><i class="icon-align-justify"></i></button>
+</div>
+<ul class="side-nav nav nav-list">
+<li class="nav-header">
+<i class="icon-custom icon-method"></i> Methods</li>
+<li class="method public "><a href="#addIfNotEmpty" title="addIfNotEmpty :: Adds the given key/value pair into array if the value doesn't satisfy empty()."><span class="description">Adds the given key/value pair into array if the value doesn't satisfy empty().</span><pre>addIfNotEmpty()</pre></a></li>
+<li class="method public "><a href="#arrayKeyExistsInsensitive" title="arrayKeyExistsInsensitive :: Checks if the given key exists in the array. The comparison is done in a case
+insensitive manner."><span class="description">Checks if the given key exists in the array. The comparison is done in a case
+insensitive manner.</span><pre>arrayKeyExistsInsensitive()</pre></a></li>
+<li class="method public "><a href="#booleanToString" title="booleanToString :: Converts string into boolean value."><span class="description">Converts string into boolean value.</span><pre>booleanToString()</pre></a></li>
+<li class="method public "><a href="#convertToDateTime" title="convertToDateTime :: Converts a string to a \DateTime object. Returns false on failure."><span class="description">Converts a string to a \DateTime object. Returns false on failure.</span><pre>convertToDateTime()</pre></a></li>
+<li class="method public "><a href="#convertToEdmDateTime" title="convertToEdmDateTime :: Converts a DateTime object into an Edm.DaeTime value in UTC timezone,
+represented as a string."><span class="description">Converts a DateTime object into an Edm.DaeTime value in UTC timezone,
+represented as a string.</span><pre>convertToEdmDateTime()</pre></a></li>
+<li class="method public "><a href="#getArray" title="getArray :: Returns grouped items from passed $var"><span class="description">Returns grouped items from passed $var</span><pre>getArray()</pre></a></li>
+<li class="method public "><a href="#inArrayInsensitive" title="inArrayInsensitive :: Checks if a value exists in an array. The comparison is done in a case
+insensitive manner."><span class="description">Checks if a value exists in an array. The comparison is done in a case
+insensitive manner.</span><pre>inArrayInsensitive()</pre></a></li>
+<li class="method public "><a href="#isoDate" title="isoDate :: Generate ISO 8601 compliant date string in UTC time zone"><span class="description">Generate ISO 8601 compliant date string in UTC time zone</span><pre>isoDate()</pre></a></li>
+<li class="method public "><a href="#orderArray" title="orderArray :: Sorts an array based on given keys order."><span class="description">Sorts an array based on given keys order.</span><pre>orderArray()</pre></a></li>
+<li class="method public "><a href="#rfc1123ToDateTime" title="rfc1123ToDateTime :: Converts a given date string into \DateTime object"><span class="description">Converts a given date string into \DateTime object</span><pre>rfc1123ToDateTime()</pre></a></li>
+<li class="method public "><a href="#serialize" title="serialize :: Serializes given array into xml. The array indices must be string to use
+them as XML tags."><span class="description">Serializes given array into xml. The array indices must be string to use
+them as XML tags.</span><pre>serialize()</pre></a></li>
+<li class="method public "><a href="#startsWith" title="startsWith :: Checks if the passed $string starts with $prefix"><span class="description">Checks if the passed $string starts with $prefix</span><pre>startsWith()</pre></a></li>
+<li class="method public "><a href="#stringToStream" title="stringToStream :: Converts string to stream handle."><span class="description">Converts string to stream handle.</span><pre>stringToStream()</pre></a></li>
+<li class="method public "><a href="#toBoolean" title="toBoolean :: Converts string into boolean value."><span class="description">Converts string into boolean value.</span><pre>toBoolean()</pre></a></li>
+<li class="method public "><a href="#tryAddUrlScheme" title="tryAddUrlScheme :: Adds a url scheme if there is no scheme."><span class="description">Adds a url scheme if there is no scheme.</span><pre>tryAddUrlScheme()</pre></a></li>
+<li class="method public "><a href="#tryGetArray" title="tryGetArray :: tries to get nested array with index name $key from $array."><span class="description">tries to get nested array with index name $key from $array.</span><pre>tryGetArray()</pre></a></li>
+<li class="method public "><a href="#tryGetKeysChainValue" title="tryGetKeysChainValue :: Returns the specified value of the key chain passed from $array and in case
+that key chain doesn't exist, null is returned."><span class="description">Returns the specified value of the key chain passed from $array and in case
+that key chain doesn't exist, null is returned.</span><pre>tryGetKeysChainValue()</pre></a></li>
+<li class="method public "><a href="#tryGetValue" title="tryGetValue :: Returns the specified value of the $key passed from $array and in case that
+this $key doesn't exist, the default value is returned."><span class="description">Returns the specified value of the $key passed from $array and in case that
+this $key doesn't exist, the default value is returned.</span><pre>tryGetValue()</pre></a></li>
+<li class="method public "><a href="#tryGetValueInsensitive" title="tryGetValueInsensitive :: Returns the specified value of the $key passed from $array and in case that
+this $key doesn't exist, the default value is returned. The key matching is
+done in a case insensitive manner."><span class="description">Returns the specified value of the $key passed from $array and in case that
+this $key doesn't exist, the default value is returned. The key matching is
+done in a case insensitive manner.</span><pre>tryGetValueInsensitive()</pre></a></li>
+<li class="method public "><a href="#unserialize" title="unserialize :: Unserializes the passed $xml into array."><span class="description">Unserializes the passed $xml into array.</span><pre>unserialize()</pre></a></li>
+<li class="nav-header private">» Private</li>
+<li class="method private "><a href="#_arr2xml" title="_arr2xml :: Takes an array and produces XML based on it."><span class="description">Takes an array and produces XML based on it.</span><pre>_arr2xml()</pre></a></li>
+<li class="method private "><a href="#_sxml2arr" title="_sxml2arr :: Converts a SimpleXML object to an Array recursively
+ensuring all sub-elements are arrays as well."><span class="description">Converts a SimpleXML object to an Array recursively
+ensuring all sub-elements are arrays as well.</span><pre>_sxml2arr()</pre></a></li>
+</ul>
+</div>
+<div class="span8">
+<a name="%5CWindowsAzure%5CCommon%5CInternal%5CUtilities" id="\WindowsAzure\Common\Internal\Utilities"></a><ul class="breadcrumb">
+<li>
+<a href="../index.html"><i class="icon-custom icon-class"></i></a><span class="divider">\</span>
+</li>
+<li><a href="../namespaces/WindowsAzure.html">WindowsAzure</a></li>
+<span class="divider">\</span><li><a href="../namespaces/WindowsAzure.Common.html">Common</a></li>
+<span class="divider">\</span><li><a href="../namespaces/WindowsAzure.Common.Internal.html">Internal</a></li>
+<li class="active">
+<span class="divider">\</span><a href="../classes/WindowsAzure.Common.Internal.Utilities.html">Utilities</a>
+</li>
+</ul>
+<div href="../classes/WindowsAzure.Common.Internal.Utilities.html" class="element class">
+<p class="short_description">Utilities for the project</p>
+<div class="details">
+<p class="long_description"></p>
+<table class="table table-bordered">
+<tr>
+<th>category</th>
+<td>Microsoft</td>
+</tr>
+<tr>
+<th>package</th>
+<td><a href="../packages/WindowsAzure.Common.Internal.html">WindowsAzure\Common\Internal</a></td>
+</tr>
+<tr>
+<th>author</th>
+<td><a href="mailto:azurephpsdk@microsoft.com">Azure PHP SDK</a></td>
+</tr>
+<tr>
+<th>copyright</th>
+<td>2012 Microsoft Corporation</td>
+</tr>
+<tr>
+<th>license</th>
+<td><a href="http://www.apache.org/licenses/LICENSE-2.0">Apache License 2.0</a></td>
+</tr>
+<tr>
+<th>version</th>
+<td>Release: @package_version@</td>
+</tr>
+<tr>
+<th>link</th>
+<td><a href="https://github.com/windowsazure/azure-sdk-for-php">https://github.com/windowsazure/azure-sdk-for-php</a></td>
+</tr>
+</table>
+<h3>
+<i class="icon-custom icon-method"></i> Methods</h3>
+<a name="addIfNotEmpty" id="addIfNotEmpty"></a><div class="element clickable method public addIfNotEmpty" data-toggle="collapse" data-target=".addIfNotEmpty .collapse">
+<h2>Adds the given key/value pair into array if the value doesn't satisfy empty().</h2>
+<pre>addIfNotEmpty(string $key, string $value, array $array) : \none</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<p class="long_description"><p>This function just validates that the given $array is actually array. If it's
+NULL the function treats it as array.</p></p>
+<table class="table table-bordered"><tr>
+<th>static</th>
+<td></td>
+</tr></table>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$key</h4>
+<code>string</code><p>The key.</p></div>
+<div class="subelement argument">
+<h4>$value</h4>
+<code>string</code><p>The value.</p></div>
+<div class="subelement argument">
+<h4>$array</h4>
+<code>array</code><p>&$array The array. If NULL will be used as array.</p>
+</div>
+<h3>Returns</h3>
+<div class="subelement response"><code>\none</code></div>
+</div></div>
+</div>
+<a name="arrayKeyExistsInsensitive" id="arrayKeyExistsInsensitive"></a><div class="element clickable method public arrayKeyExistsInsensitive" data-toggle="collapse" data-target=".arrayKeyExistsInsensitive .collapse">
+<h2>Checks if the given key exists in the array. The comparison is done in a case
+insensitive manner.</h2>
+<pre>arrayKeyExistsInsensitive(string $key, array $search) : boolean</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<p class="long_description"></p>
+<table class="table table-bordered"><tr>
+<th>static</th>
+<td></td>
+</tr></table>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$key</h4>
+<code>string</code><p>The value to check.</p></div>
+<div class="subelement argument">
+<h4>$search</h4>
+<code>array</code><p>The array with keys to check.</p></div>
+<h3>Returns</h3>
+<div class="subelement response"><code>boolean</code></div>
+</div></div>
+</div>
+<a name="booleanToString" id="booleanToString"></a><div class="element clickable method public booleanToString" data-toggle="collapse" data-target=".booleanToString .collapse">
+<h2>Converts string into boolean value.</h2>
+<pre>booleanToString(bool $obj) : string</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<p class="long_description"></p>
+<table class="table table-bordered"><tr>
+<th>static</th>
+<td></td>
+</tr></table>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$obj</h4>
+<code>bool</code><p>boolean value to convert.</p></div>
+<h3>Returns</h3>
+<div class="subelement response"><code>string</code></div>
+</div></div>
+</div>
+<a name="convertToDateTime" id="convertToDateTime"></a><div class="element clickable method public convertToDateTime" data-toggle="collapse" data-target=".convertToDateTime .collapse">
+<h2>Converts a string to a \DateTime object. Returns false on failure.</h2>
+<pre>convertToDateTime(string $value) : <a href="http://php.net/manual/en/class.datetime.php">\DateTime</a></pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<p class="long_description"></p>
+<table class="table table-bordered"><tr>
+<th>static</th>
+<td></td>
+</tr></table>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$value</h4>
+<code>string</code><p>The string value to parse.</p></div>
+<h3>Returns</h3>
+<div class="subelement response"><code><a href="http://php.net/manual/en/class.datetime.php">\DateTime</a></code></div>
+</div></div>
+</div>
+<a name="convertToEdmDateTime" id="convertToEdmDateTime"></a><div class="element clickable method public convertToEdmDateTime" data-toggle="collapse" data-target=".convertToEdmDateTime .collapse">
+<h2>Converts a DateTime object into an Edm.DaeTime value in UTC timezone,
+represented as a string.</h2>
+<pre>convertToEdmDateTime(<a href="http://php.net/manual/en/class.datetime.php">\DateTime</a> $value) : string</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<p class="long_description"></p>
+<table class="table table-bordered"><tr>
+<th>static</th>
+<td></td>
+</tr></table>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$value</h4>
+<code><a href="http://php.net/manual/en/class.datetime.php">\DateTime</a></code><p>The datetime value.</p></div>
+<h3>Returns</h3>
+<div class="subelement response"><code>string</code></div>
+</div></div>
+</div>
+<a name="getArray" id="getArray"></a><div class="element clickable method public getArray" data-toggle="collapse" data-target=".getArray .collapse">
+<h2>Returns grouped items from passed $var</h2>
+<pre>getArray(array $var) : array</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<p class="long_description"></p>
+<table class="table table-bordered"><tr>
+<th>static</th>
+<td></td>
+</tr></table>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$var</h4>
+<code>array</code><p>item to group</p></div>
+<h3>Returns</h3>
+<div class="subelement response"><code>array</code></div>
+</div></div>
+</div>
+<a name="inArrayInsensitive" id="inArrayInsensitive"></a><div class="element clickable method public inArrayInsensitive" data-toggle="collapse" data-target=".inArrayInsensitive .collapse">
+<h2>Checks if a value exists in an array. The comparison is done in a case
+insensitive manner.</h2>
+<pre>inArrayInsensitive(string $needle, array $haystack) : boolean</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<p class="long_description"></p>
+<table class="table table-bordered"><tr>
+<th>static</th>
+<td></td>
+</tr></table>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$needle</h4>
+<code>string</code><p>The searched value.</p></div>
+<div class="subelement argument">
+<h4>$haystack</h4>
+<code>array</code><p>The array.</p></div>
+<h3>Returns</h3>
+<div class="subelement response"><code>boolean</code></div>
+</div></div>
+</div>
+<a name="isoDate" id="isoDate"></a><div class="element clickable method public isoDate" data-toggle="collapse" data-target=".isoDate .collapse">
+<h2>Generate ISO 8601 compliant date string in UTC time zone</h2>
+<pre>isoDate(int $timestamp) : string</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<p class="long_description"></p>
+<table class="table table-bordered"><tr>
+<th>static</th>
+<td></td>
+</tr></table>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$timestamp</h4>
+<code>int</code><p>The unix timestamp to convert (for DateTime check date_timestamp_get).</p>
+</div>
+<h3>Returns</h3>
+<div class="subelement response"><code>string</code></div>
+</div></div>
+</div>
+<a name="orderArray" id="orderArray"></a><div class="element clickable method public orderArray" data-toggle="collapse" data-target=".orderArray .collapse">
+<h2>Sorts an array based on given keys order.</h2>
+<pre>orderArray(array $array, array $order) : array</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<p class="long_description"></p>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$array</h4>
+<code>array</code><p>The array to sort.</p></div>
+<div class="subelement argument">
+<h4>$order</h4>
+<code>array</code><p>The keys order array.</p></div>
+<h3>Returns</h3>
+<div class="subelement response"><code>array</code></div>
+</div></div>
+</div>
+<a name="rfc1123ToDateTime" id="rfc1123ToDateTime"></a><div class="element clickable method public rfc1123ToDateTime" data-toggle="collapse" data-target=".rfc1123ToDateTime .collapse">
+<h2>Converts a given date string into \DateTime object</h2>
+<pre>rfc1123ToDateTime(string $date) : <a href="http://php.net/manual/en/class.datetime.php">\DateTime</a></pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<p class="long_description"></p>
+<table class="table table-bordered"><tr>
+<th>static</th>
+<td></td>
+</tr></table>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$date</h4>
+<code>string</code><p>windows azure date ins string represntation.</p></div>
+<h3>Returns</h3>
+<div class="subelement response"><code><a href="http://php.net/manual/en/class.datetime.php">\DateTime</a></code></div>
+</div></div>
+</div>
+<a name="serialize" id="serialize"></a><div class="element clickable method public serialize" data-toggle="collapse" data-target=".serialize .collapse">
+<h2>Serializes given array into xml. The array indices must be string to use
+them as XML tags.</h2>
+<pre>serialize(array $array, string $rootName, string $defaultTag, string $standalone) : string</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<p class="long_description"></p>
+<table class="table table-bordered"><tr>
+<th>static</th>
+<td></td>
+</tr></table>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$array</h4>
+<code>array</code><p>object to serialize represented in array.</p></div>
+<div class="subelement argument">
+<h4>$rootName</h4>
+<code>string</code><p>name of the XML root element.</p></div>
+<div class="subelement argument">
+<h4>$defaultTag</h4>
+<code>string</code><p>default tag for non-tagged elements.</p>
+</div>
+<div class="subelement argument">
+<h4>$standalone</h4>
+<code>string</code><p>adds 'standalone' header tag, values 'yes'/'no'</p>
+</div>
+<h3>Returns</h3>
+<div class="subelement response"><code>string</code></div>
+</div></div>
+</div>
+<a name="startsWith" id="startsWith"></a><div class="element clickable method public startsWith" data-toggle="collapse" data-target=".startsWith .collapse">
+<h2>Checks if the passed $string starts with $prefix</h2>
+<pre>startsWith(string $string, string $prefix, boolean $ignoreCase) : boolean</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<p class="long_description"></p>
+<table class="table table-bordered"><tr>
+<th>static</th>
+<td></td>
+</tr></table>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$string</h4>
+<code>string</code><p>word to seaech in</p></div>
+<div class="subelement argument">
+<h4>$prefix</h4>
+<code>string</code><p>prefix to be matched</p></div>
+<div class="subelement argument">
+<h4>$ignoreCase</h4>
+<code>boolean</code><p>true to ignore case during the comparison; otherwise, false</p></div>
+<h3>Returns</h3>
+<div class="subelement response"><code>boolean</code></div>
+</div></div>
+</div>
+<a name="stringToStream" id="stringToStream"></a><div class="element clickable method public stringToStream" data-toggle="collapse" data-target=".stringToStream .collapse">
+<h2>Converts string to stream handle.</h2>
+<pre>stringToStream(\type $string) : resource</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<p class="long_description"></p>
+<table class="table table-bordered"><tr>
+<th>static</th>
+<td></td>
+</tr></table>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$string</h4>
+<code>\type</code><p>The string contents.</p></div>
+<h3>Returns</h3>
+<div class="subelement response"><code>resource</code></div>
+</div></div>
+</div>
+<a name="toBoolean" id="toBoolean"></a><div class="element clickable method public toBoolean" data-toggle="collapse" data-target=".toBoolean .collapse">
+<h2>Converts string into boolean value.</h2>
+<pre>toBoolean(string $obj) : bool</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<p class="long_description"></p>
+<table class="table table-bordered"><tr>
+<th>static</th>
+<td></td>
+</tr></table>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$obj</h4>
+<code>string</code><p>boolean value in string format.</p></div>
+<h3>Returns</h3>
+<div class="subelement response"><code>bool</code></div>
+</div></div>
+</div>
+<a name="tryAddUrlScheme" id="tryAddUrlScheme"></a><div class="element clickable method public tryAddUrlScheme" data-toggle="collapse" data-target=".tryAddUrlScheme .collapse">
+<h2>Adds a url scheme if there is no scheme.</h2>
+<pre>tryAddUrlScheme(string $url, string $scheme) : string</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<p class="long_description"></p>
+<table class="table table-bordered"><tr>
+<th>static</th>
+<td></td>
+</tr></table>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$url</h4>
+<code>string</code><p>The URL.</p></div>
+<div class="subelement argument">
+<h4>$scheme</h4>
+<code>string</code><p>The scheme. By default HTTP</p></div>
+<h3>Returns</h3>
+<div class="subelement response"><code>string</code></div>
+</div></div>
+</div>
+<a name="tryGetArray" id="tryGetArray"></a><div class="element clickable method public tryGetArray" data-toggle="collapse" data-target=".tryGetArray .collapse">
+<h2>tries to get nested array with index name $key from $array.</h2>
+<pre>tryGetArray(string $key, array $array) : array</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<p class="long_description"><p>Returns empty array object if the value is NULL.</p></p>
+<table class="table table-bordered"><tr>
+<th>static</th>
+<td></td>
+</tr></table>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$key</h4>
+<code>string</code><p>The index name.</p></div>
+<div class="subelement argument">
+<h4>$array</h4>
+<code>array</code><p>The array object.</p></div>
+<h3>Returns</h3>
+<div class="subelement response"><code>array</code></div>
+</div></div>
+</div>
+<a name="tryGetKeysChainValue" id="tryGetKeysChainValue"></a><div class="element clickable method public tryGetKeysChainValue" data-toggle="collapse" data-target=".tryGetKeysChainValue .collapse">
+<h2>Returns the specified value of the key chain passed from $array and in case
+that key chain doesn't exist, null is returned.</h2>
+<pre>tryGetKeysChainValue(array $array) : \mix</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<p class="long_description"></p>
+<table class="table table-bordered"><tr>
+<th>static</th>
+<td></td>
+</tr></table>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$array</h4>
+<code>array</code><p>Array to be used.</p></div>
+<h3>Returns</h3>
+<div class="subelement response"><code>\mix</code></div>
+</div></div>
+</div>
+<a name="tryGetValue" id="tryGetValue"></a><div class="element clickable method public tryGetValue" data-toggle="collapse" data-target=".tryGetValue .collapse">
+<h2>Returns the specified value of the $key passed from $array and in case that
+this $key doesn't exist, the default value is returned.</h2>
+<pre>tryGetValue(array $array, \mix $key, \mix $default) : \mix</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<p class="long_description"></p>
+<table class="table table-bordered"><tr>
+<th>static</th>
+<td></td>
+</tr></table>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$array</h4>
+<code>array</code><p>The array to be used.</p></div>
+<div class="subelement argument">
+<h4>$key</h4>
+<code>\mix</code><p>The array key.</p></div>
+<div class="subelement argument">
+<h4>$default</h4>
+<code>\mix</code><p>The value to return if $key is not found in $array.</p>
+</div>
+<h3>Returns</h3>
+<div class="subelement response"><code>\mix</code></div>
+</div></div>
+</div>
+<a name="tryGetValueInsensitive" id="tryGetValueInsensitive"></a><div class="element clickable method public tryGetValueInsensitive" data-toggle="collapse" data-target=".tryGetValueInsensitive .collapse">
+<h2>Returns the specified value of the $key passed from $array and in case that
+this $key doesn't exist, the default value is returned. The key matching is
+done in a case insensitive manner.</h2>
+<pre>tryGetValueInsensitive(string $key, array $haystack, \mix $default) : \mix</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<p class="long_description"></p>
+<table class="table table-bordered"><tr>
+<th>static</th>
+<td></td>
+</tr></table>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$key</h4>
+<code>string</code><p>The array key.</p></div>
+<div class="subelement argument">
+<h4>$haystack</h4>
+<code>array</code><p>The array to be used.</p></div>
+<div class="subelement argument">
+<h4>$default</h4>
+<code>\mix</code><p>The value to return if $key is not found in $array.</p>
+</div>
+<h3>Returns</h3>
+<div class="subelement response"><code>\mix</code></div>
+</div></div>
+</div>
+<a name="unserialize" id="unserialize"></a><div class="element clickable method public unserialize" data-toggle="collapse" data-target=".unserialize .collapse">
+<h2>Unserializes the passed $xml into array.</h2>
+<pre>unserialize(string $xml) : array</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<p class="long_description"></p>
+<table class="table table-bordered"><tr>
+<th>static</th>
+<td></td>
+</tr></table>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$xml</h4>
+<code>string</code><p>XML to be parsed.</p></div>
+<h3>Returns</h3>
+<div class="subelement response"><code>array</code></div>
+</div></div>
+</div>
+<a name="_arr2xml" id="_arr2xml"></a><div class="element clickable method private _arr2xml" data-toggle="collapse" data-target="._arr2xml .collapse">
+<h2>Takes an array and produces XML based on it.</h2>
+<pre>_arr2xml(XMLWriter $xmlw, array $data, string $defaultTag) : void</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<p class="long_description"></p>
+<table class="table table-bordered"><tr>
+<th>static</th>
+<td></td>
+</tr></table>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$xmlw</h4>
+<code><a href="http://php.net/manual/en/class.xmlwriter.php">\XMLWriter</a></code><p>XMLWriter object that was previously instanted and is used for creating the XML.</p></div>
+<div class="subelement argument">
+<h4>$data</h4>
+<code>array</code><p>Array to be converted to XML</p></div>
+<div class="subelement argument">
+<h4>$defaultTag</h4>
+<code>string</code><p>Default XML tag to be used if none specified.</p></div>
+</div></div>
+</div>
+<a name="_sxml2arr" id="_sxml2arr"></a><div class="element clickable method private _sxml2arr" data-toggle="collapse" data-target="._sxml2arr .collapse">
+<h2>Converts a SimpleXML object to an Array recursively
+ensuring all sub-elements are arrays as well.</h2>
+<pre>_sxml2arr(string $sxml, array $arr) : array</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<p class="long_description"></p>
+<table class="table table-bordered"><tr>
+<th>static</th>
+<td></td>
+</tr></table>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$sxml</h4>
+<code>string</code><p>SimpleXML object</p></div>
+<div class="subelement argument">
+<h4>$arr</h4>
+<code>array</code><p>Array into which to store results</p></div>
+<h3>Returns</h3>
+<div class="subelement response"><code>array</code></div>
+</div></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="row"><footer class="span12">
+            Template is built using <a href="http://twitter.github.com/bootstrap/">Twitter Bootstrap 2</a> and icons provided by <a href="http://glyphicons.com/">Glyphicons</a>.<br>
+            Documentation is powered by <a href="http://www.phpdoc.org/">phpDocumentor 2.0.0a6</a> and<br>
+            generated on 2012-07-17T21:10:38-07:00.<br></footer></div>
+</div>
+</body>
+</html>

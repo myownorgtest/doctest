@@ -1,0 +1,373 @@
+<!DOCTYPE html><html xmlns:date="http://exslt.org/dates-and-times" lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0; user-scalable=0;">
+<meta charset="utf-8">
+<title>Windows Azure SDK for PHP » \WindowsAzure\Common\Internal\Validate</title>
+<meta name="author" content="Mike van Riel">
+<meta name="description" content="">
+<link href="../css/template.css" rel="stylesheet" media="all">
+<script src="../js/jquery-1.7.1.min.js" type="text/javascript"></script><script src="../js/jquery-ui-1.8.2.custom.min.js" type="text/javascript"></script><script src="../js/jquery.mousewheel.min.js" type="text/javascript"></script><script src="../js/bootstrap.js" type="text/javascript"></script><script src="../js/template.js" type="text/javascript"></script><script src="../js/prettify/prettify.min.js" type="text/javascript"></script><link rel="shortcut icon" href="../img/favicon.ico">
+<link rel="apple-touch-icon" href="../img/apple-touch-icon.png">
+<link rel="apple-touch-icon" sizes="72x72" href="../img/apple-touch-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="114x114" href="../img/apple-touch-icon-114x114.png">
+</head>
+<body>
+<div class="navbar navbar-fixed-top">
+<div class="navbar-inner"><div class="container">
+<a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse"><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></a><a class="brand" href="../index.html">Windows Azure SDK for PHP</a><div class="nav-collapse"><ul class="nav">
+<li class="dropdown">
+<a href="#api" class="dropdown-toggle" data-toggle="dropdown">
+                                    API Documentation <b class="caret"></b></a><ul class="dropdown-menu">
+<li><a>Namespaces</a></li>
+<li><a href="../namespaces/WindowsAzure.html"><i class="icon-th"></i> WindowsAzure</a></li>
+<li><a>Packages</a></li>
+<li><a href="../packages/WindowsAzure.html"><i class="icon-folder-open"></i> WindowsAzure</a></li>
+</ul>
+</li>
+<li class="dropdown" id="charts-menu">
+<a href="#charts" class="dropdown-toggle" data-toggle="dropdown">
+                                    Charts <b class="caret"></b></a><ul class="dropdown-menu"><li><a href="../graph_class.html"><i class="icon-list-alt"></i> Class hierarchy diagram</a></li></ul>
+</li>
+<li class="dropdown" id="reports-menu">
+<a href="#reports" class="dropdown-toggle" data-toggle="dropdown">
+                                    Reports <b class="caret"></b></a><ul class="dropdown-menu">
+<li><a href="../errors.html"><i class="icon-remove-sign"></i> Errors 
+                <span class="label label-info">385</span></a></li>
+<li><a href="../markers.html"><i class="icon-map-marker"></i> Markers 
+                <ul></ul></a></li>
+<li><a href="../deprecated.html"><i class="icon-stop"></i> Deprecated elements 
+                <span class="label label-info">0</span></a></li>
+</ul>
+</li>
+</ul></div>
+</div></div>
+<div class="go_to_top"><a href="#___" style="color: inherit">Back to top  <i class="icon-upload icon-white"></i></a></div>
+</div>
+<div id="___" class="container">
+<noscript><div class="alert alert-warning">
+                            Javascript is disabled; several features are only available
+                            if Javascript is enabled.
+                        </div></noscript>
+<div class="row">
+<div class="span4">
+<span class="btn-group visibility" data-toggle="buttons-checkbox"><button class="btn public active" title="Show public elements">Public</button><button class="btn protected" title="Show protected elements">Protected</button><button class="btn private" title="Show private elements">Private</button><button class="btn inherited active" title="Show inherited elements">Inherited</button></span><div class="btn-group view pull-right" data-toggle="buttons-radio">
+<button class="btn details" title="Show descriptions and method names"><i class="icon-list"></i></button><button class="btn simple" title="Show only method names"><i class="icon-align-justify"></i></button>
+</div>
+<ul class="side-nav nav nav-list">
+<li class="nav-header">
+<i class="icon-custom icon-method"></i> Methods</li>
+<li class="method public "><a href="#getIsValidUri" title="getIsValidUri :: Creates a anonymous function that check if the given uri is valid or not."><span class="description">Creates a anonymous function that check if the given uri is valid or not.</span><pre>getIsValidUri()</pre></a></li>
+<li class="method public "><a href="#isArray" title="isArray :: Throws exception if the provided variable type is not array."><span class="description">Throws exception if the provided variable type is not array.</span><pre>isArray()</pre></a></li>
+<li class="method public "><a href="#isBoolean" title="isBoolean :: Throws exception if the provided variable type is not boolean."><span class="description">Throws exception if the provided variable type is not boolean.</span><pre>isBoolean()</pre></a></li>
+<li class="method public "><a href="#isDate" title="isDate :: Throws exception if the provided $date is not of type \DateTime"><span class="description">Throws exception if the provided $date is not of type \DateTime</span><pre>isDate()</pre></a></li>
+<li class="method public "><a href="#isDouble" title="isDouble :: Throws exception if the provided variable is not double."><span class="description">Throws exception if the provided variable is not double.</span><pre>isDouble()</pre></a></li>
+<li class="method public "><a href="#isInstanceOf" title="isInstanceOf :: Throws exception if the object is not of the specified class type."><span class="description">Throws exception if the object is not of the specified class type.</span><pre>isInstanceOf()</pre></a></li>
+<li class="method public "><a href="#isInteger" title="isInteger :: Throws exception if the provided variable type is not integer."><span class="description">Throws exception if the provided variable type is not integer.</span><pre>isInteger()</pre></a></li>
+<li class="method public "><a href="#isNullOrEmptyString" title="isNullOrEmptyString :: Returns whether the variable is an empty or null string."><span class="description">Returns whether the variable is an empty or null string.</span><pre>isNullOrEmptyString()</pre></a></li>
+<li class="method public "><a href="#isString" title="isString :: Throws exception if the provided variable type is not string."><span class="description">Throws exception if the provided variable type is not string.</span><pre>isString()</pre></a></li>
+<li class="method public "><a href="#isTrue" title="isTrue :: Throws exception if the provided condition is not satisfied."><span class="description">Throws exception if the provided condition is not satisfied.</span><pre>isTrue()</pre></a></li>
+<li class="method public "><a href="#notNull" title="notNull :: Throws exception if the provided variable is set to null."><span class="description">Throws exception if the provided variable is set to null.</span><pre>notNull()</pre></a></li>
+<li class="method public "><a href="#notNullOrEmpty" title="notNullOrEmpty :: Throws exception if the provided variable is set to null."><span class="description">Throws exception if the provided variable is set to null.</span><pre>notNullOrEmpty()</pre></a></li>
+</ul>
+</div>
+<div class="span8">
+<a name="%5CWindowsAzure%5CCommon%5CInternal%5CValidate" id="\WindowsAzure\Common\Internal\Validate"></a><ul class="breadcrumb">
+<li>
+<a href="../index.html"><i class="icon-custom icon-class"></i></a><span class="divider">\</span>
+</li>
+<li><a href="../namespaces/WindowsAzure.html">WindowsAzure</a></li>
+<span class="divider">\</span><li><a href="../namespaces/WindowsAzure.Common.html">Common</a></li>
+<span class="divider">\</span><li><a href="../namespaces/WindowsAzure.Common.Internal.html">Internal</a></li>
+<li class="active">
+<span class="divider">\</span><a href="../classes/WindowsAzure.Common.Internal.Validate.html">Validate</a>
+</li>
+</ul>
+<div href="../classes/WindowsAzure.Common.Internal.Validate.html" class="element class">
+<p class="short_description">Validates aganist a condition and throws an exception in case of failure.</p>
+<div class="details">
+<p class="long_description"></p>
+<table class="table table-bordered">
+<tr>
+<th>category</th>
+<td>Microsoft</td>
+</tr>
+<tr>
+<th>package</th>
+<td><a href="../packages/WindowsAzure.Common.Internal.html">WindowsAzure\Common\Internal</a></td>
+</tr>
+<tr>
+<th>author</th>
+<td><a href="mailto:azurephpsdk@microsoft.com">Azure PHP SDK</a></td>
+</tr>
+<tr>
+<th>copyright</th>
+<td>2012 Microsoft Corporation</td>
+</tr>
+<tr>
+<th>license</th>
+<td><a href="http://www.apache.org/licenses/LICENSE-2.0">Apache License 2.0</a></td>
+</tr>
+<tr>
+<th>version</th>
+<td>Release: @package_version@</td>
+</tr>
+<tr>
+<th>link</th>
+<td><a href="https://github.com/windowsazure/azure-sdk-for-php">https://github.com/windowsazure/azure-sdk-for-php</a></td>
+</tr>
+</table>
+<h3>
+<i class="icon-custom icon-method"></i> Methods</h3>
+<a name="getIsValidUri" id="getIsValidUri"></a><div class="element clickable method public getIsValidUri" data-toggle="collapse" data-target=".getIsValidUri .collapse">
+<h2>Creates a anonymous function that check if the given uri is valid or not.</h2>
+<pre>getIsValidUri() : \callable</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<p class="long_description"></p>
+<h3>Returns</h3>
+<div class="subelement response"><code>\callable</code></div>
+</div></div>
+</div>
+<a name="isArray" id="isArray"></a><div class="element clickable method public isArray" data-toggle="collapse" data-target=".isArray .collapse">
+<h2>Throws exception if the provided variable type is not array.</h2>
+<pre>isArray(\mix $var, string $name) : \none</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<p class="long_description"></p>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$var</h4>
+<code>\mix</code><p>The variable to check.</p></div>
+<div class="subelement argument">
+<h4>$name</h4>
+<code>string</code><p>The parameter name.</p></div>
+<h3>Exceptions</h3>
+<table class="table table-bordered"><tr>
+<th><code>\InvalidArgumentTypeException.</code></th>
+<td></td>
+</tr></table>
+<h3>Returns</h3>
+<div class="subelement response"><code>\none</code></div>
+</div></div>
+</div>
+<a name="isBoolean" id="isBoolean"></a><div class="element clickable method public isBoolean" data-toggle="collapse" data-target=".isBoolean .collapse">
+<h2>Throws exception if the provided variable type is not boolean.</h2>
+<pre>isBoolean(\mix $var) : \none</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<p class="long_description"></p>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$var</h4>
+<code>\mix</code><p>variable to check against.</p></div>
+<h3>Exceptions</h3>
+<table class="table table-bordered"><tr>
+<th><code>\InvalidArgumentTypeException</code></th>
+<td></td>
+</tr></table>
+<h3>Returns</h3>
+<div class="subelement response"><code>\none</code></div>
+</div></div>
+</div>
+<a name="isDate" id="isDate"></a><div class="element clickable method public isDate" data-toggle="collapse" data-target=".isDate .collapse">
+<h2>Throws exception if the provided $date is not of type \DateTime</h2>
+<pre>isDate(\mix $date) : \none</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<p class="long_description"></p>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$date</h4>
+<code>\mix</code><p>variable to check against.</p></div>
+<h3>Exceptions</h3>
+<table class="table table-bordered"><tr>
+<th><code><a href="../classes/WindowsAzure.Common.Internal.InvalidArgumentTypeException.html">\WindowsAzure\Common\Internal\InvalidArgumentTypeException</a></code></th>
+<td></td>
+</tr></table>
+<h3>Returns</h3>
+<div class="subelement response"><code>\none</code></div>
+</div></div>
+</div>
+<a name="isDouble" id="isDouble"></a><div class="element clickable method public isDouble" data-toggle="collapse" data-target=".isDouble .collapse">
+<h2>Throws exception if the provided variable is not double.</h2>
+<pre>isDouble(\mix $var, string $name) : \none</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<p class="long_description"></p>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$var</h4>
+<code>\mix</code><p>The variable to check.</p></div>
+<div class="subelement argument">
+<h4>$name</h4>
+<code>string</code><p>The parameter name.</p></div>
+<h3>Exceptions</h3>
+<table class="table table-bordered"><tr>
+<th><code><a href="http://php.net/manual/en/class.invalidargumentexception.php">\InvalidArgumentException</a></code></th>
+<td></td>
+</tr></table>
+<h3>Returns</h3>
+<div class="subelement response"><code>\none</code></div>
+</div></div>
+</div>
+<a name="isInstanceOf" id="isInstanceOf"></a><div class="element clickable method public isInstanceOf" data-toggle="collapse" data-target=".isInstanceOf .collapse">
+<h2>Throws exception if the object is not of the specified class type.</h2>
+<pre>isInstanceOf(mixed $objectInstance, mixed $classInstance, string $name) : \none</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<p class="long_description"></p>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$objectInstance</h4>
+<code>mixed</code><p>An object that requires class type validation.</p></div>
+<div class="subelement argument">
+<h4>$classInstance</h4>
+<code>mixed</code><p>The instance of the class the the object instance should be.</p></div>
+<div class="subelement argument">
+<h4>$name</h4>
+<code>string</code><p>The name of the object.</p></div>
+<h3>Exceptions</h3>
+<table class="table table-bordered"><tr>
+<th><code><a href="http://php.net/manual/en/class.invalidargumentexception.php">\InvalidArgumentException</a></code></th>
+<td></td>
+</tr></table>
+<h3>Returns</h3>
+<div class="subelement response"><code>\none</code></div>
+</div></div>
+</div>
+<a name="isInteger" id="isInteger"></a><div class="element clickable method public isInteger" data-toggle="collapse" data-target=".isInteger .collapse">
+<h2>Throws exception if the provided variable type is not integer.</h2>
+<pre>isInteger(\mix $var, string $name) : \none</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<p class="long_description"></p>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$var</h4>
+<code>\mix</code><p>The variable to check.</p></div>
+<div class="subelement argument">
+<h4>$name</h4>
+<code>string</code><p>The parameter name.</p></div>
+<h3>Exceptions</h3>
+<table class="table table-bordered"><tr>
+<th><code>\InvalidArgumentTypeException</code></th>
+<td></td>
+</tr></table>
+<h3>Returns</h3>
+<div class="subelement response"><code>\none</code></div>
+</div></div>
+</div>
+<a name="isNullOrEmptyString" id="isNullOrEmptyString"></a><div class="element clickable method public isNullOrEmptyString" data-toggle="collapse" data-target=".isNullOrEmptyString .collapse">
+<h2>Returns whether the variable is an empty or null string.</h2>
+<pre>isNullOrEmptyString(string $var) : boolean</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<p class="long_description"></p>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$var</h4>
+<code>string</code><p>value.</p></div>
+<h3>Returns</h3>
+<div class="subelement response"><code>boolean</code></div>
+</div></div>
+</div>
+<a name="isString" id="isString"></a><div class="element clickable method public isString" data-toggle="collapse" data-target=".isString .collapse">
+<h2>Throws exception if the provided variable type is not string.</h2>
+<pre>isString(\mix $var, string $name) : \none</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<p class="long_description"></p>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$var</h4>
+<code>\mix</code><p>The variable to check.</p></div>
+<div class="subelement argument">
+<h4>$name</h4>
+<code>string</code><p>The parameter name.</p></div>
+<h3>Exceptions</h3>
+<table class="table table-bordered"><tr>
+<th><code>\InvalidArgumentTypeException</code></th>
+<td></td>
+</tr></table>
+<h3>Returns</h3>
+<div class="subelement response"><code>\none</code></div>
+</div></div>
+</div>
+<a name="isTrue" id="isTrue"></a><div class="element clickable method public isTrue" data-toggle="collapse" data-target=".isTrue .collapse">
+<h2>Throws exception if the provided condition is not satisfied.</h2>
+<pre>isTrue(bool $isSatisfied, string $failureMessage) : \none</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<p class="long_description"></p>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$isSatisfied</h4>
+<code>bool</code><p>condition result.</p></div>
+<div class="subelement argument">
+<h4>$failureMessage</h4>
+<code>string</code><p>the exception message</p></div>
+<h3>Exceptions</h3>
+<table class="table table-bordered"><tr>
+<th><code><a href="http://php.net/manual/en/class.exception.php">\Exception</a></code></th>
+<td></td>
+</tr></table>
+<h3>Returns</h3>
+<div class="subelement response"><code>\none</code></div>
+</div></div>
+</div>
+<a name="notNull" id="notNull"></a><div class="element clickable method public notNull" data-toggle="collapse" data-target=".notNull .collapse">
+<h2>Throws exception if the provided variable is set to null.</h2>
+<pre>notNull(\mix $var, string $name) : \none</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<p class="long_description"></p>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$var</h4>
+<code>\mix</code><p>The variable to check.</p></div>
+<div class="subelement argument">
+<h4>$name</h4>
+<code>string</code><p>The parameter name.</p></div>
+<h3>Exceptions</h3>
+<table class="table table-bordered"><tr>
+<th><code><a href="http://php.net/manual/en/class.invalidargumentexception.php">\InvalidArgumentException</a></code></th>
+<td></td>
+</tr></table>
+<h3>Returns</h3>
+<div class="subelement response"><code>\none</code></div>
+</div></div>
+</div>
+<a name="notNullOrEmpty" id="notNullOrEmpty"></a><div class="element clickable method public notNullOrEmpty" data-toggle="collapse" data-target=".notNullOrEmpty .collapse">
+<h2>Throws exception if the provided variable is set to null.</h2>
+<pre>notNullOrEmpty(\mix $var, string $name) : \none</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<p class="long_description"></p>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$var</h4>
+<code>\mix</code><p>The variable to check.</p></div>
+<div class="subelement argument">
+<h4>$name</h4>
+<code>string</code><p>The parameter name.</p></div>
+<h3>Exceptions</h3>
+<table class="table table-bordered"><tr>
+<th><code><a href="http://php.net/manual/en/class.invalidargumentexception.php">\InvalidArgumentException</a></code></th>
+<td></td>
+</tr></table>
+<h3>Returns</h3>
+<div class="subelement response"><code>\none</code></div>
+</div></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="row"><footer class="span12">
+            Template is built using <a href="http://twitter.github.com/bootstrap/">Twitter Bootstrap 2</a> and icons provided by <a href="http://glyphicons.com/">Glyphicons</a>.<br>
+            Documentation is powered by <a href="http://www.phpdoc.org/">phpDocumentor 2.0.0a6</a> and<br>
+            generated on 2012-07-17T21:10:38-07:00.<br></footer></div>
+</div>
+</body>
+</html>
